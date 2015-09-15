@@ -128,9 +128,18 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_992154719208102506" cid="UC003" type="use-case" name="Manage Staff" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:02:04">
+          <item id="ddip303911810959166380_992154719208102506" cid="UC003" type="use-case" name="Manage Account" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:02:04">
             <stereotypes />
             <tagged-values />
+            <documentation>
+              <text>
+                <content />
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
@@ -242,7 +251,7 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_337215885946735660" cid="UC001" type="use-case" name="Notification To Patients, Doctor" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/13/2015 22:05:58">
+          <item id="ddip303911810959166380_337215885946735660" cid="UC001" type="use-case" name="Notification To Patients" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/13/2015 22:05:58">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -278,14 +287,14 @@
               <end-role id="" name="" multiplicity="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="ddip303911810959166380_489525136571138140" cid="UC007" type="use-case" name="Insert Staff" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:41:35">
+          <item id="ddip303911810959166380_489525136571138140" cid="UC007" type="use-case" name="Insert Account" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:41:35">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_147439432133836590" cid="UC008" type="use-case" name="Update Staff" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:41:53">
+          <item id="ddip303911810959166380_147439432133836590" cid="UC008" type="use-case" name="Update Account" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:41:53">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -424,7 +433,7 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_468325992981652782" cid="UC005" type="use-case" name="Delete Staff" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/12/2015 09:09:24">
+          <item id="ddip303911810959166380_468325992981652782" cid="UC005" type="use-case" name="Delete Account" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/12/2015 09:09:24">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -521,14 +530,14 @@
               <end-role id="" name="" multiplicity="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="ddip303911810959166380_259847071224643745" cid="UC001" type="use-case" name="Synchonize Data" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/14/2015 15:13:42">
+          <item id="ddip303911810959166380_259847071224643745" cid="UC001" type="use-case" name="Synchonize Data" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/14/2015 15:13:42">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_711995958151271373" cid="REL001" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/14/2015 15:14:19">
+          <item id="ddip303911810959166380_711995958151271373" cid="REL001" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/14/2015 15:14:19">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
