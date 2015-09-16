@@ -263,7 +263,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <th>Ngay uong</th>
                         <th>moi lan</th>
                       </tr>
-                      
+                      <tr>
+                        <td>1/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Thuoc 1</option>
+                            <option>Thuoc 2</option>
+                            <option>Thuoc 3</option>
+                            <option>Thuoc 4</option>                          
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" placeholder="so lan"></td>
+                        <td><input type="text" class="form-control" placeholder="so lan"></td>
+                      </tr>
                     </table>
                 </div>
             <div class="box-footer">                    
@@ -293,7 +305,108 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/app.min.js"></script>
+    <!-- script Add -->
+    <script type="text/javascript">
+                //xml data.
+                var regObj = '${list}';
+                //for IE only.
+                var xmlDom = new ActiveXObject("Microsoft.XMLDOM");
+                //check store.
+                var check = true;
+                var count = 0;
+                var cells = [];
+                var phone = [];
+                function addDiv(phone) {
+                    return  '<div style="margin: 5px;;width: 200px;height: 210px;float: left;">' +
+                            '<a href="Controller?btAction=viewDetail&amp;phoneID=' + phone[3] + '"' +
+                            'style="text-decoration: none;">' +
+                            '<img src="img/' + phone[2] + '" style="width: 195px;height: 170px;">' +
+                            '<p style="margin: 0px;">' +
+                            phone[0] +
+                            '</p>' +
+                            '<font>' +
+                            phone[1] + ' VND' +
+                            '</font>' +
+                            '</img>' +
+                            '</a>' +
+                            '</div>';
+                }
+                function addRow(tableID, cells) {
+                    var tableElement = document.getElementById(tableID);
+                    var newRow = tableElement.insertRow(tableElement.rows.length);
+                    var newCell;
+                    for (var i = 0; i < cells.length; i++) {
+                        newCell = newRow.insertCell(newRow.cells.length);
+                        newCell.innerHTML = cells[i];
+                    }
+                    return newRow;
+                }
+                function deleteRow(tableID, rowNumber) {
+                    var tableElement = document.getElementById(tableID);
+                    if (rowNumber > 0 && rowNumber < tableElement.rows.length) {
+                        tableElement.deleteRow(rowNumber);
+                    } else {
+                        alert("Failed");
+                    }
+                }
+                function searchNode(node, strSearch, tableName) {
+                    if (node == null) {
+                        return;
+                    }
+                    if (node.tagName == "phoneName") {
+                        var tmp = node.firstChild.nodeValue;
 
+                        if (tmp.indexOf(strSearch, 0) > -1) {
+
+                            phone[0] = node.firstChild.nodeValue;//phoneName
+                            var sibling = node.nextSibling;
+                            phone[1] = sibling.firstChild.nodeValue;//price
+                            var sibling = sibling.nextSibling;
+                            phone[2] = sibling.firstChild.nodeValue;//Img
+                            var sibling = sibling.nextSibling;
+                            phone[3] = sibling.firstChild.nodeValue;//phoneID
+                            //5 cells on 1 row
+                            cells[count % 5] = addDiv(phone);
+                            count++;
+                            if ((count % 5 == 0) && (count != 0)) {
+                                addRow(tableName, cells);
+                            }
+                        }
+                    }
+                    var childs = node.childNodes;
+                    for (var i = 0; i < childs.length; i++) {
+                        searchNode(childs[i], strSearch, tableName);
+                    }
+                }
+                function searchProcess(tableName) {
+                    if (!regObj) {//is null
+                        return;
+                    }
+                    if (regObj) {//not null
+                        xmlDom.async = false;
+                        xmlDom.loadXML(regObj);
+                        if (xmlDom.parseError.errorCode != 0) {
+                            alert("Error: " + xmlDom.parseError.reason);
+                        } else {
+                            //delete all table                            
+                            var tableElement = document.getElementById(tableName);
+                            var i = 1;
+                            
+                            while (i < tableElement.rows.length) {
+                                deleteRow(tableName, i);
+                            }
+                            if(check){
+                                var element = document.getElementById("store");
+                                element.parentNode.removeChild(element);                               
+                                check = false;
+                            }
+                            count = 0;
+                            //parsing
+                            searchNode(xmlDom, myForm.txtSearch.value, tableName);
+                        }
+                    }
+                }
+            </script>
 
   </body>
 </html>
