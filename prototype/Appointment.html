@@ -21,6 +21,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 
   </head>
 
@@ -46,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </a>
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav"> 
               <!-- Notifications Menu -->
               <li class="dropdown notifications-menu">
                 <!-- Menu toggle button -->
@@ -61,7 +63,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <ul class="menu">
                       <li><!-- start notification -->
                         <a href="#">
-                          <i class="fa fa-users text-aqua"></i> Appointment with Patient 1
+                          <i class="fa fa-user text-aqua"></i> Appointment with patient 1
+                        </a>
+                      </li><!-- end notification -->
+                      <li><!-- start notification -->
+                        <a href="patient2.html">
+                          <i class="fa fa-user text-aqua"></i> Appointment with patient 2
                         </a>
                       </li><!-- end notification -->
                     </ul>
@@ -86,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       Dr Nhat Anh
                       <small>Member since Nov. 2012</small>
                     </p>
-                  </li>                 
+                  </li>                  
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
@@ -117,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="pull-left info">
               <p>Dr Nhat Anh</p>
               <!-- Status -->
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <a href="#"><i class="fa fa-circle text-success"></i> Doctor</a>
             </div>
           </div>
 
@@ -135,7 +142,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-user-md"></i> <span>Nurse</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -143,7 +150,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="active"><a href="register.html"><i class="fa fa-circle-o"></i> Register Patient</a></li>                
               </ul>
             </li>
-            <li class="treeview">
+            <li class="active treeview">
               <a href="#">
                 <i class="fa fa-stethoscope"></i>
                 <span>Doctor</span>
@@ -172,18 +179,68 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">          
+        <section class="content-header">
+          <h1>
+            List Patients
+          </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>            
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Appointments</li>
           </ol>
         </section>
 
         <!-- Main content -->
-        <section class="content" style="text-align: center;">
+        <section class="content">
 
-          <!-- Your Page Content Here --> 
-          <a href="#"><h1><span class="fa fa-medkit"></span></h1></a>
-          <h1 style="margin: auto;">Health Support Tracking System</h1>        
+          <!-- Your Page Content Here -->    
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">List Patients</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table id="listPatients" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Diagnostic</th> 
+                        <th>Time</th>                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td><a href="#">Patient 1</a></td>
+                          <td>15</td>
+                          <td></td>
+                          <td>08:05 AM - 19/9/2015</td>
+                        </tr>         
+                      
+                        <tr>
+                          <td>2</td>
+                          <td><a href="patient2.html">Patient 2</a></td>
+                          <td>14</td>
+                          <td>Beo phi do 1</td>
+                          <td>08:25 AM - 19/9/2015</td>
+                        </tr>                     
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Diagnostic</th>
+                        <th>Time</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->          
 
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
@@ -206,7 +263,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="dist/js/app.min.js"></script>
-    
+    <script src="dist/js/app.min.js"></script>    
+    <!-- DataTables -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script>
+      $(function () {
+        $("#listPatients").DataTable();        
+      });
+    </script>
   </body>
 </html>
