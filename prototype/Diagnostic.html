@@ -16,6 +16,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -187,74 +189,88 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <section class="content">
 
           <!-- Your Page Content Here --> 
-          <div class="row">
-            <div class="col-md-6">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Patient</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal">
-                  <div class="box-body">
-                    <div class="form-group">
-                      <label for="Name" class="col-sm-2 control-label">Name</label>
-                      <div class="col-sm-10">
-                        <input type="text" readonly="readonly" class="form-control" value="Patient 1">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="Birthday" class="col-sm-2 control-label">Age</label>
-                      <div class="col-sm-10">
-                        <input type="text" readonly="readonly" class="form-control" value="31">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="Gender" class="col-sm-2 control-label">Gender</label>                      
-                      <div class="col-sm-10">
-                        <label>                          
-                          Male
-                        </label>                         
-                      </div>
-                    </div> 
-                    <div class="form-group">
-                      <label for="Weight" class="col-sm-2 control-label">Weight</label>
-                      <div class="col-sm-3">
-                        <input type="text" readonly="readonly" class="form-control" value="82">
-                      </div>
-                      <label for="Weight" class="col-sm-1 control-label"> Kg</label>
-                    </div>
-                    <div class="form-group">
-                      <label for="Height" class="col-sm-2 control-label">Height</label>
-                      <div class="col-sm-3">
-                        <input type="text" readonly="readonly" class="form-control" value="1.66">
-                      </div>
-                      <label for="Height" class="col-sm-1 control-label"> m</label>
-                    </div>                    
-                    <div class="form-group">
-                      <label for="Medicalhistory" class="col-sm-2 control-label">Medical history</label>
-                      <div class="col-sm-10">
-                        <textarea type="text" readonly="readonly" class="form-control" id="Medicalhistory" 
-                        style="width: 100%; height: 120px; font-size: 14px;" placeholder="Medical history">
-                        </textarea> 
-                      </div>
-                    </div> 
-                  </div><!-- /.box-body -->
-                  <div class="box-footer">                    
-                    <p>Health Support Tracking System</p>
-                  </div><!-- /.box-footer -->
-                </form>
-              </div><!-- /.box -->
+          <div class="row" style="margin: 2px;">
+            <a href="patient2.html"><button type="submit" class="btn btn-primary pull-left">
+            <i class="fa fa-hand-o-left"></i> History Treatment</button></a>
           </div>
-          <div class="col-md-6">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title"><i class="fa fa-th"></i> Prescriptions</h3>
-                </div><!-- /.box-header -->
-                <div class="box-header with-border">
-                  <h3 class="box-title">Diagnostic </h3><h2 style="display: inline;"> Beo phi do 1</h2>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table class="table table-striped" id="medicine">
+          <!-- row -->
+          <div class="row">            
+            <div class="col-md-12">              
+              <div class="box box-default">
+                <!-- form start -->
+                <form class="form-horizontal">  
+                  <div class="row">
+                   
+                    <div class="col-md-6">
+                      <div class="box-header with-border">
+                        <h3 class="box-title">Patient's Profile</h3>
+                      </div><!-- /.box-header -->
+                  
+                      <div class="box-body">
+                      <div class="form-group">
+                        <label for="Name" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                          <input type="text" readonly="readonly" class="form-control" value="Patient 1">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="Birthday" class="col-sm-2 control-label">Age</label>
+                        <div class="col-sm-10">
+                          <input type="text" readonly="readonly" class="form-control" value="31">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="Gender" class="col-sm-2 control-label">Gender</label>                      
+                        <div class="col-sm-10">
+                          <label>                          
+                            Male
+                          </label>                         
+                        </div>
+                      </div> 
+                      <div class="form-group">
+                        <label for="Weight" class="col-sm-2 control-label">Weight</label>
+                        <div class="col-sm-3">
+                          <input type="text" readonly="readonly" class="form-control" value="82">
+                        </div>
+                        <label for="Weight" class="col-sm-1 control-label"> Kg</label>
+                      </div>
+                      <div class="form-group">
+                        <label for="Height" class="col-sm-2 control-label">Height</label>
+                        <div class="col-sm-3">
+                          <input type="text" readonly="readonly" class="form-control" value="1.66">
+                        </div>
+                        <label for="Height" class="col-sm-1 control-label"> m</label>
+                      </div>                    
+                      <div class="form-group">
+                        <label for="Medicalhistory" class="col-sm-2 control-label">Medical history</label>
+                        <div class="col-sm-10">
+                          <textarea type="text" readonly="readonly" class="form-control" id="Medicalhistory" 
+                            style="width: 100%; height: 120px; font-size: 14px;" placeholder="Medical history">
+                          </textarea> 
+                        </div>
+                      </div> 
+                      </div><!-- /.box-body --> 
+                    </div><!-- /.col -->
+
+                    <div class="col-md-6">
+                      <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-th"></i> Prescriptions</h3>
+                      </div><!-- /.box-header -->                  
+                      <div class="box-body sidebar">                                     
+                        <div class="form-group">
+                          <label for="Name" class="col-sm-2 control-label">Diagnostic</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" value="Beo phi do 1">
+                          </div>
+                        </div>
+                        <ul class="sidebar-menu">
+            <li class="active treeview">
+              <a href="#">
+                <span>Medicine</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="#">
+                    <table class="table table-striped" id="medicine">
                       <tr>
                         <th style="width: 10px">#</th>
                         <th>Thuoc</th>
@@ -271,29 +287,154 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <option>Thuoc 4</option>                          
                           </select>
                         </td>
-                        <td><input type="text" class="form-control" placeholder="so lan"></td>
-                        <td><input type="text" class="form-control" placeholder="so lan"></td>
+                        <td><input type="text" class="form-control" style="width: 100px;" placeholder="so lan"></td>
+                        <td><input type="text" class="form-control" style="width: 100px;" placeholder="so lan"></td>
                       </tr>
-                    </table>
-                    <button type="submit" class="btn btn-primary" onclick="addRow('medicine')">Add</button>
-                    <div class="form-group">
+                        </table>
+                        <button type="submit" class="btn btn-primary" onclick="addRowMedicine('medicine')">Add</button>
+                  </a></li>
+              </ul><!-- /.treeview-menu -->
+            </li><!-- /.treeview -->
+            <li class="treeview">
+              <a href="#">
+                <span>Foods</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#">
+                    <table class="table table-striped" id="Foods">
+                      <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Name</th>
+                        <th>Quantitative</th>                        
+                      </tr>
+                      <tr>
+                        <td>1/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Rau</option>
+                            <option>Cơm</option>
+                            <option>Trái cây</option>
+                            <option>Bia Rượu</option>                          
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="Nhiều"></td>
+                      </tr>
+                      <tr>
+                        <td>2/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Cơm</option>
+                            <option>Rau</option>                            
+                            <option>Trái cây</option>
+                            <option>Bia Rượu</option>                          
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="Ít"></td>
+                      </tr>
+                      <tr>
+                        <td>3/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Trái cây</option>
+                            <option>Rau</option>
+                            <option>Cơm</option>                            
+                            <option>Bia Rượu</option>                          
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="Nhiều"></td>
+                      </tr>
+                      <tr>
+                        <td>4/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Bia Rượu</option>
+                            <option>Rau</option>
+                            <option>Cơm</option>
+                            <option>Trái cây</option>                                                      
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="Ít"></td>
+                      </tr>
+                        </table>
+                        <button type="submit" class="btn btn-primary" onclick="addRowFoods('Foods')">Add</button>
+                  </a></li>
+              </ul><!-- /.treeview-menu -->
+            </li><!-- /.treeview -->
+            <li class="treeview">
+              <a href="#">
+                <span>Practice</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#">
+                    <table class="table table-striped" id="Practice">
+                      <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Name</th>
+                        <th>Quantitative</th>                        
+                      </tr>
+                      <tr>
+                        <td>1/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Chạy bộ</option>
+                            <option>Đi bộ</option>
+                            <option>Chơi bóng bàn</option>                          
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="20 phút"></td>
+                      </tr>
+                      <tr>
+                        <td>2/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Chơi bóng bàn</option>
+                            <option>Chạy bộ</option>
+                            <option>Đi bộ</option>                                                      
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="30 phút"></td>
+                      </tr>
+                        </table>
+                        <button type="submit" class="btn btn-primary" onclick="addRowPractice('Practice')">Add</button>
+                  </a></li>
+              </ul><!-- /.treeview-menu -->
+            </li><!-- /.treeview -->
+                </ul><!-- /.sidebar-menu --> 
+                <div class="form-group" style="margin-top: 15px;">
+                      <label for="Appointment" class="col-sm-2 control-label">Appointment</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" id="Appointment" data-provide="Appointment">
+                      </div>
+                        </div>       
+                        <div class="form-group">
                       <label for="Note" class="col-sm-2 control-label">Note</label>
                       <div class="col-sm-10">
                         <textarea type="text" class="form-control" id="Note" 
                         style="width: 100%; height: 120px; font-size: 14px;" placeholder="Note">
+                        -Ăn nhiều bữa, không bỏ bữa, ăn đúng giờ, hạn chế đồ ăn đã qua chế biến.
+                        -Uống thuốc sau khi ăn, uống nhiều nước, không uống thuốc với sữa, không sử dụng các loại thuốc khác để giảm cân như thuốc lợi tiểu.
+                        -Vận động tích cực, tập 30 phút mỗi lần, 2 lần sáng và tối.
                         </textarea> 
                       </div>
-                    </div>
-                </div>
-                  <div class="box-footer">                    
+                        </div>
+                      </div><!-- /.box-body -->                                            
+                    </div><!-- /.col -->
+                  </div><!-- /.row -->           
+                
+                  <div class="box-footer">
+                  <div class="col-md-6">
+                    <p>Health Support Tracking System</p>
+                  </div>
+                  <div class="col-md-6">
                     <button type="reset" class="btn btn-default">Cancel</button>
                     <button type="submit" class="btn btn-primary pull-right">Submit</button>
-                  </div><!-- /.box-footer -->
-                </form>
+                  </div>
+                  </div><!-- /.footer -->
+                </form><!-- /.form -->              
               </div><!-- /.box -->
-            </div>
-          </div> 
-          <div class="row">
+            </div><!-- /.col -->
+          </div><!-- /.row --> 
+          <div class="row" style="margin: 2px;">
             <a href="patient2.html"><button type="submit" class="btn btn-primary pull-left">
             <i class="fa fa-hand-o-left"></i> History Treatment</button></a>
           </div>
@@ -317,18 +458,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/app.min.js"></script>
+    <!-- Datepicker -->
+    <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
     <!-- script Add -->
     <script type="text/javascript">
+                 
+                $('#Appointment').datepicker({
+                    format: 'dd/mm/yyyy',
+                    
+                  });
+                var countMedicine = 2;
+                var countFoods = 5;
+                var countPractice = 3;
                 
-                var count = 2;
-                
-                function addRow(tableID) {
+                function addRowMedicine(tableID) {
                     var tableElement = document.getElementById(tableID);
                     var newRow = tableElement.insertRow(tableElement.rows.length);
                     var newCell;
                     
                     newCell = newRow.insertCell(newRow.cells.length);
-                    newCell.innerHTML = count + "/";
+                    newCell.innerHTML = countMedicine + "/";
                     newCell = newRow.insertCell(newRow.cells.length);
                     newCell.innerHTML = "<select class='form-control'>"
                             + "<option>Thuoc 1</option>"
@@ -337,14 +486,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             + "<option>Thuoc 4</option>"
                             + "</select>";
                     newCell = newRow.insertCell(newRow.cells.length);
-                    newCell.innerHTML = "<input type='text' class='form-control' placeholder='so lan'>";
+                    newCell.innerHTML = "<input type='text' class='form-control' style='width: 100px;' placeholder='so lan'>";
                     newCell = newRow.insertCell(newRow.cells.length);
-                    newCell.innerHTML = "<input type='text' class='form-control' placeholder='so lan'>";
+                    newCell.innerHTML = "<input type='text' class='form-control' style='width: 100px;' placeholder='so lan'>";
 
-                    count++;
+                    countMedicine++;
+                    return newRow;
+                };
+                function addRowFoods(tableID) {
+                    var tableElement = document.getElementById(tableID);
+                    var newRow = tableElement.insertRow(tableElement.rows.length);
+                    var newCell;
+                    
+                    newCell = newRow.insertCell(newRow.cells.length);
+                    newCell.innerHTML = countFoods + "/";
+                    newCell = newRow.insertCell(newRow.cells.length);
+                    newCell.innerHTML = "<select class='form-control'>"
+                            + "<option>Rau</option>"
+                            + "<option>Cơm</option>"
+                            + "<option>Trái cây</option>"
+                            + "<option>Bia Rượu</option>"
+                            + "</select>";
+                    newCell = newRow.insertCell(newRow.cells.length);
+                    newCell.innerHTML = "<input type='text' class='form-control' style='width: 100px;' placeholder='so lan'>";                    
+
+                    countFoods++;
+                    return newRow;
+                };
+                function addRowPractice(tableID) {
+                    var tableElement = document.getElementById(tableID);
+                    var newRow = tableElement.insertRow(tableElement.rows.length);
+                    var newCell;
+                    
+                    newCell = newRow.insertCell(newRow.cells.length);
+                    newCell.innerHTML = countPractice + "/";
+                    newCell = newRow.insertCell(newRow.cells.length);
+                    newCell.innerHTML = "<select class='form-control'>"
+                            + "<option>chạy bộ</option>"
+                            + "<option>Đi bộ</option>"
+                            + "<option>Chơi bóng bàn</option>"
+                            + "</select>";
+                    newCell = newRow.insertCell(newRow.cells.length);
+                    newCell.innerHTML = "<input type='text' class='form-control' style='width: 100px;' placeholder='so lan'>";                    
+
+                    countPractice++;
                     return newRow;
                 }
-                
     </script>
 
   </body>

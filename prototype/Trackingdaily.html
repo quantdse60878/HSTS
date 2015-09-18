@@ -257,63 +257,170 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main content -->
         <section class="content">
 
-          <!-- Your Page Content Here -->
-         
+          <!-- Your Page Content Here -->         
 
-              <!-- row -->
-          <div class="row">
-            <div class="col-md-6">
-              <div class="box box-success with-border sidebar">
-                <!-- Sidebar Menu -->
-          <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Options 1</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Option v1</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Option v2</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Options 2</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Option v1</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Option v2</a></li>                
-              </ul>
-            </li>
-          </ul><!-- /.sidebar-menu -->
-              </div>
-              
-            </div>
-            <div class="col-md-4">
-              <!-- jQuery Knob -->
-              <div class="box box-success box-solid">
-                <div class="box-header with-border">
-                  <i class="fa fa-pie-chart"></i>
-                  <h3 class="box-title">Practice</h3>
-                  
-                </div><!-- /.box-header -->
-                <div style="margin-top: 17px;">
-                  <div class="row">
-                    <div class="text-center" style="border-right: 1px solid #f4f4f4">
-                      <input type="text" class="knob" data-readonly="true" value="71%" data-width="180" data-height="180" data-fgColor="#EF6C00">
-                      <div class="knob-label"><b>713 / </b>1000 Steps</div>
-                    </div><!-- ./col -->
-                  </div><!-- /.row -->                  
-                </div><!-- /.box-body -->
-                <div class="box-footer no-padding">
-                  <ul class="nav nav-pills nav-stacked">
-                    <li><a href="#">United States of America <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
-                    <li><a href="#">India <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 4%</span></a></li>
-                    <li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
-                  </ul>
-                </div><!-- /.footer -->
+          <!-- row -->
+          <div class="row">            
+            <div class="col-md-12">              
+              <div class="box box-default">
+                <div class="row">
+                  <!-- BAR CHART --> 
+                  <div class="col-md-6">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Patient's Profile</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal">
+                      <div class="box-body" style="border-bottom: 1px solid #f4f4f4">
+                        <div class="form-group">
+                          <label for="Name" class="col-sm-2 control-label">Name</label>
+                          <div class="col-sm-10">
+                            <input type="text" readonly="readonly" class="form-control" value="Patient 1">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="Birthday" class="col-sm-2 control-label">Age</label>
+                          <div class="col-sm-10">
+                            <input type="text" readonly="readonly" class="form-control" value="31">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="Gender" class="col-sm-2 control-label">Gender</label>                      
+                          <div class="col-sm-10">
+                            <label class="control-label">Male</label>                         
+                          </div>
+                        </div>
+                      </div> 
+                    </form><!-- end form -->
+                    <!-- sidebar -->            
+                    <div class="sidebar">                  
+                      <ul class="sidebar-menu">
+                        <li class="active treeview">
+                          <a href="#">
+                            <h3 class="box-title">Calories Chart</h3> <i class="fa fa-angle-left pull-right"></i>
+                          </a>
+                          <ul class="treeview-menu">
+                            <li class="active"><a href="#">
+                              <div class="chart">
+                                <canvas id="barChart" style="height:230px"></canvas>
+                              </div>
+                              <i class="fa fa-square text-orange"></i>
+                              <h4 style="display: inline;"> Calories Required </h4>                    
+                              <i class="fa fa-square text-green"></i>
+                              <h4 style="display: inline;"> Calories Consumed</h4>    
+                            </li>                        
+                          </ul>
+                        </li> 
+                      </ul>                  
+                    </div><!-- /.sidebar --> 
+                  </div><!-- /.col -->
+
+                  <!-- START CUSTOM TABS -->         
+                  <div class="col-md-6">
+                    <!-- Custom Tabs (Pulled to the right) -->
+                    <div class="nav-tabs-custom">
+                      <ul class="nav nav-tabs pull-right">
+                        <li class="active"><a href="#tab_1-1" data-toggle="tab">9/9/2015</a></li>
+                        <li><a href="#tab_2-2" data-toggle="tab">7/9/2015</a></li>                                    
+                        <li class="pull-left header"><i class="fa fa-th"></i> Prescriptions</li>
+                      </ul>
+                    <div class="tab-content">
+                    <div class="tab-pane active sidebar" id="tab_1-1">                    
+                      <table class="table table-striped">
+                        <tr>
+                          <th style="width: 10px">#</th>
+                          <th>Thuoc</th>
+                          <th>Ngay uong</th>
+                          <th>moi lan</th>
+                        </tr>
+                        <tr>
+                          <td>1/</td>
+                          <td>Thuoc so 1</td>
+                          <td>3 lan</td>
+                          <td>1 vien</td>
+                        </tr>
+                        <tr>
+                          <td>2/</td>
+                          <td>Thuoc so 2</td>
+                          <td>2 lan</td>
+                          <td>2 vien</td>
+                        </tr>
+                        <tr>
+                          <td>3/</td>
+                          <td>Thuoc so 3</td>
+                          <td>3 lan</td>
+                          <td>1/2 vien</td>
+                        </tr>
+                      </table>
+                      <!-- Sidebar Menu -->                    
+                      <ul class="sidebar-menu">
+                        <li class="active treeview">
+                          <a href="#">
+                            <span>Note</span> <i class="fa fa-angle-left pull-right"></i>
+                          </a>
+                          <ul class="treeview-menu">
+                            <li class="active"><a href="#">
+                              <textarea type="text" readonly="readonly" class="form-control" id="Note" 
+                              style="width: 100%; height: 120px; font-size: 14px;" >
+                              Note
+                              </textarea> 
+                            </li>                
+                          </ul>
+                        </li>            
+                      </ul>                    
+                    <!-- /.sidebar-menu -->
+                    </div><!-- /.tab-pane -->
+                  <div class="tab-pane sidebar" id="tab_2-2">
+                    <table class="table table-striped">
+                      <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Thuoc</th>
+                        <th>Ngay uong</th>
+                        <th>moi lan</th>
+                      </tr>
+                      <tr>
+                        <td>4/</td>
+                        <td>Thuoc so 4</td>
+                        <td>2 lan</td>
+                        <td>2 vien</td>
+                      </tr>
+                      <tr>
+                        <td>5/</td>
+                        <td>Thuoc so 5</td>
+                        <td>1 lan</td>
+                        <td>1 vien</td>
+                      </tr>
+                      <tr>
+                        <td>6/</td>
+                        <td>Thuoc so 6</td>
+                        <td>3 lan</td>
+                        <td>2 vien</td>
+                      </tr>
+                    </table>
+                    <!-- Sidebar Menu -->
+                    
+                      <ul class="sidebar-menu">
+                        <li class="active treeview">
+                          <a href="#">
+                            <span>Note</span> <i class="fa fa-angle-left pull-right"></i>
+                          </a>
+                          <ul class="treeview-menu">
+                            <li class="active"><a href="#">
+                              <textarea type="text" readonly="readonly" class="form-control" id="Note" 
+                              style="width: 100%; height: 120px; font-size: 14px;" >
+                              Note
+                              </textarea> 
+                            </li>                
+                          </ul>
+                        </li>            
+                      </ul>
+                    
+                    <!-- /.sidebar-menu -->
+                  </div><!-- /.tab-pane -->                  
+                </div><!-- /.tab-content -->
+              </div><!-- nav-tabs-custom -->
+            </div><!-- /.col -->
+                </div><!-- /.row -->
               </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row -->            
@@ -342,7 +449,74 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="dist/js/app.min.js"></script>
     <!-- jQuery Knob -->
     <script src="plugins/knob/jquery.knob.js"></script>
-    
+    <!--
+    <script>
+      $(function () {
+        //-------------
+        //- BAR CHART -
+        //-------------
+        // Get context with jQuery - using jQuery's .get() method.
+        var barChartCanvas = $("#barChart").get(0).getContext("2d");
+        // This will get the first returned node in the jQuery collection.
+        var barChart = new Chart(barChartCanvas);
+        var barChartData = {
+          labels: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+          datasets: [
+            {
+              label: "Electronics",
+              fillColor: "#ff851b",
+              strokeColor: "#ff851b",
+              pointColor: "#ff851b",
+              pointStrokeColor: "#c1c7d1",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: [65, 59, 80, 81, 56, 55, 40]
+            },
+            {
+              label: "Digital Goods",
+              fillColor: "#00a65a",
+              strokeColor: "#00a65a",
+              pointColor: "#00a65a",
+              pointStrokeColor: "rgba(60,141,188,1)",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(60,141,188,1)",
+              data: [28, 48, 40, 19, 86, 27, 90]
+            }
+          ]
+        };
+        
+        var barChartOptions = {
+          //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+          scaleBeginAtZero: true,
+          //Boolean - Whether grid lines are shown across the chart
+          scaleShowGridLines: true,
+          //String - Colour of the grid lines
+          scaleGridLineColor: "rgba(0,0,0,.05)",
+          //Number - Width of the grid lines
+          scaleGridLineWidth: 1,
+          //Boolean - Whether to show horizontal lines (except X axis)
+          scaleShowHorizontalLines: true,
+          //Boolean - Whether to show vertical lines (except Y axis)
+          scaleShowVerticalLines: true,
+          //Boolean - If there is a stroke on each bar
+          barShowStroke: true,
+          //Number - Pixel width of the bar stroke
+          barStrokeWidth: 2,
+          //Number - Spacing between each of the X value sets
+          barValueSpacing: 5,
+          //Number - Spacing between data sets within X values
+          barDatasetSpacing: 1,
+          //String - A legend template
+          legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+          //Boolean - whether to make the chart responsive
+          responsive: true,
+          maintainAspectRatio: true
+        };
+
+        barChartOptions.datasetFill = false;
+        barChart.Bar(barChartData, barChartOptions);
+      });
+    </script>
      <script>
       $(function () {
         /* jQueryKnob */
@@ -405,5 +579,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       });
       
     </script>
+      -->
   </body>
 </html>

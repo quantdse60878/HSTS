@@ -189,101 +189,105 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <section class="content">
 
           <!-- Your Page Content Here -->
-          <!-- solid sales graph -->
-          <div class="row">
-            <div class="col-md-6">
-              <!-- BAR CHART -->
-              <div class="box box-success">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Patient</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal">
-                  <div class="box-body" style="border-bottom: 1px solid #f4f4f4">
-                    <div class="form-group">
-                      <label for="Name" class="col-sm-2 control-label">Name</label>
-                      <div class="col-sm-10">
-                        <input type="text" readonly="readonly" class="form-control" value="Patient 1">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="Birthday" class="col-sm-2 control-label">Age</label>
-                      <div class="col-sm-10">
-                        <input type="text" readonly="readonly" class="form-control" value="31">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="Gender" class="col-sm-2 control-label">Gender</label>                      
-                      <div class="col-sm-10">
-                        <label>                          
-                          Male
-                        </label>                         
-                      </div>
-                    </div>
-                  </div> 
-                </form>                  
-                <div class="box-header with-border sidebar">                  
-                  <ul class="sidebar-menu">
-                    <li class="active treeview">
-                      <a href="#">
-                        <h3 class="box-title">Calories Chart</h3> <i class="fa fa-angle-left pull-right"></i>
-                      </a>
-                      <ul class="treeview-menu">
-                        <li class="active"><a href="#">
-                          <div class="chart">
-                            <canvas id="barChart" style="height:230px"></canvas>
+          <div class="row" style="margin: 2px;">
+            <a href="Diagnostic.html"><button type="submit" class="btn btn-primary pull-right">Diagnostic
+            <i class="fa fa-hand-o-right"></i></button></a>
+          </div>
+          
+          <!-- row -->
+          <div class="row">            
+            <div class="col-md-12">              
+              <div class="box box-default">
+                <div class="row">
+                  <!-- BAR CHART --> 
+                  <div class="col-md-6">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Patient's Profile</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal">
+                      <div class="box-body" style="border-bottom: 1px solid #f4f4f4">
+                        <div class="form-group">
+                          <label for="Name" class="col-sm-2 control-label">Name</label>
+                          <div class="col-sm-10">
+                            <input type="text" readonly="readonly" class="form-control" value="Patient 1">
                           </div>
-                          <i class="fa fa-square text-orange"></i>
-                          <h4 style="display: inline;">Calories Required </h4>                    
-                          <i class="fa fa-square text-green"></i>
-                          <h4 style="display: inline;">Calories Consumed</h4>    
-                        </li>                        
-                      </ul>
-                    </li> 
-                  </ul>                  
-                </div>                
-              </div><!-- /.box -->
-            </div><!-- /.col -->  
+                        </div>
+                        <div class="form-group">
+                          <label for="Birthday" class="col-sm-2 control-label">Age</label>
+                          <div class="col-sm-10">
+                            <input type="text" readonly="readonly" class="form-control" value="31">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="Gender" class="col-sm-2 control-label">Gender</label>                      
+                          <div class="col-sm-10">
+                            <label class="control-label">Male</label>                         
+                          </div>
+                        </div>
+                      </div> 
+                    </form><!-- end form -->
+                    <!-- sidebar -->            
+                    <div class="sidebar">                  
+                      <ul class="sidebar-menu">
+                        <li class="active treeview">
+                          <a href="#">
+                            <span class="box-title">Calories Chart</span> <i class="fa fa-angle-left pull-right"></i>
+                          </a>
+                          <ul class="treeview-menu">
+                            <li class="active"><a href="#">
+                              <div class="chart">
+                                <canvas id="barChart" style="height:230px"></canvas>
+                              </div>
+                              <i class="fa fa-square text-orange"></i>
+                              <h4 style="display: inline;"> Calories Required </h4>                    
+                              <i class="fa fa-square text-green"></i>
+                              <h4 style="display: inline;"> Calories Consumed</h4>    
+                            </li>                        
+                          </ul>
+                        </li> 
+                      </ul>                  
+                    </div><!-- /.sidebar --> 
+                  </div><!-- /.col -->
 
-            <!-- START CUSTOM TABS -->         
-            <div class="col-md-6">
-              <!-- Custom Tabs (Pulled to the right) -->
-              <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs pull-right">
-                  <li class="active"><a href="#tab_1-1" data-toggle="tab">9/9/2015</a></li>
-                  <li><a href="#tab_2-2" data-toggle="tab">7/9/2015</a></li>                                    
-                  <li class="pull-left header"><i class="fa fa-th"></i> Prescriptions</li>
-                </ul>
-                <div class="tab-content">
-                  <div class="tab-pane active sidebar" id="tab_1-1">                    
-                    <table class="table table-striped">
-                      <tr>
-                        <th style="width: 10px">#</th>
-                        <th>Thuoc</th>
-                        <th>Ngay uong</th>
-                        <th>moi lan</th>
-                      </tr>
-                      <tr>
-                        <td>1/</td>
-                        <td>Thuoc so 1</td>
-                        <td>3 lan</td>
-                        <td>1 vien</td>
-                      </tr>
-                      <tr>
-                        <td>2/</td>
-                        <td>Thuoc so 2</td>
-                        <td>2 lan</td>
-                        <td>2 vien</td>
-                      </tr>
-                      <tr>
-                        <td>3/</td>
-                        <td>Thuoc so 3</td>
-                        <td>3 lan</td>
-                        <td>1/2 vien</td>
-                      </tr>
-                    </table>
-                    <!-- Sidebar Menu -->
-                    
+                  <!-- START CUSTOM TABS -->         
+                  <div class="col-md-6">
+                    <!-- Custom Tabs (Pulled to the right) -->
+                    <div class="nav-tabs-custom">
+                      <ul class="nav nav-tabs pull-right">
+                        <li class="active"><a href="#tab_1-1" data-toggle="tab">9/9/2015</a></li>
+                        <li><a href="#tab_2-2" data-toggle="tab">7/9/2015</a></li>                                    
+                        <li class="pull-left header"><i class="fa fa-th"></i> Prescriptions</li>
+                      </ul>
+                    <div class="tab-content">
+                    <div class="tab-pane active sidebar" id="tab_1-1">                    
+                      <table class="table table-striped">
+                        <tr>
+                          <th style="width: 10px">#</th>
+                          <th>Thuoc</th>
+                          <th>Ngay uong</th>
+                          <th>moi lan</th>
+                        </tr>
+                        <tr>
+                          <td>1/</td>
+                          <td>Thuoc so 1</td>
+                          <td>3 lan</td>
+                          <td>1 vien</td>
+                        </tr>
+                        <tr>
+                          <td>2/</td>
+                          <td>Thuoc so 2</td>
+                          <td>2 lan</td>
+                          <td>2 vien</td>
+                        </tr>
+                        <tr>
+                          <td>3/</td>
+                          <td>Thuoc so 3</td>
+                          <td>3 lan</td>
+                          <td>1/2 vien</td>
+                        </tr>
+                      </table>
+                      <!-- Sidebar Menu -->                    
                       <ul class="sidebar-menu">
                         <li class="active treeview">
                           <a href="#">
@@ -298,10 +302,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>                
                           </ul>
                         </li>            
-                      </ul>
-                    
+                      </ul>                    
                     <!-- /.sidebar-menu -->
-                  </div><!-- /.tab-pane -->
+                    </div><!-- /.tab-pane -->
                   <div class="tab-pane sidebar" id="tab_2-2">
                     <table class="table table-striped">
                       <tr>
@@ -352,9 +355,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div><!-- /.tab-content -->
               </div><!-- nav-tabs-custom -->
             </div><!-- /.col -->
-          </div> <!-- /.row -->
-          <!-- END CUSTOM TABS -->
-          <div class="row">
+                </div><!-- /.row -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->   
+
+          <div class="row" style="margin: 2px;">
             <a href="Diagnostic.html"><button type="submit" class="btn btn-primary pull-right">Diagnostic
             <i class="fa fa-hand-o-right"></i></button></a>
           </div>
