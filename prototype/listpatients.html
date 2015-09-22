@@ -21,8 +21,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 
   </head>
 
@@ -35,9 +33,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Logo -->
         <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini">HSTS</span>
+          <span class="logo-mini"><img src="image/FPT_Logo.png" style="width :50px;height: 50px;"></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">HSTS</span>
+          <span class="logo-lg"><img src="image/FPT_Logo.png" style="height: 50px;"></span>
         </a>
 
         <!-- Header Navbar -->
@@ -46,9 +44,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
+          <!-- Logo -->
+        <a href="#" style="font-size: 20px;line-height: 50px;text-align: center;color: white;">          
+          <!-- logo for regular state and mobile devices -->
+          <span>Health Support Tracking System</span>
+        </a>
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav"> 
+            <ul class="nav navbar-nav">
               <!-- Notifications Menu -->
               <li class="dropdown notifications-menu">
                 <!-- Menu toggle button -->
@@ -63,12 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <ul class="menu">
                       <li><!-- start notification -->
                         <a href="#">
-                          <i class="fa fa-user text-aqua"></i> Appointment with patient 1
-                        </a>
-                      </li><!-- end notification -->
-                      <li><!-- start notification -->
-                        <a href="#">
-                          <i class="fa fa-user text-aqua"></i> Appointment with patient 2
+                          <i class="fa fa-users text-aqua"></i> Appointment with Patient 1
                         </a>
                       </li><!-- end notification -->
                     </ul>
@@ -93,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       Dr Nhat Anh
                       <small>Member since Nov. 2012</small>
                     </p>
-                  </li>                  
+                  </li>                 
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
@@ -128,17 +126,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
           </div>
 
-          <!-- search form (Optional) -->
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-          </form>
-          <!-- /.search form -->
-
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
@@ -147,7 +134,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <i class="fa fa-user-md"></i> <span>Nurse</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="register.html"><i class="fa fa-circle-o"></i> Register Patient</a></li>                
+                <li><a href="register.html"><i class="fa fa-circle-o"></i> Register Patient</a></li>
+                <li><a href="listpatients.html"><i class="fa fa-circle-o"></i> Patients</a></li>                
               </ul>
             </li>
             <li class="active treeview">
@@ -157,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="listpatients.html"><i class="fa fa-circle-o"></i> Patients</a></li>
+                <li class="active"><a href="listpatients.html"><i class="fa fa-circle-o"></i> Patients</a></li>
                 <li><a href="Appointment.html"><i class="fa fa-circle-o"></i> Appointments</a></li>                
               </ul>
             </li>
@@ -181,11 +169,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            List Patients
+            Search Patients
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">List Patients</li>
+            <li class="active">Search Patients</li>
           </ol>
         </section>
 
@@ -196,8 +184,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="row">
             <div class="col-xs-12">
               <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">List Patients</h3>
+                <div class="box-header" style="padding: 0px;">
+                  <div class="form-group">
+                    <h3 class="col-sm-1 control-label">Name</h3>
+                    <div class="col-sm-4">
+                      <!-- search form (Optional) -->
+                      <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                          <input type="text" name="q" class="form-control" placeholder="Search...">
+                          <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                              <i class="fa fa-search"></i></button>
+                          </span>
+                        </div>
+                      </form>
+                      <!-- /.search form -->
+                    </div>
+                  </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="listPatients" class="table table-bordered table-striped">
@@ -219,10 +222,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       
                         <tr>
                           <td>2</td>
-                          <td><a href="#">Patient 2</a></td>
+                          <td><a href="patient2.html">Patient 2</a></td>
                           <td>14</td>
                           <td>Beo phi do 1</td>
-                        </tr>                     
+                        </tr>
+
+                        <tr>
+                          <td>2</td>
+                          <td><a href="patient3.html">Patient 3</a></td>
+                          <td>14</td>
+                          <td>Beo phi do 1</td>
+                        </tr>                      
                     </tbody>
                     <tfoot>
                       <tr>
@@ -248,7 +258,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           Version 1.0.0.1
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2015 <a href="#">Group 3</a>.</strong> All rights reserved.
       </footer>      
     </div><!-- ./wrapper -->
 
@@ -259,14 +269,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="dist/js/app.min.js"></script>    
+    <script src="dist/js/app.min.js"></script>
     <!-- DataTables -->
     <script src="plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script>
       $(function () {
-        $("#listPatients").DataTable();        
-      });
+        $("#listPatients").DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+        });        
+      }); 
     </script>
   </body>
 </html>
