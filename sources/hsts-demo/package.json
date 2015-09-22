@@ -1,0 +1,10 @@
+{
+    "name": "hsts",
+    "version": "0.1.0",
+    "description": "Health Support Tracking System",
+    "repository": "vn.edu.fpt.hsts",
+    "dependencies": 
+    {
+        "bower": "1.3.4"
+    }
+}

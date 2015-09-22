@@ -1,0 +1,9 @@
+{
+  "name": "hsts",
+  "version": "0.1.0",
+  "dependencies": {
+    "jquery": "1.11.3",
+	"jquery-ui": "1.11.3",
+    "bootstrap": "3.2.0"
+  }
+}

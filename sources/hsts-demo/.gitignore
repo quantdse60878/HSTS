@@ -1,0 +1,11 @@
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+
+### Bower ###
+bower_components/
+src/main/resources/static/bower/
+.bower/
