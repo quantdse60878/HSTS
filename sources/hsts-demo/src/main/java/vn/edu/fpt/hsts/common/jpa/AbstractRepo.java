@@ -5,7 +5,7 @@
  * Author: dangquantran.
  * Date: 9/23/2015.
  */
-package vn.edu.fpt.hsts.common.util;
+package vn.edu.fpt.hsts.common.jpa;
 
-public class HstsUtils {
+public class AbstractRepo {
 }

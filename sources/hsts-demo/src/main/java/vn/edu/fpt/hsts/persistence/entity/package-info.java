@@ -5,7 +5,4 @@
  * Author: dangquantran.
  * Date: 9/23/2015.
  */
-package vn.edu.fpt.hsts.common.util;
-
-public class HstsUtils {
-}
+package vn.edu.fpt.hsts.persistence.entity;

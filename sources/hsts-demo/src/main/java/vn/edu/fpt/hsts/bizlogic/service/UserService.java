@@ -5,7 +5,10 @@
  * Author: dangquantran.
  * Date: 9/23/2015.
  */
-package vn.edu.fpt.hsts.common.util;
+package vn.edu.fpt.hsts.bizlogic.service;
 
-public class HstsUtils {
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
 }

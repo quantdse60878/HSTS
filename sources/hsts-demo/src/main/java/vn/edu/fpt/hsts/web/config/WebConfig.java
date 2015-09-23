@@ -1,3 +1,10 @@
+/**
+ * FPT University Capstone Project 2015.
+ * Program: HSTS.
+ * Program manager: Kieu Trong Khanh.
+ * Author: dangquantran.
+ * Date: 9/23/2015.
+ */
 package vn.edu.fpt.hsts.web.config;
 
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
@@ -10,16 +17,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-/**
- * FPT University Capstone Project 2015.
- * Program: HSTS.
- * Program manager: Kieu Trong Khanh.
- * Author: dangquantran.
- * Date: 9/18/2015.
- */
 @EnableWebMvc
 @Configuration
-public class WebConfig extends WebMvcConfigurerAdapter{
+public class WebConfig extends WebMvcConfigurerAdapter {
     /**************************************************/
     /******* Config resource handler ******************/
     /**************************************************/
