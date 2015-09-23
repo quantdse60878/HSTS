@@ -14,9 +14,11 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
+@Table(name = "MedicalRecord")
 public class MedicalRecord extends AbstractKeyEntity {
 
     /**

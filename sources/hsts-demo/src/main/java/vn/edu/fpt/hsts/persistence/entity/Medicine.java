@@ -10,8 +10,10 @@ package vn.edu.fpt.hsts.persistence.entity;
 import vn.edu.fpt.hsts.common.jpa.AbstractNamedDescEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Medicine")
 public class Medicine extends AbstractNamedDescEntity {
 
     /**

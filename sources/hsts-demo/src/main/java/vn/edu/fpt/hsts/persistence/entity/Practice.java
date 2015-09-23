@@ -10,8 +10,10 @@ package vn.edu.fpt.hsts.persistence.entity;
 import vn.edu.fpt.hsts.common.jpa.AbstractNamedEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Practice")
 public class Practice extends AbstractNamedEntity {
 
     /**

@@ -13,11 +13,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * The Patient entity.
  */
 @Entity
+@Table(name = "Patient")
 public class Patient extends AbstractKeyEntity {
 
     /**

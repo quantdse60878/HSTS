@@ -13,9 +13,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
+@Table(name = "Phase")
 public class Phase extends AbstractKeyEntity {
 
     /**

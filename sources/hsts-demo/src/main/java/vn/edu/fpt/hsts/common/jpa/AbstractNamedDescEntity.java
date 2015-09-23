@@ -13,10 +13,18 @@ import javax.persistence.MappedSuperclass;
  * The entity has one primary key and column name, description.
  */
 @MappedSuperclass
-public abstract class AbstractNamedDescEntity {
+public abstract class AbstractNamedDescEntity extends AbstractNamedEntity {
 
     /**
      * The description.
      */
     private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
+    }
 }

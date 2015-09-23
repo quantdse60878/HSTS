@@ -2,36 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b447a1a7-6031-430a-8607-5906d204e931" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedDescEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedEntity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Appointment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Food.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/FoodTreatment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/IDbConsts.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecord.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecordData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Medicine.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicineTreatment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Patient.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Phase.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseFood.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseMedicine.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhasePractice.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Practice.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PracticeTreatment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Role.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/repo/RoleRepo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Staff.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/StandardRegimen.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Treatment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/EntityNamingStrategy.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../docs/diagrams/hsts_edit_quan.mwb.bak" afterPath="$PROJECT_DIR$/../../docs/diagrams/hsts_edit_quan.mwb.bak" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../docs/diagrams/hsts_edit_quan.mwb" afterPath="$PROJECT_DIR$/../../docs/diagrams/hsts_edit_quan.mwb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../references/intellij-ide-settings.jar" afterPath="$PROJECT_DIR$/../../references/intellij-ide-settings.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedDescEntity.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedDescEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Appointment.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Appointment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Doctor.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Doctor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Food.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Food.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/FoodTreatment.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/FoodTreatment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecord.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecord.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecordData.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecordData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Medicine.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Medicine.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicineTreatment.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicineTreatment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Nurse.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Nurse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Patient.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Patient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Phase.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Phase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseFood.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseFood.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseMedicine.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseMedicine.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhasePractice.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhasePractice.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Practice.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Practice.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PracticeTreatment.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PracticeTreatment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Staff.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Staff.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/StandardRegimen.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/StandardRegimen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Treatment.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Treatment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/User.java" afterPath="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HSTS.iws" />
@@ -56,11 +51,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Doctor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Doctor.java">
+      <file leaf-file-name="PracticeTreatment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PracticeTreatment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="49" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
+              <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -68,25 +63,109 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MedicalRecord.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecord.java">
+      <file leaf-file-name="Staff.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Staff.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+              <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2433#2434#0" expanded="true" />
-                <element signature="e#2469#2470#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Nurse.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Nurse.java">
+      <file leaf-file-name="StandardRegimen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/StandardRegimen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53321034">
-              <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Treatment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Treatment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Medicine.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Medicine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Appointment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Appointment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.04775281">
+              <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractNamedDescEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedDescEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
+              <folding>
+                <element signature="e#506#507#0" expanded="true" />
+                <element signature="e#540#541#0" expanded="true" />
+                <element signature="e#600#601#0" expanded="true" />
+                <element signature="e#646#647#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractNamedEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Role.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Role.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -138,35 +217,36 @@
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/web/HomeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/Repo.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/IBaseRepo.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractRepo.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/repo/UserRepo.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractKeyEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/StandardRegimen.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedDescEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Medicine.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Practice.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Role.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Food.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicineTreatment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Appointment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PracticeTreatment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/FoodTreatment.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/IDbConsts.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/repo/RoleRepo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/EntityNamingStrategy.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Appointment.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Doctor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecord.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Food.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/FoodTreatment.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecordData.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecord.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicineTreatment.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Nurse.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Patient.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Phase.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseFood.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseMedicine.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhasePractice.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Practice.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PracticeTreatment.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Staff.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/StandardRegimen.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Treatment.java" />
         <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/repo/RoleRepo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Medicine.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedDescEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Role.java" />
       </list>
     </option>
   </component>
@@ -302,7 +382,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -623,14 +703,78 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HSTS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hsts-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hsts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jpa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HSTS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hsts-demo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hsts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="bizlogic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -935,30 +1079,31 @@
       <workItem from="1442967093697" duration="6535000" />
       <workItem from="1442981411760" duration="599000" />
       <workItem from="1442982349760" duration="6307000" />
+      <workItem from="1442988725821" duration="1673000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21744000" />
+    <option name="totallyTimeSpent" value="23417000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1378" height="728" extended-state="1" />
-    <editor active="false" />
+    <frame x="-8" y="0" width="1378" height="728" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5030349" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.4969651" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3263158" sideWeight="0.4969651" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962063" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962063" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -968,8 +1113,8 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -992,13 +1137,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/web/config/package-info.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/web/package-info.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1160,21 +1298,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6702509">
-          <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/repo/UserRepo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1186,237 +1313,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3655914">
-          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedDescEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1827957">
-          <caret line="12" column="63" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Role.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2509225">
-          <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/IDbConsts.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.6900369">
           <caret line="153" column="24" selection-start-line="153" selection-start-column="24" selection-end-line="153" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Appointment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7490775">
-          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Food.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4077491">
-          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/FoodTreatment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6863469">
-          <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Doctor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="49" selection-start-line="23" selection-start-column="49" selection-end-line="23" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecordData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43542436">
-          <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2064#2065#0" expanded="true" />
-            <element signature="e#2116#2117#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Medicine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43542436">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicineTreatment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2195572">
-          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2433#2434#0" expanded="true" />
-            <element signature="e#2469#2470#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Patient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43542436">
-          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Phase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4704797">
-          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1116#1117#0" expanded="true" />
-            <element signature="e#1164#1165#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseFood.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61623615">
-          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseMedicine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.704797">
-          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhasePractice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36346865">
-          <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Practice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31365314">
-          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PracticeTreatment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7490775">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Staff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14575645">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/StandardRegimen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37638375">
-          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#589#590#0" expanded="true" />
-            <element signature="e#623#624#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Treatment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2195572">
-          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53321034">
-          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1430,10 +1331,261 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/EntityNamingStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#430#431#0" expanded="true" />
+            <element signature="e#486#487#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="78" selection-start-line="13" selection-start-column="78" selection-end-line="13" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Doctor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Food.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#691#692#0" expanded="true" />
+            <element signature="e#718#719#0" expanded="true" />
+            <element signature="e#758#759#0" expanded="true" />
+            <element signature="e#790#791#0" expanded="true" />
+            <element signature="e#828#829#0" expanded="true" />
+            <element signature="e#862#863#0" expanded="true" />
+            <element signature="e#916#917#0" expanded="true" />
+            <element signature="e#962#963#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/FoodTreatment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecordData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicalRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/MedicineTreatment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Nurse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53321034">
-          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="3" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Patient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Phase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseFood.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhaseMedicine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PhasePractice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Practice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/PracticeTreatment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Staff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/StandardRegimen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Treatment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedDescEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
+          <folding>
+            <element signature="e#506#507#0" expanded="true" />
+            <element signature="e#540#541#0" expanded="true" />
+            <element signature="e#600#601#0" expanded="true" />
+            <element signature="e#646#647#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/common/jpa/AbstractNamedEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Role.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Medicine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vn/edu/fpt/hsts/persistence/entity/Appointment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04775281">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
