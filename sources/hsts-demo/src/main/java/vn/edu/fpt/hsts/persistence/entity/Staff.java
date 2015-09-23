@@ -15,10 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
- * The Nurse entity.
+ * The Staff entity.
  */
 @Entity
-public class Nurse extends AbstractKeyEntity {
+public class Staff extends AbstractKeyEntity {
 
     /**
      * The user.
@@ -32,8 +32,7 @@ public class Nurse extends AbstractKeyEntity {
      */
     private String department;
 
-
-    public Nurse() {
+    public Staff() {
     }
 
     public User getUser() {

@@ -15,10 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
- * The Nurse entity.
+ * The Patient entity.
  */
 @Entity
-public class Nurse extends AbstractKeyEntity {
+public class Patient extends AbstractKeyEntity {
 
     /**
      * The user.
@@ -27,13 +27,7 @@ public class Nurse extends AbstractKeyEntity {
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
-    /**
-     * The department.
-     */
-    private String department;
-
-
-    public Nurse() {
+    public Patient() {
     }
 
     public User getUser() {
@@ -42,13 +36,5 @@ public class Nurse extends AbstractKeyEntity {
 
     public void setUser(final User user) {
         this.user = user;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(final String department) {
-        this.department = department;
     }
 }
