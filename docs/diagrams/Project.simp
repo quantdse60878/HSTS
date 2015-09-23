@@ -58,7 +58,7 @@
           </authors>
           <description />
           <creation-date>09/12/2015 07:55:12</creation-date>
-          <change-date>09/22/2015 19:47:56</change-date>
+          <change-date>09/23/2015 15:41:16</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -349,13 +349,6 @@
               <end-role id="" name="" multiplicity="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="ddip303911810959166380_565369530339543275" cid="UC003" type="use-case" name="View Treatment" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/13/2015 22:28:09">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-          </item>
           <item id="ddip303911810959166380_696071514307142334" cid="UC001" type="use-case" name="Manage Regiman" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/12/2015 09:06:46">
             <stereotypes />
             <tagged-values />
@@ -429,17 +422,6 @@
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-          </item>
-          <item id="ddip303911810959166380_752035881815624513" cid="REL004" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/13/2015 22:28:18">
-            <stereotypes />
-            <tagged-values />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <relation from="ddip303911810959166380_565369530339543275" to="ddip303911810959166380_927125137331991065">
-              <start-role id="" name="" multiplicity="" navigability="" association-type="association" visibility="private" />
-              <end-role id="" name="" multiplicity="" navigability="" association-type="association" visibility="private" />
-            </relation>
           </item>
           <item id="ddip303911810959166380_361622231398376547" cid="UC005" type="use-case" name="Setup New Profile" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/13/2015 22:29:57">
             <stereotypes />
@@ -623,6 +605,13 @@
               <end-role id="" name="" multiplicity="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
+          <item id="ddip303911810959166380_827741669991176791" cid="GNR001" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/23/2015 15:38:26">
+            <stereotypes />
+            <tagged-values />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="ddip303911810959166380_158363925335015270" iid="3b0cbde9509a4ba4bc828885b19c21ce" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 07:57:18" order-index="0" type="entity">
@@ -632,14 +621,14 @@
             <layout ax="1090" ay="290" awidth="50" aheight="60" x="1090" y="290" width="50" height="60" angle="0" />
           </item>
           <item id="ddip303911810959166380_406189220258500690" iid="8942f07d6abe4a08a46a88fed5818c44" container="ddip303911810959166380_158363925335015270" container-iid="3b0cbde9509a4ba4bc828885b19c21ce" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:00:24" order-index="2" type="entity">
-            <layout ax="860" ay="260" awidth="70" aheight="44" x="860" y="260" width="70" height="120" angle="0" />
+            <layout ax="780" ay="280" awidth="70" aheight="44" x="780" y="280" width="70" height="120" angle="0" />
             <use-case />
           </item>
           <item id="ddip303911810959166380_137088158989512617" iid="9d24443d21f144abbdfb7b732b6922de" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:00:36" order-index="3" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="929" y1="286" x2="1090" y2="316" start-border-pos="0.40934909473766" end-border-pos="0.857007598876953">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="850" y1="303" x2="1090" y2="318" start-border-pos="0.386931852860884" end-border-pos="0.86875">
               <points>
-                <point x="929" y="286" />
-                <point x="1090" y="316" />
+                <point x="850" y="303" />
+                <point x="1090" y="318" />
               </points>
             </layout>
             <relation from="ddip303911810959166380_406189220258500690" from-iid="8942f07d6abe4a08a46a88fed5818c44" to="ddip303911810959166380_275348909362135979" to-iid="a3369f4baee34869928339f888aaf441" />
@@ -708,12 +697,12 @@
             <layout ax="140" ay="750" awidth="50" aheight="80" x="140" y="750" width="50" height="80" angle="0" />
           </item>
           <item id="ddip303911810959166380_852809984597925049" iid="398918721eb74943b4b6465aeee60f69" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:13:29" order-index="15" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="140" y1="790" x2="110" y2="370" start-border-pos="0.875" end-border-pos="0.875">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" name-position="10,-10" x1="140" y1="790" x2="110" y2="390" start-border-pos="0.875" end-border-pos="0.958333333333333">
               <points>
                 <point x="140" y="790" />
                 <point x="70" y="790" />
-                <point x="70" y="370" />
-                <point x="110" y="370" />
+                <point x="70" y="390" />
+                <point x="110" y="390" />
               </points>
             </layout>
             <relation from="ddip303911810959166380_144222146367072299" from-iid="07ae167ef9704f2594a9213ae64f5125" to="ddip303911810959166380_469147501140245333" to-iid="291800a285d74b6f9b61ca5edf35c21e" />
@@ -759,14 +748,14 @@
             <relation from="ddip303911810959166380_147439432133836590" from-iid="c5eefa10f0ec477fa504e097b0bfa4c4" to="ddip303911810959166380_992154719208102506" to-iid="084749b300bf4043919b4cde816ad62a" />
           </item>
           <item id="ddip303911810959166380_897016955810445863" iid="d2619298be9a4974ad108b47d61e1cc7" container="ddip303911810959166380_158363925335015270" container-iid="3b0cbde9509a4ba4bc828885b19c21ce" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:48:51" order-index="34" type="entity">
-            <layout ax="520" ay="750" awidth="100" aheight="62" x="520" y="750" width="100" height="60" angle="0" />
+            <layout ax="480" ay="740" awidth="100" aheight="62" x="480" y="740" width="100" height="60" angle="0" />
             <use-case />
           </item>
           <item id="ddip303911810959166380_873324930188097178" iid="57981f41f39347649c0d366947a65861" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:51:41" order-index="35" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="190" y1="789" x2="520" y2="782" start-border-pos="0.373263931274414" end-border-pos="0.879480177356351">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="190" y1="789" x2="480" y2="773" start-border-pos="0.370933151245117" end-border-pos="0.885494847451487">
               <points>
                 <point x="190" y="789" />
-                <point x="520" y="782" />
+                <point x="480" y="773" />
               </points>
             </layout>
             <relation from="ddip303911810959166380_144222146367072299" from-iid="07ae167ef9704f2594a9213ae64f5125" to="ddip303911810959166380_897016955810445863" to-iid="d2619298be9a4974ad108b47d61e1cc7" />
@@ -832,13 +821,13 @@
             <layout ax="1080" ay="800" awidth="50" aheight="100" x="1080" y="800" width="40" height="100" angle="0" />
           </item>
           <item id="ddip303911810959166380_771593775960818063" iid="3f4ed100436f49b794e57b26c4f68ee2" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/13/2015 22:00:14" order-index="49" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" name-position="10,-10" x1="1104" y1="900" x2="120" y2="340" start-border-pos="0.617647094726563" end-border-pos="0.0208333333333333">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" name-position="10,-10" x1="1104" y1="900" x2="110" y2="380" start-border-pos="0.617647094726563" end-border-pos="0.916666666666667">
               <points>
                 <point x="1104" y="900" />
                 <point x="1100" y="1020" />
                 <point x="50" y="1020" />
-                <point x="50" y="340" />
-                <point x="120" y="340" />
+                <point x="50" y="380" />
+                <point x="110" y="380" />
               </points>
             </layout>
             <relation from="ddip303911810959166380_927125137331991065" from-iid="70b51cebe4794f50a4ffd84e2ac957fd" to="ddip303911810959166380_469147501140245333" to-iid="291800a285d74b6f9b61ca5edf35c21e" />
@@ -871,29 +860,15 @@
             <relation from="ddip303911810959166380_330689767274566956" from-iid="98fe3c78fa984eb5b91a26b227079618" to="ddip303911810959166380_537124136600618460" to-iid="a0b0430af0a04f0d994da6895c8b228f" />
             <role-positions start-role="25,15" end-role="25,15" start-multiplicity="25,-15" end-multiplicity="25,-15" />
           </item>
-          <item id="ddip303911810959166380_565369530339543275" iid="3cee9c4bd34c4d6fb653cf71c53b60fd" container="ddip303911810959166380_158363925335015270" container-iid="3b0cbde9509a4ba4bc828885b19c21ce" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/13/2015 22:28:09" order-index="56" type="entity">
-            <layout ax="820" ay="910" awidth="100" aheight="62" x="820" y="910" width="100" height="50" angle="0" />
-            <use-case />
-          </item>
-          <item id="ddip303911810959166380_752035881815624513" iid="504e9e613ae74b25ba4c8c25639e0792" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/13/2015 22:28:18" order-index="57" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="917" y1="930" x2="1080" y2="860" start-border-pos="0.29692865187122" end-border-pos="0.899202117919922">
-              <points>
-                <point x="917" y="930" />
-                <point x="1080" y="860" />
-              </points>
-            </layout>
-            <relation from="ddip303911810959166380_565369530339543275" from-iid="3cee9c4bd34c4d6fb653cf71c53b60fd" to="ddip303911810959166380_927125137331991065" to-iid="70b51cebe4794f50a4ffd84e2ac957fd" />
-            <role-positions start-role="25,15" end-role="25,15" start-multiplicity="25,-15" end-multiplicity="25,-15" />
-          </item>
           <item id="ddip303911810959166380_361622231398376547" iid="6bfed4ecb0174111884b2b769d861586" container="ddip303911810959166380_158363925335015270" container-iid="3b0cbde9509a4ba4bc828885b19c21ce" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/13/2015 22:29:57" order-index="59" type="entity">
-            <layout ax="820" ay="830" awidth="100" aheight="62" x="820" y="830" width="100" height="50" angle="0" />
+            <layout ax="820" ay="900" awidth="100" aheight="62" x="820" y="900" width="100" height="50" angle="0" />
             <use-case />
           </item>
           <item id="ddip303911810959166380_834879746143343577" iid="f1c654117e554f2d862bf8529cd7c73a" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/13/2015 22:32:32" order-index="61" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="1080" y1="851" x2="920" y2="860" start-border-pos="0.877925567626953" end-border-pos="0.365562685074345">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="1080" y1="859" x2="917" y2="921" start-border-pos="0.896542510986328" end-border-pos="0.30550778296686">
               <points>
-                <point x="1080" y="851" />
-                <point x="920" y="860" />
+                <point x="1080" y="859" />
+                <point x="917" y="921" />
               </points>
             </layout>
             <relation from="ddip303911810959166380_927125137331991065" from-iid="70b51cebe4794f50a4ffd84e2ac957fd" to="ddip303911810959166380_361622231398376547" to-iid="6bfed4ecb0174111884b2b769d861586" />
@@ -1009,27 +984,27 @@
             <role-positions start-role="25,15" end-role="25,15" start-multiplicity="25,-15" end-multiplicity="25,-15" />
           </item>
           <item id="ddip303911810959166380_799065923440728054" iid="0a59316811714782a04d5f4ee08ac431" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/22/2015 08:12:34" order-index="92" type="entity">
-            <layout ax="1080" ay="90" awidth="50" aheight="90" x="1080" y="90" width="50" height="90" angle="0" />
+            <layout ax="1080" ay="120" awidth="50" aheight="90" x="1080" y="120" width="50" height="90" angle="0" />
           </item>
           <item id="ddip303911810959166380_157829900842615856" iid="4a0d229dc74240ff8fdb868c1140f415" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/22/2015 08:12:49" order-index="93" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="1080" y1="136" x2="940" y2="140" start-border-pos="0.876937993367513" end-border-pos="0.369373567642704">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="1080" y1="162" x2="940" y2="145" start-border-pos="0.867248068915473" end-border-pos="0.397505606374433">
               <points>
-                <point x="1080" y="136" />
-                <point x="940" y="140" />
+                <point x="1080" y="162" />
+                <point x="940" y="145" />
               </points>
             </layout>
             <relation from="ddip303911810959166380_799065923440728054" from-iid="0a59316811714782a04d5f4ee08ac431" to="ddip303911810959166380_902955980107992928" to-iid="3ecab6d578aa4c30864b96c34c5e69d8" />
             <role-positions start-role="25,15" end-role="25,15" start-multiplicity="25,-15" end-multiplicity="25,-15" />
           </item>
           <item id="ddip303911810959166380_599267197815867251" iid="585cf24062cb44e4925908bb92ce589e" container="ddip303911810959166380_158363925335015270" container-iid="3b0cbde9509a4ba4bc828885b19c21ce" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/22/2015 19:36:54" order-index="94" type="entity">
-            <layout ax="660" ay="260" awidth="90" aheight="56" x="660" y="260" width="90" height="40" angle="0" />
+            <layout ax="880" ay="220" awidth="90" aheight="56" x="880" y="220" width="90" height="40" angle="0" />
             <use-case />
           </item>
           <item id="ddip303911810959166380_245294390546356978" iid="ba19205573ec4888a463f28296ac4802" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/22/2015 19:37:13" order-index="95" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="740" y1="271" x2="851" y2="160" start-border-pos="0.222883605957031" end-border-pos="0.527465972900391">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="911" y1="221" x2="905" y2="171" start-border-pos="0.0995586819118924" end-border-pos="0.650350494384766">
               <points>
-                <point x="740" y="271" />
-                <point x="851" y="160" />
+                <point x="911" y="221" />
+                <point x="905" y="171" />
               </points>
             </layout>
             <relation from="ddip303911810959166380_599267197815867251" from-iid="585cf24062cb44e4925908bb92ce589e" to="ddip303911810959166380_902955980107992928" to-iid="3ecab6d578aa4c30864b96c34c5e69d8" />
@@ -1049,18 +1024,30 @@
             <role-positions start-role="25,15" end-role="25,15" start-multiplicity="25,-15" end-multiplicity="25,-15" />
           </item>
           <item id="ddip303911810959166380_160801971612763077" iid="e60b491d2b9149ae9d96d3cf63927679" container="ddip303911810959166380_158363925335015270" container-iid="3b0cbde9509a4ba4bc828885b19c21ce" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/22/2015 19:45:05" order-index="98" type="entity">
-            <layout ax="820" ay="750" awidth="100" aheight="62" x="820" y="750" width="100" height="70" angle="0" />
+            <layout ax="820" ay="800" awidth="100" aheight="62" x="820" y="800" width="100" height="70" angle="0" />
             <use-case />
           </item>
           <item id="ddip303911810959166380_275452877205106511" iid="3c9b2626d26544ccad97e5e7dfe2b0a1" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/22/2015 19:47:56" order-index="99" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="918" y1="790" x2="1080" y2="843" start-border-pos="0.434196964386971" end-border-pos="0.856648864746094">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="920" y1="833" x2="1080" y2="848" start-border-pos="0.391300570580267" end-border-pos="0.869946746826172">
               <points>
-                <point x="918" y="790" />
-                <point x="1080" y="843" />
+                <point x="920" y="833" />
+                <point x="1080" y="848" />
               </points>
             </layout>
             <relation from="ddip303911810959166380_160801971612763077" from-iid="e60b491d2b9149ae9d96d3cf63927679" to="ddip303911810959166380_927125137331991065" to-iid="70b51cebe4794f50a4ffd84e2ac957fd" />
             <role-positions start-role="25,15" end-role="25,15" start-multiplicity="25,-15" end-multiplicity="25,-15" />
+          </item>
+          <item id="ddip303911810959166380_827741669991176791" iid="9a329414cc6f43a4a6fa640f6521e35f" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/23/2015 15:38:26" order-index="100" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="1103" y1="120" x2="110" y2="370" start-border-pos="0.116666870117188" end-border-pos="0.875">
+              <points>
+                <point x="1103" y="120" />
+                <point x="1100" y="30" />
+                <point x="50" y="30" />
+                <point x="50" y="370" />
+                <point x="110" y="370" />
+              </points>
+            </layout>
+            <relation from="ddip303911810959166380_799065923440728054" from-iid="0a59316811714782a04d5f4ee08ac431" to="ddip303911810959166380_469147501140245333" to-iid="291800a285d74b6f9b61ca5edf35c21e" />
           </item>
         </layer>
       </diagram>
