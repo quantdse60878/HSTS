@@ -308,7 +308,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="form-group" style="margin-top: 15px;">
                           <label for="Appointment" class="col-sm-2 control-label">Appointment</label>
                           <div class="col-sm-5">
-                            <input class="form-control" type="text" id="Appointment" data-provide="Appointment">
+                            <input class="form-control" type="text" value="30/09/2015" 
+                            id="Appointment" data-provide="Appointment">
                           </div>
                         </div>       
                         <div class="form-group">
@@ -501,11 +502,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script type="text/javascript">
                 
                 $('#Appointment').datepicker({
-                    format: 'dd/mm/yyyy',
+                    dateFormat: 'dd/mm/yy',
                     changeMonth: true,
                     defaultDate: "+1w",
                     changeYear: true,
                   });
+
                 var countMedicine = 2;
                 var countFoods = 5;
                 var countPractice = 3;
