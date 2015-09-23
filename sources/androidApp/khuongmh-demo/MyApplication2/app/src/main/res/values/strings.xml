@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">HSTS</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment1">1111111</string>
+    <string name="hello_blank_fragment2">2222222</string>
+    <string name="hello_blank_fragment3">3333333</string>
+    <string name="title_activity_login">Login</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_register">Not A Member ? Register Now</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+</resources>

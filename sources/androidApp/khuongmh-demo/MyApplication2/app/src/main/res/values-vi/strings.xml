@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HSTS</string>
+    <string name="action_settings">Cấu Hình</string>
+    <string name="title_activity_login">Đăng Nhập</string>
+    <string name="prompt_username">Tên Đăng Nhập</string>
+    <string name="prompt_password">Mật Khẩu</string>
+    <string name="action_sign_in">Đăng Nhập</string>
+    <string name="action_register">Chưa Có Tài Khoản ? <b>Đăng Ký</b></string>
+</resources>
