@@ -331,7 +331,7 @@
               <end-role id="" name="" multiplicity="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="ddip303911810959166380_897016955810445863" cid="UC011" type="use-case" name="View History Patient" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:48:51">
+          <item id="ddip303911810959166380_897016955810445863" cid="UC011" type="use-case" name="View Patient Medical History" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:48:51">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -573,28 +573,28 @@
               <end-role id="" name="" multiplicity="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="ddip303911810959166380_599267197815867251" cid="UC001" type="use-case" name="Delete Device" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:36:54">
+          <item id="ddip303911810959166380_599267197815867251" cid="UC001" type="use-case" name="Delete Device" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:36:54">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_245294390546356978" cid="GNR001" type="generalization" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:37:13">
+          <item id="ddip303911810959166380_245294390546356978" cid="GNR001" type="generalization" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:37:13">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_796929108163093000" cid="UC002" type="use-case" name="Update Patient's History" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:38:42">
+          <item id="ddip303911810959166380_796929108163093000" cid="UC002" type="use-case" name="Update Patient's History" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:38:42">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_573602422437925989" cid="REL001" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:39:10">
+          <item id="ddip303911810959166380_573602422437925989" cid="REL001" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:39:10">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -605,14 +605,14 @@
               <end-role id="" name="" multiplicity="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="ddip303911810959166380_160801971612763077" cid="UC003" type="use-case" name="Send Notify to Doctor" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:45:05">
+          <item id="ddip303911810959166380_160801971612763077" cid="UC003" type="use-case" name="Send Notify to Doctor" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:45:05">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_275452877205106511" cid="REL002" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:47:56">
+          <item id="ddip303911810959166380_275452877205106511" cid="REL002" type="relationship" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/22/2015 19:47:56">
             <stereotypes />
             <tagged-values />
             <associated-diagrams />
@@ -759,14 +759,14 @@
             <relation from="ddip303911810959166380_147439432133836590" from-iid="c5eefa10f0ec477fa504e097b0bfa4c4" to="ddip303911810959166380_992154719208102506" to-iid="084749b300bf4043919b4cde816ad62a" />
           </item>
           <item id="ddip303911810959166380_897016955810445863" iid="d2619298be9a4974ad108b47d61e1cc7" container="ddip303911810959166380_158363925335015270" container-iid="3b0cbde9509a4ba4bc828885b19c21ce" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:48:51" order-index="34" type="entity">
-            <layout ax="520" ay="750" awidth="90" aheight="56" x="520" y="750" width="90" height="50" angle="0" />
+            <layout ax="520" ay="750" awidth="100" aheight="62" x="520" y="750" width="100" height="60" angle="0" />
             <use-case />
           </item>
           <item id="ddip303911810959166380_873324930188097178" iid="57981f41f39347649c0d366947a65861" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:51:41" order-index="35" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="190" y1="789" x2="520" y2="779" start-border-pos="0.37265625" end-border-pos="0.881026676722935">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" name-position="10,-10" x1="190" y1="789" x2="520" y2="782" start-border-pos="0.373263931274414" end-border-pos="0.879480177356351">
               <points>
                 <point x="190" y="789" />
-                <point x="520" y="779" />
+                <point x="520" y="782" />
               </points>
             </layout>
             <relation from="ddip303911810959166380_144222146367072299" from-iid="07ae167ef9704f2594a9213ae64f5125" to="ddip303911810959166380_897016955810445863" to-iid="d2619298be9a4974ad108b47d61e1cc7" />
