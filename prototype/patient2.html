@@ -197,7 +197,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Patient 2</li>
+            <li class="active">Diagnostic</li>
           </ol>
         </section>
 
@@ -206,8 +206,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <!-- Your Page Content Here --> 
           <div class="row" style="margin: 2px;">
-            <a href="patient2.html"><button type="submit" class="btn btn-primary pull-left">
-            <i class="fa fa-hand-o-left"></i> History Treatment</button></a>
+            <a href="patient2.html" class="btn btn-primary">23/09/2015</a>
+            <a href="patient2.html" class="btn btn-default">21/09/2015</a>
+            <a href="patient2.html" class="btn btn-default">18/09/2015</a>
           </div>
           <!-- row -->
           <div class="row">            
@@ -225,49 +226,59 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   
                       <div class="box-body">
                       <div class="form-group">
-                        <label for="Name" class="col-sm-2 control-label">Name</label>
+                        <label for="Name" class="col-sm-3 control-label">Name</label>
                         <div class="col-sm-6">
-                          <input type="text" readonly="readonly" class="form-control" value="Patient 1">
+                          <input type="text" readonly="readonly" class="form-control" value="Patient 2">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="Birthday" class="col-sm-2 control-label">Age</label>
+                        <label for="Birthday" class="col-sm-3 control-label">Age</label>
                         <div class="col-sm-2">
                           <input type="text" readonly="readonly" class="form-control" value="31">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="Gender" class="col-sm-2 control-label">Gender</label>                      
+                        <label for="Gender" class="col-sm-3 control-label">Gender</label>                      
                         <div class="col-sm-3">
                           <input type="text" readonly="readonly" class="form-control" value="Male">
                         </div>
                       </div> 
                       <div class="form-group">
-                        <label for="Weight" class="col-sm-2 control-label">Weight</label>
+                        <label for="informationDate" class="col-sm-3 control-label">Information Date</label>
+                        <div class="col-sm-4">
+                          <input type="text" readonly="readonly" class="form-control" value="23/09/2015">
+                        </div>                       
+                      </div>
+                      <div class="form-group">
+                        <label for="Weight" class="col-sm-3 control-label">Weight</label>
                         <div class="col-sm-2">
                           <input type="text" readonly="readonly" class="form-control" value="82">
                         </div>
                         <label for="Weight" class="col-sm-1 control-label"> Kg</label>
                       </div>
                       <div class="form-group">
-                        <label for="Height" class="col-sm-2 control-label">Height</label>
+                        <label for="Height" class="col-sm-3 control-label">Height</label>
                         <div class="col-sm-2">
                           <input type="text" readonly="readonly" class="form-control" value="1.66">
                         </div>
                         <label for="Height" class="col-sm-1 control-label"> m</label>
-                      </div>                    
+                      </div>  
                       <div class="form-group">
-                        <label for="Status" class="col-sm-2 control-label">Status</label>
-                        <div class="col-sm-10">
+                        <label for="avgKcal" class="col-sm-3 control-label">Avg Kcal</label>
+                        <div class="col-sm-2">
+                          <input type="text" readonly="readonly" class="form-control" value="121">
+                        </div>
+                        <label for="Height" class="col-sm-1 control-label"> Kcal</label>
+                      </div>                   
+                      <div class="form-group">
+                        <label for="Status" class="col-sm-3 control-label">Status</label>
+                        <div class="col-sm-9">
                           <textarea type="text" readonly="readonly" class="form-control" id="Status" 
                             style="width: 100%; height: 120px; font-size: 14px;" placeholder="Status">
                           </textarea> 
                         </div>
                       </div>
-                      <div>
-                        <a class="btn btn-primary pull-right"
-                         onclick="popup('popUpDiv')">Suggest treatments</a>
-                      </div> 
+                      
                       </div><!-- /.box-body --> 
                     </div><!-- /.col -->
 
@@ -275,14 +286,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-th"></i> Prescriptions</h3>
                       </div><!-- /.box-header -->                  
-                      <div class="box-body">                                     
+                      <div class="box-body sidebar">                                     
                         <div class="form-group">
                           <label for="Name" class="col-sm-2 control-label">Diagnostic</label>
                           <div class="col-sm-10">
                             <input type="text" class="form-control" value="Beo phi do 1">
                           </div>
                         </div> 
-                        <table class="table table-striped" id="medicine">
+
+                        <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">            
+            <li class="active treeview">
+              <a href="#">
+                <h4>Medicine</h4> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active">
+                  <!-- table medicine -->
+                  <table class="table table-striped" id="medicine">
                           <tr>
                             <th style="width: 10px">#</th>
                             <th>Medicine</th>
@@ -303,7 +324,118 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <td><input type="text" class="form-control" style="width: 100px;" placeholder="so lan"></td>
                           </tr>
                         </table>
-                        <a class="btn btn-primary" onclick="addRowMedicine('medicine')">Add</a>
+                  <!-- /.table medicine -->
+                  <a style="width: 50px;color: white;" class="btn btn-primary" onclick="addRowMedicine('medicine')">Add</a>
+                </li>                
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#"><h4>Foods</h4>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li>
+                  <table class="table table-striped" id="Foods">
+                      <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Name</th>
+                        <th>Quantitative</th>                        
+                      </tr>
+                      <tr>
+                        <td>1/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Rau</option>
+                            <option>Cơm</option>
+                            <option>Trái cây</option>
+                            <option>Bia Rượu</option>                          
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="Nhiều"></td>
+                      </tr>
+                      <tr>
+                        <td>2/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Cơm</option>
+                            <option>Rau</option>                            
+                            <option>Trái cây</option>
+                            <option>Bia Rượu</option>                          
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="Ít"></td>
+                      </tr>
+                      <tr>
+                        <td>3/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Trái cây</option>
+                            <option>Rau</option>
+                            <option>Cơm</option>                            
+                            <option>Bia Rượu</option>                          
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="Nhiều"></td>
+                      </tr>
+                      <tr>
+                        <td>4/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Bia Rượu</option>
+                            <option>Rau</option>
+                            <option>Cơm</option>
+                            <option>Trái cây</option>                                                      
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="Ít"></td>
+                      </tr>
+                        </table>
+                        <a style="width: 50px;color: white;" class="btn btn-primary" onclick="addRowFoods('Foods')">Add</a> 
+                </li>                
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#"><h4>Practices</h4>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">                
+                <li>
+                  <table class="table table-striped" id="Practice">
+                      <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Name</th>
+                        <th>Quantitative</th>                        
+                      </tr>
+                      <tr>
+                        <td>1/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Chạy bộ</option>
+                            <option>Đi bộ</option>
+                            <option>Chơi bóng bàn</option>                          
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="20 phút"></td>
+                      </tr>
+                      <tr>
+                        <td>2/</td>
+                        <td>
+                          <select class="form-control">
+                            <option>Chơi bóng bàn</option>
+                            <option>Chạy bộ</option>
+                            <option>Đi bộ</option>                                                      
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" style="width: 100px;" value="30 phút"></td>
+                      </tr>
+                        </table>
+                        <a style="width: 50px;color: white;" class="btn btn-primary" onclick="addRowPractice('Practice')">Add</a>
+                </li>                
+              </ul>
+            </li>
+          </ul><!-- /.sidebar-menu -->
+                        
+                        
                  
                         <div class="form-group" style="margin-top: 15px;">
                           <label for="Appointment" class="col-sm-2 control-label">Appointment</label>
@@ -313,7 +445,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           </div>
                         </div>       
                         <div class="form-group">
-                          <label for="Note" class="col-sm-2 control-label">Note</label>
+                          <label for="Note" class="col-sm-1 control-label">Note</label>
                           <div class="col-sm-10">
                             <textarea type="text" class="form-control" id="Note" 
                               style="width: 100%; height: 120px; font-size: 14px;" placeholder="Note">
@@ -340,10 +472,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row --> 
-          <div class="row" style="margin: 2px;">
-            <a href="patient2.html"><button type="submit" class="btn btn-primary pull-left">
-            <i class="fa fa-hand-o-left"></i> History Treatment</button></a>
-          </div>
+          
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 
