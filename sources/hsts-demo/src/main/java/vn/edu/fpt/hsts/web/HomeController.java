@@ -24,7 +24,19 @@ public class HomeController {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("login");
+            modelAndView.setViewName("login2");
+            return modelAndView;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/500")
+    public ModelAndView internalServerError() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("500");
             return modelAndView;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
