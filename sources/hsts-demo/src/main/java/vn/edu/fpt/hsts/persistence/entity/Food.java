@@ -10,10 +10,8 @@ package vn.edu.fpt.hsts.persistence.entity;
 import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "Food")
 public class Food extends AbstractKeyEntity {
 
     private String name;
