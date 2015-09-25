@@ -37,7 +37,7 @@ public class UserService {
         try {
             LOGGER.info("username[{}], password[{}]", username, password);
             final User user = userRepo.findByUsernameAndPassword(username, password);
-            if(null == user) {
+            if(null != user) {
                 return user;
             }
             return null;

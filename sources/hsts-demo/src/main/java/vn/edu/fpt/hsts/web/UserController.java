@@ -40,7 +40,6 @@ public class UserController {
      * @return
      */
     @RequestMapping("/login")
-    @ResponseBody
     public String login(@RequestParam("username") final String username,
                      @RequestParam("password") final String password) {
         LOGGER.info(IConsts.BEGIN_METHOD);
