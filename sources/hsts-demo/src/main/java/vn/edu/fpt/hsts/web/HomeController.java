@@ -42,4 +42,16 @@ public class HomeController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    @RequestMapping(value = "/404")
+    public ModelAndView pageNotFound() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("404");
+            return modelAndView;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

@@ -8,6 +8,8 @@
 package vn.edu.fpt.hsts.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.edu.fpt.hsts.persistence.entity.User;
 
@@ -16,4 +18,7 @@ import vn.edu.fpt.hsts.persistence.entity.User;
  */
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer> {
+
+    @Query("select u from User u where username = :username and password = :password")
+    public User findByUsernameAndPassword(@Param(value = "username") final String username, @Param("password") final String password);
 }

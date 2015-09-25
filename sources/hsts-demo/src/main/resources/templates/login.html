@@ -7,9 +7,11 @@
 </head>
 <body>
 <div>
-    Username: <input th:type="text" th:name="username"/>
-    Password: <input th:type="password" th:name="password"/>
-    <input th:type="submit" th:name="Login"/>
+    <form th:action="login">
+        Username: <input th:type="text" th:name="username"/>
+        Password: <input th:type="password" th:name="password"/>
+        <input th:type="submit" th:name="Login" th:value="Login"/>
+    </form>
 </div>
 </body>
 </html>
