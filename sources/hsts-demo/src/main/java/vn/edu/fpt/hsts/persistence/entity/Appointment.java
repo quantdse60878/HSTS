@@ -11,32 +11,22 @@ import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
  * The Appointment entity.
  */
 @Entity
-@Table(name = "Appointment")
 public class Appointment extends AbstractKeyEntity {
 
     /**
-     * The doctor.
+     * The medical record.
      */
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctorId", nullable = false)
-    private Doctor doctor;
-
-    /**
-     * The patient.
-     */
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patientId", nullable = false)
-    private Patient patient;
+    @ManyToOne
+    @JoinColumn(name ="medicalRecordId")
+    private MedicalRecord medicalRecord;
 
     /**
      * The meeting date.
@@ -55,22 +45,6 @@ public class Appointment extends AbstractKeyEntity {
     private byte status;
 
     public Appointment() {
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(final Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(final Patient patient) {
-        this.patient = patient;
     }
 
     public Date getMeetingDate() {
@@ -95,5 +69,13 @@ public class Appointment extends AbstractKeyEntity {
 
     public void setStatus(final byte status) {
         this.status = status;
+    }
+
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
+    }
+
+    public void setMedicalRecord(final MedicalRecord medicalRecord) {
+        this.medicalRecord = medicalRecord;
     }
 }

@@ -10,11 +10,9 @@ package vn.edu.fpt.hsts.persistence.entity;
 import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "StandardRegimen")
 public class StandardRegimen extends AbstractKeyEntity {
 
     /**

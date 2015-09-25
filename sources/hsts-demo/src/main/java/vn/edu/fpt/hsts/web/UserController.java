@@ -2,9 +2,13 @@ package vn.edu.fpt.hsts.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import vn.edu.fpt.hsts.bizlogic.service.UserService;
+import vn.edu.fpt.hsts.common.IConsts;
 
 /**
  * FPT University Capstone Project 2015.
@@ -20,9 +24,28 @@ public class UserController {
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-    @RequestMapping("/abc")
+    /**
+     * The {@link UserService}.
+     */
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping("/login")
     @ResponseBody
-    public String ok() {
-        return "ok";
+    public String ok(@RequestParam("username") final String username,
+                     @RequestParam("password") final String password) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("username[{}], password[{}]", username, password);
+            if (userService.checkLogin(username, password)) {
+               return "ok";
+            }
+            return "fail";
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+
     }
+
+
 }
