@@ -43,6 +43,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   z-index: 9002;
 }
 
+#popupChart {
+  position:absolute;  
+  width:800px;
+  height:600px;  
+  z-index: 9002;
+}
+
     </style>
 
   </head>
@@ -269,6 +276,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <input type="text" readonly="readonly" class="form-control" value="121">
                         </div>
                         <label for="Height" class="col-sm-1 control-label"> Kcal</label>
+                        <a href="#" title="View Detail" class="col-sm-1"><i class="fa fa-line-chart"></i></a>
                       </div>                   
                       <div class="form-group">
                         <label for="Status" class="col-sm-3 control-label">Status</label>
@@ -478,6 +486,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!--POPUP-->        
       <div id="blanket" style="display:none;"></div>
+      <div id="popupChart" style="display:none;">
+        <!-- box -->
+        <div class="box box-success box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title">Calories Chart</h3>
+            <div class="box-tools pull-right">
+              <button class="btn btn-box-tool" onclick="popup('popupChart')">
+                <i class="fa fa-times"></i></button>
+            </div><!-- /.box-tools -->
+          </div><!-- /.box-header -->
+          <div class="box-body">
+            <div class="chart">
+              <canvas id="barChart" ></canvas>
+            </div>
+            <i class="fa fa-square text-orange"></i>
+            <h4 style="display: inline;"> Calories Required </h4>                    
+            <i class="fa fa-square text-green"></i>
+            <h4 style="display: inline;"> Calories Consumed</h4>
+          </div><!-- /.box-body -->
+        </div><!-- /.box -->
+      </div>
       <div id="popUpDiv" style="display:none;">
         <!-- box -->
         <div class="box box-success box-solid">
@@ -627,7 +656,76 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="dist/js/app.min.js"></script>
     <!-- jQueryUI -->    
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!-- ChartJS 1.0.1 -->
+    <script src="plugins/chartjs/Chart.min.js"></script>
     <!-- script Add -->
+    <script>
+      $(function () {
+        //-------------
+        //- BAR CHART -
+        //-------------
+        // Get context with jQuery - using jQuery's .get() method.
+        var barChartCanvas = $("#barChart").get(0).getContext("2d");
+        // This will get the first returned node in the jQuery collection.
+        var barChart = new Chart(barChartCanvas);
+        var barChartData = {
+          labels: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+          datasets: [
+            {
+              label: "Electronics",
+              fillColor: "#ff851b",
+              strokeColor: "#ff851b",
+              pointColor: "#ff851b",
+              pointStrokeColor: "#c1c7d1",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: [65, 59, 80, 81, 56, 55, 40]
+            },
+            {
+              label: "Digital Goods",
+              fillColor: "#00a65a",
+              strokeColor: "#00a65a",
+              pointColor: "#00a65a",
+              pointStrokeColor: "rgba(60,141,188,1)",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(60,141,188,1)",
+              data: [28, 48, 40, 19, 86, 27, 90]
+            }
+          ]
+        };
+        
+        var barChartOptions = {
+          //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+          scaleBeginAtZero: true,
+          //Boolean - Whether grid lines are shown across the chart
+          scaleShowGridLines: true,
+          //String - Colour of the grid lines
+          scaleGridLineColor: "rgba(0,0,0,.05)",
+          //Number - Width of the grid lines
+          scaleGridLineWidth: 1,
+          //Boolean - Whether to show horizontal lines (except X axis)
+          scaleShowHorizontalLines: true,
+          //Boolean - Whether to show vertical lines (except Y axis)
+          scaleShowVerticalLines: true,
+          //Boolean - If there is a stroke on each bar
+          barShowStroke: true,
+          //Number - Pixel width of the bar stroke
+          barStrokeWidth: 2,
+          //Number - Spacing between each of the X value sets
+          barValueSpacing: 5,
+          //Number - Spacing between data sets within X values
+          barDatasetSpacing: 1,
+          //String - A legend template
+          legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+          //Boolean - whether to make the chart responsive
+          responsive: true,
+          maintainAspectRatio: true
+        };
+
+        barChartOptions.datasetFill = false;
+        barChart.Bar(barChartData, barChartOptions);
+      });
+    </script>
     <script type="text/javascript">
                 
                 $('#Appointment').datepicker({
