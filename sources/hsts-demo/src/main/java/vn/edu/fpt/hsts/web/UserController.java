@@ -3,10 +3,13 @@ package vn.edu.fpt.hsts.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import vn.edu.fpt.hsts.bizlogic.model.UserModel;
 import vn.edu.fpt.hsts.bizlogic.service.UserService;
 import vn.edu.fpt.hsts.common.IConsts;
 
@@ -30,22 +33,38 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * The login mapping
+     * @param username
+     * @param password
+     * @return
+     */
     @RequestMapping("/login")
     @ResponseBody
-    public String ok(@RequestParam("username") final String username,
+    public String login(@RequestParam("username") final String username,
                      @RequestParam("password") final String password) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("username[{}], password[{}]", username, password);
-            if (userService.checkLogin(username, password)) {
+            if (null != userService.checkLogin(username, password)) {
                return "ok";
             }
             return "fail";
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
-
     }
 
-
+    @RequestMapping(value = "/rest", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public UserModel restful(@RequestParam("username") final String username,
+                             @RequestParam("password") final String password) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("username[{}], password[{}]", username, password);
+            return userService.loginRest(username, password);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.common.IConsts;
 
+/**
+ * Home controller, for processing common mapping, redirect, etc.
+ */
 @Controller
 public class HomeController {
 

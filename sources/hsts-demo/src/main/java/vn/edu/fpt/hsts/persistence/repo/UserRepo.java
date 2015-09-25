@@ -19,6 +19,21 @@ import vn.edu.fpt.hsts.persistence.entity.User;
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer> {
 
-    @Query("select u from User u where username = :username and password = :password")
+    /**
+     * Find by username and password, use hql
+     * @param username
+     * @param password
+     * @return
+     */
+    @Query(value = "select u from User u where username = :username and password = :password")
     public User findByUsernameAndPassword(@Param(value = "username") final String username, @Param("password") final String password);
+
+    /**
+     * Find User by username and password, use native query
+     * @param username
+     * @param password
+     * @return
+     */
+    @Query(value = "select * from User u where username = :username and password = :password", nativeQuery = true)
+    public User findByUsernameAndPasswordWithNative(@Param(value = "username") final String username, @Param("password") final String password);
 }

@@ -7,5 +7,8 @@
  */
 package vn.edu.fpt.hsts.bizlogic.service;
 
+/**
+ * The abstract service, use for implement common method.
+ */
 public class AbstractService {
 }

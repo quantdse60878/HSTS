@@ -7,6 +7,9 @@
  */
 package vn.edu.fpt.hsts.web.config;
 
+/**
+ * The interface use to define mapping.
+ */
 public interface IMapMenuPath {
     /**
      *

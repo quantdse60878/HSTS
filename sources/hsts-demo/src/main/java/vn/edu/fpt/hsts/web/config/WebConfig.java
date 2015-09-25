@@ -20,18 +20,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
-    /**************************************************/
-    /******* Config resource handler ******************/
-    /**************************************************/
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        super.addResourceHandlers(registry);
-
-        if (!registry.hasMappingForPattern("/uploaded/**")) {
-            registry.addResourceHandler("/uploaded/**")
-                    .addResourceLocations("classpath:/uploaded/");
-        }
-    }
 
     @Bean
     public EmbeddedServletContainerCustomizer embeddedServletContainerCustomizer() {
