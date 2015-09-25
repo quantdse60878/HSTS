@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Health Support Tracking System</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+  </head>
+<body>
+  <div class="row">
+    <div class="container">
+      <a href="#">
+        <h3>Health Support Tracking System</h3>
+      </a>
+    </div>
+  </div>
+  <!-- End .row -->
+
+  <!-- Content -->
+  <div class="container" style="min-height: 500px;">
+    <div class="row col-sm-12">
+      <div class="col-sm-8"><img src="image/loginIMG.jpg" style="width:100%;height:100%;" />
+      </div>
+      <div class="col-sm-4">
+      <div class="box box-success box-solid">
+        <div class="box-header">
+          <h3 class="box-title">Login</h3>
+        </div>
+        <form th:action="login" class="form-horizontal">
+          <div class="box-body">          
+            <div class="form-group">              
+              <div class="col-sm-12">
+                <input th:type="text" th:name="username" class="form-control" placeholder="Username">
+              </div>
+            </div>
+            <div class="form-group">              
+              <div class="col-sm-12">
+                <input th:type="password" th:name="password" class="form-control" placeholder="Password">
+              </div>
+            </div>
+            <div class="box-footer">
+              <input th:type="reset" class="btn btn-default col-sm-6" value="Cancel" />         
+              <input th:type="submit" th:name="Login" th:value="Login" class="btn btn-primary col-sm-6" value="Login" />
+            </div>         
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>   
+  </div>
+  <!-- Main Footer -->
+      <div class="container box-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+          Version 1.0.0.1
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2015 <a href="#">Group 3</a>.</strong> All rights reserved.
+      </div>  
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js"></script>
+
+</body>
+</html>
