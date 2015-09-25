@@ -10,13 +10,14 @@ package vn.edu.fpt.hsts.bizlogic.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.bizlogic.model.UserModel;
+import vn.edu.fpt.hsts.bizlogic.model.UserPageModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.entity.User;
 import vn.edu.fpt.hsts.persistence.repo.UserRepo;
-
-import javax.transaction.Transactional;
 
 @Service
 public class UserService {
@@ -58,6 +59,19 @@ public class UserService {
             final UserModel model = new UserModel();
             model.fromEntity(user);
             return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public UserPageModel paging(final int page, final int pageSize) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("page[{}], pageSize[{}]", page, pageSize);
+            final PageRequest pageRequest = new PageRequest(page, pageSize);
+            final Page<User> userPage = userRepo.findAll(pageRequest);
+            final UserPageModel pageModel = new UserPageModel(userPage);
+            return pageModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.fpt.hsts.bizlogic.model.UserModel;
+import vn.edu.fpt.hsts.bizlogic.model.UserPageModel;
 import vn.edu.fpt.hsts.bizlogic.service.UserService;
 import vn.edu.fpt.hsts.common.IConsts;
 
@@ -21,7 +22,7 @@ import vn.edu.fpt.hsts.common.IConsts;
  * Date: 9/16/2015.
  */
 @Controller
-public class UserController {
+public class UserController extends AbstractController {
     /**
      * The logger.
      */
@@ -62,6 +63,20 @@ public class UserController {
         try {
             LOGGER.info("username[{}], password[{}]", username, password);
             return userService.loginRest(username, password);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/user/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public UserPageModel paging(
+            @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
+            @RequestParam(value = "pageSize", required = false, defaultValue = DEFAULT_PAGE_SIZE) final int pageSize) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("page[{}], pageSize[{}]", page, pageSize);
+            return userService.paging(page, pageSize);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
