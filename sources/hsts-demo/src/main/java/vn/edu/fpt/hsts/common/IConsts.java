@@ -18,4 +18,6 @@ public interface IConsts {
      * The constants define a string of ending a method.
      */
     String END_METHOD = "----end----";
+
+
 }
