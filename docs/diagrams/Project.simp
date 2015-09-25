@@ -477,9 +477,27 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_641969935481280539" cid="UC002" type="use-case" name="Add Device" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/18/2015 08:31:33">
+          <item id="ddip303911810959166380_641969935481280539" cid="UC002" type="use-case" name="Insert Device" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/18/2015 08:31:33">
             <stereotypes />
             <tagged-values />
+            <documentation>
+              <text>
+                <content>
+                  <p index="0">
+                    <t />
+                    <style font-name="Arial" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                      <text>
+                        <solid-brush color="#FF000000" />
+                      </text>
+                    </style>
+                  </p>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
@@ -590,7 +608,7 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="ddip303911810959166380_959211341131739211" cid="INC001" type="include" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/25/2015 12:56:32">
+          <item id="ddip303911810959166380_959211341131739211" cid="INC001" type="include" name="" style-class="default" is-abstract="false" is-root="false" is-leaf="false" is-active="false" creation-date="09/25/2015 12:56:32">
             <stereotypes>
               <stereotype name="include" />
             </stereotypes>
@@ -883,7 +901,7 @@
             <use-case />
           </item>
           <item id="ddip303911810959166380_641969935481280539" iid="344e181cc9354ede82955382a26db21e" container="ddip303911810959166380_158363925335015270" container-iid="3b0cbde9509a4ba4bc828885b19c21ce" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2015 08:31:33" order-index="85" type="entity">
-            <layout ax="690" ay="90" awidth="80" aheight="50" x="670" y="90" width="80" height="20" angle="0" />
+            <layout ax="690" ay="90" awidth="80" aheight="50" x="690" y="90" width="80" height="20" angle="0" />
             <use-case />
           </item>
           <item id="ddip303911810959166380_291387110591749272" iid="a9b0f021ff5d4ef8a35d5fc5e6cd7b6e" container="ddip303911810959166380_158363925335015270" container-iid="3b0cbde9509a4ba4bc828885b19c21ce" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/18/2015 08:33:28" order-index="86" type="entity">
