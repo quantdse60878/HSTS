@@ -9,3 +9,5 @@ release.properties
 bower_components/
 src/main/resources/static/bower/
 .bower/
+/.classpath
+/.project
