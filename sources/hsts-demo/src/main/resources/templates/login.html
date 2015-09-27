@@ -1,17 +1,89 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
 <head>
-  <meta charset="UTF-8"/>
-  <title>Login box</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Health Support Tracking System</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+    <!-- Bootstrap 3.3.5 -->
+    <link th:href="@{/static/bower/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}"/>
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css}"/>
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/static/AdminLTE/css/AdminLTE.min.css}" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" th:href="@{/static/AdminLTE/css/skins/_all-skins.min.css}" />
+
 </head>
 <body>
-<div>
-    <form th:action="login">
-        Username: <input th:type="text" th:name="username"/>
-        Password: <input th:type="password" th:name="password"/>
-        <input th:type="submit" th:name="Login" th:value="Login"/>
-    </form>
+<div class="row">
+    <div class="container">
+        <a href="#">
+            <h3>Health Support Tracking System</h3>
+        </a>
+    </div>
 </div>
+<!-- End .row -->
+
+<!-- Content -->
+<div class="container" style="min-height: 500px;">
+    <div class="row col-sm-12">
+        <div class="col-sm-8"><img th:src="@{/static/image/loginIMG.jpg}" style="width:100%;height:100%;" />
+        </div>
+        <div class="col-sm-4">
+            <div class="box box-success box-solid">
+                <div class="box-header">
+                    <h3 class="box-title">Login</h3>
+                </div>
+                <form th:action="login" class="form-horizontal" th:method="GET">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Username</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input th:type="text" th:name="username" class="form-control" placeholder="Username"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label class="control-label">Password</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input th:type="password" th:name="password" class="form-control" placeholder="Password"/>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <input th:type="reset" class="btn btn-default col-sm-3" value="Cancel" />
+                            <input th:type="submit" th:name="Login" th:value="Login" class="btn btn-primary col-sm-3 pull-right" value="Login" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Footer -->
+<div class="container box-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+        Version 1.0.0.1
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2015 <a href="#">Group 3</a>.</strong> All rights reserved.
+</div>
+<!-- jQuery 2.1.4 -->
+<script th:src="@{/static/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
+<!-- Bootstrap 3.3.5 -->
+<script th:src="@{/static/bower/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/static/AdminLTE/js/app.min.js}"></script>
+
 </body>
 </html>

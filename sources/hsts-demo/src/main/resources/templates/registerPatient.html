@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default">
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Register Patient
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Patient's Profile</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Your Page Content Here -->
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10" >
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Patient's Profile</h3>
+                            </div><!-- /.box-header -->
+                            <!-- form start -->
+                            <form class="form-horizontal">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="Name" class="col-sm-3 control-label">Name</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" id="Name" placeholder="Name"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Birthday" class="col-sm-3 control-label">Birthday</label>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control" id="Birthday"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-3 control-label">Gender</label>
+                                        <div class="radio col-sm-5">
+                                            <label>
+                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="Male"/>
+                                                Male
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="Female"/>
+                                                Female
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Weight" class="col-sm-3 control-label">Weight</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" id="Weight" placeholder="Weight"/>
+                                        </div>
+                                        <label for="Weight" class="col-sm-1 control-label"> Kg</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Height" class="col-sm-3 control-label">Height</label>
+                                        <div class="col-sm-2">
+                                            <input type="text" class="form-control" id="Height" placeholder="Height"/>
+                                        </div>
+                                        <label for="Height" class="col-sm-1 control-label"> m</label>
+                                    </div>
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Doctor</label>
+                                        <div class="col-sm-5 ui-widget">
+                                            <select id="combobox">
+                                                <option value="">Select one...</option>
+                                                <option value="Doctor 1">Doctor 1</option>
+                                                <option value="Doctor 2">Doctor 2</option>
+                                                <option value="Doctor 3">Doctor 3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Medicalhistory" class="col-sm-3 control-label">Status</label>
+                                        <div class="col-sm-5">
+                        <textarea type="text" class="form-control" id="Medicalhistory"
+                                  style="width: 100%; height: 120px; font-size: 14px;" placeholder="Medical history">
+                        </textarea>
+                                        </div>
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="reset" class="btn btn-default">Cancel</button>
+                                    <button type="submit" class="btn btn-primary pull-right">Register</button>
+                                </div><!-- /.box-footer -->
+                            </form>
+                        </div><!-- /.box -->
+                    </div><!-- /.col -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+<!-- jQueryUI -->
+<script th:src="@{https://code.jquery.com/jquery-1.10.2.js}"></script>
+<script th:src="@{https://code.jquery.com/ui/1.11.4/jquery-ui.js}"></script>
+
+
+</body>
+</html>
