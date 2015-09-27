@@ -34,26 +34,7 @@ public class UserController extends AbstractController {
     @Autowired
     private UserService userService;
 
-    /**
-     * The login mapping
-     * @param username
-     * @param password
-     * @return
-     */
-    @RequestMapping("/login")
-    public String login(@RequestParam("username") final String username,
-                     @RequestParam("password") final String password) {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            LOGGER.info("username[{}], password[{}]", username, password);
-            if (null != userService.checkLogin(username, password)) {
-               return "ok";
-            }
-            return "fail";
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
+
 
     @RequestMapping(value = "/rest", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
