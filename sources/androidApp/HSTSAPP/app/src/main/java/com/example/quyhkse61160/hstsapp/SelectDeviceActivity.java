@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HomeActivity extends AppCompatActivity {
+public class SelectDeviceActivity extends AppCompatActivity {
 
-    private final static String TAG = HomeActivity.class.getSimpleName();
+    private final static String TAG = SelectDeviceActivity.class.getSimpleName();
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
     private BluetoothLeService mBluetoothLeService;
@@ -92,6 +92,7 @@ public class HomeActivity extends AppCompatActivity {
             final boolean result = mBluetoothLeService.connect(mDeviceAddress);
             Log.d(TAG, "Connect request result=" + result);
         }
+
 
 
     }

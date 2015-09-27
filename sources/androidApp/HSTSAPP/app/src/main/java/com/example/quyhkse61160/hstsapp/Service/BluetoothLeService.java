@@ -13,10 +13,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.quyhkse61160.hstsapp.HomeActivity;
+import com.example.quyhkse61160.hstsapp.SelectDeviceActivity;
 
 import java.util.List;
 
@@ -57,7 +56,7 @@ public class BluetoothLeService extends Service {
             final byte[] data = characteristic.getValue();
             String stringdata = new String(data);
             Log.d("QUYYYYYYYYY", "--" + stringdata + "--");
-            HomeActivity.numberOfStep = stringdata;
+            SelectDeviceActivity.numberOfStep = stringdata;
             broadcastUpdate(ACTION_DATA_AVAILABLE);
 
         }

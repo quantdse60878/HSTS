@@ -13,11 +13,7 @@ import android.widget.EditText;
 
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
         if(!sharedPreferences.getString(Constant.PREF_USENAME_HADLOGIN, "").equals("")) {
-            Intent myIntent = new Intent(MainActivity.this, HomeActivity.class);
-            MainActivity.this.startActivity(myIntent);
+            Intent myIntent = new Intent(LoginActivity.this, SelectDeviceActivity.class);
+            LoginActivity.this.startActivity(myIntent);
         }
 
         setContentView(R.layout.activity_main);
@@ -36,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DeviceScanActivity.class);
+                Intent intent = new Intent(LoginActivity.this, DeviceScanActivity.class);
                 startActivity(intent);
             }
         });
