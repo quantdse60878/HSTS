@@ -36,6 +36,10 @@
             android:name=".DeviceScanActivity"
             android:label="@string/title_activity_device_scan" >
         </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home" >
+        </activity>
     </application>
 
 </manifest>

@@ -65,6 +65,9 @@ public class SelectDeviceActivity extends AppCompatActivity {
                 // Show all the supported services and characteristics on the user interface.
                     displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
+            } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
+                //Maybe being wrong
+                mBluetoothLeService.connect(mDeviceAddress);
             }
         }
     };
