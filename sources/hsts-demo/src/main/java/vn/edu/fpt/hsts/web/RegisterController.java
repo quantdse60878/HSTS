@@ -72,6 +72,7 @@ public class RegisterController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
+
             mav.addObject("METHOD", "Register Patient");
             mav.addObject("STATUS", "Success");
             return mav;
