@@ -27,18 +27,6 @@ public class HomeController {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("login");
-            return modelAndView;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
-
-    @RequestMapping(value = "home")
-    public ModelAndView homeDefault() {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("home");
             return modelAndView;
         } finally {
