@@ -209,23 +209,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </section>
 
         <!-- Main content -->
-        <section class="content">
-
-          <!-- Your Page Content Here --> 
-          <div class="row" style="margin: 2px;">
-            <a href="patient2.html" class="btn btn-primary">23/09/2015</a>
-            <a href="patient2.html" class="btn btn-default">21/09/2015</a>
-            <a href="patient2.html" class="btn btn-default">18/09/2015</a>
-          </div>
-          <!-- row -->
+        <section class="content">          
           <div class="row">            
-            <div class="col-md-12">
-              
+            <div class="col-md-12">              
 
               <div class="box box-default">
                 <!-- form start -->
                 <form class="form-horizontal">  
-                  <div class="row">                   
+                  <div class="row">
+                    <div class="box-body with-border">
+                      <h4 class="col-md-2"> Information Date</h4>
+                        <div class="input-group col-md-3">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">23/09/2015 <span class="fa fa-caret-down"></span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="patient2.html" class="btn btn-primary">23/09/2015</a></li>
+                        <li><a href="patient2.html" class="btn btn-default">21/09/2015</a></li>
+                        <li><a href="patient2.html" class="btn btn-default">18/09/2015</a></li>                        
+                      </ul>
+                    </div><!-- /btn-group -->                    
+                  </div><!-- /input-group -->
+                      </div><!-- /.box-header -->                   
                     <div class="col-md-6">
                       <div class="box-header with-border">
                         <h3 class="box-title">Patient's Profile</h3>
