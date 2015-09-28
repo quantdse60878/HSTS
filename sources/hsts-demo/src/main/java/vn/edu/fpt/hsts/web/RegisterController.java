@@ -51,19 +51,29 @@ public class RegisterController {
 
     /**
      * The register patient mapping
-     * @param username
-     * @param password
-     * @param session
+     * @param patientName
+     * @param birthday
+     * @param gender
+     * @param weight
+     * @param height
+     * @param status
+     * @param doctor
      * @return
      */
     @RequestMapping(value = "registerPatient", method = RequestMethod.POST)
-    public ModelAndView registerPatient(@RequestParam("username") final String username,
-                              @RequestParam("password") final String password, HttpSession session) {
+    public ModelAndView registerPatient(@RequestParam("patientName") final String patientName,
+                                        @RequestParam("birthday") final String birthday,
+                                        @RequestParam("gender") final String gender,
+                                        @RequestParam("weight") final String weight,
+                                        @RequestParam("height") final String height,
+                                        @RequestParam("status") final String status,
+                                        @RequestParam("doctor") final String doctor) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
-
+            mav.addObject("METHOD", "Register Patient");
+            mav.addObject("STATUS", "Success");
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

@@ -47,29 +47,29 @@
                                 <h3 class="box-title">Patient's Profile</h3>
                             </div><!-- /.box-header -->
                             <!-- form start -->
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" method="post" action="registerPatient">
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="Name" class="col-sm-3 control-label">Name</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="Name" placeholder="Name"/>
+                                            <input type="text" th:name="patientName" class="form-control" id="Name" placeholder="Name"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="Birthday" class="col-sm-3 control-label">Birthday</label>
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" id="Birthday"/>
+                                            <input type="text" th:name="birthday" class="form-control" id="Birthday"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label  class="col-sm-3 control-label">Gender</label>
                                         <div class="radio col-sm-5">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="Male"/>
+                                                <input type="radio" th:name="gender" id="optionsRadios1" value="Male"/>
                                                 Male
                                             </label>
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="Female"/>
+                                                <input type="radio"th:name="gender" id="optionsRadios2" value="Female"/>
                                                 Female
                                             </label>
                                         </div>
@@ -77,14 +77,14 @@
                                     <div class="form-group">
                                         <label for="Weight" class="col-sm-3 control-label">Weight</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control" id="Weight" placeholder="Weight"/>
+                                            <input type="text" th:name="weight" class="form-control" id="Weight" placeholder="Weight"/>
                                         </div>
                                         <label for="Weight" class="col-sm-1 control-label"> Kg</label>
                                     </div>
                                     <div class="form-group">
                                         <label for="Height" class="col-sm-3 control-label">Height</label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control" id="Height" placeholder="Height"/>
+                                            <input type="text" th:name="height" class="form-control" id="Height" placeholder="Height"/>
                                         </div>
                                         <label for="Height" class="col-sm-1 control-label"> m</label>
                                     </div>
@@ -92,7 +92,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Doctor</label>
                                         <div class="col-sm-5 ui-widget">
-                                            <select id="combobox" class="form-control">
+                                            <select id="combobox" class="form-control" th:name="doctor">
                                                 <option value="">Select one...</option>
                                                 <option value="Doctor 1">Doctor 1</option>
                                                 <option value="Doctor 2">Doctor 2</option>
@@ -103,7 +103,7 @@
                                     <div class="form-group">
                                         <label for="Medicalhistory" class="col-sm-3 control-label">Status</label>
                                         <div class="col-sm-5">
-                        <textarea type="text" class="form-control" id="Medicalhistory"
+                        <textarea type="text" class="form-control" id="Medicalhistory" th:name="status"
                                   style="width: 100%; height: 120px; font-size: 14px;" placeholder="Medical history">
                         </textarea>
                                         </div>

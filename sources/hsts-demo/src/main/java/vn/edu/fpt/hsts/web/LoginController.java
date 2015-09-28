@@ -32,25 +32,14 @@ public class LoginController {
     private UserService userService;
 
     /**
-     * The login mapping
-     * @param username
-     * @param password
-     * @param session
+     * The login page mapping
      * @return
      */
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public ModelAndView loginPage(@RequestParam("username") final String username,
-                        @RequestParam("password") final String password, HttpSession session) {
+    public ModelAndView loginPage() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
-            LOGGER.info("username[{}], password[{}]", username, password);
-            User user = userService.checkLogin(username, password);
-            if (user != null) {
-                session.setAttribute("USER", user);
-                mav.setViewName("home");
-                return mav;
-            }
             mav.setViewName("login");
             return mav;
         } finally {
