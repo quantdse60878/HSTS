@@ -13,6 +13,7 @@ public class Constant {
     //All constant of shared preference
     public static final String PREF_NAME = "HSTSAPPPREF";
     public static final String PREF_USENAME_HADLOGIN = "HSTSAPPPREFLOGIN";
+    public static String NUMBEROFSTEP_POSITION = "3";
 
 
 
@@ -23,4 +24,5 @@ public class Constant {
     public static final UUID main_service_UUID = UUID.fromString("0000ff01-0000-1000-8000-00805f9b34fb");
     public static final UUID movementData_current_UUID = UUID.fromString("0000f019-0000-1000-8000-00805f9b34fb");
     public static final UUID numberOfStep_UUID = UUID.fromString("00002a25-0000-1000-8000-00805f9b34fb");
+    public static final UUID manufacturer_UUID = UUID.fromString("00002a29-0000-1000-8000-00805f9b34fb");
 }

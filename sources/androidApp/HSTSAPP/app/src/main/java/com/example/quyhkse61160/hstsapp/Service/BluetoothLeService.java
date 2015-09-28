@@ -1,5 +1,6 @@
 package com.example.quyhkse61160.hstsapp.Service;
 
+import android.annotation.TargetApi;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -12,11 +13,14 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.SelectDeviceActivity;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -56,7 +60,20 @@ public class BluetoothLeService extends Service {
             final byte[] data = characteristic.getValue();
             String stringdata = new String(data);
             Log.d("QUYYYYYYYYY", "--" + stringdata + "--");
-            SelectDeviceActivity.numberOfStep = stringdata;
+            if(SelectDeviceActivity.characteristicManufacturer != null && SelectDeviceActivity.characteristicStep != null) {
+                if(characteristic.getUuid().toString().contains(Constant.numberOfStep_UUID.toString())) {
+                    String[] listData = stringdata.split(",");
+                    SelectDeviceActivity.numberOfStep = listData[SelectDeviceActivity.position];
+                } else if(characteristic.getUuid().toString().contains(Constant.manufacturer_UUID.toString())) {
+                    if (data != null && data.length > 0) {
+                        final StringBuilder stringBuilder = new StringBuilder(data.length);
+                        for(byte byteChar : data)
+                            stringBuilder.append(String.format("%02X ", byteChar));
+                        Log.d("Quyyyyy111", "--" + stringBuilder.toString() + "--");
+                    }
+                    SelectDeviceActivity.manufacturer = stringdata;
+                }
+            }
             broadcastUpdate(ACTION_DATA_AVAILABLE);
 
         }

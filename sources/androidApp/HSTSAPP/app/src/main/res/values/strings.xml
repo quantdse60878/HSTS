@@ -2,6 +2,7 @@
     <string name="app_name">HSTSAPP</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="header_name">HỆ THỐNG HỖ TRỢ ĐIỀU TRỊ BỆNH</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_device_scan">DeviceScanActivity</string>

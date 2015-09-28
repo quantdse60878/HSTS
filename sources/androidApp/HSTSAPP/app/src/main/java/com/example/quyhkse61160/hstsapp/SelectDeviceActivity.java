@@ -32,9 +32,13 @@ public class SelectDeviceActivity extends AppCompatActivity {
     private String mDeviceName;
     private String mDeviceAddress;
     public static String numberOfStep = "0";
-    private BluetoothGattCharacteristic characteristicStep = null;
+    public static int position = 0;
+    public static String manufacturer = "Unknown";
+    public static BluetoothGattCharacteristic characteristicStep = null;
+    public static BluetoothGattCharacteristic characteristicManufacturer = null;
     public static TextView txtDeviceName;
     public static TextView txtNumberOfStep;
+    public static TextView txtManufacturer;
     private Timer timer = new Timer();
 
     // Code to manage Service lifecycle.
@@ -77,15 +81,16 @@ public class SelectDeviceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_select_device);
 
-
+        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
         final Intent intent = getIntent();
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
 
         txtDeviceName = (TextView) findViewById(R.id.device_name);
         txtNumberOfStep = (TextView) findViewById(R.id.numberOfStep);
+        txtManufacturer = (TextView) findViewById(R.id.manufacturerName);
         txtDeviceName.setText(mDeviceName);
 
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
@@ -95,8 +100,6 @@ public class SelectDeviceActivity extends AppCompatActivity {
             final boolean result = mBluetoothLeService.connect(mDeviceAddress);
             Log.d(TAG, "Connect request result=" + result);
         }
-
-
 
     }
 
@@ -146,7 +149,9 @@ public class SelectDeviceActivity extends AppCompatActivity {
                     Log.d("-------", "GGWP");
                     Log.d("-------", "--" + gattService.getUuid().toString() + "--");
                     characteristicStep = gattService.getCharacteristic(Constant.numberOfStep_UUID);
-                    mBluetoothLeService.readCharacteristic(characteristicStep);
+                    characteristicManufacturer = gattService.getCharacteristic(Constant.manufacturer_UUID);
+//                    mBluetoothLeService.readCharacteristic(characteristicStep);
+                    mBluetoothLeService.readCharacteristic(characteristicManufacturer);
                 }
             }
         }
@@ -165,12 +170,13 @@ public class SelectDeviceActivity extends AppCompatActivity {
                     public void run() {
                         // This code will always run on the UI thread, therefore is safe to modify UI elements.
                         mBluetoothLeService.readCharacteristic(characteristicStep);
+//                        mBluetoothLeService.readCharacteristic(characteristicManufacturer);
                         txtNumberOfStep.setText(numberOfStep);
+                        txtManufacturer.setText(manufacturer);
                     }
                 });
             }
         }, 10000, 10000);
-
 
 
     }
