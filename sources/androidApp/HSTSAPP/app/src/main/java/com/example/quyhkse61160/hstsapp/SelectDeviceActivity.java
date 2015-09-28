@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
+import com.example.quyhkse61160.hstsapp.Service.NetworkChangeReceiver;
 
 import java.util.List;
 import java.util.Timer;
@@ -40,6 +42,8 @@ public class SelectDeviceActivity extends AppCompatActivity {
     public static TextView txtNumberOfStep;
     public static TextView txtManufacturer;
     private Timer timer = new Timer();
+    protected final IntentFilter mIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+    protected final NetworkChangeReceiver mConnectionDetector = new NetworkChangeReceiver();
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -101,6 +105,9 @@ public class SelectDeviceActivity extends AppCompatActivity {
             Log.d(TAG, "Connect request result=" + result);
         }
 
+        registerReceiver(mConnectionDetector, mIntentFilter);
+
+
     }
 
 
@@ -111,6 +118,8 @@ public class SelectDeviceActivity extends AppCompatActivity {
         timer.purge();
         super.onDestroy();
         unbindService(mServiceConnection);
+        unregisterReceiver(mGattUpdateReceiver);
+        unregisterReceiver(mConnectionDetector);
         mBluetoothLeService = null;
     }
 
