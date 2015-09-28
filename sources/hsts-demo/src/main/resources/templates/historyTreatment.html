@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Patient's History
+            <small>Patient 2</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Patient's History</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="form-group row">
+                            <label class="col-sm-1 control-label">Name</label>
+                            <div class="col-sm-3">
+                                <input type="text" readonly="readonly" class="form-control" value="Patient 2"/>
+                            </div>
+                            <label class="col-sm-1 control-label">Illness</label>
+                            <div class="col-sm-1">
+                                <input type="text" readonly="readonly" class="form-control" value="Fat-3"/>
+                            </div>
+                            <div class="col-sm-2 pull-right">
+                                <a href="patient2.html" class="btn btn-primary">Make Prescription</a>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-1 control-label">Age</label>
+                            <div class="col-sm-2">
+                                <input type="text" readonly="readonly" class="form-control" value="31"/>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <label class="col-sm-1 control-label">Status</label>
+                            <div class="col-sm-2">
+                                <input type="text" readonly="readonly" class="form-control" value="Treating"/>
+                            </div>
+                            <div class="col-sm-2 pull-right">
+                                <a href="patient2.html" class="btn btn-primary">Make Appointment</a>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-1 control-label">Gender</label>
+                            <div class="col-sm-2">
+                                <input type="text" readonly="readonly" class="form-control" value="Male"/>
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <label for="Discription" class="col-sm-1 control-label">Discription</label>
+                            <div class="col-sm-4">
+                          <textarea type="text" readonly="readonly" class="form-control" id="Discription"
+                                    style="height: 80px; font-size: 14px;">
+                            Bị hạn chế khả nặng vận động, có dấu hiệu tiểu đường tip 1, máu nhiễm mỡ</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="listPatients" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Appointment</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><a href="patient2.html">23/09/2015</a></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td><a href="patient2.html">21/09/2015</a></td>
+                                <td>23/09/2015</td>
+                                <td>Treating</td>
+                            </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td><a href="patient2.html">18/09/2015</a></td>
+                                <td>21/09/2015</td>
+                                <td>Treating</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Appointment</th>
+                                <th>Status</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+<!-- REQUIRED JS SCRIPTS -->
+<!-- DataTables -->
+<script th:src="@{/static/plugins/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/static/plugins/datatables/dataTables.bootstrap.min.js}"></script>
+<script>
+    $(function () {
+        $("#listPatients").DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+        });
+    });
+</script>
+</div>
+<!-- /.content-wrapper -->
+
+
+</body>
+</html>
