@@ -39,8 +39,34 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public ModelAndView login(@RequestParam("username") final String username,
+    public ModelAndView loginPage(@RequestParam("username") final String username,
                         @RequestParam("password") final String password, HttpSession session) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            LOGGER.info("username[{}], password[{}]", username, password);
+            User user = userService.checkLogin(username, password);
+            if (user != null) {
+                session.setAttribute("USER", user);
+                mav.setViewName("home");
+                return mav;
+            }
+            mav.setViewName("login");
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+    /**
+     * The login mapping
+     * @param username
+     * @param password
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public ModelAndView login(@RequestParam("username") final String username,
+                              @RequestParam("password") final String password, HttpSession session) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();

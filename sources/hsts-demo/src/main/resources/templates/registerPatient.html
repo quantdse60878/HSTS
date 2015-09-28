@@ -2,7 +2,24 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="default">
+      layout:decorator="layout">
+<style>
+    .custom-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .custom-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+    }
+    .custom-combobox-input {
+        margin: 0;
+        padding: 5px 10px;
+    }
+</style>
 <body>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" layout:fragment="body">
@@ -75,7 +92,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Doctor</label>
                                         <div class="col-sm-5 ui-widget">
-                                            <select id="combobox">
+                                            <select id="combobox" class="form-control">
                                                 <option value="">Select one...</option>
                                                 <option value="Doctor 1">Doctor 1</option>
                                                 <option value="Doctor 2">Doctor 2</option>
@@ -103,11 +120,21 @@
             </div><!-- /.row -->
 
         </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
-<!-- jQueryUI -->
-<script th:src="@{https://code.jquery.com/jquery-1.10.2.js}"></script>
-<script th:src="@{https://code.jquery.com/ui/1.11.4/jquery-ui.js}"></script>
 
+    <!-- jQueryUI -->
+    <script th:src="@{https://code.jquery.com/jquery-1.10.2.js}"></script>
+    <script th:src="@{https://code.jquery.com/ui/1.11.4/jquery-ui.js}"></script>
+    <!-- hsts -->
+    <script th:src="@{/static/js/hsts.js}"></script>
+    <!-- script add -->
+    <script>
+            $( "#combobox" ).combobox();
+            $( "#Birthday" ).datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+    </script>
+    </div><!-- /.content-wrapper -->
 
 </body>
 </html>
