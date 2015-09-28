@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="D:\DoAn\SVN\trunk\source\androidApp\HSTSAPP\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="D:\DoAn\SVN\trunk\source\androidApp\HSTSAPP\app\build\intermediates\pre-dexed\debug\classes-e1638d9705df43c9faea7b4edabd5c0a36875c25.jar" />
-    </item>
-    <item
-        jar="D:\DoAn\SVN\trunk\source\androidApp\HSTSAPP\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="D:\DoAn\SVN\trunk\source\androidApp\HSTSAPP\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-8bef2e6c791301af0849d129b5fa6b5598a38c85.jar" />
-    </item>
-    <item
-        jar="D:\DoAn\SVN\trunk\source\androidApp\HSTSAPP\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jar="D:\DoAn\SVN\trunk\sources\androidApp\HSTSAPP\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="D:\DoAn\SVN\trunk\source\androidApp\HSTSAPP\app\build\intermediates\pre-dexed\debug\classes-1da5bc6e9a1ad21b7a841645cda8c3c5cfdaaf2c.jar" />
+        <dex dex="D:\DoAn\SVN\trunk\sources\androidApp\HSTSAPP\app\build\intermediates\pre-dexed\debug\classes-6878cc2c336d2888f0cde71a1451f2cdec92b2b2.jar" />
+    </item>
+    <item
+        jar="D:\DoAn\SVN\trunk\sources\androidApp\HSTSAPP\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="D:\DoAn\SVN\trunk\sources\androidApp\HSTSAPP\app\build\intermediates\pre-dexed\debug\classes-14a6603b7d358ba8eefa36a534ba4dcf69aa10ab.jar" />
     </item>
     <item
         jar="C:\Users\QUYHKSE61160\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="D:\DoAn\SVN\trunk\source\androidApp\HSTSAPP\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-4e5edca9832e22c4dd461a50c63b29eee9e1e96a.jar" />
+        <dex dex="D:\DoAn\SVN\trunk\sources\androidApp\HSTSAPP\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-4e5edca9832e22c4dd461a50c63b29eee9e1e96a.jar" />
+    </item>
+    <item
+        jar="D:\DoAn\SVN\trunk\sources\androidApp\HSTSAPP\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="D:\DoAn\SVN\trunk\sources\androidApp\HSTSAPP\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-69b8289555e657ff4e7ef6947f3df0c8a0b44d96.jar" />
     </item>
 
 </items>
