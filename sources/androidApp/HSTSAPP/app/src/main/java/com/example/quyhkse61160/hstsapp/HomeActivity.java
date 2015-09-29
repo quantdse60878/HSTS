@@ -32,15 +32,18 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         adapter = new ViewPagesAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3C5D26")));
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
         actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
 
+//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#018649")));
+//        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#00A65A")));
 
 
-        ActionBar.Tab atab1 = actionBar.newTab().setText("Hiện Tại").setTabListener(this);
-        ActionBar.Tab atab2 = actionBar.newTab().setText("Lịch Sử").setTabListener(this);
-        ActionBar.Tab atab3 = actionBar.newTab().setText("Điều Trị").setTabListener(this);
-        ActionBar.Tab atab4 = actionBar.newTab().setText("Thông Báo").setTabListener(this);
+
+        ActionBar.Tab atab1 = actionBar.newTab().setText("THỨC ĂN").setTabListener(this);
+        ActionBar.Tab atab2 = actionBar.newTab().setText("THUỐC").setTabListener(this);
+        ActionBar.Tab atab3 = actionBar.newTab().setText("LUYỆN TẬP").setTabListener(this);
+        ActionBar.Tab atab4 = actionBar.newTab().setText("THÔNG BÁO").setTabListener(this);
         actionBar.addTab(atab1);
         actionBar.addTab(atab2);
         actionBar.addTab(atab3);

@@ -61,8 +61,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
 
-                Intent intent = new Intent(LoginActivity.this, DeviceScanActivity.class);
-                //Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                Intent intent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });

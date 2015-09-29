@@ -48,7 +48,7 @@ public class InfoAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View vi = view;
         if(view==null){
-            vi = inflater.inflate(R.layout.activity_home_fragment_tab_1_listiem,null);
+            vi = inflater.inflate(R.layout.home_fragment_tab_4_listiem,null);
         }
         ImageView image = (ImageView) vi.findViewById(R.id.list_image);
         TextView title = (TextView) vi.findViewById(R.id.tab1_title);

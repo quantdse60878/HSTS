@@ -23,7 +23,7 @@ public class Tab3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_home_fragment_tab_3, container, false);
+        return inflater.inflate(R.layout.home_fragment_tab_3, container, false);
     }
 
 
