@@ -23,7 +23,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
   </head>
+<style type="text/css">
+      /*STYLES FOR CSS POPUP*/
+#blanket {
+   background-color:#111;
+   opacity: 0.65;
+   *background:none;
+   position:absolute;
+   z-index: 9001;
+   top:0px;
+   left:0px;
+   width:100%;
+}
 
+#popUpDiv {
+  position:absolute;  
+  width:400px;
+  height:300px;  
+  z-index: 9002;
+}
+
+
+    </style>
   <body class="hold-transition skin-green-light sidebar-mini">
     <div class="wrapper">
 
@@ -213,7 +234,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <input type="text" readonly="readonly" class="form-control" value="Treating">
                         </div>
                         <div class="col-sm-2 pull-right">
-                           <a href="patient2.html" class="btn btn-primary" >Make Appointment</a>
+                           <a href="#" onclick="popup('popUpDiv')" class="btn btn-primary" >Make Appointment</a>
                          </div>
                       </div>
                   <div class="form-group row">
@@ -280,6 +301,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 
+<!--POPUP--> 
+       <div id="blanket" style="display:none;"></div>      
+      <div id="popUpDiv" style="display:none;">
+        <!-- box -->
+        <div class="box box-success box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Appointment Date</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" onclick="popup('popUpDiv')">
+                      <i class="fa fa-times"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="form-group" style="margin-top: 15px;">
+                    <h3>Do you want to make appointment?</h3>
+                          <label for="Appointment" class="col-sm-5 control-label">Appointment Date</label>
+                          <div class="col-sm-7">
+                            <input class="form-control" type="text" value="30/09/2015" 
+                            id="Appointment" data-provide="Appointment">
+                          </div>
+                        </div>                                     
+                </div><!-- /.box-body -->
+                <div class="box-footer">                 
+                    <button type="reset" class="btn btn-default">No</button>
+                    <button type="submit" class="btn btn-primary pull-right">Yes</button>
+                  </div>
+                  </div><!-- /.footer -->
+        </div><!-- /.box -->         
+      </div>    
+      <!-- / POPUP--> 
+
       <!-- Main Footer -->
       <footer class="main-footer">
         <!-- To the right -->
@@ -313,6 +365,69 @@ scratch. This page gets rid of all links and provides the needed markup only.
           "autoWidth": false
         });        
       }); 
+    </script>
+    <!-- jQueryUI -->    
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+                
+                $('#Appointment').datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    defaultDate: "+1w",
+                    changeYear: true,
+                  });                
+    
+      function toggle(div_id) {
+  var el = document.getElementById(div_id);
+  if ( el.style.display == 'none' ) { el.style.display = 'block';}
+  else {el.style.display = 'none';}
+};
+function blanket_size(popUpDivVar) {
+  if (typeof window.innerWidth != 'undefined') {
+    viewportheight = window.innerHeight;
+  } else {
+    viewportheight = document.documentElement.clientHeight;
+  }
+  if ((viewportheight > document.body.parentNode.scrollHeight) && (viewportheight > document.body.parentNode.clientHeight)) {
+    blanket_height = viewportheight;
+  } else {
+    if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
+      blanket_height = document.body.parentNode.clientHeight;
+    } else {
+      blanket_height = document.body.parentNode.scrollHeight;
+    }
+  }
+  var blanket = document.getElementById('blanket');
+  blanket.style.height = blanket_height + 'px';
+  var popUpDiv = document.getElementById(popUpDivVar);
+  popUpDiv_height=blanket_height/2-150;//200 is half popup's height
+  popUpDiv.style.top = popUpDiv_height + 'px';
+};
+function window_pos(popUpDivVar) {
+  if (typeof window.innerWidth != 'undefined') {
+    viewportwidth = window.innerHeight;
+  } else {
+    viewportwidth = document.documentElement.clientHeight;
+  }
+  if ((viewportwidth > document.body.parentNode.scrollWidth) && (viewportwidth > document.body.parentNode.clientWidth)) {
+    window_width = viewportwidth;
+  } else {
+    if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
+      window_width = document.body.parentNode.clientWidth;
+    } else {
+      window_width = document.body.parentNode.scrollWidth;
+    }
+  }
+  var popUpDiv = document.getElementById(popUpDivVar);
+  window_width=window_width/2-200;//200 is half popup's width
+  popUpDiv.style.left = window_width + 'px';
+};
+function popup(windowname) {
+  blanket_size(windowname);
+  window_pos(windowname);
+  toggle('blanket');
+  toggle(windowname);   
+};
     </script>
   </body>
 </html>

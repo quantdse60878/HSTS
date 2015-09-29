@@ -18,7 +18,8 @@
             <div class="pull-left info">
                 <p th:text="${session.USER.fullname}"></p>
                 <!-- Status -->
-                <a href="#"><i class="fa fa-circle text-success" th:text="${session.USER.role}"></i></a>
+                <a href="#"><i class="fa fa-circle text-success"></i>
+                    <i th:text=" ${session.USER.role.name}" style="font-size: 13px;color: red;"></i></a>
             </div>
         </div>
 
