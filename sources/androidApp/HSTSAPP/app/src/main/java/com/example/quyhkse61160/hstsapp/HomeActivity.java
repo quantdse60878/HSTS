@@ -1,16 +1,82 @@
 package com.example.quyhkse61160.hstsapp;
 
+import android.app.FragmentTransaction;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
-public class HomeActivity extends AppCompatActivity {
+import com.example.quyhkse61160.hstsapp.Adapter.ViewPagesAdapter;
+
+public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener {
+
+    ActionBar actionBar;
+    ViewPagesAdapter adapter;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_fragment);
+
+        //KhuongMH
+        actionBar = getSupportActionBar();
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        adapter = new ViewPagesAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3C5D26")));
+        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
+
+
+
+        ActionBar.Tab atab1 = actionBar.newTab().setText("Hiện Tại").setTabListener(this);
+        ActionBar.Tab atab2 = actionBar.newTab().setText("Lịch Sử").setTabListener(this);
+        ActionBar.Tab atab3 = actionBar.newTab().setText("Điều Trị").setTabListener(this);
+        ActionBar.Tab atab4 = actionBar.newTab().setText("Thông Báo").setTabListener(this);
+        actionBar.addTab(atab1);
+        actionBar.addTab(atab2);
+        actionBar.addTab(atab3);
+        actionBar.addTab(atab4);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                actionBar.setSelectedNavigationItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        //KhuongMH
+    }
+
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
+
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
+
     }
 
     @Override
@@ -37,4 +103,6 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

@@ -10,4 +10,17 @@
     <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
     <string name="unknown_device">Unknown device</string>
     <string name="action_logout">Logout</string>
+
+
+    <!-- KhuongMH -->
+    <string name="hello_blank_fragment1">1111111</string>
+    <string name="hello_blank_fragment2">2222222</string>
+    <string name="hello_blank_fragment3">3333333</string>
+    <string name="title_activity_login">Login</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_register">Not A Member ? Register Now</string>
+    <!-- KhuongMH -->
 </resources>
