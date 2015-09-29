@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HSTSAPP</string>
+    <string name="action_logout">Đăng Xuất</string>
+    <string name="action_register">Không phải thành viên ? Đăng Ký Ngay</string>
+    <string name="action_settings">Thiết Lập</string>
+    <string name="action_sign_in">Đăng Nhập</string>
+    <string name="ble_not_supported">Không hỗ trợ BLE</string>
+    <string name="error_bluetooth_not_supported">Không hỗ trợ Bluetooth</string>
+    <string name="prompt_password">Mật Khẩu</string>
+    <string name="prompt_username">Tên Đăng Nhập</string>
+    <string name="unknown_device">Thiết bị chưa hỗ trợ</string>
+</resources>
