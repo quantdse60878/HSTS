@@ -3,7 +3,11 @@ package com.example.quyhkse61160.hstsapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.CharacterPickerDialog;
@@ -31,7 +35,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,9 @@ public class LoginActivity extends AppCompatActivity {
             Intent myIntent = new Intent(LoginActivity.this, SelectDeviceActivity.class);
             LoginActivity.this.startActivity(myIntent);
         }
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
+        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
 
         setContentView(R.layout.activity_main);
         final EditText txtUsername = (EditText) findViewById(R.id.txt_login_username);
