@@ -267,11 +267,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </div>                      
                     </div>
                     <div class="form-group">
-                      <label for="Medicalhistory" class="col-sm-3 control-label">Status</label>
+                      <label for="Medicalhistory" class="col-sm-3 control-label">Medical history</label>
                       <div class="col-sm-5">
-                        <textarea type="text" class="form-control" id="Medicalhistory" 
-                        style="width: 100%; height: 120px; font-size: 14px;" placeholder="Medical history">
-                        </textarea> 
+                        <table class="table table-striped" id="Medicalhistory">
+                          <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Medical history</th>                            
+                          </tr>
+                          <tr>
+                            <td>1/</td>                            
+                            <td><input type="text" class="form-control" placeholder="Medical history"></td>
+                          </tr>
+                          
+                        </table>
+                  <!-- /.table medicine -->
+                  <a style="width: 50px;color: white;" class="btn btn-primary" onclick="addRowMedicalhistory('Medicalhistory')">Add</a>
+                      </div>
+                    </div> 
+                    <div class="form-group">
+                      <label for="clinicalSymptoms" class="col-sm-3 control-label">Clinical symptoms</label>
+                      <div class="col-sm-5">
+                        <table class="table table-striped" id="clinicalSymptoms">
+                          <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Clinical Symptoms</th>                            
+                          </tr>
+                          <tr>
+                            <td>1/</td>                            
+                            <td><input type="text" class="form-control" placeholder="Clinical Symptoms"></td>
+                          </tr>
+                          
+                        </table>
+                  <!-- /.table medicine -->
+                  <a style="width: 50px;color: white;" class="btn btn-primary" onclick="addRowClinicalSymptoms('clinicalSymptoms')">Add</a>
                       </div>
                     </div> 
                   </div><!-- /.box-body -->
@@ -302,13 +330,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- REQUIRED JS SCRIPTS -->
     <!-- jQuery 2.1.4 -->
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/app.min.js"></script>
-    <!-- jQueryUI -->
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <!-- jQueryUI -->    
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>    
   (function( $ ) {
@@ -449,6 +475,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
       changeYear: true
     });  
   });
+  </script>
+  <script type="text/javascript">
+    var countMedicalhistory = 2;
+                var countClinicalSymptoms = 2;
+               
+                
+                function addRowMedicalhistory(tableID) {
+                    var tableElement = document.getElementById(tableID);
+                    var newRow = tableElement.insertRow(tableElement.rows.length);
+                    var newCell;
+                    
+                    newCell = newRow.insertCell(newRow.cells.length);
+                    newCell.innerHTML = countMedicalhistory + "/";                    
+                    newCell = newRow.insertCell(newRow.cells.length);
+                    newCell.innerHTML = "<input type='text' class='form-control' placeholder='Medical history'>";
+
+                    countMedicalhistory++;
+                    return newRow;
+                };
+                function addRowClinicalSymptoms(tableID) {
+                    var tableElement = document.getElementById(tableID);
+                    var newRow = tableElement.insertRow(tableElement.rows.length);
+                    var newCell;
+                    
+                    newCell = newRow.insertCell(newRow.cells.length);
+                    newCell.innerHTML = countClinicalSymptoms + "/";                    
+                    newCell = newRow.insertCell(newRow.cells.length);
+                    newCell.innerHTML = "<input type='text' class='form-control' placeholder='Clinical Symptoms'>";
+
+                    countClinicalSymptoms++;
+                    return newRow;
+                };
   </script>
   </body>
 </html>
