@@ -1,47 +1,61 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="com.example.quyhkse61160.hstsapp.Fragment.Tab1">
 
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
+            android:id="@+id/time_use_component"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/time_use_component">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thời gian ăn: "/>
+                android:text="Thời gian ăn: "
+                android:textColor="@android:color/black"/>
+
             <TextView
+                android:id="@+id/time_use"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12:00"
-                android:id="@+id/time_use"/>
+                android:textColor="#FF1744"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_below="@+id/time_use_component"
-            android:id="@+id/linearLayout">
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Tên thức ăn" />
+                android:text="Tên thức ăn"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#01579B"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:text="Định lượng" />
+                android:layout_weight="3"
+                android:text="Định lượng"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#01579B"/>
         </LinearLayout>
 
         <ListView

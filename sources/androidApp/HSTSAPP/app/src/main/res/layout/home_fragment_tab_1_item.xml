@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
     android:orientation="horizontal">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="1"
         android:text="Cá"
+        android:textSize="14dp"
+        android:paddingTop="18dp"
+        android:textColor="@android:color/black"
         android:id="@+id/item_food_name"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_weight="4"
         android:text="Nhiều"
+        android:textSize="14dp"
+        android:paddingTop="18dp"
+        android:textColor="@android:color/black"
         android:id="@+id/item_quantitative_of_food"/>
 </LinearLayout>

@@ -17,11 +17,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thời gian ăn: "/>
+                android:text="Thời gian uống: "
+                android:textColor="@android:color/black"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12:00"
+                android:textStyle="bold"
+                android:textColor="#FF1744"
                 android:id="@+id/time_eat"/>
         </LinearLayout>
 
@@ -30,19 +33,26 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_below="@+id/time_eat_component"
-            android:id="@+id/linearLayout">
+            android:id="@+id/linearLayout"
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Tên thuốc" />
+                android:text="Tên thuốc"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#01579B"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
-                android:text="Số lượng" />
+                android:text="Số lượng"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#01579B"/>
         </LinearLayout>
 
         <ListView

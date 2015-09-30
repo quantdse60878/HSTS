@@ -35,9 +35,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
         actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
 
-//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#018649")));
-//        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#00A65A")));
-
 
 
         ActionBar.Tab atab1 = actionBar.newTab().setText("THỨC ĂN").setTabListener(this);
