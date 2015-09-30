@@ -10,19 +10,20 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.quyhkse61160.hstsapp.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by QUYHKSE61160 on 9/29/2015.
+ * Created by QUYHKSE61160 on 9/30/2015.
  */
-public class MedicineAdapter extends BaseAdapter {
+public class FoodAdapter extends BaseAdapter {
 
     private Activity activity;
     private ArrayList<HashMap<String, String>> data;
     private static LayoutInflater inflater = null;
 
-    public MedicineAdapter(Activity activity, ArrayList<HashMap<String, String>> data) {
+    public FoodAdapter(Activity activity, ArrayList<HashMap<String, String>> data) {
         this.activity = activity;
         this.data = data;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -47,16 +48,17 @@ public class MedicineAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
         if(vi == null) {
-            vi = inflater.inflate(R.layout.home_fragment_tab_2_item, null);
+            vi = inflater.inflate(R.layout.home_fragment_tab_1_item, null);
         }
-        TextView txtMedicineName = (TextView) vi.findViewById(R.id.item_medicine_name);
-        TextView txtNumberOfMedicine = (TextView) vi.findViewById(R.id.item_number_of_medicine);
+        TextView txtFoodName = (TextView) vi.findViewById(R.id.item_food_name);
+        TextView txtQuantitativeOfMedicine = (TextView) vi.findViewById(R.id.item_quantitative_of_food);
+
 
         HashMap<String, String> item = new HashMap<>();
         item = data.get(position);
 
-        txtMedicineName.setText(item.get("MedicineName"));
-        txtNumberOfMedicine.setText(item.get("NumberOfMedicine"));
+        txtFoodName.setText(item.get("FoodName"));
+        txtQuantitativeOfMedicine.setText(item.get("QuantitativeOfFood"));
 
 
         return vi;

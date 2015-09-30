@@ -6,12 +6,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Cá"
-        android:id="@+id/item_food_name"/>
+        android:text="Paracitamon 500mg"
+        android:id="@+id/item_medicine_name"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="4"
-        android:text="Nhiều"
-        android:id="@+id/item_quantitative_of_food"/>
+        android:text="1"
+        android:id="@+id/item_number_of_medicine"/>
 </LinearLayout>

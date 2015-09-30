@@ -5,9 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.quyhkse61160.hstsapp.Fragment.Tab4;
-import com.example.quyhkse61160.hstsapp.Fragment.Tab2;
-import com.example.quyhkse61160.hstsapp.Fragment.Tab3;
 import com.example.quyhkse61160.hstsapp.Fragment.Tab1;
+import com.example.quyhkse61160.hstsapp.Fragment.Tab3;
+import com.example.quyhkse61160.hstsapp.Fragment.Tab2;
 
 /**
  * Created by Man Huynh Khuong on 9/8/2015.
