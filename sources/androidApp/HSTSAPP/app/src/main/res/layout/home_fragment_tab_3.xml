@@ -3,8 +3,63 @@
     android:layout_height="match_parent"
     tools:context="com.example.quyhkse61160.hstsapp.Fragment.Tab3">
 
+
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment3" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:id="@+id/time_practice_component">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Thời gian tập: "-->
+                <!--android:textColor="@android:color/black"/>-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="18:00"-->
+                <!--android:textStyle="bold"-->
+                <!--android:textColor="#FF1744"-->
+                <!--android:id="@+id/time_practice"/>-->
+        <!--</LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tên bài tập"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#01579B"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="Thời gian"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#01579B"/>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/list_practice_treatment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linearLayout"></ListView>
+    </RelativeLayout>
+
 
 </FrameLayout>
