@@ -62,19 +62,16 @@ public class RegisterController {
      */
     @RequestMapping(value = "registerPatient", method = RequestMethod.POST)
     public ModelAndView registerPatient(@RequestParam("patientName") final String patientName,
-                                        @RequestParam("birthday") final String birthday,
-                                        @RequestParam("gender") final String gender,
-                                        @RequestParam("weight") final String weight,
-                                        @RequestParam("height") final String height,
-                                        @RequestParam("status") final String status,
-                                        @RequestParam("doctor") final String doctor) {
+                                        @RequestParam("birthday") final String birthday
+                                        ) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
 
             mav.addObject("METHOD", "Register Patient");
-            mav.addObject("STATUS", "Success");
+            mav.addObject("TYPE", "success");
+            mav.addObject("MESSAGE","Success");
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

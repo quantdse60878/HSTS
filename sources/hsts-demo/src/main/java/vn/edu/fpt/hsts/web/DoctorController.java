@@ -54,4 +54,21 @@ public class DoctorController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    /**
+     * The make Prescription page mapping
+     * @param patientID
+     * @return
+     */
+    @RequestMapping(value = "makePrescription", method = RequestMethod.GET)
+    public ModelAndView makePrescriptionPage(@RequestParam("patientID") final String patientID) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("makePrescription");
+            return modelAndView;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

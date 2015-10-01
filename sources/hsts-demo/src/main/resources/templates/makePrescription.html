@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+    <style type="text/css">
+        /*STYLES FOR CSS POPUP*/
+        #blanket {
+            background-color: #111;
+            opacity: 0.65;
+            *background: none;
+            position: absolute;
+            z-index: 9001;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+        }
+
+        #popUpAppointment {
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            z-index: 9002;
+        }
+
+        #popupConfirm {
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            z-index: 9002;
+        }
+
+    </style>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Diagnostic
+            <small>Patient 2</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Diagnostic</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="box box-default">
+                    <!-- form start -->
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <div class="box-body with-border">
+                                <h4 class="col-md-2"> Information Date</h4>
+
+                                <div class="input-group col-md-3">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle"
+                                                data-toggle="dropdown">23/09/2015 <span class="fa fa-caret-down"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="patient2.html" class="btn btn-primary">23/09/2015</a></li>
+                                            <li><a href="patient2.html" class="btn btn-default">21/09/2015</a></li>
+                                            <li><a href="patient2.html" class="btn btn-default">18/09/2015</a></li>
+                                        </ul>
+                                    </div>
+                                    <!-- /btn-group -->
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="col-md-6">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Patient's Profile</h3>
+                                </div>
+                                <!-- /.box-header -->
+
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Name</label>
+
+                                        <div class="col-sm-6">
+                                            <input type="text" readonly="readonly" class="form-control"
+                                                   value="Patient 2"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Age</label>
+
+                                        <div class="col-sm-2">
+                                            <input type="text" readonly="readonly" class="form-control" value="31"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Gender</label>
+
+                                        <div class="col-sm-3">
+                                            <input type="text" readonly="readonly" class="form-control" value="Male"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Information Date</label>
+
+                                        <div class="col-sm-4">
+                                            <input type="text" readonly="readonly" class="form-control"
+                                                   value="23/09/2015"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Weight</label>
+
+                                        <div class="col-sm-2">
+                                            <input type="text" readonly="readonly" class="form-control" value="82"/>
+                                        </div>
+                                        <label class="col-sm-1 control-label"> Kg</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Height</label>
+
+                                        <div class="col-sm-2">
+                                            <input type="text" readonly="readonly" class="form-control" value="1.66"/>
+                                        </div>
+                                        <label class="col-sm-1 control-label"> m</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Avg Kcal</label>
+
+                                        <div class="col-sm-2">
+                                            <input type="text" readonly="readonly" class="form-control" value="121"/>
+                                        </div>
+                                        <label class="col-sm-1 control-label"> Kcal</label>
+                                        <a href="#" title="View Detail" class="col-sm-1"><i
+                                                class="fa fa-line-chart"></i></a>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Medicalhistory" class="col-sm-4 control-label">Medical
+                                            history</label>
+
+                                        <div class="col-sm-8">
+                                            <table class="table table-striped" id="Medicalhistory">
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th>Medical history</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>1/</td>
+                                                    <td><input type="text" class="form-control"
+                                                               placeholder="Medical history"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2/</td>
+                                                    <td><input type="text" class="form-control"
+                                                               placeholder="Medical history"/></td>
+                                                </tr>
+                                            </table>
+                                            <!-- /.table Medical history -->
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="clinicalSymptoms" class="col-sm-4 control-label">Clinical
+                                            symptoms</label>
+
+                                        <div class="col-sm-8">
+                                            <table class="table table-striped" id="clinicalSymptoms">
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th>Clinical Symptoms</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>1/</td>
+                                                    <td><input type="text" class="form-control"
+                                                               placeholder="Clinical Symptoms"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2/</td>
+                                                    <td><input type="text" class="form-control"
+                                                               placeholder="Medical history"/></td>
+                                                </tr>
+                                            </table>
+                                            <!-- /.table clinical Symptoms -->
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.col -->
+
+                            <div class="col-md-6">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title"><i class="fa fa-th"></i> Prescriptions</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Diagnostic</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" value="Beo phi do 1"/>
+                                        </div>
+                                    </div>
+
+                                    <!-- Sidebar Menu -->
+                                    <!-- START CUSTOM TABS -->
+
+                                    <!-- Custom Tabs (Pulled to the left) -->
+                                    <div class="nav-tabs-custom" style="box-shadow: none;">
+
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#tab_1-1" data-toggle="tab">Medicine</a></li>
+                                            <li><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
+                                            <li><a href="#tab_3-3" data-toggle="tab">Practices</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab_1-1">
+
+                                                <h3>Medicine</h3>
+                                                <!-- table medicine -->
+                                                <table class="table table-striped" id="medicine">
+                                                    <tr>
+                                                        <th style="width: 10px">#</th>
+                                                        <th>Medicine</th>
+                                                        <th>Ngay uong</th>
+                                                        <th>moi lan</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1/</td>
+                                                        <td>
+                                                            <select class="form-control">
+                                                                <option>Thuoc 1</option>
+                                                                <option>Thuoc 2</option>
+                                                                <option>Thuoc 3</option>
+                                                                <option>Thuoc 4</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" class="form-control"
+                                                                   style="width: 100px;" placeholder="so lan"/></td>
+                                                        <td><input type="text" class="form-control"
+                                                                   style="width: 100px;" placeholder="so lan"/></td>
+                                                    </tr>
+
+                                                </table>
+                                                <!-- /.table medicine -->
+                                                <a style="width: 50px;color: white;" class="btn btn-primary"
+                                                   onclick="addRowMedicine('medicine')">Add</a>
+
+
+                                                <div class="form-group" style="margin-top: 15px;">
+                                                    <label for="Note" class="col-sm-1 control-label">Note</label>
+
+                                                    <div class="col-sm-10">
+                            <textarea type="text" class="form-control" id="Note"
+                                      style="width: 100%; height: 120px; font-size: 14px;" placeholder="Note">
+                            </textarea>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <!-- /.tab-pane -->
+                                            <div class="tab-pane" id="tab_2-2">
+                                                <h3>Foods</h3>
+                                                <table class="table table-striped" id="Foods">
+                                                    <tr>
+                                                        <th style="width: 10px">#</th>
+                                                        <th>Name</th>
+                                                        <th>Quantitative</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1/</td>
+                                                        <td>
+                                                            <select class="form-control">
+                                                                <option>Rau</option>
+                                                                <option>Cơm</option>
+                                                                <option>Trái cây</option>
+                                                                <option>Bia Rượu</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" class="form-control"
+                                                                   style="width: 100px;" value="Nhiều"/></td>
+                                                    </tr>
+
+                                                </table>
+                                                <a style="width: 50px;color: white;" class="btn btn-primary"
+                                                   onclick="addRowFoods('Foods')">Add</a>
+
+                                                <div class="form-group" style="margin-top: 15px;">
+                                                    <label for="Note" class="col-sm-1 control-label">Note</label>
+
+                                                    <div class="col-sm-10">
+                            <textarea type="text" class="form-control" id="Note"
+                                      style="width: 100%; height: 120px; font-size: 14px;" placeholder="Note">
+                            </textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!-- /.tab-pane -->
+                                            <div class="tab-pane" id="tab_3-3">
+                                                <h3>Practices</h3>
+                                                <table class="table table-striped" id="Practice">
+                                                    <tr>
+                                                        <th style="width: 10px">#</th>
+                                                        <th>Name</th>
+                                                        <th>Quantitative</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1/</td>
+                                                        <td>
+                                                            <select class="form-control">
+                                                                <option>Chạy bộ</option>
+                                                                <option>Đi bộ</option>
+                                                                <option>Chơi bóng bàn</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" class="form-control"
+                                                                   style="width: 100px;" value="20 phút"/></td>
+                                                    </tr>
+
+                                                </table>
+                                                <a style="width: 50px;color: white;" class="btn btn-primary"
+                                                   onclick="addRowPractice('Practice')">Add</a>
+
+                                                <div class="form-group" style="margin-top: 15px;">
+                                                    <label for="Note" class="col-sm-1 control-label">Note</label>
+
+                                                    <div class="col-sm-10">
+                            <textarea type="text" class="form-control" id="Note"
+                                      style="width: 100%; height: 120px; font-size: 14px;" placeholder="Note">
+                            </textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!-- /.tab-pane -->
+                                        </div>
+                                        <!-- /.tab-content -->
+                                    </div>
+                                    <!-- nav-tabs-custom -->
+
+
+                                    <!-- END CUSTOM TABS -->
+
+
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="box-footer">
+
+                            <p>Health Support Tracking System</p>
+
+
+                        </div>
+                        <!-- /.footer -->
+                    </form>
+                    <!-- /.form -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+    <!--POPUP-->
+    <div id="blanket" style="display:none;"></div>
+    <div id="popUpAppointment" style="display:none;">
+        <!-- box -->
+        <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Appointment Date</h3>
+
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" onclick="popup('popUpAppointment')">
+                        <i class="fa fa-times"></i></button>
+                </div>
+                <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="form-group" style="margin-top: 15px;">
+                    <h3>Do you want to make appointment?</h3>
+                    <label for="Appointment" class="col-sm-5 control-label">Appointment Date</label>
+
+                    <div class="col-sm-7">
+                        <input class="form-control" type="text" value="30/09/2015"
+                               id="Appointment" data-provide="Appointment" />
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <a class="btn btn-default">No</a>
+                <a class="btn btn-primary pull-right">Yes</a>
+
+            </div>
+            <!-- /.footer -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.popUpAppointment -->
+    <div id="popupConfirm" style="display:none;">
+        <!-- box -->
+        <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Confirm</h3>
+
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" onclick="popup('popupConfirm')">
+                        <i class="fa fa-times"></i></button>
+                </div>
+                <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="form-group" style="margin-top: 15px;">
+                    <h3>Do you want to make prescription?</h3>
+
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <a type="reset" class="btn btn-default">No</a>
+                <a onclick="popup('popupConfirm'); popup('popUpAppointment')" class="btn btn-primary pull-right">Yes</a>
+
+            </div>
+            <!-- /.footer -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.popupConfirm -->
+    <!-- / POPUP-->
+    <!-- REQUIRED JS SCRIPTS -->
+    <!-- jQueryUI -->
+    <script th:src="@{https://code.jquery.com/ui/1.11.4/jquery-ui.js}"></script>
+    <script type="text/javascript">
+
+        $('#Appointment').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            defaultDate: "+1w",
+            changeYear: true,
+        });
+
+
+        function toggle(div_id) {
+            var el = document.getElementById(div_id);
+            if (el.style.display == 'none') {
+                el.style.display = 'block';
+            }
+            else {
+                el.style.display = 'none';
+            }
+        }
+        ;
+        function blanket_size(popUpDivVar) {
+            if (typeof window.innerWidth != 'undefined') {
+                viewportheight = window.innerHeight;
+            } else {
+                viewportheight = document.documentElement.clientHeight;
+            }
+            if (viewportheight > document.body.parentNode.scrollHeight) {
+                if (viewportheight > document.body.parentNode.clientHeight) {
+                    blanket_height = viewportheight;
+                } else {
+                    if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
+                        blanket_height = document.body.parentNode.clientHeight;
+                    } else {
+                        blanket_height = document.body.parentNode.scrollHeight;
+                    }
+                }
+            } else {
+                if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
+                    blanket_height = document.body.parentNode.clientHeight;
+                } else {
+                    blanket_height = document.body.parentNode.scrollHeight;
+                }
+            }
+            var blanket = document.getElementById('blanket');
+            blanket.style.height = blanket_height + 'px';
+            var popUpDiv = document.getElementById(popUpDivVar);
+            popUpDiv_height = blanket_height / 2 - 150;//150 is half popup's height
+            popUpDiv.style.top = popUpDiv_height + 'px';
+        }
+        ;
+        function window_pos(popUpDivVar) {
+            if (typeof window.innerWidth != 'undefined') {
+                viewportwidth = window.innerHeight;
+            } else {
+                viewportwidth = document.documentElement.clientHeight;
+            }
+            if (viewportwidth > document.body.parentNode.scrollWidth) {
+                if (viewportwidth > document.body.parentNode.clientWidth) {
+                    window_width = viewportwidth;
+                } else {
+                    if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
+                        window_width = document.body.parentNode.clientWidth;
+                    } else {
+                        window_width = document.body.parentNode.scrollWidth;
+                    }
+                }
+            } else {
+                if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
+                    window_width = document.body.parentNode.clientWidth;
+                } else {
+                    window_width = document.body.parentNode.scrollWidth;
+                }
+            }
+            var popUpDiv = document.getElementById(popUpDivVar);
+            window_width = window_width / 2 - 200;//200 is half popup's width
+            popUpDiv.style.left = window_width + 'px';
+        }
+        ;
+        function popup(windowname) {
+            blanket_size(windowname);
+            window_pos(windowname);
+            toggle('blanket');
+            toggle(windowname);
+        }
+        ;
+    </script>
+</div>
+<!-- /.content-wrapper -->
+
+</body>
+</html>

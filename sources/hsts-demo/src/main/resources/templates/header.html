@@ -57,13 +57,13 @@
                     <!-- The user image in the navbar-->
                     <img th:src="@{/static/image/avatar.png}" class="user-image" alt="User Image"/>
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                    <span class="hidden-xs" th:text="${session.USER.fullname}"></span>
+                    <span class="hidden-xs" th:text="${session.USER.username}"></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- The user image in the menu -->
                     <li class="user-header">
                         <img th:src="@{/static/image/avatar.png}" class="img-circle" alt="User Image"/>
-                        <p th:text="${session.USER.fullname}"></p>
+                        <p th:text="${session.USER.username}"></p>
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
