@@ -37,15 +37,15 @@ public class Tab1 extends Fragment {
         ArrayList<HashMap<String,String>> sections = new ArrayList<HashMap<String,String>>();
         HashMap<String,String> d = new HashMap<>();
         d.put("FoodName", "Rau");
-        d.put("QuantitativeOfFood", "Nhiều");
+        d.put("QuantitativeOfFood", "200gr");
         sections.add(d);
         d = new HashMap<>();
         d.put("FoodName", "Cá");
-        d.put("QuantitativeOfFood", "Nhiều");
+        d.put("QuantitativeOfFood", "300gr");
         sections.add(d);
         d = new HashMap<>();
         d.put("FoodName", "Cơm");
-        d.put("QuantitativeOfFood", "Ít");
+        d.put("QuantitativeOfFood", "1 chén");
         sections.add(d);
         listView = (ListView) v.findViewById(R.id.list_food_treatment);
 
