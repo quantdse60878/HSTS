@@ -65,7 +65,7 @@
                     text: false
                 })
                 .removeClass( "ui-corner-all" )
-                .addClass( "custom-combobox-toggle ui-corner-right btn btn-default form-control" )
+                .addClass( "custom-combobox-toggle ui-corner-right btn btn-default" )
                 .mousedown(function() {
                     wasOpen = input.autocomplete( "widget" ).is( ":visible" );
                 })

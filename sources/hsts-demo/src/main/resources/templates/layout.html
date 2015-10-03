@@ -43,7 +43,9 @@
     <!-- /.footer -->
 </div>
 <!-- ./wrapper -->
-
+<input id="METHOD" th:value="${METHOD}" th:type="hidden"/>
+<input id="MESSAGE" th:value="${MESSAGE}" th:type="hidden"/>
+<input id="TYPE" th:value="${TYPE}" th:type="hidden"/>
 <!-- REQUIRED JS SCRIPTS -->
 <!-- jQuery 2.1.4 -->
 <script th:src="@{/static/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
@@ -54,55 +56,52 @@
 <!-- bootstrap-notify -->
 <script type="text/javascript" th:src="@{/static/plugins/bootstrap-notify-master/bootstrap-notify.min.js}"></script>
 <script type="text/javascript">
-    var method = '${METHOD}';
-    var mes = '${MESSAGE}';
-    var ty = '${TYPE}';
-
     $(document).ready(function () {
-        if (method != "${METHOD}") {
-            if (method != "undefined") {
-                var notify = $.notify({
-                            // options
-                            title: 'method',
-                            message: 'mes',
-                            type: 'ty',
-                            icon: 'glyphicon glyphicon-warning-sign',
-                            target: '_blank'
-                        }, {
-                            // settings
-                            element: 'body',
-                            type: "info",
-                            allow_dismiss: true,
-                            newest_on_top: true,
-                            showProgressbar: false,
-                            placement: {
-                                from: "top",
-                                align: "right"
-                            },
-                            offset: 20,
-                            spacing: 10,
-                            z_index: 1031,
-                            delay: 4000,
-                            timer: 1000,
-                            url_target: '_blank',
-                            animate: {
-                                enter: 'animated fadeInDown',
-                                exit: 'animated fadeOutUp'
-                            },
-                            icon_type: 'class',
-                            template: '<div data-notify="container" class="col-xs-10 col-sm-2 alert alert-{0}" role="alert">' +
-                            '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-                            '<span data-notify="icon"></span> ' +
-                            '<span data-notify="title">{1}</span> ' +
-                            '<span data-notify="message">{2}</span>' +
-                            '<div class="progress" data-notify="progressbar">' +
-                            '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-                            '</div>' +
-                            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-                            '</div>'
-                        }
-                );
-                notify.close();
+        var method = $('#METHOD').val();
+        var mes = $('#MESSAGE').val();
+        var ty = $('#TYPE').val();
+        if (method != "") {
+            if (method != undefined) {
+                $.notify({
+                    // options
+                    icon: 'glyphicon glyphicon-warning-sign',
+                    title: method,
+                    message: mes,
+                    target: '_blank'
+                },{
+                    // settings
+                    element: 'body',
+                    position: null,
+                    type: ty,
+                    allow_dismiss: true,
+                    newest_on_top: true,
+                    showProgressbar: false,
+                    placement: {
+                        from: "top",
+                        align: "right"
+                    },
+                    offset: 20,
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: 4000,
+                    timer: 1000,
+                    url_target: '_blank',
+                    animate: {
+                        enter: 'animated fadeInDown',
+                        exit: 'animated fadeOutUp'
+                    },
+                    icon_type: 'class',
+                    template: '<div data-notify="container" class="col-xs-11 col-sm-2 alert alert-{0}" role="alert">' +
+                    '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                    '<span data-notify="icon"></span> ' +
+                    '<span data-notify="title">{1}</span> ' +
+                    '<span data-notify="message">{2}</span>' +
+                    '<div class="progress" data-notify="progressbar">' +
+                    '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                    '</div>' +
+                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                    '</div>'
+                });
             }
         }
     });

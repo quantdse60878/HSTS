@@ -69,9 +69,14 @@ public class RegisterController {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
 
+            //create notify
+            //set name of action
             mav.addObject("METHOD", "Register Patient");
-            mav.addObject("TYPE", "success");
+            //set type. sussces TYPE = info, fail TYPE = danger
+            mav.addObject("TYPE", "info");
+            //set message notify
             mav.addObject("MESSAGE","Success");
+
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
