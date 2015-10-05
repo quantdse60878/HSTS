@@ -25,4 +25,9 @@ public class Constant {
     public static final UUID movementData_current_UUID = UUID.fromString("0000f019-0000-1000-8000-00805f9b34fb");
     public static final UUID numberOfStep_UUID = UUID.fromString("00002a25-0000-1000-8000-00805f9b34fb");
     public static final UUID manufacturer_UUID = UUID.fromString("00002a29-0000-1000-8000-00805f9b34fb");
+
+    //KhuongMH
+    public static String ASSET_PATH = "";
+    //KhuongMH
+
 }

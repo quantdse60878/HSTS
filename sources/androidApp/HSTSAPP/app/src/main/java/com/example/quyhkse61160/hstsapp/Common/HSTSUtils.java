@@ -1,5 +1,12 @@
 package com.example.quyhkse61160.hstsapp.Common;
 
+import android.content.res.AssetManager;
+
+import com.google.gson.JsonParser;
+
+import org.json.JSONObject;
+
+import java.io.FileReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -30,5 +37,22 @@ public class HSTSUtils {
         }
 
         return result.toString();
+    }
+
+    public boolean loadData(){
+        JsonParser parser = new JsonParser();
+        try{
+            Object obj = parser.parse(new FileReader(Constant.ASSET_PATH + "/treatment.json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            String treatmentName = (String) jsonObject.get("treatmentName");
+            String nextAppointment = (String) jsonObject.get("nextAppointment");
+            String fromDate = (String) jsonObject.get("fromDate");
+            String toDate = (String) jsonObject.get("toDate");
+            String advice = (String) jsonObject.get("advice");
+
+        } catch (Exception e){
+            return false;
+        }
+        return true;
     }
 }

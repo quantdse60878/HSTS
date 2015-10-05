@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import com.example.quyhkse61160.hstsapp.Adapter.ViewPagesAdapter;
+import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
 
 public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener {
 

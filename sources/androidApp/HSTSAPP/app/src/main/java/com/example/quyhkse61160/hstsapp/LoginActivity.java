@@ -3,14 +3,14 @@ package com.example.quyhkse61160.hstsapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.CharacterPickerDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
-import com.loopj.android.http.RequestParams;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -41,6 +40,13 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        //KhuongMH
+        Constant.ASSET_PATH = getCacheDir() + "";
+        HSTSUtils Utils = new HSTSUtils();
+        Utils.loadData();
+        //KhuongMH
+        
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
         if(!sharedPreferences.getString(Constant.PREF_USENAME_HADLOGIN, "").equals("")) {
             Intent myIntent = new Intent(LoginActivity.this, SelectDeviceActivity.class);
