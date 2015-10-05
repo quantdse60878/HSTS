@@ -6,7 +6,11 @@ import com.google.gson.JsonParser;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -39,20 +43,39 @@ public class HSTSUtils {
         return result.toString();
     }
 
-    public boolean loadData(){
-        JsonParser parser = new JsonParser();
+    public boolean loadData(String json){
         try{
-            Object obj = parser.parse(new FileReader(Constant.ASSET_PATH + "/treatment.json"));
-            JSONObject jsonObject = (JSONObject) obj;
-            String treatmentName = (String) jsonObject.get("treatmentName");
-            String nextAppointment = (String) jsonObject.get("nextAppointment");
-            String fromDate = (String) jsonObject.get("fromDate");
-            String toDate = (String) jsonObject.get("toDate");
-            String advice = (String) jsonObject.get("advice");
-
+            JSONObject obj = new JSONObject(json);
+            String treatmentName = (String) obj.get("treatmentName");
+            String nextAppointment = (String) obj.get("nextAppointment");
+            String fromDate = (String) obj.get("fromDate");
+            String toDate = (String) obj.get("toDate");
+            String advice = (String) obj.get("advice");
         } catch (Exception e){
             return false;
         }
         return true;
+    }
+
+    public String readAssets(AssetManager am){
+        String str = "";
+        BufferedReader in = null;
+        try{
+            StringBuilder buf=new StringBuilder();
+            InputStream json = am.open("/treatment.json");
+            in = new BufferedReader(new InputStreamReader(json, "UTF-8"));
+            while ((str=in.readLine()) != null) {
+                buf.append(str);
+            }
+        } catch(Exception e){
+            return "";
+        } finally {
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return  str;
     }
 }

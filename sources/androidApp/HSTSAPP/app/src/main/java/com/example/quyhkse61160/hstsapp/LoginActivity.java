@@ -40,13 +40,11 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         //KhuongMH
-        Constant.ASSET_PATH = getCacheDir() + "";
         HSTSUtils Utils = new HSTSUtils();
-        Utils.loadData();
+        Utils.loadData(Utils.readAssets(getAssets()));
         //KhuongMH
-        
+
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
         if(!sharedPreferences.getString(Constant.PREF_USENAME_HADLOGIN, "").equals("")) {
             Intent myIntent = new Intent(LoginActivity.this, SelectDeviceActivity.class);
