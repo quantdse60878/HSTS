@@ -56,7 +56,7 @@
                     <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}">
                         <div class="row">
                             <div class="box-body with-border">
-                                <h4 class="col-md-2"> Information Date</h4>
+                                <h4 class="col-md-3"> Information Date</h4>
 
                                 <div class="input-group col-md-3">
                                     <div class="input-group-btn">
@@ -82,7 +82,7 @@
 
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Name</label>
+                                        <label class="col-sm-3 control-label">Name</label>
 
                                         <div class="col-sm-6">
                                             <input type="text" readonly="readonly" class="form-control"
@@ -90,21 +90,20 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Age</label>
+                                        <label class="col-sm-3 control-label">Age</label>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <input type="text" readonly="readonly" class="form-control" value="31"/>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Gender</label>
+
+                                        <label class="col-sm-2 control-label">Gender</label>
 
                                         <div class="col-sm-3">
                                             <input type="text" readonly="readonly" class="form-control" value="Male"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Information Date</label>
+                                        <label class="col-sm-3 control-label">Date</label>
 
                                         <div class="col-sm-4">
                                             <input type="text" readonly="readonly" class="form-control"
@@ -112,33 +111,24 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Weight</label>
+                                        <label class="col-sm-3 control-label">Weight</label>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <input type="text" readonly="readonly" class="form-control" value="82"/>
                                         </div>
-                                        <label class="col-sm-1 control-label"> Kg</label>
+                                        <label class="col-sm-1 control-label">Kg</label>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Height</label>
+                                        <label class="col-sm-3 control-label">Height</label>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <input type="text" readonly="readonly" class="form-control" value="1.66"/>
                                         </div>
-                                        <label class="col-sm-1 control-label"> m</label>
+                                        <label class="col-sm-1 control-label">m</label>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Avg Kcal</label>
 
-                                        <div class="col-sm-2">
-                                            <input type="text" readonly="readonly" class="form-control" value="121"/>
-                                        </div>
-                                        <label class="col-sm-1 control-label"> Kcal</label>
-                                        <a href="#" title="View Detail" class="col-sm-1"><i
-                                                class="fa fa-line-chart"></i></a>
-                                    </div>
                                     <div class="form-group">
-                                        <label for="Medicalhistory" class="col-sm-4 control-label">Medical
+                                        <label for="Medicalhistory" class="col-sm-3 control-label">Medical
                                             history</label>
 
                                         <div class="col-sm-8">
@@ -159,8 +149,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="clinicalSymptoms" class="col-sm-4 control-label">Clinical
-                                            symptoms</label>
+                                        <label for="clinicalSymptoms" class="col-sm-3 control-label">Symptoms</label>
 
                                         <div class="col-sm-8">
                                             <table class="table table-striped" id="clinicalSymptoms">
@@ -192,9 +181,9 @@
                                 <!-- /.box-header -->
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">Diagnostic</label>
+                                        <label class="col-sm-3 control-label">Diagnostic</label>
 
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-8">
                                             <input type="text" th:field="*{diagnostic}"
                                                    class="form-control" value="Beo phi do 1"/>
                                         </div>
@@ -219,8 +208,8 @@
                                                     <tr>
                                                         <th style="width: 10px">#</th>
                                                         <th>Medicine</th>
-                                                        <th>Number of Time Per Day</th>
-                                                        <th>Number of Quality Per Time</th>
+                                                        <th>Time / Day</th>
+                                                        <th>Quality / Time</th>
                                                     </tr>
                                                     <tr>
                                                         <td>1/</td>
@@ -233,9 +222,9 @@
                                                             </select>
                                                         </td>
                                                         <td><input type="text" class="form-control" th:field="*{medicalNoTPD}"
-                                                                   style="width: 100px;" placeholder="so lan"/></td>
+                                                                   style="width: 100px;" placeholder="Number of Time"/></td>
                                                         <td><input type="text" class="form-control" th:field="*{medicalNoQPD}"
-                                                                   style="width: 100px;" placeholder="so lan"/></td>
+                                                                   style="width: 100px;" placeholder="Number of Quality"/></td>
                                                     </tr>
 
                                                 </table>
@@ -245,7 +234,7 @@
 
 
                                                 <div class="form-group" style="margin-top: 15px;">
-                                                    <label class="col-sm-1 control-label">Note</label>
+                                                    <label class="col-sm-2 control-label">Note</label>
 
                                                     <div class="col-sm-10">
                             <textarea type="text" class="form-control" th:field="*{medicalNote}"
@@ -317,7 +306,7 @@
                                                    onclick="addRowPractice('Practice')">Add</a>
 
                                                 <div class="form-group" style="margin-top: 15px;">
-                                                    <label class="col-sm-1 control-label">Note</label>
+                                                    <label class="col-sm-2 control-label">Note</label>
 
                                                     <div class="col-sm-10">
                             <textarea type="text" class="form-control" th:field="*{praticeNote}"
@@ -427,18 +416,19 @@
     </div>
     <!-- /.popupConfirm -->
     <!-- / POPUP-->
+
     <!-- REQUIRED JS SCRIPTS -->
     <!-- jQueryUI -->
     <script th:src="@{https://code.jquery.com/ui/1.11.4/jquery-ui.js}"></script>
+    <!-- hsts -->
+    <script th:src="@{/static/js/hsts.js}"></script>
     <script type="text/javascript">
-
         $('#Appointment').datepicker({
             dateFormat: 'dd/mm/yy',
             changeMonth: true,
             defaultDate: "+1w",
             changeYear: true,
         });
-
 
         function toggle(div_id) {
             var el = document.getElementById(div_id);
@@ -448,8 +438,7 @@
             else {
                 el.style.display = 'none';
             }
-        }
-        ;
+        };
         function blanket_size(popUpDivVar) {
             if (typeof window.innerWidth != 'undefined') {
                 viewportheight = window.innerHeight;
@@ -478,8 +467,7 @@
             var popUpDiv = document.getElementById(popUpDivVar);
             popUpDiv_height = blanket_height / 2 - 150;//150 is half popup's height
             popUpDiv.style.top = popUpDiv_height + 'px';
-        }
-        ;
+        };
         function window_pos(popUpDivVar) {
             if (typeof window.innerWidth != 'undefined') {
                 viewportwidth = window.innerHeight;
@@ -506,15 +494,13 @@
             var popUpDiv = document.getElementById(popUpDivVar);
             window_width = window_width / 2 - 200;//200 is half popup's width
             popUpDiv.style.left = window_width + 'px';
-        }
-        ;
+        };
         function popup(windowname) {
             blanket_size(windowname);
             window_pos(windowname);
             toggle('blanket');
             toggle(windowname);
-        }
-        ;
+        };
     </script>
 </div>
 <!-- /.content-wrapper -->
