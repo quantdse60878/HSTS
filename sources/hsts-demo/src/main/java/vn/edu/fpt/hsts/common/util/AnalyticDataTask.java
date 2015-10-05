@@ -24,7 +24,7 @@ public class AnalyticDataTask extends TimerTask {
         final List<MedicalRecordData> listRecordData = medicalRecordDataRepo.findAll();
         for(int i = 0; i < listRecordData.size(); i++) {
             MedicalRecordData recordData = listRecordData.get(i);
-            adfasdfasdfasdf
+//            adfasdfasdfasdf
         }
     }
 }
