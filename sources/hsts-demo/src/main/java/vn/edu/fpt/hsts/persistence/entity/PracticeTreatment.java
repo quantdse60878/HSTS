@@ -21,8 +21,8 @@ public class PracticeTreatment extends AbstractKeyEntity {
      *
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "treatmentId", nullable = false)
-    private Treatment treatment;
+    @JoinColumn(name = "practiceTimeId", nullable = false)
+    private PracticeTime practiceTime;
 
     /**
      *
@@ -32,9 +32,7 @@ public class PracticeTreatment extends AbstractKeyEntity {
     private Practice practice;
 
     /**
-     * The practice time. such as 8:00, the value will be 8.
+     *
      */
-    private int practiceTime;
-
-
+    private int timeDuration;
 }

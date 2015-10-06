@@ -21,8 +21,8 @@ public class MedicineTreatment extends AbstractKeyEntity {
      *
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "treatmentId", nullable = false)
-    private Treatment treatment;
+    @JoinColumn(name = "medicineTimeId", nullable = false)
+    private MedicineTime medicineTime;
 
     /**
      *
@@ -34,22 +34,14 @@ public class MedicineTreatment extends AbstractKeyEntity {
     /**
      *
      */
-    private int timesPerDay;
+    private float numberOfMedicine;
 
-    /**
-     *
-     */
-    private int quantityPerTime;
-
-    public MedicineTreatment() {
+    public MedicineTime getMedicineTime() {
+        return medicineTime;
     }
 
-    public Treatment getTreatment() {
-        return treatment;
-    }
-
-    public void setTreatment(final Treatment treatment) {
-        this.treatment = treatment;
+    public void setMedicineTime(final MedicineTime medicineTime) {
+        this.medicineTime = medicineTime;
     }
 
     public Medicine getMedicine() {
@@ -60,19 +52,11 @@ public class MedicineTreatment extends AbstractKeyEntity {
         this.medicine = medicine;
     }
 
-    public int getTimesPerDay() {
-        return timesPerDay;
+    public float getNumberOfMedicine() {
+        return numberOfMedicine;
     }
 
-    public void setTimesPerDay(final int timesPerDay) {
-        this.timesPerDay = timesPerDay;
-    }
-
-    public int getQuantityPerTime() {
-        return quantityPerTime;
-    }
-
-    public void setQuantityPerTime(final int quantityPerTime) {
-        this.quantityPerTime = quantityPerTime;
+    public void setNumberOfMedicine(final float numberOfMedicine) {
+        this.numberOfMedicine = numberOfMedicine;
     }
 }

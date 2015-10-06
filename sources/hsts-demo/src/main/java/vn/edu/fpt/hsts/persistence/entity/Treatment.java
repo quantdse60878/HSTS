@@ -30,21 +30,6 @@ public class Treatment extends AbstractKeyEntity {
     /**
      *
      */
-    private String suggestion;
-
-    /**
-     *
-     */
-    private int minCalories;
-
-    /**
-     *
-     */
-    private int maxCalories;
-
-    /**
-     *
-     */
     private Date fromDate;
 
     /**
@@ -52,10 +37,21 @@ public class Treatment extends AbstractKeyEntity {
      */
     private Date toDate;
 
+
     /**
      *
      */
-    private Date updateTime;
+    private String adviseFood;
+
+    /**
+     *
+     */
+    private String adviseMedicine;
+
+    /**
+     *
+     */
+    private String advisePractice;
 
     /**
      *
@@ -74,30 +70,6 @@ public class Treatment extends AbstractKeyEntity {
         this.appointment = appointment;
     }
 
-    public String getSuggestion() {
-        return suggestion;
-    }
-
-    public void setSuggestion(final String suggestion) {
-        this.suggestion = suggestion;
-    }
-
-    public int getMinCalories() {
-        return minCalories;
-    }
-
-    public void setMinCalories(final int minCalories) {
-        this.minCalories = minCalories;
-    }
-
-    public int getMaxCalories() {
-        return maxCalories;
-    }
-
-    public void setMaxCalories(final int maxCalories) {
-        this.maxCalories = maxCalories;
-    }
-
     public Date getFromDate() {
         return fromDate;
     }
@@ -114,19 +86,35 @@ public class Treatment extends AbstractKeyEntity {
         this.toDate = toDate;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(final Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public byte getStatus() {
         return status;
     }
 
     public void setStatus(final byte status) {
         this.status = status;
+    }
+
+    public String getAdviseFood() {
+        return adviseFood;
+    }
+
+    public void setAdviseFood(final String adviseFood) {
+        this.adviseFood = adviseFood;
+    }
+
+    public String getAdviseMedicine() {
+        return adviseMedicine;
+    }
+
+    public void setAdviseMedicine(final String adviseMedicine) {
+        this.adviseMedicine = adviseMedicine;
+    }
+
+    public String getAdvisePractice() {
+        return advisePractice;
+    }
+
+    public void setAdvisePractice(final String advisePractice) {
+        this.advisePractice = advisePractice;
     }
 }

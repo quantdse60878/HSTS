@@ -22,13 +22,14 @@ public class MedicalRecordData extends AbstractKeyEntity {
      * The medical record.
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medicalRecordId", nullable = false)
-    private MedicalRecord medicalRecord;
+    @JoinColumn(name = "appointmentId", nullable = false)
+    private Appointment appointment;
 
     /**
      * Collected time.
      */
-    private Date collectedTime;
+    @JoinColumn(name = "dateCollectData")
+    private Date collectedDate;
 
     /**
      * The patient height.
@@ -48,25 +49,19 @@ public class MedicalRecordData extends AbstractKeyEntity {
     /**
      * Calories burned.
      */
-    private int caloriesBurned;
+    private int calories;
+
+    /**
+     *
+     */
+    private float distance;
+
+    /**
+     *
+     */
+    private byte type;
 
     public MedicalRecordData() {
-    }
-
-    public MedicalRecord getMedicalRecord() {
-        return medicalRecord;
-    }
-
-    public void setMedicalRecord(final MedicalRecord medicalRecord) {
-        this.medicalRecord = medicalRecord;
-    }
-
-    public Date getCollectedTime() {
-        return collectedTime;
-    }
-
-    public void setCollectedTime(final Date collectedTime) {
-        this.collectedTime = collectedTime;
     }
 
     public double getHeight() {
@@ -93,11 +88,43 @@ public class MedicalRecordData extends AbstractKeyEntity {
         this.numberOfStep = numberOfStep;
     }
 
-    public int getCaloriesBurned() {
-        return caloriesBurned;
+    public int getCalories() {
+        return calories;
     }
 
-    public void setCaloriesBurned(final int caloriesBurned) {
-        this.caloriesBurned = caloriesBurned;
+    public void setCalories(final int calories) {
+        this.calories = calories;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(final Appointment appointment) {
+        this.appointment = appointment;
+    }
+
+    public Date getCollectedDate() {
+        return collectedDate;
+    }
+
+    public void setCollectedDate(final Date collectedDate) {
+        this.collectedDate = collectedDate;
+    }
+
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(final float distance) {
+        this.distance = distance;
+    }
+
+    public byte getType() {
+        return type;
+    }
+
+    public void setType(final byte type) {
+        this.type = type;
     }
 }

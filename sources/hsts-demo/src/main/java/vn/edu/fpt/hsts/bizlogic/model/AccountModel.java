@@ -116,7 +116,7 @@ public class AccountModel extends AbstractKeyModel<Account> {
         setPassword(entity.getPassword());
         setFullname(entity.getFullname());
         setEmail(entity.getEmail());
-        setBirthday(entity.getBirthday());
+        setBirthday(entity.getDateOfBirth());
         setGender(entity.getGender());
         final RoleModel role = new RoleModel();
         role.fromEntity(entity.getRole());

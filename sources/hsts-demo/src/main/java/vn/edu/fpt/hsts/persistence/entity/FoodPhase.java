@@ -15,7 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class PhaseFood extends AbstractKeyEntity {
+public class FoodPhase extends AbstractKeyEntity {
 
     /**
      * The phase.
@@ -31,12 +31,7 @@ public class PhaseFood extends AbstractKeyEntity {
     @JoinColumn(name = "foodId", nullable = false)
     private Food food;
 
-    /**
-     *
-     */
-    private byte time;
-
-    public PhaseFood() {
+    public FoodPhase() {
     }
 
     public Phase getPhase() {
@@ -53,13 +48,5 @@ public class PhaseFood extends AbstractKeyEntity {
 
     public void setFood(final Food food) {
         this.food = food;
-    }
-
-    public byte getTime() {
-        return time;
-    }
-
-    public void setTime(final byte time) {
-        this.time = time;
     }
 }

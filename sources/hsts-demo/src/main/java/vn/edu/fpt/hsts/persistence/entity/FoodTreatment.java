@@ -21,8 +21,8 @@ public class FoodTreatment extends AbstractKeyEntity {
      *
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "treatmentId", nullable = false)
-    private Treatment treatment;
+    @JoinColumn(name = "mealId", nullable = false)
+    private Meal meal;
 
     /**
      *
@@ -34,5 +34,32 @@ public class FoodTreatment extends AbstractKeyEntity {
     /**
      *
      */
-    private byte time;
+    private int quantitative;
+
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(final Meal meal) {
+        this.meal = meal;
+    }
+
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(final Food food) {
+        this.food = food;
+    }
+
+    public int getQuantitative() {
+        return quantitative;
+    }
+
+    public void setQuantitative(final int quantitative) {
+        this.quantitative = quantitative;
+    }
+
+    public FoodTreatment() {
+    }
 }

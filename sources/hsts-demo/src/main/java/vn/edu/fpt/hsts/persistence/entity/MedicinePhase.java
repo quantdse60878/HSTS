@@ -3,7 +3,7 @@
  * Program: HSTS.
  * Program manager: Kieu Trong Khanh.
  * Author: dangquantran.
- * Date: 9/23/2015.
+ * Date: 10/6/2015.
  */
 package vn.edu.fpt.hsts.persistence.entity;
 
@@ -15,23 +15,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class PhasePractice extends AbstractKeyEntity {
+public class MedicinePhase extends AbstractKeyEntity {
 
-    /**
-     *
-     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "phaseId", nullable = false)
     private Phase phase;
 
-    /**
-     *
-     */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "practiceId", nullable = false)
-    private Practice practice;
+    @JoinColumn(name = "medicineId", nullable = false)
+    private Medicine medicine;
 
-    public PhasePractice() {
+    public MedicinePhase() {
     }
 
     public Phase getPhase() {
@@ -42,11 +36,11 @@ public class PhasePractice extends AbstractKeyEntity {
         this.phase = phase;
     }
 
-    public Practice getPractice() {
-        return practice;
+    public Medicine getMedicine() {
+        return medicine;
     }
 
-    public void setPractice(final Practice practice) {
-        this.practice = practice;
+    public void setMedicine(final Medicine medicine) {
+        this.medicine = medicine;
     }
 }

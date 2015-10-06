@@ -15,28 +15,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class PhaseMedicine extends AbstractKeyEntity {
+public class PracticePhase extends AbstractKeyEntity {
 
     /**
-     * The phase.
+     *
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "phaseId", nullable = false)
     private Phase phase;
 
     /**
-     * The medicine.
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medicineId", nullable = false)
-    private Medicine medicine;
-
-    /**
      *
      */
-    private int timesPerDay;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "practiceId", nullable = false)
+    private Practice practice;
 
-    public PhaseMedicine() {
+    public PracticePhase() {
     }
 
     public Phase getPhase() {
@@ -47,19 +42,11 @@ public class PhaseMedicine extends AbstractKeyEntity {
         this.phase = phase;
     }
 
-    public Medicine getMedicine() {
-        return medicine;
+    public Practice getPractice() {
+        return practice;
     }
 
-    public void setMedicine(final Medicine medicine) {
-        this.medicine = medicine;
-    }
-
-    public int getTimesPerDay() {
-        return timesPerDay;
-    }
-
-    public void setTimesPerDay(final int timesPerDay) {
-        this.timesPerDay = timesPerDay;
+    public void setPractice(final Practice practice) {
+        this.practice = practice;
     }
 }

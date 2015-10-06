@@ -45,12 +45,12 @@ public interface IDbConsts {
         /**
          * The entry appointment.
          */
-        byte ENTRY = 0;
+        byte ENTRY = 1;
 
         /**
          *
          */
-        byte FINISHED = 1;
+        byte FINISHED = 2;
     }
 
     public interface IMedicalRecordStatus {
@@ -76,73 +76,18 @@ public interface IDbConsts {
 
     }
 
-    public interface IPhaseFoodTime {
-        /**
-         * Breakfast.
-         */
-        byte BREAKFAST = 0;
 
-        /**
-         * Lunch.
-         */
-        byte LUNCH = 1;
-
-        /**
-         * Dinner.
-         */
-        byte DINNER = 2;
-    }
-
-    public interface IMedicineType {
-        /**
-         * TABLET.
-         */
-        byte TABLET = 0;
-
-        /**
-         * BOTTLE.
-         */
-        byte BOTTLE = 1;
-    }
 
     public interface ITreatmentStatus {
         /**
-         * APPROVED.
+         * ON_TREATING
          */
-        byte APPROVED = 0;
-
-        /**
-         * On going.
-         */
-        byte ON_GOING = 1;
+        byte ON_TREATING = 1;
 
         /**
          *
          */
         byte FINISHED = 2;
-
-        /**
-         *
-         */
-        byte CANCEL = 3;
-
-    }
-
-    public interface IFoodTreatmentTime {
-        /**
-         * Breakfast.
-         */
-        byte BREAKFAST = 0;
-
-        /**
-         * Lunch.
-         */
-        byte LUNCH = 1;
-
-        /**
-         * Dinner.
-         */
-        byte DINNER = 2;
     }
 
     public interface INotifyType {
@@ -179,5 +124,21 @@ public interface IDbConsts {
         byte COMPLETED = 2;
     }
 
+    public interface IMedicalRecordDataType {
+        /**
+         *
+         */
+        byte NURSE_INPUT = 1;
 
+        /*
+         *
+         */
+        byte UN_CALCULATED = 2;
+
+        /**
+         *
+         */
+        byte CALCULATED = 3;
+
+    }
 }

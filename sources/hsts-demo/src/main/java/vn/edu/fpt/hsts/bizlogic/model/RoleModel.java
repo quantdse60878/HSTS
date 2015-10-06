@@ -9,7 +9,7 @@ package vn.edu.fpt.hsts.bizlogic.model;
 
 import vn.edu.fpt.hsts.persistence.entity.Role;
 
-public class RoleModel extends AbstractNamedDescModel<Role> {
+public class RoleModel extends AbstractKeyModel<Role> {
 
     @Override
     protected Class<Role> getEntityClass() {
