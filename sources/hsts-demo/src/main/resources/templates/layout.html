@@ -47,15 +47,13 @@
 <input id="MESSAGE" th:value="${MESSAGE}" th:type="hidden"/>
 <input id="TYPE" th:value="${TYPE}" th:type="hidden"/>
 <!-- REQUIRED JS SCRIPTS -->
-<!-- jQuery 2.1.4 -->
-<script th:src="@{/static/bower/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
+<!-- jQuery -->
+<script th:src="@{/static/bower/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.5 -->
 <script th:src="@{/static/bower/admin-lte/bootstrap/js/bootstrap.min.js}"></script>
 <!-- AdminLTE App -->
 <script th:src="@{/static/bower/admin-lte/dist/js/app.min.js}"></script>
 <!-- bootstrap-notify -->
-remarkable-bootstrap-notify
-
 <script type="text/javascript" th:src="@{/static/bower/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
