@@ -9,8 +9,8 @@ package vn.edu.fpt.hsts.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import vn.edu.fpt.hsts.persistence.entity.StandardRegimen;
+import vn.edu.fpt.hsts.persistence.entity.Regimen;
 
 @Repository
-public interface StandardRegimenRepo extends JpaRepository<StandardRegimen, Integer> {
+public interface StandardRegimenRepo extends JpaRepository<Regimen, Integer> {
 }

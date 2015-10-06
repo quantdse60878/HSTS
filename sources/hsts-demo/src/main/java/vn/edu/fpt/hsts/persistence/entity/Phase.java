@@ -23,7 +23,7 @@ public class Phase extends AbstractKeyEntity {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "regimenId", referencedColumnName = "id", nullable = false)
-    private StandardRegimen standardRegimen;
+    private Regimen regimen;
 
     /**
      *
@@ -35,12 +35,12 @@ public class Phase extends AbstractKeyEntity {
      */
     private Date updateTime;
 
-    public StandardRegimen getStandardRegimen() {
-        return standardRegimen;
+    public Regimen getRegimen() {
+        return regimen;
     }
 
-    public void setStandardRegimen(final StandardRegimen standardRegimen) {
-        this.standardRegimen = standardRegimen;
+    public void setRegimen(final Regimen regimen) {
+        this.regimen = regimen;
     }
 
     public int getNumberOfDate() {

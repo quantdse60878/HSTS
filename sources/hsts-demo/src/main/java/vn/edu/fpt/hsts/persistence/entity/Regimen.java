@@ -10,30 +10,27 @@ package vn.edu.fpt.hsts.persistence.entity;
 import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.util.Date;
 
 @Entity
-public class StandardRegimen extends AbstractKeyEntity {
+public class Regimen extends AbstractKeyEntity {
 
     /**
      * The illness name.
      */
-    private String illnessName;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "illnessId", nullable = false)
+    private Illness illness;
 
     /**
      * The update time.
      */
     private Date updateTime;
 
-    public StandardRegimen() {
-    }
-
-    public String getIllnessName() {
-        return illnessName;
-    }
-
-    public void setIllnessName(final String illnessName) {
-        this.illnessName = illnessName;
+    public Regimen() {
     }
 
     public Date getUpdateTime() {
@@ -42,5 +39,13 @@ public class StandardRegimen extends AbstractKeyEntity {
 
     public void setUpdateTime(final Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Illness getIllness() {
+        return illness;
+    }
+
+    public void setIllness(final Illness illness) {
+        this.illness = illness;
     }
 }

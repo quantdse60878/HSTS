@@ -11,8 +11,10 @@ import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.util.Date;
 
 /**
@@ -24,13 +26,14 @@ public class Appointment extends AbstractKeyEntity {
     /**
      * The medical record.
      */
-    @ManyToOne
-    @JoinColumn(name ="medicalRecordId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="medicalRecordId", nullable = false)
     private MedicalRecord medicalRecord;
 
     /**
      * The meeting date.
      */
+    @Column(name = "appointmentDateTime")
     private Date meetingDate;
 
     /**
@@ -43,6 +46,14 @@ public class Appointment extends AbstractKeyEntity {
      * The status.
      */
     private byte status;
+
+    /**
+     *
+     */
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nextAppointment")
+    private Appointment nextAppointment;
+
 
     public Appointment() {
     }
@@ -77,5 +88,13 @@ public class Appointment extends AbstractKeyEntity {
 
     public void setMedicalRecord(final MedicalRecord medicalRecord) {
         this.medicalRecord = medicalRecord;
+    }
+
+    public Appointment getNextAppointment() {
+        return nextAppointment;
+    }
+
+    public void setNextAppointment(final Appointment nextAppointment) {
+        this.nextAppointment = nextAppointment;
     }
 }

@@ -43,24 +43,14 @@ public interface IDbConsts {
 
     public interface IAppointmentStatus {
         /**
-         * Entry.
+         * The entry appointment.
          */
         byte ENTRY = 0;
 
         /**
-         * On going.
+         *
          */
-        byte ON_GOING = 1;
-
-        /**
-         * Done.
-         */
-        byte DONE = 2;
-
-        /**
-         * Cancel.
-         */
-        byte CANCEL = 3;
+        byte FINISHED = 1;
     }
 
     public interface IMedicalRecordStatus {

@@ -7,39 +7,29 @@
  */
 package vn.edu.fpt.hsts.persistence.entity;
 
+import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 import vn.edu.fpt.hsts.common.jpa.AbstractNamedDescEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Medicine extends AbstractNamedDescEntity {
+public class Medicine extends AbstractKeyEntity {
 
     /**
-     * The brand name.
+     * The name.
      */
-    private String brandName;
-
-    /**
-     * The type.
-     */
-    private byte type;
+    @Column(name = "medicineName")
+    private String name;
 
     public Medicine() {
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getName() {
+        return name;
     }
 
-    public void setBrandName(final String brandName) {
-        this.brandName = brandName;
-    }
-
-    public byte getType() {
-        return type;
-    }
-
-    public void setType(final byte type) {
-        this.type = type;
+    public void setName(final String name) {
+        this.name = name;
     }
 }

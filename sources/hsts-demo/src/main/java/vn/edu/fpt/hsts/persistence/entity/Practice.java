@@ -7,12 +7,18 @@
  */
 package vn.edu.fpt.hsts.persistence.entity;
 
+import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 import vn.edu.fpt.hsts.common.jpa.AbstractNamedEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Practice extends AbstractNamedEntity {
+public class Practice extends AbstractKeyEntity {
+
+
+    @Column(name = "practiceName")
+    private String name;
 
     /**
      * The intensity.
@@ -25,6 +31,14 @@ public class Practice extends AbstractNamedEntity {
 
     public void setIntensity(final int intensity) {
         this.intensity = intensity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
     }
 
     public Practice() {

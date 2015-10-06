@@ -9,29 +9,16 @@ package vn.edu.fpt.hsts.persistence.entity;
 
 import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class Food extends AbstractKeyEntity {
 
+    @Column(name = "foodName")
     private String name;
 
-    private String description;
-
-    /**
-     *
-     */
-    private String type;
-
     public Food() {
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(final String type) {
-        this.type = type;
     }
 
     public String getName() {
@@ -42,11 +29,4 @@ public class Food extends AbstractKeyEntity {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
