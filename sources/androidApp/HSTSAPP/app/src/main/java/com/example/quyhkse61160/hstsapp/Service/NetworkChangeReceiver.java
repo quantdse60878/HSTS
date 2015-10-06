@@ -14,16 +14,24 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         ConnectivityManager connectivityManager = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE );
-        NetworkInfo activeNetInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        boolean isConnected = activeNetInfo != null && activeNetInfo.isConnectedOrConnecting();
-        if (isConnected) {
-            Log.i("QUYYYYYYY INTERNET", "connecte" + isConnected);
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (activeNetInfo != null) {
+            boolean isConnected = activeNetInfo != null && activeNetInfo.isConnectedOrConnecting();
+            Intent notifyIntent = new Intent(context, BroadcastService.class);
+            if (isConnected) {
+                Log.i("QUYYYYYYY INTERNET", "connected " + isConnected);
 
-            //A function with many code overhere
+                //A function with many code overhere
 
+                context.startService(notifyIntent);
+
+
+            } else {
+                Log.i("QUYYYYYY INTERNET", "not connected " + isConnected);
+                context.stopService(notifyIntent);
+            }
         }
 
-        else Log.i("QUYYYYYY INTERNET", "not connecte" +isConnected);
     }
 }

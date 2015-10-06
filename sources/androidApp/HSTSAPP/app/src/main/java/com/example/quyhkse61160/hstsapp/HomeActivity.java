@@ -1,32 +1,160 @@
 package com.example.quyhkse61160.hstsapp;
 
 import android.app.FragmentTransaction;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattService;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.TextView;
 
 import com.example.quyhkse61160.hstsapp.Adapter.ViewPagesAdapter;
+import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
+import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
+import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
+import com.example.quyhkse61160.hstsapp.Service.NetworkChangeReceiver;
+
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener {
+
+    private final static String TAG = SelectDeviceActivity.class.getSimpleName();
+    public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
+    public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
+    private BluetoothLeService mBluetoothLeService;
+    private String mDeviceName;
+    private String mDeviceAddress;
+    public static String numberOfStep = "0";
+    public static int position = 0;
+    public static String manufacturer = "Unknown";
+    public static BluetoothGattCharacteristic characteristicStep = null;
+    public static BluetoothGattCharacteristic characteristicManufacturer = null;
+    private Timer timer = new Timer();
+    protected final IntentFilter mIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+    protected final NetworkChangeReceiver mConnectionDetector = new NetworkChangeReceiver();
+    private Intent checkNotifyIntent;
 
     ActionBar actionBar;
     ViewPagesAdapter adapter;
     ViewPager viewPager;
 
+
+
+    // Code to manage Service lifecycle.
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder service) {
+            mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
+            if (!mBluetoothLeService.initialize()) {
+                Log.e(TAG, "Unable to initialize Bluetooth");
+                finish();
+            }
+            // Automatically connects to the device upon successful start-up initialization.
+            mBluetoothLeService.connect(mDeviceAddress);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mBluetoothLeService = null;
+        }
+    };
+
+    private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
+            } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
+                // Show all the supported services and characteristics on the user interface.
+                displayGattServices(mBluetoothLeService.getSupportedGattServices());
+            } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
+            } else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
+                //Maybe being wrong
+                mBluetoothLeService.connect(mDeviceAddress);
+            }
+        }
+    };
+
+    private BroadcastReceiver notifyReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            checkNotify(intent);
+        }
+    };
+
+
+    private void displayGattServices(List<BluetoothGattService> gattServices) {
+        if (gattServices == null) return;
+        List<BluetoothGattService> listService = mBluetoothLeService.getSupportedGattServices();
+        for(int i = 0; i < listService.size(); i++) {
+            if(listService.get(i).getUuid().toString().equals(Constant.DEVICE_INFORMATION)) {
+                BluetoothGattService gattService = listService.get(i);
+                if(gattService == null) {
+                    Log.d("-------", "NULL CMNR");
+                } else {
+                    Log.d("-------", "GGWP");
+                    Log.d("-------", "--" + gattService.getUuid().toString() + "--");
+                    characteristicStep = gattService.getCharacteristic(Constant.numberOfStep_UUID);
+                    characteristicManufacturer = gattService.getCharacteristic(Constant.manufacturer_UUID);
+//                    mBluetoothLeService.readCharacteristic(characteristicStep);
+                    mBluetoothLeService.readCharacteristic(characteristicManufacturer);
+                }
+            }
+        }
+
+//        txtNumberOfStep.setText(numberOfStep);
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Your logic here...
+
+                // When you need to modify a UI element, do so on the UI thread.
+                // 'getActivity()' is required as this is being ran from a Fragment.
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // This code will always run on the UI thread, therefore is safe to modify UI elements.
+                        mBluetoothLeService.readCharacteristic(characteristicStep);
+//                        mBluetoothLeService.readCharacteristic(characteristicManufacturer);
+//                        txtNumberOfStep.setText(numberOfStep);
+//                        txtManufacturer.setText(manufacturer);
+
+                        Log.d("QUYYY1111111", "Manufacturer: " + manufacturer + "------" + "Number of step: " + numberOfStep);
+                    }
+                });
+            }
+        }, 10000, 1000*60*30);
+
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_fragment);
-
+        checkNotifyIntent = new Intent(this, BroadcastService.class);
         //KhuongMH
         actionBar = getSupportActionBar();
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -63,6 +191,24 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             }
         });
         //KhuongMH
+
+//        startService(checkNotifyIntent);
+        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
+        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
+        final Intent intent = getIntent();
+        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+
+//        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+//        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+//        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+//        if (mBluetoothLeService != null) {
+//            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+//            Log.d(TAG, "Connect request result=" + result);
+//        }
+
+        registerReceiver(mConnectionDetector, mIntentFilter);
+
     }
 
     @Override
@@ -105,5 +251,19 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         return super.onOptionsItemSelected(item);
     }
 
+    private static IntentFilter makeGattUpdateIntentFilter() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
+        intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
+        intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
+        return intentFilter;
+    }
+
+    private void checkNotify(Intent intent) {
+        String counter = intent.getStringExtra("counter");
+        String time = intent.getStringExtra("time");
+        Log.d("QUYYYY1111", "Check Notify: " + counter + "--" + time);
+    }
 
 }
