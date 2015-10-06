@@ -6,7 +6,22 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.quyhkse61160.hstsapp.Common.Constant;
+import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import cz.msebera.android.httpclient.NameValuePair;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
 public class BroadcastService extends Service {
 
@@ -41,7 +56,35 @@ public class BroadcastService extends Service {
         intent.putExtra("time", new Date().toLocaleString());
         intent.putExtra("counter", String.valueOf(++counter));
 
+        String stringURL = Constant.hostURL + Constant.checkNotifyMethod;
+        Log.d("QUYYYY1111", "Login url: " + stringURL);
 
+        try {
+            URL url = new URL(stringURL);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(100000);
+            urlConnection.setConnectTimeout(30000);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("receiverId", Constant.accountId));
+
+            OutputStream os = urlConnection.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            writer.write(HSTSUtils.getQuery(params));
+            writer.flush();
+            writer.close();
+            os.close();
+
+            urlConnection.connect();
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         sendBroadcast(intent);

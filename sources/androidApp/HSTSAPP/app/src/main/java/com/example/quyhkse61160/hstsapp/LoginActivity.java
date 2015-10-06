@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -107,6 +108,7 @@ public class LoginActivity extends ActionBarActivity {
         protected String doInBackground(String... strings) {
 
             String stringURL = Constant.hostURL + Constant.loginMethod;
+            Log.d("QUYYYY1111", "Login url: " + stringURL);
 
             try {
                 URL url = new URL(stringURL);
