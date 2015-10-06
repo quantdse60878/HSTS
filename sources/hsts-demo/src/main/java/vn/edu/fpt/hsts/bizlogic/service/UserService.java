@@ -18,6 +18,7 @@ import vn.edu.fpt.hsts.bizlogic.model.UserPageModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.entity.User;
 import vn.edu.fpt.hsts.persistence.repo.UserRepo;
+import vn.edu.fpt.hsts.web.session.UserSession;
 
 @Service
 public class UserService {
@@ -26,6 +27,13 @@ public class UserService {
      * The logger.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+
+
+    /**
+     * The {@link UserSession}.
+     */
+    @Autowired
+    private UserSession userSession;
 
     /**
      * The {@link UserRepo}.
@@ -39,6 +47,10 @@ public class UserService {
             LOGGER.info("username[{}], password[{}]", username, password);
             final User user = userRepo.findByUsernameAndPassword(username, password);
             if(null != user) {
+                userSession.setId(user.getId());
+                userSession.setUsername(user.getUsername());
+                userSession.setRole(user.getRole().getName());
+                userSession.setEmail(user.getEmail());
                 return user;
             }
             return null;

@@ -153,4 +153,21 @@ public interface IDbConsts {
          */
         byte DINNER = 2;
     }
+
+    public interface IAccountStatus {
+        /**
+         * Inactive status, use for check first time login
+         */
+        byte IN_ACTIVE = 0;
+
+        /**
+         * Active status, on-working account.
+         */
+        byte ACTIVE = 1;
+
+        /**
+         * The account has been blocked.
+         */
+        byte BLOCKED = 2;
+    }
 }

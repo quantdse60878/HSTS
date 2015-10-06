@@ -7,6 +7,7 @@
  */
 package vn.edu.fpt.hsts.web.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.ErrorPage;
@@ -14,12 +15,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @EnableWebMvc
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
+
+    /**
+     * The {@link UserAuthInterceptor}
+     */
+    @Autowired
+    private UserAuthInterceptor userAuthInterceptor;
 
     @Bean
     public EmbeddedServletContainerCustomizer embeddedServletContainerCustomizer() {
@@ -37,5 +45,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         if (!registry.hasMappingForPattern("/static/**")) {
             registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         }
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(userAuthInterceptor);
     }
 }

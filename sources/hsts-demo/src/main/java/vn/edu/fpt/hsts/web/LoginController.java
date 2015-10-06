@@ -11,13 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.service.MailService;
 import vn.edu.fpt.hsts.bizlogic.service.UserService;
 import vn.edu.fpt.hsts.common.IConsts;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import vn.edu.fpt.hsts.persistence.entity.User;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Login controller, for processing login, logout.
@@ -31,6 +34,12 @@ public class LoginController {
      */
     @Autowired
     private UserService userService;
+
+    /**
+     * The {@link MailService}.
+     */
+    @Autowired
+    private MailService mailService;
 
     /**
      * The login page mapping
@@ -99,5 +108,25 @@ public class LoginController {
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
+    }
+
+
+    @RequestMapping(value = "/invalidate")
+    @ResponseBody
+    public String invalidateSession(HttpSession httpSession) {
+        httpSession.invalidate();
+        return "OK";
+    }
+
+    @RequestMapping(value = "mail")
+    @ResponseBody
+    public String mailTo() throws UnsupportedEncodingException, MessagingException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            mailService.sendMail("kool.spammer@gmail.com", "New mail", "XUÂN YEEU DAU'");
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+        return "OK";
     }
 }

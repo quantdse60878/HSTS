@@ -8,10 +8,11 @@
 package vn.edu.fpt.hsts.web.session;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope(value = "SESSION")
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserSession {
     /**
      * The ID.
@@ -40,4 +41,27 @@ public class UserSession {
         this.id = id;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
