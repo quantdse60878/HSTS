@@ -19,13 +19,15 @@ public interface IConsts {
      */
     String END_METHOD = "----end----";
 
+
+
 //    X: Height
 //    Y: Weight
 //    Z: NumberofStep
 //    K: Distance
-
     String FORMULA_CALCULATE_DISTANCE = "z * x * 0.414 / 100000";
-    String FORMULA_CALCULATE_CALORIES = "y / 0.4536 * 0.53 * 1.609";
+    String FORMULA_CALCULATE_CALORIES = "y / 0.4536 * 0.53 * 1.609 * k";
+    
 
 
 }

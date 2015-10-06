@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.service.UserService;
 import vn.edu.fpt.hsts.common.IConsts;
@@ -71,6 +72,15 @@ public class LoginController {
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
+    }
+    @RequestMapping(value = "loginMobile", method = RequestMethod.POST)
+    @ResponseBody
+    public User loginMobile(@RequestParam("username") final String username,
+                            @RequestParam("password") final String password) {
+        LOGGER.info("login mobile");
+        User userLogin = new User();
+            userLogin = userService.checkLogin(username, password);
+        return userLogin;
     }
 
     /**
