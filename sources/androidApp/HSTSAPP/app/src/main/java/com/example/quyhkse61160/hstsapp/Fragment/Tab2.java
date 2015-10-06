@@ -6,12 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.quyhkse61160.hstsapp.Adapter.MedicineAdapter;
+import com.example.quyhkse61160.hstsapp.Classes.ToDoItem;
+import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
+import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Man Huynh Khuong on 9/28/2015.
@@ -20,6 +25,7 @@ public class Tab2 extends Fragment {
 
     MedicineAdapter adapter;
     ListView listView;
+    TextView time_use;
 
     public Tab2() {
         // Required empty public constructor
@@ -32,22 +38,38 @@ public class Tab2 extends Fragment {
 
         View v = inflater.inflate(R.layout.home_fragment_tab_2, container, false);
         ArrayList<HashMap<String,String>> sections = new ArrayList<HashMap<String,String>>();
-        HashMap<String,String> d = new HashMap<>();
-        d.put("MedicineName", "Paracitamol 500mg");
-        d.put("NumberOfMedicine", "1");
-        sections.add(d);
-        d = new HashMap<>();
-        d.put("MedicineName", "Tiffy");
-        d.put("NumberOfMedicine", "2");
-        sections.add(d);
-        d = new HashMap<>();
-        d.put("MedicineName", "Panadol");
-        d.put("NumberOfMedicine", "1");
-        sections.add(d);
-        d = new HashMap<>();
-        d.put("MedicineName", "Simvastatin");
-        d.put("NumberOfMedicine", "1");
-        sections.add(d);
+//        HashMap<String,String> d = new HashMap<>();
+//        d.put("MedicineName", "Paracitamol 500mg");
+//        d.put("NumberOfMedicine", "1");
+//        sections.add(d);
+//        d = new HashMap<>();
+//        d.put("MedicineName", "Tiffy");
+//        d.put("NumberOfMedicine", "2");
+//        sections.add(d);
+//        d = new HashMap<>();
+//        d.put("MedicineName", "Panadol");
+//        d.put("NumberOfMedicine", "1");
+//        sections.add(d);
+//        d = new HashMap<>();
+//        d.put("MedicineName", "Simvastatin");
+//        d.put("NumberOfMedicine", "1");
+//        sections.add(d);
+
+        //KhuongMH
+        List<ToDoTime> medicines = Constant.getItems("medicine");
+        ToDoTime medicine = medicines.get(0);
+        for (int i = 0; i<medicine.getItems().size();i++){
+            ToDoItem item = medicine.getItems().get(i);
+            HashMap<String,String> d = new HashMap<>();
+            d.put("MedicineName", item.getName());
+            d.put("NumberOfMedicine", item.getQuantity());
+            sections.add(d);
+        }
+
+        time_use = (TextView) v.findViewById(R.id.time_use);
+        time_use.setText(medicine.getTimeUse());
+        //KhuongMH
+
         listView = (ListView) v.findViewById(R.id.list_medicine_treatment);
         adapter = new MedicineAdapter(getActivity(), sections);
         listView.setAdapter(adapter);

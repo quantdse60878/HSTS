@@ -1,5 +1,13 @@
 package com.example.quyhkse61160.hstsapp.Common;
 
+import com.example.quyhkse61160.hstsapp.Classes.ToDoItem;
+import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -27,7 +35,32 @@ public class Constant {
     public static final UUID manufacturer_UUID = UUID.fromString("00002a29-0000-1000-8000-00805f9b34fb");
 
     //KhuongMH
-    public static String ASSET_PATH = "";
+    public static String DATA_FROM_SERVER = "";
+
+    public static List<ToDoTime> getItems(String field){
+        List<ToDoTime> foods = new ArrayList<>();
+        try{
+            JSONObject obj = new JSONObject(Constant.DATA_FROM_SERVER);
+            JSONArray array = obj.getJSONArray(field);
+            for(int i = 0;i< array.length();i++){
+                ToDoTime food = new ToDoTime();
+                food.setTimeUse(array.getJSONObject(i).getString("timeUse"));
+                JSONArray array1 = array.getJSONObject(i).getJSONArray("items");
+                for (int j = 0;j<array1.length();j++){
+                    ToDoItem item = new ToDoItem();
+                    item.setName(array1.getJSONObject(j).getString("name"));
+                    item.setQuantity(array1.getJSONObject(j).getString("quantity"));
+                    food.getItems().add(item);
+                }
+                foods.add(food);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return foods;
+    }
+
     //KhuongMH
 
 }

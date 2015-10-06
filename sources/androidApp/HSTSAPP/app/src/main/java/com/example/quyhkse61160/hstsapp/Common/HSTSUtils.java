@@ -2,12 +2,9 @@ package com.example.quyhkse61160.hstsapp.Common;
 
 import android.content.res.AssetManager;
 
-import com.google.gson.JsonParser;
-
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -43,27 +40,14 @@ public class HSTSUtils {
         return result.toString();
     }
 
-    public boolean loadData(String json){
-        try{
-            JSONObject obj = new JSONObject(json);
-            String treatmentName = (String) obj.get("treatmentName");
-            String nextAppointment = (String) obj.get("nextAppointment");
-            String fromDate = (String) obj.get("fromDate");
-            String toDate = (String) obj.get("toDate");
-            String advice = (String) obj.get("advice");
-        } catch (Exception e){
-            return false;
-        }
-        return true;
-    }
-
-    public String readAssets(AssetManager am){
-        String str = "";
+    public static String loadData(AssetManager am){
+        String str;
         BufferedReader in = null;
+        StringBuilder buf = null;
         try{
-            StringBuilder buf=new StringBuilder();
-            InputStream json = am.open("/treatment.json");
-            in = new BufferedReader(new InputStreamReader(json, "UTF-8"));
+            buf = new StringBuilder();
+            InputStream json = am.open("treatment.json");
+            in = new BufferedReader(new InputStreamReader(json));
             while ((str=in.readLine()) != null) {
                 buf.append(str);
             }
@@ -76,6 +60,6 @@ public class HSTSUtils {
                 e.printStackTrace();
             }
         }
-        return  str;
+        return  buf.toString();
     }
 }

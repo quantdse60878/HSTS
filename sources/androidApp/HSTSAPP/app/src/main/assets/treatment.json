@@ -1,0 +1,79 @@
+{
+  "treatmentName":"Ten Benh",
+  "nextAppointment":"mm/dd/yyyy",
+  "fromDate":"This is from date",
+  "toDate":"This is to date",
+  "advice":"Try Hard",
+  "medicine":[
+    {
+      "timeUse": "07:00",
+      "items": [
+        {
+          "name": "paracitamol",
+          "quantity": "1"
+        },
+        {
+          "name": "tiffy",
+          "quantity": "1"
+        }
+      ]
+    },
+    {
+      "timeUse": "12:00",
+      "items": [
+        {
+          "name": "paracitamol",
+          "quantity": "1"
+        },
+        {
+          "name": "tiffy",
+          "quantity": "1"
+        }
+      ]
+    }
+  ],
+  "food":[
+    {
+      "timeUse":"15:00",
+      "items":[
+        {
+          "name":"Cơm",
+          "quantity":"2 Tô"
+        },
+        {
+          "name":"Cá",
+          "quantity":"Ítt"
+        }
+      ]
+    },
+    {
+      "timeUse":"18:00",
+      "items":[
+        {
+          "name":"Rau",
+          "quantity":"Nhieu"
+        }
+      ]
+    }
+  ],
+  "practice":[
+    {
+      "timeUse":"08:00",
+      "items":[
+        {
+          "name":"Đi Bộ",
+          "quantity":"15 phút"
+        }
+      ]
+    },
+    {
+      "timeUse":"13:00",
+      "items":[
+        {
+          "name":"Di Xe Dap",
+          "quantity":"20 phut"
+        }
+      ]
+    }
+  ]
+}

@@ -23,7 +23,7 @@
                 android:textColor="@android:color/black"/>
 
             <TextView
-                android:id="@+id/time_use"
+                android:id="@+id/time_eat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12:00"

@@ -41,8 +41,7 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         //KhuongMH
-        HSTSUtils Utils = new HSTSUtils();
-        Utils.loadData(Utils.readAssets(getAssets()));
+        Constant.DATA_FROM_SERVER = HSTSUtils.loadData(getAssets());
         //KhuongMH
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);

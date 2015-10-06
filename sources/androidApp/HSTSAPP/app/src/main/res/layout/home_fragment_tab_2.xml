@@ -25,7 +25,7 @@
                 android:text="12:00"
                 android:textStyle="bold"
                 android:textColor="#FF1744"
-                android:id="@+id/time_eat"/>
+                android:id="@+id/time_use"/>
         </LinearLayout>
 
         <LinearLayout
