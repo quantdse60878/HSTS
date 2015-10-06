@@ -38,7 +38,7 @@ import java.util.TimerTask;
 
 public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener {
 
-    private final static String TAG = SelectDeviceActivity.class.getSimpleName();
+    private final static String TAG = HomeActivity.class.getSimpleName();
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
     private BluetoothLeService mBluetoothLeService;
@@ -144,7 +144,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     }
                 });
             }
-        }, 10000, 1000*60*30);
+        }, 10000, 10000);
 
 
     }
@@ -193,12 +193,12 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         //KhuongMH
 
 //        startService(checkNotifyIntent);
-        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
-        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
-        final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-
+//        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
+//        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
+//        final Intent intent = getIntent();
+//        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+//        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+//
 //        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
 //        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
 //        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
@@ -207,7 +207,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 //            Log.d(TAG, "Connect request result=" + result);
 //        }
 
-        registerReceiver(mConnectionDetector, mIntentFilter);
+//        registerReceiver(mConnectionDetector, mIntentFilter);
 
     }
 

@@ -18,6 +18,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.example.quyhkse61160.hstsapp.Common.Constant;
+import com.example.quyhkse61160.hstsapp.HomeActivity;
 import com.example.quyhkse61160.hstsapp.SelectDeviceActivity;
 
 import java.nio.charset.StandardCharsets;
@@ -59,19 +60,19 @@ public class BluetoothLeService extends Service {
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             final byte[] data = characteristic.getValue();
             String stringdata = new String(data);
-            Log.d("QUYYYYYYYYY", "--" + stringdata + "--");
-            if(SelectDeviceActivity.characteristicManufacturer != null && SelectDeviceActivity.characteristicStep != null) {
+//            Log.d("QUYYYYYYYYY", "--" + stringdata + "--");
+            if((HomeActivity.characteristicManufacturer != null) && (HomeActivity.characteristicStep != null)) {
                 if(characteristic.getUuid().toString().contains(Constant.numberOfStep_UUID.toString())) {
                     String[] listData = stringdata.split(",");
-                    SelectDeviceActivity.numberOfStep = listData[SelectDeviceActivity.position];
+                    HomeActivity.numberOfStep = listData[HomeActivity.position];
                 } else if(characteristic.getUuid().toString().contains(Constant.manufacturer_UUID.toString())) {
                     if (data != null && data.length > 0) {
                         final StringBuilder stringBuilder = new StringBuilder(data.length);
                         for(byte byteChar : data)
                             stringBuilder.append(String.format("%02X ", byteChar));
-                        Log.d("Quyyyyy111", "--" + stringBuilder.toString() + "--");
+                        Log.d("Quyyyyy111", "Manufacturer: " + stringBuilder.toString() + "--");
                     }
-                    SelectDeviceActivity.manufacturer = stringdata;
+                    HomeActivity.manufacturer = stringdata;
                 }
             }
             broadcastUpdate(ACTION_DATA_AVAILABLE);
