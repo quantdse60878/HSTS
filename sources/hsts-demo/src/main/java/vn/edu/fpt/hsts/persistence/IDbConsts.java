@@ -12,33 +12,33 @@ package vn.edu.fpt.hsts.persistence;
  */
 public interface IDbConsts {
 
-    public interface IUserGender {
+    public interface IAccountGender {
         /**
          * Male.
          */
-        byte MALE = 0;
+        byte MALE = 1;
 
         /**
          * Female.
          */
-        byte FEMALE = 1;
+        byte FEMALE = 2;
     }
 
-    public interface IUserStatus {
+    public interface IAccountStatus {
         /**
          * Active.
          */
-        byte ACTIVE = 0;
+        byte IN_ACTIVE = 1;
 
         /**
          * Inactive.
          */
-        byte INACTIVE = 1;
+        byte ACTIVE = 2;
 
         /**
          * BLOCKED.
          */
-        byte BLOCKED = 2;
+        byte BLOCKED = 3;
     }
 
     public interface IAppointmentStatus {
@@ -67,22 +67,23 @@ public interface IDbConsts {
         /**
          * Entry.
          */
-        byte ENTRY = 0;
-
-        /**
-         * On treating.
-         */
-        byte ON_TREATING = 1;
-
-        /**
-         * Done.
-         */
-        byte FINISHED = 2;
+        byte WAITING_FOR_EXAMINATION = 1;
 
         /**
          * No illness.
          */
-        byte NO_ILLNESS = 3;
+        byte NO_ILLNESS = 2;
+
+        /**
+         * On treating.
+         */
+        byte ON_TREATING = 3;
+
+        /**
+         * Done.
+         */
+        byte FINISHED = 4;
+
     }
 
     public interface IPhaseFoodTime {
@@ -154,20 +155,39 @@ public interface IDbConsts {
         byte DINNER = 2;
     }
 
-    public interface IAccountStatus {
+    public interface INotifyType {
         /**
-         * Inactive status, use for check first time login
+         *
          */
-        byte IN_ACTIVE = 0;
+        byte PATIENT_DOCTOR = 1;
 
         /**
-         * Active status, on-working account.
+         *
          */
-        byte ACTIVE = 1;
+        byte DOCTOR_PATIENT_PRESCRIPTION = 2;
 
         /**
-         * The account has been blocked.
+         *
          */
-        byte BLOCKED = 2;
+        byte DOCTOR_PATIENT_APPOINTMENT = 3;
+
+        /**
+         *
+         */
+        byte NURSE_DOCTOR = 4;
     }
+
+    public interface INotifyStatus {
+        /**
+         *
+         */
+        byte UNCOMPLETED = 1;
+
+        /**
+         *
+         */
+        byte COMPLETED = 2;
+    }
+
+
 }

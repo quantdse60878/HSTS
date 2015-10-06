@@ -13,20 +13,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import vn.edu.fpt.hsts.bizlogic.model.UserModel;
-import vn.edu.fpt.hsts.bizlogic.model.UserPageModel;
+import vn.edu.fpt.hsts.bizlogic.model.AccountModel;
+import vn.edu.fpt.hsts.bizlogic.model.AccountPageModel;
 import vn.edu.fpt.hsts.common.IConsts;
-import vn.edu.fpt.hsts.persistence.entity.User;
-import vn.edu.fpt.hsts.persistence.repo.UserRepo;
+import vn.edu.fpt.hsts.persistence.entity.Account;
+import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
 import vn.edu.fpt.hsts.web.session.UserSession;
 
 @Service
-public class UserService {
+public class AccountService {
 
     /**
      * The logger.
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountService.class);
 
 
     /**
@@ -36,22 +36,22 @@ public class UserService {
     private UserSession userSession;
 
     /**
-     * The {@link UserRepo}.
+     * The {@link AccountRepo}.
      */
     @Autowired
-    private UserRepo userRepo;
+    private AccountRepo accountRepo;
 
-    public User checkLogin(final String username, final String password) {
+    public Account checkLogin(final String username, final String password) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("username[{}], password[{}]", username, password);
-            final User user = userRepo.findByUsernameAndPassword(username, password);
-            if(null != user) {
-                userSession.setId(user.getId());
-                userSession.setUsername(user.getUsername());
-                userSession.setRole(user.getRole().getName());
-                userSession.setEmail(user.getEmail());
-                return user;
+            final Account account = accountRepo.findByUsernameAndPassword(username, password);
+            if(null != account) {
+                userSession.setId(account.getId());
+                userSession.setUsername(account.getUsername());
+                userSession.setRole(account.getRole().getRoleName());
+                userSession.setEmail(account.getEmail());
+                return account;
             }
             return null;
         } finally {
@@ -59,30 +59,30 @@ public class UserService {
         }
     }
 
-    public UserModel loginRest(final String username, final String password) {
+    public AccountModel loginRest(final String username, final String password) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("username[{}], password[{}]", username, password);
-            final User user = userRepo.findByUsernameAndPassword(username, password);
-            if(null == user) {
+            final Account account = accountRepo.findByUsernameAndPassword(username, password);
+            if(null == account) {
                 return null;
             }
-            LOGGER.debug("Login OK with email[{}]", user.getEmail());
-            final UserModel model = new UserModel();
-            model.fromEntity(user);
+            LOGGER.debug("Login OK with email[{}]", account.getEmail());
+            final AccountModel model = new AccountModel();
+            model.fromEntity(account);
             return model;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
 
-    public UserPageModel paging(final int page, final int pageSize) {
+    public AccountPageModel paging(final int page, final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("page[{}], pageSize[{}]", page, pageSize);
             final PageRequest pageRequest = new PageRequest(page, pageSize);
-            final Page<User> userPage = userRepo.findAll(pageRequest);
-            final UserPageModel pageModel = new UserPageModel(userPage);
+            final Page<Account> accountPage = accountRepo.findAll(pageRequest);
+            final AccountPageModel pageModel = new AccountPageModel(accountPage);
             return pageModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

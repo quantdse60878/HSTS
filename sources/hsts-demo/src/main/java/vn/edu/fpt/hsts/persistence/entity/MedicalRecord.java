@@ -9,6 +9,7 @@ package vn.edu.fpt.hsts.persistence.entity;
 
 import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -35,11 +36,11 @@ public class MedicalRecord extends AbstractKeyEntity {
     private Patient patient;
 
     /**
-     * The regimen.
+     * The illness.
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "regimenId", referencedColumnName = "id")
-    private StandardRegimen standardRegimen;
+    @JoinColumn(name = "illnessId", referencedColumnName = "id")
+    private Illness illness;
 
     /**
      * The start time.
@@ -49,12 +50,18 @@ public class MedicalRecord extends AbstractKeyEntity {
     /**
      * The update time.
      */
-    private Date updateTime;
+    private Date endTime;
 
     /**
      * The symptoms.
      */
+    @Column(name = "clinicalSymptoms")
     private String symptoms;
+
+    /**
+     *
+     */
+    private String medicalHistory;
 
     /**
      * The status.
@@ -80,28 +87,12 @@ public class MedicalRecord extends AbstractKeyEntity {
         this.patient = patient;
     }
 
-    public StandardRegimen getStandardRegimen() {
-        return standardRegimen;
-    }
-
-    public void setStandardRegimen(final StandardRegimen standardRegimen) {
-        this.standardRegimen = standardRegimen;
-    }
-
     public Date getStartTime() {
         return startTime;
     }
 
     public void setStartTime(final Date startTime) {
         this.startTime = startTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(final Date updateTime) {
-        this.updateTime = updateTime;
     }
 
     public String getSymptoms() {
@@ -118,5 +109,29 @@ public class MedicalRecord extends AbstractKeyEntity {
 
     public void setStatus(final byte status) {
         this.status = status;
+    }
+
+    public Illness getIllness() {
+        return illness;
+    }
+
+    public void setIllness(final Illness illness) {
+        this.illness = illness;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(final Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getMedicalHistory() {
+        return medicalHistory;
+    }
+
+    public void setMedicalHistory(final String medicalHistory) {
+        this.medicalHistory = medicalHistory;
     }
 }

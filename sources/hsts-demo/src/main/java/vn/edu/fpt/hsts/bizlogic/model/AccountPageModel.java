@@ -8,9 +8,9 @@
 package vn.edu.fpt.hsts.bizlogic.model;
 
 import org.springframework.data.domain.Page;
-import vn.edu.fpt.hsts.persistence.entity.User;
+import vn.edu.fpt.hsts.persistence.entity.Account;
 
-public class UserPageModel extends AbstractPageModel<User, UserModel>{
+public class AccountPageModel extends AbstractPageModel<Account, AccountModel>{
     /**
      * <p>
      * Constructor.
@@ -18,13 +18,13 @@ public class UserPageModel extends AbstractPageModel<User, UserModel>{
      *
      * @param pageEntities {@link Page}
      */
-    public UserPageModel(final Page<User> pageEntities) {
+    public AccountPageModel(final Page<Account> pageEntities) {
         super(pageEntities);
     }
 
     @Override
-    protected Class<UserModel> getModelClass() {
-        return UserModel.class;
+    protected Class<AccountModel> getModelClass() {
+        return AccountModel.class;
     }
 
 

@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.service.MailService;
-import vn.edu.fpt.hsts.bizlogic.service.UserService;
+import vn.edu.fpt.hsts.bizlogic.service.AccountService;
 import vn.edu.fpt.hsts.common.IConsts;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import vn.edu.fpt.hsts.persistence.entity.User;
+import vn.edu.fpt.hsts.persistence.entity.Account;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
@@ -30,10 +30,10 @@ public class LoginController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
     /**
-     * The {@link UserService}.
+     * The {@link AccountService}.
      */
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
     /**
      * The {@link MailService}.
@@ -70,7 +70,7 @@ public class LoginController {
         try {
             ModelAndView mav = new ModelAndView();
             LOGGER.info("username[{}], password[{}]", username, password);
-            User user = userService.checkLogin(username, password);
+            Account user = accountService.checkLogin(username, password);
             if (user != null) {
                 session.setAttribute("USER", user);
                 mav.setViewName("home");
@@ -84,11 +84,11 @@ public class LoginController {
     }
     @RequestMapping(value = "loginMobile", method = RequestMethod.POST)
     @ResponseBody
-    public User loginMobile(@RequestParam("username") final String username,
+    public Account loginMobile(@RequestParam("username") final String username,
                             @RequestParam("password") final String password) {
         LOGGER.info("login mobile");
-        User userLogin = new User();
-            userLogin = userService.checkLogin(username, password);
+        Account userLogin = new Account();
+            userLogin = accountService.checkLogin(username, password);
         return userLogin;
     }
 

@@ -21,8 +21,8 @@ public class Doctor extends AbstractKeyEntity {
      * The user.
      */
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", nullable = false)
-    private User user;
+    @JoinColumn(name = "accountId", nullable = false)
+    private Account account;
 
     /**
      * The department.
@@ -34,12 +34,12 @@ public class Doctor extends AbstractKeyEntity {
      */
     private String major;
 
-    public User getUser() {
-        return user;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setUser(final User user) {
-        this.user = user;
+    public void setAccount(final Account account) {
+        this.account = account;
     }
 
     public String getDepartment() {

@@ -3,19 +3,24 @@
  * Program: HSTS.
  * Program manager: Kieu Trong Khanh.
  * Author: dangquantran.
- * Date: 9/25/2015.
+ * Date: 9/23/2015.
  */
-package vn.edu.fpt.hsts.bizlogic.model;
+package vn.edu.fpt.hsts.persistence.entity;
 
-import vn.edu.fpt.hsts.persistence.entity.User;
+import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
+import vn.edu.fpt.hsts.persistence.IDbConsts;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
-public class UserModel extends AbstractKeyModel<User> {
-    @Override
-    protected Class<User> getEntityClass() {
-        return User.class;
-    }
+/**
+ * The Account entity.
+ */
+@Entity
+public class Account extends AbstractKeyEntity {
 
     /**
      * The username.
@@ -40,18 +45,30 @@ public class UserModel extends AbstractKeyModel<User> {
     /**
      * The birthday.
      */
-    private Date birthday;
-
+    private Date dateOfBirth;
 
     /**
      * Gender
      */
     private byte gender;
 
-    /***
-     * Role
+    /**
+     * The user role.
      */
-    private RoleModel role;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "roleId", nullable = false)
+    private Role role;
+
+    /**
+     * The Account status.
+     * @see vn.edu.fpt.hsts.persistence.IDbConsts.IAccountStatus
+     */
+    private byte status;
+
+    /**
+     * The update time.
+     */
+    private Date updateTime;
 
     public String getUsername() {
         return username;
@@ -85,12 +102,12 @@ public class UserModel extends AbstractKeyModel<User> {
         this.email = email;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setBirthday(final Date birthday) {
-        this.birthday = birthday;
+    public void setDateOfBirth(final Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public byte getGender() {
@@ -101,25 +118,30 @@ public class UserModel extends AbstractKeyModel<User> {
         this.gender = gender;
     }
 
-    public RoleModel getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(final RoleModel role) {
+    public void setRole(final Role role) {
         this.role = role;
     }
 
-    @Override
-    public void fromEntity(User entity) {
-        super.fromEntity(entity);
-        setUsername(entity.getUsername());
-        setPassword(entity.getPassword());
-        setFullname(entity.getFullname());
-        setEmail(entity.getEmail());
-        setBirthday(entity.getBirthday());
-        setGender(entity.getGender());
-        final RoleModel role = new RoleModel();
-        role.fromEntity(entity.getRole());
-        setRole(role);
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(final byte status) {
+        this.status = status;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(final Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Account() {
     }
 }

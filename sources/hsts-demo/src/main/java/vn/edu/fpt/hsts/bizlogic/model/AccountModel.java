@@ -3,24 +3,19 @@
  * Program: HSTS.
  * Program manager: Kieu Trong Khanh.
  * Author: dangquantran.
- * Date: 9/23/2015.
+ * Date: 9/25/2015.
  */
-package vn.edu.fpt.hsts.persistence.entity;
+package vn.edu.fpt.hsts.bizlogic.model;
 
-import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
-import vn.edu.fpt.hsts.persistence.IDbConsts;
+import vn.edu.fpt.hsts.persistence.entity.Account;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.util.Date;
 
-/**
- * The User entity.
- */
-@Entity
-public class User extends AbstractKeyEntity {
+public class AccountModel extends AbstractKeyModel<Account> {
+    @Override
+    protected Class<Account> getEntityClass() {
+        return Account.class;
+    }
 
     /**
      * The username.
@@ -53,23 +48,10 @@ public class User extends AbstractKeyEntity {
      */
     private byte gender;
 
-    /**
-     * The user role.
+    /***
+     * Role
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roleId", nullable = false)
-    private Role role;
-
-    /**
-     * The User status.
-     * @see IDbConsts.IUserStatus
-     */
-    private byte status;
-
-    /**
-     * The update time.
-     */
-    private Date updateTime;
+    private RoleModel role;
 
     public String getUsername() {
         return username;
@@ -119,30 +101,25 @@ public class User extends AbstractKeyEntity {
         this.gender = gender;
     }
 
-    public Role getRole() {
+    public RoleModel getRole() {
         return role;
     }
 
-    public void setRole(final Role role) {
+    public void setRole(final RoleModel role) {
         this.role = role;
     }
 
-    public byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(final byte status) {
-        this.status = status;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(final Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public User() {
+    @Override
+    public void fromEntity(Account entity) {
+        super.fromEntity(entity);
+        setUsername(entity.getUsername());
+        setPassword(entity.getPassword());
+        setFullname(entity.getFullname());
+        setEmail(entity.getEmail());
+        setBirthday(entity.getBirthday());
+        setGender(entity.getGender());
+        final RoleModel role = new RoleModel();
+        role.fromEntity(entity.getRole());
+        setRole(role);
     }
 }

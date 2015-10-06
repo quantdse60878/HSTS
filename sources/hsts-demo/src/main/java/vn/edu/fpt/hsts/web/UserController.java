@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import vn.edu.fpt.hsts.bizlogic.model.UserModel;
-import vn.edu.fpt.hsts.bizlogic.model.UserPageModel;
-import vn.edu.fpt.hsts.bizlogic.service.UserService;
+import vn.edu.fpt.hsts.bizlogic.model.AccountModel;
+import vn.edu.fpt.hsts.bizlogic.model.AccountPageModel;
+import vn.edu.fpt.hsts.bizlogic.service.AccountService;
 import vn.edu.fpt.hsts.common.IConsts;
 
 /**
@@ -29,21 +29,21 @@ public class UserController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     /**
-     * The {@link UserService}.
+     * The {@link AccountService}.
      */
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
 
 
     @RequestMapping(value = "/rest", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public UserModel restful(@RequestParam("username") final String username,
+    public AccountModel restful(@RequestParam("username") final String username,
                              @RequestParam("password") final String password) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("username[{}], password[{}]", username, password);
-            return userService.loginRest(username, password);
+            return accountService.loginRest(username, password);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
@@ -51,13 +51,13 @@ public class UserController extends AbstractController {
 
     @RequestMapping(value = "/user/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public UserPageModel paging(
+    public AccountPageModel paging(
             @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
             @RequestParam(value = "pageSize", required = false, defaultValue = DEFAULT_PAGE_SIZE) final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("page[{}], pageSize[{}]", page, pageSize);
-            return userService.paging(page, pageSize);
+            return accountService.paging(page, pageSize);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

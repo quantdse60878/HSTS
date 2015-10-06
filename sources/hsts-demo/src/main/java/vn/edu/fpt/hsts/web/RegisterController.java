@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import vn.edu.fpt.hsts.bizlogic.service.UserService;
+import vn.edu.fpt.hsts.bizlogic.service.AccountService;
 import vn.edu.fpt.hsts.common.IConsts;
-import vn.edu.fpt.hsts.persistence.entity.User;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * Register controller, for processing Register patient, account.
@@ -26,10 +23,10 @@ public class RegisterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(RegisterController.class);
 
     /**
-     * The {@link UserService}.
+     * The {@link AccountService}.
      */
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
     /**
      * The register patient page mapping
