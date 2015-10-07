@@ -11,12 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.PatientModel;
 import vn.edu.fpt.hsts.bizlogic.service.MailService;
 import vn.edu.fpt.hsts.bizlogic.service.AccountService;
+import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.common.IConsts;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import vn.edu.fpt.hsts.persistence.entity.Account;
+import vn.edu.fpt.hsts.persistence.entity.Patient;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
@@ -34,6 +37,8 @@ public class LoginController {
      */
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private PatientService patientService;
 
     /**
      * The {@link MailService}.
@@ -84,12 +89,23 @@ public class LoginController {
     }
     @RequestMapping(value = "loginMobile", method = RequestMethod.POST)
     @ResponseBody
-    public Account loginMobile(@RequestParam("username") final String username,
+    public PatientModel loginMobile(@RequestParam("username") final String username,
                             @RequestParam("password") final String password) {
         LOGGER.info("login mobile");
+        PatientModel patient = new PatientModel();
         Account userLogin = new Account();
             userLogin = accountService.checkLogin(username, password);
-        return userLogin;
+        if(userLogin != null) {
+
+            Patient patientLogin = new Patient();
+            patientLogin = patientService.getPatient(userLogin.getId());
+
+            patient.setAccountId(userLogin.getId());
+            patient.setPatientId(patientLogin.getId());
+            patient.setEmail(userLogin.getEmail());
+            patient.setFullname(userLogin.getFullname());
+        }
+        return patient;
     }
 
     /**

@@ -20,14 +20,14 @@ public class Notify extends AbstractKeyEntity{
     /**
      *
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "senderId", nullable = false)
     private Account sender;
 
     /**
      *
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "receiverId", nullable = false)
     private Account receiver;
 
