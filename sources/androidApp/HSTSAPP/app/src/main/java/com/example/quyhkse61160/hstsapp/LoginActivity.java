@@ -22,6 +22,9 @@ import android.widget.Toast;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -140,6 +143,15 @@ public class LoginActivity extends ActionBarActivity {
                 String temp, response = "";
                 while ((temp = bReader.readLine()) != null) {
                     response += temp;
+                }
+                Log.d("QUYYY111", "Response: --" + response);
+                try {
+                    JSONObject patientObject = new JSONObject(response);
+                    Constant.accountId = patientObject.getString("accountId");
+                    Constant.patientId = patientObject.getString("patientId");
+                    Log.d("QUYYY111", "Benh nhan: " + "Account: " + Constant.accountId + " Patient: " + Constant.patientId);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
 

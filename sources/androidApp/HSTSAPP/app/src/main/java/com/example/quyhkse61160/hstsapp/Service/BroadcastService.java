@@ -9,6 +9,10 @@ import android.util.Log;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -49,7 +53,14 @@ public class BroadcastService extends Service {
     private Runnable sendUpdateToUI = new Runnable() {
         @Override
         public void run() {
-            checkNotify();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    checkNotify();
+                }
+            }).start();
+
             handlerThread.postDelayed(this, 10000);
         }
     };
@@ -88,6 +99,22 @@ public class BroadcastService extends Service {
             while ((temp = bReader.readLine()) != null) {
                 response += temp;
             }
+            Log.d("QUYYY111", "--" + response);
+
+            try {
+                JSONArray array = new JSONArray(response);
+                for(int i = 0; i < array.length(); i++) {
+                    JSONObject notifyItem = array.getJSONObject(i);
+                    int notifyType = Integer.parseInt(notifyItem.getString("type"));
+                    if(notifyType == 2) {
+                        getNewTreatment();
+                    }
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
         } catch (MalformedURLException e) {
@@ -116,5 +143,8 @@ public class BroadcastService extends Service {
     public void onDestroy() {
         handlerThread.removeCallbacks(sendUpdateToUI);
         super.onDestroy();
+    }
+    public void getNewTreatment() {
+
     }
 }
