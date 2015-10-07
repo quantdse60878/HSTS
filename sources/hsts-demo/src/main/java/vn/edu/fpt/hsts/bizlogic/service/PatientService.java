@@ -129,4 +129,8 @@ public class PatientService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public List<Patient> getPatientByApponitmentDate() {
+        return null;
+    }
 }
