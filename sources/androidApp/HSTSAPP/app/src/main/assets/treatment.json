@@ -1,79 +1,210 @@
-{
-  "treatmentName":"Ten Benh",
-  "nextAppointment":"mm/dd/yyyy",
-  "fromDate":"This is from date",
-  "toDate":"This is to date",
-  "advice":"Try Hard",
-  "medicine":[
-    {
-      "timeUse": "07:00",
-      "items": [
-        {
-          "name": "paracitamol",
-          "quantity": "1"
-        },
-        {
-          "name": "tiffy",
-          "quantity": "1"
-        }
-      ]
-    },
-    {
-      "timeUse": "12:00",
-      "items": [
-        {
-          "name": "paracitamol",
-          "quantity": "1"
-        },
-        {
-          "name": "tiffy",
-          "quantity": "1"
-        }
-      ]
-    }
-  ],
-  "food":[
-    {
-      "timeUse":"15:00",
-      "items":[
-        {
-          "name":"Cơm",
-          "quantity":"2 Tô"
-        },
-        {
-          "name":"Cá",
-          "quantity":"Ítt"
-        }
-      ]
-    },
-    {
-      "timeUse":"18:00",
-      "items":[
-        {
-          "name":"Rau",
-          "quantity":"Nhieu"
-        }
-      ]
-    }
-  ],
-  "practice":[
-    {
-      "timeUse":"08:00",
-      "items":[
-        {
-          "name":"Đi Bộ",
-          "quantity":"15 phút"
-        }
-      ]
-    },
-    {
-      "timeUse":"13:00",
-      "items":[
-        {
-          "name":"Di Xe Dap",
-          "quantity":"20 phut"
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "illnessName": "beo phi cap do 1",
+    "nextAppointment": 1444150800000,
+    "fromDate": 1443632400000,
+    "toDate": 1444150800000,
+    "adviseFood": "Ăn ít nhai kỹ",
+    "adviseMedicine": "Uống thuốc đều đặn",
+    "advicePractice": "Luyện tập vừa phải",
+    "listFoodTreatment": [
+      {
+        "listFood": [
+          {
+            "foodName": "cơm",
+            "quantitative": "1 chén"
+          },
+          {
+            "foodName": "cá",
+            "quantitative": "nhiều"
+          },
+          {
+            "foodName": "rau",
+            "quantitative": "nhiều"
+          }
+        ],
+        "timeEat": "07:00:00"
+      },
+      {
+        "listFood": [
+          {
+            "foodName": "củ",
+            "quantitative": "nhiều"
+          },
+          {
+            "foodName": "thịt",
+            "quantitative": "hạn chế"
+          },
+          {
+            "foodName": "cá",
+            "quantitative": "ít"
+          }
+        ],
+        "timeEat": "09:30:00"
+      },
+      {
+        "listFood": [
+          {
+            "foodName": "cơm",
+            "quantitative": "2 chén"
+          },
+          {
+            "foodName": "thịt",
+            "quantitative": "ít"
+          },
+          {
+            "foodName": "củ",
+            "quantitative": "nhiều"
+          }
+        ],
+        "timeEat": "12:00:00"
+      },
+      {
+        "listFood": [
+          {
+            "foodName": "cá",
+            "quantitative": "vừa phải"
+          },
+          {
+            "foodName": "rau",
+            "quantitative": "nhiều"
+          }
+        ],
+        "timeEat": "14:30:00"
+      },
+      {
+        "listFood": [
+          {
+            "foodName": "cơm",
+            "quantitative": "2 chén"
+          },
+          {
+            "foodName": "thịt",
+            "quantitative": "ít"
+          }
+        ],
+        "timeEat": "15:00:00"
+      },
+      {
+        "listFood": [
+          {
+            "foodName": "cá",
+            "quantitative": "nhiều"
+          },
+          {
+            "foodName": "rau",
+            "quantitative": "nhiều"
+          },
+          {
+            "foodName": "củ",
+            "quantitative": "ít"
+          }
+        ],
+        "timeEat": "19:00:00"
+      }
+    ],
+    "listMedicineTreatment": [
+      {
+        "listMedicine": [
+          {
+            "medicineName": "Sibutramine",
+            "numberOfMedicine": 1,
+            "advice": "Uống trước khi ăn"
+          },
+          {
+            "medicineName": "Orlistat",
+            "numberOfMedicine": 1,
+            "advice": "Uống sau khi ăn"
+          }
+        ],
+        "timeUse": "07:00:00"
+      },
+      {
+        "listMedicine": [
+          {
+            "medicineName": "Sibutramine",
+            "numberOfMedicine": 2,
+            "advice": "Uống trước khi ăn"
+          },
+          {
+            "medicineName": "Orlistat",
+            "numberOfMedicine": 1,
+            "advice": "Uống sau khi ăn"
+          }
+        ],
+        "timeUse": "12:00:00"
+      },
+      {
+        "listMedicine": [
+          {
+            "medicineName": "Sibutramine",
+            "numberOfMedicine": 2,
+            "advice": "Uống trước khi ăn"
+          },
+          {
+            "medicineName": "Orlistat",
+            "numberOfMedicine": 1,
+            "advice": "Uống sau khi ăn"
+          }
+        ],
+        "timeUse": "17:00:00"
+      },
+      {
+        "listMedicine": [
+          {
+            "medicineName": "Sibutramine",
+            "numberOfMedicine": 1,
+            "advice": "Uống trước khi ăn"
+          },
+          {
+            "medicineName": "Orlistat",
+            "numberOfMedicine": 1,
+            "advice": "Uống sau khi ăn"
+          }
+        ],
+        "timeUse": "22:00:00"
+      }
+    ],
+    "listPracticeTreatment": [
+      {
+        "listPractice": [
+          {
+            "practiceName": "đi bộ",
+            "duration": 20
+          },
+          {
+            "practiceName": "chạy bộ",
+            "duration": 10
+          }
+        ],
+        "timePractice": "06:00:00"
+      },
+      {
+        "listPractice": [
+          {
+            "practiceName": "đi bộ",
+            "duration": 20
+          },
+          {
+            "practiceName": "chạy bộ",
+            "duration": 10
+          }
+        ],
+        "timePractice": "06:00:00"
+      },
+      {
+        "listPractice": [
+          {
+            "practiceName": "đi bộ",
+            "duration": 20
+          },
+          {
+            "practiceName": "chạy bộ",
+            "duration": 10
+          }
+        ],
+        "timePractice": "06:00:00"
+      }
+    ]
+  }
+]
