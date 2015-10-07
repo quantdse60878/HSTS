@@ -134,6 +134,7 @@ public class PatientService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             final Date currentDate = new Date();
+            LOGGER.info("currentDate: " + currentDate);
             final List<Patient> patients = patientRepo.findByAppoinmentDate(currentDate);
             if (null != patients && patients.isEmpty()) {
                 if (LOGGER.isDebugEnabled()) {
@@ -144,5 +145,8 @@ public class PatientService {
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
+    }
+
+    public void makeAppointment(String patientID, String appointmentDate) {
     }
 }

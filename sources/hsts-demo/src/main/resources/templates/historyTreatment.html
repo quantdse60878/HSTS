@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns:body="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <body>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" layout:fragment="body">
+    <style type="text/css">
+        /*STYLES FOR CSS POPUP*/
+        #blanket {
+            background-color: #111;
+            opacity: 0.65;
+            *background: none;
+            position: absolute;
+            z-index: 9001;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+        }
+
+        #popUpDiv {
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            z-index: 9002;
+        }
+    </style>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -28,10 +48,12 @@
                     <div class="box-header">
                         <div class="form-group row">
                             <label class="col-sm-1 control-label">Name</label>
+
                             <div class="col-sm-3">
                                 <input type="text" readonly="readonly" class="form-control" value="Patient 2"/>
                             </div>
                             <label class="col-sm-2 control-label">Illness</label>
+
                             <div class="col-sm-2">
                                 <input type="text" readonly="readonly" class="form-control" value="Fat-3"/>
                             </div>
@@ -42,26 +64,30 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-1 control-label">Age</label>
+
                             <div class="col-sm-2">
                                 <input type="text" readonly="readonly" class="form-control" value="31"/>
                             </div>
                             <div class="col-sm-1"></div>
                             <label class="col-sm-2 control-label">Status</label>
+
                             <div class="col-sm-2">
                                 <input type="text" readonly="readonly" class="form-control" value="Treating"/>
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2" style="margin-right: 0px;">
-                                <a href="patient2.html" class="btn btn-primary">Appointment</a>
+                                <a onclick="popup('popUpDiv')" class="btn btn-primary">Appointment</a>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-1 control-label">Gender</label>
+
                             <div class="col-sm-2">
                                 <input type="text" readonly="readonly" class="form-control" value="Male"/>
                             </div>
                             <div class="col-sm-1"></div>
                             <label for="Discription" class="col-sm-2 control-label">Discription</label>
+
                             <div class="col-sm-4">
                           <textarea type="text" readonly="readonly" class="form-control" id="Discription"
                                     style="height: 80px; font-size: 14px;">Bị hạn chế khả nặng vận động, có dấu hiệu tiểu đường tip 1, máu nhiễm mỡ</textarea>
@@ -120,25 +146,144 @@
         <!-- /.row -->
     </section>
     <!-- /.content -->
-<!-- REQUIRED JS SCRIPTS -->
-<!-- DataTables -->
-<script th:src="@{/static/bower/admin-lte/plugins/datatables/jquery.dataTables.min.js}"></script>
-<script th:src="@{/static/bower/admin-lte/plugins/datatables/dataTables.bootstrap.min.js}"></script>
-<script>
-    $(function () {
-        $("#listPatients").DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
+
+    <!--POPUP-->
+    <div id="blanket" style="display:none;"></div>
+    <div id="popUpDiv" style="display:none;">
+        <!-- box -->
+        <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Appointment Date</h3>
+
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" onclick="popup('popUpDiv')">
+                        <i class="fa fa-times"></i></button>
+                </div>
+                <!-- /.box-tools -->
+            </div>
+            <form th:action="makeAppointment" method="get" class="form-horizontal">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="form-group" style="margin-top: 15px;">
+                        <label class="form-label">Do you want to make appointment?</label>
+                        <label for="Appointment" class="col-sm-5 control-label">Appointment Date</label>
+
+                        <div class="col-sm-7">
+                            <input th:text="hidden" th:name="patientID" th:value="1"/>
+                            <input class="form-control" type="text" th:name="appointmentDate" th:value="30/09/2015"
+                                   id="Appointment" data-provide="Appointment"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="reset" class="btn btn-default">No</button>
+                    <button type="submit" class="btn btn-primary pull-right">Yes</button>
+                </div>
+                <!-- /.footer -->
+            </form>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.popUpDiv -->
+
+    <!-- / POPUP-->
+
+    <!-- REQUIRED JS SCRIPTS -->
+    <!-- jQueryUI -->
+    <script th:src="@{/static/bower/jquery/jquery.js}"></script>
+    <script th:src="@{/static/bower/jquery-ui/jquery-ui.js}"></script>
+    <!-- DataTables -->
+    <script th:src="@{/static/bower/admin-lte/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/static/bower/admin-lte/plugins/datatables/dataTables.bootstrap.min.js}"></script>
+    <script>
+        $(function () {
+            $("#listPatients").DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
         });
-    });
-</script>
+
+        $('#Appointment').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            defaultDate: "+1w",
+            changeYear: true,
+        });
+
+        function toggle(div_id) {
+            var el = document.getElementById(div_id);
+            if ( el.style.display == 'none' ) { el.style.display = 'block';}
+            else {el.style.display = 'none';}
+        };
+        function blanket_size(popUpDivVar) {
+            if (typeof window.innerWidth != 'undefined') {
+                viewportheight = window.innerHeight;
+            } else {
+                viewportheight = document.documentElement.clientHeight;
+            }
+            if (viewportheight > document.body.parentNode.scrollHeight) {
+                if (viewportheight > document.body.parentNode.clientHeight) {
+                    blanket_height = viewportheight;
+                } else {
+                    if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
+                        blanket_height = document.body.parentNode.clientHeight;
+                    } else {
+                        blanket_height = document.body.parentNode.scrollHeight;
+                    }
+                }
+            } else {
+                if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
+                    blanket_height = document.body.parentNode.clientHeight;
+                } else {
+                    blanket_height = document.body.parentNode.scrollHeight;
+                }
+            }
+            var blanket = document.getElementById('blanket');
+            blanket.style.height = blanket_height + 'px';
+            var popUpDiv = document.getElementById(popUpDivVar);
+            popUpDiv_height=blanket_height/2-150;//200 is half popup's height
+            popUpDiv.style.top = popUpDiv_height + 'px';
+        };
+        function window_pos(popUpDivVar) {
+            if (typeof window.innerWidth != 'undefined') {
+                viewportwidth = window.innerHeight;
+            } else {
+                viewportwidth = document.documentElement.clientHeight;
+            }
+            if (viewportwidth > document.body.parentNode.scrollWidth) {
+                if (viewportwidth > document.body.parentNode.clientWidth) {
+                    window_width = viewportwidth;
+                } else {
+                    if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
+                        window_width = document.body.parentNode.clientWidth;
+                    } else {
+                        window_width = document.body.parentNode.scrollWidth;
+                    }
+                }
+            } else {
+                if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
+                    window_width = document.body.parentNode.clientWidth;
+                } else {
+                    window_width = document.body.parentNode.scrollWidth;
+                }
+            }
+            var popUpDiv = document.getElementById(popUpDivVar);
+            window_width=window_width/2-200;//200 is half popup's width
+            popUpDiv.style.left = window_width + 'px';
+        };
+        function popup(windowname) {
+            blanket_size(windowname);
+            window_pos(windowname);
+            toggle('blanket');
+            toggle(windowname);
+        };
+    </script>
 </div>
 <!-- /.content-wrapper -->
-
-
 </body>
 </html>

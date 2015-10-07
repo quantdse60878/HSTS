@@ -43,6 +43,7 @@ public class DoctorController {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("doctorPatients");
             List<Patient> patientList = patientService.getPatientByApponitmentDate();
+            LOGGER.info("listpatiens: " + patientList.size());
             mav.addObject("LISTPATIENTS", patientList);
             return mav;
         } finally {
@@ -59,9 +60,35 @@ public class DoctorController {
     public ModelAndView historyTreatmentPage(@RequestParam("patientID") final String patientID) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("historyTreatment");
-            return modelAndView;
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("historyTreatment");
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    /**
+     * The history treatment page mapping
+     * @param patientID
+     * @return
+     */
+    @RequestMapping(value = "makeAppointment", method = RequestMethod.GET)
+    public ModelAndView makeAppointment(@RequestParam("patientID") final String patientID,
+                                        @RequestParam("appointmentDate") final String appointmentDate) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("historyTreatment");
+            patientService.makeAppointment(patientID, appointmentDate);
+            //create notify
+            //set name of action
+            mav.addObject("METHOD", "Register Patient");
+            //set type. sussces TYPE = info, fail TYPE = danger
+            mav.addObject("TYPE", "info");
+            //set message notify
+            mav.addObject("MESSAGE", "Success");
+            return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

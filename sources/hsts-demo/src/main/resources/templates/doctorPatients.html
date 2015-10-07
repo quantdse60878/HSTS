@@ -56,6 +56,9 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <tr th:if="${LISTPATIENTS == null}">
+                                <td colspan="5">No Patient for today!!!</td>
+                            </tr>
                             <tr th:each="patient,rowStat : ${LISTPATIENTS}">
                                 <td th:text="${rowStat.count}">No.</td>
                                 <td><a th:href="@{/historyTreatment(patientID=${patient.id})}" th:text="${patient.account.username}">Name</a></td>
