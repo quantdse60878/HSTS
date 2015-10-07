@@ -31,15 +31,6 @@ public class MedicalRecordData extends AbstractKeyEntity {
     @JoinColumn(name = "dateCollectData")
     private Date collectedDate;
 
-    /**
-     * The patient height.
-     */
-    private double height;
-
-    /**
-     * The patient weight.
-     */
-    private double weight;
 
     /**
      * Number of steps.
@@ -64,21 +55,6 @@ public class MedicalRecordData extends AbstractKeyEntity {
     public MedicalRecordData() {
     }
 
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(final double height) {
-        this.height = height;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(final double weight) {
-        this.weight = weight;
-    }
 
     public int getNumberOfStep() {
         return numberOfStep;

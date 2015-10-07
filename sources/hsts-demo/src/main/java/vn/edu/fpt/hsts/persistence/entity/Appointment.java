@@ -43,6 +43,15 @@ public class Appointment extends AbstractKeyEntity {
     private String messsage;
 
     /**
+     * The patient height.
+     */
+    private double height;
+
+    /**
+     * The patient weight.
+     */
+    private double weight;
+    /**
      * The status.
      */
     private byte status;
@@ -50,12 +59,28 @@ public class Appointment extends AbstractKeyEntity {
     /**
      *
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "nextAppointment")
     private Appointment nextAppointment;
 
 
     public Appointment() {
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(final double height) {
+        this.height = height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(final double weight) {
+        this.weight = weight;
     }
 
     public Date getMeetingDate() {

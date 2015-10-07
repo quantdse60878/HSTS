@@ -24,21 +24,21 @@ public class MedicalRecord extends AbstractKeyEntity {
     /**
      * The doctor.
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "doctorId", nullable = false)
     private Doctor doctor;
 
     /**
      * The patient.
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "patientId", nullable = false)
     private Patient patient;
 
     /**
      * The illness.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "illnessId", referencedColumnName = "id")
     private Illness illness;
 

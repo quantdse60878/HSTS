@@ -1,29 +1,32 @@
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by QUYHKSE61160 on 10/5/15.
  */
-public class PracticeTreatmentModel {
+public class PracticeTreatmentModel implements Serializable {
 
-    private String timePractice;
+    private String time;
     private List<Practice> listPractice;
 
     public PracticeTreatmentModel() {
+        listPractice = new ArrayList<Practice>();
     }
 
     public PracticeTreatmentModel(String timePractice, List<Practice> listPractice) {
-        this.timePractice = timePractice;
+        this.time = timePractice;
         this.listPractice = listPractice;
     }
 
     public String getTimePractice() {
-        return timePractice;
+        return time;
     }
 
     public void setTimePractice(String timePractice) {
-        this.timePractice = timePractice;
+        this.time = timePractice;
     }
 
     public List<Practice> getListPractice() {
@@ -34,9 +37,12 @@ public class PracticeTreatmentModel {
         this.listPractice = listPractice;
     }
 
-    class Practice {
+    public void addPractice(String practiceName, int duration) {
+        listPractice.add(new Practice(practiceName, duration));
+    }
+    class Practice implements Serializable {
         private String practiceName;
-        private String duration;
+        private int duration;
 
         public String getPracticeName() {
             return practiceName;
@@ -46,15 +52,15 @@ public class PracticeTreatmentModel {
             this.practiceName = practiceName;
         }
 
-        public String getDuration() {
+        public int getDuration() {
             return duration;
         }
 
-        public void setDuration(String duration) {
+        public void setDuration(int duration) {
             this.duration = duration;
         }
 
-        Practice(String practiceName, String duration) {
+        Practice(String practiceName, int duration) {
 
             this.practiceName = practiceName;
             this.duration = duration;

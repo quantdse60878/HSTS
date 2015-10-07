@@ -34,7 +34,7 @@ public class FoodTreatment extends AbstractKeyEntity {
     /**
      *
      */
-    private int quantitative;
+    private String quantitative;
 
     public Meal getMeal() {
         return meal;
@@ -52,11 +52,11 @@ public class FoodTreatment extends AbstractKeyEntity {
         this.food = food;
     }
 
-    public int getQuantitative() {
+    public String getQuantitative() {
         return quantitative;
     }
 
-    public void setQuantitative(final int quantitative) {
+    public void setQuantitative(final String quantitative) {
         this.quantitative = quantitative;
     }
 

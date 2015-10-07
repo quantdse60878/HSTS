@@ -8,9 +8,15 @@
 package vn.edu.fpt.hsts.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
 import vn.edu.fpt.hsts.persistence.entity.PracticeTreatment;
+
+import java.util.List;
 
 @Repository
 public interface PracticeTreatmentRepo extends JpaRepository<PracticeTreatment, Integer>{
+    @Query(value = "SELECT * FROM practicetreatment WHERE practiceTimeId = ?1", nativeQuery = true)
+    List<PracticeTreatment> findPracticeTreatmentByPracticeTimeId(int practiceTimeId);
 }

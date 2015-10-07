@@ -35,4 +35,28 @@ public class PracticeTreatment extends AbstractKeyEntity {
      *
      */
     private int timeDuration;
+
+    public PracticeTime getPracticeTime() {
+        return practiceTime;
+    }
+
+    public void setPracticeTime(PracticeTime practiceTime) {
+        this.practiceTime = practiceTime;
+    }
+
+    public Practice getPractice() {
+        return practice;
+    }
+
+    public void setPractice(Practice practice) {
+        this.practice = practice;
+    }
+
+    public int getTimeDuration() {
+        return timeDuration;
+    }
+
+    public void setTimeDuration(int timeDuration) {
+        this.timeDuration = timeDuration;
+    }
 }

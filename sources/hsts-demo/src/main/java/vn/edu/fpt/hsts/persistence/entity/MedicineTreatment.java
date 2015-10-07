@@ -27,7 +27,7 @@ public class MedicineTreatment extends AbstractKeyEntity {
     /**
      *
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "medicineId", nullable = false)
     private Medicine medicine;
 
@@ -35,6 +35,15 @@ public class MedicineTreatment extends AbstractKeyEntity {
      *
      */
     private float numberOfMedicine;
+    private String advice;
+
+    public String getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(String advice) {
+        this.advice = advice;
+    }
 
     public MedicineTime getMedicineTime() {
         return medicineTime;

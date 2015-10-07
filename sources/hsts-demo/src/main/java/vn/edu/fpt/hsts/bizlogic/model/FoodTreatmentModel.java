@@ -1,29 +1,32 @@
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by QUYHKSE61160 on 10/5/15.
  */
-public class FoodTreatmentModel {
+public class FoodTreatmentModel implements Serializable {
 
-    private String timeEat;
+    private String time;
     private List<Food> listFood;
 
     public FoodTreatmentModel() {
+        listFood = new ArrayList<Food>();
     }
 
     public FoodTreatmentModel(String timeEat, List<Food> listFood) {
-        this.timeEat = timeEat;
+        this.time = timeEat;
         this.listFood = listFood;
     }
 
     public String getTimeEat() {
-        return timeEat;
+        return time;
     }
 
     public void setTimeEat(String timeEat) {
-        this.timeEat = timeEat;
+        this.time = timeEat;
     }
 
     public List<Food> getListFood() {
@@ -34,7 +37,12 @@ public class FoodTreatmentModel {
         this.listFood = listFood;
     }
 
-    class Food {
+
+    public void addFood(String foodName, String quantitative) {
+        listFood.add(new Food(foodName, quantitative));
+    }
+
+    class Food implements Serializable {
         private String foodName;
         private String quantitative;
 
