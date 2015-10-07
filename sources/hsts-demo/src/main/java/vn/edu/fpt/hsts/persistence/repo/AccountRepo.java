@@ -13,6 +13,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 
+import java.util.List;
+
 /**
  * The repository for Account entity.
  */
@@ -36,4 +38,7 @@ public interface AccountRepo extends JpaRepository<Account, Integer> {
      */
     @Query(value = "select * from Account a where username = :username and password = :password", nativeQuery = true)
     public Account findByUsernameAndPasswordWithNative(@Param(value = "username") final String username, @Param("password") final String password);
+
+    @Query("select a from Account a where username like :criteria")
+    public List<Account> findByUsernameStartWith(@Param("criteria") final String criteria);
 }

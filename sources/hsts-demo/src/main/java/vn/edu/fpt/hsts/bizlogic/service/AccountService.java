@@ -16,9 +16,14 @@ import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.bizlogic.model.AccountModel;
 import vn.edu.fpt.hsts.bizlogic.model.AccountPageModel;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.expception.BizlogicException;
+import vn.edu.fpt.hsts.common.util.StringUtils;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
 import vn.edu.fpt.hsts.web.session.UserSession;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -84,6 +89,47 @@ public class AccountService {
             final Page<Account> accountPage = accountRepo.findAll(pageRequest);
             final AccountPageModel pageModel = new AccountPageModel(accountPage);
             return pageModel;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public String buildUniqueUsername(final String fullname) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("fullname", fullname);
+            if (StringUtils.isEmpty(fullname)) {
+                // Throws wrong username
+                final String message = String.format("The input fullname[{}] is wrong format", fullname);
+                throw new BizlogicException(message);
+            }
+            final String[] tmp = fullname.split(" ");
+            final List<String> parts = Arrays.asList(tmp);
+
+            // Build result
+            final StringBuilder result = new StringBuilder();
+
+            // Append lastname to result
+            result.append(parts.get(parts.size() - 1));
+            for (int i = 0; i < parts.size() - 1; i++) {
+                char c = parts.get(i).charAt(0);
+                result.append(c);
+            }
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("result[{}]", result.toString());
+            }
+
+            // Find  username same prefix in db
+            List<Account> accounts = accountRepo.findByUsernameStartWith(result.toString() + "%");
+            // If contain username same prefix, apppend an integer to result
+            if (null != accounts && !accounts.isEmpty()) {
+                result.append(accounts.size() + 1);
+            }
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("New account[{}]", result.toString());
+            }
+            return result.toString();
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

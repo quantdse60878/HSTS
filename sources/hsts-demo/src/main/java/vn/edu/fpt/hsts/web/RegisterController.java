@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.service.AccountService;
+import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.expception.BizlogicException;
 
 /**
  * Register controller, for processing Register patient, account.
@@ -27,6 +29,13 @@ public class RegisterController {
      */
     @Autowired
     private AccountService accountService;
+
+
+    /**
+     * The {@link PatientService}
+     */
+    @Autowired
+    private PatientService patientService;
 
     /**
      * The register patient page mapping
@@ -46,6 +55,7 @@ public class RegisterController {
         }
     }
 
+
     /**
      * The register patient mapping
      * @param patientName
@@ -59,12 +69,24 @@ public class RegisterController {
      */
     @RequestMapping(value = "registerPatient", method = RequestMethod.POST)
     public ModelAndView registerPatient(@RequestParam("patientName") final String patientName,
-                                        @RequestParam("birthday") final String birthday
-                                        ) {
+                                        @RequestParam("birthday") final String birthday,
+                                        @RequestParam("gender") final String gender,
+                                        @RequestParam("weight") final int weight,
+                                        @RequestParam("height") final int height,
+                                        @RequestParam("doctor") final String doctor,
+                                        @RequestParam("medicalHistory") final String medicalHistory,
+                                        @RequestParam("symptoms") final String symptoms) throws BizlogicException, BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+            LOGGER.info("patientName[{}], birthday[{}], gender[{}], weight[{}], height[{}], doctor[{}], medicalHistory[{}], symptoms[{}]");
+
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
+            /**
+             * Create new patient
+             */
+            patientService.createPatient();
+
 
             //create notify
             //set name of action

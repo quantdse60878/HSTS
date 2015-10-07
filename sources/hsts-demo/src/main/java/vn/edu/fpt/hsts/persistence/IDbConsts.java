@@ -141,4 +141,36 @@ public interface IDbConsts {
         byte CALCULATED = 3;
 
     }
+
+    public interface IRoleType {
+        /**
+         *
+         */
+        int DOCTOR = 1;
+
+        /**
+         *
+         */
+        int NURSE = 2;
+
+        /**
+         *
+         */
+        int PATIENT = 3;
+
+        /**
+         *
+         */
+        int ADMIN = 4;
+
+        /**
+         *
+         */
+        int DOCTOR_MANAGER = 5;
+
+        /**
+         *
+         */
+        int STAFF = 6;
+    }
 }
