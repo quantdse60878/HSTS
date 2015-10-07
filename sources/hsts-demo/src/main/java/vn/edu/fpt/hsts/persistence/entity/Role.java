@@ -9,6 +9,7 @@ package vn.edu.fpt.hsts.persistence.entity;
 
 import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
@@ -17,7 +18,8 @@ public class Role extends AbstractKeyEntity {
     /**
      *
      */
-    private String roleName;
+    @Column(name = "roleName")
+    private String name;
 
     /**
      *
@@ -27,12 +29,12 @@ public class Role extends AbstractKeyEntity {
     public Role() {
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setName(final String name) {
+        this.name = name;
     }
 
     public String getDescription() {

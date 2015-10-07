@@ -49,7 +49,7 @@ public class AccountService {
             if(null != account) {
                 userSession.setId(account.getId());
                 userSession.setUsername(account.getUsername());
-                userSession.setRole(account.getRole().getRoleName());
+                userSession.setRole(account.getRole().getName());
                 userSession.setEmail(account.getEmail());
                 return account;
             }
