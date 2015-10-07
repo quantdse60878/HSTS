@@ -50,42 +50,26 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Name</th>
-                                <th>Age</th>
-                                <th>Diagnostic</th>
+                                <th>Birthday</th>
+                                <th>Gender</th>
                                 <th style="width: 40px;">#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><a href="historyTreatment?patientID=1">Patient 1</a></td>
-                                <td>15</td>
-                                <td></td>
-                                <td><a href="makePrescription?patientID=1" class="btn btn-primary">Make Prescription</a></td>
-                            </tr>
-
-                            <tr>
-                                <td>2</td>
-                                <td><a href="HistoryTreatment.html">Patient 2</a></td>
-                                <td>14</td>
-                                <td>Fat-1</td>
-                                <td><a href="patient2.html" class="btn btn-primary">Make Prescription</a></td>
-                            </tr>
-
-                            <tr>
-                                <td>3</td>
-                                <td><a href="patient3.html">Patient 3</a></td>
-                                <td>14</td>
-                                <td>Fat-1</td>
-                                <td><a href="patient2.html" class="btn btn-primary">Make Prescription</a></td>
+                            <tr th:each="patient,rowStat : ${LISTPATIENTS}">
+                                <td th:text="${rowStat.count}">No.</td>
+                                <td><a th:href="@{/historyTreatment(patientID=${patient.id})}" th:text="${patient.account.username}">Name</a></td>
+                                <td th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</td>
+                                <td th:text="*{patient.account.gender == 1}? 'Male' : 'Female'">Gender</td>
+                                <td><a th:href="@{/makePrescription(patientID=${patient.id})}" class="btn btn-primary">Make Prescription</a></td>
                             </tr>
                             </tbody>
                             <tfoot>
                             <tr>
                                 <th>No.</th>
                                 <th>Name</th>
-                                <th>Age</th>
-                                <th>Diagnostic</th>
+                                <th>Birthday</th>
+                                <th>Gender</th>
                                 <th style="width: 40px;">#</th>
                             </tr>
                             </tfoot>

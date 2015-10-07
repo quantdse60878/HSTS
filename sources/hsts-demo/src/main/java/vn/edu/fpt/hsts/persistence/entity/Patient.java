@@ -20,16 +20,17 @@ import javax.persistence.OneToOne;
 @Entity
 public class Patient extends AbstractKeyEntity {
 
-    /**
-     * The user.
-     */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "accountId", nullable = false)
     private Account account;
 
     public Patient() {
     }
 
+
+    /**
+     * The user.
+     */
     public Account getAccount() {
         return account;
     }
