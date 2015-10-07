@@ -131,6 +131,18 @@ public class PatientService {
     }
 
     public List<Patient> getPatientByApponitmentDate() {
-        return null;
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final Date currentDate = new Date();
+            final List<Patient> patients = patientRepo.findByAppoinmentDate(currentDate);
+            if (null != patients && patients.isEmpty()) {
+                if (LOGGER.isDebugEnabled()) {
+                   LOGGER.debug("Got {} records", patients.size());
+                }
+            }
+            return patients;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
     }
 }
