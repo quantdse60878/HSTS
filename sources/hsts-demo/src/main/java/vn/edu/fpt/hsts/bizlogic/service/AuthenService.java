@@ -23,8 +23,7 @@ public class AuthenService extends AbstractService{
     public String randomPassword() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            // TODO random password
-            return "ABCDEFGHI";
+            return String.valueOf(System.currentTimeMillis());
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

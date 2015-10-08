@@ -68,17 +68,17 @@ public class RegisterController {
      * @return
      */
     @RequestMapping(value = "registerPatient", method = RequestMethod.POST)
-    public ModelAndView registerPatient(@RequestParam("patientName") final String patientName,
+    public ModelAndView registerPatient(/*@RequestParam("patientName") final String patientName,
                                         @RequestParam("birthday") final String birthday,
                                         @RequestParam("gender") final String gender,
                                         @RequestParam("weight") final int weight,
                                         @RequestParam("height") final int height,
                                         @RequestParam("doctor") final String doctor,
                                         @RequestParam("medicalHistory") final String medicalHistory,
-                                        @RequestParam("symptoms") final String symptoms) throws BizlogicException, BizlogicException {
+                                        @RequestParam("symptoms") final String symptoms*/) throws BizlogicException, BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("patientName[{}], birthday[{}], gender[{}], weight[{}], height[{}], doctor[{}], medicalHistory[{}], symptoms[{}]");
+//            LOGGER.info("patientName[{}], birthday[{}], gender[{}], weight[{}], height[{}], doctor[{}], medicalHistory[{}], symptoms[{}]");
 
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
@@ -86,7 +86,6 @@ public class RegisterController {
              * Create new patient
              */
             patientService.createPatient();
-
 
             //create notify
             //set name of action

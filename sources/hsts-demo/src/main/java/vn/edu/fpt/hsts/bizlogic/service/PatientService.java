@@ -9,9 +9,15 @@ import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
+import vn.edu.fpt.hsts.persistence.entity.Appointment;
+import vn.edu.fpt.hsts.persistence.entity.Doctor;
+import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.Role;
 import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
+import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
+import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
+import vn.edu.fpt.hsts.persistence.repo.IllnessRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordDataRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
 import vn.edu.fpt.hsts.persistence.repo.PatientRepo;
@@ -72,6 +78,23 @@ public class PatientService {
     @Autowired
     private AuthenService authenService;
 
+    /**
+     * The {@link DoctorRepo}.
+     */
+    @Autowired
+    private DoctorRepo doctorRepo;
+
+    /**
+     * The {@link IllnessRepo}.
+     */
+    @Autowired
+    private IllnessRepo illnessRepo;
+
+    /**
+     * The {@link AppointmentRepo}.
+     */
+    @Autowired
+    private AppointmentRepo appointmentRepo;
 
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -94,6 +117,8 @@ public class PatientService {
     public void createPatient() throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+            Date currentDate = new Date();
+            currentDate = DateUtils.formatDate(currentDate, false);
             // TODO Create account
             final Account account = new Account();
             final String newUsername = accountService.buildUniqueUsername("Man Huynh Khuong");
@@ -102,25 +127,46 @@ public class PatientService {
             account.setGender(IDbConsts.IAccountGender.MALE);
             account.setDateOfBirth(new Date());
             account.setFullname("Man Huynh Khuong");
-
+            account.setUpdateTime(currentDate);
             final Role role = roleRepo.findOne(IDbConsts.IRoleType.PATIENT);
             account.setRole(role);
             // Account have been not actived yet, require change password
             account.setStatus(IDbConsts.IAccountStatus.IN_ACTIVE);
             account.setPassword(authenService.randomPassword());
-
             accountRepo.saveAndFlush(account);
 
             // TODO Create patient
+            final Patient patient = new Patient();
+            patient.setAccount(account);
+            patientRepo.saveAndFlush(patient);
 
             // TODO create medical record
+            MedicalRecord medicalRecord = new MedicalRecord();
+            medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);
+
+            Doctor doctor = doctorRepo.findByUsername("bacsi");
+            if(null == doctor) {
+                throw new BizlogicException("Doctor with username[bacsi] is not found");
+            }
+            medicalRecord.setDoctor(doctor);
+            medicalRecord.setPatient(patient);
+            medicalRecord.setSymptoms("Béo quá độ");
+            medicalRecord.setStartTime(currentDate);
+
+            medicalRecord.setMedicalHistory("Medical history");
+            medicalRecordRepo.saveAndFlush(medicalRecord);
 
             // TODO Create appointment
-
-            // TODO Create medical record data
+            final Appointment appointment = new Appointment();
+            appointment.setMedicalRecord(medicalRecord);
+            appointment.setWeight(100);
+            appointment.setHeight(170);
+            appointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
+            appointment.setMeetingDate(currentDate);
+            appointmentRepo.saveAndFlush(appointment);
 
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Create new patient successfully");
+                LOGGER.debug("Create new patient[{}] successfully", account.getUsername());
             }
         } catch (BizlogicException be) {
             throw be;

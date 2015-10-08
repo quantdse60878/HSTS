@@ -151,26 +151,21 @@ public interface IDbConsts {
         /**
          *
          */
-        int NURSE = 2;
+        int PATIENT = 2;
 
         /**
          *
          */
-        int PATIENT = 3;
+        int NURSE = 3;
 
         /**
          *
          */
-        int ADMIN = 4;
+        int DOCTOR_MANAGER = 4;
 
         /**
          *
          */
-        int DOCTOR_MANAGER = 5;
-
-        /**
-         *
-         */
-        int STAFF = 6;
+        int STAFF = 5;
     }
 }
