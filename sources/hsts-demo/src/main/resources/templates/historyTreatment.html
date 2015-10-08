@@ -106,11 +106,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr >
-                                <td>#</td>
-                                <td><a th:href="@{/makeAppointment(appointmentID=1)}" text="">Date</a></td>
-                                <td>Appointment</td>
-                                <td>Status</td>
+                            <tr th:each="appointment,rowStat : ${MEDICALRECORD.appointmentList}">
+                                <td th:text="${rowStat.count}">#</td>
+                                <td><a th:href="@{/makeAppointment(appointmentID=${appointment.id})}" th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">Date</a></td>
+                                <td th:text="*{appointment.nextAppointment !=null}? ${#dates.format(appointment.nextAppointment.meetingDate, 'dd-MM-yyyy')} : ''">Appointment</td>
+                                <td th:if="*{appointment.status == 1}">Not yet</td>
+                                <td th:if="*{appointment.status == 2}">Finished</td>
                             </tr>
                             </tbody>
                             <tfoot>
@@ -151,7 +152,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="form-group" style="margin-top: 15px;">
-                        <label class="form-label">Do you want to make appointment?</label>
+                        <label class="form-label" style="margin-left: 15px;">Do you want to make appointment?</label>
                         <label for="Appointment" class="col-sm-5 control-label">Appointment Date</label>
 
                         <div class="col-sm-7">

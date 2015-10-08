@@ -18,4 +18,8 @@ public class AppointmentService {
 
     @Autowired
     private AppointmentRepo appointmentRepo;
+
+    public Appointment findAppointmentByID(int appointmentID) {
+        return appointmentRepo.findOne(appointmentID);
+    }
 }

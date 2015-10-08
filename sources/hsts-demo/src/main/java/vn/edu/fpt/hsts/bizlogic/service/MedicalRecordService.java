@@ -21,11 +21,15 @@ public class MedicalRecordService {
     @Autowired
     private MedicalRecordRepo medicalRecordRepo;
 
-    public List<MedicalRecord> getAllMedicalRecord(String patientID) {
+    public List<MedicalRecord> getAllMedicalRecord() {
         return medicalRecordRepo.findAll();
     }
 
-    public MedicalRecord findMedicalRecordByID(String recordID) {
-        return medicalRecordRepo.findOne(Integer.parseInt(recordID));
+    public MedicalRecord findMedicalRecordByID(int recordID) {
+        return medicalRecordRepo.findOne(recordID);
+    }
+
+    public List<MedicalRecord> findMedicalRecordByPatientId(int patientID){
+        return medicalRecordRepo.findMedicalRecordByPatientId(patientID);
     }
 }

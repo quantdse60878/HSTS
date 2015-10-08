@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
+import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
+import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
+import vn.edu.fpt.hsts.persistence.entity.Appointment;
+import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 
 import java.util.List;
@@ -32,6 +36,12 @@ public class DoctorController {
 
     @Autowired
     private PatientService patientService;
+
+    @Autowired
+    private MedicalRecordService medicalRecordService;
+
+    @Autowired
+    private AppointmentService appointmentService;
 
     /**
      * The doctor patients page mapping
@@ -52,17 +62,35 @@ public class DoctorController {
         }
     }
 
+    @RequestMapping(value = "medicalHistory", method = RequestMethod.GET)
+    public ModelAndView medicalHistoryPage(@RequestParam("patientID") final int patientID) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("medicalHistory");
+            Patient patient = patientService.getPatientByID(patientID);
+            List<MedicalRecord> medicalRecords = medicalRecordService.findMedicalRecordByPatientId(patientID);
+            mav.addObject("PATIENT", patient);
+            mav.addObject("MEDICALRECORDS", medicalRecords);
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
     /**
      * The history treatment page mapping
-     * @param patientID
+     * @param recordID
      * @return
      */
     @RequestMapping(value = "historyTreatment", method = RequestMethod.GET)
-    public ModelAndView historyTreatmentPage(@RequestParam("patientID") final String patientID) {
+    public ModelAndView historyTreatmentPage(@RequestParam("recordID") final int recordID) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("historyTreatment");
+            MedicalRecord medicalRecord = medicalRecordService.findMedicalRecordByID(recordID);
+            mav.addObject("MEDICALRECORD", medicalRecord);
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
@@ -98,15 +126,17 @@ public class DoctorController {
 
     /**
      * The make Prescription page mapping
-     * @param patientID
+     * @param appointmentID
      * @return
      */
     @RequestMapping(value = "makePrescription", method = RequestMethod.GET)
-    public ModelAndView makePrescriptionPage(@RequestParam("patientID") final String patientID) {
+    public ModelAndView makePrescriptionPage(@RequestParam("appointmentID") final int appointmentID) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
+            Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
+            mav.addObject("APPOINTMENT", appointment);
             mav.addObject("model", new PrescriptionModel());
             return mav;
         } finally {
