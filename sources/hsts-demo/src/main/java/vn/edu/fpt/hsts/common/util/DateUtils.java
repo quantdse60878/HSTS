@@ -7,7 +7,12 @@
  */
 package vn.edu.fpt.hsts.common.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import vn.edu.fpt.hsts.common.IConsts;
+
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,9 +22,16 @@ import java.util.Date;
  */
 public class DateUtils {
 
+    /**
+     * The logger.
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(DateUtils.class);
+
     public static final String DATE_PATTERN_1 = "dd/MM/yyyy";
 
     public static final String DATE_PATTERN_2 = "dd-MM-yyyy";
+
+
 
     public static String formatDate(final Date date, final String datePattern) {
         final DateFormat dateFormat = new SimpleDateFormat(datePattern);
@@ -41,5 +53,21 @@ public class DateUtils {
             calendar.set(Calendar.MILLISECOND, 0);
         }
         return calendar.getTime();
+    }
+
+    public static Date parseDate(final String dateString, final String datePattern) {
+        LOGGER.debug(IConsts.BEGIN_METHOD);
+        try {
+            if (LOGGER.isDebugEnabled()) {
+               LOGGER.debug("dateString[{}], pattern[{}]", dateString, datePattern);
+            }
+            final DateFormat dateFormat = new SimpleDateFormat(datePattern);
+            return dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            LOGGER.error("Error while parsing date data: {}", e.getMessage());
+            return null;
+        } finally {
+            LOGGER.debug(IConsts.END_METHOD);
+        }
     }
 }

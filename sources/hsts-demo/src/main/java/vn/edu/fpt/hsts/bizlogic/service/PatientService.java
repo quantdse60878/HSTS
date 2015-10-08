@@ -196,10 +196,56 @@ public class PatientService {
         }
     }
 
-    public void makeAppointment(String recordID, String appointmentDate) {
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void makeAppointment(final int medicalRecordId, final String nextAppointmentDate) throws BizlogicException {
         //TODO parse INT recordID.
         //TODO find appointmentDate from recordID with appointmentDateChild = null
         //TODO new appointmentDate record from appointmentDate
         //TODO set appointmentDateChild with new appointmentDate record
+
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("medicalRecordId[{}], nextAppointmentDate[{}]", medicalRecordId, nextAppointmentDate);
+
+            // Find last appointment
+            final Appointment appointment = appointmentRepo.findLastAppointmentByMedicalRecordId(medicalRecordId);
+            if (null == appointment) {
+                throw new BizlogicException("Appointment with medicalRecordId[{}] not found", null, medicalRecordId);
+            } else if (appointment.getStatus() == IDbConsts.IAppointmentStatus.ENTRY) {
+                throw new BizlogicException("Appointment[{}] has been finished", null, appointment.getId());
+            }
+            // Create new appointment -> set to old appointment
+            final Appointment newAppointment = new Appointment();
+            final Date appointmentDate = DateUtils.parseDate(nextAppointmentDate, DateUtils.DATE_PATTERN_1);
+            if (null == appointmentDate) {
+               throw new BizlogicException("Wrong input date data: {}, output: {}", null, nextAppointmentDate, appointmentDate);
+            }
+            newAppointment.setMeetingDate(appointmentDate);
+            newAppointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
+            newAppointment.setMedicalRecord(appointment.getMedicalRecord());
+            newAppointment.setMesssage("ABCDEREFFDF");
+            appointmentRepo.save(newAppointment);
+
+            // Finish old appointment, link to next appointment
+            appointment.setNextAppointment(newAppointment);
+            appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
+            appointmentRepo.save(appointment);
+
+            // Flush data
+            appointmentRepo.flush();
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Create new appointment with medicalRecordId[{}] successfully", medicalRecordId);
+            }
+        } catch (BizlogicException be) {
+            throw be;
+        } catch (Exception e) {
+            LOGGER.error("Error while make new appointment: {}", e.getMessage());
+            throw new BizlogicException(e.getMessage());
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+
+
     }
 }

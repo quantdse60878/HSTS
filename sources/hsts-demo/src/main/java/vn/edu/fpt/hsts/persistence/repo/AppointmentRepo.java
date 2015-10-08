@@ -9,6 +9,7 @@ package vn.edu.fpt.hsts.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.edu.fpt.hsts.App;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
@@ -23,4 +24,6 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
     public Appointment findAppointmentByMedicalRecordId(int medicalRecordId);
 
 
+    @Query(value = "select a from Appointment a where medicalRecord.id = :medicalRecordId ORDER BY meetingDate DESC")
+    public Appointment findLastAppointmentByMedicalRecordId(@Param("medicalRecordId") final int medicalRecordId);
 }
