@@ -47,9 +47,11 @@ public class HSTSUtils {
         try{
             buf = new StringBuilder();
             InputStream json = am.open("treatment.json");
-            in = new BufferedReader(new InputStreamReader(json));
-            while ((str=in.readLine()) != null) {
-                buf.append(str);
+            if(json != null) {
+                in = new BufferedReader(new InputStreamReader(json));
+                while ((str=in.readLine()) != null) {
+                    buf.append(str);
+                }
             }
         } catch(Exception e){
             return "";

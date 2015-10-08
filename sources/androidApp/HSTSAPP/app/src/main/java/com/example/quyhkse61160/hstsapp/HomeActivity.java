@@ -37,8 +37,11 @@ import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
 import com.example.quyhkse61160.hstsapp.Service.NetworkChangeReceiver;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -48,6 +51,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceName;
     private String mDeviceAddress;
+    public static int appointmentId = 0;
+    public static List<String> listNumberOfStep = new ArrayList<>();
+    public static List<Date> dateSaveStep = new ArrayList<>();
     public static String numberOfStep = "0";
     public static int position = 0;
     public static String manufacturer = "Unknown";
@@ -108,6 +114,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     };
 
 
+
     private void displayGattServices(List<BluetoothGattService> gattServices) {
         if (gattServices == null) return;
         List<BluetoothGattService> listService = mBluetoothLeService.getSupportedGattServices();
@@ -129,30 +136,31 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
 //        txtNumberOfStep.setText(numberOfStep);
 
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
                 // Your logic here...
 
                 // When you need to modify a UI element, do so on the UI thread.
-//                // 'getActivity()' is required as this is being ran from a Fragment.
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        // This code will always run on the UI thread, therefore is safe to modify UI elements.
+                // 'getActivity()' is required as this is being ran from a Fragment.
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // This code will always run on the UI thread, therefore is safe to modify UI elements.
                         mBluetoothLeService.readCharacteristic(characteristicStep);
 //                        mBluetoothLeService.readCharacteristic(characteristicManufacturer);
 //                        txtNumberOfStep.setText(numberOfStep);
-////                        txtManufacturer.setText(manufacturer);
-//
-//                        Log.d("QUYYY1111111", "Manufacturer: " + manufacturer + "------" + "Number of step: " + numberOfStep);
-//                    }
-//                });
-//            }
-//        }, 10000, 10000);
+//                        txtManufacturer.setText(manufacturer);
+
+                        Log.d("QUYYY1111111", "Manufacturer: " + manufacturer + "------" + "Number of step: " + numberOfStep);
+                    }
+                });
+            }
+        }, 10000, 10000);
 
 
     }
+
 
 
     @Override
@@ -178,10 +186,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         ActionBar.Tab atab2 = actionBar.newTab().setText("THUỐC").setTabListener(this);
         ActionBar.Tab atab3 = actionBar.newTab().setText("LUYỆN TẬP").setTabListener(this);
         ActionBar.Tab atab4 = actionBar.newTab().setText("THÔNG BÁO").setTabListener(this);
-        actionBar.addTab(atab4);
         actionBar.addTab(atab2);
         actionBar.addTab(atab3);
-        actionBar.addTab(atab1);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -237,7 +243,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 //        }
 
 //        startService(checkNotifyIntent);
-//        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
 //        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
 //        final Intent intent = getIntent();
 //        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
@@ -251,7 +256,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 //            Log.d(TAG, "Connect request result=" + result);
 //        }
 
-//        registerReceiver(mConnectionDetector, mIntentFilter);
 
     }
 

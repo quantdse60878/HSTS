@@ -7,6 +7,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.example.quyhkse61160.hstsapp.Common.Constant;
+
 public class NetworkChangeReceiver extends BroadcastReceiver {
     public NetworkChangeReceiver() {
     }
@@ -23,12 +25,13 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
                 Log.i("QUYYYYYYY INTERNET", "connected " + isConnected);
 
                 //A function with many code overhere
-
+                Constant.haveInternet = true;
                 context.startService(notifyIntent);
 
 
             } else {
                 Log.i("QUYYYYYY INTERNET", "not connected " + isConnected);
+                Constant.haveInternet = false;
                 context.stopService(notifyIntent);
             }
         }

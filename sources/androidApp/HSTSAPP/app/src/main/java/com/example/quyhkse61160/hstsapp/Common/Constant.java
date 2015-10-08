@@ -16,14 +16,17 @@ public class Constant {
     public static final String hostURL = "http://localhost:8080";
     public static final String loginMethod = "/login";
     public static final String checkNotifyMethod = "/notify";
+    public static final String getTreatment = "/getTreatment";
+    public static final String sendMedicalData = "/sendMedicalData";
 
     //All constant of shared preference
     public static final String PREF_NAME = "HSTSAPPPREF";
     public static final String PREF_USENAME_HADLOGIN = "HSTSAPPPREFLOGIN";
     public static String NUMBEROFSTEP_POSITION = "3";
 
-    public static String accountId = "";
-    public static String patientId = "";
+    public static String accountId = "2";
+    public static String patientId = "1";
+    public static boolean haveInternet = false;
 
     //
     public static String HEART_RATE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb";
