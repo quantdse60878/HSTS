@@ -63,7 +63,6 @@ public class Appointment extends AbstractKeyEntity {
     @JoinColumn(name = "nextAppointment")
     private Appointment nextAppointment;
 
-
     public Appointment() {
     }
 

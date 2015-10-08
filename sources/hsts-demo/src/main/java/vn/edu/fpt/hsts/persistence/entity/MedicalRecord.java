@@ -14,9 +14,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class MedicalRecord extends AbstractKeyEntity {
@@ -67,6 +68,10 @@ public class MedicalRecord extends AbstractKeyEntity {
      * The status.
      */
     private byte status;
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "medicalRecord")
+    private List<Appointment> appointmentList;
 
     public MedicalRecord() {
     }
@@ -133,5 +138,14 @@ public class MedicalRecord extends AbstractKeyEntity {
 
     public void setMedicalHistory(final String medicalHistory) {
         this.medicalHistory = medicalHistory;
+    }
+
+
+    public List<Appointment> getAppointmentList() {
+        return appointmentList;
+    }
+
+    public void setAppointmentList(final List<Appointment> appointmentList) {
+        this.appointmentList = appointmentList;
     }
 }
