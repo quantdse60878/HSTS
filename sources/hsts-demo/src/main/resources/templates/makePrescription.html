@@ -185,12 +185,18 @@
                                 <!-- /.box-header -->
                                 <div class="box-body">
                                     <div class="form-group">
+                                        <form th:action="suggestTreatment" method="get">
                                         <label class="col-sm-3 control-label">Diagnostic</label>
-
-                                        <div class="col-sm-8">
-                                            <input type="text" th:field="*{diagnostic}"
-                                                   class="form-control"/>
+                                        <div class="col-sm-5 ui-widget">
+                                            <select id="combobox" class="form-control" th:field="*{diagnostic}">
+                                                <option value="0">Select one...</option>
+                                                <option th:each="doctor : ${DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.username}"></option>
+                                            </select>
                                         </div>
+                                        <div class="col-sm-4">
+                                            <button type="submit">Suggest</button>
+                                        </div>
+                                        </form>
                                     </div>
 
                                     <!-- Sidebar Menu -->

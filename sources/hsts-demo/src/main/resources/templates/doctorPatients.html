@@ -45,7 +45,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="listPatients" class="table table-bordered table-striped">
+                        <table id="dataTable" class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>No.</th>
@@ -87,21 +87,7 @@
         <!-- /.row -->
     </section>
     <!-- /.content -->
-    <!-- DataTables -->
-    <script th:src="@{/static/bower/admin-lte/plugins/datatables/jquery.dataTables.min.js}"></script>
-    <script th:src="@{/static/bower/admin-lte/plugins/datatables/dataTables.bootstrap.min.js}"></script>
-    <script>
-        $(function () {
-            $("#listPatients").DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
-        });
-    </script>
+
 </div>
 <!-- /.content-wrapper -->
 

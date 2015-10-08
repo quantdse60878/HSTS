@@ -1,5 +1,7 @@
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import java.util.List;
+
 /**
  * Created by Aking on 10/1/2015.
  */
@@ -7,6 +9,7 @@ public class PrescriptionModel {
     private String diagnostic;
     private String medical;
     private String medicalNoTPD;
+    private List<String> medicalNoTPDs;
     private String medicalNoQPD;
     private String medicalNote;
     private String food;
@@ -130,6 +133,14 @@ public class PrescriptionModel {
 
     public void setPraticeNote(String praticeNote) {
         this.praticeNote = praticeNote;
+    }
+
+    public List<String> getMedicalNoTPDs() {
+        return medicalNoTPDs;
+    }
+
+    public void setMedicalNoTPDs(List<String> medicalNoTPDs) {
+        this.medicalNoTPDs = medicalNoTPDs;
     }
 
     public String toString(){

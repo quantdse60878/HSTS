@@ -96,7 +96,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="listAppointments" class="table table-bordered table-striped">
+                        <table id="dataTable" class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -180,21 +180,7 @@
     <!-- jQueryUI -->
     <script th:src="@{/static/bower/jquery/jquery.js}"></script>
     <script th:src="@{/static/bower/jquery-ui/jquery-ui.js}"></script>
-    <!-- DataTables -->
-    <script th:src="@{/static/bower/admin-lte/plugins/datatables/jquery.dataTables.min.js}"></script>
-    <script th:src="@{/static/bower/admin-lte/plugins/datatables/dataTables.bootstrap.min.js}"></script>
     <script>
-        $(function () {
-            $("#listAppointments").DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
-            });
-        });
-
         $('#Appointment').datepicker({
             dateFormat: 'dd/mm/yy',
             changeMonth: true,

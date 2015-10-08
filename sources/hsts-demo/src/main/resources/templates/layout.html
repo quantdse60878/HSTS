@@ -12,15 +12,17 @@
     <link rel="stylesheet" th:href="@{/static/bower/fontawesome/css/font-awesome.min.css}"/>
     <!-- Ionicons -->
     <link rel="stylesheet" th:href="@{/static/bower/ionicons/css/ionicons.min.css}"/>
-    <!-- jQueryUI -->
-    <link rel="stylesheet" th:href="@{/static/bower/jquery-ui/themes/smoothness/jquery-ui.css}"/>
+    <!-- dataTables -->
+    <link rel="stylesheet" th:href="@{/static/bower/admin-lte/plugins/datatables/jquery.dataTables.min.css}"/>
     <!-- Theme style -->
     <link rel="stylesheet" th:href="@{/static/bower/admin-lte/dist/css/AdminLTE.min.css}"/>
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" th:href="@{/static/bower/admin-lte/dist/css/skins/_all-skins.min.css}"/>
     <!-- Bootstrap 3.3.5 -->
-    <link th:href="@{/static/bower/admin-lte/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/static/bower/admin-lte/bootstrap/css/bootstrap.min.css}"/>
+    <!-- jQueryUI -->
+    <link rel="stylesheet" th:href="@{/static/bower/jquery-ui/themes/smoothness/jquery-ui.css}"/>
 </head>
 
 <body class="hold-transition skin-green-light sidebar-mini">
@@ -48,14 +50,27 @@
 <input id="TYPE" th:value="${TYPE}" th:type="hidden"/>
 <!-- REQUIRED JS SCRIPTS -->
 <!-- jQuery -->
-<script th:src="@{/static/bower/jquery/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/bower/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.5 -->
-<script th:src="@{/static/bower/admin-lte/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/bower/admin-lte/bootstrap/js/bootstrap.min.js}"></script>
 <!-- AdminLTE App -->
-<script th:src="@{/static/bower/admin-lte/dist/js/app.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/bower/admin-lte/dist/js/app.min.js}"></script>
 <!-- bootstrap-notify -->
 <script type="text/javascript" th:src="@{/static/bower/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js}"></script>
+<!-- DataTables -->
+<script type="text/javascript" th:src="@{/static/bower/admin-lte/plugins/datatables/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/bower/admin-lte/plugins/datatables/dataTables.bootstrap.min.js}"></script>
 <script type="text/javascript">
+    $(function () {
+        $("#dataTable").DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+        });
+    });
     $(document).ready(function () {
         var method = $('#METHOD').val();
         var mes = $('#MESSAGE').val();
