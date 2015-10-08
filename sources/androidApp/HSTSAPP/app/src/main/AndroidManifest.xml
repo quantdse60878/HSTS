@@ -61,12 +61,6 @@
             android:exported="true" >
         </service>
 
-        <receiver
-            android:name=".Service.SynchronizeDataReceiver"
-            android:enabled="true"
-            android:exported="true" >
-        </receiver>
-
         <service
             android:name=".Service.AlarmService"
             android:exported="false" >

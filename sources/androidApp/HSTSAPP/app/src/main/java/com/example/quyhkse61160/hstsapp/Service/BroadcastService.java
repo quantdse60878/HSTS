@@ -246,8 +246,8 @@ public class BroadcastService extends Service {
             }
             Log.d("QUYYY111", "--" + response);
 
-//            PrintWriter printWriter = new PrintWriter("treatment.json");
-//            printWriter.write(response);
+            PrintWriter printWriter = new PrintWriter("treatment.json");
+            printWriter.write(response);
 
 
         } catch (MalformedURLException e) {
