@@ -171,7 +171,7 @@ public class DoctorController {
     @RequestMapping(value="prescription", method=RequestMethod.GET)
     public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel,
                                          @RequestParam("appointmentID") final int appointmentID,
-                                         @RequestParam(value = "appointmentDate", required = false) final String appointmentDate) {
+                                         @RequestParam(value = "appointmentDate", required = false) final String appointmentDate) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
