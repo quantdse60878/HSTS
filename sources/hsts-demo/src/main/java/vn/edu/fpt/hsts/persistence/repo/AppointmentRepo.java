@@ -20,7 +20,7 @@ import java.util.List;
 @Repository
 public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
 
-    @Query(value = "SELECT * FROM appointment WHERE medicalRecordId = ?1 AND status = 1 ORDER BY appointmentDateTime DESC LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM appointment WHERE medicalRecordId = ?1 AND status = 2 ORDER BY appointmentDateTime DESC LIMIT 1", nativeQuery = true)
     public Appointment findAppointmentByMedicalRecordId(int medicalRecordId);
 
 
