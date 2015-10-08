@@ -18,6 +18,7 @@ import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
+import vn.edu.fpt.hsts.criteria.PatientCriteria;
 
 import java.util.List;
 
@@ -88,24 +89,37 @@ public class RegisterController {
      * @return
      */
     @RequestMapping(value = "registerPatient", method = RequestMethod.POST)
-    public ModelAndView registerPatient(/*@RequestParam("patientName") final String patientName,
+    public ModelAndView registerPatient(@RequestParam("patientName") final String patientName,
+                                        @RequestParam("email") final String email,
                                         @RequestParam("birthday") final String birthday,
-                                        @RequestParam("gender") final String gender,
+                                        @RequestParam("gender") final byte gender,
                                         @RequestParam("weight") final int weight,
                                         @RequestParam("height") final int height,
-                                        @RequestParam("doctor") final String doctor,
+                                        @RequestParam("doctorId") final int doctorId,
                                         @RequestParam("medicalHistory") final String medicalHistory,
-                                        @RequestParam("symptoms") final String symptoms*/) throws BizlogicException, BizlogicException {
+                                        @RequestParam("symptoms") final String symptoms) throws BizlogicException, BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-//            LOGGER.info("patientName[{}], birthday[{}], gender[{}], weight[{}], height[{}], doctor[{}], medicalHistory[{}], symptoms[{}]");
+            LOGGER.info("patientName[{}], email[{}], birthday[{}], gender[{}], weight[{}], height[{}], doctorId[{}], medicalHistory[{}], symptoms[{}]",
+                    patientName, email, birthday, gender, weight, height, doctorId, medicalHistory, symptoms);
 
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
             /**
              * Create new patient
              */
-            patientService.createPatient();
+            PatientCriteria criteria = new PatientCriteria();
+            criteria.setPatientName(patientName);
+            criteria.setEmail(email);
+            criteria.setBirthday(birthday);
+            criteria.setGender(gender);
+            criteria.setWeight(weight);
+            criteria.setHeight(height);
+            criteria.setDoctorId(doctorId);
+            criteria.setMedicalHistory(medicalHistory);
+            criteria.setSymptom(symptoms);
+
+            patientService.createPatient(criteria);
 
             //create notify
             //set name of action

@@ -98,6 +98,7 @@ public class AccountService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("fullname", fullname);
+
             if (StringUtils.isEmpty(fullname)) {
                 // Throws wrong username
                 final String message = String.format("The input fullname[{}] is wrong format", fullname);

@@ -30,4 +30,6 @@ public interface DoctorRepo extends JpaRepository<Doctor, Integer> {
      */
     @Query("select d from Doctor d where d.account.username = :username")
     public Doctor findByUsername(@Param("username") final String username);
+
+
 }

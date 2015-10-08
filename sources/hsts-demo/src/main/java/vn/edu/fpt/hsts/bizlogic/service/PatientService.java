@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
+import vn.edu.fpt.hsts.common.util.StringUtils;
+import vn.edu.fpt.hsts.criteria.PatientCriteria;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
@@ -96,6 +98,12 @@ public class PatientService {
     @Autowired
     private AppointmentRepo appointmentRepo;
 
+    /**
+     * The {@link MailService}.
+     */
+    @Autowired
+    private MailService mailService;
+
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         Patient patient = new Patient();
@@ -130,19 +138,24 @@ public class PatientService {
 
 
     @Transactional(rollbackOn = BizlogicException.class)
-    public void createPatient() throws BizlogicException {
+    public void createPatient(final PatientCriteria criteria) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+            LOGGER.info("criteria[{}]", criteria);
+
             Date currentDate = new Date();
             currentDate = DateUtils.formatDate(currentDate, false);
             // TODO Create account
             final Account account = new Account();
-            final String newUsername = accountService.buildUniqueUsername("Man Huynh Khuong");
-            account.setEmail("khuongmh@gmail.com");
+            String normalizeName = StringUtils.normalizeString(criteria.getPatientName());
+            final String newUsername = accountService.buildUniqueUsername(normalizeName);
+            account.setEmail(criteria.getEmail());
             account.setUsername(newUsername);
-            account.setGender(IDbConsts.IAccountGender.MALE);
-            account.setDateOfBirth(new Date());
-            account.setFullname("Man Huynh Khuong");
+            account.setGender(criteria.getGender());
+            account.setFullname(criteria.getPatientName());
+            final Date birthdate = DateUtils.parseDate(criteria.getBirthday(), DateUtils.DATE_PATTERN_1);
+            account.setDateOfBirth(birthdate);
+            account.setFullname(criteria.getPatientName());
             account.setUpdateTime(currentDate);
             final Role role = roleRepo.findOne(IDbConsts.IRoleType.PATIENT);
             account.setRole(role);
@@ -160,26 +173,28 @@ public class PatientService {
             MedicalRecord medicalRecord = new MedicalRecord();
             medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);
 
-            Doctor doctor = doctorRepo.findByUsername("bacsi");
+            Doctor doctor = doctorRepo.findOne(criteria.getDoctorId());
             if(null == doctor) {
-                throw new BizlogicException("Doctor with username[bacsi] is not found");
+                throw new BizlogicException("Doctor with username[{}] is not found", null, criteria.getDoctorId());
             }
             medicalRecord.setDoctor(doctor);
             medicalRecord.setPatient(patient);
-            medicalRecord.setSymptoms("Béo quá độ");
+            medicalRecord.setSymptoms(criteria.getSymptom());
             medicalRecord.setStartTime(currentDate);
 
-            medicalRecord.setMedicalHistory("Medical history");
+            medicalRecord.setMedicalHistory(criteria.getMedicalHistory());
             medicalRecordRepo.saveAndFlush(medicalRecord);
 
             // TODO Create appointment
             final Appointment appointment = new Appointment();
             appointment.setMedicalRecord(medicalRecord);
-            appointment.setWeight(100);
-            appointment.setHeight(170);
+            appointment.setWeight(criteria.getWeight());
+            appointment.setHeight(criteria.getHeight());
             appointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
             appointment.setMeetingDate(currentDate);
             appointmentRepo.saveAndFlush(appointment);
+
+            // TODO send email with creditial information to patient
 
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Create new patient[{}] successfully", account.getUsername());

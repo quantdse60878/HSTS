@@ -68,6 +68,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="Email" class="col-sm-3 control-label">Email</label>
+
+                                    <div class="col-sm-3">
+                                        <input type="text" th:name="email" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3 control-label">Gender</label>
 
                                     <div class="radio col-sm-5">
@@ -104,7 +111,7 @@
                                     <label class="col-sm-3 control-label">Doctor</label>
 
                                     <div class="col-sm-5 ui-widget">
-                                        <select id="combobox" class="form-control" th:name="doctor">
+                                        <select id="combobox" class="form-control" th:name="doctorId">
                                             <option value="">Select one...</option>
                                             <option th:each="doctor : ${DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.username}"></option>
                                         </select>
