@@ -57,18 +57,18 @@ public class Tab3 extends Fragment {
 //        sections.add(d);
 
         //KhuongMH
-        List<ToDoTime> practices = Constant.getItems("practice");
-        ToDoTime practice = practices.get(0);
-        for (int i = 0; i<practice.getItems().size();i++){
-            ToDoItem item = practice.getItems().get(i);
-            HashMap<String,String> d = new HashMap<>();
-            d.put("PracticeName", item.getName());
-            d.put("PracticeTime", item.getQuantity());
-            sections.add(d);
-        }
-
-        time_practice = (TextView) v.findViewById(R.id.time_practice);
-        time_practice.setText(practice.getTimeUse());
+//        List<ToDoTime> practices = Constant.getItems(Constant.PRACTICE_FROM_JSON);
+//        ToDoTime practice = practices.get(0);
+//        for (int i = 0; i<practice.getItems().size();i++){
+//            ToDoItem item = practice.getItems().get(i);
+//            HashMap<String,String> d = new HashMap<>();
+//            d.put("PracticeName", item.getName());
+//            d.put("PracticeTime", item.getQuantity());
+//            sections.add(d);
+//        }
+//
+//        time_practice = (TextView) v.findViewById(R.id.time_practice);
+//        time_practice.setText(practice.getTimeUse());
         //KhuongMH
 
         listView = (ListView) v.findViewById(R.id.list_practice_treatment);

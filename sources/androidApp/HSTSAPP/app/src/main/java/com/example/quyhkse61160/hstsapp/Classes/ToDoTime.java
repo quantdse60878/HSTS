@@ -9,6 +9,7 @@ import java.util.List;
 public class ToDoTime {
     private String timeUse = "";
     private List<ToDoItem> items = new ArrayList<>();
+    private String advice = "";
 
     public ToDoTime() {
     }

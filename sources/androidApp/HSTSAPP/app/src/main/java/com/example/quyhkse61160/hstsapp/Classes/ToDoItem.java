@@ -6,6 +6,7 @@ package com.example.quyhkse61160.hstsapp.Classes;
 public class ToDoItem {
     private String name = "";
     private String quantity = "";
+    private String advice = "";
 
     public ToDoItem() {
     }
@@ -24,5 +25,14 @@ public class ToDoItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public String getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(String advice) {
+        this.advice = advice;
     }
 }

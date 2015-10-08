@@ -23,18 +23,22 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quyhkse61160.hstsapp.Adapter.ViewPagesAdapter;
+import com.example.quyhkse61160.hstsapp.Classes.AlarmManagerBroadcastReceiver;
+import com.example.quyhkse61160.hstsapp.Classes.ToDoItem;
+import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
+import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
 import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
 import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
 import com.example.quyhkse61160.hstsapp.Service.NetworkChangeReceiver;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -57,6 +61,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     ActionBar actionBar;
     ViewPagesAdapter adapter;
     ViewPager viewPager;
+    private AlarmManagerBroadcastReceiver alarm;
 
 
 
@@ -124,27 +129,27 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
 //        txtNumberOfStep.setText(numberOfStep);
 
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
                 // Your logic here...
 
                 // When you need to modify a UI element, do so on the UI thread.
-                // 'getActivity()' is required as this is being ran from a Fragment.
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // This code will always run on the UI thread, therefore is safe to modify UI elements.
+//                // 'getActivity()' is required as this is being ran from a Fragment.
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // This code will always run on the UI thread, therefore is safe to modify UI elements.
                         mBluetoothLeService.readCharacteristic(characteristicStep);
 //                        mBluetoothLeService.readCharacteristic(characteristicManufacturer);
 //                        txtNumberOfStep.setText(numberOfStep);
-//                        txtManufacturer.setText(manufacturer);
-
-                        Log.d("QUYYY1111111", "Manufacturer: " + manufacturer + "------" + "Number of step: " + numberOfStep);
-                    }
-                });
-            }
-        }, 10000, 10000);
+////                        txtManufacturer.setText(manufacturer);
+//
+//                        Log.d("QUYYY1111111", "Manufacturer: " + manufacturer + "------" + "Number of step: " + numberOfStep);
+//                    }
+//                });
+//            }
+//        }, 10000, 10000);
 
 
     }
@@ -164,16 +169,19 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
         actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
 
-
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null && bundle.getString("timeAlert") != null){
+            String timeAlert = bundle.getString("timeAlert");
+        }
 
         ActionBar.Tab atab1 = actionBar.newTab().setText("THỨC ĂN").setTabListener(this);
         ActionBar.Tab atab2 = actionBar.newTab().setText("THUỐC").setTabListener(this);
         ActionBar.Tab atab3 = actionBar.newTab().setText("LUYỆN TẬP").setTabListener(this);
         ActionBar.Tab atab4 = actionBar.newTab().setText("THÔNG BÁO").setTabListener(this);
-        actionBar.addTab(atab1);
+        actionBar.addTab(atab4);
         actionBar.addTab(atab2);
         actionBar.addTab(atab3);
-        actionBar.addTab(atab4);
+        actionBar.addTab(atab1);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -190,7 +198,43 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
             }
         });
-        //KhuongMH
+
+        Constant.TREATMENTS = Constant.getItems();
+
+        //Set Alarm
+        List<String> amountTime = amountTime();
+        alarm = new AlarmManagerBroadcastReceiver();
+        Context context = this.getApplicationContext();
+        for (String item : amountTime) {
+            alarm.setAlarm(context,item);
+        }
+//            for (ToDoTime item2 : Constant.Foods) {
+//                if (item2.getTimeUse().equals(item)) {
+//                    message += "Thức ăn : \n";
+//                    for (ToDoItem item3 : item2.getItems()) {
+//                        message += item3.getName() + " - " + item3.getQuantity() + "\n";
+//
+//                    }
+//                }
+//            }
+//            for (ToDoTime item2 : Constant.Medicines) {
+//                if (item2.getTimeUse().equals(item)) {
+//                    message += "Thuốc : \n";
+//                    for (ToDoItem item3 : item2.getItems()) {
+//                        message += item3.getName() + " - " + item3.getQuantity() + "\n";
+//                    }
+//                }
+//            }
+//            for (ToDoTime item2 : Constant.Practice) {
+//                if (item2.getTimeUse().equals(item)) {
+//                    message += "Bài tập : \n";
+//                    for (ToDoItem item3 : item2.getItems()) {
+//                        message += item3.getName() + " - " + item3.getQuantity() + "\n";
+//                    }
+//                }
+//            }
+//            alarm.setAlarm(context, item, message);
+//        }
 
 //        startService(checkNotifyIntent);
 //        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
@@ -211,6 +255,24 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
     }
 
+    public List<String> amountTime() {
+        List<Treatment> treatments = Constant.TREATMENTS;
+        List<String> alarmTime = new ArrayList<>();
+        for(Treatment treatment : treatments){
+            for(ToDoTime time : treatment.getListFoodTreatment()){
+                if (!alarmTime.contains(time.getTimeUse())) alarmTime.add(time.getTimeUse());
+            }
+            for(ToDoTime time : treatment.getListMedicineTreatment()){
+                if (!alarmTime.contains(time.getTimeUse())) alarmTime.add(time.getTimeUse());
+            }
+            for(ToDoTime time : treatment.getListPracticeTreatment()){
+                if (!alarmTime.contains(time.getTimeUse())) alarmTime.add(time.getTimeUse());
+            }
+        }
+        return alarmTime;
+    }
+
+    //KhuongMH
     @Override
     public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
         viewPager.setCurrentItem(tab.getPosition());

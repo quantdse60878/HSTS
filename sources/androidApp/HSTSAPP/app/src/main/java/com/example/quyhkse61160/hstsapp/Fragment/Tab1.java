@@ -60,17 +60,17 @@ public class Tab1 extends Fragment {
 //        sections.add(d);
 
         //KhuongMH
-        List<ToDoTime> foods = Constant.getItems("food");
-        ToDoTime food = foods.get(0);
-        for (int i = 0; i<food.getItems().size();i++){
-            ToDoItem item = food.getItems().get(i);
-            HashMap<String,String> d = new HashMap<>();
-            d.put("FoodName", item.getName());
-            d.put("QuantitativeOfFood", item.getQuantity());
-            sections.add(d);
-        }
-        time_eat = (TextView) v.findViewById(R.id.time_eat);
-        time_eat.setText(food.getTimeUse());
+//        List<ToDoTime> foods = Constant.getItems(Constant.FOOD_FROM_JSON);
+//        ToDoTime food = foods.get(0);
+//        for (int i = 0; i<food.getItems().size();i++){
+//            ToDoItem item = food.getItems().get(i);
+//            HashMap<String,String> d = new HashMap<>();
+//            d.put("FoodName", item.getName());
+//            d.put("QuantitativeOfFood", item.getQuantity());
+//            sections.add(d);
+//        }
+//        time_eat = (TextView) v.findViewById(R.id.time_eat);
+//        time_eat.setText(food.getTimeUse());
         //KhuongMH
 
         listView = (ListView) v.findViewById(R.id.list_food_treatment);
