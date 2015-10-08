@@ -14,8 +14,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The Appointment entity.
@@ -41,6 +43,9 @@ public class Appointment extends AbstractKeyEntity {
      */
     @Column(name = "appointmentMessage")
     private String messsage;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
+    private List<Treatment> treatmentList;
 
     /**
      * The patient height.
@@ -120,5 +125,13 @@ public class Appointment extends AbstractKeyEntity {
 
     public void setNextAppointment(final Appointment nextAppointment) {
         this.nextAppointment = nextAppointment;
+    }
+
+    public List<Treatment> getTreatmentList() {
+        return treatmentList;
+    }
+
+    public void setTreatmentList(final List<Treatment> treatmentList) {
+        this.treatmentList = treatmentList;
     }
 }
