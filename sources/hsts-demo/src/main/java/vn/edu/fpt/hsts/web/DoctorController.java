@@ -82,7 +82,7 @@ public class DoctorController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("historyTreatment");
-            patientService.makeAppointment(recordID, appointmentDate);
+//            patientService.makeAppointment(recordID, appointmentDate);
             //create notify
             //set name of action
             mav.addObject("METHOD", "Make Appointment");

@@ -12,6 +12,7 @@ public class TreatmentModel implements Serializable {
 
     private String illnessName;
     private String nextAppointment;
+    private int appointmentId;
     private String fromDate;
     private String toDate;
     private String adviseFood;
@@ -35,6 +36,14 @@ public class TreatmentModel implements Serializable {
         this.listFoodTreatment = listFoodTreatment;
         this.listMedicineTreatment = listMedicineTreatment;
         this.listPracticeTreatment = listPracticeTreatment;
+    }
+
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
     public String getIllnessName() {

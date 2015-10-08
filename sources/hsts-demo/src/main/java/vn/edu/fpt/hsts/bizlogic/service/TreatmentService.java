@@ -56,7 +56,7 @@ public class TreatmentService {
             treatmentOfPatient.setIllnessName(medicalRecord.getIllness().getName());
 
             Appointment appointment = appointmentRepo.findAppointmentByMedicalRecordId(medicalRecord.getId());
-
+            treatmentOfPatient.setAppointmentId(appointment.getId());
             treatmentOfPatient.setNextAppointment(appointment.getNextAppointment().getMeetingDate().toString());
 
             Treatment treatment = treatmentRepo.findTreatmentByAppointmentId(appointment.getId());
@@ -101,7 +101,7 @@ public class TreatmentService {
             List<PracticeTime> practiceTimes = practiceTimeRepo.findPracticeTimeByTreatmentId(treatment.getId());
             for(int j = 0; j < practiceTimes.size(); j++) {
                 PracticeTreatmentModel practiceTreatmentItem = new PracticeTreatmentModel();
-                PracticeTime practiceTimeItem = practiceTimes.get(i);
+                PracticeTime practiceTimeItem = practiceTimes.get(j);
                 practiceTreatmentItem.setTimePractice(practiceTimeItem.getTimeStart().toString());
 
                 List<PracticeTreatment> practiceTreatments = practiceTreatmentRepo.findPracticeTreatmentByPracticeTimeId(practiceTimeItem.getId());
