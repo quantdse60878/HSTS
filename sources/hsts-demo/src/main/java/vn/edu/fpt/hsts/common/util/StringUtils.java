@@ -13,6 +13,8 @@ import vn.edu.fpt.hsts.common.IConsts;
 
 import java.io.UnsupportedEncodingException;
 import java.text.Normalizer;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -28,17 +30,12 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static String normalizeString(final String str) {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
-            // TODO research
+            // TODO implement
             if (LOGGER.isDebugEnabled()) {
                LOGGER.debug("str[{}]", str);
             }
-            String s1 = Normalizer.normalize(str, Normalizer.Form.NFKD);
-            String regex = Pattern.quote("[\\p{InCombiningDiacriticalMarks}\\p{IsLm}\\p{IsSk}]+");
-            String s2 = new String(s1.replaceAll(regex, "").getBytes("ascii"), "ascii");
-            return s2;
-        } catch (UnsupportedEncodingException e) {
-            LOGGER.error("Error while normalizing string[{}]", str);
-            return null;
+            String s1 = Normalizer.normalize(str.toLowerCase(), Normalizer.Form.NFKD);
+            return s1;
         } finally {
             LOGGER.debug(IConsts.END_METHOD);
         }
