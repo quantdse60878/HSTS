@@ -70,4 +70,25 @@ public class DateUtils {
             LOGGER.debug(IConsts.END_METHOD);
         }
     }
+
+    /**
+     * <p>
+     * Plus/minus date a value of Calendar type(YEAR, MONTH, DAY, HOUR, MINUTE, SECOND, etc).
+     * If minus date, amount should be a negative value.
+     * </p>
+     * @param date long
+     * @param type int
+     * @param amount int
+     * @return {@link java.util.Date}
+     */
+    public static Date plusDateTime(final Date date, final int type, final int amount) throws Exception {
+        final Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        try {
+            cal.add(type, amount);
+            return new java.sql.Date(cal.getTimeInMillis());
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 }
