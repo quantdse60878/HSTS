@@ -69,21 +69,22 @@ public class DoctorController {
     }
 
     /**
-     * The history treatment page mapping
-     * @param patientID
+     * Make new appointment
+     * @param recordID
+     * @param appointmentDate
      * @return
      */
     @RequestMapping(value = "makeAppointment", method = RequestMethod.GET)
-    public ModelAndView makeAppointment(@RequestParam("patientID") final String patientID,
+    public ModelAndView makeAppointment(@RequestParam("recordID") final String recordID,
                                         @RequestParam("appointmentDate") final String appointmentDate) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("historyTreatment");
-            patientService.makeAppointment(patientID, appointmentDate);
+            patientService.makeAppointment(recordID, appointmentDate);
             //create notify
             //set name of action
-            mav.addObject("METHOD", "Register Patient");
+            mav.addObject("METHOD", "Make Appointment");
             //set type. sussces TYPE = info, fail TYPE = danger
             mav.addObject("TYPE", "info");
             //set message notify

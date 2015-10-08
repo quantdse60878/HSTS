@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
+import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
@@ -17,6 +18,7 @@ import vn.edu.fpt.hsts.persistence.repo.PatientRepo;
 import vn.edu.fpt.hsts.persistence.repo.RoleRepo;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -133,8 +135,9 @@ public class PatientService {
     public List<Patient> getPatientByApponitmentDate() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            final Date currentDate = new Date();
-            LOGGER.info("currentDate: " + currentDate);
+            Date currentDate = new Date();
+            currentDate = DateUtils.formatDate(currentDate, false);
+            LOGGER.info("currentDate[{}]", currentDate);
             final List<Patient> patients = patientRepo.findByAppoinmentDate(currentDate);
             if (null != patients && patients.isEmpty()) {
                 if (LOGGER.isDebugEnabled()) {
@@ -147,6 +150,10 @@ public class PatientService {
         }
     }
 
-    public void makeAppointment(String patientID, String appointmentDate) {
+    public void makeAppointment(String recordID, String appointmentDate) {
+        //TODO parse INT recordID.
+        //TODO find appointmentDate from recordID with appointmentDateChild = null
+        //TODO new appointmentDate record from appointmentDate
+        //TODO set appointmentDateChild with new appointmentDate record
     }
 }
