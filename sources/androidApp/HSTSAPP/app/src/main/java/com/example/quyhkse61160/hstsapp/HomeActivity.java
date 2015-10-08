@@ -32,6 +32,7 @@ import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
 import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
+import com.example.quyhkse61160.hstsapp.Service.AlarmService;
 import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
 import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
 import com.example.quyhkse61160.hstsapp.Service.NetworkChangeReceiver;
@@ -63,7 +64,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     protected final IntentFilter mIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
     protected final NetworkChangeReceiver mConnectionDetector = new NetworkChangeReceiver();
     private Intent checkNotifyIntent;
-
+    public static List<String> amountTime = new ArrayList<>();
+    public static boolean hadStartAlarmService = false;
     ActionBar actionBar;
     ViewPagesAdapter adapter;
     ViewPager viewPager;
@@ -208,11 +210,11 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         Constant.TREATMENTS = Constant.getItems();
 
         //Set Alarm
-        List<String> amountTime = amountTime();
-        alarm = new AlarmManagerBroadcastReceiver();
-        Context context = this.getApplicationContext();
-        for (String item : amountTime) {
-            alarm.setAlarm(context,item);
+        amountTime = amountTime();
+        if(!hadStartAlarmService) {
+            Intent alarmIntent = new Intent(this, AlarmService.class);
+            startService(alarmIntent);
+            hadStartAlarmService = true;
         }
 //            for (ToDoTime item2 : Constant.Foods) {
 //                if (item2.getTimeUse().equals(item)) {

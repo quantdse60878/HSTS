@@ -49,6 +49,7 @@ public class BroadcastService extends Service {
     public void onStart(Intent intent, int startId) {
         handlerThread.removeCallbacks(sendUpdateToUI);
         handlerThread.postDelayed(sendUpdateToUI, 1000);
+
     }
 
     private Runnable sendUpdateToUI = new Runnable() {

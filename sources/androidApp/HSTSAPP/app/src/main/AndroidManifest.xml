@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name='android.permission.WAKE_LOCK'/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
@@ -53,13 +53,25 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".Classes.AlarmManagerBroadcastReceiver"></receiver>
+        <receiver android:name=".Classes.AlarmManagerBroadcastReceiver" />
 
         <service
             android:name=".Service.BroadcastService"
             android:enabled="true"
             android:exported="true" >
         </service>
+
+        <receiver
+            android:name=".Service.SynchronizeDataReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
+
+        <service
+            android:name=".Service.AlarmService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>
+

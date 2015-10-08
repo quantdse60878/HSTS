@@ -22,7 +22,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        Log.d("Khuong Dep Trai", "Đã tới đây");
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Giờ ăn, uống, tập luyện đến rồi");
         wl.acquire();
@@ -33,9 +32,10 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
             //Auto open application
             Intent in = new Intent(context, HomeActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            in.putExtra("timeAlert",time);
+            in.putExtra("timeAlert", time);
             context.startActivity(in);
-
+            final int idOfAlarm = extras.getInt("id");
+            Log.d("QUYYY111", "----------" + idOfAlarm + "------------");
             //Make dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Nhắc Nhở").setMessage("Bạn đến giờ ăn, uống thuốc, tập luyện")
@@ -44,11 +44,9 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
                             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                            for (int i = AlarmManagerBroadcastReceiver.id; i > 0; i--) {
-
-                                PendingIntent sender = PendingIntent.getBroadcast(context, i, intent, 0);
+                                PendingIntent sender = PendingIntent.getBroadcast(context, idOfAlarm, intent, 0);
                                 alarmManager.cancel(sender);
-                            }
+
                         }
                     }).setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
                 @Override
@@ -63,14 +61,13 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     }
 
-    public void setAlarm(Context context, String time) {
+    public static void setAlarm(Context context, String time) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
         intent.putExtra("time", time);
         int id1 = AlarmManagerBroadcastReceiver.id++;
-        int id2 = AlarmManagerBroadcastReceiver.id++;
+        intent.putExtra("id", id1);
         PendingIntent pi = PendingIntent.getBroadcast(context, id1, intent, 0);
-        PendingIntent pi1 = PendingIntent.getBroadcast(context, id2, intent, 0);
 
         //After 5 seconds
         //am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 10, pi);
@@ -85,8 +82,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         calendar.set(Calendar.SECOND, second);
         Log.d("Khuong Dep Trai", calendar.getTime() + " - " + AlarmManagerBroadcastReceiver.id);
         am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);
-        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                1000 * 60 * 60 * 24, pi1);
     }
 
 //    public void cancelAlarm(Context context) {
