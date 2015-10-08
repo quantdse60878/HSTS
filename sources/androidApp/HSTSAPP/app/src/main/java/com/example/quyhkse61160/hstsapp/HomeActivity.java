@@ -52,9 +52,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceName;
     private String mDeviceAddress;
-    public static int appointmentId = 0;
+    public static int appointmentId = 1;
     public static List<String> listNumberOfStep = new ArrayList<>();
-    public static List<Date> dateSaveStep = new ArrayList<>();
+    public static List<String> dateSaveStep = new ArrayList<>();
     public static String numberOfStep = "0";
     public static int position = 0;
     public static String manufacturer = "Unknown";

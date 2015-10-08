@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
+import com.example.quyhkse61160.hstsapp.HomeActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +25,9 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -60,12 +63,76 @@ public class BroadcastService extends Service {
                 @Override
                 public void run() {
                     checkNotify();
+                    Calendar c = Calendar.getInstance();
+                    Calendar c1 = Calendar.getInstance();
+                    c1.set(Calendar.HOUR_OF_DAY, 23);
+                    c1.set(Calendar.MINUTE, 13);
+                    Log.d("QUYYY111", "-----" + c.getTime() + "--" + c1.getTime());
+                    if(c.getTime().equals(c1.getTime())) {
+
+
+                        HomeActivity.listNumberOfStep.add(HomeActivity.numberOfStep);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                        HomeActivity.dateSaveStep.add(sdf.format(new Date()));
+                        for (int i = 0; i < HomeActivity.listNumberOfStep.size(); i++) {
+                            sendMedicalData(HomeActivity.listNumberOfStep.get(i), HomeActivity.dateSaveStep.get(i));
+                        }
+
+                    }
                 }
             }).start();
 
-            handlerThread.postDelayed(this, 10000);
+            handlerThread.postDelayed(this, 30000);
+
         }
     };
+
+
+    private void sendMedicalData(String numberOfStep, String collectDate) {
+
+        String stringURL = Constant.hostURL + Constant.sendMedicalData;
+        Log.d("QUYYYY1111", "Login url: " + stringURL + "------" + "App: " + HomeActivity.appointmentId + "--Step: " + numberOfStep + "--Date: " + collectDate);
+
+        try {
+            URL url = new URL(stringURL);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(100000);
+            urlConnection.setConnectTimeout(30000);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("appointmentId", HomeActivity.appointmentId + ""));
+            params.add(new BasicNameValuePair("numberOfStep", numberOfStep));
+            params.add(new BasicNameValuePair("collectDate", collectDate.toString()));
+
+            OutputStream os = urlConnection.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            writer.write(HSTSUtils.getQuery(params));
+            writer.flush();
+            writer.close();
+            os.close();
+
+            urlConnection.connect();
+
+            InputStream inStream = urlConnection.getInputStream();
+            BufferedReader bReader = new BufferedReader(new InputStreamReader(inStream));
+            String temp, response = "";
+            while ((temp = bReader.readLine()) != null) {
+                response += temp;
+            }
+            Log.d("QUYYY111", "--" + response);
+
+            HomeActivity.listNumberOfStep = new ArrayList<>();
+            HomeActivity.dateSaveStep = new ArrayList<>();
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void checkNotify() {
         Log.d(TAG, "entered check notify");
@@ -179,8 +246,8 @@ public class BroadcastService extends Service {
             }
             Log.d("QUYYY111", "--" + response);
 
-            PrintWriter printWriter = new PrintWriter("treatment.json");
-            printWriter.write(response);
+//            PrintWriter printWriter = new PrintWriter("treatment.json");
+//            printWriter.write(response);
 
 
         } catch (MalformedURLException e) {

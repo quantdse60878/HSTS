@@ -29,7 +29,7 @@ public class AlarmService extends Service {
     public void onStart(Intent intent, int startId) {
         handlerThread.removeCallbacks(setAlarm);
         Log.d("QUYYY111", "-----------------");
-        handlerThread.postDelayed(setAlarm, 10000);
+        handlerThread.postDelayed(setAlarm, 5000);
     }
 
 
@@ -40,7 +40,6 @@ public class AlarmService extends Service {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.d("QUYYY222", "---------0--------");
                     setUpAlarm();
                 }
             }).start();
@@ -51,10 +50,10 @@ public class AlarmService extends Service {
 
     private void setUpAlarm() {
         Context context = getApplicationContext();
-        AlarmManagerBroadcastReceiver alarmManagerBroadcastReceiver = new AlarmManagerBroadcastReceiver();
-        for(String item : HomeActivity.amountTime) {
-            alarmManagerBroadcastReceiver.setAlarm(context, item);
-        }
+//        AlarmManagerBroadcastReceiver alarmManagerBroadcastReceiver = new AlarmManagerBroadcastReceiver();
+//        for(String item : HomeActivity.amountTime) {
+//            alarmManagerBroadcastReceiver.setAlarm(context, item);
+//        }
     }
 
 
