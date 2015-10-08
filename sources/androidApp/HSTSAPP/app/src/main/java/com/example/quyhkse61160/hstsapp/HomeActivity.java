@@ -151,8 +151,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                         // This code will always run on the UI thread, therefore is safe to modify UI elements.
                         mBluetoothLeService.readCharacteristic(characteristicStep);
 //                        mBluetoothLeService.readCharacteristic(characteristicManufacturer);
-//                        txtNumberOfStep.setText(numberOfStep);
-//                        txtManufacturer.setText(manufacturer);
 
                         Log.d("QUYYY1111111", "Manufacturer: " + manufacturer + "------" + "Number of step: " + numberOfStep);
                     }
@@ -206,6 +204,27 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
             }
         });
+
+
+
+//        startService(checkNotifyIntent);
+//        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
+//        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
+//        final Intent intent = getIntent();
+//        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+//        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+//
+//        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+//        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+//        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+//        if (mBluetoothLeService != null) {
+//            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+//            Log.d(TAG, "Connect request result=" + result);
+//        }
+
+        registerReceiver(mConnectionDetector, mIntentFilter);
+
+
 
         Constant.TREATMENTS = Constant.getItems();
 
