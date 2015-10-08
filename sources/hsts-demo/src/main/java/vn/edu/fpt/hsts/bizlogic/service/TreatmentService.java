@@ -57,12 +57,12 @@ public class TreatmentService {
 
             Appointment appointment = appointmentRepo.findAppointmentByMedicalRecordId(medicalRecord.getId());
 
-            treatmentOfPatient.setNextAppointment(appointment.getNextAppointment().getMeetingDate());
+            treatmentOfPatient.setNextAppointment(appointment.getNextAppointment().getMeetingDate().toString());
 
             Treatment treatment = treatmentRepo.findTreatmentByAppointmentId(appointment.getId());
 
-            treatmentOfPatient.setFromDate(treatment.getFromDate());
-            treatmentOfPatient.setToDate(treatment.getToDate());
+            treatmentOfPatient.setFromDate(treatment.getFromDate().toString());
+            treatmentOfPatient.setToDate(treatment.getToDate().toString());
             treatmentOfPatient.setAdviseFood(treatment.getAdviseFood());
             treatmentOfPatient.setAdvicePractice(treatment.getAdvisePractice());
             treatmentOfPatient.setAdviseMedicine(treatment.getAdviseMedicine());

@@ -11,9 +11,9 @@ import java.util.List;
 public class TreatmentModel implements Serializable {
 
     private String illnessName;
-    private Date nextAppointment = new Date();
-    private Date fromDate = new Date();
-    private Date toDate = new Date();
+    private String nextAppointment;
+    private String fromDate;
+    private String toDate;
     private String adviseFood;
     private String adviseMedicine;
     private String advicePractice;
@@ -24,7 +24,7 @@ public class TreatmentModel implements Serializable {
     public TreatmentModel() {
     }
 
-    public TreatmentModel(String illnessName, Date nextAppointment, Date fromDate, Date toDate, String adviseFood, String adviseMedicine, String advicePractice, List<FoodTreatmentModel> listFoodTreatment, List<MedicineTreatmentModel> listMedicineTreatment, List<PracticeTreatmentModel> listPracticeTreatment) {
+    public TreatmentModel(String illnessName, String nextAppointment, String fromDate, String toDate, String adviseFood, String adviseMedicine, String advicePractice, List<FoodTreatmentModel> listFoodTreatment, List<MedicineTreatmentModel> listMedicineTreatment, List<PracticeTreatmentModel> listPracticeTreatment) {
         this.illnessName = illnessName;
         this.nextAppointment = nextAppointment;
         this.fromDate = fromDate;
@@ -45,27 +45,27 @@ public class TreatmentModel implements Serializable {
         this.illnessName = illnessName;
     }
 
-    public Date getNextAppointment() {
+    public String getNextAppointment() {
         return nextAppointment;
     }
 
-    public void setNextAppointment(Date nextAppointment) {
+    public void setNextAppointment(String nextAppointment) {
         this.nextAppointment = nextAppointment;
     }
 
-    public Date getFromDate() {
+    public String getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(Date fromDate) {
+    public void setFromDate(String fromDate) {
         this.fromDate = fromDate;
     }
 
-    public Date getToDate() {
+    public String getToDate() {
         return toDate;
     }
 
-    public void setToDate(Date toDate) {
+    public void setToDate(String toDate) {
         this.toDate = toDate;
     }
 

@@ -21,7 +21,7 @@ public class MedicineTreatmentModel implements Serializable {
         this.listMedicine = listMedicine;
     }
 
-    public String getTimeUse() {
+    public String getTime() {
         return time;
     }
 
@@ -42,33 +42,33 @@ public class MedicineTreatmentModel implements Serializable {
     }
 
     class Medicine implements Serializable {
-        private String medicineName;
-        private float numberOfMedicine;
+        private String name;
+        private float quantitative;
         private String advice;
 
         Medicine() {
         }
 
         Medicine(String medicineName, float numberOfMedicine, String advice) {
-            this.medicineName = medicineName;
-            this.numberOfMedicine = numberOfMedicine;
+            this.name = medicineName;
+            this.quantitative = numberOfMedicine;
             this.advice = advice;
         }
 
-        public String getMedicineName() {
-            return medicineName;
+        public String getName() {
+            return name;
         }
 
         public void setMedicineName(String medicineName) {
-            this.medicineName = medicineName;
+            this.name = medicineName;
         }
 
-        public float getNumberOfMedicine() {
-            return numberOfMedicine;
+        public float getQuantitative() {
+            return quantitative;
         }
 
         public void setNumberOfMedicine(float numberOfMedicine) {
-            this.numberOfMedicine = numberOfMedicine;
+            this.quantitative = numberOfMedicine;
         }
 
         public String getAdvice() {

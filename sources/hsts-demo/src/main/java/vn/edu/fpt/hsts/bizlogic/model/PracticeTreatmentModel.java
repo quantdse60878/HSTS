@@ -21,7 +21,7 @@ public class PracticeTreatmentModel implements Serializable {
         this.listPractice = listPractice;
     }
 
-    public String getTimePractice() {
+    public String getTime() {
         return time;
     }
 
@@ -41,29 +41,29 @@ public class PracticeTreatmentModel implements Serializable {
         listPractice.add(new Practice(practiceName, duration));
     }
     class Practice implements Serializable {
-        private String practiceName;
-        private int duration;
+        private String name;
+        private int quantitative;
 
-        public String getPracticeName() {
-            return practiceName;
+        public String getName() {
+            return name;
         }
 
         public void setPracticeName(String practiceName) {
-            this.practiceName = practiceName;
+            this.name = practiceName;
         }
 
-        public int getDuration() {
-            return duration;
+        public int getQuantitative() {
+            return quantitative;
         }
 
         public void setDuration(int duration) {
-            this.duration = duration;
+            this.quantitative = duration;
         }
 
         Practice(String practiceName, int duration) {
 
-            this.practiceName = practiceName;
-            this.duration = duration;
+            this.name = practiceName;
+            this.quantitative = duration;
         }
 
         Practice() {

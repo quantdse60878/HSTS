@@ -21,7 +21,7 @@ public class FoodTreatmentModel implements Serializable {
         this.listFood = listFood;
     }
 
-    public String getTimeEat() {
+    public String getTime() {
         return time;
     }
 
@@ -43,23 +43,23 @@ public class FoodTreatmentModel implements Serializable {
     }
 
     class Food implements Serializable {
-        private String foodName;
+        private String name;
         private String quantitative;
 
         Food() {
         }
 
         Food(String foodName, String quantitative) {
-            this.foodName = foodName;
+            this.name = foodName;
             this.quantitative = quantitative;
         }
 
-        public String getFoodName() {
-            return foodName;
+        public String getName() {
+            return name;
         }
 
         public void setFoodName(String foodName) {
-            this.foodName = foodName;
+            this.name = foodName;
         }
 
         public String getQuantitative() {
