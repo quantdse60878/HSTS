@@ -1,209 +1,209 @@
 [
   {
     "illnessName": "beo phi cap do 1",
-    "nextAppointment": 1444150800000,
-    "fromDate": 1443632400000,
-    "toDate": 1444150800000,
+    "nextAppointment": "2015-10-07 00:00:00.0",
+    "fromDate": "2015-10-01 00:00:00.0",
+    "toDate": "2015-10-07 00:00:00.0",
     "adviseFood": "Ăn ít nhai kỹ",
     "adviseMedicine": "Uống thuốc đều đặn",
     "advicePractice": "Luyện tập vừa phải",
     "listFoodTreatment": [
       {
+        "time": "07:00:00",
         "listFood": [
           {
-            "foodName": "cơm",
+            "name": "cơm",
             "quantitative": "1 chén"
           },
           {
-            "foodName": "cá",
+            "name": "cá",
             "quantitative": "nhiều"
           },
           {
-            "foodName": "rau",
+            "name": "rau",
             "quantitative": "nhiều"
           }
-        ],
-        "timeEat": "07:00:00"
+        ]
       },
       {
+        "time": "09:30:00",
         "listFood": [
           {
-            "foodName": "củ",
+            "name": "củ",
             "quantitative": "nhiều"
           },
           {
-            "foodName": "thịt",
+            "name": "thịt",
             "quantitative": "hạn chế"
           },
           {
-            "foodName": "cá",
+            "name": "cá",
             "quantitative": "ít"
           }
-        ],
-        "timeEat": "09:30:00"
+        ]
       },
       {
+        "time": "12:00:00",
         "listFood": [
           {
-            "foodName": "cơm",
+            "name": "cơm",
             "quantitative": "2 chén"
           },
           {
-            "foodName": "thịt",
+            "name": "thịt",
             "quantitative": "ít"
           },
           {
-            "foodName": "củ",
+            "name": "củ",
             "quantitative": "nhiều"
           }
-        ],
-        "timeEat": "12:00:00"
+        ]
       },
       {
+        "time": "14:30:00",
         "listFood": [
           {
-            "foodName": "cá",
+            "name": "cá",
             "quantitative": "vừa phải"
           },
           {
-            "foodName": "rau",
+            "name": "rau",
             "quantitative": "nhiều"
           }
-        ],
-        "timeEat": "14:30:00"
+        ]
       },
       {
+        "time": "15:00:00",
         "listFood": [
           {
-            "foodName": "cơm",
+            "name": "cơm",
             "quantitative": "2 chén"
           },
           {
-            "foodName": "thịt",
+            "name": "thịt",
             "quantitative": "ít"
           }
-        ],
-        "timeEat": "15:00:00"
+        ]
       },
       {
+        "time": "19:00:00",
         "listFood": [
           {
-            "foodName": "cá",
+            "name": "cá",
             "quantitative": "nhiều"
           },
           {
-            "foodName": "rau",
+            "name": "rau",
             "quantitative": "nhiều"
           },
           {
-            "foodName": "củ",
+            "name": "củ",
             "quantitative": "ít"
           }
-        ],
-        "timeEat": "19:00:00"
+        ]
       }
     ],
     "listMedicineTreatment": [
       {
+        "time": "07:00:00",
         "listMedicine": [
           {
-            "medicineName": "Sibutramine",
-            "numberOfMedicine": 1,
+            "name": "Sibutramine",
+            "quantitative": 1,
             "advice": "Uống trước khi ăn"
           },
           {
-            "medicineName": "Orlistat",
-            "numberOfMedicine": 1,
+            "name": "Orlistat",
+            "quantitative": 1,
             "advice": "Uống sau khi ăn"
           }
-        ],
-        "timeUse": "07:00:00"
+        ]
       },
       {
+        "time": "12:00:00",
         "listMedicine": [
           {
-            "medicineName": "Sibutramine",
-            "numberOfMedicine": 2,
+            "name": "Sibutramine",
+            "quantitative": 2,
             "advice": "Uống trước khi ăn"
           },
           {
-            "medicineName": "Orlistat",
-            "numberOfMedicine": 1,
+            "name": "Orlistat",
+            "quantitative": 1,
             "advice": "Uống sau khi ăn"
           }
-        ],
-        "timeUse": "12:00:00"
+        ]
       },
       {
+        "time": "17:00:00",
         "listMedicine": [
           {
-            "medicineName": "Sibutramine",
-            "numberOfMedicine": 2,
+            "name": "Sibutramine",
+            "quantitative": 2,
             "advice": "Uống trước khi ăn"
           },
           {
-            "medicineName": "Orlistat",
-            "numberOfMedicine": 1,
+            "name": "Orlistat",
+            "quantitative": 1,
             "advice": "Uống sau khi ăn"
           }
-        ],
-        "timeUse": "17:00:00"
+        ]
       },
       {
+        "time": "22:00:00",
         "listMedicine": [
           {
-            "medicineName": "Sibutramine",
-            "numberOfMedicine": 1,
+            "name": "Sibutramine",
+            "quantitative": 1,
             "advice": "Uống trước khi ăn"
           },
           {
-            "medicineName": "Orlistat",
-            "numberOfMedicine": 1,
+            "name": "Orlistat",
+            "quantitative": 1,
             "advice": "Uống sau khi ăn"
           }
-        ],
-        "timeUse": "22:00:00"
+        ]
       }
     ],
     "listPracticeTreatment": [
       {
+        "time": "06:00:00",
         "listPractice": [
           {
-            "practiceName": "đi bộ",
-            "duration": 20
+            "name": "đi bộ",
+            "quantitative": 20
           },
           {
-            "practiceName": "chạy bộ",
-            "duration": 10
+            "name": "chạy bộ",
+            "quantitative": 10
           }
-        ],
-        "timePractice": "06:00:00"
+        ]
       },
       {
+        "time": "06:00:00",
         "listPractice": [
           {
-            "practiceName": "đi bộ",
-            "duration": 20
+            "name": "đi bộ",
+            "quantitative": 20
           },
           {
-            "practiceName": "chạy bộ",
-            "duration": 10
+            "name": "chạy bộ",
+            "quantitative": 10
           }
-        ],
-        "timePractice": "06:00:00"
+        ]
       },
       {
+        "time": "06:00:00",
         "listPractice": [
           {
-            "practiceName": "đi bộ",
-            "duration": 20
+            "name": "đi bộ",
+            "quantitative": 20
           },
           {
-            "practiceName": "chạy bộ",
-            "duration": 10
+            "name": "chạy bộ",
+            "quantitative": 10
           }
-        ],
-        "timePractice": "06:00:00"
+        ]
       }
     ]
   }
