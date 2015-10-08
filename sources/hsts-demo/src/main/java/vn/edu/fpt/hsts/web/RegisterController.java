@@ -121,6 +121,10 @@ public class RegisterController {
 
             patientService.createPatient(criteria);
 
+            // Add doctors to request
+            final List<DoctorModel> doctors = doctorService.findAll();
+            mav.addObject("DOCTORS", doctors);
+
             //create notify
             //set name of action
             mav.addObject("METHOD", "Register Patient");
