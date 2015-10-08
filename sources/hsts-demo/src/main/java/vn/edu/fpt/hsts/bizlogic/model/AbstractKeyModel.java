@@ -21,18 +21,11 @@ public abstract class AbstractKeyModel<E extends AbstractKeyEntity> implements S
      */
     private int id;
 
-    /**
-     * Get the id attribute.
-     * @return the id
-     */
-    public int getPk() {
+    public int getId() {
         return id;
     }
-    /**
-     * Set the pk attribute.
-     * @param id the pk to set
-     */
-    public void setPk(final int id) {
+
+    public void setId(final int id) {
         this.id = id;
     }
 
