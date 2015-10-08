@@ -45,8 +45,7 @@ public class AnalyticDataTask {
                 vars = new HashMap<String, Object>();
                 vars.put("y", recordData.getAppointment().getWeight());
                 vars.put("k", distance);
-                double caloriesDB = Double.parseDouble(engine.eval(IConsts.FORMULA_CALCULATE_CALORIES, new SimpleBindings(vars)).toString());
-                calories = (int) caloriesDB;
+                calories = (int) Double.parseDouble(engine.eval(IConsts.FORMULA_CALCULATE_CALORIES, new SimpleBindings(vars)).toString());
                 if(distance > 0 && calories > 0) {
                     recordData.setDistance(distance);
                     recordData.setCalories(calories);
