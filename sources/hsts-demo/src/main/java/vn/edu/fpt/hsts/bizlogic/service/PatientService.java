@@ -112,6 +112,22 @@ public class PatientService {
         } else return null;
     }
 
+    public Patient getPatientByID(final int patientID) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        Patient patient = new Patient();
+        final List<Patient> listPatient = patientRepo.findAll();
+        for(int i = 0; i < listPatient.size(); i++) {
+            if(listPatient.get(i).getId() == patientID) {
+                patient = listPatient.get(i);
+                break;
+            }
+        }
+        LOGGER.info(IConsts.END_METHOD);
+        if(patient != null) {
+            return patient;
+        } else return null;
+    }
+
 
     @Transactional(rollbackOn = BizlogicException.class)
     public void createPatient() throws BizlogicException {
