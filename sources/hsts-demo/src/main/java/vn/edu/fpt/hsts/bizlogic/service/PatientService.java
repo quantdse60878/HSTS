@@ -147,7 +147,10 @@ public class PatientService {
             currentDate = DateUtils.formatDate(currentDate, false);
             // TODO Create account
             final Account account = new Account();
-            String normalizeName = StringUtils.normalizeString(criteria.getPatientName());
+            String normalizeName = StringUtils.removeAcients(criteria.getPatientName().toLowerCase());
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Formatted name: {}", normalizeName);
+            }
             final String newUsername = accountService.buildUniqueUsername(normalizeName);
             account.setEmail(criteria.getEmail());
             account.setUsername(newUsername);
@@ -199,6 +202,7 @@ public class PatientService {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Create new patient[{}] successfully", account.getUsername());
             }
+
         } catch (BizlogicException be) {
             throw be;
         } catch (Exception e) {

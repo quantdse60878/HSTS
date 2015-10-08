@@ -31,8 +31,6 @@ public class DateUtils {
 
     public static final String DATE_PATTERN_2 = "dd-MM-yyyy";
 
-
-
     public static String formatDate(final Date date, final String datePattern) {
         final DateFormat dateFormat = new SimpleDateFormat(datePattern);
         return dateFormat.format(date);
