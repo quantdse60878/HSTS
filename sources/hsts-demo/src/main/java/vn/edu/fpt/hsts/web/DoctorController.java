@@ -18,6 +18,7 @@ import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
+import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
@@ -35,17 +36,35 @@ import java.util.List;
 public class DoctorController {
     private static final Logger LOGGER = LoggerFactory.getLogger(DoctorController.class);
 
+    /**
+     * The {@link PatientService}.
+     */
     @Autowired
     private PatientService patientService;
 
+    /**
+     * The {@link MedicalRecordService}.
+     */
     @Autowired
     private MedicalRecordService medicalRecordService;
 
+    /**
+     * The {@link AppointmentService}.
+     */
     @Autowired
     private AppointmentService appointmentService;
 
+    /**
+     * The {@link DoctorService}.
+     */
     @Autowired
     private DoctorService doctorService;
+
+    /**
+     * The {@link TreatmentService}.
+     */
+    @Autowired
+    private TreatmentService treatmentService;
 
     /**
      * The doctor patients page mapping
@@ -140,6 +159,10 @@ public class DoctorController {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
             Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
+            // Get config time
+            final String[] timeArr = treatmentService.getMedicineTimeConfig();
+            
+            mav.addObject("TIMES", timeArr);
             mav.addObject("APPOINTMENT", appointment);
             mav.addObject("model", new PrescriptionModel());
             return mav;
