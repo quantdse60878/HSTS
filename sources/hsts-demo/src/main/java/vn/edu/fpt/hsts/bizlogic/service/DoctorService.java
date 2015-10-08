@@ -57,7 +57,9 @@ public class DoctorService extends AbstractService {
         }
     }
 
-    public void makePrescription(final PrescriptionModel prescription) {
+    public void makePrescription(final PrescriptionModel prescription,
+                                 final int appointmentID,
+                                 final String appointmentDate) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             // find appointment by id
@@ -65,6 +67,8 @@ public class DoctorService extends AbstractService {
             // create new treatment
 
             // new data list
+
+            //new appoitment form appointmentDate, appointmentDate can be null.
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
+import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.common.IConsts;
@@ -42,6 +43,9 @@ public class DoctorController {
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    private DoctorService doctorService;
 
     /**
      * The doctor patients page mapping
@@ -165,13 +169,16 @@ public class DoctorController {
      * @return
      */
     @RequestMapping(value="prescription", method=RequestMethod.GET)
-    public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel) {
+    public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel,
+                                         @RequestParam("appointmentID") final int appointmentID,
+                                         @RequestParam(value = "appointmentDate", required = false) final String appointmentDate) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
             mav.addObject("model", prescriptionModel);
             LOGGER.info(prescriptionModel.toString());
+            doctorService.makePrescription(prescriptionModel, appointmentID, appointmentDate);
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
