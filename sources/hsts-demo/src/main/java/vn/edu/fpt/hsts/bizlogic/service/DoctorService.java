@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
+import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
@@ -51,6 +52,19 @@ public class DoctorService extends AbstractService {
                 return modelList;
             }
             return Collections.emptyList();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public void makePrescription(final PrescriptionModel prescription) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            // find appointment by id
+
+            // create new treatment
+
+            // new data list
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

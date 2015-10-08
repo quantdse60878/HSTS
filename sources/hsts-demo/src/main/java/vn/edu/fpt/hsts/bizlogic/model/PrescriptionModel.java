@@ -131,4 +131,18 @@ public class PrescriptionModel {
     public void setPraticeNote(String praticeNote) {
         this.praticeNote = praticeNote;
     }
+
+    public String toString(){
+        return "diagnostic: " + diagnostic
+        +"medical: "+ medical
+        +"medicalNoTPD: "+ medicalNoTPD
+        +"medicalNoQPD: "+ medicalNoQPD
+        +"medicalNote: "+ medicalNote
+        +"food: "+ food
+        +"foodTime: "+ foodTime
+        +"foodNote: "+ foodNote
+        +"pratice: "+ pratice
+        +"praticeIntensity: "+ praticeIntensity
+        +"praticeNote: "+ praticeNote;
+    }
 }

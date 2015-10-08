@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-sm-2"></div>
                             <div class="col-sm-2" style="margin-right: 0px;">
-                                <a th:href="@{/makePrescription(recordID=${MEDICALRECORD.id})}" class="btn btn-primary">Prescription</a>
+                                <a th:href="@{/createPrescription(patientID=${MEDICALRECORD.patient.id})}" class="btn btn-primary">Prescription</a>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -108,7 +108,7 @@
                             <tbody>
                             <tr th:each="appointment,rowStat : ${MEDICALRECORD.appointmentList}">
                                 <td th:text="${rowStat.count}">#</td>
-                                <td><a th:href="@{/makeAppointment(appointmentID=${appointment.id})}" th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">Date</a></td>
+                                <td><a th:href="@{/makePrescription(appointmentID=${appointment.id})}" th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">Date</a></td>
                                 <td th:text="*{appointment.nextAppointment !=null}? ${#dates.format(appointment.nextAppointment.meetingDate, 'dd-MM-yyyy')} : ''">Appointment</td>
                                 <td th:if="*{appointment.status == 1}">Not yet</td>
                                 <td th:if="*{appointment.status == 2}">Finished</td>

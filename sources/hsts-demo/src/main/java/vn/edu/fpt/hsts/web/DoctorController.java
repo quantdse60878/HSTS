@@ -144,19 +144,34 @@ public class DoctorController {
         }
     }
 
-    /**
-     * The Prescription  mapping
-     * @param PrescriptionModel
-     * @return
-     */
-    @RequestMapping(value="prescription", method=RequestMethod.GET)
-    public ModelAndView makePrescription(@ModelAttribute PrescriptionModel PrescriptionModel) {
+    @RequestMapping(value = "createPrescription", method = RequestMethod.GET)
+    public ModelAndView createPrescriptionPage(@RequestParam("patientID") final int patientID) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
-            mav.addObject("model", PrescriptionModel);
+//            Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
+//            mav.addObject("APPOINTMENT", appointment);
+            mav.addObject("model", new PrescriptionModel());
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 
+    /**
+     * The Prescription  mapping
+     * @param prescriptionModel
+     * @return
+     */
+    @RequestMapping(value="prescription", method=RequestMethod.GET)
+    public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("makePrescription");
+            mav.addObject("model", prescriptionModel);
+            LOGGER.info(prescriptionModel.toString());
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

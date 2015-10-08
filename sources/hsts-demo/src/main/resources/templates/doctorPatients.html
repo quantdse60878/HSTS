@@ -64,7 +64,7 @@
                                 <td><a th:href="@{/medicalHistory(patientID=${patient.id})}" th:text="${patient.account.fullname}">Name</a></td>
                                 <td th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</td>
                                 <td th:text="*{patient.account.gender == 1}? 'Male' : 'Female'">Gender</td>
-                                <td><a th:href="@{/makePrescription(patientID=${patient.id})}" class="btn btn-primary">Make Prescription</a></td>
+                                <td><a th:href="@{/createPrescription(patientID=${patient.id})}" class="btn btn-primary">Make Prescription</a></td>
                             </tr>
                             </tbody>
                             <tfoot>
