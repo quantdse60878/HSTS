@@ -23,11 +23,13 @@ import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTime;
+import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
 import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicineRepo;
+import vn.edu.fpt.hsts.persistence.repo.MedicineTimeRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicineTreatmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
@@ -81,6 +83,11 @@ public class DoctorService extends AbstractService {
     @Autowired
     private MedicalRecordRepo medicalRecordRepo;
 
+    /**
+     * The {@link MedicineTimeRepo}.
+     */
+    @Autowired
+    private MedicineTimeRepo medicineTimeRepo;
 
     public List<DoctorModel> findAll() {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -165,9 +172,33 @@ public class DoctorService extends AbstractService {
                 }
                 treatmentRepo.save(newTreatment);
 
-                // TODO implement for medicine, food, practice
-            }
+                // TODO implement for medicine, food, practice and multiple row
+                Medicine medicine = medicineRepo.findByName(prescription.getMedical());
+                if (null == medicine) {
+                    LOGGER.error("Medicine[{}] is not found", prescription.getMedical());
+                    throw new BizlogicException("Medicine[{}] with name is not found", null, prescription.getMedical());
+                }
+                String medicineTime = prescription.getMedicalTime();
+                if (StringUtils.isEmpty(medicineTime)) {
+                    LOGGER.error("MedicineTime[{}] is not wrong input", prescription.getMedicalTime());
+                    throw new BizlogicException("MedicineTime[{}] is wrong format", null, prescription.getMedicalTime());
+                }
+                String[] parts = medicineTime.split(",");
+                for (String part : parts) {
+                    // Save medicine time
+                    MedicineTime mt = new MedicineTime();
+                    mt.setTimeUse(DateUtils.parseTime(part));
+                    mt.setTreatment(newTreatment);
+                    medicineTimeRepo.saveAndFlush(mt);
 
+                    // Save detail
+                    MedicineTreatment medicineTreatment = new MedicineTreatment();
+                    medicineTreatment.setMedicineTime(mt);
+                    medicineTreatment.setNumberOfMedicine(Integer.parseInt(prescription.getMedicalQuantity()));
+                    medicineTreatment.setAdvice(null);
+                    medicineTreatmentRepo.saveAndFlush(medicineTreatment);
+                }
+            }
             // flush all change to db
             appointmentRepo.flush();
             treatmentRepo.flush();

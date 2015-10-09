@@ -144,7 +144,7 @@ public class PatientService {
             LOGGER.info("criteria[{}]", criteria);
 
             Date currentDate = new Date();
-            currentDate = DateUtils.formatDate(currentDate, false);
+            currentDate = DateUtils.roundDate(currentDate, false);
             // TODO Create account
             final Account account = new Account();
             String normalizeName = StringUtils.removeAcients(criteria.getPatientName().toLowerCase());
@@ -217,7 +217,7 @@ public class PatientService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             Date currentDate = new Date();
-            currentDate = DateUtils.formatDate(currentDate, false);
+            currentDate = DateUtils.roundDate(currentDate, false);
             LOGGER.info("currentDate[{}]", currentDate);
             final List<Patient> patients = patientRepo.findByAppoinmentDate(currentDate);
             if (null != patients && patients.isEmpty()) {

@@ -39,7 +39,7 @@ public class DateUtils {
         return dateFormat.format(date);
     }
 
-    public static Date formatDate(final Date date, final boolean isEndOfDay) {
+    public static Date roundDate(final Date date, final boolean isEndOfDay) {
         final Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         if(isEndOfDay) {
@@ -93,4 +93,23 @@ public class DateUtils {
         }
     }
 
+
+    public static Time parseTime(final String time) throws Exception {
+        final Calendar calendar = Calendar.getInstance();
+        LOGGER.debug(IConsts.BEGIN_METHOD);
+        try {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("time[{}]", time);
+            }
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time));
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            return new Time(calendar.getTimeInMillis());
+        } finally {
+            LOGGER.debug(IConsts.END_METHOD);
+        }
+
+
+    }
 }
