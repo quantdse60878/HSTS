@@ -9,67 +9,40 @@ import java.util.List;
  */
 public class PracticeTreatmentModel implements Serializable {
 
-    private String time;
-    private List<Practice> listPractice;
+        private String name;
+        private String quantitative;
+        private int numberOfTime;
+
+    public PracticeTreatmentModel(String name, String quantitative, int numberOfTime) {
+        this.name = name;
+        this.quantitative = quantitative;
+        this.numberOfTime = numberOfTime;
+    }
 
     public PracticeTreatmentModel() {
-        listPractice = new ArrayList<Practice>();
     }
 
-    public PracticeTreatmentModel(String timePractice, List<Practice> listPractice) {
-        this.time = timePractice;
-        this.listPractice = listPractice;
+    public String getName() {
+        return name;
     }
 
-    public String getTime() {
-        return time;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setTimePractice(String timePractice) {
-        this.time = timePractice;
+    public String getQuantitative() {
+        return quantitative;
     }
 
-    public List<Practice> getListPractice() {
-        return listPractice;
+    public void setQuantitative(String quantitative) {
+        this.quantitative = quantitative;
     }
 
-    public void setListPractice(List<Practice> listPractice) {
-        this.listPractice = listPractice;
+    public int getNumberOfTime() {
+        return numberOfTime;
     }
 
-    public void addPractice(String practiceName, int duration) {
-        listPractice.add(new Practice(practiceName, duration));
+    public void setNumberOfTime(int numberOfTime) {
+        this.numberOfTime = numberOfTime;
     }
-    class Practice implements Serializable {
-        private String name;
-        private int quantitative;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setPracticeName(String practiceName) {
-            this.name = practiceName;
-        }
-
-        public int getQuantitative() {
-            return quantitative;
-        }
-
-        public void setDuration(int duration) {
-            this.quantitative = duration;
-        }
-
-        Practice(String practiceName, int duration) {
-
-            this.name = practiceName;
-            this.quantitative = duration;
-        }
-
-        Practice() {
-
-        }
-    }
-
-
 }

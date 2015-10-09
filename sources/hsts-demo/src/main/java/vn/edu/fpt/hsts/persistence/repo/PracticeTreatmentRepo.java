@@ -17,6 +17,6 @@ import java.util.List;
 
 @Repository
 public interface PracticeTreatmentRepo extends JpaRepository<PracticeTreatment, Integer>{
-    @Query(value = "SELECT * FROM practicetreatment WHERE practiceTimeId = ?1", nativeQuery = true)
-    List<PracticeTreatment> findPracticeTreatmentByPracticeTimeId(int practiceTimeId);
+    @Query(value = "SELECT * FROM practicetreatment WHERE treatmentId = ?1", nativeQuery = true)
+    List<PracticeTreatment> findPracticeTreatmentByTreatmentId(int treatmentId);
 }

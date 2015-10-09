@@ -18,6 +18,6 @@ import java.util.List;
 @Repository
 public interface FoodTreatmentRepo extends JpaRepository<FoodTreatment, Integer> {
 
-    @Query(value = "SELECT * FROM foodtreatment WHERE mealId = ?1", nativeQuery = true)
-    List<FoodTreatment> findFoodTreatmentByMealId(int mealId);
+    @Query(value = "SELECT * FROM foodtreatment WHERE treatmentId = ?1", nativeQuery = true)
+    List<FoodTreatment> findFoodTreatmentTreatmentId(int treatmentId);
 }

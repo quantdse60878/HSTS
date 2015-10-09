@@ -9,74 +9,50 @@ import java.util.List;
  */
 public class MedicineTreatmentModel implements Serializable {
 
-    private String time;
-    private List<Medicine> listMedicine;
+        private String name;
+        private String quantitative;
+        private String advice;
+        private int numberOfTime;
+
+    public MedicineTreatmentModel(String name, String quantitative, String advice, int numberOfTime) {
+        this.name = name;
+        this.quantitative = quantitative;
+        this.advice = advice;
+        this.numberOfTime = numberOfTime;
+    }
 
     public MedicineTreatmentModel() {
-        listMedicine = new ArrayList<Medicine>();
     }
 
-    public MedicineTreatmentModel(String timeUse, List<Medicine> listMedicine) {
-        this.time = timeUse;
-        this.listMedicine = listMedicine;
+    public String getName() {
+        return name;
     }
 
-    public String getTime() {
-        return time;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setTimeUse(String timeUse) {
-        this.time = timeUse;
+    public String getQuantitative() {
+        return quantitative;
     }
 
-    public List<Medicine> getListMedicine() {
-        return listMedicine;
+    public void setQuantitative(String quantitative) {
+        this.quantitative = quantitative;
     }
 
-    public void setListMedicine(List<Medicine> listMedicine) {
-        this.listMedicine = listMedicine;
+    public String getAdvice() {
+        return advice;
     }
 
-    public void addMedicine(String medinineName, float numberOfMedicine, String advice) {
-        listMedicine.add(new Medicine(medinineName, numberOfMedicine, advice));
+    public void setAdvice(String advice) {
+        this.advice = advice;
     }
 
-    class Medicine implements Serializable {
-        private String name;
-        private float quantitative;
-        private String advice;
+    public int getNumberOfTime() {
+        return numberOfTime;
+    }
 
-        Medicine() {
-        }
-
-        Medicine(String medicineName, float numberOfMedicine, String advice) {
-            this.name = medicineName;
-            this.quantitative = numberOfMedicine;
-            this.advice = advice;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setMedicineName(String medicineName) {
-            this.name = medicineName;
-        }
-
-        public float getQuantitative() {
-            return quantitative;
-        }
-
-        public void setNumberOfMedicine(float numberOfMedicine) {
-            this.quantitative = numberOfMedicine;
-        }
-
-        public String getAdvice() {
-            return advice;
-        }
-
-        public void setAdvice(String advice) {
-            this.advice = advice;
-        }
+    public void setNumberOfTime(int numberOfTime) {
+        this.numberOfTime = numberOfTime;
     }
 }
