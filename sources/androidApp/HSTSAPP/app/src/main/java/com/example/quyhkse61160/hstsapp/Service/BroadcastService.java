@@ -65,24 +65,23 @@ public class BroadcastService extends Service {
                     checkNotify();
                     Calendar c = Calendar.getInstance();
                     Calendar c1 = Calendar.getInstance();
-                    c1.set(Calendar.HOUR_OF_DAY, 8);
-                    c1.set(Calendar.MINUTE, 41);
+                    c1.set(Calendar.HOUR_OF_DAY, 22);
+                    c1.set(Calendar.MINUTE, 00);
                     Log.d("QUYYY111", "-----" + c.getTime() + "--" + c1.getTime());
                     if(c.getTime().equals(c1.getTime())) {
-
-
                         HomeActivity.listNumberOfStep.add(HomeActivity.numberOfStep);
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                         HomeActivity.dateSaveStep.add(sdf.format(new Date()));
                         for (int i = 0; i < HomeActivity.listNumberOfStep.size(); i++) {
                             sendMedicalData(HomeActivity.listNumberOfStep.get(i), HomeActivity.dateSaveStep.get(i));
                         }
-
                     }
+
+                    //Khuong ve nha code cho nay bo alarm thay bang kiem tra thoi gian trong list time. Neu trung thi hien nhu binh thuong
                 }
             }).start();
 
-            handlerThread.postDelayed(this, 50000);
+            handlerThread.postDelayed(this, 60000);
 
         }
     };
