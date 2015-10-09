@@ -245,10 +245,8 @@ public class BroadcastService extends Service {
                 response += temp;
             }
             Log.d("QUYYY111", "--" + response);
-
-//            PrintWriter printWriter = new PrintWriter("treatment.json");
-//            printWriter.write(response);
-
+            Constant.DATA_FROM_SERVER = response;
+            Constant.TREATMENTS = Constant.getItems();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
