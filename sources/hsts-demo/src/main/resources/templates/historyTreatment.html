@@ -109,9 +109,9 @@
                             <tr th:each="appointment,rowStat : ${MEDICALRECORD.appointmentList}">
                                 <td th:text="${rowStat.count}">#</td>
                                 <td><a th:href="@{/makePrescription(appointmentID=${appointment.id})}" th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">Date</a></td>
-                                <td th:text="*{appointment.nextAppointment !=null}? ${#dates.format(appointment.nextAppointment.meetingDate, 'dd-MM-yyyy')} : ''">Appointment</td>
-                                <td th:if="*{appointment.status == 1}">Not yet</td>
-                                <td th:if="*{appointment.status == 2}">Finished</td>
+                                <td><a th:href="@{/makePrescription(appointmentID=${appointment.id})}" th:text="*{appointment.nextAppointment !=null}? ${#dates.format(appointment.nextAppointment.meetingDate, 'dd-MM-yyyy')} : ''">Appointment</a></td>
+                                <td th:if="*{appointment.status == 1}"><a th:href="@{/makePrescription(appointmentID=${appointment.id})}">Not yet</a></td>
+                                <td th:if="*{appointment.status == 2}"><a th:href="@{/makePrescription(appointmentID=${appointment.id})}">Finished</a></td>
                             </tr>
                             </tbody>
                             <tfoot>
