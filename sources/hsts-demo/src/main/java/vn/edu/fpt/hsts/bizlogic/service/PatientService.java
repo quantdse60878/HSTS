@@ -156,7 +156,7 @@ public class PatientService {
             account.setUsername(newUsername);
             account.setGender(criteria.getGender());
             account.setFullname(criteria.getPatientName());
-            final Date birthdate = DateUtils.parseDate(criteria.getBirthday(), DateUtils.DATE_PATTERN_1);
+            final Date birthdate = DateUtils.parseDate(criteria.getBirthday(), DateUtils.DATE_PATTERN_2);
             account.setDateOfBirth(birthdate);
             account.setFullname(criteria.getPatientName());
             account.setUpdateTime(currentDate);
