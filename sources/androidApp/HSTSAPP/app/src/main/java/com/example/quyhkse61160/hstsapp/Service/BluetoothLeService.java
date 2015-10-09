@@ -65,6 +65,9 @@ public class BluetoothLeService extends Service {
                 if(characteristic.getUuid().toString().contains(Constant.numberOfStep_UUID.toString())) {
                     String[] listData = stringdata.split(",");
                     HomeActivity.numberOfStep = listData[HomeActivity.position];
+
+                    Log.d("Quyyyyy111", "NumberOfStep: " + stringdata + "--");
+
                 } else if(characteristic.getUuid().toString().contains(Constant.manufacturer_UUID.toString())) {
                     if (data != null && data.length > 0) {
                         final StringBuilder stringBuilder = new StringBuilder(data.length);

@@ -78,8 +78,8 @@ public class LoginActivity extends ActionBarActivity {
                 }
 
 
-//                Intent intent = new Intent(LoginActivity.this, DeviceScanActivity.class);
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                Intent intent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+//                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });

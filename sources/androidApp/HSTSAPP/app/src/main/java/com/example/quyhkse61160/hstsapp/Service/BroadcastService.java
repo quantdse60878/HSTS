@@ -65,8 +65,8 @@ public class BroadcastService extends Service {
                     checkNotify();
                     Calendar c = Calendar.getInstance();
                     Calendar c1 = Calendar.getInstance();
-                    c1.set(Calendar.HOUR_OF_DAY, 23);
-                    c1.set(Calendar.MINUTE, 13);
+                    c1.set(Calendar.HOUR_OF_DAY, 8);
+                    c1.set(Calendar.MINUTE, 41);
                     Log.d("QUYYY111", "-----" + c.getTime() + "--" + c1.getTime());
                     if(c.getTime().equals(c1.getTime())) {
 
@@ -246,8 +246,8 @@ public class BroadcastService extends Service {
             }
             Log.d("QUYYY111", "--" + response);
 
-            PrintWriter printWriter = new PrintWriter("treatment.json");
-            printWriter.write(response);
+//            PrintWriter printWriter = new PrintWriter("treatment.json");
+//            printWriter.write(response);
 
 
         } catch (MalformedURLException e) {
