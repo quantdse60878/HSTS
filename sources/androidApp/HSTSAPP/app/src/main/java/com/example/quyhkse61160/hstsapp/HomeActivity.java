@@ -290,7 +290,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
     }
 
-    public List<String> amountTime() {
+    public static List<String> amountTime() {
         List<Treatment> treatments = Constant.TREATMENTS;
         List<String> alarmTime = new ArrayList<>();
         for(Treatment treatment : treatments){

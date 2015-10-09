@@ -30,7 +30,7 @@ public class AlarmService extends Service {
         handlerThread.removeCallbacks(setAlarm);
 
         //Sau 10s khi ch?y service.
-        handlerThread.postDelayed(setAlarm, 5000);
+        handlerThread.postDelayed(setAlarm, 20000);
     }
 
 
@@ -52,10 +52,11 @@ public class AlarmService extends Service {
 
     private void setUpAlarm() {
         Context context = getApplicationContext();
-//        AlarmManagerBroadcastReceiver alarmManagerBroadcastReceiver = new AlarmManagerBroadcastReceiver();
-//        for(String item : HomeActivity.amountTime) {
-//            alarmManagerBroadcastReceiver.setAlarm(context, item);
-//        }
+        Log.d("QUYYY111", "00000000000000000000000");
+        AlarmManagerBroadcastReceiver alarmManagerBroadcastReceiver = new AlarmManagerBroadcastReceiver();
+        for(String item : HomeActivity.amountTime) {
+            alarmManagerBroadcastReceiver.setAlarm(context, item);
+        }
     }
 
 

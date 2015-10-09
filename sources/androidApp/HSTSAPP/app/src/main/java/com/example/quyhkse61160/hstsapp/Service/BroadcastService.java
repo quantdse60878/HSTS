@@ -51,7 +51,7 @@ public class BroadcastService extends Service {
     @Override
     public void onStart(Intent intent, int startId) {
         handlerThread.removeCallbacks(sendUpdateToUI);
-        handlerThread.postDelayed(sendUpdateToUI, 1000);
+        handlerThread.postDelayed(sendUpdateToUI, 100);
 
     }
 
@@ -82,7 +82,7 @@ public class BroadcastService extends Service {
                 }
             }).start();
 
-            handlerThread.postDelayed(this, 30000);
+            handlerThread.postDelayed(this, 50000);
 
         }
     };
@@ -247,6 +247,8 @@ public class BroadcastService extends Service {
             Log.d("QUYYY111", "--" + response);
             Constant.DATA_FROM_SERVER = response;
             Constant.TREATMENTS = Constant.getItems();
+
+            HomeActivity.amountTime = HomeActivity.amountTime();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
