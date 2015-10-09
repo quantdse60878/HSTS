@@ -167,9 +167,10 @@ public class DoctorService extends AbstractService {
                 newTreatment.setAdvisePractice(prescription.getPracticeNote());
                 newTreatment.setAppointment(appointment);
                 newTreatment.setFromDate(new Date());
-                if (null != toDate) {
-                    newTreatment.setToDate(toDate);
-                }
+//                if (null != toDate) {
+//                    newTreatment.setToDate(toDate);
+//                }
+                newTreatment.setToDate(new Date());
                 treatmentRepo.save(newTreatment);
 
                 // TODO implement for medicine, food, practice and multiple row
@@ -196,6 +197,7 @@ public class DoctorService extends AbstractService {
                     medicineTreatment.setMedicineTime(mt);
                     medicineTreatment.setNumberOfMedicine(Integer.parseInt(prescription.getMedicalQuantity()));
                     medicineTreatment.setAdvice(null);
+                    medicineTreatment.setMedicine(medicine);
                     medicineTreatmentRepo.saveAndFlush(medicineTreatment);
                 }
             }

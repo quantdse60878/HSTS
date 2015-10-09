@@ -211,7 +211,7 @@ public class DoctorController {
             mav.addObject("TIMES", timeArr);
             mav.addObject("APPOINTMENT", appointment);
             LOGGER.info(prescriptionModel.toString());
-//            doctorService.makePrescription(prescriptionModel, appointmentID, appointmentDate);
+            doctorService.makePrescription(prescriptionModel, appointmentID, appointmentDate);
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
