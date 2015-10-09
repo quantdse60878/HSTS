@@ -12,7 +12,9 @@ import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.List;
 
 /**
  * The Patient entity.
@@ -24,9 +26,11 @@ public class Patient extends AbstractKeyEntity {
     @JoinColumn(name = "accountId", nullable = false)
     private Account account;
 
+    @OneToMany
+    private List<MedicalRecord> medicalRecords;
+
     public Patient() {
     }
-
 
     /**
      * The user.
@@ -37,5 +41,13 @@ public class Patient extends AbstractKeyEntity {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public List<MedicalRecord> getMedicalRecords() {
+        return medicalRecords;
+    }
+
+    public void setMedicalRecords(final List<MedicalRecord> medicalRecords) {
+        this.medicalRecords = medicalRecords;
     }
 }
