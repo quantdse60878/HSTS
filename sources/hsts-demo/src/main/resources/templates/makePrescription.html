@@ -6,7 +6,28 @@
 <body>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" layout:fragment="body">
+    <!-- Multi select -->
+    <link rel="stylesheet" th:href="@{/static/bower/bootstrap-multiselect/dist/css/bootstrap-multiselect.css}"
+          type="text/css"/>
+    <link rel="stylesheet" th:href="@{/static/css/prettify.css}" type="text/css"/>
     <style type="text/css">
+        .custom-combobox {
+            position: relative;
+            display: inline-block;
+        }
+
+        .custom-combobox-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+        }
+
+        .custom-combobox-input {
+            margin: 0;
+            padding: 5px 10px;
+        }
         /*STYLES FOR CSS POPUP*/
         #blanket {
             background-color: #111;
@@ -52,8 +73,7 @@
             <div class="col-md-12">
 
                 <div class="box box-default">
-                    <!-- form start -->
-                    <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}">
+
                         <div class="row">
                             <div class="box-body with-border">
                                 <h4 class="col-md-3"> Information Date</h4>
@@ -61,12 +81,15 @@
                                 <div class="input-group col-md-3">
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-default dropdown-toggle"
-                                                data-toggle="dropdown" >
+                                                data-toggle="dropdown">
                                             <span th:text="${#dates.format(APPOINTMENT.meetingDate, 'dd-MM-yyyy')}"></span>
-                                            <span class="fa fa-caret-down" ></span>
+                                            <span class="fa fa-caret-down"></span>
                                         </button>
-                                        <ul class="dropdown-menu" th:each="appointment : ${APPOINTMENT.medicalRecord.appointmentList}">
-                                            <li><a href="#" class="btn btn-default" th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a></li>
+                                        <ul class="dropdown-menu"
+                                            th:each="appointment : ${APPOINTMENT.medicalRecord.appointmentList}">
+                                            <li><a href="#" class="btn btn-default"
+                                                   th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>
+                                            </li>
                                         </ul>
                                     </div>
                                     <!-- /btn-group -->
@@ -75,6 +98,7 @@
                             </div>
                             <!-- /.box-header -->
                             <div class="col-md-6">
+                                <form class="form-horizontal">
                                 <div class="box-header with-border">
                                     <h3 class="box-title">Patient's Profile</h3>
                                 </div>
@@ -94,7 +118,8 @@
 
                                         <div class="col-sm-3">
                                             <input type="text" readonly="readonly"
-                                                   class="form-control" th:value="${#dates.format(ACC.dateOfBirth, 'dd-MM-yyyy')}"/>
+                                                   class="form-control"
+                                                   th:value="${#dates.format(ACC.dateOfBirth, 'dd-MM-yyyy')}"/>
                                         </div>
 
                                         <label class="col-sm-2 control-label">Gender</label>
@@ -118,7 +143,8 @@
                                         <label class="col-sm-3 control-label">Weight</label>
 
                                         <div class="col-sm-3">
-                                            <input type="text" readonly="readonly" class="form-control" th:value="${APPOINTMENT.weight}"/>
+                                            <input type="text" readonly="readonly" class="form-control"
+                                                   th:value="${APPOINTMENT.weight}"/>
                                         </div>
                                         <label class="col-sm-1 control-label">Kg</label>
                                     </div>
@@ -126,7 +152,8 @@
                                         <label class="col-sm-3 control-label">Height</label>
 
                                         <div class="col-sm-3">
-                                            <input type="text" readonly="readonly" class="form-control" th:value="${APPOINTMENT.height}"/>
+                                            <input type="text" readonly="readonly" class="form-control"
+                                                   th:value="${APPOINTMENT.height}"/>
                                         </div>
                                         <label class="col-sm-1 control-label">cm</label>
                                     </div>
@@ -144,7 +171,8 @@
                                                 <tr>
                                                     <td>1/</td>
                                                     <td><input type="text" class="form-control" readonly="readonly"
-                                                              th:value="${APPOINTMENT.medicalRecord.medicalHistory}"/></td>
+                                                               th:value="${APPOINTMENT.medicalRecord.medicalHistory}"/>
+                                                    </td>
                                                 </tr>
 
                                             </table>
@@ -175,6 +203,7 @@
 
                                 </div>
                                 <!-- /.box-body -->
+                                </form>
                             </div>
                             <!-- /.col -->
 
@@ -183,25 +212,31 @@
                                     <h3 class="box-title"><i class="fa fa-th"></i> Prescriptions</h3>
                                 </div>
                                 <!-- /.box-header -->
+                                <!-- form start -->
+                                <form th:action="suggestTreatment" method="get">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <form th:action="suggestTreatment" method="get">
-                                        <label class="col-sm-3 control-label">Diagnostic</label>
-                                        <div class="col-sm-5 ui-widget">
-                                            <select id="combobox" class="form-control" th:field="*{diagnostic}">
-                                                <option value="0">Select one...</option>
-                                                <option th:each="doctor : ${DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.username}"></option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <button type="submit">Suggest</button>
-                                        </div>
-                                        </form>
-                                    </div>
+                                            <label class="col-sm-3 control-label">Diagnostic</label>
+                                            <div class="col-sm-4 ui-widget">
+                                                <select id="combobox" th:name="diagnostic" class="form-control">
+                                                    <option value="0">Select one...</option>
+                                                    <option th:each="doctor : ${DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.username}"></option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-2 pull-right">
+                                                <button type="submit" class="btn btn-primary">Suggest</button>
+                                            </div>
+                                    </div><!-- ./form-group -->
+                                </div><!-- ./box-body -->
+                                </form><!-- ./form -->
+                                <!-- form start -->
+                                <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}">
+                                    <input type="hidden" th:field="*{diagnostic}" th:value="${combobox}"/>
+                                <div class="box-body">
 
                                     <!-- Sidebar Menu -->
                                     <!-- START CUSTOM TABS -->
-
+                                    <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentID"/>
                                     <!-- Custom Tabs (Pulled to the left) -->
                                     <div class="nav-tabs-custom" style="box-shadow: none;">
 
@@ -218,8 +253,8 @@
                                                     <tr>
                                                         <th style="width: 10px">#</th>
                                                         <th>Medicine</th>
-                                                        <th>Time / Day</th>
-                                                        <th>Quality / Time</th>
+                                                        <th>Times</th>
+                                                        <th>Quanlity</th>
                                                     </tr>
                                                     <tr>
                                                         <td>1/</td>
@@ -231,27 +266,28 @@
                                                                 <option value="Thuoc 2">Thuoc 4</option>
                                                             </select>
                                                         </td>
-                                                        <td><input type="text" class="form-control" th:field="*{medicalNoTPD}"
-                                                                   style="width: 100px;" placeholder="Number of Time"/></td>
-                                                        <td><input type="text" class="form-control" th:field="*{medicalNoQPD}"
-                                                                   style="width: 100px;" placeholder="Number of Quality"/></td>
+                                                        <td><select class="form-control" multiple="multiple"
+                                                                    id="multiselect_medical" th:field="*{medicalTime}">
+                                                            <option th:each="time : ${TIMES}" th:value="${time}"
+                                                                    th:selected="${medicalTime == time}? 'selected'"
+                                                                    th:text="${time}"></option>
+                                                        </select>
+                                                        </td>
+                                                        <td><input type="text" class="form-control"
+                                                                   th:field="*{medicalQuantity}"
+                                                                   style="width: 100px;"
+                                                                   placeholder="Quality"/></td>
                                                     </tr>
-
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <input type="text" class="form-control" th:field="*{medicalNote}" placeholder="Advice" />
+                                                        </td>
+                                                    </tr>
                                                 </table>
                                                 <!-- /.table medicine -->
                                                 <a style="width: 50px;color: white;" class="btn btn-primary"
                                                    onclick="addRowMedicine('medicine')">Add</a>
 
-
-                                                <div class="form-group" style="margin-top: 15px;">
-                                                    <label class="col-sm-2 control-label">Note</label>
-
-                                                    <div class="col-sm-10">
-                            <textarea type="text" class="form-control" th:field="*{medicalNote}"
-                                      style="width: 100%; height: 120px; font-size: 14px;" placeholder="Note">
-                            </textarea>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane" id="tab_2-2">
@@ -260,6 +296,7 @@
                                                     <tr>
                                                         <th style="width: 10px">#</th>
                                                         <th>Name</th>
+                                                        <th>Times</th>
                                                         <th>Quantitative</th>
                                                     </tr>
                                                     <tr>
@@ -272,22 +309,26 @@
                                                                 <option value="Bia Rượu">Bia Rượu</option>
                                                             </select>
                                                         </td>
-                                                        <td><input type="text" class="form-control" th:field="*{foodTime}"
-                                                                   style="width: 100px;" value="Nhiều"/></td>
+                                                        <td>
+                                                            <select class="form-control" multiple="multiple"
+                                                                    id="multiselect_food" th:field="*{foodTime}">
+                                                                <option th:each="time : ${TIMES}" th:value="${time}"
+                                                                        th:text="${time}"></option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" class="form-control"
+                                                                   th:field="*{foodQuantity}"
+                                                                   style="width: 100px;" placeholder="Quantity"/></td>
                                                     </tr>
-
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <input type="text" class="form-control" th:field="*{foodNote}" placeholder="Advice" />
+                                                        </td>
+                                                    </tr>
                                                 </table>
                                                 <a style="width: 50px;color: white;" class="btn btn-primary"
                                                    onclick="addRowFoods('Foods')">Add</a>
 
-                                                <div class="form-group" style="margin-top: 15px;">
-                                                    <label class="col-sm-1 control-label">Note</label>
-                                                    <div class="col-sm-10">
-                            <textarea type="text" class="form-control" th:field="*{foodNote}"
-                                      style="width: 100%; height: 120px; font-size: 14px;" placeholder="Note">
-                            </textarea>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane" id="tab_3-3">
@@ -296,34 +337,38 @@
                                                     <tr>
                                                         <th style="width: 10px">#</th>
                                                         <th>Name</th>
+                                                        <th>Times</th>
                                                         <th>Quantitative</th>
                                                     </tr>
                                                     <tr>
                                                         <td>1/</td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{pratice}">
+                                                            <select class="form-control" th:field="*{practice}">
                                                                 <option value="Chạy bộ">Chạy bộ</option>
                                                                 <option value="Đi bộ">Đi bộ</option>
                                                                 <option value="Chơi bóng bàn">Chơi bóng bàn</option>
                                                             </select>
                                                         </td>
-                                                        <td><input type="text" class="form-control" th:field="*{praticeIntensity}"
-                                                                   style="width: 100px;" value="20 phút"/></td>
+                                                        <td>
+                                                            <select class="form-control" multiple="multiple"
+                                                                    id="multiselect_practice" th:field="*{practiceTime}">
+                                                                <option th:each="time : ${TIMES}" th:value="${time}"
+                                                                        th:text="${time}"></option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" class="form-control"
+                                                                   th:field="*{practiceIntensity}"
+                                                                   style="width: 100px;" placeholder="Quantuty"/></td>
                                                     </tr>
-
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <input type="text" class="form-control" th:field="*{practiceNote}" placeholder="Advice" />
+                                                        </td>
+                                                    </tr>
                                                 </table>
                                                 <a style="width: 50px;color: white;" class="btn btn-primary"
                                                    onclick="addRowPractice('Practice')">Add</a>
 
-                                                <div class="form-group" style="margin-top: 15px;">
-                                                    <label class="col-sm-2 control-label">Note</label>
-
-                                                    <div class="col-sm-10">
-                            <textarea type="text" class="form-control" th:field="*{praticeNote}"
-                                      style="width: 100%; height: 120px; font-size: 14px;" placeholder="Note">
-                            </textarea>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <!-- /.tab-pane -->
                                         </div>
@@ -333,22 +378,20 @@
                                     <!-- END CUSTOM TABS -->
                                 </div>
                                 <!-- /.box-body -->
+                                <!-- footer -->
+                                <div class="box-footer">
+                                    <button type="reset" class="btn btn-default">Cancel</button>
+                                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                                </div>
+                                <!-- /.footer -->
+                    </form>
+                    <!-- /.form -->
                             </div>
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
-                        <!-- footer -->
-                        <div class="box-footer">
-                            <div class="col-md-6">
-                                <p>Health Support Tracking System</p>
-                            </div>
-                            <div class="col-md-6">
-                                <button type="reset" class="btn btn-default">Cancel</button>
-                                <button type="submit"  class="btn btn-primary pull-right">Submit</button>
-                            </div>
-                        </div><!-- /.footer -->
-                    </form>
-                    <!-- /.form -->
+
+
                 </div>
                 <!-- /.box -->
             </div>
@@ -380,7 +423,7 @@
 
                     <div class="col-sm-7">
                         <input class="form-control" type="text" value="30/09/2015"
-                               id="Appointment" data-provide="Appointment" />
+                               id="Appointment" data-provide="Appointment"/>
                     </div>
                 </div>
             </div>
@@ -429,10 +472,46 @@
 
     <!-- REQUIRED JS SCRIPTS -->
     <!-- jQueryUI -->
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
     <script th:src="@{/static/bower/jquery-ui/jquery-ui.js}"></script>
+    <!-- Multi select -->
+    <script th:src="@{/static/bower/bootstrap-multiselect/dist/js/bootstrap-multiselect.js}"></script>
+    <script th:src="@{/static/js/prettify.js}"></script>
+    <!-- registerPatient -->
+    <script th:src="@{/static/js/registerPatient.js}"></script>
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
+        /* For multiselect_medical.*/
+            $('#multiselect_medical').multiselect({
+                includeSelectAllOption: true,
+                nonSelectedText: 'Select Times',
+                nSelectedText: 'Select',
+                selectAllText: 'Select All',
+                numberDisplayed: 0,
+                buttonWidth: '140px'
+            });
+
+        /* For multiselect_food.*/
+        $('#multiselect_food').multiselect({
+            includeSelectAllOption: true,
+            nonSelectedText: 'Select Times',
+            nSelectedText: 'Select',
+            selectAllText: 'Select All',
+            numberDisplayed: 0,
+            buttonWidth: '140px'
+        });
+
+        /* For multiselect_practice.*/
+        $('#multiselect_practice').multiselect({
+            includeSelectAllOption: true,
+            nonSelectedText: 'Select Times',
+            nSelectedText: 'Select',
+            selectAllText: 'Select All',
+            numberDisplayed: 0,
+            buttonWidth: '140px'
+        });
+        $("#combobox").combobox();
         $('#Appointment').datepicker({
             dateFormat: 'dd/mm/yy',
             changeMonth: true,
@@ -448,7 +527,8 @@
             else {
                 el.style.display = 'none';
             }
-        };
+        }
+        ;
         function blanket_size(popUpDivVar) {
             if (typeof window.innerWidth != 'undefined') {
                 viewportheight = window.innerHeight;
@@ -477,7 +557,8 @@
             var popUpDiv = document.getElementById(popUpDivVar);
             popUpDiv_height = blanket_height / 2 - 150;//150 is half popup's height
             popUpDiv.style.top = popUpDiv_height + 'px';
-        };
+        }
+        ;
         function window_pos(popUpDivVar) {
             if (typeof window.innerWidth != 'undefined') {
                 viewportwidth = window.innerHeight;
@@ -504,13 +585,15 @@
             var popUpDiv = document.getElementById(popUpDivVar);
             window_width = window_width / 2 - 200;//200 is half popup's width
             popUpDiv.style.left = window_width + 'px';
-        };
+        }
+        ;
         function popup(windowname) {
             blanket_size(windowname);
             window_pos(windowname);
             toggle('blanket');
             toggle(windowname);
-        };
+        }
+        ;
     </script>
 </div>
 <!-- /.content-wrapper -->

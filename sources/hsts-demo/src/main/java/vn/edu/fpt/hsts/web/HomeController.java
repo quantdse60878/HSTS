@@ -27,7 +27,7 @@ public class HomeController {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("login");
+            modelAndView.setViewName("home");
             return modelAndView;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

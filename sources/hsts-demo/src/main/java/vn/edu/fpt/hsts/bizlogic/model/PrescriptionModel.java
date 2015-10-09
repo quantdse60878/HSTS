@@ -8,43 +8,47 @@ import java.util.List;
 public class PrescriptionModel {
     private String diagnostic;
     private String medical;
-    private String medicalNoTPD;
-    private List<String> medicalNoTPDs;
-    private String medicalNoQPD;
+    private String medicalTime;
+    private String medicalQuantity;
     private String medicalNote;
     private String food;
     private String foodTime;
+    private String foodQuantity;
     private String foodNote;
-    private String pratice;
-    private String praticeIntensity;
-    private String praticeNote;
+    private String practice;
+    private String practiceTime;
+    private String practiceIntensity;
+    private String practiceNote;
 
-    public PrescriptionModel(){
-
+    public PrescriptionModel() {
     }
 
     public PrescriptionModel(String diagnostic,
-            String medical,
-            String medicalNoTPD,
-            String medicalNoQPD,
-            String medicalNote,
-            String food,
-            String foodTime,
-            String foodNote,
-            String pratice,
-            String praticeIntensity,
-            String praticeNote){
+                             String medical,
+                             String medicalTime,
+                             String medicalQuantity,
+                             String medicalNote,
+                             String food,
+                             String foodTime,
+                             String foodQuantity,
+                             String foodNote,
+                             String practice,
+                             String practiceTime,
+                             String practiceIntensity,
+                             String practiceNote) {
         this.diagnostic = diagnostic;
         this.medical = medical;
-        this.medicalNoTPD = medicalNoTPD;
-        this.medicalNoQPD = medicalNoQPD;
+        this.medicalTime = medicalTime;
+        this.medicalQuantity = medicalQuantity;
         this.medicalNote = medicalNote;
         this.food = food;
         this.foodTime = foodTime;
+        this.foodQuantity = foodQuantity;
         this.foodNote = foodNote;
-        this.pratice = pratice;
-        this.praticeIntensity = praticeIntensity;
-        this.praticeNote = praticeNote;
+        this.practice = practice;
+        this.practiceTime = practiceTime;
+        this.practiceIntensity = practiceIntensity;
+        this.practiceNote = practiceNote;
     }
 
     public String getDiagnostic() {
@@ -63,20 +67,20 @@ public class PrescriptionModel {
         this.medical = medical;
     }
 
-    public String getMedicalNoTPD() {
-        return medicalNoTPD;
+    public String getMedicalTime() {
+        return medicalTime;
     }
 
-    public void setMedicalNoTPD(String medicalNoTPD) {
-        this.medicalNoTPD = medicalNoTPD;
+    public void setMedicalTime(String medicalTime) {
+        this.medicalTime = medicalTime;
     }
 
-    public String getMedicalNoQPD() {
-        return medicalNoQPD;
+    public String getMedicalQuantity() {
+        return medicalQuantity;
     }
 
-    public void setMedicalNoQPD(String medicalNoQPD) {
-        this.medicalNoQPD = medicalNoQPD;
+    public void setMedicalQuantity(String medicalQuantity) {
+        this.medicalQuantity = medicalQuantity;
     }
 
     public String getMedicalNote() {
@@ -103,6 +107,14 @@ public class PrescriptionModel {
         this.foodTime = foodTime;
     }
 
+    public String getFoodQuantity() {
+        return foodQuantity;
+    }
+
+    public void setFoodQuantity(String foodQuantity) {
+        this.foodQuantity = foodQuantity;
+    }
+
     public String getFoodNote() {
         return foodNote;
     }
@@ -111,49 +123,54 @@ public class PrescriptionModel {
         this.foodNote = foodNote;
     }
 
-    public String getPratice() {
-        return pratice;
+    public String getPractice() {
+        return practice;
     }
 
-    public void setPratice(String pratice) {
-        this.pratice = pratice;
+    public void setPractice(String practice) {
+        this.practice = practice;
     }
 
-    public String getPraticeIntensity() {
-        return praticeIntensity;
+    public String getPracticeTime() {
+        return practiceTime;
     }
 
-    public void setPraticeIntensity(String praticeIntensity) {
-        this.praticeIntensity = praticeIntensity;
+    public void setPracticeTime(String practiceTime) {
+        this.practiceTime = practiceTime;
     }
 
-    public String getPraticeNote() {
-        return praticeNote;
+    public String getPracticeIntensity() {
+        return practiceIntensity;
     }
 
-    public void setPraticeNote(String praticeNote) {
-        this.praticeNote = praticeNote;
+    public void setPracticeIntensity(String practiceIntensity) {
+        this.practiceIntensity = practiceIntensity;
     }
 
-    public List<String> getMedicalNoTPDs() {
-        return medicalNoTPDs;
+    public String getPracticeNote() {
+        return practiceNote;
     }
 
-    public void setMedicalNoTPDs(List<String> medicalNoTPDs) {
-        this.medicalNoTPDs = medicalNoTPDs;
+    public void setPracticeNote(String practiceNote) {
+        this.practiceNote = practiceNote;
     }
 
-    public String toString(){
-        return "diagnostic: " + diagnostic
-        +"medical: "+ medical
-        +"medicalNoTPD: "+ medicalNoTPD
-        +"medicalNoQPD: "+ medicalNoQPD
-        +"medicalNote: "+ medicalNote
-        +"food: "+ food
-        +"foodTime: "+ foodTime
-        +"foodNote: "+ foodNote
-        +"pratice: "+ pratice
-        +"praticeIntensity: "+ praticeIntensity
-        +"praticeNote: "+ praticeNote;
+    @Override
+    public String toString() {
+        return "PrescriptionModel{" +
+                "diagnostic='" + diagnostic + '\'' +
+                ", medical='" + medical + '\'' +
+                ", medicalNoTPD='" + medicalTime + '\'' +
+                ", medicalNoQPD='" + medicalQuantity + '\'' +
+                ", medicalNote='" + medicalNote + '\'' +
+                ", food='" + food + '\'' +
+                ", foodTime='" + foodTime + '\'' +
+                ", foodQuantity='" + foodQuantity + '\'' +
+                ", foodNote='" + foodNote + '\'' +
+                ", practice='" + practice + '\'' +
+                ", practiceTime='" + practiceTime + '\'' +
+                ", practiceIntensity='" + practiceIntensity + '\'' +
+                ", practiceNote='" + practiceNote + '\'' +
+                '}';
     }
 }

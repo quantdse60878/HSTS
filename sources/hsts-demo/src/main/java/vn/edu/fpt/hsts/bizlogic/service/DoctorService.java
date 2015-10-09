@@ -157,7 +157,7 @@ public class DoctorService extends AbstractService {
                 newTreatment.setStatus(IDbConsts.ITreatmentStatus.ON_TREATING);
                 newTreatment.setAdviseFood(prescription.getFoodNote());
                 newTreatment.setAdviseMedicine(prescription.getMedicalNote());
-                newTreatment.setAdvisePractice(prescription.getPraticeNote());
+                newTreatment.setAdvisePractice(prescription.getPracticeNote());
                 newTreatment.setAppointment(appointment);
                 newTreatment.setFromDate(new Date());
                 if (null != toDate) {
