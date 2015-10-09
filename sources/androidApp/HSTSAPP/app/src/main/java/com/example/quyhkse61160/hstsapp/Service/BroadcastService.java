@@ -1,10 +1,16 @@
 package com.example.quyhkse61160.hstsapp.Service;
 
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
@@ -38,6 +44,7 @@ public class BroadcastService extends Service {
 
     private static final String TAG = "BroadcastService Notify";
     public static final String BROADCAST_ACTION = "com.example.quyhkse61160.hstsapp.trackingevent";
+    public static boolean flag = true;
     private final Handler handlerThread = new Handler();
     Intent intent;
     int counter = 0;
@@ -62,12 +69,15 @@ public class BroadcastService extends Service {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    checkNotify();
+
+//                    checkNotify();
                     Calendar c = Calendar.getInstance();
+                    long cl = c.getTimeInMillis();
                     Calendar c1 = Calendar.getInstance();
                     c1.set(Calendar.HOUR_OF_DAY, 22);
                     c1.set(Calendar.MINUTE, 00);
                     Log.d("QUYYY111", "-----" + c.getTime() + "--" + c1.getTime());
+                    Log.d("QUYYY111", "-----------------------------------------------------------");
                     if(c.getTime().equals(c1.getTime())) {
                         HomeActivity.listNumberOfStep.add(HomeActivity.numberOfStep);
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -78,6 +88,43 @@ public class BroadcastService extends Service {
                     }
 
                     //Khuong ve nha code cho nay bo alarm thay bang kiem tra thoi gian trong list time. Neu trung thi hien nhu binh thuong
+                    for(String time : HomeActivity.amountTime){
+                        Calendar c2 = Calendar.getInstance();
+                        c2.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.split(":")[0]));
+                        c2.set(Calendar.MINUTE, Integer.parseInt(time.split(":")[1]));
+
+                        Log.d("Hihi",c2.getTimeInMillis() + " " + c.getTimeInMillis());
+                        if (c2.getTime().getHours() == c.getTime().getHours() && c2.getTime().getMinutes() == c.getTime().getMinutes()) {
+                            Log.d("KhuongMH","HHHHHHHHHHHHHHHH");
+                            final Context context = getApplicationContext();
+//                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                            builder.setTitle("Nhắc Nhở").setMessage("Bạn đến giờ ăn, uống thuốc, tập luyện")
+//                                    .setPositiveButton("Ngưng Nhắc Nhở", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            Intent in = new Intent(context, HomeActivity.class);
+//                                            in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                            context.startActivity(in);
+//                                        }
+//                                    }).setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                }
+//                            });
+//                            AlertDialog dialog = builder.create();
+//                            dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+//                            dialog.show();
+                            if(BroadcastService.flag){
+                                BroadcastService.flag = false;
+                                Intent in = new Intent(context, HomeActivity.class);
+                                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                in.putExtra("openDialogForMe", Boolean.TRUE);
+                                context.startActivity(in);
+                            }
+
+                        }
+                    }
+
                 }
             }).start();
 
@@ -126,10 +173,9 @@ public class BroadcastService extends Service {
             HomeActivity.dateSaveStep = new ArrayList<>();
 
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+            Log.d("Khuonggggggg","Cannot connectttttttttttt");
         }
     }
 
@@ -244,8 +290,8 @@ public class BroadcastService extends Service {
                 response += temp;
             }
             Log.d("QUYYY111", "--" + response);
-            Constant.DATA_FROM_SERVER = response;
-            Constant.TREATMENTS = Constant.getItems();
+//            Constant.DATA_FROM_SERVER = response;
+//            Constant.TREATMENTS = Constant.getItems();
 
             HomeActivity.amountTime = HomeActivity.amountTime();
 

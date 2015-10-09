@@ -1,11 +1,13 @@
 package com.example.quyhkse61160.hstsapp;
 
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -23,6 +25,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.quyhkse61160.hstsapp.Adapter.ViewPagesAdapter;
@@ -74,7 +77,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     private AlarmManagerBroadcastReceiver alarm;
 
 
-
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
@@ -124,14 +126,13 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     };
 
 
-
     private void displayGattServices(List<BluetoothGattService> gattServices) {
         if (gattServices == null) return;
         List<BluetoothGattService> listService = mBluetoothLeService.getSupportedGattServices();
-        for(int i = 0; i < listService.size(); i++) {
-            if(listService.get(i).getUuid().toString().equals(Constant.DEVICE_INFORMATION)) {
+        for (int i = 0; i < listService.size(); i++) {
+            if (listService.get(i).getUuid().toString().equals(Constant.DEVICE_INFORMATION)) {
                 BluetoothGattService gattService = listService.get(i);
-                if(gattService == null) {
+                if (gattService == null) {
                     Log.d("-------", "NULL CMNR");
                 } else {
                     Log.d("-------", "GGWP");
@@ -170,13 +171,37 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_fragment);
         checkNotifyIntent = new Intent(this, BroadcastService.class);
         //KhuongMH
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            Log.d("KhuongMH","123");
+            if (bundle.getBoolean("openDialogForMe")) {
+                Log.d("KhuongMH","456");
+                final Context context = getApplicationContext();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Nhắc Nhở").setMessage("Bạn đến giờ ăn, uống thuốc, tập luyện")
+                        .setPositiveButton("Ngưng Nhắc Nhở", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.show();
+            }
+        }
+
+
         actionBar = getSupportActionBar();
         viewPager = (ViewPager) findViewById(R.id.pager);
         adapter = new ViewPagesAdapter(getSupportFragmentManager());
@@ -185,8 +210,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
         actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle!=null && bundle.getString("timeAlert") != null){
+        if (bundle != null && bundle.getString("timeAlert") != null) {
             String timeAlert = bundle.getString("timeAlert");
         }
 
@@ -216,34 +240,32 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         });
 
 
-
-        startService(checkNotifyIntent);
-        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
-        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
-        final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-        if (mBluetoothLeService != null) {
-            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
-            Log.d(TAG, "Connect request result=" + result);
-        }
+//        startService(checkNotifyIntent);
+//        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
+//        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
+//        final Intent intent = getIntent();
+//        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+//        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+//
+//        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+//        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+//        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+//        if (mBluetoothLeService != null) {
+//            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+//            Log.d(TAG, "Connect request result=" + result);
+//        }
 
         registerReceiver(mConnectionDetector, mIntentFilter);
-
 
 
         Constant.TREATMENTS = Constant.getItems();
 
         //Set Alarm
         amountTime = amountTime();
-        if(!hadStartAlarmService) {
-            Intent alarmIntent = new Intent(this, AlarmService.class);
-            startService(alarmIntent);
-            hadStartAlarmService = true;
+        if (!hadStartAlarmService) {
+//            Intent alarmIntent = new Intent(this, AlarmService.class);
+//            startService(alarmIntent);
+//            hadStartAlarmService = true;
         }
 //            for (ToDoTime item2 : Constant.Foods) {
 //                if (item2.getTimeUse().equals(item)) {
@@ -293,14 +315,14 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public static List<String> amountTime() {
         List<Treatment> treatments = Constant.TREATMENTS;
         List<String> alarmTime = new ArrayList<>();
-        for(Treatment treatment : treatments){
-            for(ToDoTime time : treatment.getListFoodTreatment()){
+        for (Treatment treatment : treatments) {
+            for (ToDoTime time : treatment.getListFoodTreatment()) {
                 if (!alarmTime.contains(time.getTimeUse())) alarmTime.add(time.getTimeUse());
             }
-            for(ToDoTime time : treatment.getListMedicineTreatment()){
+            for (ToDoTime time : treatment.getListMedicineTreatment()) {
                 if (!alarmTime.contains(time.getTimeUse())) alarmTime.add(time.getTimeUse());
             }
-            for(ToDoTime time : treatment.getListPracticeTreatment()){
+            for (ToDoTime time : treatment.getListPracticeTreatment()) {
                 if (!alarmTime.contains(time.getTimeUse())) alarmTime.add(time.getTimeUse());
             }
         }
