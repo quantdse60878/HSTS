@@ -79,6 +79,12 @@ public class LoginController {
             if (user != null) {
                 session.setAttribute("USER", user);
                 mav.setViewName("home");
+                if (user.getRole().getName().equals("Doctor")){
+                    mav.setViewName("doctorPatients");
+                } else if (user.getRole().getName().equals("Nurse")){
+                    mav.setViewName("registerPatient");
+                }
+
                 return mav;
             }
             mav.setViewName("login");
