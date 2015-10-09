@@ -212,6 +212,13 @@ public class DoctorController {
             mav.addObject("APPOINTMENT", appointment);
             LOGGER.info(prescriptionModel.toString());
             doctorService.makePrescription(prescriptionModel, appointmentID, appointmentDate);
+            //create notify
+            //set name of action
+            mav.addObject("METHOD", "Make Prescription");
+            //set type. sussces TYPE = info, fail TYPE = danger
+            mav.addObject("TYPE", "info");
+            //set message notify
+            mav.addObject("MESSAGE", "Success");
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

@@ -283,4 +283,8 @@ public class PatientService {
 
 
     }
+
+    public List<Patient> getAllPatients() {
+        return patientRepo.findAll();
+    }
 }
