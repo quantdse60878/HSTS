@@ -30,7 +30,7 @@
 
                             <div class="col-sm-4">
                                 <!-- search form (Optional) -->
-                                <form th:action="/nurse/patients" method="get" class="sidebar-form">
+                                <form th:action="nursePatients" method="get" class="sidebar-form">
                                     <div class="input-group">
                                         <input type="text" th:name="q" class="form-control" placeholder="Search..."/>
                           <span class="input-group-btn">
@@ -52,7 +52,7 @@
                                 <th>Name</th>
                                 <th>Birthday</th>
                                 <th>Gender</th>
-                                <th style="width: 40px;">#</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -61,10 +61,14 @@
                             </tr>
                             <tr th:each="patient,rowStat : ${LISTPATIENTS}">
                                 <td th:text="${rowStat.count}">No.</td>
-                                <td><a th:href="@{/medicalHistory(patientID=${patient.id})}" th:text="${patient.account.fullname}">Name</a></td>
-                                <td><a th:href="@{/medicalHistory(patientID=${patient.id})}" th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</a></td>
-                                <td><a th:href="@{/medicalHistory(patientID=${patient.id})}" th:text="*{patient.account.gender == 1}? 'Male' : 'Female'">Gender</a></td>
-                                <td><a th:href="@{/createPrescription(patientID=${patient.id})}" class="btn btn-primary">Make Prescription</a></td>
+                                <td><a th:href="@{/medicalHistory(patientID=${patient.id})}"
+                                       th:text="${patient.account.fullname}">Name</a></td>
+                                <td><a th:href="@{/medicalHistory(patientID=${patient.id})}"
+                                       th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</a>
+                                </td>
+                                <td><a th:href="@{/medicalHistory(patientID=${patient.id})}"
+                                       th:text="*{patient.account.gender == 1}? 'Male' : 'Female'">Gender</a></td>
+
                             </tr>
                             </tbody>
                             <tfoot>
