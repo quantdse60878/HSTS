@@ -16,12 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
+import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
+import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 
@@ -66,6 +68,9 @@ public class DoctorController {
     @Autowired
     private TreatmentService treatmentService;
 
+    @Autowired
+    private IllnessService illnessService;
+
     /**
      * The doctor patients page mapping
      * @return
@@ -79,6 +84,113 @@ public class DoctorController {
             List<Patient> patientList = patientService.getPatientByApponitmentDate();
             LOGGER.info("listpatiens: " + patientList.size());
             mav.addObject("LISTPATIENTS", patientList);
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "createPrescription", method = RequestMethod.GET)
+    public ModelAndView createPrescriptionPage(@RequestParam("patientID") final int patientID) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("makePrescription");
+            Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
+            // Get config time
+            final String[] timeArr = treatmentService.getMedicineTimeConfig();
+            List<Illness> illnessList = illnessService.getAllIllness();
+
+            mav.addObject("ILLNESSES", illnessList);
+            mav.addObject("TIMES", timeArr);
+            mav.addObject("APPOINTMENT", appointment);
+            mav.addObject("model", new PrescriptionModel());
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "suggestTreatment", method = RequestMethod.GET)
+    public ModelAndView suggestTreatment(@RequestParam("patientID") final int patientID,
+                                         @RequestParam("diagnostic") final int diagnostic) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            // Get config time
+            final String[] timeArr = treatmentService.getMedicineTimeConfig();
+            List<Illness> illnessList = illnessService.getAllIllness();
+            Illness illness = illnessService.findByID(diagnostic);
+            Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
+
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("makePrescription");
+            mav.addObject("ILLNESSES", illnessList);
+            mav.addObject("TIMES", timeArr);
+            mav.addObject("APPOINTMENT", appointment);
+            mav.addObject("DIAGNOSTIC", illness);
+            mav.addObject("model", new PrescriptionModel());
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    /**
+     * The Prescription  mapping
+     * @param prescriptionModel
+     * @return
+     */
+    @RequestMapping(value="prescription", method=RequestMethod.GET)
+    public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel,
+                                         @RequestParam("appointmentID") final int appointmentID,
+                                         @RequestParam(value = "appointmentDate", required = false) final String appointmentDate) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("makePrescription");
+            mav.addObject("model", prescriptionModel);
+            Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
+            // Get config time
+            final String[] timeArr = treatmentService.getMedicineTimeConfig();
+
+            mav.addObject("TIMES", timeArr);
+            mav.addObject("APPOINTMENT", appointment);
+            LOGGER.info(prescriptionModel.toString());
+            doctorService.makePrescription(prescriptionModel, appointmentID, appointmentDate);
+            //create notify
+            //set name of action
+            mav.addObject("METHOD", "Make Prescription");
+            //set type. sussces TYPE = info, fail TYPE = danger
+            mav.addObject("TYPE", "info");
+            //set message notify
+            mav.addObject("MESSAGE", "Success");
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    /**
+     * Make new appointment
+     * @param recordID
+     * @param appointmentDate
+     * @return
+     */
+    @RequestMapping(value = "makeAppointment", method = RequestMethod.GET)
+    public ModelAndView makeAppointment(@RequestParam("recordID") final int recordID,
+                                        @RequestParam("appointmentDate") final String appointmentDate) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("historyTreatment");
+//            patientService.makeAppointment(recordID, appointmentDate);
+            //create notify
+            //set name of action
+            mav.addObject("METHOD", "Make Appointment");
+            //set type. sussces TYPE = info, fail TYPE = danger
+            mav.addObject("TYPE", "info");
+            //set message notify
+            mav.addObject("MESSAGE", "Success");
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
@@ -121,33 +233,6 @@ public class DoctorController {
     }
 
     /**
-     * Make new appointment
-     * @param recordID
-     * @param appointmentDate
-     * @return
-     */
-    @RequestMapping(value = "makeAppointment", method = RequestMethod.GET)
-    public ModelAndView makeAppointment(@RequestParam("recordID") final int recordID,
-                                        @RequestParam("appointmentDate") final String appointmentDate) throws BizlogicException {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("historyTreatment");
-//            patientService.makeAppointment(recordID, appointmentDate);
-            //create notify
-            //set name of action
-            mav.addObject("METHOD", "Make Appointment");
-            //set type. sussces TYPE = info, fail TYPE = danger
-            mav.addObject("TYPE", "info");
-            //set message notify
-            mav.addObject("MESSAGE", "Success");
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
-
-    /**
      * The make Prescription page mapping
      * @param appointmentID
      * @return
@@ -171,57 +256,5 @@ public class DoctorController {
         }
     }
 
-    @RequestMapping(value = "createPrescription", method = RequestMethod.GET)
-    public ModelAndView createPrescriptionPage(@RequestParam("patientID") final int patientID) {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("makePrescription");
-            Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
-            // Get config time
-            final String[] timeArr = treatmentService.getMedicineTimeConfig();
 
-            mav.addObject("TIMES", timeArr);
-            mav.addObject("APPOINTMENT", appointment);
-            mav.addObject("model", new PrescriptionModel());
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
-
-    /**
-     * The Prescription  mapping
-     * @param prescriptionModel
-     * @return
-     */
-    @RequestMapping(value="prescription", method=RequestMethod.GET)
-    public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel,
-                                         @RequestParam("appointmentID") final int appointmentID,
-                                         @RequestParam(value = "appointmentDate", required = false) final String appointmentDate) throws BizlogicException {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("makePrescription");
-            mav.addObject("model", prescriptionModel);
-            Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
-            // Get config time
-            final String[] timeArr = treatmentService.getMedicineTimeConfig();
-
-            mav.addObject("TIMES", timeArr);
-            mav.addObject("APPOINTMENT", appointment);
-            LOGGER.info(prescriptionModel.toString());
-            doctorService.makePrescription(prescriptionModel, appointmentID, appointmentDate);
-            //create notify
-            //set name of action
-            mav.addObject("METHOD", "Make Prescription");
-            //set type. sussces TYPE = info, fail TYPE = danger
-            mav.addObject("TYPE", "info");
-            //set message notify
-            mav.addObject("MESSAGE", "Success");
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
 }

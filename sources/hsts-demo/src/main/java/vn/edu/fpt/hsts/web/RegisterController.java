@@ -80,13 +80,17 @@ public class RegisterController {
     /**
      * The register patient mapping
      * @param patientName
+     * @param email
      * @param birthday
      * @param gender
      * @param weight
      * @param height
-     * @param status
-     * @param doctor
+     * @param doctorId
+     * @param medicalHistory
+     * @param symptoms
      * @return
+     * @throws BizlogicException
+     * @throws BizlogicException
      */
     @RequestMapping(value = "registerPatient", method = RequestMethod.POST)
     public ModelAndView registerPatient(@RequestParam("patientName") final String patientName,
@@ -96,8 +100,8 @@ public class RegisterController {
                                         @RequestParam("weight") final int weight,
                                         @RequestParam("height") final int height,
                                         @RequestParam("doctorId") final int doctorId,
-                                        @RequestParam("medicalHistory") final String medicalHistory,
-                                        @RequestParam("symptoms") final String symptoms) throws BizlogicException, BizlogicException {
+                                        @RequestParam(value = "medicalHistory") final String medicalHistory,
+                                        @RequestParam(value = "symptoms") final String symptoms) throws BizlogicException, BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("patientName[{}], email[{}], birthday[{}], gender[{}], weight[{}], height[{}], doctorId[{}], medicalHistory[{}], symptoms[{}]",

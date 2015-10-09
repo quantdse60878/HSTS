@@ -24,7 +24,6 @@ public class AppointmentService {
     }
 
     public Appointment findAppointmentByPatientID(int patientID) {
-        //TODO
-        return null;
+        return appointmentRepo.findLastAppointmentByPatientId(patientID);
     }
 }

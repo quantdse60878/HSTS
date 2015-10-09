@@ -24,6 +24,7 @@ import vn.edu.fpt.hsts.persistence.entity.Patient;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * Login controller, for processing login, logout.
@@ -37,6 +38,7 @@ public class LoginController {
      */
     @Autowired
     private AccountService accountService;
+
     @Autowired
     private PatientService patientService;
 
@@ -81,6 +83,9 @@ public class LoginController {
                 mav.setViewName("home");
                 if (user.getRole().getName().equals("Doctor")){
                     mav.setViewName("doctorPatients");
+                    List<Patient> patientList = patientService.getPatientByApponitmentDate();
+                    LOGGER.info("listpatiens: " + patientList.size());
+                    mav.addObject("LISTPATIENTS", patientList);
                 } else if (user.getRole().getName().equals("Nurse")){
                     mav.setViewName("registerPatient");
                 }
