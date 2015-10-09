@@ -22,4 +22,9 @@ public class AppointmentService {
     public Appointment findAppointmentByID(int appointmentID) {
         return appointmentRepo.findOne(appointmentID);
     }
+
+    public Appointment findAppointmentByPatientID(int patientID) {
+
+        return null;
+    }
 }

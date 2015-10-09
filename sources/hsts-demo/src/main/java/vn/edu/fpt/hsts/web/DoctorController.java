@@ -177,8 +177,12 @@ public class DoctorController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
-//            Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
-//            mav.addObject("APPOINTMENT", appointment);
+            Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
+            // Get config time
+            final String[] timeArr = treatmentService.getMedicineTimeConfig();
+
+            mav.addObject("TIMES", timeArr);
+            mav.addObject("APPOINTMENT", appointment);
             mav.addObject("model", new PrescriptionModel());
             return mav;
         } finally {

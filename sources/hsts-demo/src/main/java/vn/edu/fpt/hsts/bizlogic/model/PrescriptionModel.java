@@ -160,8 +160,8 @@ public class PrescriptionModel {
         return "PrescriptionModel{" +
                 "diagnostic='" + diagnostic + '\'' +
                 ", medical='" + medical + '\'' +
-                ", medicalNoTPD='" + medicalTime + '\'' +
-                ", medicalNoQPD='" + medicalQuantity + '\'' +
+                ", medicalTime='" + medicalTime + '\'' +
+                ", medicalQuantity='" + medicalQuantity + '\'' +
                 ", medicalNote='" + medicalNote + '\'' +
                 ", food='" + food + '\'' +
                 ", foodTime='" + foodTime + '\'' +
