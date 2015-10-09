@@ -18,6 +18,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- jQueryUI -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <!-- Multi select -->
+<link rel="stylesheet" href="plugins/bootstrap-multiselect/css/bootstrap-multiselect.css" type="text/css">
+<link rel="stylesheet" href="plugins/bootstrap-multiselect/css/prettify.css" type="text/css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -366,7 +369,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <tr>
                             <td>1/</td>
                             <td>
-                              <select class="form-control">
+                              <select class="form-control" multiple="multiple"
+                                                                    id="multiselect_medical">
                                 <option>Thuoc 1</option>
                                 <option>Thuoc 2</option>
                                 <option>Thuoc 3</option>
@@ -613,6 +617,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
      <!-- jQuery 2.1.4 -->
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Multi select -->
+<script type="text/javascript" src="plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="plugins/bootstrap-multiselect/js/prettify.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
@@ -628,7 +635,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     defaultDate: "+1w",
                     changeYear: true,
                   });
-
+/* For university.*/
+  $(document).ready(function() {
+      $('#multiselect_medical').multiselect({ 
+          includeSelectAllOption: true,
+          nonSelectedText: 'Select Universities',
+          nSelectedText: 'Select',
+          selectAllText: 'Select All',
+          numberDisplayed: 0,
+          buttonWidth: '170px'
+      });
+  });
                 
     
       function toggle(div_id) {
