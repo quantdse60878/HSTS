@@ -34,7 +34,7 @@ public class PracticeTreatment extends AbstractKeyEntity {
     /**
      *
      */
-    private int timeDuration;
+    private String timeDuration;
 
     /**
      *
@@ -50,11 +50,11 @@ public class PracticeTreatment extends AbstractKeyEntity {
         this.practice = practice;
     }
 
-    public int getTimeDuration() {
+    public String getTimeDuration() {
         return timeDuration;
     }
 
-    public void setTimeDuration(final int timeDuration) {
+    public void setTimeDuration(final String timeDuration) {
         this.timeDuration = timeDuration;
     }
 
