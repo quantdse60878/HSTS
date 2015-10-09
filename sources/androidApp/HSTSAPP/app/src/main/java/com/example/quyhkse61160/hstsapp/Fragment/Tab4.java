@@ -46,9 +46,9 @@ public class Tab4 extends Fragment {
         advicePractice = (TextView) v.findViewById(R.id.notice_advice_practical);
 
         ill.setText(Constant.TREATMENTS.get(0).getIllnessName());
-        toDate.setText(Constant.TREATMENTS.get(0).getToDate());
-        fromDate.setText(Constant.TREATMENTS.get(0).getFromDate());
-        nextApp.setText(Constant.TREATMENTS.get(0).getNextAppointment());
+        toDate.setText(Constant.TREATMENTS.get(0).getToDate().split(" ")[0]);
+        fromDate.setText(Constant.TREATMENTS.get(0).getFromDate().split(" ")[0]);
+        nextApp.setText(Constant.TREATMENTS.get(0).getNextAppointment().split(" ")[0]);
         adviceFood.setText(Constant.TREATMENTS.get(0).getAdviseFood());
         adviceMedicine.setText(Constant.TREATMENTS.get(0).getAdviseMedicine());
         advicePractice.setText(Constant.TREATMENTS.get(0).getAdvicePractice());
