@@ -63,7 +63,7 @@
                             <tr th:each="record,rowStat : ${MEDICALRECORDS}">
                                 <td th:text="${rowStat.count}">No.</td>
                                 <td><a th:href="@{/historyTreatment(recordID=${record.id})}" th:text="${#dates.format(record.startTime, 'dd-MM-yyyy')}">Start Time</a></td>
-                                <td th:text="*{record.endTime != null}? ${#dates.format(record.endTime, 'dd-MM-yyyy')} : ''">End Time</td>
+                                <td><a th:href="@{/historyTreatment(recordID=${record.id})}" th:text="*{record.endTime != null}? ${#dates.format(record.endTime, 'dd-MM-yyyy')} : ''">End Time</td>
                                 <td><a th:href="@{/historyTreatment(recordID=${record.id})}" th:text="*{record.illness != null}? ${record.illness.name} : ''">Illness</a></td>
                                 <td th:if="*{record.status == 1}" ><a th:href="@{/historyTreatment(recordID=${record.id})}">WAITING FOR EXAMINATION</a></td>
                                 <td th:if="*{record.status == 2}" ><a th:href="@{/historyTreatment(recordID=${record.id})}">NO ILLNESS</a></td>
