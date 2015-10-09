@@ -251,7 +251,7 @@ public class PatientService {
             }
             // Create new appointment -> set to old appointment
             final Appointment newAppointment = new Appointment();
-            final Date appointmentDate = DateUtils.parseDate(nextAppointmentDate, DateUtils.DATE_PATTERN_1);
+            final Date appointmentDate = DateUtils.parseDate(nextAppointmentDate, DateUtils.DATE_PATTERN_2);
             if (null == appointmentDate) {
                throw new BizlogicException("Wrong input date data: {}, output: {}", null, nextAppointmentDate, appointmentDate);
             }
