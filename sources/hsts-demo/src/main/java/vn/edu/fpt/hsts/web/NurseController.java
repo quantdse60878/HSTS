@@ -7,5 +7,8 @@
  */
 package vn.edu.fpt.hsts.web;
 
-public class NurseController {
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class NurseController extends AbstractController {
 }
