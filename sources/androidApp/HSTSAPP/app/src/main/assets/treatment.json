@@ -9,7 +9,7 @@
     "advicePractice": "Luyện tập vừa phải",
     "listFoodTreatment": [
       {
-        "time": "17:17:00",
+        "time": "11:16:00",
         "listFood": [
           {
             "name": "cơm",
@@ -38,49 +38,6 @@
           },
           {
             "name": "cá",
-            "quantitative": "ít"
-          }
-        ]
-      },
-      {
-        "time": "06:00:00",
-        "listFood": [
-          {
-            "name": "cơm",
-            "quantitative": "2 chén"
-          },
-          {
-            "name": "thịt",
-            "quantitative": "ít"
-          },
-          {
-            "name": "củ",
-            "quantitative": "nhiều"
-          }
-        ]
-      },
-      {
-        "time": "06:00:00",
-        "listFood": [
-          {
-            "name": "cá",
-            "quantitative": "vừa phải"
-          },
-          {
-            "name": "rau",
-            "quantitative": "nhiều"
-          }
-        ]
-      },
-      {
-        "time": "06:00:00",
-        "listFood": [
-          {
-            "name": "cơm",
-            "quantitative": "2 chén"
-          },
-          {
-            "name": "thịt",
             "quantitative": "ít"
           }
         ]

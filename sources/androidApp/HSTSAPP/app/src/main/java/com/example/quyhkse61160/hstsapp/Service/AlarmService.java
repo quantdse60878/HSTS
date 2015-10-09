@@ -28,7 +28,8 @@ public class AlarmService extends Service {
     @Override
     public void onStart(Intent intent, int startId) {
         handlerThread.removeCallbacks(setAlarm);
-        Log.d("QUYYY111", "-----------------");
+
+        //Sau 10s khi ch?y service.
         handlerThread.postDelayed(setAlarm, 5000);
     }
 
@@ -44,6 +45,7 @@ public class AlarmService extends Service {
                 }
             }).start();
 
+            //Ch?y l?i sau 24h
             handlerThread.postDelayed(this, 1000*60*60*24);
         }
     };

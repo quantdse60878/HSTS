@@ -32,6 +32,7 @@ import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
 import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
+import com.example.quyhkse61160.hstsapp.Fragment.Tab1;
 import com.example.quyhkse61160.hstsapp.Service.AlarmService;
 import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
 import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
@@ -69,6 +70,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     ActionBar actionBar;
     ViewPagesAdapter adapter;
     ViewPager viewPager;
+    public static String timeAlert;
     private AlarmManagerBroadcastReceiver alarm;
 
 
@@ -91,6 +93,12 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             mBluetoothLeService = null;
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AlarmManagerBroadcastReceiver.flag = true;
+    }
 
     private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
@@ -186,8 +194,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         ActionBar.Tab atab2 = actionBar.newTab().setText("THUỐC").setTabListener(this);
         ActionBar.Tab atab3 = actionBar.newTab().setText("LUYỆN TẬP").setTabListener(this);
         ActionBar.Tab atab4 = actionBar.newTab().setText("THÔNG BÁO").setTabListener(this);
+        actionBar.addTab(atab1);
         actionBar.addTab(atab2);
         actionBar.addTab(atab3);
+        actionBar.addTab(atab4);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

@@ -39,16 +39,23 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:text="Tên thuốc"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:textColor="#01579B"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="5"
+                android:text="Lời khuyên"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="#01579B"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
                 android:text="Số lượng"
                 android:textStyle="bold"
                 android:textSize="15dp"

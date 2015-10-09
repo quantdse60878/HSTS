@@ -13,7 +13,9 @@ import com.example.quyhkse61160.hstsapp.Adapter.MedicineAdapter;
 import com.example.quyhkse61160.hstsapp.Adapter.PracticeAdapter;
 import com.example.quyhkse61160.hstsapp.Classes.ToDoItem;
 import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
+import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
+import com.example.quyhkse61160.hstsapp.HomeActivity;
 import com.example.quyhkse61160.hstsapp.R;
 
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class Tab3 extends Fragment {
     PracticeAdapter adapter;
     ListView listView;
     TextView time_practice;
-
+    static ArrayList<HashMap<String,String>> sections;
     public Tab3() {
         // Required empty public constructor
     }
@@ -38,7 +40,7 @@ public class Tab3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.home_fragment_tab_3, container, false);
-        ArrayList<HashMap<String,String>> sections = new ArrayList<HashMap<String,String>>();
+
 //        HashMap<String,String> d = new HashMap<>();
 //        d.put("PracticeName", "Đi bộ");
 //        d.put("PracticeTime", "15 phút");
@@ -67,8 +69,10 @@ public class Tab3 extends Fragment {
 //            sections.add(d);
 //        }
 //
-//        time_practice = (TextView) v.findViewById(R.id.time_practice);
-//        time_practice.setText(practice.getTimeUse());
+        time_practice = (TextView) v.findViewById(R.id.time_practice);
+        time_practice.setText(HomeActivity.timeAlert);
+
+        updateData();
         //KhuongMH
 
         listView = (ListView) v.findViewById(R.id.list_practice_treatment);
@@ -77,5 +81,20 @@ public class Tab3 extends Fragment {
         return v;
     }
 
-
+    public static void updateData(){
+        sections = new ArrayList<HashMap<String,String>>();
+        List<Treatment> treatments = Constant.TREATMENTS;
+        for (Treatment treatment : treatments){
+            for(ToDoTime time : treatment.getListPracticeTreatment()){
+                if(time.getTimeUse().equals(HomeActivity.timeAlert)){
+                    for (ToDoItem item : time.getItems()){
+                        HashMap<String,String> d = new HashMap<>();
+                        d.put("PracticeName", item.getName());
+                        d.put("PracticeTime", item.getQuantity());
+                        sections.add(d);
+                    }
+                }
+            }
+        }
+    }
 }

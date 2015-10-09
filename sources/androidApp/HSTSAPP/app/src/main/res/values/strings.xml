@@ -22,5 +22,6 @@
 
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Not A Member ? Register Now</string>
+    <string name="title_activity_notice">NoticeActivity</string>
     <!-- KhuongMH -->
 </resources>

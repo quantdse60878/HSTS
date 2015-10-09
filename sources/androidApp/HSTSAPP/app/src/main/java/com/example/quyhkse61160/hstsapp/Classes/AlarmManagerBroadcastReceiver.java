@@ -19,6 +19,7 @@ import java.util.Calendar;
 public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     private static int id = 0;
+    public static boolean flag = true;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
@@ -28,34 +29,35 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         Bundle extras = intent.getExtras();
         if (extras != null && extras.getString("time") != null) {
             String time = extras.getString("time");
-
-            //Auto open application
-            Intent in = new Intent(context, HomeActivity.class);
-            in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            in.putExtra("timeAlert", time);
-            context.startActivity(in);
+            HomeActivity.timeAlert = time;
             final int idOfAlarm = extras.getInt("id");
             Log.d("QUYYY111", "----------" + idOfAlarm + "------------");
             //Make dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Nhắc Nhở").setMessage("Bạn đến giờ ăn, uống thuốc, tập luyện")
-                    .setPositiveButton("Ngưng Nhắc Nhở", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
-                            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            if(flag){
+                flag = false;
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Nhắc Nhở").setMessage("Bạn đến giờ ăn, uống thuốc, tập luyện")
+                        .setPositiveButton("Ngưng Nhắc Nhở", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
+                                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                                 PendingIntent sender = PendingIntent.getBroadcast(context, idOfAlarm, intent, 0);
                                 alarmManager.cancel(sender);
+                                Intent in = new Intent(context, HomeActivity.class);
+                                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(in);
+                            }
+                        }).setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.show();
+            }
 
-                        }
-                    }).setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-            dialog.show();
     }
         wl.release();
 

@@ -2,6 +2,7 @@ package com.example.quyhkse61160.hstsapp.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 import com.example.quyhkse61160.hstsapp.Adapter.MedicineAdapter;
 import com.example.quyhkse61160.hstsapp.Classes.ToDoItem;
 import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
+import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
+import com.example.quyhkse61160.hstsapp.HomeActivity;
 import com.example.quyhkse61160.hstsapp.R;
 
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ public class Tab2 extends Fragment {
     MedicineAdapter adapter;
     ListView listView;
     TextView time_use;
-
+    static ArrayList<HashMap<String,String>> sections;
     public Tab2() {
         // Required empty public constructor
     }
@@ -37,7 +40,7 @@ public class Tab2 extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.home_fragment_tab_2, container, false);
-        ArrayList<HashMap<String,String>> sections = new ArrayList<HashMap<String,String>>();
+
 //        HashMap<String,String> d = new HashMap<>();
 //        d.put("MedicineName", "Paracitamol 500mg");
 //        d.put("NumberOfMedicine", "1");
@@ -66,14 +69,34 @@ public class Tab2 extends Fragment {
 //            sections.add(d);
 //        }
 //
-//        time_use = (TextView) v.findViewById(R.id.time_use);
-//        time_use.setText(medicine.getTimeUse());
+        time_use = (TextView) v.findViewById(R.id.time_use);
+        time_use.setText(HomeActivity.timeAlert);
+        updateData();
         //KhuongMH
 
         listView = (ListView) v.findViewById(R.id.list_medicine_treatment);
         adapter = new MedicineAdapter(getActivity(), sections);
         listView.setAdapter(adapter);
         return v;
+    }
+
+    public static void updateData(){
+        sections = new ArrayList<HashMap<String,String>>();
+        List<Treatment> treatments = Constant.TREATMENTS;
+        for (Treatment treatment : treatments){
+            for(ToDoTime time : treatment.getListMedicineTreatment()){
+                if(time.getTimeUse().equals(HomeActivity.timeAlert)){
+                    for (ToDoItem item : time.getItems()){
+                        HashMap<String,String> d = new HashMap<>();
+                        d.put("MedicineName", item.getName());
+                        Log.d("Khuongjjjjjj", item.getAdvice());
+                        d.put("Advice",item.getAdvice());
+                        d.put("NumberOfMedicine", item.getQuantity());
+                        sections.add(d);
+                    }
+                }
+            }
+        }
     }
 
 }

@@ -14,7 +14,9 @@ import com.example.quyhkse61160.hstsapp.Adapter.FoodAdapter;
 import com.example.quyhkse61160.hstsapp.Adapter.MedicineAdapter;
 import com.example.quyhkse61160.hstsapp.Classes.ToDoItem;
 import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
+import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
+import com.example.quyhkse61160.hstsapp.HomeActivity;
 import com.example.quyhkse61160.hstsapp.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,6 +36,7 @@ public class Tab1 extends Fragment {
     FoodAdapter adapter;
     ListView listView;
     TextView time_eat;
+    static ArrayList<HashMap<String,String>> sections;
 
     public Tab1() {
         // Required empty public constructor
@@ -45,7 +48,7 @@ public class Tab1 extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.home_fragment_tab_1, container, false);
-        ArrayList<HashMap<String,String>> sections = new ArrayList<HashMap<String,String>>();
+
 //        HashMap<String,String> d = new HashMap<>();
 //        d.put("FoodName", "Rau");
 //        d.put("QuantitativeOfFood", "200gr");
@@ -60,23 +63,32 @@ public class Tab1 extends Fragment {
 //        sections.add(d);
 
         //KhuongMH
-//        List<ToDoTime> foods = Constant.getItems(Constant.FOOD_FROM_JSON);
-//        ToDoTime food = foods.get(0);
-//        for (int i = 0; i<food.getItems().size();i++){
-//            ToDoItem item = food.getItems().get(i);
-//            HashMap<String,String> d = new HashMap<>();
-//            d.put("FoodName", item.getName());
-//            d.put("QuantitativeOfFood", item.getQuantity());
-//            sections.add(d);
-//        }
-//        time_eat = (TextView) v.findViewById(R.id.time_eat);
-//        time_eat.setText(food.getTimeUse());
+        updateData();
+        time_eat = (TextView) v.findViewById(R.id.time_eat);
+        time_eat.setText(HomeActivity.timeAlert);
         //KhuongMH
 
         listView = (ListView) v.findViewById(R.id.list_food_treatment);
         adapter = new FoodAdapter(getActivity(), sections);
         listView.setAdapter(adapter);
         return v;
+    }
+
+    public static void updateData(){
+        sections = new ArrayList<HashMap<String,String>>();
+        List<Treatment> treatments = Constant.TREATMENTS;
+        for (Treatment treatment : treatments){
+            for(ToDoTime time : treatment.getListFoodTreatment()){
+                if(time.getTimeUse().equals(HomeActivity.timeAlert)){
+                    for (ToDoItem item : time.getItems()){
+                        HashMap<String,String> d = new HashMap<>();
+                        d.put("FoodName", item.getName());
+                        d.put("QuantitativeOfFood", item.getQuantity());
+                        sections.add(d);
+                    }
+                }
+            }
+        }
     }
 
 

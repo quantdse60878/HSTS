@@ -4,10 +4,175 @@
     tools:context="com.example.quyhkse61160.hstsapp.Fragment.Tab4">
 
     <!-- TODO: Update blank fragment layout -->
-    <ListView
-        android:id="@+id/current_info"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-    </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Tên Bệnh : "
+                    android:textColor="#3ea000"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Stupid "
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:id="@+id/notice_illness_name"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Điều Trị Từ : "
+                    android:textColor="#3ea000"
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Ngày Mai "
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:id="@+id/notice_from_date"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Điều Trị Đến : "
+                    android:textColor="#3ea000"
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Hihi"
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:id="@+id/notice_to_date"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Lần Gặp Tiếp Theo: "
+                    android:textColor="#3ea000"
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Hoho"
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:id="@+id/notice_next_appointment"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Chế Độ Ăn Uống : "
+                    android:textColor="#3ea000"
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Ít"
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:id="@+id/notice_advice_food"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Uống Thuốc : "
+                    android:textColor="#3ea000"
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Ít"
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:id="@+id/notice_advice_medicine"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Tập Thể Dục : "
+                    android:textColor="#3ea000"
+                    android:textSize="17dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Ít"
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:id="@+id/notice_advice_practical"/>
+            </LinearLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Những Thức Ăn Cần Thiết"
+                android:id="@+id/btn_foods"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Những Thuốc Cần Thiết"
+                android:id="@+id/btn_medicines"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Những Bài Tập Cần Thiết"
+                android:id="@+id/btn_pracrices"/>
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>
