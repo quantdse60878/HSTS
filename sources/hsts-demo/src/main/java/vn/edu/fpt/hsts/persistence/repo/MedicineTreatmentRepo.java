@@ -10,7 +10,6 @@ package vn.edu.fpt.hsts.persistence.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import vn.edu.fpt.hsts.persistence.entity.MedicineTime;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 
 import java.util.List;

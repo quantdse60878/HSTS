@@ -21,8 +21,8 @@ public class PracticeTreatment extends AbstractKeyEntity {
      *
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "practiceTimeId", nullable = false)
-    private PracticeTime practiceTime;
+    @JoinColumn(name = "treatmentId", nullable = false)
+    private Treatment treatment;
 
     /**
      *
@@ -36,13 +36,11 @@ public class PracticeTreatment extends AbstractKeyEntity {
      */
     private int timeDuration;
 
-    public PracticeTime getPracticeTime() {
-        return practiceTime;
-    }
+    /**
+     *
+     */
+    private int numberOfTime;
 
-    public void setPracticeTime(PracticeTime practiceTime) {
-        this.practiceTime = practiceTime;
-    }
 
     public Practice getPractice() {
         return practice;
@@ -56,7 +54,23 @@ public class PracticeTreatment extends AbstractKeyEntity {
         return timeDuration;
     }
 
-    public void setTimeDuration(int timeDuration) {
+    public void setTimeDuration(final int timeDuration) {
         this.timeDuration = timeDuration;
+    }
+
+    public Treatment getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(final Treatment treatment) {
+        this.treatment = treatment;
+    }
+
+    public int getNumberOfTime() {
+        return numberOfTime;
+    }
+
+    public void setNumberOfTime(final int numberOfTime) {
+        this.numberOfTime = numberOfTime;
     }
 }

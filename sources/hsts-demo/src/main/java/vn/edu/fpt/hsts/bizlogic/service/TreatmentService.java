@@ -43,18 +43,18 @@ public class TreatmentService {
     @Autowired
     private TreatmentRepo treatmentRepo;
 
-    @Autowired
-    private MedicineTimeRepo medicineTimeRepo;
+//    @Autowired
+//    private MedicineTimeRepo medicineTimeRepo;
     @Autowired
     private MedicineTreatmentRepo medicineTreatmentRepo;
 
-    @Autowired
-    private MealRepo mealRepo;
+//    @Autowired
+//    private MealRepo mealRepo;
     @Autowired
     private FoodTreatmentRepo foodTreatmentRepo;
 
-    @Autowired
-    private PracticeTimeRepo practiceTimeRepo;
+//    @Autowired
+//    private PracticeTimeRepo practiceTimeRepo;
     @Autowired
     private PracticeTreatmentRepo practiceTreatmentRepo;
 
@@ -87,52 +87,52 @@ public class TreatmentService {
             List<FoodTreatmentModel> foodTreatmentModels = new ArrayList<FoodTreatmentModel>();
             List<PracticeTreatmentModel> practiceTreatmentModels = new ArrayList<PracticeTreatmentModel>();
 
-            List<MedicineTime> medicineTimes = medicineTimeRepo.findMedicineTimeByTreatmentId(treatment.getId());
-            for(int j = 0; j < medicineTimes.size(); j++) {
-                MedicineTreatmentModel medicineTreatmentItem = new MedicineTreatmentModel();
-                MedicineTime medicineTimeItem = medicineTimes.get(j);
-                medicineTreatmentItem.setTimeUse(medicineTimeItem.getTimeUse().toString());
-
-                List<MedicineTreatment> medicineTreatments = medicineTreatmentRepo.findMedicineTreatmentByMedicineTimeId(medicineTimeItem.getId());
-
-                for(MedicineTreatment medicineTreatment : medicineTreatments)  {
-                    medicineTreatmentItem.addMedicine(medicineTreatment.getMedicine().getName(), medicineTreatment.getNumberOfMedicine(), medicineTreatment.getAdvice());
-                }
-
-                medicineTreatmentModels.add(medicineTreatmentItem);
-            }
-            List<Meal> foodTimes = mealRepo.findMealByTreatmentId(treatment.getId());
-            for(int j = 0; j < foodTimes.size(); j++) {
-                FoodTreatmentModel foodTreatmentItem = new FoodTreatmentModel();
-                Meal mealItem = foodTimes.get(j);
-                foodTreatmentItem.setTimeEat(mealItem.getTimeStart().toString());
-
-                List<FoodTreatment> foodTreatments = foodTreatmentRepo.findFoodTreatmentByMealId(mealItem.getId());
-                for(FoodTreatment foodTreatment : foodTreatments) {
-                    foodTreatmentItem.addFood(foodTreatment.getFood().getName(), foodTreatment.getQuantitative());
-                }
-                foodTreatmentModels.add(foodTreatmentItem);
-
-            }
-            List<PracticeTime> practiceTimes = practiceTimeRepo.findPracticeTimeByTreatmentId(treatment.getId());
-            for(int j = 0; j < practiceTimes.size(); j++) {
-                PracticeTreatmentModel practiceTreatmentItem = new PracticeTreatmentModel();
-                PracticeTime practiceTimeItem = practiceTimes.get(j);
-                practiceTreatmentItem.setTimePractice(practiceTimeItem.getTimeStart().toString());
-
-                List<PracticeTreatment> practiceTreatments = practiceTreatmentRepo.findPracticeTreatmentByPracticeTimeId(practiceTimeItem.getId());
-                for(PracticeTreatment practiceTreatment : practiceTreatments) {
-                    practiceTreatmentItem.addPractice(practiceTreatment.getPractice().getName(), practiceTreatment.getTimeDuration());
-                }
-                practiceTreatmentModels.add(practiceTreatmentItem);
-            }
-            treatmentOfPatient.setListFoodTreatment(foodTreatmentModels);
-            treatmentOfPatient.setListMedicineTreatment(medicineTreatmentModels);
-            treatmentOfPatient.setListPracticeTreatment(practiceTreatmentModels);
-            System.out.println("!!!!");
-
-
-        treatmentModels.add(treatmentOfPatient);
+//            List<MedicineTime> medicineTimes = medicineTimeRepo.findMedicineTimeByTreatmentId(treatment.getId());
+//            for(int j = 0; j < medicineTimes.size(); j++) {
+//                MedicineTreatmentModel medicineTreatmentItem = new MedicineTreatmentModel();
+//                MedicineTime medicineTimeItem = medicineTimes.get(j);
+//                medicineTreatmentItem.setTimeUse(medicineTimeItem.getTimeUse().toString());
+//
+//                List<MedicineTreatment> medicineTreatments = medicineTreatmentRepo.findMedicineTreatmentByMedicineTimeId(medicineTimeItem.getId());
+//
+//                for(MedicineTreatment medicineTreatment : medicineTreatments)  {
+//                    medicineTreatmentItem.addMedicine(medicineTreatment.getMedicine().getName(), medicineTreatment.getNumberOfMedicine(), medicineTreatment.getAdvice());
+//                }
+//
+//                medicineTreatmentModels.add(medicineTreatmentItem);
+//            }
+//            List<Meal> foodTimes = mealRepo.findMealByTreatmentId(treatment.getId());
+//            for(int j = 0; j < foodTimes.size(); j++) {
+//                FoodTreatmentModel foodTreatmentItem = new FoodTreatmentModel();
+//                Meal mealItem = foodTimes.get(j);
+//                foodTreatmentItem.setTimeEat(mealItem.getTimeStart().toString());
+//
+//                List<FoodTreatment> foodTreatments = foodTreatmentRepo.findFoodTreatmentByMealId(mealItem.getId());
+//                for(FoodTreatment foodTreatment : foodTreatments) {
+//                    foodTreatmentItem.addFood(foodTreatment.getFood().getName(), foodTreatment.getQuantitative());
+//                }
+//                foodTreatmentModels.add(foodTreatmentItem);
+//
+//            }
+//            List<PracticeTime> practiceTimes = practiceTimeRepo.findPracticeTimeByTreatmentId(treatment.getId());
+//            for(int j = 0; j < practiceTimes.size(); j++) {
+//                PracticeTreatmentModel practiceTreatmentItem = new PracticeTreatmentModel();
+//                PracticeTime practiceTimeItem = practiceTimes.get(j);
+//                practiceTreatmentItem.setTimePractice(practiceTimeItem.getTimeStart().toString());
+//
+//                List<PracticeTreatment> practiceTreatments = practiceTreatmentRepo.findPracticeTreatmentByPracticeTimeId(practiceTimeItem.getId());
+//                for(PracticeTreatment practiceTreatment : practiceTreatments) {
+//                    practiceTreatmentItem.addPractice(practiceTreatment.getPractice().getName(), practiceTreatment.getTimeDuration());
+//                }
+//                practiceTreatmentModels.add(practiceTreatmentItem);
+//            }
+//            treatmentOfPatient.setListFoodTreatment(foodTreatmentModels);
+//            treatmentOfPatient.setListMedicineTreatment(medicineTreatmentModels);
+//            treatmentOfPatient.setListPracticeTreatment(practiceTreatmentModels);
+//            System.out.println("!!!!");
+//
+//
+//        treatmentModels.add(treatmentOfPatient);
 
 
         }
