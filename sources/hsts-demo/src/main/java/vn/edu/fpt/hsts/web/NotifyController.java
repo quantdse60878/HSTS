@@ -39,10 +39,17 @@ public class NotifyController {
             notifyModel.setReceiverId(notifyItem.getReceiver().getId());
             notifyModel.setStatus(notifyItem.getStatus());
             notifyModel.setType(notifyItem.getType());
+            notifyModel.setNotifyId(notifyItem.getId());
             listNotifyReceiver.add(notifyModel);
         }
         LOGGER.info("Notify size--------------------------" + listNotifyReceiver.size());
         return listNotifyReceiver;
+    }
+    @RequestMapping(value = "hadGetTreatment", method = RequestMethod.POST)
+    @ResponseBody
+    public String hadGetTreatment(@RequestParam("notifyId") final String notifyId) {
+        notifyService.hadGetTreatment(Integer.parseInt(notifyId));
+        return "success";
     }
 
 

@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class NotifyModel implements Serializable {
 
+    private int notifyId;
     private int senderId;
     private int receiverId;
     private int type;
@@ -20,6 +21,14 @@ public class NotifyModel implements Serializable {
         this.receiverId = receiverId;
         this.type = type;
         this.status = status;
+    }
+
+    public int getNotifyId() {
+        return notifyId;
+    }
+
+    public void setNotifyId(int notifyId) {
+        this.notifyId = notifyId;
     }
 
     public int getSenderId() {

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Notify;
 import vn.edu.fpt.hsts.persistence.repo.NotifyRepo;
 
@@ -27,13 +28,21 @@ public class NotifyService {
         for(int i = 0; i < allNotify.size(); i++) {
             Notify notifyItem = allNotify.get(i);
             LOGGER.info("-----------------ReceiverId: " + receiverId + "--Receiver: " + notifyItem.getReceiver().getId() + "--Status: " + notifyItem.getStatus());
-            if((notifyItem.getReceiver().getId() == receiverId) && (notifyItem.getStatus() == 0)) {
+            if((notifyItem.getReceiver().getId() == receiverId) && (notifyItem.getStatus() == IDbConsts.INotifyStatus.UNCOMPLETED)) {
                 notifyReceiver.add(notifyItem);
             }
         }
         LOGGER.info(IConsts.END_METHOD);
         return notifyReceiver;
     }
+
+    public boolean hadGetTreatment(final int notifyId) {
+        final Notify notify = notifyRepo.findOne(notifyId);
+        notify.setStatus((byte) IDbConsts.INotifyStatus.COMPLETED);
+        notifyRepo.save(notify);
+        return true;
+    }
+
 
 
 }
