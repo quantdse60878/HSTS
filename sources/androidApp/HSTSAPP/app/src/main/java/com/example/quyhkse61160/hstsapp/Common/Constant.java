@@ -18,6 +18,7 @@ public class Constant {
     public static final String checkNotifyMethod = "/notify";
     public static final String getTreatment = "/getTreatment";
     public static final String sendMedicalData = "/sendMedicalData";
+    public static final String hadGetTreatment = "/hadGetTreatment";
 
     //All constant of shared preference
     public static final String PREF_NAME = "HSTSAPPPREF";

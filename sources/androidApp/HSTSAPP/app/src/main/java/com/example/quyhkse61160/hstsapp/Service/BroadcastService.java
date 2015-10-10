@@ -74,8 +74,8 @@ public class BroadcastService extends Service {
                     Calendar c = Calendar.getInstance();
                     long cl = c.getTimeInMillis();
                     Calendar c1 = Calendar.getInstance();
-                    c1.set(Calendar.HOUR_OF_DAY, 22);
-                    c1.set(Calendar.MINUTE, 00);
+                    c1.set(Calendar.HOUR_OF_DAY, 14);
+                    c1.set(Calendar.MINUTE, 47);
                     Log.d("QUYYY111", "-----" + c.getTime() + "--" + c1.getTime());
                     Log.d("QUYYY111", "-----------------------------------------------------------");
                     if(c.getTime().equals(c1.getTime())) {
@@ -220,8 +220,9 @@ public class BroadcastService extends Service {
                 for(int i = 0; i < array.length(); i++) {
                     JSONObject notifyItem = array.getJSONObject(i);
                     int notifyType = Integer.parseInt(notifyItem.getString("type"));
+                    int notifyId = Integer.parseInt(notifyItem.getString("notifyId"));
                     if(notifyType == 2) {
-                        getNewTreatment();
+                        getNewTreatment(notifyId);
                     }
                 }
 
@@ -258,7 +259,7 @@ public class BroadcastService extends Service {
         handlerThread.removeCallbacks(sendUpdateToUI);
         super.onDestroy();
     }
-    public void getNewTreatment() {
+    public void getNewTreatment(int notifyId) {
 
         String stringURL = Constant.hostURL + Constant.getTreatment;
         Log.d("QUYYYY1111", "Login url: " + stringURL);
@@ -294,12 +295,54 @@ public class BroadcastService extends Service {
 //            Constant.TREATMENTS = Constant.getItems();
 
             HomeActivity.amountTime = HomeActivity.amountTime();
+            hadGetTreatment(notifyId);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void hadGetTreatment(int notifyId) {
+
+        String stringURL = Constant.hostURL + Constant.hadGetTreatment;
+        Log.d("QUYYYY1111", "Login url: " + stringURL);
+
+        try {
+            URL url = new URL(stringURL);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(100000);
+            urlConnection.setConnectTimeout(30000);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("notifyId", notifyId + ""));
+
+            OutputStream os = urlConnection.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            writer.write(HSTSUtils.getQuery(params));
+            writer.flush();
+            writer.close();
+            os.close();
+
+            urlConnection.connect();
+
+            InputStream inStream = urlConnection.getInputStream();
+            BufferedReader bReader = new BufferedReader(new InputStreamReader(inStream));
+            String temp, response = "";
+            while ((temp = bReader.readLine()) != null) {
+                response += temp;
+            }
+            Log.d("QUYYY111", "--" + response);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
