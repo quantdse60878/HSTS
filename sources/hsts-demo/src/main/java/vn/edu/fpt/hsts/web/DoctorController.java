@@ -19,6 +19,7 @@ import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
+import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
@@ -26,6 +27,7 @@ import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
+import vn.edu.fpt.hsts.persistence.entity.Phase;
 
 import java.util.List;
 
@@ -71,6 +73,9 @@ public class DoctorController {
     @Autowired
     private IllnessService illnessService;
 
+    @Autowired
+    private PhaseService phaseService;
+
     /**
      * The doctor patients page mapping
      * @return
@@ -111,6 +116,12 @@ public class DoctorController {
         }
     }
 
+    /**
+     * suggest Treatment for doctor
+     * @param patientID
+     * @param diagnostic
+     * @return
+     */
     @RequestMapping(value = "suggestTreatment", method = RequestMethod.GET)
     public ModelAndView suggestTreatment(@RequestParam("patientID") final int patientID,
                                          @RequestParam("diagnostic") final int diagnostic) {
@@ -120,12 +131,14 @@ public class DoctorController {
             final String[] timeArr = treatmentService.getMedicineTimeConfig();
             List<Illness> illnessList = illnessService.getAllIllness();
             Illness illness = illnessService.findByID(diagnostic);
+//            Phase phase = phaseService.findPhaseByIllnessID(diagnostic);
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
 
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
             mav.addObject("ILLNESSES", illnessList);
             mav.addObject("TIMES", timeArr);
+//            mav.addObject("PHASE", phase);
             mav.addObject("APPOINTMENT", appointment);
             mav.addObject("DIAGNOSTIC", illness);
             mav.addObject("model", new PrescriptionModel());
@@ -156,7 +169,7 @@ public class DoctorController {
             mav.addObject("TIMES", timeArr);
             mav.addObject("APPOINTMENT", appointment);
             LOGGER.info(prescriptionModel.toString());
-            doctorService.makePrescription(prescriptionModel, appointmentID, appointmentDate);
+//            doctorService.makePrescription(prescriptionModel, appointmentID, appointmentDate);
             //create notify
             //set name of action
             mav.addObject("METHOD", "Make Prescription");

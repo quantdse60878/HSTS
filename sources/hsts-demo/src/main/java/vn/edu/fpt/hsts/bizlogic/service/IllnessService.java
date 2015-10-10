@@ -23,7 +23,7 @@ public class IllnessService {
         return illnessRepo.findAll();
     }
 
-    public Illness findByID(int illnessID) {
+    public Illness findByID(final int illnessID) {
         return illnessRepo.getOne(illnessID);
     }
 }

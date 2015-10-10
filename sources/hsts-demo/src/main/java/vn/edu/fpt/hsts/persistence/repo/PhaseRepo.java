@@ -8,9 +8,14 @@
 package vn.edu.fpt.hsts.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
 
 @Repository
 public interface PhaseRepo extends JpaRepository<Phase, Integer> {
+
+    @Query(value = "select p from Phase p where regimen.illness.id = :illnessID")
+    public Phase findPhaseByIllnessID(@Param(value = "illnessID") final int illnessID);
 }

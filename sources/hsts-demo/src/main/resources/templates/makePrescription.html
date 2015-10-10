@@ -76,7 +76,7 @@
 
                         <div class="box-body">
                             <div class="box-header">
-                                <h3 class="col-md-6" style="margin-top: 4px;"><i class="fa fa-th"></i> Prescriptions</h3>
+                                <h4 class="col-md-6" style="margin-top: 4px;"><i class="fa fa-th"></i> Prescriptions</h4>
 
                                 <!-- input-group -->
                                 <div class="input-group col-md-3 pull-right">
@@ -141,7 +141,7 @@
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab_4-4">
-                                                <h3>Patient's Profile</h3>
+                                                <h4>Patient's Profile</h4>
                                                 <!-- box-body -->
                                                 <div class="box-body" th:with="ACC=${APPOINTMENT.medicalRecord.patient.account}">
                                                     <div class="form-group">
@@ -237,7 +237,7 @@
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane" id="tab_1-1">
-                                                <h3>Medicine</h3>
+                                                <h4>Medicine</h4>
                                                 <!-- table medicine -->
                                                 <table class="table table-striped" id="medicine">
                                                     <tr>
@@ -262,10 +262,8 @@
                                                                     th:text="${time}"></option>
                                                         </select>
                                                         </td>
-                                                        <td><input type="text" class="form-control"
-                                                                   th:field="*{medicalQuantity}"
-                                                                   style="width: 100px;"
-                                                                   placeholder="Quality"/></td>
+                                                        <td><input type="text" class="form-control" th:field="*{medicalQuantity}"
+                                                                   placeholder="Quanlity"/></td>
                                                         <td>
                                                             <input type="text" class="form-control"
                                                                    th:field="*{medicalNote}" placeholder="Advice"/>
@@ -280,7 +278,7 @@
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane" id="tab_2-2">
-                                                <h3>Foods</h3>
+                                                <h4>Foods</h4>
                                                 <table class="table table-striped" id="Foods">
                                                     <tr>
                                                         <th style="width: 10px">#</th>
@@ -305,9 +303,8 @@
                                                                         th:text="${time}"></option>
                                                             </select>
                                                         </td>
-                                                        <td><input type="text" class="form-control"
-                                                                   th:field="*{foodQuantity}"
-                                                                   style="width: 100px;" placeholder="Quantity"/></td>
+                                                        <td><input type="text" class="form-control" th:field="*{foodQuantity}"
+                                                                    placeholder="Quantity"/></td>
                                                         <td>
                                                             <input type="text" class="form-control"
                                                                    th:field="*{foodNote}" placeholder="Advice"/>
@@ -320,7 +317,7 @@
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane" id="tab_3-3">
-                                                <h3>Practices</h3>
+                                                <h4>Practices</h4>
                                                 <table class="table table-striped" id="Practice">
                                                     <tr>
                                                         <th style="width: 10px">#</th>
@@ -344,9 +341,8 @@
                                                                         th:text="${time}"></option>
                                                             </select>
                                                         </td>
-                                                        <td><input type="text" class="form-control"
-                                                                   th:field="*{practiceIntensity}"
-                                                                   style="width: 100px;" placeholder="Quantuty"/></td>
+                                                        <td><input type="text" class="form-control" th:field="*{practiceIntensity}"
+                                                                   placeholder="Quantity"/></td>
                                                         <td>
                                                             <input type="text" class="form-control"
                                                                    th:field="*{practiceNote}" placeholder="Advice"/>
@@ -463,40 +459,9 @@
     <!-- Multi select -->
     <script th:src="@{/static/bower/bootstrap-multiselect/dist/js/bootstrap-multiselect.js}"></script>
     <script th:src="@{/static/js/prettify.js}"></script>
-    <!-- registerPatient -->
-    <script th:src="@{/static/js/registerPatient.js}"></script>
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
-        /* For multiselect_medical.*/
-        $('#multiselect_medical').multiselect({
-            includeSelectAllOption: true,
-            nonSelectedText: 'Select Times',
-            nSelectedText: 'Select',
-            selectAllText: 'Select All',
-            numberDisplayed: 0,
-            buttonWidth: '140px'
-        });
-
-        /* For multiselect_food.*/
-        $('#multiselect_food').multiselect({
-            includeSelectAllOption: true,
-            nonSelectedText: 'Select Times',
-            nSelectedText: 'Select',
-            selectAllText: 'Select All',
-            numberDisplayed: 0,
-            buttonWidth: '140px'
-        });
-
-        /* For multiselect_practice.*/
-        $('#multiselect_practice').multiselect({
-            includeSelectAllOption: true,
-            nonSelectedText: 'Select Times',
-            nSelectedText: 'Select',
-            selectAllText: 'Select All',
-            numberDisplayed: 0,
-            buttonWidth: '140px'
-        });
         $("#combobox").combobox();
         $('#Appointment').datepicker({
             dateFormat: 'dd/mm/yy',
@@ -505,81 +470,93 @@
             changeYear: true,
         });
 
-        function toggle(div_id) {
-            var el = document.getElementById(div_id);
-            if (el.style.display == 'none') {
-                el.style.display = 'block';
-            }
-            else {
-                el.style.display = 'none';
-            }
-        }
-        ;
-        function blanket_size(popUpDivVar) {
-            if (typeof window.innerWidth != 'undefined') {
-                viewportheight = window.innerHeight;
-            } else {
-                viewportheight = document.documentElement.clientHeight;
-            }
-            if (viewportheight > document.body.parentNode.scrollHeight) {
-                if (viewportheight > document.body.parentNode.clientHeight) {
-                    blanket_height = viewportheight;
-                } else {
-                    if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
-                        blanket_height = document.body.parentNode.clientHeight;
-                    } else {
-                        blanket_height = document.body.parentNode.scrollHeight;
-                    }
-                }
-            } else {
-                if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
-                    blanket_height = document.body.parentNode.clientHeight;
-                } else {
-                    blanket_height = document.body.parentNode.scrollHeight;
-                }
-            }
-            var blanket = document.getElementById('blanket');
-            blanket.style.height = blanket_height + 'px';
-            var popUpDiv = document.getElementById(popUpDivVar);
-            popUpDiv_height = blanket_height / 2 - 150;//150 is half popup's height
-            popUpDiv.style.top = popUpDiv_height + 'px';
-        }
-        ;
-        function window_pos(popUpDivVar) {
-            if (typeof window.innerWidth != 'undefined') {
-                viewportwidth = window.innerHeight;
-            } else {
-                viewportwidth = document.documentElement.clientHeight;
-            }
-            if (viewportwidth > document.body.parentNode.scrollWidth) {
-                if (viewportwidth > document.body.parentNode.clientWidth) {
-                    window_width = viewportwidth;
-                } else {
-                    if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
-                        window_width = document.body.parentNode.clientWidth;
-                    } else {
-                        window_width = document.body.parentNode.scrollWidth;
-                    }
-                }
-            } else {
-                if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
-                    window_width = document.body.parentNode.clientWidth;
-                } else {
-                    window_width = document.body.parentNode.scrollWidth;
-                }
-            }
-            var popUpDiv = document.getElementById(popUpDivVar);
-            window_width = window_width / 2 - 200;//200 is half popup's width
-            popUpDiv.style.left = window_width + 'px';
-        }
-        ;
-        function popup(windowname) {
-            blanket_size(windowname);
-            window_pos(windowname);
-            toggle('blanket');
-            toggle(windowname);
-        }
-        ;
+        var countMedicine = 2;
+        function addRowMedicine(tableID) {
+            var tableElement = document.getElementById(tableID);
+            var newRow = tableElement.insertRow(tableElement.rows.length);
+            var newCell;
+
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = countMedicine + "/";
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = '<select class="form-control" name="medical" id="medical">'
+                    + '<option>Thuoc 1</option>'
+                    + '<option>Thuoc 2</option>'
+                    + '<option>Thuoc 3</option>'
+                    + '<option>Thuoc 4</option>'
+                    + '</select>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = '<select class="form-control" nam="medicalTime" id="medicalTime">'
+                    +'<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
+                    +'</select>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML =
+                    '<input type="text" class="form-control" name="medicalQuantity" id="medicalQuantity" placeholder="Quanlity"/>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML =
+                    '<input type="text" class="form-control" name="medicalNote" id="medicalNote" placeholder="Advice"/>';
+
+            countMedicine++;
+            return newRow;
+        };
+
+        var countFoods = 5;
+        function addRowFoods(tableID) {
+            var tableElement = document.getElementById(tableID);
+            var newRow = tableElement.insertRow(tableElement.rows.length);
+            var newCell;
+
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = countFoods + "/";
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = '<select class="form-control" name="food" id="food">'
+                    + '<option>Rau</option>'
+                    + '<option>Cơm</option>'
+                    + '<option>Trái cây</option>'
+                    + '<option>Bia Rượu</option>'
+                    + '</select>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML =
+                    '<select class="form-control" name="foodTime">'
+                    +'<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
+                    +'</select>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML ='<input type="text" class="form-control" name="foodQuantity" id="foodQuantity" placeholder="Quantity"/>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML ='<input type="text" class="form-control" name="foodNote" id="foodNote" placeholder="Advice"/>';
+
+            countFoods++;
+            return newRow;
+        };
+        var countPractice = 3;
+        function addRowPractice(tableID) {
+            var tableElement = document.getElementById(tableID);
+            var newRow = tableElement.insertRow(tableElement.rows.length);
+            var newCell;
+
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = countPractice + "/";
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML ='<select class="form-control" name="pratice" id="pratice">'
+                    + '<option>chạy bộ</option>'
+                    + '<option>Đi bộ</option>'
+                    + '<option>Chơi bóng bàn</option>'
+                    + '</select>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML =
+                    '<select class="form-control" name="practiceTime" id="practiceTime">'
+                    +'<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
+                    +'</select>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML =
+                    '<input type="text" class="form-control" placeholder="Quantity" name="praticeIntensity" id="praticeIntensity"/>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML =
+                    '<input type="text" class="form-control" name="practiceNote" id="practiceNote" placeholder="Advice"/>';
+
+            countPractice++;
+            return newRow;
+        };
     </script>
 </div>
 <!-- /.content-wrapper -->
