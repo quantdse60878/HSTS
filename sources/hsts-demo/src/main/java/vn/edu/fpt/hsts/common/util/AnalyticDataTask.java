@@ -6,8 +6,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
-import vn.edu.fpt.hsts.persistence.entity.MedicalRecordData;
+import vn.edu.fpt.hsts.persistence.entity.*;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordDataRepo;
+import vn.edu.fpt.hsts.persistence.repo.PracticeTreatmentRepo;
+import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -28,6 +30,10 @@ public class AnalyticDataTask {
 
     @Autowired
     MedicalRecordDataRepo medicalRecordDataRepo;
+    @Autowired
+    TreatmentRepo treatmentRepo;
+    @Autowired
+    PracticeTreatmentRepo practiceTreatmentRepo;
 
     @Scheduled(fixedRate = 1000*20)
     public void updatePatientData() {
@@ -56,6 +62,9 @@ public class AnalyticDataTask {
                 e.printStackTrace();
             }
 
+            Appointment appointment = recordData.getAppointment();
+            Treatment treatment = treatmentRepo.findTreatmentByAppointmentId(appointment.getId());
+            recordData.setRatioCompletePractice(calories/treatment.getCaloriesBurnEveryday());
         }
 
         medicalRecordDataRepo.save(listRecordData);

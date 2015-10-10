@@ -59,7 +59,17 @@ public class Treatment extends AbstractKeyEntity {
     private byte status;
 
 
+    private int caloriesBurnEveryday;
+
     public Treatment() {
+    }
+
+    public int getCaloriesBurnEveryday() {
+        return caloriesBurnEveryday;
+    }
+
+    public void setCaloriesBurnEveryday(int caloriesBurnEveryday) {
+        this.caloriesBurnEveryday = caloriesBurnEveryday;
     }
 
     public Appointment getAppointment() {

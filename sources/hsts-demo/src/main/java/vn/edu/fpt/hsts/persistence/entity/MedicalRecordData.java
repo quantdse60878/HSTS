@@ -47,6 +47,9 @@ public class MedicalRecordData extends AbstractKeyEntity {
      */
     private float distance;
 
+
+    private int ratioCompletePractice;
+
     /**
      *
      */
@@ -55,6 +58,13 @@ public class MedicalRecordData extends AbstractKeyEntity {
     public MedicalRecordData() {
     }
 
+    public int getRatioCompletePractice() {
+        return ratioCompletePractice;
+    }
+
+    public void setRatioCompletePractice(int ratioCompletePractice) {
+        this.ratioCompletePractice = ratioCompletePractice;
+    }
 
     public int getNumberOfStep() {
         return numberOfStep;

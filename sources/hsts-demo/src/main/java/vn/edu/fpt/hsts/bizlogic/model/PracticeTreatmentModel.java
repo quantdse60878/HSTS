@@ -10,10 +10,10 @@ import java.util.List;
 public class PracticeTreatmentModel implements Serializable {
 
         private String name;
-        private String quantitative;
+        private int quantitative;
         private int numberOfTime;
 
-    public PracticeTreatmentModel(String name, String quantitative, int numberOfTime) {
+    public PracticeTreatmentModel(String name, int quantitative, int numberOfTime) {
         this.name = name;
         this.quantitative = quantitative;
         this.numberOfTime = numberOfTime;
@@ -30,11 +30,11 @@ public class PracticeTreatmentModel implements Serializable {
         this.name = name;
     }
 
-    public String getQuantitative() {
+    public int getQuantitative() {
         return quantitative;
     }
 
-    public void setQuantitative(String quantitative) {
+    public void setQuantitative(int quantitative) {
         this.quantitative = quantitative;
     }
 

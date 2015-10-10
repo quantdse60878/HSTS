@@ -27,7 +27,7 @@ public class PracticeTreatment extends AbstractKeyEntity {
     /**
      *
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "practiceId", nullable = false)
     private Practice practice;
 
