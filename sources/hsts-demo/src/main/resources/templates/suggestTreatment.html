@@ -109,7 +109,7 @@
                                             <select id="combobox" th:name="diagnostic" class="form-control">
                                                 <option th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}" th:text="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name} : ''">Select one...</option>
                                                 <option th:each="illness : ${ILLNESSES}" th:value="${illness.id}"
-                                                        th:text="${illness.name}"></option>
+                                                        th:text="${illness.name}" th:unless="${DIAGNOSTIC.id == illness.id}"></option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2 pull-right">
@@ -123,7 +123,7 @@
                             <!-- ./form -->
                             <!-- form start -->
                             <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}">
-                                <input type="hidden" th:field="*{diagnostic}" th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"/>
+                                <input type="hidden" name="diagnostic" th:value="${DIAGNOSTIC.id}" th:if="${DIAGNOSTIC != null}"/>
 
                                 <div class="box-body">
 
@@ -134,14 +134,14 @@
                                     <div class="nav-tabs-custom" style="box-shadow: none;">
 
                                         <ul class="nav nav-tabs">
-                                            <li class="active"><a href="#tab_4-4" data-toggle="tab">Patient's Profile</a></li>
-                                            <li><a href="#tab_1-1" data-toggle="tab">Medicine</a></li>
+                                            <li><a href="#tab_4-4" data-toggle="tab">Patient's Profile</a></li>
+                                            <li class="active"><a href="#tab_1-1" data-toggle="tab">Medicine</a></li>
                                             <li><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
                                             <li><a href="#tab_3-3" data-toggle="tab">Practices</a></li>
                                         </ul>
 
                                         <div class="tab-content">
-                                            <div class="tab-pane active" id="tab_4-4">
+                                            <div class="tab-pane" id="tab_4-4">
                                                 <h4>Patient's Profile</h4>
                                                 <!-- box-body -->
                                                 <div class="box-body" th:with="ACC=${APPOINTMENT.medicalRecord.patient.account}">
@@ -237,7 +237,7 @@
                                                 <!-- /.box-body -->
                                             </div>
                                             <!-- /.tab-pane -->
-                                            <div class="tab-pane" id="tab_1-1">
+                                            <div class="tab-pane active" id="tab_1-1">
                                                 <h4>Medicine</h4>
                                                 <!-- table medicine -->
                                                 <table class="table table-striped" id="medicine">
@@ -248,13 +248,16 @@
                                                         <th>Quanlity</th>
                                                         <th>Note</th>
                                                     </tr>
-                                                    <tr>
-                                                        <td>1</td>
+                                                    <tr th:each="medicalPhase,row : ${PHASE.medicinePhaseList}">
+                                                        <td th:text="${row.count}"></td>
                                                         <td>
                                                             <select class="form-control" th:field="*{medical}">
-
-                                                                <option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"
-                                                                        th:text="${medicine.name}"></option>
+                                                                <option th:value="${medicalPhase.medicine.id}"
+                                                                        th:text="${medicalPhase.medicine.name}"></option>
+                                                                <option th:each="medicine : ${MEDICINES}"
+                                                                        th:value="${medicine.id}"
+                                                                        th:text="${medicine.name}"
+                                                                        th:if="${medicalPhase.medicine.id != medicine.id}"></option>
                                                             </select>
                                                         </td>
                                                         <td><select class="form-control" th:field="*{medicalTime}">
@@ -287,12 +290,16 @@
                                                         <th>Quantitative</th>
                                                         <th>Note</th>
                                                     </tr>
-                                                    <tr>
-                                                        <td>1</td>
+                                                    <tr th:each="foodPhase,row : ${PHASE.foodPhaseList}">
+                                                        <td th:text="${row.count}"></td>
                                                         <td>
                                                             <select class="form-control" th:field="*{food}">
-                                                                <option th:each="food : ${FOODS}" th:value="${food.id}"
-                                                                        th:text="${food.name}"></option>
+                                                                <option th:value="${foodPhase.food.id}"
+                                                                        th:text="${foodPhase.food.name}"></option>
+                                                                <option th:each="food : ${FOODS}"
+                                                                        th:value="${food.id}"
+                                                                        th:text="${food.name}"
+                                                                        th:if="${foodPhase.food.id != food.id}"></option>
                                                             </select>
                                                         </td>
                                                         <td>
@@ -324,12 +331,16 @@
                                                         <th>Quantitative</th>
                                                         <th>Note</th>
                                                     </tr>
-                                                    <tr>
-                                                        <td>1</td>
+                                                    <tr th:each="practicePhase,row : ${PHASE.practicePhaseList}">
+                                                        <td th:text="${row.count}"></td>
                                                         <td>
                                                             <select class="form-control" th:field="*{practice}">
-                                                                <option th:each="practice : ${PRACTICES}" th:value="${practice.id}"
-                                                                        th:text="${practice.name}"></option>
+                                                                <option th:value="${practicePhase.practice.id}"
+                                                                        th:text="${practicePhase.practice.name}"></option>
+                                                                <option th:each="practice : ${PRACTICES}"
+                                                                        th:value="${practice.id}"
+                                                                        th:text="${practice.name}"
+                                                                        th:if="${practicePhase.practice.id != practice.id}"></option>
                                                             </select>
                                                         </td>
                                                         <td>
@@ -494,7 +505,7 @@
             return newRow;
         };
 
-        var countFoods = 2;
+        var countFoods = 5;
         function addRowFoods(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
@@ -519,7 +530,7 @@
             countFoods++;
             return newRow;
         };
-        var countPractice = 2;
+        var countPractice = 3;
         function addRowPractice(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);

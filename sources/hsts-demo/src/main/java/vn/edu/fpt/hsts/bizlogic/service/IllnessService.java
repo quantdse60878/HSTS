@@ -24,6 +24,6 @@ public class IllnessService {
     }
 
     public Illness findByID(final int illnessID) {
-        return illnessRepo.getOne(illnessID);
+        return illnessRepo.findOne(illnessID);
     }
 }

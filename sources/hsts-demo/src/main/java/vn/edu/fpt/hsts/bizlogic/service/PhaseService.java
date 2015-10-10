@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
 import vn.edu.fpt.hsts.persistence.repo.PhaseRepo;
 
+import java.util.List;
+
 /**
  * Created by Aking on 10/9/2015.
  */
@@ -19,5 +21,9 @@ public class PhaseService {
 
     public Phase findPhaseByIllnessID(final int illnessID){
         return phaseRepo.findPhaseByIllnessID(illnessID);
+    }
+
+    public Phase findByID(final int phaseID){
+        return phaseRepo.getOne(phaseID);
     }
 }
