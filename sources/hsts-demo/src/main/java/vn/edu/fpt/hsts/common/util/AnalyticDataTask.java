@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.*;
-import vn.edu.fpt.hsts.persistence.repo.MedicalRecordDataRepo;
-import vn.edu.fpt.hsts.persistence.repo.PracticeTreatmentRepo;
-import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
+import vn.edu.fpt.hsts.persistence.repo.*;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -34,6 +32,10 @@ public class AnalyticDataTask {
     TreatmentRepo treatmentRepo;
     @Autowired
     PracticeTreatmentRepo practiceTreatmentRepo;
+    @Autowired
+    NotifyRepo notifyRepo;
+    @Autowired
+    AccountRepo accountRepo;
 
     @Scheduled(fixedRate = 1000*20)
     public void updatePatientData() {
@@ -64,7 +66,29 @@ public class AnalyticDataTask {
 
             Appointment appointment = recordData.getAppointment();
             Treatment treatment = treatmentRepo.findTreatmentByAppointmentId(appointment.getId());
-            recordData.setRatioCompletePractice(calories/treatment.getCaloriesBurnEveryday());
+            int ratioComplete = (calories*100)/treatment.getCaloriesBurnEveryday();
+            recordData.setRatioCompletePractice(ratioComplete);
+            if(ratioComplete < 55) {
+                MedicalRecord medicalRecord = appointment.getMedicalRecord();
+                Account sender = medicalRecord.getDoctor().getAccount();
+                Account receiverId = medicalRecord.getPatient().getAccount();
+                Notify notify = new Notify();
+                notify.setSender(sender);
+                notify.setReceiver(receiverId);
+                notify.setType((byte) 5);
+                notify.setStatus((byte) 1);
+                notifyRepo.save(notify);
+            } else if (ratioComplete > 130) {
+                MedicalRecord medicalRecord = appointment.getMedicalRecord();
+                Account sender = medicalRecord.getDoctor().getAccount();
+                Account receiverId = medicalRecord.getPatient().getAccount();
+                Notify notify = new Notify();
+                notify.setSender(sender);
+                notify.setReceiver(receiverId);
+                notify.setType((byte) 6);
+                notify.setStatus((byte) 1);
+                notifyRepo.save(notify);
+            }
         }
 
         medicalRecordDataRepo.save(listRecordData);

@@ -28,7 +28,7 @@ public class Appointment extends AbstractKeyEntity {
     /**
      * The medical record.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name ="medicalRecordId", nullable = false)
     private MedicalRecord medicalRecord;
 

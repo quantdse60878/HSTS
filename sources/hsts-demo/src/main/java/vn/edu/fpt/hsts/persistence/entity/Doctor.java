@@ -20,7 +20,7 @@ public class Doctor extends AbstractKeyEntity {
     /**
      * The user.
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "accountId", nullable = false)
     private Account account;
 
