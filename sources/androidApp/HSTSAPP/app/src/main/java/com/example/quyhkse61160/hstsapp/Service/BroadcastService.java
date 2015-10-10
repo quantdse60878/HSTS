@@ -223,6 +223,10 @@ public class BroadcastService extends Service {
                     int notifyId = Integer.parseInt(notifyItem.getString("notifyId"));
                     if(notifyType == 2) {
                         getNewTreatment(notifyId);
+                    } else if (notifyType == 5) {
+                        //Mo ung dung hien thong bao la benh nhan hom truoc chua hoan thanh duoc bai tap cua minh
+                    } else if (notifyType == 6) {
+                        //Mo ung dung hien thong bao la benh nhan hom truoc da hoan thanh qua muc can thiet va can giam cuong do luyen tap de bao ve suc khoe
                     }
                 }
 
