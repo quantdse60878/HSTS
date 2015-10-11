@@ -74,158 +74,177 @@
             <div class="col-md-12">
                 <div class="box box-default">
 
-                        <div class="box-body">
-                            <div class="box-header">
-                                <h4 class="col-md-6" style="margin-top: 4px;"><i class="fa fa-th"></i> Prescriptions</h4>
+                    <div class="box-body">
+                        <div class="box-header">
+                            <h4 class="col-md-6" style="margin-top: 4px;"><i class="fa fa-th"></i> Prescriptions</h4>
 
-                                <!-- input-group -->
-                                <div class="input-group col-md-3 pull-right">
-                                    <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle"
-                                                data-toggle="dropdown">
-                                            <span th:text="${#dates.format(APPOINTMENT.meetingDate, 'dd-MM-yyyy')}"></span>
-                                            <span class="fa fa-caret-down"></span>
-                                        </button>
-                                        <ul class="dropdown-menu"
-                                            th:each="appointment : ${APPOINTMENT.medicalRecord.appointmentList}">
-                                            <li><a href="@{/viewPrescription(appointmentID=${appointment.id})}" class="btn btn-default"
-                                                   th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- /btn-group -->
+                            <!-- input-group -->
+                            <div class="input-group col-md-3 pull-right">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown">
+                                        <span th:text="${#dates.format(APPOINTMENT.meetingDate, 'dd-MM-yyyy')}"></span>
+                                        <span class="fa fa-caret-down"></span>
+                                    </button>
+                                    <ul class="dropdown-menu"
+                                        th:each="appointment : ${APPOINTMENT.medicalRecord.appointmentList}">
+                                        <li><a href="@{/viewPrescription(appointmentID=${appointment.id})}"
+                                               class="btn btn-default"
+                                               th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <!-- /input-group -->
-                                <h4 class="col-md-3 pull-right"> Information Date</h4>
+                                <!-- /btn-group -->
                             </div>
-                            <!-- /.box-header -->
-                            <!-- form start -->
-                            <form th:action="suggestTreatment" method="get">
-                                <div class="box-body">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">Diagnostic</label>
-                                        <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
-                                        <!--<input type="hidden" th:name="patientID" th:value="${APPOINTMENT.medicalRecord.patient.id}"/>-->
-                                        <div class="col-sm-4 ui-widget">
-                                            <select id="combobox" th:name="diagnostic" class="form-control">
-                                                <option th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}" th:text="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name} : ''">Select one...</option>
-                                                <option th:each="illness : ${ILLNESSES}" th:value="${illness.id}"
-                                                        th:text="${illness.name}"></option>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2 pull-right">
-                                            <button type="submit" class="btn btn-primary">Suggest</button>
-                                        </div>
-                                    </div>
-                                    <!-- ./form-group -->
-                                </div>
-                                <!-- ./box-body -->
-                            </form>
-                            <!-- ./form -->
-                            <!-- form start -->
-                            <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}">
-                                <input type="hidden" th:field="*{diagnostic}" th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"/>
-
-                                <div class="box-body">
-
-                                    <!-- Sidebar Menu -->
-                                    <!-- START CUSTOM TABS -->
-                                    <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
-                                    <!-- Custom Tabs (Pulled to the left) -->
-                                    <div class="nav-tabs-custom" style="box-shadow: none;">
-
-                                        <ul class="nav nav-tabs">
-                                            <li class="active"><a href="#tab_4-4" data-toggle="tab">Patient's Profile</a></li>
-                                            <li><a href="#tab_1-1" data-toggle="tab">Medicine</a></li>
-                                            <li><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
-                                            <li><a href="#tab_3-3" data-toggle="tab">Practices</a></li>
-                                            <li><a href="#tab_5-5" data-toggle="tab">Appointment</a></li>
-                                        </ul>
-
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="tab_4-4">
-                                                <!-- patient's Profile -->
-                                                <div layout:replace="_patientProfile"></div>
-                                                <!-- /.patient's Profile -->
-                                            </div>
-                                            <!-- /.tab-pane -->
-                                            <div class="tab-pane" id="tab_1-1">
-                                                <div th:if="${PHASE == null}">
-                                                    <!-- medicine tab -->
-                                                    <div layout:replace="_medicinePrecription"></div>
-                                                    <!-- /.medicine tab -->
-                                                </div>
-
-                                                <div th:if="${PHASE != null}">
-                                                    <!-- medicine Suggest -->
-                                                    <div layout:replace="_medicineSuggest" ></div>
-                                                    <!-- /.medicine Suggest -->
-                                                </div>
-
-                                            </div>
-                                            <!-- /.tab-pane -->
-                                            <div class="tab-pane" id="tab_2-2">
-                                                <div th:if="${PHASE == null}">
-                                                    <!-- food tab -->
-                                                    <div layout:replace="_foodPrescription"></div>
-                                                    <!-- /.food tab -->
-                                                </div>
-
-                                                <div th:if="${PHASE != null}">
-                                                    <!-- food Suggest -->
-                                                    <div layout:replace="_foodSuggest"></div>
-                                                    <!-- /.food Suggest -->
-                                                </div>
-
-                                            </div>
-                                            <!-- /.tab-pane -->
-                                            <div class="tab-pane" id="tab_3-3">
-                                                <div th:if="${PHASE == null}">
-                                                    <!-- practice tab -->
-                                                    <div layout:replace="_practicePrescription" ></div>
-                                                    <!-- /.practice tab -->
-                                                </div>
-
-                                                <div th:if="${PHASE != null}">
-                                                    <!-- practice Suggest -->
-                                                    <div layout:replace="_practiceSuggest"></div>
-                                                    <!-- /.practice Suggest -->
-                                                </div>
-
-                                            </div>
-                                            <!-- /.tab-pane -->
-                                            <!-- tab-pane -->
-                                            <div class="tab-pane" id="tab_5-5">
-
-                                                    <h4>Appointment</h4>
-                                                <div class="form-group box-body">
-                                                    <label for="Appointment" class="col-sm-3 control-label">Appointment Date</label>
-
-                                                    <div class="col-sm-4">
-                                                        <input class="form-control" type="text" name="appointmentDate"
-                                                               id="Appointment" data-provide="Appointment"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /.tab-pane -->
-                                        </div>
-                                        <!-- /.tab-content -->
-                                    </div>
-                                    <!-- nav-tabs-custom -->
-                                    <!-- END CUSTOM TABS -->
-                                </div>
-                                <!-- /.box-body -->
-                                <!-- footer -->
-                                <div class="box-footer">
-                                    <button type="reset" class="btn btn-default">Cancel</button>
-                                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
-                                </div>
-                                <!-- /.footer -->
-                            </form>
-                            <!-- /.form -->
+                            <!-- /input-group -->
+                            <h4 class="col-md-3 pull-right"> Information Date</h4>
                         </div>
-                        <!-- /.col -->
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form th:action="suggestTreatment" method="get">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Diagnostic</label>
+                                    <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
+                                    <!--<input type="hidden" th:name="patientID" th:value="${APPOINTMENT.medicalRecord.patient.id}"/>-->
+                                    <div class="col-sm-4 ui-widget">
+                                        <select id="combobox" th:name="diagnostic" class="form-control">
+                                            <option th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"
+                                                    th:text="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name} : ''">Select
+                                                one...
+                                            </option>
+                                            <option th:each="illness : ${ILLNESSES}" th:value="${illness.id}"
+                                                    th:text="${illness.name}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2 pull-right">
+                                        <button type="submit" class="btn btn-primary">Suggest</button>
+                                    </div>
+                                </div>
+                                <!-- ./form-group -->
+                            </div>
+                            <!-- ./box-body -->
+                        </form>
+                        <!-- ./form -->
+                        <!-- form start -->
+                        <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}">
+                            <input type="hidden" th:field="*{diagnostic}"
+                                   th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"/>
 
+                            <div class="box-body">
+
+                                <!-- Sidebar Menu -->
+                                <!-- START CUSTOM TABS -->
+                                <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
+                                <!-- Custom Tabs (Pulled to the left) -->
+                                <div class="nav-tabs-custom" style="box-shadow: none;">
+
+                                    <ul class="nav nav-tabs">
+                                        <li class="active" th:if="${PHASE == null}"><a href="#tab_4-4"
+                                                                                       data-toggle="tab">Patient's
+                                            Profile</a></li>
+                                        <li th:if="${PHASE != null}"><a href="#tab_4-4" data-toggle="tab">Patient's
+                                            Profile</a></li>
+                                        <li class="active" th:if="${PHASE != null}"><a href="#tab_1-1"
+                                                                                       data-toggle="tab">Medicine</a>
+                                        </li>
+                                        <li th:if="${PHASE == null}"><a href="#tab_1-1" data-toggle="tab">Medicine</a>
+                                        </li>
+                                        <li><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
+                                        <li><a href="#tab_3-3" data-toggle="tab">Practices</a></li>
+                                        <li><a href="#tab_5-5" data-toggle="tab">Appointment</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab_4-4" th:if="${PHASE == null}">
+                                            <!-- patient's Profile -->
+                                            <div layout:replace="_patientProfile"></div>
+                                            <!-- /.patient's Profile -->
+                                        </div>
+                                        <div class="tab-pane" id="tab_4-4" th:if="${PHASE != null}">
+                                            <!-- patient's Profile -->
+                                            <div layout:replace="_patientProfile"></div>
+                                            <!-- /.patient's Profile -->
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="tab_1-1" th:if="${PHASE == null}">
+
+                                            <!-- medicine tab -->
+                                            <div layout:replace="_medicinePrecription"></div>
+                                            <!-- /.medicine tab -->
+                                        </div>
+
+                                        <div th:if="${PHASE != null}" class="tab-pane active" id="tab_1-1">
+                                            <!-- medicine Suggest -->
+                                            <div layout:replace="_medicineSuggest"></div>
+                                            <!-- /.medicine Suggest -->
+                                        </div>
+
+
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="tab_2-2">
+                                            <div th:if="${PHASE == null}">
+                                                <!-- food tab -->
+                                                <div layout:replace="_foodPrescription"></div>
+                                                <!-- /.food tab -->
+                                            </div>
+
+                                            <div th:if="${PHASE != null}">
+                                                <!-- food Suggest -->
+                                                <div layout:replace="_foodSuggest"></div>
+                                                <!-- /.food Suggest -->
+                                            </div>
+
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="tab_3-3">
+                                            <div th:if="${PHASE == null}">
+                                                <!-- practice tab -->
+                                                <div layout:replace="_practicePrescription"></div>
+                                                <!-- /.practice tab -->
+                                            </div>
+
+                                            <div th:if="${PHASE != null}">
+                                                <!-- practice Suggest -->
+                                                <div layout:replace="_practiceSuggest"></div>
+                                                <!-- /.practice Suggest -->
+                                            </div>
+
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <!-- tab-pane -->
+                                        <div class="tab-pane" id="tab_5-5">
+
+                                            <h4>Appointment</h4>
+
+                                            <div class="form-group box-body">
+                                                <label for="Appointment" class="col-sm-3 control-label">Appointment
+                                                    Date</label>
+
+                                                <div class="col-sm-4">
+                                                    <input class="form-control" type="text" name="appointmentDate"
+                                                           id="Appointment" data-provide="Appointment"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                <!-- nav-tabs-custom -->
+                                <!-- END CUSTOM TABS -->
+                            </div>
+                            <!-- /.box-body -->
+                            <!-- footer -->
+                            <div class="box-footer">
+                                <button type="reset" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                            </div>
+                            <!-- /.footer -->
+                        </form>
+                        <!-- /.form -->
+                    </div>
+                    <!-- /.col -->
 
 
                 </div>
@@ -338,8 +357,8 @@
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<select class="form-control" nam="mPresModel.mTime" id="mPresModel.mTime">'
-                    +'<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
-                    +'</select>';
+                    + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
+                    + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" name="mPresModel.mQuantity" id="mPresModel.mQuantity" placeholder="Quanlity"/>';
@@ -349,7 +368,8 @@
 
             countMedicine++;
             return newRow;
-        };
+        }
+        ;
 
         var countFoods = 2;
         function addRowFoods(tableID) {
@@ -366,16 +386,17 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<select class="form-control" name="fPresModel.fTime" id="fPresModel.fTime">'
-                    +'<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
-                    +'</select>';
+                    + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
+                    + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML ='<input type="text" class="form-control" name="fPresModel.fQuantity" id="fPresModel.fQuantity" placeholder="Quantity"/>';
+            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModel.fQuantity" id="fPresModel.fQuantity" placeholder="Quantity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML ='<input type="text" class="form-control" name="fPresModel.fNote" id="fPresModel.fNote" placeholder="Advice"/>';
+            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModel.fNote" id="fPresModel.fNote" placeholder="Advice"/>';
 
             countFoods++;
             return newRow;
-        };
+        }
+        ;
         var countPractice = 2;
         function addRowPractice(tableID) {
             var tableElement = document.getElementById(tableID);
@@ -385,14 +406,14 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = countPractice;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML ='<select class="form-control" name="pPresModel.p" id="pPresModel.p">'
+            newCell.innerHTML = '<select class="form-control" name="pPresModel.p" id="pPresModel.p">'
                     + '<option th:each="practice : ${PRACTICES}" th:value="${practice.id}" th:text="${practice.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<select class="form-control" name="pPresModel.pTime" id="pPresModel.pTime">'
-                    +'<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
-                    +'</select>';
+                    + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
+                    + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" placeholder="Quantity" name="pPresModel.pIntensity" id="pPresModel.pIntensity"/>';
@@ -402,7 +423,8 @@
 
             countPractice++;
             return newRow;
-        };
+        }
+        ;
     </script>
 </div>
 <!-- /.content-wrapper -->
