@@ -136,24 +136,26 @@ public class DoctorController extends AbstractController{
      * @return
      */
     @RequestMapping(value = "suggestTreatment", method = RequestMethod.GET)
-    public ModelAndView suggestTreatment(@RequestParam("patientID") final int patientID,
-                                         @RequestParam("diagnostic") final int diagnostic) {
+    public ModelAndView suggestTreatment(@RequestParam(value = "appointmentId") final int appointmentId,
+                                         @RequestParam("diagnostic") final int diagnostic) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+
             ModelAndView mav = new ModelAndView();
             mav.setViewName("suggestTreatment");
             // Initialization Data Prescription
             initDataPrescription(mav);
+
             // Find phase for diagnostic
-            Phase phase = phaseService.findByID(1);
+            final Phase phase = illnessService.getPhaseSugestion(appointmentId, diagnostic);
+
             mav.addObject("PHASE", phase);
             // Find illness form diagnostic
             Illness illness = illnessService.findByID(diagnostic);
             mav.addObject("DIAGNOSTIC", illness);
             // Find Appointment
-            Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
+            Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
-
 
             mav.addObject("model", new PrescriptionModel());
             return mav;

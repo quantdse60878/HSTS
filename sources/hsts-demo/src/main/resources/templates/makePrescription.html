@@ -104,7 +104,8 @@
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Diagnostic</label>
-                                        <input type="hidden" th:name="patientID" th:value="${APPOINTMENT.medicalRecord.patient.id}"/>
+                                        <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
+                                        <!--<input type="hidden" th:name="patientID" th:value="${APPOINTMENT.medicalRecord.patient.id}"/>-->
                                         <div class="col-sm-4 ui-widget">
                                             <select id="combobox" th:name="diagnostic" class="form-control">
                                                 <option th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}" th:text="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name} : ''">Select one...</option>
@@ -129,7 +130,7 @@
 
                                     <!-- Sidebar Menu -->
                                     <!-- START CUSTOM TABS -->
-                                    <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentID"/>
+                                    <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
                                     <!-- Custom Tabs (Pulled to the left) -->
                                     <div class="nav-tabs-custom" style="box-shadow: none;">
 

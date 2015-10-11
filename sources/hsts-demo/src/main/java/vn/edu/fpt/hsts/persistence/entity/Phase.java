@@ -27,12 +27,21 @@ public class Phase extends AbstractKeyEntity {
     @JoinColumn(name = "regimenId", referencedColumnName = "id", nullable = false)
     private Regimen regimen;
 
+    /**
+     *
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "phase")
     private List<MedicinePhase> medicinePhaseList;
 
+    /**
+     *
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "phase")
     private List<PracticePhase> practicePhaseList;
 
+    /**
+     *
+     */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "phase")
     private List<FoodPhase> foodPhaseList;
 
