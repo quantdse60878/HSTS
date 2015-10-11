@@ -9,10 +9,13 @@ package vn.edu.fpt.hsts.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.util.StringUtils;
+import vn.edu.fpt.hsts.web.session.UserSession;
 
 /**
  * Home controller, for processing common mapping, redirect, etc.
@@ -22,25 +25,33 @@ public class HomeController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
+    /**
+     * The {@link UserSession}
+     */
+    @Autowired
+    private UserSession userSession;
+
     @RequestMapping(value = "/")
-    public ModelAndView home() {
+    public String home() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("home");
-            return modelAndView;
+            if (StringUtils.isEmpty(userSession.getUsername())) {
+               return "redirect:/login";
+            }
+            return "home";
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
 
     @RequestMapping(value = "home")
-    public ModelAndView homePage() {
+    public String homePage() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("home");
-            return modelAndView;
+            if (StringUtils.isEmpty(userSession.getUsername())) {
+                return "redirect:/login";
+            }
+            return "home";
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
