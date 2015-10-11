@@ -125,8 +125,6 @@ public class NurseController extends AbstractController {
         }
     }
 
-
-
     @RequestMapping(value = "searchPatient", method = RequestMethod.GET)
     public ModelAndView nursePatientsPage() {
         LOGGER.info(IConsts.BEGIN_METHOD);

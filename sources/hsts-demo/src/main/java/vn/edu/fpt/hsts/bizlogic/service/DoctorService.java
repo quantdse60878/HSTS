@@ -162,7 +162,7 @@ public class DoctorService extends AbstractService {
             appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
             Date toDate = null;
             if (StringUtils.isNotEmpty(appointmentDate)) {
-                toDate = DateUtils.parseDate(appointmentDate, DateUtils.DATE_PATTERN_1);
+                toDate = DateUtils.parseDate(appointmentDate, DateUtils.DATE_PATTERN_3);
                 if (null == toDate) {
                     throw new BizlogicException("Wrong input date format: {}", null, appointmentDate);
                 }

@@ -8,6 +8,7 @@
 	"ionicons": null,
 	"bootstrap-multiselect": "0.9.13",
 	"jquery": "2.1.4",
-	"jquery-ui": "1.11.4"
+	"jquery-ui": "1.11.4",
+	"select2": "3.4.5"
   }
 }
