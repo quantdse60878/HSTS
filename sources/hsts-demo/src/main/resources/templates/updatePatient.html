@@ -6,92 +6,204 @@
 <body>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" layout:fragment="body">
+    <style>
+        .custom-combobox {
+            position: relative;
+            display: inline-block;
+        }
+
+        .custom-combobox-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+        }
+
+        .custom-combobox-input {
+            margin: 0;
+            padding: 5px 10px;
+        }
+    </style>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Search Patients
+            Update Patient
+            <small th:text="${PATIENT.account.fullname}"></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Search Patients</li>
+            <li class="active">Patient's Profile</li>
         </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
-
         <!-- Your Page Content Here -->
+        <!-- row -->
         <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header" style="padding: 0px;">
-                        <div class="form-group">
-                            <h3 class="col-sm-1 control-label">Name</h3>
+            <div class="col-md-12">
 
-                            <div class="col-sm-4">
-                                <!-- search form (Optional) -->
-                                <form th:action="nursePatients" method="get" class="sidebar-form">
-                                    <div class="input-group">
-                                        <input type="text" th:name="q" class="form-control" placeholder="Search..."/>
-                          <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i></button>
-                          </span>
-                                    </div>
-                                </form>
-                                <!-- /.search form -->
-                            </div>
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Patient's Profile</h3>
                         </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <table id="dataTable" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Name</th>
-                                <th>Birthday</th>
-                                <th>Gender</th>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form class="form-horizontal" method="POST" th:action="updatePatient">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="Name" class="col-sm-3 control-label">Name</label>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:if="${LISTPATIENTS == null}">
-                                <td colspan="5">No Patient for today!!!</td>
-                            </tr>
-                            <tr th:each="patient,rowStat : ${LISTPATIENTS}">
-                                <td th:text="${rowStat.count}">No.</td>
-                                <td><a th:href="@{/medicalHistory(patientID=${patient.id})}"
-                                       th:text="${patient.account.fullname}">Name</a></td>
-                                <td><a th:href="@{/medicalHistory(patientID=${patient.id})}"
-                                       th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</a>
-                                </td>
-                                <td><a th:href="@{/medicalHistory(patientID=${patient.id})}"
-                                       th:text="*{patient.account.gender == 1}? 'Male' : 'Female'">Gender</a></td>
+                                    <div class="col-sm-5">
+                                        <input type="text" th:name="patientName" class="form-control"
+                                               th:value="${PATIENT.account.fullname}" readonly="readonly"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Birthday" class="col-sm-3 control-label">Birthday</label>
 
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>No.</th>
-                                <th>Name</th>
-                                <th>Birthday</th>
-                                <th>Gender</th>
-                                <th style="width: 40px;">#</th>
-                            </tr>
-                            </tfoot>
-                        </table>
+                                    <div class="col-sm-3">
+                                        <input type="text" th:name="birthday" class="form-control" readonly="readonly"
+                                               th:value="${#dates.format(PATIENT.account.dateOfBirth, 'dd-MM-yyyy')}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Email" class="col-sm-3 control-label">Email</label>
+
+                                    <div class="col-sm-5">
+                                        <input type="text" th:name="email" class="form-control"
+                                                th:value="${PATIENT.account.email}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Gender</label>
+
+                                    <div class="radio col-sm-5">
+                                        <label>
+                                            <input type="radio" th:name="gender" id="optionsRadios1" checked="checked"
+                                                   value="1" th:if="${PATIENT.account.gender == 1}"/>
+                                            <input type="radio" th:name="gender" id="optionsRadios1"
+                                                   value="1" th:if="${PATIENT.account.gender != 1}"/>
+                                            Male
+                                        </label>
+                                        <label>
+                                            <input type="radio" th:name="gender" id="optionsRadios2" value="2" checked="checked"
+                                                   th:if="${PATIENT.account.gender == 2}"/>
+                                            <input type="radio" th:name="gender" id="optionsRadios2" value="2"
+                                                   th:if="${PATIENT.account.gender != 2}"/>
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Weight" class="col-sm-3 control-label">Weight</label>
+
+                                    <div class="col-sm-2">
+                                        <input type="text" th:name="weight" class="form-control" id="Weight"
+                                               placeholder="Weight"/>
+                                    </div>
+                                    <label for="Weight" class="col-sm-1 control-label"> Kg</label>
+
+                                    <label for="Height" class="col-sm-2 control-label">Height</label>
+
+                                    <div class="col-sm-2">
+                                        <input type="text" th:name="height" class="form-control" id="Height"
+                                               placeholder="Height"/>
+                                    </div>
+                                    <label for="Height" class="col-sm-1 control-label"> Cm</label>
+                                </div>
+                                <!-- select -->
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Doctor</label>
+
+                                    <div class="col-sm-5 ui-widget">
+                                        <select id="combobox" class="form-control" th:name="doctorId">
+                                            <option value="">Select one...</option>
+                                            <option th:each="doctor : ${DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.username}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Medicalhistory" class="col-sm-3 control-label">Medical history</label>
+
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" placeholder="Medical history" name="medicalHistory" rows="3">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="clinicalSymptoms" class="col-sm-3 control-label">Clinical
+                                        symptoms</label>
+
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" placeholder="Clinical symptoms" name="symptoms" rows="3">
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="reset" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="btn btn-primary pull-right">Register</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </form>
                     </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
+                    <!-- /.box -->
+
             </div>
             <!-- /.col -->
         </div>
         <!-- /.row -->
+
     </section>
     <!-- /.content -->
 
+    <!-- jQueryUI -->
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <script th:src="@{/static/bower/jquery-ui/jquery-ui.js}"></script>
+    <!-- registerPatient -->
+    <script th:src="@{/static/js/registerPatient.js}"></script>
+    <!-- script add -->
+    <script>
+        $("#combobox").combobox();
+        $("#Birthday").datepicker({
+            changeMonth: true,
+            dateFormat: 'dd-mm-yy',
+            changeYear: true
+        });
+        var countMedicalhistory = 2;
+        var countClinicalSymptoms = 2;
+
+        function addRowMedicalhistory(tableID) {
+            var tableElement = document.getElementById(tableID);
+            var newRow = tableElement.insertRow(tableElement.rows.length);
+            var newCell;
+
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = countMedicalhistory + "/";
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = '<input type="text" class="form-control" placeholder="Medical history"/>';
+
+            countMedicalhistory++;
+            return newRow;
+        }
+        ;
+        function addRowClinicalSymptoms(tableID) {
+            var tableElement = document.getElementById(tableID);
+            var newRow = tableElement.insertRow(tableElement.rows.length);
+            var newCell;
+
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = countClinicalSymptoms + "/";
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = '<input type="text" class="form-control" placeholder="Clinical Symptoms"/>';
+
+            countClinicalSymptoms++;
+            return newRow;
+        }
+        ;
+    </script>
 </div>
 <!-- /.content-wrapper -->
 

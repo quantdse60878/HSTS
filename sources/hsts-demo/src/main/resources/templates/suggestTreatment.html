@@ -285,13 +285,19 @@
                                                 <table class="table table-striped" id="Foods">
                                                     <tr>
                                                         <th style="width: 10px">#</th>
-                                                        <th>Name</th>
                                                         <th>Times</th>
+                                                        <th>Menu</th>
                                                         <th>Quantitative</th>
                                                         <th>Note</th>
                                                     </tr>
                                                     <tr th:each="foodPhase,row : ${PHASE.foodPhaseList}">
                                                         <td th:text="${row.count}"></td>
+                                                        <td>
+                                                            <select class="form-control" th:field="*{foodTime}" th:if="${row.count == 1}">
+                                                                <option th:each="time : ${TIMES}" th:value="${time}"
+                                                                        th:text="${time}"></option>
+                                                            </select>
+                                                        </td>
                                                         <td>
                                                             <select class="form-control" th:field="*{food}">
                                                                 <option th:value="${foodPhase.food.id}"
@@ -302,12 +308,7 @@
                                                                         th:if="${foodPhase.food.id != food.id}"></option>
                                                             </select>
                                                         </td>
-                                                        <td>
-                                                            <select class="form-control" th:field="*{foodTime}">
-                                                                <option th:each="time : ${TIMES}" th:value="${time}"
-                                                                        th:text="${time}"></option>
-                                                            </select>
-                                                        </td>
+
                                                         <td><input type="text" class="form-control" th:field="*{foodQuantity}"
                                                                     placeholder="Quantity"/></td>
                                                         <td>
@@ -326,13 +327,19 @@
                                                 <table class="table table-striped" id="Practice">
                                                     <tr>
                                                         <th style="width: 10px">#</th>
-                                                        <th>Name</th>
                                                         <th>Times</th>
+                                                        <th>Name</th>
                                                         <th>Quantitative</th>
                                                         <th>Note</th>
                                                     </tr>
                                                     <tr th:each="practicePhase,row : ${PHASE.practicePhaseList}">
                                                         <td th:text="${row.count}"></td>
+                                                        <td>
+                                                            <select class="form-control" th:field="*{practiceTime}" th:if="${row.count == 1}">
+                                                                <option th:each="time : ${TIMES}" th:value="${time}"
+                                                                        th:text="${time}"></option>
+                                                            </select>
+                                                        </td>
                                                         <td>
                                                             <select class="form-control" th:field="*{practice}">
                                                                 <option th:value="${practicePhase.practice.id}"
@@ -343,12 +350,7 @@
                                                                         th:if="${practicePhase.practice.id != practice.id}"></option>
                                                             </select>
                                                         </td>
-                                                        <td>
-                                                            <select class="form-control" th:field="*{practiceTime}">
-                                                                <option th:each="time : ${TIMES}" th:value="${time}"
-                                                                        th:text="${time}"></option>
-                                                            </select>
-                                                        </td>
+
                                                         <td><input type="text" class="form-control" th:field="*{practiceIntensity}"
                                                                    placeholder="Quantity"/></td>
                                                         <td>
@@ -472,7 +474,7 @@
     <script type="text/javascript">
         $("#combobox").combobox();
         $('#Appointment').datepicker({
-            dateFormat: 'dd/mm/yy',
+            dateFormat: 'dd-mm-yy',
             changeMonth: true,
             defaultDate: "+1w",
             changeYear: true,
@@ -514,14 +516,11 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = countFoods + "/";
             newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML ='';
+            newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<select class="form-control" name="food" id="food">'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
                     + '</select>';
-            newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML =
-                    '<select class="form-control" name="foodTime">'
-                    +'<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
-                    +'</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML ='<input type="text" class="form-control" name="foodQuantity" id="foodQuantity" placeholder="Quantity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
@@ -539,14 +538,11 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = countPractice + "/";
             newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML ='';
+            newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML ='<select class="form-control" name="pratice" id="pratice">'
                     + '<option th:each="practice : ${PRACTICES}" th:value="${practice.id}" th:text="${practice.name}"></option>'
                     + '</select>';
-            newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML =
-                    '<select class="form-control" name="practiceTime" id="practiceTime">'
-                    +'<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
-                    +'</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" placeholder="Quantity" name="praticeIntensity" id="praticeIntensity"/>';

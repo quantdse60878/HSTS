@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Search Patients
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Search Patients</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header" style="padding: 0px;">
+                        <div class="form-group">
+                            <h3 class="col-sm-1 control-label">Name</h3>
+
+                            <div class="col-sm-4">
+                                <!-- search form (Optional) -->
+                                <form th:action="nSearchPatients" method="get" class="sidebar-form">
+                                    <div class="input-group">
+                                        <input type="text" th:name="q" class="form-control" placeholder="Search..."/>
+                          <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                <i class="fa fa-search"></i></button>
+                          </span>
+                                    </div>
+                                </form>
+                                <!-- /.search form -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="dataTable" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Birthday</th>
+                                <th>Gender</th>
+                                <th style="width: 40px;">#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${LISTPATIENTS == null}">
+                                <td colspan="5">No Patient for today!!!</td>
+                            </tr>
+                            <tr th:each="patient,rowStat : ${LISTPATIENTS}">
+                                <td th:text="${rowStat.count}">No.</td>
+                                <td><a th:href="@{/patient(patientID=${patient.id})}"
+                                       th:text="${patient.account.fullname}">Name</a></td>
+                                <td><a th:href="@{/patient(patientID=${patient.id})}"
+                                       th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</a>
+                                </td>
+                                <td><a th:href="@{/patient(patientID=${patient.id})}"
+                                       th:text="*{patient.account.gender == 1}? 'Male' : 'Female'">Gender</a></td>
+                                <td><a th:href="@{/patient(patientID=${patient.id})}" class="btn btn-primary">Update Patient</a></td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Birthday</th>
+                                <th>Gender</th>
+                                <th style="width: 40px;">#</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+</div>
+<!-- /.content-wrapper -->
+
+</body>
+</html>
