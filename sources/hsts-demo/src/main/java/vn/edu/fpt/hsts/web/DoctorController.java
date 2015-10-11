@@ -34,6 +34,7 @@ import vn.edu.fpt.hsts.persistence.entity.Medicine;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
 import vn.edu.fpt.hsts.persistence.entity.Practice;
+import vn.edu.fpt.hsts.persistence.entity.Treatment;
 
 import java.util.List;
 
@@ -238,22 +239,49 @@ public class DoctorController extends AbstractController{
 
     /**
      * The view Prescription page mapping
-     * @param appointmentID
+     * @param appointmentId
      * @return
      */
     @RequestMapping(value = "viewPrescription", method = RequestMethod.GET)
-    public ModelAndView makePrescriptionPage(@RequestParam("appointmentID") final int appointmentID) {
+    public ModelAndView makePrescriptionPage(@RequestParam("appointmentId") final int appointmentId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
-            Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
-            // Get config time
-            final String[] timeArr = treatmentService.getMedicineTimeConfig();
-
-            mav.addObject("TIMES", timeArr);
+            // Find Appointment
+            Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
-            mav.addObject("model", new PrescriptionModel());
+            // Check appointment status
+            if (appointment.getStatus() == 1){
+                // Initialization Data Prescription
+                initDataPrescription(mav);
+
+                mav.addObject("model", new PrescriptionModel());
+            } else if (appointment.getStatus() == 2){
+                // Find treatment form appointment
+                Treatment treatment = treatmentService.findTreatmentByAppointmentID(appointmentId);
+                mav.addObject("TREATMENT", treatment);
+            }
+
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    /**
+     * not yet
+     * @return
+     */
+    @RequestMapping(value = "medicalRecord", method = RequestMethod.GET)
+    public ModelAndView medicalRecordPage() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("doctorPatients");
+            List<Patient> patientList = patientService.getPatientByApponitmentDate();
+            LOGGER.info("listpatiens: " + patientList.size());
+            mav.addObject("LISTPATIENTS", patientList);
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

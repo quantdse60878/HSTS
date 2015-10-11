@@ -59,7 +59,7 @@ public class MedicinePrescriptionModel {
         return mNote;
     }
 
-    public void setmNote(String medicalNote) {
+    public void setmNote(String mNote) {
         this.mNote = mNote;
     }
 

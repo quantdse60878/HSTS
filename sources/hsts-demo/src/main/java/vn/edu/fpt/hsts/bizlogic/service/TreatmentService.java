@@ -137,4 +137,8 @@ public class TreatmentService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public Treatment findTreatmentByAppointmentID(final int appointmentId) {
+        return treatmentRepo.findLastTreatmenByAppointmentId(appointmentId);
+    }
 }
