@@ -50,6 +50,8 @@
                         <!-- /.box-header -->
                         <!-- form start -->
                         <form class="form-horizontal" method="POST" th:action="updatePatient">
+                            <input type="hidden" th:name="patientID" class="form-control"
+                                   th:value="${PATIENT.id}"/>
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="Name" class="col-sm-3 control-label">Name</label>
