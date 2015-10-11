@@ -203,7 +203,7 @@ public class DoctorController {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
             //find Appointment
-            Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
+            Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
             mav.addObject("APPOINTMENT", appointment);
             // Get config time
             final String[] timeArr = treatmentService.getMedicineTimeConfig();
