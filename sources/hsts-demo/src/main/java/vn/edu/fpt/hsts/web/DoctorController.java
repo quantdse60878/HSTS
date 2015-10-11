@@ -43,7 +43,7 @@ import java.util.List;
  * make appointment, etc.
  */
 @Controller
-public class DoctorController {
+public class DoctorController extends AbstractController{
     private static final Logger LOGGER = LoggerFactory.getLogger(DoctorController.class);
 
     /**
@@ -116,24 +116,11 @@ public class DoctorController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
-            //find Appointment
+            // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
             mav.addObject("APPOINTMENT", appointment);
-            // Get config time
-            final String[] timeArr = treatmentService.getMedicineTimeConfig();
-            mav.addObject("TIMES", timeArr);
-            // get illnessList
-            List<Illness> illnessList = illnessService.getAllIllness();
-            mav.addObject("ILLNESSES", illnessList);
-            //get medicineList
-            List<Medicine> medicineList = medicineService.getAllMedicine();
-            mav.addObject("MEDICINES", medicineList);
-            //get foodList
-            List<Food> foodList = foodService.getAllFood();
-            mav.addObject("FOODS", foodList);
-            //get practiceList
-            List<Practice> practiceList = practiceService.getAllPractice();
-            mav.addObject("PRACTICES", practiceList);
+            // Initialization Data Prescription
+            initDataPrescription(mav);
 
             mav.addObject("model", new PrescriptionModel());
             return mav;
@@ -155,32 +142,18 @@ public class DoctorController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("suggestTreatment");
-            // find phase for diagnostic
+            // Initialization Data Prescription
+            initDataPrescription(mav);
+            // Find phase for diagnostic
             Phase phase = phaseService.findByID(1);
             mav.addObject("PHASE", phase);
-            // find illness form diagnostic
-            LOGGER.info("diagnostic: " + diagnostic);
+            // Find illness form diagnostic
             Illness illness = illnessService.findByID(diagnostic);
-            LOGGER.info("illness: " + illness.getId());
             mav.addObject("DIAGNOSTIC", illness);
-            //find Appointment
+            // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
             mav.addObject("APPOINTMENT", appointment);
-            // Get config time
-            final String[] timeArr = treatmentService.getMedicineTimeConfig();
-            mav.addObject("TIMES", timeArr);
-            // get illnessList
-            List<Illness> illnessList = illnessService.getAllIllness();
-            mav.addObject("ILLNESSES", illnessList);
-            //get medicineList
-            List<Medicine> medicineList = medicineService.getAllMedicine();
-            mav.addObject("MEDICINES", medicineList);
-            //get foodList
-            List<Food> foodList = foodService.getAllFood();
-            mav.addObject("FOODS", foodList);
-            //get practiceList
-            List<Practice> practiceList = practiceService.getAllPractice();
-            mav.addObject("PRACTICES", practiceList);
+
 
             mav.addObject("model", new PrescriptionModel());
             return mav;
@@ -202,35 +175,22 @@ public class DoctorController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
-            //find Appointment
+            // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
             mav.addObject("APPOINTMENT", appointment);
-            // Get config time
-            final String[] timeArr = treatmentService.getMedicineTimeConfig();
-            mav.addObject("TIMES", timeArr);
-            // get illnessList
-            List<Illness> illnessList = illnessService.getAllIllness();
-            mav.addObject("ILLNESSES", illnessList);
-            //get medicineList
-            List<Medicine> medicineList = medicineService.getAllMedicine();
-            mav.addObject("MEDICINES", medicineList);
-            //get foodList
-            List<Food> foodList = foodService.getAllFood();
-            mav.addObject("FOODS", foodList);
-            //get practiceList
-            List<Practice> practiceList = practiceService.getAllPractice();
-            mav.addObject("PRACTICES", practiceList);
+            // Initialization Data Prescription
+            initDataPrescription(mav);
 
             mav.addObject("model", prescriptionModel);
 
             LOGGER.info(prescriptionModel.toString());
 //            doctorService.makePrescription(prescriptionModel, appointmentID, appointmentDate);
-            //create notify
-            //set name of action
+            // Create notify
+            // Set name of action
             mav.addObject("METHOD", "Make Prescription");
-            //set type. sussces TYPE = info, fail TYPE = danger
+            // Set type. sussces TYPE = info, fail TYPE = danger
             mav.addObject("TYPE", "info");
-            //set message notify
+            // Set message notify
             mav.addObject("MESSAGE", "Success");
             return mav;
         } finally {
