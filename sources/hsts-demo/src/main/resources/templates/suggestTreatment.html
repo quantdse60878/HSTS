@@ -252,7 +252,7 @@
                                                     <tr th:each="medicalPhase,row : ${PHASE.medicinePhaseList}">
                                                         <td th:text="${row.count}"></td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{medical}">
+                                                            <select class="form-control" th:field="*{medicinePrescriptionModel.medical}">
                                                                 <option th:value="${medicalPhase.medicine.id}"
                                                                         th:text="${medicalPhase.medicine.name}"></option>
                                                                 <option th:each="medicine : ${MEDICINES}"
@@ -261,16 +261,16 @@
                                                                         th:if="${medicalPhase.medicine.id != medicine.id}"></option>
                                                             </select>
                                                         </td>
-                                                        <td><select class="form-control" th:field="*{medicalTime}">
+                                                        <td><select class="form-control" th:field="*{medicinePrescriptionModel.medicalTime}">
                                                             <option th:each="time : ${TIMES}" th:value="${time}"
                                                                     th:text="${time}"></option>
                                                         </select>
                                                         </td>
-                                                        <td><input type="text" class="form-control" th:field="*{medicalQuantity}"
+                                                        <td><input type="text" class="form-control" th:field="*{medicinePrescriptionModel.medicalQuantity}"
                                                                    placeholder="Quanlity"/></td>
                                                         <td>
                                                             <input type="text" class="form-control"
-                                                                   th:field="*{medicalNote}" placeholder="Advice"/>
+                                                                   th:field="*{medicinePrescriptionModel.medicalNote}" placeholder="Advice"/>
                                                         </td>
                                                     </tr>
 
@@ -294,13 +294,13 @@
                                                     <tr th:each="foodPhase,row : ${PHASE.foodPhaseList}">
                                                         <td th:text="${row.count}"></td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{foodTime}" th:if="${row.count == 1}">
+                                                            <select class="form-control" th:field="*{foodPrescriptionModel.foodTime}" th:if="${row.count == 1}">
                                                                 <option th:each="time : ${TIMES}" th:value="${time}"
                                                                         th:text="${time}"></option>
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{food}">
+                                                            <select class="form-control" th:field="*{foodPrescriptionModel.food}">
                                                                 <option th:value="${foodPhase.food.id}"
                                                                         th:text="${foodPhase.food.name}"></option>
                                                                 <option th:each="food : ${FOODS}"
@@ -310,11 +310,11 @@
                                                             </select>
                                                         </td>
 
-                                                        <td><input type="text" class="form-control" th:field="*{foodQuantity}"
+                                                        <td><input type="text" class="form-control" th:field="*{foodPrescriptionModel.foodQuantity}"
                                                                     placeholder="Quantity"/></td>
                                                         <td>
                                                             <input type="text" class="form-control"
-                                                                   th:field="*{foodNote}" placeholder="Advice"/>
+                                                                   th:field="*{foodPrescriptionModel.foodNote}" placeholder="Advice"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -336,13 +336,13 @@
                                                     <tr th:each="practicePhase,row : ${PHASE.practicePhaseList}">
                                                         <td th:text="${row.count}"></td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{practiceTime}" th:if="${row.count == 1}">
+                                                            <select class="form-control" th:field="*{practicePrescriptionModel.practiceTime}" th:if="${row.count == 1}">
                                                                 <option th:each="time : ${TIMES}" th:value="${time}"
                                                                         th:text="${time}"></option>
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{practice}">
+                                                            <select class="form-control" th:field="*{practicePrescriptionModel.practice}">
                                                                 <option th:value="${practicePhase.practice.id}"
                                                                         th:text="${practicePhase.practice.name}"></option>
                                                                 <option th:each="practice : ${PRACTICES}"
@@ -352,11 +352,11 @@
                                                             </select>
                                                         </td>
 
-                                                        <td><input type="text" class="form-control" th:field="*{practiceIntensity}"
+                                                        <td><input type="text" class="form-control" th:field="*{practicePrescriptionModel.practiceIntensity}"
                                                                    placeholder="Quantity"/></td>
                                                         <td>
                                                             <input type="text" class="form-control"
-                                                                   th:field="*{practiceNote}" placeholder="Advice"/>
+                                                                   th:field="*{practicePrescriptionModel.practiceNote}" placeholder="Advice"/>
                                                         </td>
                                                     </tr>
                                                 </table>

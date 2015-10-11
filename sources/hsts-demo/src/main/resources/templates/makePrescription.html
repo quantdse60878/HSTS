@@ -88,7 +88,7 @@
                                         </button>
                                         <ul class="dropdown-menu"
                                             th:each="appointment : ${APPOINTMENT.medicalRecord.appointmentList}">
-                                            <li><a href="#" class="btn btn-default"
+                                            <li><a href="@{/viewPrescription(appointmentID=${appointment.id})}" class="btn btn-default"
                                                    th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>
                                             </li>
                                         </ul>
@@ -230,22 +230,22 @@
                                                     <tr>
                                                         <td>1</td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{medical}">
+                                                            <select class="form-control" th:field="*{medicinePrescriptionModel.medical}">
 
                                                                 <option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"
                                                                         th:text="${medicine.name}"></option>
                                                             </select>
                                                         </td>
-                                                        <td><select class="form-control" th:field="*{medicalTime}">
+                                                        <td><select class="form-control" th:field="*{medicinePrescriptionModel.medicalTime}">
                                                             <option th:each="time : ${TIMES}" th:value="${time}"
                                                                     th:text="${time}"></option>
                                                         </select>
                                                         </td>
-                                                        <td><input type="text" class="form-control" th:field="*{medicalQuantity}"
+                                                        <td><input type="text" class="form-control" th:field="*{medicinePrescriptionModel.medicalQuantity}"
                                                                    placeholder="Quanlity"/></td>
                                                         <td>
                                                             <input type="text" class="form-control"
-                                                                   th:field="*{medicalNote}" placeholder="Advice"/>
+                                                                   th:field="*{medicinePrescriptionModel.medicalNote}" placeholder="Advice"/>
                                                         </td>
                                                     </tr>
 
@@ -269,22 +269,22 @@
                                                     <tr>
                                                         <td>1</td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{food}">
+                                                            <select class="form-control" th:field="*{foodPrescriptionModel.food}">
                                                                 <option th:each="food : ${FOODS}" th:value="${food.id}"
                                                                         th:text="${food.name}"></option>
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{foodTime}">
+                                                            <select class="form-control" th:field="*{foodPrescriptionModel.foodTime}">
                                                                 <option th:each="time : ${TIMES}" th:value="${time}"
                                                                         th:text="${time}"></option>
                                                             </select>
                                                         </td>
-                                                        <td><input type="text" class="form-control" th:field="*{foodQuantity}"
+                                                        <td><input type="text" class="form-control" th:field="*{foodPrescriptionModel.foodQuantity}"
                                                                     placeholder="Quantity"/></td>
                                                         <td>
                                                             <input type="text" class="form-control"
-                                                                   th:field="*{foodNote}" placeholder="Advice"/>
+                                                                   th:field="*{foodPrescriptionModel.foodNote}" placeholder="Advice"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -306,22 +306,22 @@
                                                     <tr>
                                                         <td>1</td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{practice}">
+                                                            <select class="form-control" th:field="*{practicePrescriptionModel.practice}">
                                                                 <option th:each="practice : ${PRACTICES}" th:value="${practice.id}"
                                                                         th:text="${practice.name}"></option>
                                                             </select>
                                                         </td>
                                                         <td>
-                                                            <select class="form-control" th:field="*{practiceTime}">
+                                                            <select class="form-control" th:field="*{practicePrescriptionModel.practiceTime}">
                                                                 <option th:each="time : ${TIMES}" th:value="${time}"
                                                                         th:text="${time}"></option>
                                                             </select>
                                                         </td>
-                                                        <td><input type="text" class="form-control" th:field="*{practiceIntensity}"
+                                                        <td><input type="text" class="form-control" th:field="*{practicePrescriptionModel.practiceIntensity}"
                                                                    placeholder="Quantity"/></td>
                                                         <td>
                                                             <input type="text" class="form-control"
-                                                                   th:field="*{practiceNote}" placeholder="Advice"/>
+                                                                   th:field="*{practicePrescriptionModel.practiceNote}" placeholder="Advice"/>
                                                         </td>
                                                     </tr>
                                                 </table>

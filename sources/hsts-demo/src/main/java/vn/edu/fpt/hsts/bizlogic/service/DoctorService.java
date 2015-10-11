@@ -103,102 +103,102 @@ public class DoctorService extends AbstractService {
         }
     }
 
-    @Transactional(rollbackOn = BizlogicException.class)
-    public void makePrescription(final PrescriptionModel prescription,
-                                 final int appointmentId,
-                                 final String appointmentDate) throws BizlogicException {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            LOGGER.info("prescription[{}], appointmentId[{}], appointmentDate[{}]", prescription, appointmentId, appointmentDate);
-            // Find appointment by id
-            final Appointment appointment = appointmentRepo.findOne(appointmentId);
-            if (null == appointment) {
-                LOGGER.error("Appointment with id[{}] is not found", appointmentId);
-                throw new BizlogicException("Appointment with id[{}] is not found", null, appointmentId);
-            }
-            appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
-            Date toDate = null;
-            if (StringUtils.isNotEmpty(appointmentDate)) {
-                toDate = DateUtils.parseDate(appointmentDate, DateUtils.DATE_PATTERN_1);
-                if (null == toDate) {
-                    throw new BizlogicException("Wrong input date format: {}", null, appointmentDate);
-                }
-                // Create next appointment
-                Appointment nextAppointment = new Appointment();
-                nextAppointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
-                nextAppointment.setMeetingDate(toDate);
-                nextAppointment.setMedicalRecord(appointment.getMedicalRecord());
-
-                appointmentRepo.save(nextAppointment);
-
-                // Set old appointment link to new appointment
-                appointment.setNextAppointment(nextAppointment);
-
-            } else {
-                // Finish medical record
-                final MedicalRecord medicalRecord = appointment.getMedicalRecord();
-                medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
-                medicalRecord.setEndTime(new Date());
-                medicalRecordRepo.saveAndFlush(medicalRecord);
-            }
-
-            appointmentRepo.save(appointment);
-
-            // Set old treatment to DONE
-            final Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(appointmentId);
-            if (null != treatment) {
-                treatment.setStatus(IDbConsts.ITreatmentStatus.FINISHED);
-                treatmentRepo.save(treatment);
-            }
-            if (null != prescription) {
-                // create new treatment
-                final Treatment newTreatment = new Treatment();
-                newTreatment.setStatus(IDbConsts.ITreatmentStatus.ON_TREATING);
-                newTreatment.setAdviseFood(prescription.getFoodNote());
-                newTreatment.setAdviseMedicine(prescription.getMedicalNote());
-                newTreatment.setAdvisePractice(prescription.getPracticeNote());
-                newTreatment.setAppointment(appointment);
-                newTreatment.setFromDate(new Date());
-//                if (null != toDate) {
-//                    newTreatment.setToDate(toDate);
+//    @Transactional(rollbackOn = BizlogicException.class)
+//    public void makePrescription(final PrescriptionModel prescription,
+//                                 final int appointmentId,
+//                                 final String appointmentDate) throws BizlogicException {
+//        LOGGER.info(IConsts.BEGIN_METHOD);
+//        try {
+//            LOGGER.info("prescription[{}], appointmentId[{}], appointmentDate[{}]", prescription, appointmentId, appointmentDate);
+//            // Find appointment by id
+//            final Appointment appointment = appointmentRepo.findOne(appointmentId);
+//            if (null == appointment) {
+//                LOGGER.error("Appointment with id[{}] is not found", appointmentId);
+//                throw new BizlogicException("Appointment with id[{}] is not found", null, appointmentId);
+//            }
+//            appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
+//            Date toDate = null;
+//            if (StringUtils.isNotEmpty(appointmentDate)) {
+//                toDate = DateUtils.parseDate(appointmentDate, DateUtils.DATE_PATTERN_1);
+//                if (null == toDate) {
+//                    throw new BizlogicException("Wrong input date format: {}", null, appointmentDate);
 //                }
-                newTreatment.setToDate(new Date());
-                treatmentRepo.save(newTreatment);
-
-                // TODO implement for medicine, food, practice and multiple row
-                Medicine medicine = medicineRepo.findByName(prescription.getMedical());
-                if (null == medicine) {
-                    LOGGER.error("Medicine[{}] is not found", prescription.getMedical());
-                    throw new BizlogicException("Medicine[{}] with name is not found", null, prescription.getMedical());
-                }
-                String medicineTime = prescription.getMedicalTime();
-                if (StringUtils.isEmpty(medicineTime)) {
-                    LOGGER.error("MedicineTime[{}] is not wrong input", prescription.getMedicalTime());
-                    throw new BizlogicException("MedicineTime[{}] is wrong format", null, prescription.getMedicalTime());
-                }
-                String[] parts = medicineTime.split(",");
-                for (String part : parts) {
-                    // Save medicine time
-                    // Save detail
-                    MedicineTreatment medicineTreatment = new MedicineTreatment();
-                    medicineTreatment.setTreatment(newTreatment);
-//                    medicineTreatment.setNumberOfMedicine(Integer.parseInt(prescription.getMedicalQuantity()));
-                    medicineTreatment.setAdvice(null);
-                    medicineTreatment.setMedicine(medicine);
-                    medicineTreatmentRepo.saveAndFlush(medicineTreatment);
-                }
-            }
-            // flush all change to db
-            appointmentRepo.flush();
-            treatmentRepo.flush();
-
-            //new appoitment form appointmentDate, appointmentDate can be null.
-        } catch (BizlogicException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new BizlogicException("Error while making new prescription: {}", null, e.getMessage());
-        }finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
+//                // Create next appointment
+//                Appointment nextAppointment = new Appointment();
+//                nextAppointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
+//                nextAppointment.setMeetingDate(toDate);
+//                nextAppointment.setMedicalRecord(appointment.getMedicalRecord());
+//
+//                appointmentRepo.save(nextAppointment);
+//
+//                // Set old appointment link to new appointment
+//                appointment.setNextAppointment(nextAppointment);
+//
+//            } else {
+//                // Finish medical record
+//                final MedicalRecord medicalRecord = appointment.getMedicalRecord();
+//                medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
+//                medicalRecord.setEndTime(new Date());
+//                medicalRecordRepo.saveAndFlush(medicalRecord);
+//            }
+//
+//            appointmentRepo.save(appointment);
+//
+//            // Set old treatment to DONE
+//            final Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(appointmentId);
+//            if (null != treatment) {
+//                treatment.setStatus(IDbConsts.ITreatmentStatus.FINISHED);
+//                treatmentRepo.save(treatment);
+//            }
+//            if (null != prescription) {
+//                // create new treatment
+//                final Treatment newTreatment = new Treatment();
+//                newTreatment.setStatus(IDbConsts.ITreatmentStatus.ON_TREATING);
+////                newTreatment.setAdviseFood(prescription.getFoodNote());
+////                newTreatment.setAdviseMedicine(prescription.getMedicalNote());
+////                newTreatment.setAdvisePractice(prescription.getPracticeNote());
+//                newTreatment.setAppointment(appointment);
+//                newTreatment.setFromDate(new Date());
+////                if (null != toDate) {
+////                    newTreatment.setToDate(toDate);
+////                }
+//                newTreatment.setToDate(new Date());
+//                treatmentRepo.save(newTreatment);
+//
+//                // TODO implement for medicine, food, practice and multiple row
+//                Medicine medicine = medicineRepo.findByName(prescription.getMedical());
+//                if (null == medicine) {
+//                    LOGGER.error("Medicine[{}] is not found", prescription.getMedical());
+//                    throw new BizlogicException("Medicine[{}] with name is not found", null, prescription.getMedical());
+//                }
+//                String medicineTime = prescription.getMedicalTime();
+//                if (StringUtils.isEmpty(medicineTime)) {
+//                    LOGGER.error("MedicineTime[{}] is not wrong input", prescription.getMedicalTime());
+//                    throw new BizlogicException("MedicineTime[{}] is wrong format", null, prescription.getMedicalTime());
+//                }
+//                String[] parts = medicineTime.split(",");
+//                for (String part : parts) {
+//                    // Save medicine time
+//                    // Save detail
+//                    MedicineTreatment medicineTreatment = new MedicineTreatment();
+//                    medicineTreatment.setTreatment(newTreatment);
+////                    medicineTreatment.setNumberOfMedicine(Integer.parseInt(prescription.getMedicalQuantity()));
+//                    medicineTreatment.setAdvice(null);
+//                    medicineTreatment.setMedicine(medicine);
+//                    medicineTreatmentRepo.saveAndFlush(medicineTreatment);
+//                }
+//            }
+//            // flush all change to db
+//            appointmentRepo.flush();
+//            treatmentRepo.flush();
+//
+//            //new appoitment form appointmentDate, appointmentDate can be null.
+//        } catch (BizlogicException e) {
+//            throw e;
+//        } catch (Exception e) {
+//            throw new BizlogicException("Error while making new prescription: {}", null, e.getMessage());
+//        }finally {
+//            LOGGER.info(IConsts.END_METHOD);
+//        }
+//    }
 }

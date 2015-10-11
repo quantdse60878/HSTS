@@ -110,15 +110,22 @@ public class DoctorController extends AbstractController{
         }
     }
 
+    /**
+     * Create page prescription
+     * @param patientID
+     * @return
+     */
     @RequestMapping(value = "createPrescription", method = RequestMethod.GET)
     public ModelAndView createPrescriptionPage(@RequestParam("patientID") final int patientID) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
+
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
             mav.addObject("APPOINTMENT", appointment);
+
             // Initialization Data Prescription
             initDataPrescription(mav);
 
@@ -130,10 +137,11 @@ public class DoctorController extends AbstractController{
     }
 
     /**
-     * suggest Treatment for doctor
-     * @param patientID
+     * Suggest Treatment for doctor
+     * @param appointmentId
      * @param diagnostic
      * @return
+     * @throws BizlogicException
      */
     @RequestMapping(value = "suggestTreatment", method = RequestMethod.GET)
     public ModelAndView suggestTreatment(@RequestParam(value = "appointmentId") final int appointmentId,
@@ -148,11 +156,12 @@ public class DoctorController extends AbstractController{
 
             // Find phase for diagnostic
             final Phase phase = illnessService.getPhaseSugestion(appointmentId, diagnostic);
-
             mav.addObject("PHASE", phase);
+
             // Find illness form diagnostic
             Illness illness = illnessService.findByID(diagnostic);
             mav.addObject("DIAGNOSTIC", illness);
+
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
@@ -227,6 +236,30 @@ public class DoctorController extends AbstractController{
         }
     }
 
+    /**
+     * The view Prescription page mapping
+     * @param appointmentID
+     * @return
+     */
+    @RequestMapping(value = "viewPrescription", method = RequestMethod.GET)
+    public ModelAndView makePrescriptionPage(@RequestParam("appointmentID") final int appointmentID) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("makePrescription");
+            Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
+            // Get config time
+            final String[] timeArr = treatmentService.getMedicineTimeConfig();
+
+            mav.addObject("TIMES", timeArr);
+            mav.addObject("APPOINTMENT", appointment);
+            mav.addObject("model", new PrescriptionModel());
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
     @RequestMapping(value = "medicalHistory", method = RequestMethod.GET)
     public ModelAndView medicalHistoryPage(@RequestParam("patientID") final int patientID) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -262,29 +295,7 @@ public class DoctorController extends AbstractController{
         }
     }
 
-    /**
-     * The make Prescription page mapping
-     * @param appointmentID
-     * @return
-     */
-    @RequestMapping(value = "makePrescription", method = RequestMethod.GET)
-    public ModelAndView makePrescriptionPage(@RequestParam("appointmentID") final int appointmentID) {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("makePrescription");
-            Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
-            // Get config time
-            final String[] timeArr = treatmentService.getMedicineTimeConfig();
-            
-            mav.addObject("TIMES", timeArr);
-            mav.addObject("APPOINTMENT", appointment);
-            mav.addObject("model", new PrescriptionModel());
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
+
 
 
 }
