@@ -222,22 +222,25 @@ public class DoctorService extends AbstractService {
                 final MedicinePrescriptionModel medicineModel = prescription.getmPresModel();
                 if (null != medicineModel) {
                     // Split string
-                    final String[] medicineNames = medicineModel.getM().split(",");
+                    final String[] medicines = medicineModel.getM().split(",");
                     final String[] mTime = medicineModel.getmTime().split(",");
                     final String[] mQuantity = medicineModel.getmQuantity().split(",");
 //                    final String[] mNote = medicineModel.getmNote().split(",");
-                    for (int i = 0; i< medicineNames.length; i++) {
-                        Medicine medicine = medicineRepo.findByName(medicineNames[i]);
-                        if (null == medicine) {
-                            throw new BizlogicException("Medicine with name[{}] is not found", null, medicineNames[i]);
-                        }
-                        MedicineTreatment medicineTreatment = new MedicineTreatment();
-                        medicineTreatment.setMedicine(medicine);
-                        medicineTreatment.setNumberOfTime(Integer.parseInt(mTime[i]));
-                        medicineTreatment.setQuantitative(mQuantity[i]);
-                        medicineTreatment.setTreatment(newTreatment);
+                    for (int i = 0; i< medicines.length; i++) {
+                        final String medicineId = medicines[i].trim();
+                        if(StringUtils.isNotEmpty(medicineId)) {
+                            Medicine medicine = medicineRepo.findOne(Integer.parseInt(medicineId));
+                            if (null == medicine) {
+                                throw new BizlogicException("Medicine with id[{}] is not found", null, medicineId);
+                            }
+                            MedicineTreatment medicineTreatment = new MedicineTreatment();
+                            medicineTreatment.setMedicine(medicine);
+                            medicineTreatment.setNumberOfTime(Integer.parseInt(mTime[i]));
+                            medicineTreatment.setQuantitative(mQuantity[i]);
+                            medicineTreatment.setTreatment(newTreatment);
 //                        medicineTreatment.setAdvice(mNote[i]);
-                        medicineTreatmentRepo.save(medicineTreatment);
+                            medicineTreatmentRepo.save(medicineTreatment);
+                        }
                     }
                 }
 
@@ -245,21 +248,25 @@ public class DoctorService extends AbstractService {
                 final FoodPrescriptionModel foodModel = prescription.getfPresModel();
                 if(null != foodModel) {
                     // Split string
-                    final String[] foodNames = foodModel.getF().split(",");
+                    final String[] foods = foodModel.getF().split(",");
                     final String[] foodQuantity = foodModel.getfQuantity().split(",");
                     final String[] foodAdvice = foodModel.getfNote().split(",");
                     final String[] fTime = foodModel.getfTime().split(",");
-                    for(int i = 0; i< foodNames.length; i++) {
-                        Food food = foodRepo.findByName(foodNames[i]);
-                        if (null == food) {
-                            throw new BizlogicException("Food with name[{}] is not found", null, foodNames[i]);
+                    for(int i = 0; i< foods.length; i++) {
+                        final String foodId = foods[i].trim();
+                        if (StringUtils.isNotEmpty(foodId)) {
+                            Food food = foodRepo.findOne(Integer.parseInt(foodId));
+                            if (null == food) {
+                                throw new BizlogicException("Food with id[{}] is not found", null, foodId);
+                            }
+                            FoodTreatment foodTreatment = new FoodTreatment();
+                            foodTreatment.setFood(food);
+                            foodTreatment.setTreatment(newTreatment);
+                            foodTreatment.setNumberOfTime(Integer.parseInt(fTime[i]));
+                            foodTreatment.setQuantitative(foodQuantity[i]);
+                            foodTreatmentRepo.save(foodTreatment);
                         }
-                        FoodTreatment foodTreatment = new FoodTreatment();
-                        foodTreatment.setFood(food);
-                        foodTreatment.setTreatment(newTreatment);
-                        foodTreatment.setNumberOfTime(Integer.parseInt(fTime[i]));
-                        foodTreatment.setQuantitative(foodQuantity[i]);
-                        foodTreatmentRepo.save(foodTreatment);
+
                     }
                 }
 
@@ -267,20 +274,23 @@ public class DoctorService extends AbstractService {
                 final PracticePrescriptionModel practiceModel = prescription.getpPresModel();
                 if (null != practiceModel) {
                     // Split string
-                    final String[] practiceNames = practiceModel.getP().split(",");
+                    final String[] practices = practiceModel.getP().split(",");
                     final String[] practiceIntensity = practiceModel.getpIntensity().split(",");
                     final String[] practiceTimes = practiceModel.getpTime().split(",");
                     final String[] practiceNotes = practiceModel.getpNote().split(",");
-                    for (int i = 0; i < practiceNames.length; i++) {
-                        final Practice practice = practiceRepo.findByName(practiceNames[i]);
-                        if (null == practice) {
-                            throw new BizlogicException("Practice with name[{}] is not found", null, practiceNames[i]);
+                    for (int i = 0; i < practices.length; i++) {
+                        final String practiceId = practices[i].trim();
+                        if(StringUtils.isNotEmpty(practiceId)) {
+                            final Practice practice = practiceRepo.findOne(Integer.parseInt(practiceId));
+                            if (null == practice) {
+                                throw new BizlogicException("Practice with name[{}] is not found", null, practiceId);
+                            }
+                            PracticeTreatment practiceTreatment = new PracticeTreatment();
+                            practiceTreatment.setTreatment(newTreatment);
+                            practiceTreatment.setNumberOfTime(Integer.parseInt(practiceTimes[i]));
+                            practiceTreatment.setPractice(practice);
+                            practiceTreatmentRepo.save(practiceTreatment);
                         }
-                        PracticeTreatment practiceTreatment = new PracticeTreatment();
-                        practiceTreatment.setTreatment(newTreatment);
-                        practiceTreatment.setNumberOfTime(Integer.parseInt(practiceTimes[i]));
-                        practiceTreatment.setPractice(practice);
-                        practiceTreatmentRepo.save(practiceTreatment);
                     }
                 }
             }
