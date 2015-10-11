@@ -59,7 +59,7 @@
                             </tr>
                             <tr th:each="patient,rowStat : ${LISTPATIENTS}">
                                 <td th:text="${rowStat.count}">No.</td>
-                                <td><a th:href="@{/createPrescription(patientID=${patient.id})}" th:text="${patient.account.fullname}">Name</a></td>
+                                <td><a th:href="@{/createPrescription(patientID=${patient.id})}" th:text="${patient.account.fullName}">Name</a></td>
                                 <td><a th:href="@{/createPrescription(patientID=${patient.id})}" th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</a></td>
                                 <td><a th:href="@{/createPrescription(patientID=${patient.id})}" th:text="*{patient.account.gender == 1}? 'Male' : 'Female'">Gender</a></td>
                                 <td><a th:href="@{/createPrescription(patientID=${patient.id})}" class="btn btn-primary">Make Prescription</a></td>

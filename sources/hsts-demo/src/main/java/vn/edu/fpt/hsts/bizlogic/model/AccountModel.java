@@ -30,7 +30,7 @@ public class AccountModel extends AbstractKeyModel<Account> {
     /**
      * The full name.
      */
-    private String fullname;
+    private String fullName;
 
     /**
      * The email.
@@ -69,12 +69,12 @@ public class AccountModel extends AbstractKeyModel<Account> {
         this.password = password;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(final String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -114,7 +114,7 @@ public class AccountModel extends AbstractKeyModel<Account> {
         super.fromEntity(entity);
         setUsername(entity.getUsername());
         setPassword(entity.getPassword());
-        setFullname(entity.getFullname());
+        setFullName(entity.getFullName());
         setEmail(entity.getEmail());
         setBirthday(entity.getDateOfBirth());
         setGender(entity.getGender());

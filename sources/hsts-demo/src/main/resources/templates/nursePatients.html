@@ -61,7 +61,7 @@
                             <tr th:each="patient,rowStat : ${LISTPATIENTS}">
                                 <td th:text="${rowStat.count}">No.</td>
                                 <td><a th:href="@{/patient(patientID=${patient.id})}"
-                                       th:text="${patient.account.fullname}">Name</a></td>
+                                       th:text="${patient.account.fullName}">Name</a></td>
                                 <td><a th:href="@{/patient(patientID=${patient.id})}"
                                        th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</a>
                                 </td>

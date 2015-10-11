@@ -16,7 +16,7 @@
                 <img th:src="@{/static/image/avatar.png}" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p th:text="${session.USER.fullname}"></p>
+                <p th:text="${session.USER.fullName}"></p>
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i>
                     <i th:text=" ${session.USER.role.name}" style="font-size: 13px;color: #ff0000;"></i></a>

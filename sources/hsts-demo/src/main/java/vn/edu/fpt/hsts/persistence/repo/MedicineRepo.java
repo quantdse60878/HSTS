@@ -15,6 +15,6 @@ import vn.edu.fpt.hsts.persistence.entity.Medicine;
 @Repository
 public interface MedicineRepo extends JpaRepository<Medicine, Integer> {
 
-    @Query("select m from Medicine m where name = :name")
+    @Query("select m from Medicine m where lower(name) = lower(:name)")
     public Medicine findByName(@Param("name") final String name);
 }

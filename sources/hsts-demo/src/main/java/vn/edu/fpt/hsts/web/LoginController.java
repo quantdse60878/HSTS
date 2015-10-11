@@ -125,7 +125,7 @@ public class LoginController {
             patient.setAccountId(userLogin.getId());
             patient.setPatientId(patientLogin.getId());
             patient.setEmail(userLogin.getEmail());
-            patient.setFullname(userLogin.getFullname());
+            patient.setFullname(userLogin.getFullName());
         }
         return patient;
     }

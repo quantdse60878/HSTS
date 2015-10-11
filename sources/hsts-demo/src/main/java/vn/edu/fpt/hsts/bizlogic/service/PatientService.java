@@ -155,10 +155,10 @@ public class PatientService {
             account.setEmail(criteria.getEmail());
             account.setUsername(newUsername);
             account.setGender(criteria.getGender());
-            account.setFullname(criteria.getPatientName());
+            account.setFullName(criteria.getPatientName());
             final Date birthdate = DateUtils.parseDate(criteria.getBirthday(), DateUtils.DATE_PATTERN_3);
             account.setDateOfBirth(birthdate);
-            account.setFullname(criteria.getPatientName());
+            account.setFullName(criteria.getPatientName());
             account.setUpdateTime(currentDate);
             final Role role = roleRepo.findOne(IDbConsts.IRoleType.PATIENT);
             account.setRole(role);

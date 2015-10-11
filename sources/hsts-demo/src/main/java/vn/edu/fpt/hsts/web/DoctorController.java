@@ -195,7 +195,7 @@ public class DoctorController extends AbstractController{
             mav.addObject("model", prescriptionModel);
 
             LOGGER.info(prescriptionModel.toString());
-//            doctorService.makePrescription(prescriptionModel, appointmentID, appointmentDate);
+            doctorService.makePrescription(prescriptionModel, appointmentId, appointmentDate);
             // Create notify
             // Set name of action
             mav.addObject("METHOD", "Make Prescription");

@@ -30,7 +30,7 @@
     <section class="content-header">
         <h1>
             Patient's History
-            <small th:text="${MEDICALRECORD.patient.account.fullname}">Patient Name</small>
+            <small th:text="${MEDICALRECORD.patient.account.fullName}">Patient Name</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -49,7 +49,7 @@
                         <div class="form-group row">
                             <label class="col-sm-1 control-label">Name</label>
                             <div class="col-sm-3">
-                                <input type="text" th:value="${MEDICALRECORD.patient.account.fullname}" readonly="readonly" class="form-control"/>
+                                <input type="text" th:value="${MEDICALRECORD.patient.account.fullName}" readonly="readonly" class="form-control"/>
                             </div>
                             <label class="col-sm-2 control-label">Illness</label>
                             <div class="col-sm-2">

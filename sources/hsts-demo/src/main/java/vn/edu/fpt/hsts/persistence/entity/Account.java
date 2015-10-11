@@ -35,7 +35,7 @@ public class Account extends AbstractKeyEntity {
     /**
      * The full name.
      */
-    private String fullname;
+    private String fullName;
 
     /**
      * The email.
@@ -86,12 +86,12 @@ public class Account extends AbstractKeyEntity {
         this.password = password;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(final String fullname) {
-        this.fullname = fullname;
+    public void setFullName(final String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
