@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.App;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -14,6 +15,7 @@ import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
+import vn.edu.fpt.hsts.persistence.entity.MedicalRecordData;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.Role;
 import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
@@ -25,6 +27,7 @@ import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
 import vn.edu.fpt.hsts.persistence.repo.PatientRepo;
 import vn.edu.fpt.hsts.persistence.repo.RoleRepo;
 
+import javax.swing.*;
 import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.Date;
@@ -287,5 +290,71 @@ public class PatientService {
 
     public List<Patient> getAllPatients() {
         return patientRepo.findAll();
+    }
+
+    public void updatePatient(final PatientCriteria criteria, final boolean isNewMedicalRecord) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("criteria[{}], isNewMedicalRecord[{}]", criteria, isNewMedicalRecord);
+            Date currentDate = new Date();
+            currentDate = DateUtils.roundDate(currentDate, false);
+            if (isNewMedicalRecord) {
+                // Patient re-exam after a long time
+
+                // TODO create medical record
+                MedicalRecord medicalRecord = new MedicalRecord();
+                medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);
+
+                Doctor doctor = doctorRepo.findOne(criteria.getDoctorId());
+                if(null == doctor) {
+                    throw new BizlogicException("Doctor with username[{}] is not found", null, criteria.getDoctorId());
+                }
+                medicalRecord.setDoctor(doctor);
+                Patient patient = patientRepo.findOne(criteria.getId());
+                medicalRecord.setPatient(patient);
+                medicalRecord.setSymptoms(criteria.getSymptom());
+                medicalRecord.setStartTime(currentDate);
+
+                medicalRecord.setMedicalHistory(criteria.getMedicalHistory());
+                medicalRecordRepo.saveAndFlush(medicalRecord);
+
+                // TODO Create appointment
+                final Appointment appointment = new Appointment();
+                appointment.setMedicalRecord(medicalRecord);
+                appointment.setWeight(criteria.getWeight());
+                appointment.setHeight(criteria.getHeight());
+                appointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
+                appointment.setMeetingDate(currentDate);
+                appointmentRepo.saveAndFlush(appointment);
+
+            } else {
+                /**
+                 * TODO find last appointment with status ENTRY
+                 * note that for case patient re-exam after a long time, system should implement a scheduler to mark all out-of-date appointment
+                 */
+                final Appointment appointment = appointmentRepo.findLastAppointmentByPatientId(criteria.getId(),
+                        IDbConsts.IAppointmentStatus.ENTRY);
+                if(null == appointment) {
+                    // throw ex
+                }
+                // TODO update meeting date
+                appointment.setMeetingDate(new Date());
+                appointment.setMesssage(criteria.getSymptom());
+                appointment.setHeight(criteria.getHeight());
+                appointment.setWeight(criteria.getWeight());
+
+                final MedicalRecord medicalRecord = appointment.getMedicalRecord();
+                if (medicalRecord.getDoctor().getId() != criteria.getDoctorId()) {
+                   LOGGER.debug("Nurse assign patient[{}] to new doctor[{}]", criteria.getDoctorId());
+                    final Doctor doctor = doctorRepo.findOne(criteria.getDoctorId());
+                    medicalRecord.setDoctor(doctor);
+                }
+                appointmentRepo.saveAndFlush(appointment);
+                medicalRecordRepo.saveAndFlush(medicalRecord);
+            }
+
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
     }
 }

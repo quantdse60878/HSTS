@@ -22,6 +22,6 @@ public interface TreatmentRepo extends JpaRepository<Treatment, Integer>{
     @Query(value = "SELECT * FROM treatment WHERE appointmentId = ?1 AND status = 1", nativeQuery = true)
     Treatment findTreatmentByAppointmentId(int appointmentId);
 
-    @Query("select t from Treatment t where appointment.id = :appointmentId ORDER BY fromDate DESC")
+    @Query("select t from Treatment t where appointment.id = :appointmentId ORDER BY fromDate DESC, id DESC")
     Treatment findLastTreatmenByAppointmentId(@Param("appointmentId") final int appointmentId);
 }

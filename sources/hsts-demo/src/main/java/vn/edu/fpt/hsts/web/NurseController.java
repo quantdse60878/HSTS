@@ -65,6 +65,7 @@ public class NurseController extends AbstractController {
 
     /**
      * The register patient mapping
+     *
      * @param patientName
      * @param email
      * @param birthday
@@ -117,7 +118,7 @@ public class NurseController extends AbstractController {
             //set type. sussces TYPE = info, fail TYPE = danger
             mav.addObject("TYPE", "info");
             //set message notify
-            mav.addObject("MESSAGE","Success");
+            mav.addObject("MESSAGE", "Success");
 
             return mav;
         } finally {
@@ -155,36 +156,33 @@ public class NurseController extends AbstractController {
     }
 
     @RequestMapping(value = "updatePatient", method = RequestMethod.POST)
-    public ModelAndView registerPatient(@RequestParam("patientID") final int patientID,
+    public ModelAndView registerPatient(@RequestParam("patientId") final int patientId,
                                         @RequestParam("weight") final int weight,
                                         @RequestParam("height") final int height,
                                         @RequestParam("doctorId") final int doctorId,
                                         @RequestParam(value = "medicalHistory") final String medicalHistory,
-                                        @RequestParam(value = "symptoms") final String symptoms) throws BizlogicException, BizlogicException {
+                                        @RequestParam(value = "symptoms") final String symptoms,
+                                        @RequestParam(value = "isNewMedicalRecord", required = false, defaultValue = "false")
+                                        final boolean isNewMedicalRecord) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-//            LOGGER.info("patientName[{}], email[{}], birthday[{}], gender[{}], weight[{}], height[{}], doctorId[{}], medicalHistory[{}], symptoms[{}]",
-//                    patientName, email, birthday, gender, weight, height, doctorId, medicalHistory, symptoms);
+            LOGGER.info("weight[{}], height[{}], doctorId[{}], medicalHistory[{}], symptoms[{}], isNewMedicalRecord[{}]",
+                    weight, height, doctorId, medicalHistory, symptoms, isNewMedicalRecord);
 
             ModelAndView mav = new ModelAndView();
-            mav.setViewName("updatePatient");
-            Patient patient = patientService.getPatientByID(patientID);
-            mav.addObject("PATIENT", patient);
+            mav.setViewName("nursePatients");
             /**
              * Update patient
              */
             PatientCriteria criteria = new PatientCriteria();
+            criteria.setId(patientId);
             criteria.setWeight(weight);
             criteria.setHeight(height);
             criteria.setDoctorId(doctorId);
             criteria.setMedicalHistory(medicalHistory);
             criteria.setSymptom(symptoms);
 
-//            patientService.createPatient(criteria);
-
-            // Add doctors to request
-            final List<DoctorModel> doctors = doctorService.findAll();
-            mav.addObject("DOCTORS", doctors);
+            patientService.updatePatient(criteria, isNewMedicalRecord);
 
             //create notify
             //set name of action
@@ -192,7 +190,7 @@ public class NurseController extends AbstractController {
             //set type. sussces TYPE = info, fail TYPE = danger
             mav.addObject("TYPE", "info");
             //set message notify
-            mav.addObject("MESSAGE","Success");
+            mav.addObject("MESSAGE", "Success");
 
             return mav;
         } finally {
