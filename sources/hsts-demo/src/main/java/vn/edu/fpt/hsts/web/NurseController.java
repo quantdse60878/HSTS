@@ -78,7 +78,7 @@ public class NurseController extends AbstractController {
      * @throws BizlogicException
      * @throws BizlogicException
      */
-    @RequestMapping(value = "/nurse/registerNew", method = RequestMethod.POST)
+    @RequestMapping(value = "registerNew", method = RequestMethod.POST)
     public ModelAndView registerPatient(@RequestParam("patientName") final String patientName,
                                         @RequestParam("email") final String email,
                                         @RequestParam("birthday") final String birthday,
@@ -127,7 +127,7 @@ public class NurseController extends AbstractController {
 
 
 
-    @RequestMapping(value = "/nurse/updatePatient", method = RequestMethod.GET)
+    @RequestMapping(value = "searchPatient", method = RequestMethod.GET)
     public ModelAndView nursePatientsPage() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
