@@ -77,9 +77,9 @@ public class LoginActivity extends ActionBarActivity {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ thông tin.", Toast.LENGTH_SHORT).show();
                 }
 
-
-                Intent intent = new Intent(LoginActivity.this, DeviceScanActivity.class);
-//                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                Comment o day
+//                Intent intent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });

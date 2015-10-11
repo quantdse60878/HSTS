@@ -48,6 +48,7 @@ public class BroadcastService extends Service {
     private final Handler handlerThread = new Handler();
     Intent intent;
     int counter = 0;
+    public static int alertMinute = 0;
 
     @Override
     public void onCreate() {
@@ -72,7 +73,6 @@ public class BroadcastService extends Service {
 
 //                    checkNotify();
                     Calendar c = Calendar.getInstance();
-                    long cl = c.getTimeInMillis();
                     Calendar c1 = Calendar.getInstance();
                     c1.set(Calendar.HOUR_OF_DAY, 14);
                     c1.set(Calendar.MINUTE, 47);
@@ -93,32 +93,16 @@ public class BroadcastService extends Service {
                         c2.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.split(":")[0]));
                         c2.set(Calendar.MINUTE, Integer.parseInt(time.split(":")[1]));
 
-                        Log.d("Hihi",c2.getTimeInMillis() + " " + c.getTimeInMillis());
-                        if (c2.getTime().getHours() == c.getTime().getHours() && c2.getTime().getMinutes() == c.getTime().getMinutes()) {
+
+                        if (c2.getTime().getHours() == c.getTime().getHours() && c2.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
                             Log.d("KhuongMH","HHHHHHHHHHHHHHHH");
                             final Context context = getApplicationContext();
-//                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                            builder.setTitle("Nhắc Nhở").setMessage("Bạn đến giờ ăn, uống thuốc, tập luyện")
-//                                    .setPositiveButton("Ngưng Nhắc Nhở", new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            Intent in = new Intent(context, HomeActivity.class);
-//                                            in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                            context.startActivity(in);
-//                                        }
-//                                    }).setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                }
-//                            });
-//                            AlertDialog dialog = builder.create();
-//                            dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-//                            dialog.show();
                             if(BroadcastService.flag){
                                 BroadcastService.flag = false;
                                 Intent in = new Intent(context, HomeActivity.class);
                                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 in.putExtra("openDialogForMe", Boolean.TRUE);
+                                HomeActivity.timeAlert = c2.getTime().getHours() + ":" + c2.getTime().getMinutes();
                                 context.startActivity(in);
                             }
 
@@ -186,7 +170,7 @@ public class BroadcastService extends Service {
 
         String stringURL = Constant.hostURL + Constant.checkNotifyMethod;
         Log.d("QUYYYY1111", "Login url: " + stringURL);
-
+        Calendar c = Calendar.getInstance();
         try {
             URL url = new URL(stringURL);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -217,6 +201,7 @@ public class BroadcastService extends Service {
 
             try {
                 JSONArray array = new JSONArray(response);
+                final Context context = getApplicationContext();
                 for(int i = 0; i < array.length(); i++) {
                     JSONObject notifyItem = array.getJSONObject(i);
                     int notifyType = Integer.parseInt(notifyItem.getString("type"));
@@ -225,8 +210,20 @@ public class BroadcastService extends Service {
                         getNewTreatment(notifyId);
                     } else if (notifyType == 5) {
                         //Mo ung dung hien thong bao la benh nhan hom truoc chua hoan thanh duoc bai tap cua minh, benh nhan can co gang hon de hoan thanh bai tap
+                        if(c.getTime().getHours() == 7 && c.getTime().getMinutes() == 0){
+                            Intent in = new Intent(context, HomeActivity.class);
+                            in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            in.putExtra("notFinished", Boolean.TRUE);
+                            context.startActivity(in);
+                        }
                     } else if (notifyType == 6) {
                         //Mo ung dung hien thong bao la benh nhan hom truoc da hoan thanh qua muc can thiet, benh nhan can giam cuong do luyen tap de bao ve suc khoe
+                        if(c.getTime().getHours() == 7 && c.getTime().getMinutes() == 0){
+                            Intent in = new Intent(context, HomeActivity.class);
+                            in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            in.putExtra("overFinished", Boolean.TRUE);
+                            context.startActivity(in);
+                        }
                     }
                 }
 
@@ -246,8 +243,6 @@ public class BroadcastService extends Service {
         sendBroadcast(intent);
 
     }
-
-
 
     public BroadcastService() {
     }

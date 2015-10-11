@@ -179,22 +179,37 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         //KhuongMH
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            Log.d("KhuongMH","123");
+            final Context context = getApplicationContext();
             if (bundle.getBoolean("openDialogForMe")) {
-                Log.d("KhuongMH","456");
-                final Context context = getApplicationContext();
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Nhắc Nhở").setMessage("Bạn đến giờ ăn, uống thuốc, tập luyện")
                         .setPositiveButton("Ngưng Nhắc Nhở", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                BroadcastService.alertMinute = 0;
+                                BroadcastService.flag = true;
                             }
                         }).setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        BroadcastService.alertMinute += 5;
+                        BroadcastService.flag = true;
                     }
                 });
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.show();
+            }
+            if(bundle.getBoolean("notFinished")){
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Nhắc Nhở").setMessage("Hôm qua bạn chưa hoàn thành chế độ điều trị, hãy cố gắng thực hiện để việc điều trị được tốt hơn.");
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.show();
+            }
+            if(bundle.getBoolean("overFinished")){
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Nhắc Nhở").setMessage("Hôm qua bạn hoàn thành vượt mức chế độ điều trị, hãy cố gắng điều độ để việc điều trị được tốt hơn.");
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
@@ -209,10 +224,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
         actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
-
-        if (bundle != null && bundle.getString("timeAlert") != null) {
-            String timeAlert = bundle.getString("timeAlert");
-        }
 
         ActionBar.Tab atab1 = actionBar.newTab().setText("THỨC ĂN").setTabListener(this);
         ActionBar.Tab atab2 = actionBar.newTab().setText("THUỐC").setTabListener(this);
@@ -317,13 +328,19 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         List<String> alarmTime = new ArrayList<>();
         for (Treatment treatment : treatments) {
             for (ToDoTime time : treatment.getListFoodTreatment()) {
-                if (!alarmTime.contains(time.getTimeUse())) alarmTime.add(time.getTimeUse());
+                for(String t : time.getNumberOfTime()){
+                    if (!alarmTime.contains(t)) alarmTime.add(t);
+                }
             }
             for (ToDoTime time : treatment.getListMedicineTreatment()) {
-                if (!alarmTime.contains(time.getTimeUse())) alarmTime.add(time.getTimeUse());
+                for(String t : time.getNumberOfTime()){
+                    if (!alarmTime.contains(t)) alarmTime.add(t);
+                }
             }
             for (ToDoTime time : treatment.getListPracticeTreatment()) {
-                if (!alarmTime.contains(time.getTimeUse())) alarmTime.add(time.getTimeUse());
+                for(String t : time.getNumberOfTime()){
+                    if (!alarmTime.contains(t)) alarmTime.add(t);
+                }
             }
         }
         return alarmTime;

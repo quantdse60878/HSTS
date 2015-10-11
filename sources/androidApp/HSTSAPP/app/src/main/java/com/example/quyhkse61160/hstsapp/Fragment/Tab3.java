@@ -30,7 +30,8 @@ public class Tab3 extends Fragment {
     PracticeAdapter adapter;
     ListView listView;
     TextView time_practice;
-    static ArrayList<HashMap<String,String>> sections;
+    static ArrayList<HashMap<String, String>> sections;
+
     public Tab3() {
         // Required empty public constructor
     }
@@ -81,18 +82,16 @@ public class Tab3 extends Fragment {
         return v;
     }
 
-    public static void updateData(){
-        sections = new ArrayList<HashMap<String,String>>();
+    public static void updateData() {
+        sections = new ArrayList<HashMap<String, String>>();
         List<Treatment> treatments = Constant.TREATMENTS;
-        for (Treatment treatment : treatments){
-            for(ToDoTime time : treatment.getListPracticeTreatment()){
-                if(time.getTimeUse().equals(HomeActivity.timeAlert)){
-                    for (ToDoItem item : time.getItems()){
-                        HashMap<String,String> d = new HashMap<>();
-                        d.put("PracticeName", item.getName());
-                        d.put("PracticeTime", item.getQuantity());
-                        sections.add(d);
-                    }
+        for (Treatment treatment : treatments) {
+            for (ToDoTime time : treatment.getListPracticeTreatment()) {
+                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+                    HashMap<String, String> d = new HashMap<>();
+                    d.put("PracticeName", time.getName());
+                    d.put("PracticeTime", time.getQuantitative());
+                    sections.add(d);
                 }
             }
         }

@@ -29,7 +29,8 @@ public class Tab2 extends Fragment {
     MedicineAdapter adapter;
     ListView listView;
     TextView time_use;
-    static ArrayList<HashMap<String,String>> sections;
+    static ArrayList<HashMap<String, String>> sections;
+
     public Tab2() {
         // Required empty public constructor
     }
@@ -80,20 +81,17 @@ public class Tab2 extends Fragment {
         return v;
     }
 
-    public static void updateData(){
-        sections = new ArrayList<HashMap<String,String>>();
+    public static void updateData() {
+        sections = new ArrayList<HashMap<String, String>>();
         List<Treatment> treatments = Constant.TREATMENTS;
-        for (Treatment treatment : treatments){
-            for(ToDoTime time : treatment.getListMedicineTreatment()){
-                if(time.getTimeUse().equals(HomeActivity.timeAlert)){
-                    for (ToDoItem item : time.getItems()){
-                        HashMap<String,String> d = new HashMap<>();
-                        d.put("MedicineName", item.getName());
-                        Log.d("Khuongjjjjjj", item.getAdvice());
-                        d.put("Advice",item.getAdvice());
-                        d.put("NumberOfMedicine", item.getQuantity());
-                        sections.add(d);
-                    }
+        for (Treatment treatment : treatments) {
+            for (ToDoTime time : treatment.getListMedicineTreatment()) {
+                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+                    HashMap<String, String> d = new HashMap<>();
+                    d.put("MedicineName", time.getName());
+                    d.put("Advice", time.getAdvice());
+                    d.put("NumberOfMedicine", time.getQuantitative());
+                    sections.add(d);
                 }
             }
         }

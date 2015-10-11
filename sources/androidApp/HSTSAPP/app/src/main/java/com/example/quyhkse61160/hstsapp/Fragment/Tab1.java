@@ -79,13 +79,12 @@ public class Tab1 extends Fragment {
         List<Treatment> treatments = Constant.TREATMENTS;
         for (Treatment treatment : treatments){
             for(ToDoTime time : treatment.getListFoodTreatment()){
-                if(time.getTimeUse().equals(HomeActivity.timeAlert)){
-                    for (ToDoItem item : time.getItems()){
+                if(time.getNumberOfTime().contains(HomeActivity.timeAlert)){
                         HashMap<String,String> d = new HashMap<>();
-                        d.put("FoodName", item.getName());
-                        d.put("QuantitativeOfFood", item.getQuantity());
+                        d.put("FoodName", time.getName());
+                        d.put("QuantitativeOfFood", time.getQuantitative());
                         sections.add(d);
-                    }
+
                 }
             }
         }

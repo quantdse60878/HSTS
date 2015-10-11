@@ -55,8 +55,8 @@ public class NoticeAdapter extends BaseAdapter {
         HashMap<String, String> item = new HashMap<>();
         item = data.get(position);
 
-        txtDate.setText(item.get("Hour"));
-        txtName.setText(item.get("Name"));
+        txtDate.setText(item.get("Name"));
+        txtName.setText(item.get("Number"));
         txtQuantity.setText(item.get("Quantity"));
 
         return vi;

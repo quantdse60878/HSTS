@@ -80,24 +80,39 @@ public class Constant {
         try {
             for(int i = 0; i < source.length();i++){
                 ToDoTime time = new ToDoTime();
-                time.setTimeUse(source.getJSONObject(i).getString("time"));
-                JSONArray items = null;
-                if (field.equals(Constant.FOOD_FROM_JSON)) {
-                    items = source.getJSONObject(i).getJSONArray("listFood");
+                time.setName(source.getJSONObject(i).getString("name"));
+                time.setQuantitative(source.getJSONObject(i).getString("quantitative"));
+                int tempTime = source.getJSONObject(i).getInt("numberOfTime");
+                List<String> numberOfTime = new ArrayList<>();
+                numberOfTime.add("07:00");
+                if(tempTime == 2){
+                    numberOfTime.add("18:00");
                 }
+                if(tempTime == 3){
+                    numberOfTime.add("12:00");
+                    numberOfTime.add("18:00");
+                }
+                if(tempTime == 4){
+                    numberOfTime.add("12:00");
+                    numberOfTime.add("18:00");
+                    numberOfTime.add("21:00");
+                }
+                if(tempTime == 5){
+                    numberOfTime.add("09:00");
+                    numberOfTime.add("12:00");
+                    numberOfTime.add("15:00");
+                    numberOfTime.add("18:00");
+                }
+                if(tempTime == 6){
+                    numberOfTime.add("09:00");
+                    numberOfTime.add("12:00");
+                    numberOfTime.add("15:00");
+                    numberOfTime.add("18:00");
+                    numberOfTime.add("21:00");
+                }
+                time.setNumberOfTime(numberOfTime);
                 if (field.equals(Constant.MEDICINE_FROM_JSON)) {
-                    items = source.getJSONObject(i).getJSONArray("listMedicine");
-                }
-                if (field.equals(Constant.PRACTICE_FROM_JSON)) {
-                    items = source.getJSONObject(i).getJSONArray("listPractice");
-                }
-                for (int j = 0; j < items.length(); j++) {
-                    ToDoItem item = new ToDoItem();
-                    if (field.equals(Constant.MEDICINE_FROM_JSON))
-                        item.setAdvice(items.getJSONObject(j).getString("advice"));
-                    item.setName(items.getJSONObject(j).getString("name"));
-                    item.setQuantity(items.getJSONObject(j).getString("quantitative"));
-                    time.getItems().add(item);
+                    time.setAdvice(source.getJSONObject(i).getString("advice"));
                 }
                 times.add(time);
             }

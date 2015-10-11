@@ -7,26 +7,43 @@ import java.util.List;
  * Created by Man Huynh Khuong on 10/6/2015.
  */
 public class ToDoTime {
-    private String timeUse = "";
-    private List<ToDoItem> items = new ArrayList<>();
+    private String name = "";
+    private String quantitative = "";
+    private List<String> numberOfTime = new ArrayList<>();
     private String advice = "";
 
     public ToDoTime() {
     }
 
-    public String getTimeUse() {
-        return timeUse;
+    public String getName() {
+        return name;
     }
 
-    public void setTimeUse(String timeUse) {
-        this.timeUse = timeUse;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<ToDoItem> getItems() {
-        return items;
+    public String getQuantitative() {
+        return quantitative;
     }
 
-    public void setItems(List<ToDoItem> items) {
-        this.items = items;
+    public void setQuantitative(String quantitative) {
+        this.quantitative = quantitative;
+    }
+
+    public List<String> getNumberOfTime() {
+        return numberOfTime;
+    }
+
+    public void setNumberOfTime(List<String> numberOfTime) {
+        this.numberOfTime = numberOfTime;
+    }
+
+    public String getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(String advice) {
+        this.advice = advice;
     }
 }

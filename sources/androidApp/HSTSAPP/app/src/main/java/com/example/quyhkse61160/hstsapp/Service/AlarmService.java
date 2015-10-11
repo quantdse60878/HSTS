@@ -30,7 +30,7 @@ public class AlarmService extends Service {
         handlerThread.removeCallbacks(setAlarm);
 
         //Sau 10s khi ch?y service.
-        handlerThread.postDelayed(setAlarm, 20000);
+        handlerThread.postDelayed(setAlarm, 5000);
     }
 
 

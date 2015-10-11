@@ -38,39 +38,33 @@ public class NoticeActivity extends ActionBarActivity {
         if(field.equals("food")){
             for(Treatment treatment : treatments){
                 for(ToDoTime time : treatment.getListFoodTreatment()){
-                    for(ToDoItem item : time.getItems()){
                         HashMap<String,String> d = new HashMap<>();
-                        d.put("Hour",time.getTimeUse());
-                        d.put("Name",item.getName());
-                        d.put("Quantity",item.getQuantity());
+                        d.put("Name",time.getName());
+                        d.put("Number",time.getNumberOfTime() + "");
+                        d.put("Quantity",time.getQuantitative());
                         sections.add(d);
-                    }
                 }
             }
         }
         if(field.equals("medicine")){
             for(Treatment treatment : treatments){
                 for(ToDoTime time : treatment.getListMedicineTreatment()){
-                    for(ToDoItem item : time.getItems()){
-                        HashMap<String,String> d = new HashMap<>();
-                        d.put("Hour",time.getTimeUse());
-                        d.put("Name",item.getName());
-                        d.put("Quantity",item.getQuantity());
-                        sections.add(d);
-                    }
+                    HashMap<String,String> d = new HashMap<>();
+                    d.put("Name",time.getName());
+                    d.put("Number",time.getNumberOfTime() + "");
+                    d.put("Quantity",time.getQuantitative());
+                    sections.add(d);
                 }
             }
         }
         if(field.equals("practice")){
             for(Treatment treatment : treatments){
                 for(ToDoTime time : treatment.getListPracticeTreatment()){
-                    for(ToDoItem item : time.getItems()){
-                        HashMap<String,String> d = new HashMap<>();
-                        d.put("Hour",time.getTimeUse());
-                        d.put("Name",item.getName());
-                        d.put("Quantity",item.getQuantity());
-                        sections.add(d);
-                    }
+                    HashMap<String,String> d = new HashMap<>();
+                    d.put("Name",time.getName());
+                    d.put("Number",time.getNumberOfTime() + "");
+                    d.put("Quantity",time.getQuantitative());
+                    sections.add(d);
                 }
             }
         }
