@@ -198,6 +198,7 @@ public class PatientService {
             appointmentRepo.saveAndFlush(appointment);
 
             // TODO send email with creditial information to patient
+//            mailService.sendMail(criteria.getEmail(), "Credential email", account.getPassword());
 
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Create new patient[{}] successfully", account.getUsername());

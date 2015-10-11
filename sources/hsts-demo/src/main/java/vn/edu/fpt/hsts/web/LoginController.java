@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientModel;
+import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.MailService;
 import vn.edu.fpt.hsts.bizlogic.service.AccountService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
@@ -19,6 +21,7 @@ import vn.edu.fpt.hsts.common.IConsts;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import vn.edu.fpt.hsts.persistence.entity.Account;
+import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 
 import javax.mail.MessagingException;
@@ -47,6 +50,12 @@ public class LoginController {
      */
     @Autowired
     private MailService mailService;
+
+    /**
+     * The {@link DoctorService}.
+     */
+    @Autowired
+    DoctorService doctorService;
 
     /**
      * The login page mapping
@@ -87,6 +96,8 @@ public class LoginController {
                     LOGGER.info("listpatiens: " + patientList.size());
                     mav.addObject("LISTPATIENTS", patientList);
                 } else if (user.getRole().getName().equals("Nurse")){
+                    List<DoctorModel> doctorList = doctorService.findAll();
+                    session.setAttribute("DOCTORS", doctorList);
                     mav.setViewName("registerPatient");
                 }
 

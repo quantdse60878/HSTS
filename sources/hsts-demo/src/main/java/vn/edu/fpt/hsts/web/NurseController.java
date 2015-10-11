@@ -35,7 +35,99 @@ public class NurseController extends AbstractController {
     @Autowired
     DoctorService doctorService;
 
-    @RequestMapping(value = "updatePatient", method = RequestMethod.GET)
+    /**
+     * The register patient page mapping
+     *
+     * @return
+     */
+    @RequestMapping(value = "registerPatient", method = RequestMethod.GET)
+    public ModelAndView registerPatientPage() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("registerPatient");
+
+            /**
+             * Set reference data
+             */
+//            final List<DoctorModel> doctors = doctorService.findAll();
+//            mav.addObject("DOCTORS", doctors);
+            /**
+             *
+             */
+
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+
+    /**
+     * The register patient mapping
+     * @param patientName
+     * @param email
+     * @param birthday
+     * @param gender
+     * @param weight
+     * @param height
+     * @param doctorId
+     * @param medicalHistory
+     * @param symptoms
+     * @return
+     * @throws BizlogicException
+     * @throws BizlogicException
+     */
+    @RequestMapping(value = "/nurse/registerNew", method = RequestMethod.POST)
+    public ModelAndView registerPatient(@RequestParam("patientName") final String patientName,
+                                        @RequestParam("email") final String email,
+                                        @RequestParam("birthday") final String birthday,
+                                        @RequestParam("gender") final byte gender,
+                                        @RequestParam("weight") final int weight,
+                                        @RequestParam("height") final int height,
+                                        @RequestParam("doctorId") final int doctorId,
+                                        @RequestParam(value = "medicalHistory") final String medicalHistory,
+                                        @RequestParam(value = "symptoms") final String symptoms) throws BizlogicException, BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientName[{}], email[{}], birthday[{}], gender[{}], weight[{}], height[{}], doctorId[{}], medicalHistory[{}], symptoms[{}]",
+                    patientName, email, birthday, gender, weight, height, doctorId, medicalHistory, symptoms);
+
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("registerPatient");
+            /**
+             * Create new patient
+             */
+            PatientCriteria criteria = new PatientCriteria();
+            criteria.setPatientName(patientName);
+            criteria.setEmail(email);
+            criteria.setBirthday(birthday);
+            criteria.setGender(gender);
+            criteria.setWeight(weight);
+            criteria.setHeight(height);
+            criteria.setDoctorId(doctorId);
+            criteria.setMedicalHistory(medicalHistory);
+            criteria.setSymptom(symptoms);
+
+            patientService.createPatient(criteria);
+
+            //create notify
+            //set name of action
+            mav.addObject("METHOD", "Register Patient");
+            //set type. sussces TYPE = info, fail TYPE = danger
+            mav.addObject("TYPE", "info");
+            //set message notify
+            mav.addObject("MESSAGE","Success");
+
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+
+
+    @RequestMapping(value = "/nurse/updatePatient", method = RequestMethod.GET)
     public ModelAndView nursePatientsPage() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {

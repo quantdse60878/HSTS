@@ -48,7 +48,7 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form class="form-horizontal" method="POST" th:action="registerPatient">
+                        <form class="form-horizontal" method="POST" th:action="@{/nurse/registerNew}">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="Name" class="col-sm-3 control-label">Name</label>
@@ -110,7 +110,7 @@
                                     <div class="col-sm-5 ui-widget">
                                         <select id="combobox" class="form-control" th:name="doctorId">
                                             <option value="">Select one...</option>
-                                            <option th:each="doctor : ${DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.username}"></option>
+                                            <option th:each="doctor : ${session.DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.username}"></option>
                                         </select>
                                     </div>
                                 </div>
