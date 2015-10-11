@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<h4>Foods</h4>
+<table class="table table-striped" id="Foods">
+    <tr>
+        <th style="width: 10px">#</th>
+        <th>Name</th>
+        <th>Times</th>
+        <th>Quantitative</th>
+        <th>Note</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>
+            <select class="form-control" th:field="*{fPresModel.f}">
+                <option th:each="food : ${FOODS}" th:value="${food.id}"
+                        th:text="${food.name}"></option>
+            </select>
+        </td>
+        <td>
+            <select class="form-control" th:field="*{fPresModel.fTime}">
+                <option th:each="time : ${TIMES}" th:value="${time}"
+                        th:text="${time}"></option>
+            </select>
+        </td>
+        <td><input type="text" class="form-control" th:field="*{fPresModel.fQuantity}"
+                   placeholder="Quantity"/></td>
+        <td>
+            <input type="text" class="form-control"
+                   th:field="*{fPresModel.fNote}" placeholder="Advice"/>
+        </td>
+    </tr>
+</table>
+<a style="width: 50px;color: white;" class="btn btn-primary"
+   onclick="addRowFoods('Foods')">Add</a>
+
+</body>
+</html>

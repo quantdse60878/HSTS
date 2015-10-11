@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+
+<h4>Practices</h4>
+<table class="table table-striped" id="Practice">
+    <tr>
+        <th style="width: 10px">#</th>
+        <th>Name</th>
+        <th>Times</th>
+        <th>Quantitative</th>
+        <th>Note</th>
+    </tr>
+    <tr th:each="practicePhase,row : ${PHASE.practicePhaseList}">
+        <td th:text="${row.count}"></td>
+
+        <td>
+            <select class="form-control" th:field="*{pPresModel.p}">
+                <option th:value="${practicePhase.practice.id}"
+                        th:text="${practicePhase.practice.name}"></option>
+                <option th:each="practice : ${PRACTICES}"
+                        th:value="${practice.id}"
+                        th:text="${practice.name}"
+                        th:if="${practicePhase.practice.id != practice.id}"></option>
+            </select>
+        </td>
+        <td>
+            <select class="form-control" th:field="*{pPresModel.pTime}">
+                <option th:each="time : ${TIMES}" th:value="${time}"
+                        th:text="${time}"></option>
+            </select>
+        </td>
+        <td><input type="text" class="form-control" th:field="*{pPresModel.pIntensity}"
+                   placeholder="Quantity"/></td>
+        <td>
+            <input type="text" class="form-control"
+                   th:field="*{pPresModel.pNote}" placeholder="Advice"/>
+        </td>
+    </tr>
+</table>
+<a style="width: 50px;color: white;" class="btn btn-primary"
+   onclick="addRowPractice('Practice')">Add</a>
+</body>
+</html>

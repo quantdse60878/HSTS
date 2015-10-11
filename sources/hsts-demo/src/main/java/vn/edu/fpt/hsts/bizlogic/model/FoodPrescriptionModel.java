@@ -4,60 +4,72 @@ package vn.edu.fpt.hsts.bizlogic.model;
  * Created by Aking on 10/11/2015.
  */
 public class FoodPrescriptionModel {
-    private String food;
-    private String foodTime;
-    private String foodQuantity;
-    private String foodNote;
+    /**
+     * Food
+     */
+    private String f;
+    /**
+     * Food Time
+     */
+    private String fTime;
+    /**
+     * Food Quantity
+     */
+    private String fQuantity;
+    /**
+     * Food Note
+     */
+    private String fNote;
 
     public FoodPrescriptionModel() {
     }
 
-    public FoodPrescriptionModel(String food, String foodTime, String foodQuantity, String foodNote) {
-        this.food = food;
-        this.foodTime = foodTime;
-        this.foodQuantity = foodQuantity;
-        this.foodNote = foodNote;
+    public FoodPrescriptionModel(String f, String fTime, String fQuantity, String fNote) {
+        this.f = f;
+        this.fTime = fTime;
+        this.fQuantity = fQuantity;
+        this.fNote = fNote;
     }
 
-    public String getFood() {
-        return food;
+    public String getF() {
+        return f;
     }
 
-    public void setFood(String food) {
-        this.food = food;
+    public void setF(String f) {
+        this.f = f;
     }
 
-    public String getFoodTime() {
-        return foodTime;
+    public String getfTime() {
+        return fTime;
     }
 
-    public void setFoodTime(String foodTime) {
-        this.foodTime = foodTime;
+    public void setfTime(String fTime) {
+        this.fTime = fTime;
     }
 
-    public String getFoodQuantity() {
-        return foodQuantity;
+    public String getfQuantity() {
+        return fQuantity;
     }
 
-    public void setFoodQuantity(String foodQuantity) {
-        this.foodQuantity = foodQuantity;
+    public void setfQuantity(String fQuantity) {
+        this.fQuantity = fQuantity;
     }
 
-    public String getFoodNote() {
-        return foodNote;
+    public String getfNote() {
+        return fNote;
     }
 
-    public void setFoodNote(String foodNote) {
-        this.foodNote = foodNote;
+    public void setfNote(String fNote) {
+        this.fNote = fNote;
     }
 
     @Override
     public String toString() {
         return "FoodPrescriptionModel{" +
-                "food='" + food + '\'' +
-                ", foodTime='" + foodTime + '\'' +
-                ", foodQuantity='" + foodQuantity + '\'' +
-                ", foodNote='" + foodNote + '\'' +
+                "f='" + f + '\'' +
+                ", fTime='" + fTime + '\'' +
+                ", fQuantity='" + fQuantity + '\'' +
+                ", fNote='" + fNote + '\'' +
                 '}';
     }
 }

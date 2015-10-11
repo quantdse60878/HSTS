@@ -143,225 +143,29 @@
 
                                         <div class="tab-content">
                                             <div class="tab-pane" id="tab_4-4">
-                                                <h4>Patient's Profile</h4>
-                                                <!-- box-body -->
-                                                <div class="box-body" th:with="ACC=${APPOINTMENT.medicalRecord.patient.account}">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">Name</label>
-
-                                                        <div class="col-sm-6">
-                                                            <input type="text" readonly="readonly" class="form-control"
-                                                                   th:value="${ACC.fullname}"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">BirthDay</label>
-
-                                                        <div class="col-sm-3">
-                                                            <input type="text" readonly="readonly"
-                                                                   class="form-control"
-                                                                   th:value="${#dates.format(ACC.dateOfBirth, 'dd-MM-yyyy')}"/>
-                                                        </div>
-
-                                                        <label class="col-sm-2 control-label">Gender</label>
-
-                                                        <div class="col-sm-3">
-                                                            <input type="text" readonly="readonly" th:if="${ACC.gender == 1}"
-                                                                   class="form-control" value="Male"/>
-                                                            <input type="text" readonly="readonly" th:if="${ACC.gender == 2}"
-                                                                   class="form-control" value="Female"/>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">Weight</label>
-
-                                                        <div class="col-sm-2">
-                                                            <input type="text" readonly="readonly" class="form-control"
-                                                                   th:value="${APPOINTMENT.weight}"/>
-                                                        </div>
-                                                        <label class="col-sm-1 control-label">Kg</label>
-
-                                                        <label class="col-sm-3 control-label">Height</label>
-
-                                                        <div class="col-sm-2">
-                                                            <input type="text" readonly="readonly" class="form-control"
-                                                                   th:value="${APPOINTMENT.height}"/>
-                                                        </div>
-                                                        <label class="col-sm-1 control-label">Cm</label>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="Medicalhistory" class="col-sm-3 control-label">Medical
-                                                            history</label>
-
-                                                        <div class="col-sm-6">
-                                                            <table class="table table-striped" id="Medicalhistory">
-                                                                <tr>
-                                                                    <th style="width: 10px">#</th>
-                                                                    <th>Medical history</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1/</td>
-                                                                    <td><input type="text" class="form-control" readonly="readonly"
-                                                                               th:value="${APPOINTMENT.medicalRecord.medicalHistory}"/>
-                                                                    </td>
-                                                                </tr>
-
-                                                            </table>
-                                                            <!-- /.table Medical history -->
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="clinicalSymptoms" class="col-sm-3 control-label">Symptoms</label>
-
-                                                        <div class="col-sm-6">
-                                                            <table class="table table-striped" id="clinicalSymptoms">
-                                                                <tr>
-                                                                    <th style="width: 10px">#</th>
-                                                                    <th>Clinical Symptoms</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1/</td>
-                                                                    <td><input type="text" class="form-control" readonly="readonly"
-                                                                               th:value="${APPOINTMENT.medicalRecord.symptoms}"/></td>
-                                                                </tr>
-
-                                                            </table>
-                                                            <!-- /.table clinical Symptoms -->
-
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <!-- /.box-body -->
+                                                <!-- patient's Profile -->
+                                                <div layout:replace="_patientProfile"></div>
+                                                <!-- /.patient's Profile -->
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane active" id="tab_1-1">
-                                                <h4>Medicine</h4>
-                                                <!-- table medicine -->
-                                                <table class="table table-striped" id="medicine">
-                                                    <tr>
-                                                        <th style="width: 10px">#</th>
-                                                        <th>Medicine</th>
-                                                        <th>Times</th>
-                                                        <th>Quanlity</th>
-                                                        <th>Note</th>
-                                                    </tr>
-                                                    <tr th:each="medicalPhase,row : ${PHASE.medicinePhaseList}">
-                                                        <td th:text="${row.count}"></td>
-                                                        <td>
-                                                            <select class="form-control" th:field="*{medicinePrescriptionModel.medical}">
-                                                                <option th:value="${medicalPhase.medicine.id}"
-                                                                        th:text="${medicalPhase.medicine.name}"></option>
-                                                                <option th:each="medicine : ${MEDICINES}"
-                                                                        th:value="${medicine.id}"
-                                                                        th:text="${medicine.name}"
-                                                                        th:if="${medicalPhase.medicine.id != medicine.id}"></option>
-                                                            </select>
-                                                        </td>
-                                                        <td><select class="form-control" th:field="*{medicinePrescriptionModel.medicalTime}">
-                                                            <option th:each="time : ${TIMES}" th:value="${time}"
-                                                                    th:text="${time}"></option>
-                                                        </select>
-                                                        </td>
-                                                        <td><input type="text" class="form-control" th:field="*{medicinePrescriptionModel.medicalQuantity}"
-                                                                   placeholder="Quanlity"/></td>
-                                                        <td>
-                                                            <input type="text" class="form-control"
-                                                                   th:field="*{medicinePrescriptionModel.medicalNote}" placeholder="Advice"/>
-                                                        </td>
-                                                    </tr>
-
-                                                </table>
-                                                <!-- /.table medicine -->
-                                                <a style="width: 50px;color: white;" class="btn btn-primary"
-                                                   onclick="addRowMedicine('medicine')">Add</a>
+                                                <!-- medicine Suggest -->
+                                                <div layout:replace="_medicineSuggest"></div>
+                                                <!-- /.medicine Suggest -->
 
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane" id="tab_2-2">
-                                                <h4>Foods</h4>
-                                                <table class="table table-striped" id="Foods">
-                                                    <tr>
-                                                        <th style="width: 10px">#</th>
-                                                        <th>Times</th>
-                                                        <th>Menu</th>
-                                                        <th>Quantitative</th>
-                                                        <th>Note</th>
-                                                    </tr>
-                                                    <tr th:each="foodPhase,row : ${PHASE.foodPhaseList}">
-                                                        <td th:text="${row.count}"></td>
-                                                        <td>
-                                                            <select class="form-control" th:field="*{foodPrescriptionModel.foodTime}" th:if="${row.count == 1}">
-                                                                <option th:each="time : ${TIMES}" th:value="${time}"
-                                                                        th:text="${time}"></option>
-                                                            </select>
-                                                        </td>
-                                                        <td>
-                                                            <select class="form-control" th:field="*{foodPrescriptionModel.food}">
-                                                                <option th:value="${foodPhase.food.id}"
-                                                                        th:text="${foodPhase.food.name}"></option>
-                                                                <option th:each="food : ${FOODS}"
-                                                                        th:value="${food.id}"
-                                                                        th:text="${food.name}"
-                                                                        th:if="${foodPhase.food.id != food.id}"></option>
-                                                            </select>
-                                                        </td>
-
-                                                        <td><input type="text" class="form-control" th:field="*{foodPrescriptionModel.foodQuantity}"
-                                                                    placeholder="Quantity"/></td>
-                                                        <td>
-                                                            <input type="text" class="form-control"
-                                                                   th:field="*{foodPrescriptionModel.foodNote}" placeholder="Advice"/>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <a style="width: 50px;color: white;" class="btn btn-primary"
-                                                   onclick="addRowFoods('Foods')">Add</a>
+                                                <!-- food Suggest -->
+                                                <div layout:replace="_foodSuggest"></div>
+                                                <!-- /.food Suggest -->
 
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane" id="tab_3-3">
-                                                <h4>Practices</h4>
-                                                <table class="table table-striped" id="Practice">
-                                                    <tr>
-                                                        <th style="width: 10px">#</th>
-                                                        <th>Times</th>
-                                                        <th>Name</th>
-                                                        <th>Quantitative</th>
-                                                        <th>Note</th>
-                                                    </tr>
-                                                    <tr th:each="practicePhase,row : ${PHASE.practicePhaseList}">
-                                                        <td th:text="${row.count}"></td>
-                                                        <td>
-                                                            <select class="form-control" th:field="*{practicePrescriptionModel.practiceTime}" th:if="${row.count == 1}">
-                                                                <option th:each="time : ${TIMES}" th:value="${time}"
-                                                                        th:text="${time}"></option>
-                                                            </select>
-                                                        </td>
-                                                        <td>
-                                                            <select class="form-control" th:field="*{practicePrescriptionModel.practice}">
-                                                                <option th:value="${practicePhase.practice.id}"
-                                                                        th:text="${practicePhase.practice.name}"></option>
-                                                                <option th:each="practice : ${PRACTICES}"
-                                                                        th:value="${practice.id}"
-                                                                        th:text="${practice.name}"
-                                                                        th:if="${practicePhase.practice.id != practice.id}"></option>
-                                                            </select>
-                                                        </td>
-
-                                                        <td><input type="text" class="form-control" th:field="*{practicePrescriptionModel.practiceIntensity}"
-                                                                   placeholder="Quantity"/></td>
-                                                        <td>
-                                                            <input type="text" class="form-control"
-                                                                   th:field="*{practicePrescriptionModel.practiceNote}" placeholder="Advice"/>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <a style="width: 50px;color: white;" class="btn btn-primary"
-                                                   onclick="addRowPractice('Practice')">Add</a>
+                                                <!-- practice Suggest -->
+                                                <div layout:replace="_practiceSuggest"></div>
+                                                <!-- /.practice Suggest -->
 
                                             </div>
                                             <!-- /.tab-pane -->

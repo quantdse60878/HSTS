@@ -7,21 +7,21 @@ import java.util.List;
  */
 public class PrescriptionModel {
     private String diagnostic;
-    private MedicinePrescriptionModel medicinePrescriptionModel;
-    private FoodPrescriptionModel foodPrescriptionModel;
-    private PracticePrescriptionModel practicePrescriptionModel;
+    private MedicinePrescriptionModel mPresModel;
+    private FoodPrescriptionModel fPresModel;
+    private PracticePrescriptionModel pPresModel;
 
     public PrescriptionModel() {
     }
 
     public PrescriptionModel(String diagnostic,
-                             MedicinePrescriptionModel medicinePrescriptionModel,
-                             FoodPrescriptionModel foodPrescriptionModel,
-                             PracticePrescriptionModel practicePrescriptionModel) {
+                             MedicinePrescriptionModel mPresModel,
+                             FoodPrescriptionModel fPresModel,
+                             PracticePrescriptionModel pPresModel) {
         this.diagnostic = diagnostic;
-        this.medicinePrescriptionModel = medicinePrescriptionModel;
-        this.foodPrescriptionModel = foodPrescriptionModel;
-        this.practicePrescriptionModel = practicePrescriptionModel;
+        this.mPresModel = mPresModel;
+        this.fPresModel = fPresModel;
+        this.pPresModel = pPresModel;
     }
 
     public String getDiagnostic() {
@@ -32,37 +32,37 @@ public class PrescriptionModel {
         this.diagnostic = diagnostic;
     }
 
-    public MedicinePrescriptionModel getMedicinePrescriptionModel() {
-        return medicinePrescriptionModel;
+    public MedicinePrescriptionModel getmPresModel() {
+        return mPresModel;
     }
 
-    public void setMedicinePrescriptionModel(MedicinePrescriptionModel medicinePrescriptionModel) {
-        this.medicinePrescriptionModel = medicinePrescriptionModel;
+    public void setmPresModel(MedicinePrescriptionModel mPresModel) {
+        this.mPresModel = mPresModel;
     }
 
-    public FoodPrescriptionModel getFoodPrescriptionModel() {
-        return foodPrescriptionModel;
+    public FoodPrescriptionModel getfPresModel() {
+        return fPresModel;
     }
 
-    public void setFoodPrescriptionModel(FoodPrescriptionModel foodPrescriptionModel) {
-        this.foodPrescriptionModel = foodPrescriptionModel;
+    public void setfPresModel(FoodPrescriptionModel fPresModel) {
+        this.fPresModel = fPresModel;
     }
 
-    public PracticePrescriptionModel getPracticePrescriptionModel() {
-        return practicePrescriptionModel;
+    public PracticePrescriptionModel getpPresModel() {
+        return pPresModel;
     }
 
-    public void setPracticePrescriptionModel(PracticePrescriptionModel practicePrescriptionModel) {
-        this.practicePrescriptionModel = practicePrescriptionModel;
+    public void setpPresModel(PracticePrescriptionModel pPresModel) {
+        this.pPresModel = pPresModel;
     }
 
     @Override
     public String toString() {
         return "PrescriptionModel{" +
                 "diagnostic='" + diagnostic + '\'' +
-                ", medicinePrescriptionModel=" + medicinePrescriptionModel +
-                ", foodPrescriptionModel=" + foodPrescriptionModel +
-                ", practicePrescriptionModel=" + practicePrescriptionModel +
+                ", mPresModel=" + mPresModel +
+                ", fPresModel=" + fPresModel +
+                ", pPresModel=" + pPresModel +
                 '}';
     }
 }

@@ -4,60 +4,72 @@ package vn.edu.fpt.hsts.bizlogic.model;
  * Created by Aking on 10/11/2015.
  */
 public class PracticePrescriptionModel {
-    private String practice;
-    private String practiceTime;
-    private String practiceIntensity;
-    private String practiceNote;
+    /**
+     * Practice
+     */
+    private String p;
+    /**
+     * Practice Time
+     */
+    private String pTime;
+    /**
+     * Practice Intensity
+     */
+    private String pIntensity;
+    /**
+     * Practice Note
+     */
+    private String pNote;
 
     public PracticePrescriptionModel() {
     }
 
-    public PracticePrescriptionModel(String practice, String practiceTime, String practiceIntensity, String practiceNote) {
-        this.practice = practice;
-        this.practiceTime = practiceTime;
-        this.practiceIntensity = practiceIntensity;
-        this.practiceNote = practiceNote;
+    public PracticePrescriptionModel(String p, String pTime, String pIntensity, String pNote) {
+        this.p = p;
+        this.pTime = pTime;
+        this.pIntensity = pIntensity;
+        this.pNote = pNote;
     }
 
-    public String getPractice() {
-        return practice;
+    public String getP() {
+        return p;
     }
 
-    public void setPractice(String practice) {
-        this.practice = practice;
+    public void setP(String p) {
+        this.p = p;
     }
 
-    public String getPracticeTime() {
-        return practiceTime;
+    public String getpTime() {
+        return pTime;
     }
 
-    public void setPracticeTime(String practiceTime) {
-        this.practiceTime = practiceTime;
+    public void setpTime(String pTime) {
+        this.pTime = pTime;
     }
 
-    public String getPracticeIntensity() {
-        return practiceIntensity;
+    public String getpIntensity() {
+        return pIntensity;
     }
 
-    public void setPracticeIntensity(String practiceIntensity) {
-        this.practiceIntensity = practiceIntensity;
+    public void setpIntensity(String pIntensity) {
+        this.pIntensity = pIntensity;
     }
 
-    public String getPracticeNote() {
-        return practiceNote;
+    public String getpNote() {
+        return pNote;
     }
 
-    public void setPracticeNote(String practiceNote) {
-        this.practiceNote = practiceNote;
+    public void setpNote(String pNote) {
+        this.pNote = pNote;
     }
 
     @Override
     public String toString() {
         return "PracticePrescriptionModel{" +
-                "practice='" + practice + '\'' +
-                ", practiceTime='" + practiceTime + '\'' +
-                ", practiceIntensity='" + practiceIntensity + '\'' +
-                ", practiceNote='" + practiceNote + '\'' +
+                "p='" + p + '\'' +
+                ", pTime='" + pTime + '\'' +
+                ", pIntensity='" + pIntensity + '\'' +
+                ", pNote='" + pNote + '\'' +
                 '}';
     }
 }

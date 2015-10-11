@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<h4>Patient's Profile</h4>
+<!-- box-body -->
+<div class="box-body" th:with="ACC=${APPOINTMENT.medicalRecord.patient.account}">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Name</label>
+
+        <div class="col-sm-6">
+            <input type="text" readonly="readonly" class="form-control"
+                   th:value="${ACC.fullname}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">BirthDay</label>
+
+        <div class="col-sm-3">
+            <input type="text" readonly="readonly"
+                   class="form-control"
+                   th:value="${#dates.format(ACC.dateOfBirth, 'dd-MM-yyyy')}"/>
+        </div>
+
+        <label class="col-sm-2 control-label">Gender</label>
+
+        <div class="col-sm-3">
+            <input type="text" readonly="readonly" th:if="${ACC.gender == 1}"
+                   class="form-control" value="Male"/>
+            <input type="text" readonly="readonly" th:if="${ACC.gender == 2}"
+                   class="form-control" value="Female"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Weight</label>
+
+        <div class="col-sm-2">
+            <input type="text" readonly="readonly" class="form-control"
+                   th:value="${APPOINTMENT.weight}"/>
+        </div>
+        <label class="col-sm-1 control-label">Kg</label>
+
+        <label class="col-sm-3 control-label">Height</label>
+
+        <div class="col-sm-2">
+            <input type="text" readonly="readonly" class="form-control"
+                   th:value="${APPOINTMENT.height}"/>
+        </div>
+        <label class="col-sm-1 control-label">Cm</label>
+    </div>
+
+    <div class="form-group">
+        <label for="Medicalhistory" class="col-sm-3 control-label">Medical
+            history</label>
+
+        <div class="col-sm-6">
+                                                            <textarea class="form-control" readonly="readonly"
+                                                                      th:text="${APPOINTMENT.medicalRecord.medicalHistory}"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="clinicalSymptoms" class="col-sm-3 control-label">Symptoms</label>
+
+        <div class="col-sm-6">
+                                                            <textarea class="form-control" readonly="readonly"
+                                                                      th:text="${APPOINTMENT.medicalRecord.symptoms}"></textarea>
+        </div>
+    </div>
+
+</div>
+<!-- /.box-body -->
+
+</body>
+</html>

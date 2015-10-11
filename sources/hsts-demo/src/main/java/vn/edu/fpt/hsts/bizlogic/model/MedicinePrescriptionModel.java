@@ -4,60 +4,72 @@ package vn.edu.fpt.hsts.bizlogic.model;
  * Created by Aking on 10/11/2015.
  */
 public class MedicinePrescriptionModel {
-    private String medical;
-    private String medicalTime;
-    private String medicalQuantity;
-    private String medicalNote;
+    /**
+     * Medicine
+     */
+    private String m;
+    /**
+     * Medicine Time
+     */
+    private String mTime;
+    /**
+     * Medicine Quantity
+     */
+    private String mQuantity;
+    /**
+     * Medicine Note
+     */
+    private String mNote;
 
     public MedicinePrescriptionModel() {
     }
 
-    public MedicinePrescriptionModel(String medical, String medicalTime, String medicalQuantity, String medicalNote) {
-        this.medical = medical;
-        this.medicalTime = medicalTime;
-        this.medicalQuantity = medicalQuantity;
-        this.medicalNote = medicalNote;
+    public MedicinePrescriptionModel(String m, String mTime, String mQuantity, String mNote) {
+        this.m = m;
+        this.mTime = mTime;
+        this.mQuantity = mQuantity;
+        this.mNote = mNote;
     }
 
-    public String getMedical() {
-        return medical;
+    public String getM() {
+        return m;
     }
 
-    public void setMedical(String medical) {
-        this.medical = medical;
+    public void setM(String m) {
+        this.m = m;
     }
 
-    public String getMedicalTime() {
-        return medicalTime;
+    public String getmTime() {
+        return mTime;
     }
 
-    public void setMedicalTime(String medicalTime) {
-        this.medicalTime = medicalTime;
+    public void setmTime(String mTime) {
+        this.mTime = mTime;
     }
 
-    public String getMedicalQuantity() {
-        return medicalQuantity;
+    public String getmQuantity() {
+        return mQuantity;
     }
 
-    public void setMedicalQuantity(String medicalQuantity) {
-        this.medicalQuantity = medicalQuantity;
+    public void setmQuantity(String mQuantity) {
+        this.mQuantity = mQuantity;
     }
 
-    public String getMedicalNote() {
-        return medicalNote;
+    public String getmNote() {
+        return mNote;
     }
 
-    public void setMedicalNote(String medicalNote) {
-        this.medicalNote = medicalNote;
+    public void setmNote(String medicalNote) {
+        this.mNote = mNote;
     }
 
     @Override
     public String toString() {
         return "MedicinePrescriptionModel{" +
-                "medical='" + medical + '\'' +
-                ", medicalTime='" + medicalTime + '\'' +
-                ", medicalQuantity='" + medicalQuantity + '\'' +
-                ", medicalNote='" + medicalNote + '\'' +
+                "m='" + m + '\'' +
+                ", mTime='" + mTime + '\'' +
+                ", mQuantity='" + mQuantity + '\'' +
+                ", mNote='" + mNote + '\'' +
                 '}';
     }
 }

@@ -150,7 +150,7 @@ public class DoctorController extends AbstractController{
         try {
 
             ModelAndView mav = new ModelAndView();
-            mav.setViewName("suggestTreatment");
+            mav.setViewName("makePrescription");
             // Initialization Data Prescription
             initDataPrescription(mav);
 
@@ -180,14 +180,14 @@ public class DoctorController extends AbstractController{
      */
     @RequestMapping(value="prescription", method=RequestMethod.GET)
     public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel,
-                                         @RequestParam("appointmentID") final int appointmentID,
+                                         @RequestParam("appointmentId") final int appointmentId,
                                          @RequestParam(value = "appointmentDate", required = false) final String appointmentDate) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
             // Find Appointment
-            Appointment appointment = appointmentService.findAppointmentByID(appointmentID);
+            Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
             // Initialization Data Prescription
             initDataPrescription(mav);
