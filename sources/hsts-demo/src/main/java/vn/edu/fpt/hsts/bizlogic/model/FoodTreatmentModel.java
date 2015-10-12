@@ -11,15 +11,25 @@ public class FoodTreatmentModel implements Serializable {
 
         private String name;
         private String quantitative;
+        private String advice;
         private int numberOfTime;
 
-    public FoodTreatmentModel(String name, String quantitative, int numberOfTime) {
+    public FoodTreatmentModel(String name, String quantitative, String advice, int numberOfTime) {
         this.name = name;
         this.quantitative = quantitative;
+        this.advice = advice;
         this.numberOfTime = numberOfTime;
     }
 
     public FoodTreatmentModel() {
+    }
+
+    public String getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(String advice) {
+        this.advice = advice;
     }
 
     public String getName() {

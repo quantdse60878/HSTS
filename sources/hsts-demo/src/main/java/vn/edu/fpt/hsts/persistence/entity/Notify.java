@@ -41,7 +41,17 @@ public class Notify extends AbstractKeyEntity{
      */
     private byte status;
 
+    private String message;
+
     public Notify() {
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Account getSender() {

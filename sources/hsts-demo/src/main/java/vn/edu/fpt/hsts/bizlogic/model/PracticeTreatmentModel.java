@@ -11,15 +11,25 @@ public class PracticeTreatmentModel implements Serializable {
 
         private String name;
         private int quantitative;
+        private String advice;
         private int numberOfTime;
 
-    public PracticeTreatmentModel(String name, int quantitative, int numberOfTime) {
+    public PracticeTreatmentModel(String name, int quantitative, String advice, int numberOfTime) {
         this.name = name;
         this.quantitative = quantitative;
+        this.advice = advice;
         this.numberOfTime = numberOfTime;
     }
 
     public PracticeTreatmentModel() {
+    }
+
+    public String getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(String advice) {
+        this.advice = advice;
     }
 
     public String getName() {
