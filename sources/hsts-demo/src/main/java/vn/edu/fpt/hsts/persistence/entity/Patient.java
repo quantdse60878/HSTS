@@ -26,7 +26,7 @@ public class Patient extends AbstractKeyEntity {
     @JoinColumn(name = "accountId", nullable = false)
     private Account account;
 
-    @OneToMany
+    @OneToMany(mappedBy = "patient")
     private List<MedicalRecord> medicalRecords;
 
     public Patient() {
