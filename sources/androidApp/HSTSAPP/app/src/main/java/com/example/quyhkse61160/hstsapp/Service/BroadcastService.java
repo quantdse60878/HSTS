@@ -71,11 +71,11 @@ public class BroadcastService extends Service {
                 @Override
                 public void run() {
 
-//                    checkNotify();
+                    checkNotify();
                     Calendar c = Calendar.getInstance();
                     Calendar c1 = Calendar.getInstance();
-                    c1.set(Calendar.HOUR_OF_DAY, 14);
-                    c1.set(Calendar.MINUTE, 47);
+                    c1.set(Calendar.HOUR_OF_DAY, 22);
+                    c1.set(Calendar.MINUTE, 00);
                     Log.d("QUYYY111", "-----" + c.getTime() + "--" + c1.getTime());
                     Log.d("QUYYY111", "-----------------------------------------------------------");
                     if(c.getTime().equals(c1.getTime())) {
@@ -102,7 +102,8 @@ public class BroadcastService extends Service {
                                 Intent in = new Intent(context, HomeActivity.class);
                                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 in.putExtra("openDialogForMe", Boolean.TRUE);
-                                HomeActivity.timeAlert = c2.getTime().getHours() + ":" + c2.getTime().getMinutes();
+                                if(c2.getTime().getHours() < 10) HomeActivity.timeAlert = "0" + c2.getTime().getHours() + ":00";
+                                else HomeActivity.timeAlert = c2.getTime().getHours() + ":00";
                                 context.startActivity(in);
                             }
 
@@ -215,6 +216,7 @@ public class BroadcastService extends Service {
                             in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             in.putExtra("notFinished", Boolean.TRUE);
                             context.startActivity(in);
+                            hadGetNotify(notifyId);
                         }
                     } else if (notifyType == 6) {
                         //Mo ung dung hien thong bao la benh nhan hom truoc da hoan thanh qua muc can thiet, benh nhan can giam cuong do luyen tap de bao ve suc khoe
@@ -223,6 +225,7 @@ public class BroadcastService extends Service {
                             in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             in.putExtra("overFinished", Boolean.TRUE);
                             context.startActivity(in);
+                            hadGetNotify(notifyId);
                         }
                     }
                 }
@@ -290,11 +293,18 @@ public class BroadcastService extends Service {
                 response += temp;
             }
             Log.d("QUYYY111", "--" + response);
-//            Constant.DATA_FROM_SERVER = response;
-//            Constant.TREATMENTS = Constant.getItems();
+            try {
+                JSONArray treatmentArray = new JSONArray(response);
+                JSONObject treatmentObject = treatmentArray.getJSONObject(0);
+                HomeActivity.appointmentId = Integer.parseInt(treatmentObject.getString("appointmentId"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Constant.DATA_FROM_SERVER = response;
+            Constant.TREATMENTS = Constant.getItems();
 
             HomeActivity.amountTime = HomeActivity.amountTime();
-            hadGetTreatment(notifyId);
+            hadGetNotify(notifyId);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -303,7 +313,7 @@ public class BroadcastService extends Service {
         }
     }
 
-    public void hadGetTreatment(int notifyId) {
+    public void hadGetNotify(int notifyId) {
 
         String stringURL = Constant.hostURL + Constant.hadGetTreatment;
         Log.d("QUYYYY1111", "Login url: " + stringURL);

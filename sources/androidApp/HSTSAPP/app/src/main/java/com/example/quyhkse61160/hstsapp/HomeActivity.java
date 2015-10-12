@@ -56,10 +56,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceName;
     private String mDeviceAddress;
-    public static int appointmentId = 1;
+    public static int appointmentId = 2;
     public static List<String> listNumberOfStep = new ArrayList<>();
     public static List<String> dateSaveStep = new ArrayList<>();
-    public static String numberOfStep = "0";
+    public static String numberOfStep = "2000";
     public static int position = 0;
     public static String manufacturer = "Unknown";
     public static BluetoothGattCharacteristic characteristicStep = null;
@@ -382,6 +382,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         }
         if (id == R.id.action_logout) {
             return true;
+        }
+        if(id == R.id.action_notify_doctor) {
+            Intent intentNotify = new Intent(this, NotifyToDoctor.class);
+            startActivity(intentNotify);
         }
 
         return super.onOptionsItemSelected(item);

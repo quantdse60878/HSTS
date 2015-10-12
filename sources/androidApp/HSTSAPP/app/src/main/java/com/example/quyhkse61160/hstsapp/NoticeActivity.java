@@ -40,7 +40,7 @@ public class NoticeActivity extends ActionBarActivity {
                 for(ToDoTime time : treatment.getListFoodTreatment()){
                         HashMap<String,String> d = new HashMap<>();
                         d.put("Name",time.getName());
-                        d.put("Number",time.getNumberOfTime() + "");
+                        d.put("Number",time.getNumberOfTime().size() + "");
                         d.put("Quantity",time.getQuantitative());
                         sections.add(d);
                 }
@@ -51,7 +51,7 @@ public class NoticeActivity extends ActionBarActivity {
                 for(ToDoTime time : treatment.getListMedicineTreatment()){
                     HashMap<String,String> d = new HashMap<>();
                     d.put("Name",time.getName());
-                    d.put("Number",time.getNumberOfTime() + "");
+                    d.put("Number",time.getNumberOfTime().size() + "");
                     d.put("Quantity",time.getQuantitative());
                     sections.add(d);
                 }
@@ -62,7 +62,7 @@ public class NoticeActivity extends ActionBarActivity {
                 for(ToDoTime time : treatment.getListPracticeTreatment()){
                     HashMap<String,String> d = new HashMap<>();
                     d.put("Name",time.getName());
-                    d.put("Number",time.getNumberOfTime() + "");
+                    d.put("Number",time.getNumberOfTime().size() + "");
                     d.put("Quantity",time.getQuantitative());
                     sections.add(d);
                 }

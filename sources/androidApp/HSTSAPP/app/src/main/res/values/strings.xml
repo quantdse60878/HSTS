@@ -10,6 +10,7 @@
     <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
     <string name="unknown_device">Unknown device</string>
     <string name="action_logout">Logout</string>
+    <string name="action_notify">Thông báo bác sĩ</string>
 
 
     <!-- KhuongMH -->
@@ -23,5 +24,6 @@
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Not A Member ? Register Now</string>
     <string name="title_activity_notice">NoticeActivity</string>
+    <string name="title_activity_notify_to_doctor">NotifyToDoctor</string>
     <!-- KhuongMH -->
 </resources>

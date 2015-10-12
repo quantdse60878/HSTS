@@ -4,6 +4,8 @@
     tools:context="com.example.quyhkse61160.hstsapp.HomeActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_notify_doctor" android:title="@string/action_notify"
+        android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_logout" android:title="@string/action_logout"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

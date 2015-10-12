@@ -60,7 +60,6 @@
             android:enabled="true"
             android:exported="true" >
         </service>
-
         <service
             android:name=".Service.AlarmService"
             android:exported="false" >
@@ -69,6 +68,10 @@
         <activity
             android:name=".NoticeActivity"
             android:label="@string/title_activity_notice" >
+        </activity>
+        <activity
+            android:name=".NotifyToDoctor"
+            android:label="@string/title_activity_notify_to_doctor" >
         </activity>
     </application>
 
