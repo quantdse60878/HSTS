@@ -8,30 +8,36 @@
     "adviseFood": "Ăn chậm nhai kỹ",
     "adviseMedicine": "Uống thuốc điều độ",
     "advicePractice": "Tập luyện đều đặng",
+    "caloriesBurnEveryday": 800,
     "listFoodTreatment": [
       {
         "name": "cơm",
         "quantitative": "1 chén",
-        "numberOfTime": 3
+        "advice": "ăn chậm nhai kỹ",
+        "numberOfTime": 5
       },
       {
         "name": "cá",
         "quantitative": "ít",
-        "numberOfTime": 3
+        "advice": "không ăn cá da trơn",
+        "numberOfTime": 5
       },
       {
         "name": "thịt",
         "quantitative": "hạn chế",
+        "advice": "không ăn nhiều thịt mỡ",
         "numberOfTime": 3
       },
       {
         "name": "rau",
-        "quantitative": "nhiều",
-        "numberOfTime": 3
+        "quantitative": "càng nhiều càng tốt",
+        "advice": null,
+        "numberOfTime": 5
       },
       {
         "name": "củ",
         "quantitative": "nhiều",
+        "advice": "",
         "numberOfTime": 3
       }
     ],
@@ -59,17 +65,20 @@
       {
         "name": "đi bộ",
         "quantitative": 20,
-        "numberOfTime": 0
+        "advice": "đi nhẹ nhàng, chậm rãi",
+        "numberOfTime": 2
       },
       {
         "name": "chạy bộ",
         "quantitative": 10,
-        "numberOfTime": 0
+        "advice": "chạy chậm nhiều bước",
+        "numberOfTime": 2
       },
       {
         "name": "đạp xe đạp",
         "quantitative": 10,
-        "numberOfTime": 0
+        "advice": "chọn xe đạp phù hợp",
+        "numberOfTime": 2
       }
     ]
   }
