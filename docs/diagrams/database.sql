@@ -62,11 +62,11 @@ CREATE TABLE `appointment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `medicalRecordId` int(11) NOT NULL,
   `appointmentDateTime` datetime DEFAULT NULL,
-  `appointmentMessage` varchar(200) DEFAULT NULL,
   `status` tinyint(4) DEFAULT NULL COMMENT 'status = 1 la cuoc hen da qua y ta va chua duoc gap bac si\nstatus = 2 la cuoc hen da duoc gap bac si\nstatus = 3 la cuoc hen chua qua y ta',
   `nextAppointment` int(11) DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
   `weight` int(11) DEFAULT NULL,
+  `appointmentMessage` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_appointment_medicalrecord_idx` (`medicalRecordId`),
   KEY `fk_appointment_nextappointment_idx` (`nextAppointment`),
@@ -81,7 +81,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (1,1,'2015-10-01 00:00:00',NULL,1,NULL,0,0),(2,1,'2015-10-07 00:00:00',NULL,2,1,160,85);
+INSERT INTO `appointment` VALUES (1,1,'2015-10-01 00:00:00',1,NULL,0,0,NULL),(2,1,'2015-10-07 00:00:00',2,1,160,85,NULL);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,7 +248,7 @@ CREATE TABLE `foodtreatment` (
 
 LOCK TABLES `foodtreatment` WRITE;
 /*!40000 ALTER TABLE `foodtreatment` DISABLE KEYS */;
-INSERT INTO `foodtreatment` VALUES (1,1,'1 chén',1,5,NULL),(2,2,'ít',1,5,NULL),(3,3,'hạn chế',1,3,NULL),(4,4,'nhiều',1,5,NULL),(5,5,'nhiều',1,3,NULL);
+INSERT INTO `foodtreatment` VALUES (1,1,'1 chén',1,5,'ăn chậm nhai kỹ'),(2,2,'ít',1,5,'không ăn cá da trơn'),(3,3,'hạn chế',1,3,'không ăn nhiều thịt mỡ'),(4,4,'càng nhiều càng tốt',1,5,NULL),(5,5,'nhiều',1,3,'');
 /*!40000 ALTER TABLE `foodtreatment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,32 +347,6 @@ INSERT INTO `medicalrecorddata` VALUES (1,2,3000,740,4.6368,3,0,'2015-10-01 00:0
 UNLOCK TABLES;
 
 --
--- Table structure for table `medicalrecords`
---
-
-DROP TABLE IF EXISTS `medicalrecords`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `medicalrecords` (
-  `Patient` int(11) NOT NULL,
-  `medicalRecords` int(11) NOT NULL,
-  UNIQUE KEY `UK_sixi9w48om2ewoj5foss8m8d1` (`medicalRecords`),
-  KEY `FK_k8q8ggqe920p4xpe6q7ge74li` (`Patient`),
-  CONSTRAINT `FK_k8q8ggqe920p4xpe6q7ge74li` FOREIGN KEY (`Patient`) REFERENCES `patient` (`id`),
-  CONSTRAINT `FK_sixi9w48om2ewoj5foss8m8d1` FOREIGN KEY (`medicalRecords`) REFERENCES `medicalrecord` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `medicalrecords`
---
-
-LOCK TABLES `medicalrecords` WRITE;
-/*!40000 ALTER TABLE `medicalrecords` DISABLE KEYS */;
-/*!40000 ALTER TABLE `medicalrecords` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `medicine`
 --
 
@@ -467,8 +441,9 @@ CREATE TABLE `notify` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `senderId` int(11) NOT NULL,
   `receiverId` int(11) NOT NULL,
-  `type` tinyint(4) DEFAULT NULL COMMENT 'type = 1 notify cua benh nhan den bac si\ntype = 2 notify cua bac si den benh nhan - new prescription\ntype = 3 notify cua bac si den benh nhan - new appointment\ntype = 4 notify cua y ta den bac si\ntype = 5 notify benh nhan chua hoan thanh bai tap cua minh\ntype = 6 notify benh nhan luyen tap qua muc can thiet\ntype = 5 notify benh nhan khong hoan thanh duoc so calories',
+  `type` tinyint(4) DEFAULT NULL COMMENT 'type = 1 notify cua benh nhan den bac si\ntype = 2 notify cua bac si den benh nhan - new prescription\ntype = 3 notify cua bac si den benh nhan - new appointment\ntype = 4 notify cua y ta den bac si\ntype = 5 notify cua he thong benh nhan luyen tap chua du\ntype = 6 notify cua he thong benh nhan luyen tap qua muc\ntype = 5 notify benh nhan chua hoan thanh bai tap cua minh\ntype = 6 notify benh nhan luyen tap qua muc can thiet\ntype = 5 notify benh nhan khong hoan thanh duoc so calories',
   `status` tinyint(4) DEFAULT NULL COMMENT 'status = 1 chua nhan\nstatus = 2 da nhan',
+  `message` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_notify_sender_idx` (`senderId`),
   KEY `fk_notify_receiver_idx` (`receiverId`),
@@ -483,7 +458,7 @@ CREATE TABLE `notify` (
 
 LOCK TABLES `notify` WRITE;
 /*!40000 ALTER TABLE `notify` DISABLE KEYS */;
-INSERT INTO `notify` VALUES (1,1,2,2,1);
+INSERT INTO `notify` VALUES (1,1,2,2,1,NULL);
 /*!40000 ALTER TABLE `notify` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -623,7 +598,7 @@ CREATE TABLE `practicetreatment` (
 
 LOCK TABLES `practicetreatment` WRITE;
 /*!40000 ALTER TABLE `practicetreatment` DISABLE KEYS */;
-INSERT INTO `practicetreatment` VALUES (1,1,20,1,2,NULL),(2,2,10,1,2,NULL),(3,3,10,1,2,NULL);
+INSERT INTO `practicetreatment` VALUES (1,1,20,1,2,'đi nhẹ nhàng, chậm rãi'),(2,2,10,1,2,'chạy chậm nhiều bước'),(3,3,10,1,2,'chọn xe đạp phù hợp');
 /*!40000 ALTER TABLE `practicetreatment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -746,4 +721,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-12  9:20:05
+-- Dump completed on 2015-10-12 12:37:26
