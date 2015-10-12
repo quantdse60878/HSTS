@@ -108,7 +108,8 @@
                                     <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
                                     <!--<input type="hidden" th:name="patientID" th:value="${APPOINTMENT.medicalRecord.patient.id}"/>-->
                                     <div class="col-sm-4 ui-widget">
-                                        <input th:if="${TREATMENT != null}" th:value="${TREATMENT.appointment.medicalRecord.illness.name}" readonly="readonly" class="form-control"/>
+                                        <input th:if="${TREATMENT != null}"
+                                               th:value="${TREATMENT.appointment.medicalRecord.illness != null}? ${TREATMENT.appointment.medicalRecord.illness.name} : 'Unknown Disease'" readonly="readonly" class="form-control"/>
                                         <select th:if="${TREATMENT == null}" id="combobox" th:name="diagnostic" class="form-control">
                                             <option th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"
                                                     th:text="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name} : ''">Select
@@ -171,13 +172,12 @@
                                         </div>
                                         <!-- /.tab-pane -->
                                         <div class="tab-pane" id="tab_1-1" th:if="${PHASE == null and TREATMENT == null}">
-
                                             <!-- medicine tab -->
                                             <div layout:replace="_medicinePrecription"></div>
                                             <!-- /.medicine tab -->
                                         </div>
 
-                                        <div th:if="${PHASE != null}" class="tab-pane active" id="tab_1-1">
+                                        <div class="tab-pane active" id="tab_1-1" th:if="${PHASE != null}">
                                             <!-- medicine Suggest -->
                                             <div layout:replace="_medicineSuggest"></div>
                                             <!-- /.medicine Suggest -->

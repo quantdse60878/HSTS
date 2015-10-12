@@ -268,7 +268,6 @@ public class DoctorService extends AbstractService {
                             foodTreatment.setQuantitative(foodQuantity[i]);
                             foodTreatmentRepo.save(foodTreatment);
                         }
-
                     }
                 }
 

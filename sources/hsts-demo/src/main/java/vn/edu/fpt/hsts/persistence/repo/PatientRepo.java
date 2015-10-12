@@ -21,7 +21,7 @@ import java.util.List;
 @Repository
 public interface PatientRepo extends JpaRepository<Patient, Integer> {
 
-    @Query(value = "select patient.* from Patient patient join MedicalRecord mr on patient.id = mr.patientId join Appointment a on mr.id = a.medicalRecordId where a.appointmentDateTime = :appointmentDateTime", nativeQuery = true)
+    @Query(value = "select patient.* from Patient patient join MedicalRecord mr on patient.id = mr.patientId join Appointment a on mr.id = a.medicalRecordId where a.appointmentDateTime = :appointmentDateTime and a.status = 1", nativeQuery = true)
     public List<Patient> findByAppoinmentDate(@Param(value = "appointmentDateTime") final Date date);
 
     @Query("select p from Patient p where lower(name) like lower(:name)")

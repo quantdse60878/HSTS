@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
 
@@ -24,6 +25,6 @@ public class AppointmentService {
     }
 
     public Appointment findAppointmentByPatientID(int patientID) {
-        return appointmentRepo.findLastAppointmentByPatientId(patientID);
+        return appointmentRepo.findLastAppointmentByPatientId(patientID, IDbConsts.IAppointmentStatus.ENTRY);
     }
 }

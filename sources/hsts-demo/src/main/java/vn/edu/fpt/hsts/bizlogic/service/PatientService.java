@@ -291,7 +291,13 @@ public class PatientService {
     }
 
     public List<Patient> getAllPatients() {
-        return patientRepo.findAll();
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return patientRepo.findAll();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+
     }
 
     public void updatePatient(final PatientCriteria criteria, final boolean isNewMedicalRecord) throws BizlogicException {
