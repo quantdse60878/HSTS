@@ -202,11 +202,6 @@ public class DoctorService extends AbstractService {
                 treatmentRepo.save(treatment);
             }
             if (null != prescription) {
-                // dianose
-                final String diagnostic = prescription.getDiagnostic();
-                final Illness illness = illnessRepo.findByName(diagnostic);
-                appointment.getMedicalRecord().setIllness(illness);
-
 
                 // create new treatment
                 final Treatment newTreatment = new Treatment();
