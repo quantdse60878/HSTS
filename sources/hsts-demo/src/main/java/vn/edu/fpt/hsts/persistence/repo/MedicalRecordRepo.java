@@ -17,7 +17,7 @@ import java.util.List;
 @Repository
 public interface MedicalRecordRepo extends JpaRepository<MedicalRecord, Integer> {
 
-    @Query("SELECT m FROM MedicalRecord m WHERE m.patient.id = ?1")
+    @Query("SELECT m FROM MedicalRecord m WHERE m.patient.id = ?1 AND m.status = 3")
     public List<MedicalRecord> findMedicalRecordByPatientId(int patientId);
 
 

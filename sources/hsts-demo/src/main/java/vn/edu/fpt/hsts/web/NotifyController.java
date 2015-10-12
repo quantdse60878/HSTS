@@ -45,10 +45,19 @@ public class NotifyController {
         LOGGER.info("Notify size--------------------------" + listNotifyReceiver.size());
         return listNotifyReceiver;
     }
-    @RequestMapping(value = "hadGetTreatment", method = RequestMethod.POST)
+    @RequestMapping(value = "hadGetNotify", method = RequestMethod.POST)
     @ResponseBody
     public String hadGetTreatment(@RequestParam("notifyId") final String notifyId) {
         notifyService.hadGetTreatment(Integer.parseInt(notifyId));
+        return "success";
+    }
+    @RequestMapping(value = "sendNotifyToDoctor", method = RequestMethod.POST)
+    @ResponseBody
+    public String sendNotifyToDoctor(@RequestParam("patientId") final String patientId,
+                                     @RequestParam("message") final String message) {
+
+        notifyService.sendNotifyToDoctor(Integer.parseInt(patientId), message);
+
         return "success";
     }
 

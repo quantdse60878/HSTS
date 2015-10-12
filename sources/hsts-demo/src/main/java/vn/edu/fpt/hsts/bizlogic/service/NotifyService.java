@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
+import vn.edu.fpt.hsts.persistence.entity.Account;
+import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Notify;
+import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
 import vn.edu.fpt.hsts.persistence.repo.NotifyRepo;
 
 import java.util.ArrayList;
@@ -20,6 +23,8 @@ public class NotifyService {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotifyService.class);
     @Autowired
     private NotifyRepo notifyRepo;
+    @Autowired
+    private MedicalRecordRepo medicalRecordRepo;
 
     public List<Notify> getNotifyByReceiverId(final int receiverId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -40,6 +45,27 @@ public class NotifyService {
         final Notify notify = notifyRepo.findOne(notifyId);
         notify.setStatus((byte) IDbConsts.INotifyStatus.COMPLETED);
         notifyRepo.save(notify);
+        return true;
+    }
+
+    public boolean sendNotifyToDoctor(final int patientId, final String message) {
+
+        List<MedicalRecord> listMedicalReport = medicalRecordRepo.findMedicalRecordByPatientId(patientId);
+        for(int i = 0; i < listMedicalReport.size(); i++) {
+            MedicalRecord  medicalRecord = listMedicalReport.get(i);
+            Account senderId = medicalRecord.getPatient().getAccount();
+            Account receiverId = medicalRecord.getDoctor().getAccount();
+            Notify notify = new Notify();
+            notify.setSender(senderId);
+            notify.setReceiver(receiverId);
+            notify.setMessage(message);
+            notify.setStatus((byte) 1);
+            notify.setType((byte) 1);
+            notifyRepo.save(notify);
+        }
+
+
+        System.out.println("!!!!");
         return true;
     }
 
