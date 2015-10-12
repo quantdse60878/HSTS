@@ -112,9 +112,7 @@ public class Constant {
                     numberOfTime.add("21:00");
                 }
                 time.setNumberOfTime(numberOfTime);
-                if (field.equals(Constant.MEDICINE_FROM_JSON)) {
-                    time.setAdvice(source.getJSONObject(i).getString("advice"));
-                }
+                time.setAdvice(source.getJSONObject(i).getString("advice"));
                 times.add(time);
             }
         } catch (Exception e) {

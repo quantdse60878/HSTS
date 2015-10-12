@@ -52,12 +52,14 @@ public class FoodAdapter extends BaseAdapter {
         }
         TextView txtFoodName = (TextView) vi.findViewById(R.id.item_food_name);
         TextView txtQuantitativeOfMedicine = (TextView) vi.findViewById(R.id.item_quantitative_of_food);
+        TextView txtAdvice = (TextView) vi.findViewById(R.id.item_advice_of_food);
 
 
         HashMap<String, String> item = new HashMap<>();
         item = data.get(position);
 
         txtFoodName.setText(item.get("FoodName"));
+        txtAdvice.setText(item.get("Advice"));
         txtQuantitativeOfMedicine.setText(item.get("QuantitativeOfFood"));
 
 

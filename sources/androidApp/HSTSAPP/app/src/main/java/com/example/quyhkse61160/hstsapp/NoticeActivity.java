@@ -63,7 +63,7 @@ public class NoticeActivity extends ActionBarActivity {
                     HashMap<String,String> d = new HashMap<>();
                     d.put("Name",time.getName());
                     d.put("Number",time.getNumberOfTime().size() + "");
-                    d.put("Quantity",time.getQuantitative());
+                    d.put("Quantity",time.getQuantitative() + " phút");
                     sections.add(d);
                 }
             }

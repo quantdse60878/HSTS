@@ -1,7 +1,11 @@
 package com.example.quyhkse61160.hstsapp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,13 +37,15 @@ import java.util.List;
 import cz.msebera.android.httpclient.NameValuePair;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
-public class NotifyToDoctor extends AppCompatActivity {
+public class NotifyToDoctor extends ActionBarActivity {
     EditText txtMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notify_to_doctor);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
         txtMessage = (EditText) findViewById(R.id.message_of_patient);
         Button btnSendMessage = (Button) findViewById(R.id.send_to_doctor);
         btnSendMessage.setOnClickListener(new View.OnClickListener() {

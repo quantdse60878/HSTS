@@ -82,6 +82,7 @@ public class Tab1 extends Fragment {
                 if(time.getNumberOfTime().contains(HomeActivity.timeAlert)){
                         HashMap<String,String> d = new HashMap<>();
                         d.put("FoodName", time.getName());
+                        d.put("Advice", time.getAdvice());
                         d.put("QuantitativeOfFood", time.getQuantitative());
                         sections.add(d);
 

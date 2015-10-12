@@ -90,7 +90,8 @@ public class Tab3 extends Fragment {
                 if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
                     HashMap<String, String> d = new HashMap<>();
                     d.put("PracticeName", time.getName());
-                    d.put("PracticeTime", time.getQuantitative());
+                    d.put("Advice",time.getAdvice());
+                    d.put("PracticeTime", time.getQuantitative() + " phút");
                     sections.add(d);
                 }
             }
