@@ -7,5 +7,23 @@
  */
 package vn.edu.fpt.hsts.bizlogic.model;
 
-public class PatientExtendedPageModel {
+import org.springframework.data.domain.Page;
+import vn.edu.fpt.hsts.persistence.entity.Patient;
+
+public class PatientExtendedPageModel extends AbstractPageModel<Patient, PatientExtendedModel>{
+    /**
+     * <p>
+     * Constructor.
+     * </p>
+     *
+     * @param pageEntities {@link Page}
+     */
+    public PatientExtendedPageModel(final Page<Patient> pageEntities) {
+        super(pageEntities);
+    }
+
+    @Override
+    protected Class<PatientExtendedModel> getModelClass() {
+        return PatientExtendedModel.class;
+    }
 }
