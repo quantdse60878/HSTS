@@ -38,12 +38,6 @@ public class Appointment extends AbstractKeyEntity {
     @Column(name = "appointmentDateTime")
     private Date meetingDate;
 
-    /**
-     * The appointment message.
-     */
-    @Column(name = "appointmentMessage")
-    private String messsage;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
     private List<Treatment> treatmentList;
 
@@ -93,14 +87,6 @@ public class Appointment extends AbstractKeyEntity {
 
     public void setMeetingDate(final Date meetingDate) {
         this.meetingDate = meetingDate;
-    }
-
-    public String getMesssage() {
-        return messsage;
-    }
-
-    public void setMesssage(final String messsage) {
-        this.messsage = messsage;
     }
 
     public byte getStatus() {
