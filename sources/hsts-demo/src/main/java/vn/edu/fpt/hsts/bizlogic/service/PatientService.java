@@ -3,8 +3,11 @@ package vn.edu.fpt.hsts.bizlogic.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.App;
+import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -262,7 +265,6 @@ public class PatientService {
             newAppointment.setMeetingDate(appointmentDate);
             newAppointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
             newAppointment.setMedicalRecord(appointment.getMedicalRecord());
-            newAppointment.setMesssage("ABCDEREFFDF");
             appointmentRepo.save(newAppointment);
 
             // Finish old appointment, link to next appointment
@@ -339,7 +341,6 @@ public class PatientService {
                 }
                 // TODO update meeting date
                 appointment.setMeetingDate(new Date());
-                appointment.setMesssage(criteria.getSymptom());
                 appointment.setHeight(criteria.getHeight());
                 appointment.setWeight(criteria.getWeight());
 
@@ -353,6 +354,25 @@ public class PatientService {
                 medicalRecordRepo.saveAndFlush(medicalRecord);
             }
 
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public PatientExtendedPageModel findPatients(final String name, final int page, final int pageSize) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("name[{}], page[{}], pageSize[{}]", name, page, pageSize);
+            Page<Patient> pageEntitties = null;
+            final PageRequest pageRequest = new PageRequest(page, pageSize);
+            if (StringUtils.isNotEmpty(name)) {
+                String searchName = "%" + name + "%";
+                pageEntitties = patientRepo.findByNameLike(searchName, pageRequest);
+            } else {
+                pageEntitties = patientRepo.findAll(pageRequest);
+            }
+            PatientExtendedPageModel pageModel = new PatientExtendedPageModel(pageEntitties);
+            return pageModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
