@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+
+<h4>Medicine</h4>
+<!-- table medicine -->
+<table class="table table-striped" id="medicine">
+    <tr>
+        <th style="width: 10px">#</th>
+        <th>Medicine</th>
+        <th>Times</th>
+        <th>Quanlity</th>
+        <th>Note</th>
+    </tr>
+    <tr th:each="medicalTreatment,row : ${TREATMENT.medicineTreatmentList}">
+        <td th:text="${row.count}"></td>
+        <td>
+            <input th:value="${medicalTreatment.medicine.name}" readonly="readonly" class="form-control"/>
+        </td>
+        <td>
+            <input th:value="${medicalTreatment.numberOfTime}" readonly="readonly" class="form-control"/>
+        </td>
+        <td>
+            <input th:value="${medicalTreatment.quantitative}" readonly="readonly" class="form-control"/>
+        </td>
+        <td>
+            <input th:value="${medicalTreatment.advice}" readonly="readonly" class="form-control"/>
+        </td>
+    </tr>
+
+</table>
+<!-- /.table medicine -->
+
+</body>
+</html>

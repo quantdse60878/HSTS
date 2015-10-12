@@ -261,6 +261,7 @@ public class DoctorController extends AbstractController{
                 // Find treatment form appointment
                 Treatment treatment = treatmentService.findTreatmentByAppointmentID(appointmentId);
                 mav.addObject("TREATMENT", treatment);
+                mav.addObject("model", new PrescriptionModel());
             }
 
             return mav;

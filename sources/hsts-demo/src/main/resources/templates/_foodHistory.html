@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+
+<h4>Foods</h4>
+<table class="table table-striped" id="Foods">
+    <tr>
+        <th style="width: 10px">#</th>
+        <th>Menu</th>
+        <th>Times</th>
+        <th>Quantitative</th>
+        <th>Note</th>
+    </tr>
+    <tr th:each="foodTreatment,row : ${TREATMENT.foodTreatmentList}">
+        <td th:text="${row.count}"></td>
+        <td>
+            <input th:value="${foodTreatment.food.name}" readonly="readonly" class="form-control"/>
+        </td>
+        <td>
+            <input th:value="${foodTreatment.numberOfTime}" readonly="readonly" class="form-control"/>
+        </td>
+        <td>
+            <input th:value="${foodTreatment.quantitative}" readonly="readonly" class="form-control"/>
+        </td>
+        <td>
+            <input th:value="${foodTreatment.id}" readonly="readonly" class="form-control"/>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

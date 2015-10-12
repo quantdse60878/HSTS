@@ -170,7 +170,7 @@ public class NurseController extends AbstractController {
                     weight, height, doctorId, medicalHistory, symptoms, isNewMedicalRecord);
 
             ModelAndView mav = new ModelAndView();
-            mav.setViewName("nursePatients");
+            mav.setViewName("updatePatient");
             /**
              * Update patient
              */

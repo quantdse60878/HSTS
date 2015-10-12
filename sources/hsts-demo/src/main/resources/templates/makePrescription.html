@@ -88,7 +88,7 @@
                                     </button>
                                     <ul class="dropdown-menu"
                                         th:each="appointment : ${APPOINTMENT.medicalRecord.appointmentList}">
-                                        <li><a href="@{/viewPrescription(appointmentID=${appointment.id})}"
+                                        <li><a th:href="@{/viewPrescription(appointmentId=${appointment.id})}"
                                                class="btn btn-default"
                                                th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>
                                         </li>
@@ -108,7 +108,8 @@
                                     <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
                                     <!--<input type="hidden" th:name="patientID" th:value="${APPOINTMENT.medicalRecord.patient.id}"/>-->
                                     <div class="col-sm-4 ui-widget">
-                                        <select id="combobox" th:name="diagnostic" class="form-control">
+                                        <input th:if="${TREATMENT != null}" th:value="${TREATMENT.appointment.medicalRecord.illness.name}" readonly="readonly" class="form-control"/>
+                                        <select th:if="${TREATMENT == null}" id="combobox" th:name="diagnostic" class="form-control">
                                             <option th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"
                                                     th:text="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name} : ''">Select
                                                 one...
@@ -117,7 +118,7 @@
                                                     th:text="${illness.name}"></option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-2 pull-right">
+                                    <div class="col-sm-2 pull-right" th:if="${TREATMENT == null}">
                                         <button type="submit" class="btn btn-primary">Suggest</button>
                                     </div>
                                 </div>
@@ -128,7 +129,7 @@
                         <!-- ./form -->
                         <!-- form start -->
                         <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}">
-                            <input type="hidden" th:field="*{diagnostic}"
+                            <input type="hidden" name="diagnostic" id="diagnostic"
                                    th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"/>
 
                             <div class="box-body">
@@ -140,15 +141,17 @@
                                 <div class="nav-tabs-custom" style="box-shadow: none;">
 
                                     <ul class="nav nav-tabs">
-                                        <li class="active" th:if="${PHASE == null}"><a href="#tab_4-4"
-                                                                                       data-toggle="tab">Patient's
-                                            Profile</a></li>
-                                        <li th:if="${PHASE != null}"><a href="#tab_4-4" data-toggle="tab">Patient's
-                                            Profile</a></li>
-                                        <li class="active" th:if="${PHASE != null}"><a href="#tab_1-1"
-                                                                                       data-toggle="tab">Medicine</a>
+                                        <li class="active" th:if="${PHASE == null}">
+                                            <a href="#tab_4-4" data-toggle="tab">Patient's Profile</a>
                                         </li>
-                                        <li th:if="${PHASE == null}"><a href="#tab_1-1" data-toggle="tab">Medicine</a>
+                                        <li th:if="${PHASE != null}">
+                                            <a href="#tab_4-4" data-toggle="tab">Patient's Profile</a>
+                                        </li>
+                                        <li class="active" th:if="${PHASE != null}">
+                                            <a href="#tab_1-1" data-toggle="tab">Medicine</a>
+                                        </li>
+                                        <li th:if="${PHASE == null}">
+                                            <a href="#tab_1-1" data-toggle="tab">Medicine</a>
                                         </li>
                                         <li><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
                                         <li><a href="#tab_3-3" data-toggle="tab">Practices</a></li>
@@ -167,7 +170,7 @@
                                             <!-- /.patient's Profile -->
                                         </div>
                                         <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="tab_1-1" th:if="${PHASE == null}">
+                                        <div class="tab-pane" id="tab_1-1" th:if="${PHASE == null and TREATMENT == null}">
 
                                             <!-- medicine tab -->
                                             <div layout:replace="_medicinePrecription"></div>
@@ -179,11 +182,14 @@
                                             <div layout:replace="_medicineSuggest"></div>
                                             <!-- /.medicine Suggest -->
                                         </div>
-
-
+                                        <div th:if="${TREATMENT != null}" class="tab-pane" id="tab_1-1">
+                                            <!-- medicine History -->
+                                            <div layout:replace="_medicineHistory"></div>
+                                            <!-- /.medicine History -->
+                                        </div>
                                         <!-- /.tab-pane -->
                                         <div class="tab-pane" id="tab_2-2">
-                                            <div th:if="${PHASE == null}">
+                                            <div th:if="${PHASE == null and TREATMENT == null}">
                                                 <!-- food tab -->
                                                 <div layout:replace="_foodPrescription"></div>
                                                 <!-- /.food tab -->
@@ -195,10 +201,16 @@
                                                 <!-- /.food Suggest -->
                                             </div>
 
+                                            <div th:if="${TREATMENT != null}">
+                                                <!-- food History -->
+                                                <div layout:replace="_foodHistory"></div>
+                                                <!-- /.food History -->
+                                            </div>
+
                                         </div>
                                         <!-- /.tab-pane -->
                                         <div class="tab-pane" id="tab_3-3">
-                                            <div th:if="${PHASE == null}">
+                                            <div th:if="${PHASE == null and TREATMENT == null}">
                                                 <!-- practice tab -->
                                                 <div layout:replace="_practicePrescription"></div>
                                                 <!-- /.practice tab -->
@@ -210,6 +222,11 @@
                                                 <!-- /.practice Suggest -->
                                             </div>
 
+                                            <div th:if="${TREATMENT != null}">
+                                                <!-- practice History -->
+                                                <div layout:replace="_practiceHistory"></div>
+                                                <!-- /.practice History -->
+                                            </div>
                                         </div>
                                         <!-- /.tab-pane -->
                                         <!-- tab-pane -->
@@ -222,8 +239,15 @@
                                                     Date</label>
 
                                                 <div class="col-sm-4">
-                                                    <input class="form-control" type="text" name="appointmentDate"
+                                                    <input th:if="${TREATMENT == null}" class="form-control" type="text" name="appointmentDate"
                                                            id="Appointment" data-provide="Appointment"/>
+                                                    <div th:if="${TREATMENT != null}" th:with="appointment=${TREATMENT.appointment}">
+                                                        <input th:if="${appointment.nextAppointment == null}" class="form-control"
+                                                               readonly="readonly" value=""/>
+                                                        <input th:if="${appointment.nextAppointment != null}" class="form-control"
+                                                               readonly="readonly"
+                                                               th:value="${#dates.format(appointment.nextAppointment.meetingDate, 'dd-MM-yyyy')}"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
