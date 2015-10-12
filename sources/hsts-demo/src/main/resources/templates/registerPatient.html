@@ -110,7 +110,7 @@
                                     <div class="col-sm-5 ui-widget">
                                         <select id="combobox" class="form-control" th:name="doctorId">
                                             <option value="">Select one...</option>
-                                            <option th:each="doctor : ${session.DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.username}"></option>
+                                            <option th:each="doctor : ${session.DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.fullName}"></option>
                                         </select>
                                     </div>
                                 </div>
