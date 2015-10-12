@@ -69,6 +69,7 @@
             "info": true
         });
     });
+
     $(document).ready(function () {
         var method = $('#METHOD').val();
         var mes = $('#MESSAGE').val();
@@ -77,7 +78,6 @@
             if (method != undefined) {
                 $.notify({
                     // options
-                    icon: 'glyphicon glyphicon-warning-sign',
                     title: method,
                     message: mes,
                     target: '_blank'
@@ -106,7 +106,6 @@
                     icon_type: 'class',
                     template: '<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert">' +
                     '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-                    '<span data-notify="icon"></span> ' +
                     '<span data-notify="title">{1}</span> ' +
                     '<span data-notify="message">{2}</span>' +
                     '<div class="progress" data-notify="progressbar">' +
