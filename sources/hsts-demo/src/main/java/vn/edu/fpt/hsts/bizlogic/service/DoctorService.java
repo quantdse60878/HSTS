@@ -182,7 +182,14 @@ public class DoctorService extends AbstractService {
                 final MedicalRecord medicalRecord = appointment.getMedicalRecord();
                 medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
                 medicalRecord.setEndTime(new Date());
+                final String dianostic = prescription.getDiagnostic();
+                if (null != dianostic) {
+                   final Illness illness = illnessRepo.findOne(Integer.parseInt(dianostic));
+                    medicalRecord.setIllness(illness);
+                }
+
                 medicalRecordRepo.saveAndFlush(medicalRecord);
+
             }
 
             appointmentRepo.save(appointment);
