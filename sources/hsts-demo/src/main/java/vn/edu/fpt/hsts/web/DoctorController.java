@@ -102,9 +102,12 @@ public class DoctorController extends AbstractController{
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("doctorPatients");
+
+            // Get list patients
             List<Patient> patientList = patientService.getPatientByApponitmentDate();
             LOGGER.info("listpatiens: " + patientList.size());
             mav.addObject("LISTPATIENTS", patientList);
+
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
@@ -146,7 +149,7 @@ public class DoctorController extends AbstractController{
      */
     @RequestMapping(value = "suggestTreatment", method = RequestMethod.GET)
     public ModelAndView suggestTreatment(@RequestParam(value = "appointmentId") final int appointmentId,
-                                         @RequestParam("diagnostic") final int diagnostic) throws BizlogicException {
+                                         @RequestParam(value = "diagnostic", required = false) final int diagnostic) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
 
@@ -158,6 +161,9 @@ public class DoctorController extends AbstractController{
             // Find phase for diagnostic
             final Phase phase = illnessService.getPhaseSugestion(appointmentId, diagnostic);
             mav.addObject("PHASE", phase);
+            if (phase == null){
+                notify(mav, false, "Fail", "No regimen for suggest treatment");
+            }
 
             // Find illness form diagnostic
             Illness illness = illnessService.findByID(diagnostic);
@@ -198,12 +204,7 @@ public class DoctorController extends AbstractController{
             LOGGER.info(prescriptionModel.toString());
             doctorService.makePrescription(prescriptionModel, appointmentId, appointmentDate);
             // Create notify
-            // Set name of action
-            mav.addObject("METHOD", "Make Prescription");
-            // Set type. sussces TYPE = info, fail TYPE = danger
-            mav.addObject("TYPE", "info");
-            // Set message notify
-            mav.addObject("MESSAGE", "Success");
+            notify(mav, true, "Make Prescription", "Success");
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
@@ -225,12 +226,8 @@ public class DoctorController extends AbstractController{
             mav.setViewName("historyTreatment");
 //            patientService.makeAppointment(recordID, appointmentDate);
             //create notify
-            //set name of action
-            mav.addObject("METHOD", "Make Appointment");
-            //set type. sussces TYPE = info, fail TYPE = danger
-            mav.addObject("TYPE", "info");
-            //set message notify
-            mav.addObject("MESSAGE", "Success");
+            notify(mav, true, "Make Appointment", "Success");
+
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

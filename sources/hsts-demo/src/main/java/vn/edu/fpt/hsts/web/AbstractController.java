@@ -62,4 +62,18 @@ public class AbstractController implements ControllerParam {
         List<Practice> practiceList = practiceService.getAllPractice();
         mav.addObject("PRACTICES", practiceList);
     }
+
+    public void notify(ModelAndView mav, Boolean result,String method, String mess){
+        // Set name of action
+        mav.addObject("METHOD", method);
+        // Set message notify
+        mav.addObject("MESSAGE", mess);
+        if (result){
+            // Set type. sussces TYPE = info, fail TYPE = danger
+            mav.addObject("TYPE", "info");
+        }else {
+            // Set type. sussces TYPE = info, fail TYPE = danger
+            mav.addObject("TYPE", "danger");
+        }
+    }
 }

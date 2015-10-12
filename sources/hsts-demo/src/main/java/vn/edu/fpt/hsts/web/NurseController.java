@@ -113,12 +113,7 @@ public class NurseController extends AbstractController {
             patientService.createPatient(criteria);
 
             //create notify
-            //set name of action
-            mav.addObject("METHOD", "Register Patient");
-            //set type. sussces TYPE = info, fail TYPE = danger
-            mav.addObject("TYPE", "info");
-            //set message notify
-            mav.addObject("MESSAGE", "Success");
+            notify(mav, true, "Register Patient", "Success");
 
             return mav;
         } finally {
@@ -185,12 +180,7 @@ public class NurseController extends AbstractController {
             patientService.updatePatient(criteria, isNewMedicalRecord);
 
             //create notify
-            //set name of action
-            mav.addObject("METHOD", "Update Patient's Profile");
-            //set type. sussces TYPE = info, fail TYPE = danger
-            mav.addObject("TYPE", "info");
-            //set message notify
-            mav.addObject("MESSAGE", "Success");
+            notify(mav, true, "Update Patient's Profile", "Success");
 
             return mav;
         } finally {
