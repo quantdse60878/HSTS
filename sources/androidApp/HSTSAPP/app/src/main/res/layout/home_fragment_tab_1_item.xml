@@ -7,20 +7,32 @@
     android:orientation="horizontal">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
         android:text="Cá"
         android:textSize="14dp"
-        android:paddingTop="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:textColor="@android:color/black"
         android:id="@+id/item_food_name"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="4"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:text="1"
+        android:id="@+id/item_advice_of_food"
+        android:textSize="14dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@android:color/black"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
         android:text="Nhiều"
         android:textSize="14dp"
-        android:paddingTop="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:textColor="@android:color/black"
         android:id="@+id/item_quantitative_of_food"/>
 </LinearLayout>
