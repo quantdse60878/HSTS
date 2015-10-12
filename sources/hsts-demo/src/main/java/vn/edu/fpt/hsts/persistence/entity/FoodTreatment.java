@@ -38,6 +38,9 @@ public class FoodTreatment extends AbstractKeyEntity {
      */
     private int numberOfTime;
 
+    /**
+     *
+     */
     private String advice;
 
     public String getAdvice() {
