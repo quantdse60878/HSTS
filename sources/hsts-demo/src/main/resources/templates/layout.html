@@ -76,7 +76,11 @@
         function notifyScheduler() {
             $.getJSON("notifyWeb", function (result) {
                 // Set num notify.
-                $("#notifyNum").html(result.length);
+                var num = result.length;
+                if(num != 0){
+                    $("#notifyNum").html(num);
+                }
+
                 // Delete row.
                 $("#notifyRow").html('');
                 // Add row.
