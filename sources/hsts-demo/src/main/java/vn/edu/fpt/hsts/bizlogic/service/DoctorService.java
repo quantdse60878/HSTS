@@ -219,7 +219,7 @@ public class DoctorService extends AbstractService {
                     newTreatment.setToDate(toDate);
                 } else {
                     // Set todate to next 7 day, note that UI should be check
-                    toDate = DateUtils.plusDateTime(toDate, Calendar.DATE, treatmentLong);
+                    toDate = DateUtils.plusDateTime(new Date(), Calendar.DATE, treatmentLong);
                     newTreatment.setToDate(toDate);
                 }
                 treatmentRepo.save(newTreatment);

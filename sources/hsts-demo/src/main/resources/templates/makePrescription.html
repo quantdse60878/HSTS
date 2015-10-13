@@ -86,9 +86,8 @@
                                         <span th:text="${#dates.format(APPOINTMENT.meetingDate, 'dd-MM-yyyy')}"></span>
                                         <span class="fa fa-caret-down"></span>
                                     </button>
-                                    <ul class="dropdown-menu"
-                                        th:each="appointment : ${APPOINTMENT.medicalRecord.appointmentList}">
-                                        <li><a th:href="@{/viewPrescription(appointmentId=${appointment.id})}"
+                                    <ul class="dropdown-menu">
+                                        <li th:each="appointment : ${APPOINTMENT.medicalRecord.appointmentList}"><a th:href="@{/viewPrescription(appointmentId=${appointment.id})}"
                                                class="btn btn-default"
                                                th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>
                                         </li>

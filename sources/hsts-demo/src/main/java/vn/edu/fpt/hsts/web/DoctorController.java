@@ -209,9 +209,7 @@ public class DoctorController extends AbstractController{
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
-            // Find Appointment
-            Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
-            mav.addObject("APPOINTMENT", appointment);
+
             // Initialization Data Prescription
             initDataPrescription(mav);
 
@@ -219,6 +217,10 @@ public class DoctorController extends AbstractController{
 
             LOGGER.info(prescriptionModel.toString());
             doctorService.makePrescription(prescriptionModel, appointmentId, appointmentDate);
+            // Find Appointment
+            Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
+            mav.addObject("APPOINTMENT", appointment);
+            LOGGER.info("APPOINTMENTlist : " + appointment.getMedicalRecord().getAppointmentList().size());
             // Create notify
             notify(mav, true, "Make Prescription", "Success");
             return mav;
