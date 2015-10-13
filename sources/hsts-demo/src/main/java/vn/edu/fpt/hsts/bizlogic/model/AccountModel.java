@@ -7,6 +7,8 @@
  */
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import vn.edu.fpt.hsts.common.util.DateUtils;
+import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 
 import java.util.Date;
@@ -40,13 +42,13 @@ public class AccountModel extends AbstractKeyModel<Account> {
     /**
      * The birthday.
      */
-    private Date birthday;
+    private String birthday;
 
 
     /**
      * Gender
      */
-    private byte gender;
+    private String gender;
 
     /***
      * Role
@@ -85,19 +87,19 @@ public class AccountModel extends AbstractKeyModel<Account> {
         this.email = email;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(final Date birthday) {
+    public void setBirthday(final String birthday) {
         this.birthday = birthday;
     }
 
-    public byte getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(final byte gender) {
+    public void setGender(final String gender) {
         this.gender = gender;
     }
 
@@ -116,8 +118,13 @@ public class AccountModel extends AbstractKeyModel<Account> {
         setPassword(entity.getPassword());
         setFullName(entity.getFullName());
         setEmail(entity.getEmail());
-        setBirthday(entity.getDateOfBirth());
-        setGender(entity.getGender());
+        String formatDate = DateUtils.formatDate(entity.getDateOfBirth(), DateUtils.DATE_PATTERN_3);
+        this.birthday = formatDate;
+        if(entity.getGender() == IDbConsts.IAccountGender.MALE) {
+            this.gender = "MALE";
+        } else {
+            this.gender = "FEMALE";
+        }
         final RoleModel role = new RoleModel();
         role.fromEntity(entity.getRole());
         setRole(role);

@@ -44,35 +44,19 @@
                     </div>-->
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="dataTable" class="table table-bordered table-striped">
+
+                        <table id="dataContent" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>No.</th>
                                 <th>Name</th>
                                 <th>Birthday</th>
                                 <th>Gender</th>
                                 <th style="width: 40px;">#</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr th:if="${LISTPATIENTS == null}">
-                                <td colspan="5">No Patient for today!!!</td>
-                            </tr>
-                            <tr th:each="patient,rowStat : ${LISTPATIENTS}">
-                                <td th:text="${rowStat.count}">No.</td>
-                                <td><a th:href="@{/patient(patientID=${patient.id})}"
-                                       th:text="${patient.account.fullName}">Name</a></td>
-                                <td><a th:href="@{/patient(patientID=${patient.id})}"
-                                       th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</a>
-                                </td>
-                                <td><a th:href="@{/patient(patientID=${patient.id})}"
-                                       th:text="*{patient.account.gender == 1}? 'Male' : 'Female'">Gender</a></td>
-                                <td><a th:href="@{/patient(patientID=${patient.id})}" class="btn btn-primary">Update Patient</a></td>
-                            </tr>
-                            </tbody>
+                            <!--<tbody id="table-body"></tbody>-->
                             <tfoot>
                             <tr>
-                                <th>No.</th>
                                 <th>Name</th>
                                 <th>Birthday</th>
                                 <th>Gender</th>
@@ -90,9 +74,72 @@
         <!-- /.row -->
     </section>
     <!-- /.content -->
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+//            $.ajax({
+//                method: "GET",
+//                url: "/patientList",
+//                data: {}
+//            })
+//            .done(function(data) {
+//                console.log(data);
+//                $("#table-body").html("");
+//                var bodyContent = "";
+//                if(data.dataList != null) {
+//
+//                    $.each( data.dataList , function( key, element ) {
+//                        bodyContent += "<tr><td>" + (key + 1) + "</td>" +
+//                                "<td>" + element.account.fullName + "</td>" +
+//                                "<td>" + element.account.birthday + "</td>" +
+//                                "<td>" + element.account.gender + "</td>" +
+//                                "<td></td></tr>";
+//
+//                    });
+//                }
+//                $("#table-body").html(bodyContent);
+//            });
 
+            var table = $('#dataContent').dataTable( {
+                "processing": true,
+                "pagingType": "full",
+                "paging": true,
+                "ajax": {
+                    "url": "/patientList",
+                    "dataSrc": "dataList",
+                    "page": "pageNumber",
+                    "pages": "pageSize",
+                    "recordsTotal": "totalElements",
+                    "recordsFiltered": "numberOfElements",
+                    "type": "GET"
+                },
+
+                "columns": [
+                    { "data": "account.fullName" },
+                    { "data": "account.birthday" },
+                    { "data": "account.gender" },
+                    {
+                        "data": "id",
+                        "render": function ( data, type, full, meta ) {
+                            return '<a href="/createPrescription?patientID='+ data + '" class="btn btn-primary">Make Prescription</a>';
+                        }
+                    }
+
+                ]
+            } );
+
+            var info = table.page.info();
+            console.log(info.pages);
+        });
+
+
+
+//        setInterval(function() {
+//            // Code
+//        }, 500)
+    </script>
 </div>
 <!-- /.content-wrapper -->
-
 </body>
 </html>

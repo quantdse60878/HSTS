@@ -128,6 +128,7 @@ public class DoctorController extends AbstractController{
 
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
+
             mav.addObject("APPOINTMENT", appointment);
 
             // Initialization Data Prescription

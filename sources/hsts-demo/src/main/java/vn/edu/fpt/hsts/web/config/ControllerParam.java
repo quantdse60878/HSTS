@@ -23,4 +23,10 @@ public interface ControllerParam {
      *
      */
     final String EMPTY = "";
+
+    /**
+     * Un-limit page size.
+     * It is maximum value of integer.
+     */
+    String UNLIMIT_PAGE_SIZE = "2147483647";
 }
