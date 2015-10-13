@@ -119,8 +119,8 @@ public class NotifyService extends AbstractService {
                             }
 
                             // Make data
-                            message = String.format("New appointment with patient %s today", n.getMessage());
-                            targetLink = "/createPrescription?patientID=" + n.getMessage() + "&notificationId=" + n.getId();
+                            message = String.format("New appointment with patient %s today", patient.getAccount().getFullName());
+                            targetLink = "/createPrescription?patientID=" + patient.getId() + "&notificationId=" + n.getId();
                             break;
 
                         case IDbConsts.INotifyType.PATIENT_DOCTOR:
@@ -131,14 +131,14 @@ public class NotifyService extends AbstractService {
                                 LOGGER.debug("senderId[{}], senderAccount[{}]", sender.getId(), sender.getUsername());
                             }
                             // Find related patient
-                            Patient senderPatient = patientRepo.findOne(sender.getId());
+                            Patient senderPatient = patientRepo.findByAccountId(sender.getId());
                             if (null == senderPatient) {
                                 LOGGER.error("Patient with accountId[{}] is not found", sender.getId());
                                 throw new BizlogicException("Patient with accountId[{}] is not found", null, sender.getId());
                             }
 
                             // TODO map targetLink with a static variable for avoid changes
-                            message = String.format("Patient %s sent a message: %s", senderPatient.getAccount().getFullName(), n.getMessage());
+                            message = String.format("Patient %s sent a message: %s", sender.getFullName(), n.getMessage());
                             targetLink = "/createPrescription?patientID=" + senderPatient.getId() + "&notificationId=" + n.getId();
                             break;
 
