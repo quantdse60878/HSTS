@@ -369,7 +369,7 @@ public class PatientService extends AbstractService {
                     // throw ex
                 }
                 // TODO update meeting date
-                appointment.setMeetingDate(new Date());
+                appointment.setMeetingDate(currentDate);
                 appointment.setHeight(criteria.getHeight());
                 appointment.setWeight(criteria.getWeight());
 

@@ -195,6 +195,9 @@ public class NurseController extends AbstractController {
 
             patientService.updatePatient(criteria, isNewMedicalRecord);
 
+            Patient patient = patientService.getPatientByID(patientId);
+            mav.addObject("PATIENT", patient);
+
             //create notify
             notify(mav, true, "Update Patient's Profile", "Success");
 
