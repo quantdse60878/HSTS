@@ -17,6 +17,7 @@ import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
+import vn.edu.fpt.hsts.persistence.entity.Notify;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.Role;
 import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
@@ -25,6 +26,7 @@ import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
 import vn.edu.fpt.hsts.persistence.repo.IllnessRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordDataRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
+import vn.edu.fpt.hsts.persistence.repo.NotifyRepo;
 import vn.edu.fpt.hsts.persistence.repo.PatientRepo;
 import vn.edu.fpt.hsts.persistence.repo.RoleRepo;
 
@@ -36,7 +38,7 @@ import java.util.List;
  * Created by QUYHKSE61160 on 10/7/15.
  */
 @Service
-public class PatientService {
+public class PatientService extends AbstractService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PatientService.class);
 
@@ -105,6 +107,12 @@ public class PatientService {
      */
     @Autowired
     private MailService mailService;
+
+    /**
+     * The {@link NotifyRepo}.
+     */
+    @Autowired
+    private NotifyRepo notifyRepo;
 
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -201,6 +209,15 @@ public class PatientService {
 
             // TODO send email with creditial information to patient
 //            mailService.sendMail(criteria.getEmail(), "Credential email", account.getPassword());
+
+            // Create notify to doctor
+            final Notify notify = new Notify();
+            notify.setSender(getCurrentAccount());
+            notify.setReceiver(doctor.getAccount());
+            notify.setType(IDbConsts.INotifyType.NURSE_DOCTOR);
+            notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
+            notify.setMessage(String.valueOf(patient.getId()));
+            notifyRepo.saveAndFlush(notify);
 
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Create new patient[{}] successfully", account.getUsername());
@@ -331,6 +348,15 @@ public class PatientService {
                 appointment.setMeetingDate(currentDate);
                 appointmentRepo.saveAndFlush(appointment);
 
+                // Create notify to doctor
+                final Notify notify = new Notify();
+                notify.setSender(getCurrentAccount());
+                notify.setReceiver(doctor.getAccount());
+                notify.setType(IDbConsts.INotifyType.NURSE_DOCTOR);
+                notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
+                notify.setMessage(String.valueOf(patient.getId()));
+                notifyRepo.saveAndFlush(notify);
+
             } else {
                 /**
                  * TODO find last appointment with status ENTRY
@@ -354,6 +380,17 @@ public class PatientService {
                 }
                 appointmentRepo.saveAndFlush(appointment);
                 medicalRecordRepo.saveAndFlush(medicalRecord);
+
+                // Create notify to doctor
+                final Notify notify = new Notify();
+                notify.setSender(getCurrentAccount());
+                final Account doctorAccount = medicalRecord.getDoctor().getAccount();
+                notify.setReceiver(doctorAccount);
+                notify.setType(IDbConsts.INotifyType.NURSE_DOCTOR);
+                notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
+                final int patientId = medicalRecord.getPatient().getId();
+                notify.setMessage(String.valueOf(patientId));
+                notifyRepo.saveAndFlush(notify);
             }
 
         } finally {

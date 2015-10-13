@@ -3,13 +3,17 @@ package vn.edu.fpt.hsts.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.fpt.hsts.bizlogic.model.NotifyModel;
+import vn.edu.fpt.hsts.bizlogic.model.WebNotifyModel;
 import vn.edu.fpt.hsts.bizlogic.service.NotifyService;
+import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.entity.Notify;
 
 import java.util.ArrayList;
@@ -19,7 +23,7 @@ import java.util.List;
  * Created by QUYHKSE61160 on 10/7/15.
  */
 @Controller
-public class NotifyController {
+public class NotifyController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotifyController.class);
 
     @Autowired
@@ -62,4 +66,25 @@ public class NotifyController {
     }
 
 
+    @RequestMapping(value = "notifyWeb", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<WebNotifyModel> notifyAjax() throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return notifyService.findNotificationData();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "markAllReaded", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String markAllReaded() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            notifyService.markAllNotificationAsReaded();
+            return OK_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

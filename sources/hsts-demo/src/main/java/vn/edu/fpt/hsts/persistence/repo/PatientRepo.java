@@ -26,4 +26,7 @@ public interface PatientRepo extends JpaRepository<Patient, Integer> {
 
     @Query("select p from Patient p where lower(name) like lower(:name)")
     public Page<Patient> findByNameLike(@Param("name") final String name, final Pageable pageable);
+
+    @Query("select p from Patient p where account.id = :accountId")
+    public Patient findByAccountId(@Param("accountId") final int accountId);
 }

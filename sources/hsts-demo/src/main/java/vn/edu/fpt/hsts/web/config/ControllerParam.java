@@ -29,4 +29,14 @@ public interface ControllerParam {
      * It is maximum value of integer.
      */
     String UNLIMIT_PAGE_SIZE = "2147483647";
+
+    /**
+     *
+     */
+    String OK_STATUS = "{\"status\":\"ok\"}";
+
+    /**
+     *
+     */
+    String FAIL_STATUS = "{\"status\":\"fail\"}";
 }
