@@ -32,10 +32,7 @@ public class AjaxController {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             // TODO
-            NotifyWebPageModel pageModel = new NotifyWebPageModel();
-            pageModel.setData(WebNotifyModel.testData());
-            pageModel.setSize(pageModel.getData().size());
-            return pageModel;
+            return WebNotifyModel.testData();
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
