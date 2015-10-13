@@ -261,7 +261,7 @@
                             <!-- footer -->
                             <div class="box-footer">
                                 <button type="reset" class="btn btn-default">Cancel</button>
-                                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                                <button type="submit" onsubmit="return confirmBox();" class="btn btn-primary pull-right">Submit</button>
                             </div>
                             <!-- /.footer -->
                         </form>
@@ -358,6 +358,10 @@
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
+        function confirmBox(){
+            confirm("Press a button");
+        }
+
         $("#combobox").combobox();
         $('#Appointment').datepicker({
             dateFormat: 'dd-mm-yy',
@@ -379,7 +383,7 @@
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<select class="form-control" nam="mPresModel.mTime" id="mPresModel.mTime">'
+            newCell.innerHTML = '<select class="form-control" name="mPresModel.mTime" id="mPresModel.mTime">'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
