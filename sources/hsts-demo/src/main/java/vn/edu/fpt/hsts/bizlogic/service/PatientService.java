@@ -175,6 +175,7 @@ public class PatientService extends AbstractService {
             // Account have been not actived yet, require change password
             account.setStatus(IDbConsts.IAccountStatus.IN_ACTIVE);
             account.setPassword(authenService.randomPassword());
+            account.setUpdateTime(new Date());
             accountRepo.saveAndFlush(account);
 
             // TODO Create patient

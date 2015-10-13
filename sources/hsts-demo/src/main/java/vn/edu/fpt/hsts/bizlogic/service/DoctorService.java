@@ -224,7 +224,7 @@ public class DoctorService extends AbstractService {
                 }
                 treatmentRepo.save(newTreatment);
 
-                // TODO implement for medicine, food, practice and multiple row
+                // TODO implement for medicine, food, practice and multiple row, validate data
 
 
                 // Medicine
