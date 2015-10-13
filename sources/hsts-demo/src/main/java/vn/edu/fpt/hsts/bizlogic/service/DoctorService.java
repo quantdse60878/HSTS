@@ -22,6 +22,7 @@ import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.common.util.StringUtils;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
+import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.entity.Food;
@@ -30,6 +31,7 @@ import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
+import vn.edu.fpt.hsts.persistence.entity.Notify;
 import vn.edu.fpt.hsts.persistence.entity.Practice;
 import vn.edu.fpt.hsts.persistence.entity.PracticeTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
@@ -41,6 +43,7 @@ import vn.edu.fpt.hsts.persistence.repo.IllnessRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicineRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicineTreatmentRepo;
+import vn.edu.fpt.hsts.persistence.repo.NotifyRepo;
 import vn.edu.fpt.hsts.persistence.repo.PracticeRepo;
 import vn.edu.fpt.hsts.persistence.repo.PracticeTreatmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
@@ -126,6 +129,12 @@ public class DoctorService extends AbstractService {
     @Autowired
     private PracticeRepo practiceRepo;
 
+    /**
+     * The {@link NotifyRepo}.
+     */
+    @Autowired
+    private NotifyRepo notifyRepo;
+
     @Value("${hsts.default.treatment.long}")
     private int treatmentLong;
 
@@ -188,6 +197,18 @@ public class DoctorService extends AbstractService {
 
                 // Set old appointment link to new appointment
                 appointment.setNextAppointment(nextAppointment);
+
+                // Create notify to patient
+                final Notify notify = new Notify();
+                notify.setSender(getCurrentAccount());
+                notify.setReceiver(medicalRecord.getPatient().getAccount());
+                notify.setType(IDbConsts.INotifyType.DOCTOR_PATIENT_APPOINTMENT);
+                notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
+                final int patientId = medicalRecord.getPatient().getId();
+                notify.setMessage(String.valueOf(patientId));
+                notifyRepo.saveAndFlush(notify);
+
+
             } else {
                 // Finish medical record
                 medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
@@ -304,6 +325,16 @@ public class DoctorService extends AbstractService {
                     }
                 }
             }
+
+            // Create notify to patient
+            final Notify notify = new Notify();
+            notify.setSender(getCurrentAccount());
+            notify.setReceiver(medicalRecord.getPatient().getAccount());
+            notify.setType(IDbConsts.INotifyType.DOCTOR_PATIENT_PRESCRIPTION);
+            notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
+            final int patientId = medicalRecord.getPatient().getId();
+            notify.setMessage(String.valueOf(patientId));
+            notifyRepo.saveAndFlush(notify);
 
             // flush all change to db
             appointmentRepo.flush();
