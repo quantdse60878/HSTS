@@ -234,7 +234,7 @@ public class DoctorService extends AbstractService {
                     final String[] medicines = medicineModel.getM().split(",");
                     final String[] mTime = medicineModel.getmTime().split(",");
                     final String[] mQuantity = medicineModel.getmQuantity().split(",");
-//                    final String[] mNote = medicineModel.getmNote().split(",");
+                    final String[] mNote = medicineModel.getmNote().split(",");
                     for (int i = 0; i< medicines.length; i++) {
                         final String medicineId = medicines[i].trim();
                         if(StringUtils.isNotEmpty(medicineId)) {
@@ -247,7 +247,7 @@ public class DoctorService extends AbstractService {
                             medicineTreatment.setNumberOfTime(Integer.parseInt(mTime[i]));
                             medicineTreatment.setQuantitative(mQuantity[i]);
                             medicineTreatment.setTreatment(newTreatment);
-//                        medicineTreatment.setAdvice(mNote[i]);
+                            medicineTreatment.setAdvice(mNote[i]);
                             medicineTreatmentRepo.save(medicineTreatment);
                         }
                     }
@@ -273,6 +273,7 @@ public class DoctorService extends AbstractService {
                             foodTreatment.setTreatment(newTreatment);
                             foodTreatment.setNumberOfTime(Integer.parseInt(fTime[i]));
                             foodTreatment.setQuantitative(foodQuantity[i]);
+                            foodTreatment.setAdvice(foodAdvice[i]);
                             foodTreatmentRepo.save(foodTreatment);
                         }
                     }
@@ -297,6 +298,7 @@ public class DoctorService extends AbstractService {
                             practiceTreatment.setTreatment(newTreatment);
                             practiceTreatment.setNumberOfTime(Integer.parseInt(practiceTimes[i]));
                             practiceTreatment.setPractice(practice);
+                            practiceTreatment.setAdvice(practiceNotes[i]);
                             practiceTreatmentRepo.save(practiceTreatment);
                         }
                     }
