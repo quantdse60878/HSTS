@@ -97,7 +97,7 @@ public class NotifyService extends AbstractService {
             }
 
             // Find all notification with receiverId = current session user
-            final List<Notify> notifications = notifyRepo.findByReceiverId(userSession.getId());
+            final List<Notify> notifications = notifyRepo.findByReceiverId(userSession.getId(), IDbConsts.INotifyStatus.UNCOMPLETED);
             final List<WebNotifyModel> dataList = new ArrayList<WebNotifyModel>();
             if (null != notifications && !notifications.isEmpty()) {
                 for (Notify n: notifications) {
@@ -166,7 +166,7 @@ public class NotifyService extends AbstractService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("Marking all notification to user[{}] as readed", getUserSession().getUsername());
-            final List<Notify> notifications = notifyRepo.findByReceiverId(getUserSession().getId());
+            final List<Notify> notifications = notifyRepo.findByReceiverId(getUserSession().getId(), IDbConsts.INotifyStatus.UNCOMPLETED);
             if (null != notifications && !notifications.isEmpty()) {
                 for (Notify n: notifications) {
                     n.setStatus(IDbConsts.INotifyStatus.COMPLETED);
