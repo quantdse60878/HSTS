@@ -71,6 +71,13 @@
     });
 
     $(document).ready(function () {
+        var notify = setInterval(notifyScheduler, 10000);
+        function notifyScheduler() {
+            $.getJSON("notifyWeb", function (result) {
+                    $("#notifyNum").html(result);
+                })
+            };
+
         var method = $('#METHOD').val();
         var mes = $('#MESSAGE').val();
         var ty = $('#TYPE').val();

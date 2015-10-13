@@ -28,7 +28,7 @@ public class AjaxController {
 
     @RequestMapping(value = "notifyWeb", method = RequestMethod.GET)
     @ResponseBody
-    public NotifyWebPageModel notifyAjax() {
+    public List<WebNotifyModel> notifyAjax() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             // TODO

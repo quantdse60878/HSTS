@@ -35,11 +35,15 @@
                         <i class="fa fa-bell-o"></i>
                         <span class="label label-warning" id="notifyNum">2</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">You have 2 notifications</li>
+                    <ul class="dropdown-menu" >
                         <li>
                             <!-- Inner Menu: contains the notifications -->
-                            <ul class="menu">
+                            <ul class="menu" id="notifyRow">
+                                <li><!-- start notification -->
+                                    <a href="#">
+                                        <i class="fa fa-users text-aqua"></i> Appointment with Patient 1
+                                    </a>
+                                </li>
                                 <li><!-- start notification -->
                                     <a href="#">
                                         <i class="fa fa-users text-aqua"></i> Appointment with Patient 1
@@ -48,7 +52,6 @@
                                 <!-- end notification -->
                             </ul>
                         </li>
-                        <li class="footer"><a href="#">View all</a></li>
                     </ul>
                 </li>
                 <!-- Account Account Menu -->
@@ -75,35 +78,10 @@
                         </li>
                     </ul>
                 </li>
-
             </ul>
         </div>
     </nav>
-    <!-- jQuery -->
-    <script type="text/javascript" th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
-    <script>
-        $(document).ready(function () {
-            var notify = setInterval(notifyScheduler, 10000);
-            function notifyScheduler() {
-                $.ajax({
-                    url: "notifyWeb",
-                    success: function(result){
-                        $("#notifyNum").html(result);
-                    }});
-//                alert('aa');
-                /**
-                 * [
-                 * { message: "New appointment with patient 1totday",
-                 * link: "http://localhost/patient?id=12"
-                 * },
-                 * {
-                 *
-                 * }
-                 * ]
-                 */
-            };
-        });
-    </script>
+
 </header>
 </body>
 </html>
