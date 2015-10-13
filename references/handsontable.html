@@ -1,0 +1,401 @@
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Trainee Tracking System</title>
+ 
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="D:\Code_Example\lib\bootstrap\bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="D:\Code_Example\lib\bootstrap\bootstrap-theme.min.css">
+<script type="text/javascript" src="D:\Code_Example\lib\bootstrap\bootstrap.min.js"></script>
+<!-- Application's javascript -->
+<script type="text/javascript" src="D:\Code_Example\lib\user-defined\js\ud.js"></script>
+<!-- jquery -->
+ <script src="D:\Code_Example\lib\jquery\1.9.1\jquery-1.9.1.min.js"></script>
+<!-- Messi message dialog box -->
+<link rel="stylesheet" type="text/css" href="resources/jquery/plugins/messi/messi.min.css">
+</head>
+<body style="background-color: aliceblue;">
+
+
+  <!--header-->
+  <div id="header-container">
+    
+
+
+
+
+
+<!-- Header -->
+	<div class="navbar navbar-default">
+		<div class="container">
+            <ul class="nav nav-pills">
+               <li><a href="home"><h4><span class="glyphicon glyphicon-home">
+               	</span>  Trainee Tracking System</h4></a></li>
+        	   <li class="dropdown navbar-right" style="margin-top: 19px;">
+          		 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+            		<span class="glyphicon glyphicon-user"></span> 
+            		admin
+            		<b class="caret"></b>
+          			</a>
+          			<ul class="dropdown-menu">
+            			<li>
+                			<a href="j_spring_security_logout">
+                			<span class="glyphicon glyphicon-log-out"></span>
+                			Log Out</a>
+            			</li>
+          			</ul>
+        	   </li>
+			</ul>
+						
+		</div>
+	</div>
+<!-- /Header -->
+  </div>
+  <!-- Title -->
+	<div class="title">
+		<div class="container" style="height: 70px; ">
+		</div>
+	</div>
+	<!-- /Title -->
+  <div id="body-container" class="container navbar navbar-default">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+<!-- bootstrap 3.0.2 -->
+<link href="D:\Code_Example\lib\AdminLTE\css\bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!-- font Awesome -->
+<link href="D:\Code_Example\lib\AdminLTE\css\font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!-- Ionicons -->
+<link href="D:\Code_Example\lib\AdminLTE\css\ionicons.min.css" rel="stylesheet" type="text/css" />
+
+<!-- DATA TABLES -->
+<link href="D:\Code_Example\lib\AdminLTE\css\datatables\dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+
+
+<link rel="stylesheet" href="resources/bootstrap-multiselect/css/bootstrap-multiselect.css" type="text/css">
+<link rel="stylesheet" href="resources/bootstrap-multiselect/css/prettify.css" type="text/css">
+
+<!-- jQuery -->
+<script src="D:\Code_Example\lib\jquery\1.9.1\jquery-1.9.1.min.js"></script>
+<!-- Bootstrap -->
+<script src="D:\Code_Example\lib\AdminLTE\js\bootstrap.min.js" type="text/javascript"></script>
+<!-- DATA TABES SCRIPT -->
+<script src="D:\Code_Example\lib\AdminLTE\js\plugins\datatables\jquery.dataTables.js" type="text/javascript"></script>
+<script src="D:\Code_Example\lib\AdminLTE\js\plugins\datatables\dataTables.bootstrap.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="D:\Code_Example\lib\jquery-ui\1.9.2\ui\jquery-ui-1.9.2.js"></script>
+<link type="text/css" href="D:\Code_Example\lib\jquery-ui\1.9.2\themes\base\jquery.ui.all.css" rel="stylesheet">
+
+
+
+<!--  -->
+
+
+<script type="text/javascript" src="resources/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+<script type="text/javascript" src="resources/bootstrap-multiselect/js/prettify.js"></script>
+
+
+
+<!-- hansontable -->
+<script src="D:\Code_Example\lib\handsontable\handsontable.full.js"></script>
+<link rel="stylesheet" media="screen" href="D:\Code_Example\lib\handsontable\handsontable.full.css">
+<link rel="stylesheet" media="screen" href="D:\Code_Example\lib\handsontable\github.css">
+
+<!-- Body -->
+<div>
+	<ul class="nav nav-tabs nav-justified" style="margin: auto;">
+		<li><a href="home">Home Page</a></li>
+		<li><a href="searchRequest">Search</a></li>
+		<li class="active"><a class="dropdown-toggle"
+			data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+				Add data <span class="caret"></span>
+		</a><ul class="dropdown-menu" role="menu">
+			<li><a href="_university">Add University</a></li>
+			<li><a href="_class">Add Class</a></li>
+			<li><a href="_student">Add Student</a></li>
+			</ul>
+		</li>
+		<li>
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+      			Edit data <span class="caret"></span>
+   			</a>
+    		<ul class="dropdown-menu" role="menu">
+    			<li><a href="edit_university">Edit University</a></li>
+    			<li><a href="edit_class">Edit Class</a></li>
+    			<li><a href="edit_student">Edit Student</a></li>
+    		</ul>
+		</li>
+	</ul>
+	<div class="page-header">
+		<h4>Add Student</h4>
+	</div>
+	<div class="col-lg-12" style="overflow:auto;">
+			<div id="dataTable"></div>
+
+	</div>
+			<br/>
+			<button id="save" class="btn btn-success">Save</button>
+
+			<div>
+				<img id="access_log_print" src="D:\Code_Example\lib\image\ajax-loader.gif" />
+			</div>
+	<div id="resViewer"></div>
+	<!-- Create datatable -->
+	<script type="text/javascript">
+
+        $("#dataTable").handsontable({
+          startRows : 1,
+          dataShema : {
+            id : null,
+            universityCode : null,
+            classCode : null,
+            lastName : null,
+            firstName : null,
+            email1 : null,
+            email2 : null,
+            phone : null,
+            availableForWork : null,
+            gpa : null,
+            level : null,
+            specialty : null,
+            certNo : null,
+            introduction : null,
+          },
+          startCols : 13,
+          rowHeaders : true,
+          colHeaders : [ 'University', 'Class', 'Last Name', 'First Name', 'Email1',
+                          'Email2', 'Phone', 'Available For Work', 'GPA', 'Level',
+                           'Specialty', 'Cert No.', 'Introduction' ],
+          colWidths : [ 130, 110, 100, 100, 150, 150, 110, 130, 80, 80, 100, 120, 160 ],
+          manualColumnResize : true,
+          minSpareRows : 4,
+          currentRowClassName : 'currentRow',
+          currentColClassName : 'currentCol',
+          autoWrapRow : true,
+          removeRowPlugin : true,
+
+          columns : [ {
+            data : "universityCode",
+            validator : valName,
+            allowInvalid : true
+          }, {
+            data : "classCode",
+            validator : valName,
+            allowInvalid : true
+          }, {
+            data : "lastName",
+            validator : valName,
+            allowInvalid : true
+          }, {
+        	  data : "firstName",
+              validator : valName,
+              allowInvalid : true
+            }, {
+              data : "email1",
+              validator : valEmail,
+              allowInvalid : true
+          }, {
+            data : "email2",
+            validator : valEmail,
+            allowInvalid : true
+          }, {
+        	  data : "phone",
+              validator : valTele,
+              allowInvalid : true
+            }, {
+              data : "availableForWork",
+              validator : valEmail,
+              allowInvalid : true
+            }, {
+                data : "gpa",
+                validator : valName,
+                allowInvalid : true
+            }, {
+              data : "level",
+              validator : valName,
+              allowInvalid : true
+            }, {  
+            	data : "specialty",
+                validator : valName,
+                allowInvalid : true
+              }, {
+                data : "certNo",
+                validator : valName,
+                allowInvalid : true
+              }, {
+            data : "introduction",
+            validator : valName,
+            allowInvalid : true
+          } ]
+        });
+	</script>
+	<!-- Send data -->
+	<script type="text/javascript">
+	
+			      
+    $("#save").click(function() {
+    	windown.open("home");
+        var json = $("#dataTable").handsontable('getData');
+        var jsonData = createJsonSection(json);
+        if (jsonData === null) {
+          return false;
+        } else {
+          showLoadingMsg();
+          var dataJson = JSON.stringify(jsonData);
+          console.log(dataJson);
+
+          $.ajax({
+            url : "addStudent",
+            data : {
+              "data" : dataJson,
+            }, //returns all cells' data
+            type : "POST",
+            success : function(res) {
+              $("#resViewer").empty();
+              $("#resViewer").append(res);
+              hideLoadingMsg();
+            }
+          });
+        }
+      });
+	</script>
+	<script language="JavaScript" type="text/javascript">
+  $(document).ready(
+      function() {
+        hideLoadingMsg();
+        function showLoadingMsg() {
+          $("input[type=submit]").attr("disabled", "disabled");
+          $('#access_log_print').show();
+        }
+        function hideLoadingMsg() {
+          $("input[type=submit]").removeAttr("disabled");
+          $('#access_log_print').hide();
+        }
+        function createJsonSection(json, callback) {
+          //Variable to save json string.
+          var jsonObj = [];
+
+          //Variable to save lenght of json string.
+          var lenghJson = Object.keys(json).length;
+
+          //Variable to save message error.
+          // var missInput = customDialog();
+
+          //Variable for loop.
+          var i = 0;
+          var j = 0;
+          //Check all null cell when not input data on handsontable.
+          if ((json[0]["university"] == null) && (json[0]["classInfo"] == null) && (json[0]["lastName"] == null)
+              && (json[0]["firstname"] == null) && (json[0]["email1"] == null) && (json[0]["email2"] == null)
+              && (json[0]["phone"] == null) && (json[0]["availableForWork"] == null) && (json[0]["GPA"] == null) 
+              && (json[0]["level"] == null) && (json[0]["specialty"] == null) && (json[0]["certNo"] == null)
+               && (json[0]["introduction"] == null)) {
+
+            // missInput.message = CustomMessage.MISSING_INPUT;
+            // bootbox.dialog(missInput);
+            customDialog(CustomMessage.MISSING_INPUT);
+          } else {
+            //Check null cell when forget inputing one or some cell. If fill all up,then it will put this record input jsonObj.
+            for (i; i < (lenghJson - 1); i++) {
+              var obj = {};
+              obj["university"] = json[i]["university"];
+              obj["classInfo"] = json[i]["classInfo"];
+              obj["lastName"] = json[i]["lastName"];
+              obj["email"] = json[i]["email"];
+              obj["phone"] = json[i]["phone"];
+              obj["availableForWork"] = json[i]["availableForWork"];
+              obj["email1"] = json[i]["email1"];
+              obj["email2"] = json[i]["email2"];
+              obj["GPA"] = json[i]["GPA"];
+              obj["level"] = json[i]["level"];
+              obj["specialty"] = json[i]["specialty"];
+              obj["certNo"] = json[i]["certNo"];
+              obj["introduction"] = json[i]["introduction"];
+
+              console.log(obj);
+
+              if (
+                  ((obj["firstName"] == null) || (obj["firstName"] == ""))
+                  && ((obj["lastName"] == null) || (obj["lastName"] == ""))
+                  && ((obj["email1"] == null) || (obj["email1"] == ""))
+                  && ((obj["university"] == null) || (obj["university"] == "")) 
+                  && (i != 0)
+                ) {
+                continue;
+              } else {
+
+                if ((obj["firstName"] == null) || (obj["firstName"] == "")) {
+                  customDialog(CustomMessage.MISSING_INPUT_FIRSTNAME);
+                  callback(false);
+                  return null;
+                } else if ((obj["lastName"] == null) || (obj["lastName"] == "")) {
+                  customDialog(CustomMessage.MISSING_INPUT_LASTNAME);
+                  callback(false);
+                  return null;
+                } else if ((obj["email"] == null) || (obj["email"] == "")) {
+                  customDialog(CustomMessage.MISSING_INPUT_EMAIL);
+                  callback(false);
+                  return null;
+                } else if ((obj["university"] == null) || (obj["university"] == "")) {
+                  customDialog(CustomMessage.MISSING_INPUT_PASSWORD);
+                  callback(false);
+                  return null;
+                } else if (!validName(obj["firstName"])) {
+                  customDialog(CustomMessage.INVALID_NAME);
+                  callback(false);
+                  return null;
+                } else if (!validName(obj["lastName"])) {
+                  customDialog(CustomMessage.INVALID_NAME);
+                  callback(false);
+                  return null;
+                } else if (!validEmail(obj["email1"])) {
+                  customDialog(CustomMessage.INVALID_EMAIL_PATTERN);
+                  callback(false);
+                  return null;
+                } else if ((obj["phone"] != "") && (obj["phone"] != null) && (!validTelephone(obj["phone"]))) {
+                  customDialog(CustomMessage.INVALID_PHONE);
+                  callback(false);
+                  return null;
+                } else if (!validPwd(obj["university"])) {
+                  customDialog(CustomMessage.INVALID_PASSWORD);
+                  callback(false);
+                  return null;
+                } else {
+                  jsonObj.push(obj);
+                }
+              }
+            }
+          }
+          return jsonObj;
+        }
+      });
+</script>
+</div>
+  </div>
+
+  <div id="footer-container">
+    
+
+  </div>
+
+
+</body>
+</html>

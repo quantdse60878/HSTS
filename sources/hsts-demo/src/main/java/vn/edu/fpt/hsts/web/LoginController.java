@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientModel;
+import vn.edu.fpt.hsts.bizlogic.model.WebNotifyModel;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.MailService;
 import vn.edu.fpt.hsts.bizlogic.service.AccountService;
@@ -90,6 +91,7 @@ public class LoginController {
             if (user != null) {
                 session.setAttribute("USER", user);
                 mav.setViewName("home");
+
                 if (user.getRole().getName().equals("Doctor")){
                     mav.setViewName("doctorPatients");
                     List<Patient> patientList = patientService.getPatientByApponitmentDate();
