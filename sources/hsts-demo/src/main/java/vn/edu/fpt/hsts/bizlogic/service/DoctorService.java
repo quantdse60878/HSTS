@@ -207,12 +207,6 @@ public class DoctorService extends AbstractService {
                 final int patientId = medicalRecord.getPatient().getId();
                 notify.setMessage(String.valueOf(patientId));
                 notifyRepo.saveAndFlush(notify);
-
-
-            } else {
-                // Finish medical record
-                medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
-                medicalRecord.setEndTime(new Date());
             }
 
             medicalRecordRepo.saveAndFlush(medicalRecord);
