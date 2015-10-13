@@ -120,7 +120,7 @@ public class NotifyService extends AbstractService {
 
                             // Make data
                             message = String.format("New appointment with patient %s today", n.getMessage());
-                            targetLink = "/createPrescription?patientID=" + n.getMessage();
+                            targetLink = "/createPrescription?patientID=" + n.getMessage() + "&notificationId=" + n.getId();
                             break;
 
                         case IDbConsts.INotifyType.PATIENT_DOCTOR:
@@ -139,7 +139,7 @@ public class NotifyService extends AbstractService {
 
                             // TODO map targetLink with a static variable for avoid changes
                             message = String.format("Patient %s sent a message: %s", senderPatient.getAccount().getFullName(), n.getMessage());
-                            targetLink = "/createPrescription?patientID=" + senderPatient.getId();
+                            targetLink = "/createPrescription?patientID=" + senderPatient.getId() + "&notificationId=" + n.getId();
                             break;
 
                         default:
@@ -175,6 +175,19 @@ public class NotifyService extends AbstractService {
             }
             notifyRepo.flush();
             LOGGER.info("Finished");
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void markAsRead(final int notificationId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("notification[{}]", notificationId);
+            Notify notify = notifyRepo.findOne(notificationId);
+            notify.setStatus(IDbConsts.INotifyStatus.COMPLETED);
+            notifyRepo.saveAndFlush(notify);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

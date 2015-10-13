@@ -25,6 +25,11 @@ public interface ControllerParam {
     final String EMPTY = "";
 
     /**
+     *
+     */
+    final String ZERO = "0";
+
+    /**
      * Un-limit page size.
      * It is maximum value of integer.
      */

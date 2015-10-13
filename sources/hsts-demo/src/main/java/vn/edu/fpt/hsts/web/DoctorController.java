@@ -20,6 +20,7 @@ import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicineService;
+import vn.edu.fpt.hsts.bizlogic.service.NotifyService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.bizlogic.service.PracticeService;
@@ -93,6 +94,12 @@ public class DoctorController extends AbstractController{
     private PracticeService practiceService;
 
     /**
+     * The {@link NotifyService}.
+     */
+    @Autowired
+    private NotifyService notifyService;
+
+    /**
      * The doctor patients page mapping
      * @return
      */
@@ -120,11 +127,19 @@ public class DoctorController extends AbstractController{
      * @return
      */
     @RequestMapping(value = "createPrescription", method = RequestMethod.GET)
-    public ModelAndView createPrescriptionPage(@RequestParam("patientID") final int patientID) {
+    public ModelAndView createPrescriptionPage(@RequestParam("patientID") final int patientID,
+                                               @RequestParam(value = "notificationId", required = false, defaultValue = ZERO) final int notificationId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+            LOGGER.info("patientId[{}], notificationId[{}]", patientID, notificationId);
+
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
+
+            // Set notify as readed
+            if (0 < notificationId) {
+                notifyService.markAsRead(notificationId);
+            }
 
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
