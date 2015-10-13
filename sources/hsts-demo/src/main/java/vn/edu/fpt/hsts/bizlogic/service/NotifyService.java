@@ -119,7 +119,7 @@ public class NotifyService extends AbstractService {
                             }
 
                             // Make data
-                            message = String.format("New appointment with patient {} today", n.getMessage());
+                            message = String.format("New appointment with patient %s today", n.getMessage());
                             targetLink = "/createPrescription?patientID=" + n.getMessage();
                             break;
 
@@ -138,7 +138,7 @@ public class NotifyService extends AbstractService {
                             }
 
                             // TODO map targetLink with a static variable for avoid changes
-                            message = String.format("Patient {} sent a message: {}", senderPatient.getAccount().getFullName(), n.getMessage());
+                            message = String.format("Patient %s sent a message: %s", senderPatient.getAccount().getFullName(), n.getMessage());
                             targetLink = "/createPrescription?patientID=" + senderPatient.getId();
                             break;
 
