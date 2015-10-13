@@ -177,7 +177,7 @@ public class DoctorService extends AbstractService {
             Date toDate = null;
             final MedicalRecord medicalRecord = appointment.getMedicalRecord();
             final String dianostic = prescription.getDiagnostic();
-            if (null != dianostic) {
+            if (StringUtils.isNotEmpty(dianostic)) {
                 final Illness illness = illnessRepo.findOne(Integer.parseInt(dianostic));
                 medicalRecord.setIllness(illness);
             }
