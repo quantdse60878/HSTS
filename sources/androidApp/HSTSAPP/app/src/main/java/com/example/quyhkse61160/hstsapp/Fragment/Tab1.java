@@ -36,7 +36,7 @@ public class Tab1 extends Fragment {
     FoodAdapter adapter;
     ListView listView;
     TextView time_eat;
-    static ArrayList<HashMap<String,String>> sections;
+    static ArrayList<HashMap<String, String>> sections;
 
     public Tab1() {
         // Required empty public constructor
@@ -74,17 +74,18 @@ public class Tab1 extends Fragment {
         return v;
     }
 
-    public static void updateData(){
-        sections = new ArrayList<HashMap<String,String>>();
+    public static void updateData() {
+        sections = new ArrayList<HashMap<String, String>>();
         List<Treatment> treatments = Constant.TREATMENTS;
-        for (Treatment treatment : treatments){
-            for(ToDoTime time : treatment.getListFoodTreatment()){
-                if(time.getNumberOfTime().contains(HomeActivity.timeAlert)){
-                        HashMap<String,String> d = new HashMap<>();
-                        d.put("FoodName", time.getName());
-                        d.put("Advice", time.getAdvice());
-                        d.put("QuantitativeOfFood", time.getQuantitative());
-                        sections.add(d);
+        for (Treatment treatment : treatments) {
+            for (ToDoTime time : treatment.getListFoodTreatment()) {
+                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+                    HashMap<String, String> d = new HashMap<>();
+                    d.put("FoodName", time.getName());
+                    if (time.getAdvice().isEmpty() || time.getAdvice().equals("null")) d.put("Advice", "");
+                    else d.put("Advice", time.getAdvice());
+                    d.put("QuantitativeOfFood", time.getQuantitative());
+                    sections.add(d);
 
                 }
             }

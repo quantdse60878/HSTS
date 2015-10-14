@@ -89,7 +89,8 @@ public class Tab2 extends Fragment {
                 if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
                     HashMap<String, String> d = new HashMap<>();
                     d.put("MedicineName", time.getName());
-                    d.put("Advice", time.getAdvice());
+                    if (time.getAdvice().isEmpty() || time.getAdvice().equals("null")) d.put("Advice", "");
+                    else d.put("Advice", time.getAdvice());
                     d.put("NumberOfMedicine", time.getQuantitative());
                     sections.add(d);
                 }

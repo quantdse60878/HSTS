@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:text="1"
         android:id="@+id/item_advice_of_medicine"
         android:textSize="14dp"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="6"
+        android:layout_weight="5"
         android:text="1"
         android:id="@+id/item_number_of_medicine"
         android:textSize="14dp"

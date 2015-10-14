@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.quyhkse61160.hstsapp.Adapter.NoticeAdapter;
 import com.example.quyhkse61160.hstsapp.Adapter.PracticeAdapter;
@@ -24,10 +25,14 @@ import java.util.List;
 public class NoticeActivity extends ActionBarActivity {
     NoticeAdapter adapter;
     ListView listView;
+    TextView name, number, quantitative;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
+        name = (TextView) findViewById(R.id.notice_title_name);
+        number = (TextView) findViewById(R.id.notice_title_number);
+        quantitative = (TextView) findViewById(R.id.notice_title_quantitative);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
         actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
@@ -36,6 +41,9 @@ public class NoticeActivity extends ActionBarActivity {
         ArrayList<HashMap<String,String>> sections = new ArrayList<>();
         List<Treatment> treatments = Constant.TREATMENTS;
         if(field.equals("food")){
+            name.setText("Tên Món Ăn");
+            number.setText("Số Bữa Ăn");
+            quantitative.setText("Số Lượng");
             for(Treatment treatment : treatments){
                 for(ToDoTime time : treatment.getListFoodTreatment()){
                         HashMap<String,String> d = new HashMap<>();
@@ -47,6 +55,9 @@ public class NoticeActivity extends ActionBarActivity {
             }
         }
         if(field.equals("medicine")){
+            name.setText("Tên Thuốc");
+            number.setText("Số Lần Uống");
+            quantitative.setText("Số Lượng/Lần");
             for(Treatment treatment : treatments){
                 for(ToDoTime time : treatment.getListMedicineTreatment()){
                     HashMap<String,String> d = new HashMap<>();
@@ -58,6 +69,9 @@ public class NoticeActivity extends ActionBarActivity {
             }
         }
         if(field.equals("practice")){
+            name.setText("Tên Bài Tập");
+            number.setText("Số Lần Tập");
+            quantitative.setText("Thời Gian");
             for(Treatment treatment : treatments){
                 for(ToDoTime time : treatment.getListPracticeTreatment()){
                     HashMap<String,String> d = new HashMap<>();

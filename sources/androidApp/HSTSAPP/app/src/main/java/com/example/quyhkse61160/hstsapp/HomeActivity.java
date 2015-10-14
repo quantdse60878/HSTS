@@ -13,7 +13,10 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -181,33 +184,41 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         if (bundle != null) {
             final Context context = getApplicationContext();
             if (bundle.getBoolean("openDialogForMe")) {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Nhắc Nhở").setMessage("Bạn đến giờ ăn, uống thuốc, tập luyện")
                         .setPositiveButton("Ngưng Nhắc Nhở", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 BroadcastService.alertMinute = 0;
-                                BroadcastService.flag = true;
                             }
-                        }).setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        BroadcastService.alertMinute += 5;
-                        BroadcastService.flag = true;
-                    }
-                });
+                        })
+                        .setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                BroadcastService.alertMinute += 5;
+                            }
+                        });
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
             }
-            if(bundle.getBoolean("notFinished")){
+            if (bundle.getBoolean("notFinished")) {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Nhắc Nhở").setMessage("Hôm qua bạn chưa hoàn thành chế độ điều trị, hãy cố gắng thực hiện để việc điều trị được tốt hơn.");
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
             }
-            if(bundle.getBoolean("overFinished")){
+            if (bundle.getBoolean("overFinished")) {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Nhắc Nhở").setMessage("Hôm qua bạn hoàn thành vượt mức chế độ điều trị, hãy cố gắng điều độ để việc điều trị được tốt hơn.");
                 AlertDialog dialog = builder.create();
@@ -328,17 +339,17 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         List<String> alarmTime = new ArrayList<>();
         for (Treatment treatment : treatments) {
             for (ToDoTime time : treatment.getListFoodTreatment()) {
-                for(String t : time.getNumberOfTime()){
+                for (String t : time.getNumberOfTime()) {
                     if (!alarmTime.contains(t)) alarmTime.add(t);
                 }
             }
             for (ToDoTime time : treatment.getListMedicineTreatment()) {
-                for(String t : time.getNumberOfTime()){
+                for (String t : time.getNumberOfTime()) {
                     if (!alarmTime.contains(t)) alarmTime.add(t);
                 }
             }
             for (ToDoTime time : treatment.getListPracticeTreatment()) {
-                for(String t : time.getNumberOfTime()){
+                for (String t : time.getNumberOfTime()) {
                     if (!alarmTime.contains(t)) alarmTime.add(t);
                 }
             }
@@ -383,7 +394,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         if (id == R.id.action_logout) {
             return true;
         }
-        if(id == R.id.action_notify_doctor) {
+        if (id == R.id.action_notify_doctor) {
             Intent intentNotify = new Intent(this, NotifyToDoctor.class);
             startActivity(intentNotify);
         }

@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="4"
                 android:text="Lời Khuyên"
                 android:textStyle="bold"
                 android:textSize="15dp"
@@ -60,7 +60,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
+                android:layout_weight="5"
                 android:text="Định lượng"
                 android:textStyle="bold"
                 android:textSize="15dp"

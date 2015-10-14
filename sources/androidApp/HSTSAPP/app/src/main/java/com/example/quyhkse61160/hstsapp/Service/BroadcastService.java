@@ -76,8 +76,6 @@ public class BroadcastService extends Service {
                     Calendar c1 = Calendar.getInstance();
                     c1.set(Calendar.HOUR_OF_DAY, 22);
                     c1.set(Calendar.MINUTE, 00);
-                    Log.d("QUYYY111", "-----" + c.getTime() + "--" + c1.getTime());
-                    Log.d("QUYYY111", "-----------------------------------------------------------");
                     if(c.getTime().equals(c1.getTime())) {
                         HomeActivity.listNumberOfStep.add(HomeActivity.numberOfStep);
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -92,10 +90,8 @@ public class BroadcastService extends Service {
                         Calendar c2 = Calendar.getInstance();
                         c2.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.split(":")[0]));
                         c2.set(Calendar.MINUTE, Integer.parseInt(time.split(":")[1]));
-
-
-                        if (c2.getTime().getHours() == c.getTime().getHours() && c2.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
-                            Log.d("KhuongMH","HHHHHHHHHHHHHHHH");
+                        if (c2.getTime().getHours() == c.getTime().getHours()
+                                && c2.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
                             final Context context = getApplicationContext();
                             if(BroadcastService.flag){
                                 BroadcastService.flag = false;
@@ -122,7 +118,6 @@ public class BroadcastService extends Service {
     private void sendMedicalData(String numberOfStep, String collectDate) {
 
         String stringURL = Constant.hostURL + Constant.sendMedicalData;
-        Log.d("QUYYYY1111", "Login url: " + stringURL + "------" + "App: " + HomeActivity.appointmentId + "--Step: " + numberOfStep + "--Date: " + collectDate);
 
         try {
             URL url = new URL(stringURL);
@@ -152,15 +147,12 @@ public class BroadcastService extends Service {
             while ((temp = bReader.readLine()) != null) {
                 response += temp;
             }
-            Log.d("QUYYY111", "--" + response);
-
             HomeActivity.listNumberOfStep = new ArrayList<>();
             HomeActivity.dateSaveStep = new ArrayList<>();
 
 
         } catch (IOException e) {
             e.printStackTrace();
-            Log.d("Khuonggggggg","Cannot connectttttttttttt");
         }
     }
 
@@ -198,8 +190,6 @@ public class BroadcastService extends Service {
             while ((temp = bReader.readLine()) != null) {
                 response += temp;
             }
-            Log.d("QUYYY111", "--" + response);
-
             try {
                 JSONArray array = new JSONArray(response);
                 final Context context = getApplicationContext();
@@ -264,8 +254,6 @@ public class BroadcastService extends Service {
     public void getNewTreatment(int notifyId) {
 
         String stringURL = Constant.hostURL + Constant.getTreatment;
-        Log.d("QUYYYY1111", "Login url: " + stringURL);
-
         try {
             URL url = new URL(stringURL);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -292,7 +280,6 @@ public class BroadcastService extends Service {
             while ((temp = bReader.readLine()) != null) {
                 response += temp;
             }
-            Log.d("QUYYY111", "--" + response);
             try {
                 JSONArray treatmentArray = new JSONArray(response);
                 JSONObject treatmentObject = treatmentArray.getJSONObject(0);
@@ -316,8 +303,6 @@ public class BroadcastService extends Service {
     public void hadGetNotify(int notifyId) {
 
         String stringURL = Constant.hostURL + Constant.hadGetTreatment;
-        Log.d("QUYYYY1111", "Login url: " + stringURL);
-
         try {
             URL url = new URL(stringURL);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -344,8 +329,6 @@ public class BroadcastService extends Service {
             while ((temp = bReader.readLine()) != null) {
                 response += temp;
             }
-            Log.d("QUYYY111", "--" + response);
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
