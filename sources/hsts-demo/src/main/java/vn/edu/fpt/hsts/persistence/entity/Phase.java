@@ -45,10 +45,7 @@ public class Phase extends AbstractKeyEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "phase")
     private List<FoodPhase> foodPhaseList;
 
-    /**
-     *
-     */
-    private int numberOfDate;
+
 
     /**
      *
@@ -87,13 +84,6 @@ public class Phase extends AbstractKeyEntity {
         this.regimen = regimen;
     }
 
-    public int getNumberOfDate() {
-        return numberOfDate;
-    }
-
-    public void setNumberOfDate(final int numberOfDate) {
-        this.numberOfDate = numberOfDate;
-    }
 
     public Date getUpdateTime() {
         return updateTime;
