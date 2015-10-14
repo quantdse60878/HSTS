@@ -31,6 +31,7 @@ public class AjaxController {
     public NotifyWebPageModel notifyAjax() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+            // TODO
             NotifyWebPageModel pageModel = new NotifyWebPageModel();
             pageModel.setData(WebNotifyModel.testData());
             pageModel.setSize(pageModel.getData().size());

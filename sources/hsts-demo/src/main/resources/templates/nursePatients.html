@@ -118,11 +118,19 @@
                 "columns": [
                     { "data": "account.fullName" },
                     { "data": "account.birthday" },
-                    { "data": "account.gender" },
+                    { "data": "account.gender",
+                        "render": function (data, type, full, meta) {
+                            var className = "btn btn-success";
+                            if(data == "FEMALE") {
+                                className = "btn btn-danger";
+                            }
+                            return '<input type ="text" disabled = "true" class="'+ className +'" value="' + data + '"/>';
+                        }
+                    },
                     {
                         "data": "id",
                         "render": function ( data, type, full, meta ) {
-                            return '<a href="/createPrescription?patientID='+ data + '" class="btn btn-primary">Make Prescription</a>';
+                            return '<a href="/patient?patientID='+ data + '" class="btn btn-primary">Update</a>';
                         }
                     }
 
