@@ -1,9 +1,9 @@
 package com.example.quyhkse61160.hstsapp.Fragment;
 
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,17 +41,11 @@ public class Tab4 extends Fragment {
         toDate = (TextView) v.findViewById(R.id.notice_to_date);
         fromDate = (TextView) v.findViewById(R.id.notice_from_date);
         nextApp = (TextView) v.findViewById(R.id.notice_next_appointment);
-        adviceFood = (TextView) v.findViewById(R.id.notice_advice_food);
-        adviceMedicine = (TextView) v.findViewById(R.id.notice_advice_medicine);
-        advicePractice = (TextView) v.findViewById(R.id.notice_advice_practical);
 
-        ill.setText(Constant.TREATMENTS.get(0).getIllnessName());
-        toDate.setText(Constant.TREATMENTS.get(0).getToDate().split(" ")[0]);
-        fromDate.setText(Constant.TREATMENTS.get(0).getFromDate().split(" ")[0]);
-        nextApp.setText(Constant.TREATMENTS.get(0).getNextAppointment().split(" ")[0]);
-        adviceFood.setText(Constant.TREATMENTS.get(0).getAdviseFood());
-        adviceMedicine.setText(Constant.TREATMENTS.get(0).getAdviseMedicine());
-        advicePractice.setText(Constant.TREATMENTS.get(0).getAdvicePractice());
+//        ill.setText(Constant.TREATMENTS.get(0).getIllnessName());
+//        toDate.setText(Constant.TREATMENTS.get(0).getToDate().split(" ")[0]);
+//        fromDate.setText(Constant.TREATMENTS.get(0).getFromDate().split(" ")[0]);
+//        nextApp.setText(Constant.TREATMENTS.get(0).getNextAppointment().split(" ")[0]);
 
 
         food = (Button) v.findViewById(R.id.btn_foods);

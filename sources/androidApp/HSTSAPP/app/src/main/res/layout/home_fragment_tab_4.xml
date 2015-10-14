@@ -95,69 +95,6 @@
                     android:textSize="17dp"
                     android:id="@+id/notice_next_appointment"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Chế Độ Ăn Uống : "
-                    android:textColor="#3ea000"
-                    android:textSize="17dp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Ít"
-                    android:textColor="@android:color/black"
-                    android:textSize="17dp"
-                    android:id="@+id/notice_advice_food"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Uống Thuốc : "
-                    android:textColor="#3ea000"
-                    android:textSize="17dp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Ít"
-                    android:textColor="@android:color/black"
-                    android:textSize="17dp"
-                    android:id="@+id/notice_advice_medicine"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Tập Thể Dục : "
-                    android:textColor="#3ea000"
-                    android:textSize="17dp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Ít"
-                    android:textColor="@android:color/black"
-                    android:textSize="17dp"
-                    android:id="@+id/notice_advice_practical"/>
-            </LinearLayout>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

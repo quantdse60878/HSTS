@@ -73,6 +73,10 @@
             android:name=".NotifyToDoctor"
             android:label="@string/title_activity_notify_to_doctor" >
         </activity>
+        <activity
+            android:name=".HomeActivity2"
+            android:label="@string/title_activity_home2" >
+        </activity>
     </application>
 
 </manifest>

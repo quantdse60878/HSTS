@@ -25,5 +25,23 @@
     <string name="action_register">Not A Member ? Register Now</string>
     <string name="title_activity_notice">NoticeActivity</string>
     <string name="title_activity_notify_to_doctor">NotifyToDoctor</string>
+
+    <string-array name="nav_drawer_items">
+        <item>Thông Tin Chung</item>
+        <item>Thức Ăn</item>
+        <item>Thuốc</item>
+        <item>Bài Tập</item>
+    </string-array>
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_drawer</item>
+        <item>@drawable/food_icon1</item>
+        <item>@drawable/medicine_icon</item>
+        <item>@drawable/walk_icon</item>
+    </array>
+
+    <string name="desc_list_item_icon">Item Icon</string>
+    <string name="drawer_open">Slider Menu Opened</string>
+    <string name="drawer_close">Slider Menu Closed</string>
+    <string name="title_activity_home2">Menu</string>
     <!-- KhuongMH -->
 </resources>
