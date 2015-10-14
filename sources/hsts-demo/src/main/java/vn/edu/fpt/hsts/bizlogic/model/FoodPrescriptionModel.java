@@ -7,11 +7,11 @@ public class FoodPrescriptionModel {
     /**
      * Food
      */
-    private String f;
+    private int f;
     /**
      * Food Time
      */
-    private String fTime;
+    private int fTime;
     /**
      * Food Quantity
      */
@@ -24,26 +24,26 @@ public class FoodPrescriptionModel {
     public FoodPrescriptionModel() {
     }
 
-    public FoodPrescriptionModel(String f, String fTime, String fQuantity, String fNote) {
+    public FoodPrescriptionModel(int f, int fTime, String fQuantity, String fNote) {
         this.f = f;
         this.fTime = fTime;
         this.fQuantity = fQuantity;
         this.fNote = fNote;
     }
 
-    public String getF() {
+    public int getF() {
         return f;
     }
 
-    public void setF(String f) {
+    public void setF(int f) {
         this.f = f;
     }
 
-    public String getfTime() {
+    public int getfTime() {
         return fTime;
     }
 
-    public void setfTime(String fTime) {
+    public void setfTime(int fTime) {
         this.fTime = fTime;
     }
 

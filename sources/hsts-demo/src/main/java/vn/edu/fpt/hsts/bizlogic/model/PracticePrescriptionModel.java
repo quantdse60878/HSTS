@@ -7,11 +7,11 @@ public class PracticePrescriptionModel {
     /**
      * Practice
      */
-    private String p;
+    private int p;
     /**
      * Practice Time
      */
-    private String pTime;
+    private int pTime;
     /**
      * Practice Intensity
      */
@@ -24,26 +24,26 @@ public class PracticePrescriptionModel {
     public PracticePrescriptionModel() {
     }
 
-    public PracticePrescriptionModel(String p, String pTime, String pIntensity, String pNote) {
+    public PracticePrescriptionModel(int p, int pTime, String pIntensity, String pNote) {
         this.p = p;
         this.pTime = pTime;
         this.pIntensity = pIntensity;
         this.pNote = pNote;
     }
 
-    public String getP() {
+    public int getP() {
         return p;
     }
 
-    public void setP(String p) {
+    public void setP(int p) {
         this.p = p;
     }
 
-    public String getpTime() {
+    public int getpTime() {
         return pTime;
     }
 
-    public void setpTime(String pTime) {
+    public void setpTime(int pTime) {
         this.pTime = pTime;
     }
 

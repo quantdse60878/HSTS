@@ -7,11 +7,11 @@ public class MedicinePrescriptionModel {
     /**
      * Medicine
      */
-    private String m;
+    private int m;
     /**
      * Medicine Time
      */
-    private String mTime;
+    private int mTime;
     /**
      * Medicine Quantity
      */
@@ -24,26 +24,26 @@ public class MedicinePrescriptionModel {
     public MedicinePrescriptionModel() {
     }
 
-    public MedicinePrescriptionModel(String m, String mTime, String mQuantity, String mNote) {
+    public MedicinePrescriptionModel(int m, int mTime, String mQuantity, String mNote) {
         this.m = m;
         this.mTime = mTime;
         this.mQuantity = mQuantity;
         this.mNote = mNote;
     }
 
-    public String getM() {
+    public int getM() {
         return m;
     }
 
-    public void setM(String m) {
+    public void setM(int m) {
         this.m = m;
     }
 
-    public String getmTime() {
+    public int getmTime() {
         return mTime;
     }
 
-    public void setmTime(String mTime) {
+    public void setmTime(int mTime) {
         this.mTime = mTime;
     }
 

@@ -101,11 +101,12 @@ public class TreatmentService {
                     foodTreatmentModels.add(item);
                 }
                 List<PracticeTreatment> practiceTreatments = practiceTreatmentRepo.findPracticeTreatmentByTreatmentId(treatment.getId());
-                for(int j = 0; j < practiceTreatments.size(); j++) {
-                    PracticeTreatment pItem = practiceTreatments.get(j);
-                    PracticeTreatmentModel item = new PracticeTreatmentModel(pItem.getPractice().getName(), pItem.getTimeDuration(), pItem.getAdvice(), pItem.getNumberOfTime());
-                    practiceTreatmentModels.add(item);
-                }
+                // TODO change entity, comment code -> check again
+//                for(int j = 0; j < practiceTreatments.size(); j++) {
+//                    PracticeTreatment pItem = practiceTreatments.get(j);
+//                    PracticeTreatmentModel item = new PracticeTreatmentModel(pItem.getPractice().getName(), pItem.getTimeDuration(), pItem.getAdvice(), pItem.getNumberOfTime());
+//                    practiceTreatmentModels.add(item);
+//                }
                 treatmentOfPatient.setListFoodTreatment(foodTreatmentModels);
                 treatmentOfPatient.setListMedicineTreatment(medicineTreatmentModels);
                 treatmentOfPatient.setListPracticeTreatment(practiceTreatmentModels);
