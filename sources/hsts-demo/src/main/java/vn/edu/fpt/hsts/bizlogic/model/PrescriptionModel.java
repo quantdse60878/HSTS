@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class PrescriptionModel {
     private String diagnostic;
+    private String kcalRequire;
     private MedicinePrescriptionModel mPresModel;
     private FoodPrescriptionModel fPresModel;
     private PracticePrescriptionModel pPresModel;
@@ -15,10 +16,12 @@ public class PrescriptionModel {
     }
 
     public PrescriptionModel(String diagnostic,
+                             String kcalRequire,
                              MedicinePrescriptionModel mPresModel,
                              FoodPrescriptionModel fPresModel,
                              PracticePrescriptionModel pPresModel) {
         this.diagnostic = diagnostic;
+        this.kcalRequire = kcalRequire;
         this.mPresModel = mPresModel;
         this.fPresModel = fPresModel;
         this.pPresModel = pPresModel;
@@ -56,10 +59,19 @@ public class PrescriptionModel {
         this.pPresModel = pPresModel;
     }
 
+    public String getKcalRequire() {
+        return kcalRequire;
+    }
+
+    public void setKcalRequire(String kcalRequire) {
+        this.kcalRequire = kcalRequire;
+    }
+
     @Override
     public String toString() {
         return "PrescriptionModel{" +
                 "diagnostic='" + diagnostic + '\'' +
+                ", kcalRequire='" + kcalRequire + '\'' +
                 ", mPresModel=" + mPresModel +
                 ", fPresModel=" + fPresModel +
                 ", pPresModel=" + pPresModel +
