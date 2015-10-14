@@ -8,23 +8,24 @@ import java.util.List;
 public class PrescriptionModel {
     private String diagnostic;
     private String kcalRequire;
-    private MedicinePrescriptionModel mPresModel;
-    private FoodPrescriptionModel fPresModel;
-    private PracticePrescriptionModel pPresModel;
+    private List<MedicinePrescriptionModel> mPresModels;
+    private List<FoodPrescriptionModel> fPresModels;
+    private List<PracticePrescriptionModel> pPresModels;
+
 
     public PrescriptionModel() {
     }
 
     public PrescriptionModel(String diagnostic,
                              String kcalRequire,
-                             MedicinePrescriptionModel mPresModel,
-                             FoodPrescriptionModel fPresModel,
-                             PracticePrescriptionModel pPresModel) {
+                             List<MedicinePrescriptionModel> mPresModels,
+                             List<FoodPrescriptionModel> fPresModels,
+                             List<PracticePrescriptionModel> pPresModels) {
         this.diagnostic = diagnostic;
         this.kcalRequire = kcalRequire;
-        this.mPresModel = mPresModel;
-        this.fPresModel = fPresModel;
-        this.pPresModel = pPresModel;
+        this.mPresModels = mPresModels;
+        this.fPresModels = fPresModels;
+        this.pPresModels = pPresModels;
     }
 
     public String getDiagnostic() {
@@ -35,30 +36,6 @@ public class PrescriptionModel {
         this.diagnostic = diagnostic;
     }
 
-    public MedicinePrescriptionModel getmPresModel() {
-        return mPresModel;
-    }
-
-    public void setmPresModel(MedicinePrescriptionModel mPresModel) {
-        this.mPresModel = mPresModel;
-    }
-
-    public FoodPrescriptionModel getfPresModel() {
-        return fPresModel;
-    }
-
-    public void setfPresModel(FoodPrescriptionModel fPresModel) {
-        this.fPresModel = fPresModel;
-    }
-
-    public PracticePrescriptionModel getpPresModel() {
-        return pPresModel;
-    }
-
-    public void setpPresModel(PracticePrescriptionModel pPresModel) {
-        this.pPresModel = pPresModel;
-    }
-
     public String getKcalRequire() {
         return kcalRequire;
     }
@@ -67,14 +44,38 @@ public class PrescriptionModel {
         this.kcalRequire = kcalRequire;
     }
 
+    public List<MedicinePrescriptionModel> getmPresModels() {
+        return mPresModels;
+    }
+
+    public void setmPresModels(List<MedicinePrescriptionModel> mPresModels) {
+        this.mPresModels = mPresModels;
+    }
+
+    public List<FoodPrescriptionModel> getfPresModels() {
+        return fPresModels;
+    }
+
+    public void setfPresModels(List<FoodPrescriptionModel> fPresModels) {
+        this.fPresModels = fPresModels;
+    }
+
+    public List<PracticePrescriptionModel> getpPresModels() {
+        return pPresModels;
+    }
+
+    public void setpPresModels(List<PracticePrescriptionModel> pPresModels) {
+        this.pPresModels = pPresModels;
+    }
+
     @Override
     public String toString() {
         return "PrescriptionModel{" +
                 "diagnostic='" + diagnostic + '\'' +
                 ", kcalRequire='" + kcalRequire + '\'' +
-                ", mPresModel=" + mPresModel +
-                ", fPresModel=" + fPresModel +
-                ", pPresModel=" + pPresModel +
+                ", mPresModels=" + mPresModels +
+                ", fPresModels=" + fPresModels +
+                ", pPresModels=" + pPresModels +
                 '}';
     }
 }

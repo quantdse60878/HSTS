@@ -15,22 +15,22 @@
     <tr>
         <td>1</td>
         <td>
-            <select class="form-control" th:field="*{fPresModel.f}">
+            <select class="form-control" th:field="*{fPresModels[0].f}">
                 <option th:each="food : ${FOODS}" th:value="${food.id}"
                         th:text="${food.name}"></option>
             </select>
         </td>
         <td>
-            <select class="form-control" th:field="*{fPresModel.fTime}">
+            <select class="form-control" th:field="*{fPresModels[0].fTime}">
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
         </td>
-        <td><input type="text" class="form-control" th:field="*{fPresModel.fQuantity}"
+        <td><input type="text" class="form-control" th:field="*{fPresModels[0].fQuantity}"
                    placeholder="Quantity"/></td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{fPresModel.fNote}" placeholder="Advice"/>
+                   th:field="*{fPresModels[0].fNote}" placeholder="Advice"/>
         </td>
     </tr>
 </table>

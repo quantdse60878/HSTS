@@ -17,7 +17,7 @@
     <tr th:each="medicalPhase,row : ${PHASE.medicinePhaseList}">
         <td th:text="${row.count}"></td>
         <td>
-            <select class="form-control" th:field="*{mPresModel.m}">
+            <select class="form-control" th:field="*{mPresModels[__${row.index}__].m}">
                 <option th:value="${medicalPhase.medicine.id}"
                         th:text="${medicalPhase.medicine.name}"></option>
                 <option th:each="medicine : ${MEDICINES}"
@@ -26,16 +26,16 @@
                         th:if="${medicalPhase.medicine.id != medicine.id}"></option>
             </select>
         </td>
-        <td><select class="form-control" th:field="*{mPresModel.mTime}">
+        <td><select class="form-control" th:field="*{mPresModels[__${row.index}__].mTime}">
             <option th:each="time : ${TIMES}" th:value="${time}"
                     th:text="${time}"></option>
         </select>
         </td>
-        <td><input type="text" class="form-control" th:field="*{mPresModel.mQuantity}"
+        <td><input type="text" class="form-control" th:field="*{mPresModels[__${row.index}__].mQuantity}"
                    placeholder="Quanlity"/></td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{mPresModel.mNote}" placeholder="Advice"/>
+                   th:field="*{mPresModels[__${row.index}__].mNote}" placeholder="Advice"/>
         </td>
     </tr>
 

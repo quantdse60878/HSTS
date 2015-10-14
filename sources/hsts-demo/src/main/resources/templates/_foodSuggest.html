@@ -16,7 +16,7 @@
     <tr th:each="foodPhase,row : ${PHASE.foodPhaseList}">
         <td th:text="${row.count}"></td>
         <td>
-            <select class="form-control" th:field="*{fPresModel.f}">
+            <select class="form-control" th:field="*{fPresModels[__${row.index}__].f}">
                 <option th:value="${foodPhase.food.id}"
                         th:text="${foodPhase.food.name}"></option>
                 <option th:each="food : ${FOODS}"
@@ -26,16 +26,16 @@
             </select>
         </td>
         <td>
-            <select class="form-control" th:field="*{fPresModel.fTime}">
+            <select class="form-control" th:field="*{fPresModels[__${row.index}__].fTime}">
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
         </td>
-        <td><input type="text" class="form-control" th:field="*{fPresModel.fQuantity}"
+        <td><input type="text" class="form-control" th:field="*{fPresModels[__${row.index}__].fQuantity}"
                    placeholder="Quantity"/></td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{fPresModel.fNote}" placeholder="Advice"/>
+                   th:field="*{fPresModels[__${row.index}__].fNote}" placeholder="Advice"/>
         </td>
     </tr>
 </table>

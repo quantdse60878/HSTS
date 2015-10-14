@@ -16,22 +16,22 @@
     <tr>
         <td>1</td>
         <td>
-            <select class="form-control" th:field="*{mPresModel.m}">
+            <select class="form-control" th:field="*{mPresModels[0].m}">
 
                 <option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"
                         th:text="${medicine.name}"></option>
             </select>
         </td>
-        <td><select class="form-control" th:field="*{mPresModel.mTime}">
+        <td><select class="form-control" th:field="*{mPresModels[0].mTime}">
             <option th:each="time : ${TIMES}" th:value="${time}"
                     th:text="${time}"></option>
         </select>
         </td>
-        <td><input type="text" class="form-control" th:field="*{mPresModel.mQuantity}"
+        <td><input type="text" class="form-control" th:field="*{mPresModels[0].mQuantity}"
                    placeholder="Quanlity"/></td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{mPresModel.mNote}" placeholder="Advice"/>
+                   th:field="*{mPresModels[0].mNote}" placeholder="Advice"/>
         </td>
     </tr>
 

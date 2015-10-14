@@ -15,22 +15,22 @@
     <tr>
         <td>1</td>
         <td>
-            <select class="form-control" th:field="*{pPresModel.p}">
+            <select class="form-control" th:field="*{pPresModels[0].p}">
                 <option th:each="practice : ${PRACTICES}" th:value="${practice.id}"
                         th:text="${practice.name}"></option>
             </select>
         </td>
         <td>
-            <select class="form-control" th:field="*{pPresModel.pTime}">
+            <select class="form-control" th:field="*{pPresModels[0].pTime}">
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
         </td>
-        <td><input type="text" class="form-control" th:field="*{pPresModel.pIntensity}"
+        <td><input type="text" class="form-control" th:field="*{pPresModels[0].pIntensity}"
                    placeholder="Quantity"/></td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{pPresModel.pNote}" placeholder="Advice"/>
+                   th:field="*{pPresModels[0].pNote}" placeholder="Advice"/>
         </td>
     </tr>
 </table>
