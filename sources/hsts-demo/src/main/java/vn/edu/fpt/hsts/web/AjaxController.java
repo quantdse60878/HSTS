@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.NotifyWebPageModel;
+import vn.edu.fpt.hsts.bizlogic.model.WebNotifyModel;
 import vn.edu.fpt.hsts.bizlogic.service.NotifyService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
@@ -26,12 +28,13 @@ public class AjaxController {
 
     @RequestMapping(value = "notifyWeb", method = RequestMethod.GET)
     @ResponseBody
-    public String notifyAjax() {
+    public NotifyWebPageModel notifyAjax() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            String json = "test";
-
-            return json;
+            NotifyWebPageModel pageModel = new NotifyWebPageModel();
+            pageModel.setData(WebNotifyModel.testData());
+            pageModel.setSize(pageModel.getData().size());
+            return pageModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

@@ -10,6 +10,7 @@ package vn.edu.fpt.hsts.bizlogic.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPrescriptionModel;
@@ -46,6 +47,7 @@ import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -124,6 +126,9 @@ public class DoctorService extends AbstractService {
     @Autowired
     private PracticeRepo practiceRepo;
 
+    @Value("${hsts.default.treatment.long}")
+    private int treatmentLong;
+
     public List<DoctorModel> findAll() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
@@ -161,6 +166,13 @@ public class DoctorService extends AbstractService {
             }
             appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
             Date toDate = null;
+            final MedicalRecord medicalRecord = appointment.getMedicalRecord();
+            final String dianostic = prescription.getDiagnostic();
+            if (null != dianostic) {
+                final Illness illness = illnessRepo.findOne(Integer.parseInt(dianostic));
+                medicalRecord.setIllness(illness);
+            }
+            medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.ON_TREATING);
             if (StringUtils.isNotEmpty(appointmentDate)) {
                 toDate = DateUtils.parseDate(appointmentDate, DateUtils.DATE_PATTERN_3);
                 if (null == toDate) {
@@ -176,22 +188,13 @@ public class DoctorService extends AbstractService {
 
                 // Set old appointment link to new appointment
                 appointment.setNextAppointment(nextAppointment);
-
             } else {
                 // Finish medical record
-                final MedicalRecord medicalRecord = appointment.getMedicalRecord();
                 medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
                 medicalRecord.setEndTime(new Date());
-                final String dianostic = prescription.getDiagnostic();
-                if (null != dianostic) {
-                   final Illness illness = illnessRepo.findOne(Integer.parseInt(dianostic));
-                    medicalRecord.setIllness(illness);
-                }
-
-                medicalRecordRepo.saveAndFlush(medicalRecord);
-
             }
 
+            medicalRecordRepo.saveAndFlush(medicalRecord);
             appointmentRepo.save(appointment);
 
             // Set old treatment to DONE
@@ -212,9 +215,13 @@ public class DoctorService extends AbstractService {
                 newTreatment.setAppointment(appointment);
                 newTreatment.setFromDate(new Date());
                 if (null != toDate) {
+                    // Set toDate = appointmentDate
+                    newTreatment.setToDate(toDate);
+                } else {
+                    // Set todate to next 7 day, note that UI should be check
+                    toDate = DateUtils.plusDateTime(toDate, Calendar.DATE, treatmentLong);
                     newTreatment.setToDate(toDate);
                 }
-                newTreatment.setToDate(new Date());
                 treatmentRepo.save(newTreatment);
 
                 // TODO implement for medicine, food, practice and multiple row
