@@ -91,8 +91,9 @@ public class TreatmentService {
                 List<MedicineTreatment> medicineTreatment = medicineTreatmentRepo.findMedicineTreatmentByTreatmentId(treatment.getId());
                 for(int j = 0; j < medicineTreatment.size(); j++) {
                     MedicineTreatment mItem = medicineTreatment.get(j);
-                    MedicineTreatmentModel item = new MedicineTreatmentModel(mItem.getMedicine().getName(), mItem.getQuantitative(), mItem.getAdvice(), mItem.getNumberOfTime());
-                    medicineTreatmentModels.add(item);
+                    // TODO change entity, comment code -> check again
+//                    MedicineTreatmentModel item = new MedicineTreatmentModel(mItem.getMedicine().getName(), mItem.getQuantitative(), mItem.getAdvice(), mItem.getNumberOfTime());
+//                    medicineTreatmentModels.add(item);
                 }
                 List<FoodTreatment> foodTreatments = foodTreatmentRepo.findFoodTreatmentTreatmentId(treatment.getId());
                 for(int j = 0; j < foodTreatments.size(); j++) {
