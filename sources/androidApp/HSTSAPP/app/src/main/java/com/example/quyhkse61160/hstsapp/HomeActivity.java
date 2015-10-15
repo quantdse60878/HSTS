@@ -222,7 +222,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home2);
 
-
         mTitle = mDrawerTitle = getTitle();
 
         // load slide menu items
@@ -243,26 +242,26 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         // Home
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
         // Food
-        boolean hasFood = true;
-        boolean hasMedicine = true;
-        boolean hasPractice = true;
-//        for(Treatment treatment : Constant.TREATMENTS){
-//            for (ToDoTime time : treatment.getListFoodTreatment()) {
-//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
-//                    hasFood = true;
-//                }
-//            }
-//            for (ToDoTime time : treatment.getListMedicineTreatment()) {
-//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
-//                    hasMedicine = true;
-//                }
-//            }
-//            for (ToDoTime time : treatment.getListPracticeTreatment()) {
-//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
-//                    hasPractice = true;
-//                }
-//            }
-//        }
+        boolean hasFood = false;
+        boolean hasMedicine = false;
+        boolean hasPractice = false;
+        for(Treatment treatment : Constant.TREATMENTS){
+            for (ToDoTime time : treatment.getListFoodTreatment()) {
+                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+                    hasFood = true;
+                }
+            }
+            for (ToDoTime time : treatment.getListMedicineTreatment()) {
+                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+                    hasMedicine = true;
+                }
+            }
+            for (ToDoTime time : treatment.getListPracticeTreatment()) {
+                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+                    hasPractice = true;
+                }
+            }
+        }
 
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), hasFood));
         // Medicines
@@ -457,9 +456,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             hadRegisterReceiver = true;
             registerReceiver(mConnectionDetector, mIntentFilter);
         }
-
-
-//        Constant.TREATMENTS = Constant.getItems();
 
         //Set Alarm
 //        amountTime = amountTime();

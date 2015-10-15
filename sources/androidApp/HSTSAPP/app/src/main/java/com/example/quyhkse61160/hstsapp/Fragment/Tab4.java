@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class Tab4 extends Fragment {
 
     LinearLayout food, medicine, practice;
-    TextView ill, fromDate, nextApp;
+    TextView name, ill, fromDate, nextApp;
 
     public Tab4() {
         // Required empty public constructor
@@ -38,14 +38,16 @@ public class Tab4 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.home_fragment_tab_4, container, false);
+
+        name = (TextView) v.findViewById(R.id.notice_patient_name);
         ill = (TextView) v.findViewById(R.id.notice_illness_name);
         fromDate = (TextView) v.findViewById(R.id.notice_from_date);
         nextApp = (TextView) v.findViewById(R.id.notice_next_appointment);
 
-//        ill.setText(Constant.TREATMENTS.get(0).getIllnessName());
-//        toDate.setText(Constant.TREATMENTS.get(0).getToDate().split(" ")[0]);
-//        fromDate.setText(Constant.TREATMENTS.get(0).getFromDate().split(" ")[0]);
-//        nextApp.setText(Constant.TREATMENTS.get(0).getNextAppointment().split(" ")[0]);
+        name.setText(Constant.PATIENT_NAME);
+        ill.setText(Constant.TREATMENTS.get(0).getIllnessName());
+        fromDate.setText(Constant.TREATMENTS.get(0).getFromDate().split(" ")[0]);
+        nextApp.setText(Constant.TREATMENTS.get(0).getNextAppointment().split(" ")[0]);
 
 
         food = (LinearLayout) v.findViewById(R.id.btn_foods);

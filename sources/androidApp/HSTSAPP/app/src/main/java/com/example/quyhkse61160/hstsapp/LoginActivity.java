@@ -185,6 +185,7 @@ public class LoginActivity extends ActionBarActivity {
                 try {
                     JSONObject patientObject = new JSONObject(response);
                     Constant.accountId = patientObject.getString("accountId");
+                    Constant.PATIENT_NAME = patientObject.getString("fullname");
                     Constant.patientId = patientObject.getString("patientId");
                     Log.d("QUYYY111", "Benh nhan: " + "Account: " + Constant.accountId + " Patient: " + Constant.patientId);
                 } catch (JSONException e) {

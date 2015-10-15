@@ -44,6 +44,7 @@ public class Constant {
     public static String FOOD_FROM_JSON = "listFoodTreatment";
     public static String MEDICINE_FROM_JSON = "listMedicineTreatment";
     public static String PRACTICE_FROM_JSON = "listPracticeTreatment";
+    public static String PATIENT_NAME = "";
 
 
     public static List<Treatment> getItems() {
@@ -59,7 +60,6 @@ public class Constant {
                 treatment.setAdviseFood(jsonArray.getJSONObject(i).getString("adviseFood"));
                 treatment.setAdviseMedicine(jsonArray.getJSONObject(i).getString("adviseMedicine"));
                 treatment.setAdvicePractice(jsonArray.getJSONObject(i).getString("advicePractice"));
-
                 treatment.setListFoodTreatment(Constant.getInfoTreatment(jsonArray.getJSONObject(i).getJSONArray(Constant.FOOD_FROM_JSON)
                         , Constant.FOOD_FROM_JSON));
                 treatment.setListMedicineTreatment(Constant.getInfoTreatment(jsonArray.getJSONObject(i).getJSONArray(Constant.MEDICINE_FROM_JSON)
