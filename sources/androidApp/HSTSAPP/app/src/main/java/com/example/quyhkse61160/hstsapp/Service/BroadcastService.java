@@ -78,7 +78,7 @@ public class BroadcastService extends Service {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-
+                    BroadcastService.flag = true;
                     checkNotify();
                     Calendar c = Calendar.getInstance();
                     Calendar c1 = Calendar.getInstance();
@@ -197,29 +197,13 @@ public class BroadcastService extends Service {
 //                        Su dung private folder
                     }
 
-                    //Khuong ve nha code cho nay bo alarm thay bang kiem tra thoi gian trong list time. Neu trung thi hien nhu binh thuong
+<<<<<<< .mine                //Khuong ve nha code cho nay bo alarm thay bang kiem tra thoi gian trong list time. Neu trung thi hien nhu binh thuong
+                for(String time : HomeActivity.amountTime)
+=======                    //Khuong ve nha code cho nay bo alarm thay bang kiem tra thoi gian trong list time. Neu trung thi hien nhu binh thuong
                     for (
                             String time
                             : HomeActivity.amountTime)
-
-                    {
-                        Calendar c2 = Calendar.getInstance();
-                        c2.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.split(":")[0]));
-                        c2.set(Calendar.MINUTE, Integer.parseInt(time.split(":")[1]));
-                        if (c2.getTime().getHours() == c.getTime().getHours()
-                                && c2.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
-                            final Context context = getApplicationContext();
-                            if (BroadcastService.flag) {
-                                BroadcastService.flag = false;
-                                Intent in = new Intent(context, HomeActivity.class);
-                                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                in.putExtra("openDialogForMe", Boolean.TRUE);
-                                if (c2.getTime().getHours() < 10)
-                                    HomeActivity.timeAlert = "0" + c2.getTime().getHours() + ":00";
-                                else HomeActivity.timeAlert = c2.getTime().getHours() + ":00";
-                                context.startActivity(in);
-                            }
-
+>>>>>>> .theirs
                         }
                     }
 
