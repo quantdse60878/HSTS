@@ -26,16 +26,16 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="active treeview" th:if="${session.USER.role.name == 'Nurse'}">
                 <a href="#">
                     <i class="fa fa-user-md"></i> <span>Nurse</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li class="active"><a href="registerPatient"><i class="fa fa-circle-o"></i> Register Patient</a></li>
-                    <li><a href="searchPatient"><i class="fa fa-circle-o"></i> Update Patient</a></li>
+                    <li><a href="searchPatient"><i class="fa fa-circle-o"></i> Patients</a></li>
                 </ul>
             </li>
-            <li class="active treeview">
+            <li class="active treeview" th:if="${session.USER.role.name == 'Doctor'}">
                 <a href="#">
                     <i class="fa fa-stethoscope"></i>
                     <span>Doctor</span>
@@ -46,14 +46,26 @@
                     <li><a href="medicalRecord"><i class="fa fa-circle-o"></i> Medical Record</a></li>
                 </ul>
             </li>
-            <li class="active treeview">
+            <li class="active treeview" th:if="${session.USER.role.name == 'Doctor Manager'}">
+                <a href="#">
+                    <i class="fa fa-stethoscope"></i>
+                    <span>Manager Doctor</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Register Regimen</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Edit Regimen</a></li>
+                </ul>
+            </li>
+            <li class="active treeview" th:if="${session.USER.role.name == 'Admin'}">
                 <a href="#">
                     <i class="fa  fa-user-plus"></i>
                     <span>Admin</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Staffs</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Register Account</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Edit Account</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

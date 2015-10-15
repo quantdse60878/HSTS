@@ -347,7 +347,9 @@
     </div>
     <!-- /.popupConfirm -->
     <!-- / POPUP-->
-
+    <input th:value="${MEDICS}" id="medics" type="hidden"/>
+    <input th:value="${FOS}" id="fos" type="hidden"/>
+    <input th:value="${PRACS}" id="pracs" type="hidden"/>
     <!-- REQUIRED JS SCRIPTS -->
     <!-- jQueryUI -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
@@ -355,6 +357,8 @@
     <!-- Multi select -->
     <script th:src="@{/static/bower/bootstrap-multiselect/dist/js/bootstrap-multiselect.js}"></script>
     <script th:src="@{/static/js/prettify.js}"></script>
+    <!-- DataTable -->
+    <script th:src="@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
@@ -370,7 +374,8 @@
             changeYear: true,
         });
 
-        var countMedicine = 2;
+        var countMedicine = $('#medics').val();
+//        alert(countMedicine);
         function addRowMedicine(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
@@ -379,26 +384,26 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = countMedicine;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<select class="form-control" name="mPresModel.m" id="mPresModel.m">'
+            newCell.innerHTML = '<select class="form-control" name="mPresModels['+countMedicine+'].m" id="mPresModels'+countMedicine+'.m">'
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<select class="form-control" name="mPresModel.mTime" id="mPresModel.mTime">'
+            newCell.innerHTML = '<select class="form-control" name="mPresModels['+countMedicine+'].mTime" id="mPresModels'+countMedicine+'.mTime">'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="mPresModel.mQuantity" id="mPresModel.mQuantity" placeholder="Quanlity"/>';
+                    '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mQuantity" id="mPresModels'+countMedicine+'.mQuantity" placeholder="Quanlity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="mPresModel.mNote" id="mPresModel.mNote" placeholder="Advice"/>';
+                    '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mNote" id="mPresModels'+countMedicine+'.mNote" placeholder="Advice"/>';
 
             countMedicine++;
             return newRow;
         }
         ;
 
-        var countFoods = 2;
+        var countFoods = $('#fos').val();
         function addRowFoods(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
@@ -407,24 +412,24 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = countFoods;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<select class="form-control" name="fPresModel.f" id="fPresModel.f">'
+            newCell.innerHTML = '<select class="form-control" name="fPresModels['+countFoods+'].f" id="fPresModels'+countFoods+'.f">'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<select class="form-control" name="fPresModel.fTime" id="fPresModel.fTime">'
+                    '<select class="form-control" name="fPresModels['+countFoods+'].fTime" id="fPresModels'+countFoods+'.fTime">'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModel.fQuantity" id="fPresModel.fQuantity" placeholder="Quantity"/>';
+            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels['+countFoods+'].fQuantity" id="fPresModels'+countFoods+'.fQuantity" placeholder="Quantity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModel.fNote" id="fPresModel.fNote" placeholder="Advice"/>';
+            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels['+countFoods+'].fNote" id="fPresModels'+countFoods+'.fNote" placeholder="Advice"/>';
 
             countFoods++;
             return newRow;
         }
         ;
-        var countPractice = 2;
+        var countPractice = $('#pracs').val();
         function addRowPractice(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
@@ -433,20 +438,20 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = countPractice;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<select class="form-control" name="pPresModel.p" id="pPresModel.p">'
+            newCell.innerHTML = '<select class="form-control" name="pPresModels['+countPractice+'].p" id="pPresModels'+countPractice+'.p">'
                     + '<option th:each="practice : ${PRACTICES}" th:value="${practice.id}" th:text="${practice.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<select class="form-control" name="pPresModel.pTime" id="pPresModel.pTime">'
+                    '<select class="form-control" name="pPresModels['+countPractice+'].pTime" id="pPresModels'+countPractice+'.pTime">'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" placeholder="Quantity" name="pPresModel.pIntensity" id="pPresModel.pIntensity"/>';
+                    '<input type="text" class="form-control" placeholder="Quantity" name="pPresModels['+countPractice+'].pIntensity" id="pPresModels'+countPractice+'.pIntensity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="pPresModel.pNote" id="pPresModel.pNote" placeholder="Advice"/>';
+                    '<input type="text" class="form-control" name="pPresModels['+countPractice+'].pNote" id="pPresModels'+countPractice+'.pNote" placeholder="Advice"/>';
 
             countPractice++;
             return newRow;
