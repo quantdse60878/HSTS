@@ -1,12 +1,19 @@
 package vn.edu.fpt.hsts.bizlogic.service;
 
+import net.sf.jasperreports.engine.JRException;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import sun.util.resources.CalendarData_sr_Latn_RS;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
+import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
+import vn.edu.fpt.hsts.bizlogic.model.prescription.PrescriptionWrapperModel;
+import vn.edu.fpt.hsts.bizlogic.model.prescription.PrintingMedicineModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -17,9 +24,11 @@ import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
+import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Notify;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.Role;
+import vn.edu.fpt.hsts.persistence.entity.Treatment;
 import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
 import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
@@ -29,8 +38,14 @@ import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
 import vn.edu.fpt.hsts.persistence.repo.NotifyRepo;
 import vn.edu.fpt.hsts.persistence.repo.PatientRepo;
 import vn.edu.fpt.hsts.persistence.repo.RoleRepo;
+import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -113,6 +128,13 @@ public class PatientService extends AbstractService {
      */
     @Autowired
     private NotifyRepo notifyRepo;
+
+    /**
+     * The {@link TreatmentRepo}.
+     */
+    @Autowired
+    private TreatmentRepo treatmentRepo;
+
 
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -413,6 +435,67 @@ public class PatientService extends AbstractService {
             }
             PatientExtendedPageModel pageModel = new PatientExtendedPageModel(pageEntitties);
             return pageModel;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public void print(final int patientId, final HttpServletResponse response) throws BizlogicException, IOException, JRException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            // Find last prescription with patient id
+            Patient patient = patientRepo.findOne(patientId);
+            if (null == patient) {
+                throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
+            }
+
+            final Treatment lastTreatment = treatmentRepo.findLastTreatmenByPatientId(patientId, IDbConsts.ITreatmentStatus.ON_TREATING);
+            if(null == lastTreatment) {
+                throw new BizlogicException("Last treatment with patientId[{}] is not found", null, patientId);
+            }
+            final List<MedicineTreatment> medicineTreatments = lastTreatment.getMedicineTreatmentList();
+            List<PrintingMedicineModel> listMedicine = new ArrayList<PrintingMedicineModel>();
+
+            DateTime dt1 = new DateTime(lastTreatment.getFromDate());
+            DateTime dt2 = new DateTime(lastTreatment.getToDate());
+
+            int numberOfDay = Days.daysBetween(dt1, dt2).getDays();
+            if (null != medicineTreatments) {
+                int count = 1;
+                for (MedicineTreatment mt: medicineTreatments) {
+                    PrintingMedicineModel model = new PrintingMedicineModel();
+                    model.setNumber(String.valueOf(count++));
+                    model.setMedicineName(mt.getMedicine().getName());
+                    int qty = numberOfDay * mt.getNumberOfTime() * mt.getQuantitative();
+                    model.setQty(String.valueOf(qty));
+                    model.setUnit(mt.getUnit());
+                    String usage = "Ngày uống " + mt.getNumberOfTime() + " lần, mỗi lần " + mt.getQuantitative() + " " + mt.getUnit();
+                    model.setUsage(usage);
+                    listMedicine.add(model);
+                }
+            }
+            final MedicineListWraper wraper = new MedicineListWraper();
+            wraper.setItems(listMedicine);
+
+            final PrescriptionWrapperModel prescription = new PrescriptionWrapperModel();
+            prescription.setPatientName(patient.getAccount().getFullName());
+            prescription.setBirthday(DateUtils.formatDate(patient.getAccount().getDateOfBirth(), DateUtils.DATE_PATTERN_3));
+            String diagnose = lastTreatment.getAppointment().getMedicalRecord().getIllness().getDescription();
+            prescription.setDiagnose(diagnose);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            final String address = "TP. Hồ Chí Minh ngày " + calendar.get(Calendar.DATE) + " tháng " + calendar.get(Calendar.MONTH) + " năm " + calendar.get(Calendar.YEAR);
+            prescription.setAddress(address);
+            // TODO
+            prescription.setAdvice(lastTreatment.getAdviseMedicine());
+            final String appointmentDate = DateUtils.formatDate(lastTreatment.getAppointment().getNextAppointment().getMeetingDate(), DateUtils.DATE_PATTERN_3);
+            prescription.setAppointmentDate(appointmentDate);
+            prescription.setDoctorName(lastTreatment.getAppointment().getMedicalRecord().getDoctor().getAccount().getFullName());
+            prescription.setTableData(wraper);
+
+            final OutputStream out = response.getOutputStream();
+            prescription.toPdf(out);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

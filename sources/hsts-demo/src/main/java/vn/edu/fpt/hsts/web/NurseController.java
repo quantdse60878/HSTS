@@ -7,6 +7,7 @@
  */
 package vn.edu.fpt.hsts.web;
 
+import net.sf.jasperreports.engine.JRException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.criteria.PatientCriteria;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -202,6 +207,24 @@ public class NurseController extends AbstractController {
             notify(mav, true, "Update Patient's Profile", "Success");
 
             return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/print", method = RequestMethod.GET)
+    @ResponseBody
+    public void printPrescription(@RequestParam("patientId") final int patientId,
+            final HttpServletResponse response) throws IOException, BizlogicException, JRException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId", patientId);
+            //TODO re-format filename
+            Date toDayTime = new Date();
+            String timeDownload = toDayTime.getTime() + "";
+            response.setHeader("Content-disposition", "attachment; filename="
+                    + "Don-thuoc" + timeDownload + ".pdf");
+            patientService.print(patientId, response);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
