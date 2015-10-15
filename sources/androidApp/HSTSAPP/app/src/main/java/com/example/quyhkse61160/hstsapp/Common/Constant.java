@@ -13,8 +13,8 @@ import java.util.UUID;
 
 public class Constant {
     //All constant of call api
-    public static final String hostURL = "http://192.168.176.1:8080";
-    public static final String loginMethod = "/login";
+    public static final String hostURL = "http://192.168.34.1:8080";
+    public static final String loginMethod = "/loginMobile";
     public static final String checkNotifyMethod = "/notify";
     public static final String getTreatment = "/getTreatment";
     public static final String sendMedicalData = "/sendMedicalData";

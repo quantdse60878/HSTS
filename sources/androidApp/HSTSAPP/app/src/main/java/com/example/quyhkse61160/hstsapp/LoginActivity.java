@@ -100,7 +100,6 @@ public class LoginActivity extends ActionBarActivity {
         String dateString = df.format(date).replaceAll("/", "");
         String FILENAME = "hakimquy" + ".txt";
 
-        Log.e("QUY", "------------------2222222222222-------------");
         File root = Environment.getExternalStorageDirectory();
         File dir = new File(root.getAbsolutePath() + "/kimquy");
         dir.mkdirs();
@@ -117,7 +116,6 @@ public class LoginActivity extends ActionBarActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d("QUY", "------------------111111111111111-------------");
 
 
     }
