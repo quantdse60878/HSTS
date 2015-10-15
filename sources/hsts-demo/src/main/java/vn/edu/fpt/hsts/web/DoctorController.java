@@ -7,12 +7,15 @@ package vn.edu.fpt.hsts.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
@@ -145,7 +148,9 @@ public class DoctorController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
 
             mav.addObject("APPOINTMENT", appointment);
-
+            mav.addObject("MEDICS",  1);
+            mav.addObject("FOS", 1);
+            mav.addObject("PRACS", 1);
             // Initialization Data Prescription
             initDataPrescription(mav);
 
@@ -181,6 +186,9 @@ public class DoctorController extends AbstractController{
                 notify(mav, false, "Fail", "No regimen for suggest treatment");
             }
 
+            mav.addObject("MEDICS", phase.getMedicinePhaseList().size() + 1);
+            mav.addObject("FOS", phase.getFoodPhaseList().size() + 1);
+            mav.addObject("PRACS", phase.getPracticePhaseList().size() + 1);
             // Find illness form diagnostic
             Illness illness = illnessService.findByID(diagnostic);
             mav.addObject("DIAGNOSTIC", illness);
@@ -221,6 +229,9 @@ public class DoctorController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
             LOGGER.info("APPOINTMENTlist : " + appointment.getMedicalRecord().getAppointmentList().size());
+            mav.addObject("MEDICS",  1);
+            mav.addObject("FOS", 1);
+            mav.addObject("PRACS", 1);
             // Create notify
             notify(mav, true, "Make Prescription", "Success");
             return mav;
@@ -294,11 +305,25 @@ public class DoctorController extends AbstractController{
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
-            mav.setViewName("doctorPatients");
-            List<Patient> patientList = patientService.getPatientByApponitmentDate();
-            LOGGER.info("listpatiens: " + patientList.size());
-            mav.addObject("LISTPATIENTS", patientList);
+            mav.setViewName("suggestTreatment");
+
+            // Find Appointment
+            Appointment appointment = appointmentService.findAppointmentByID(23);
+            mav.addObject("APPOINTMENT", appointment);
+            mav.addObject("model", new PrescriptionModel());
+
             return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "medicineList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public PatientExtendedPageModel medicineList() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return null;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
