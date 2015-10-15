@@ -474,6 +474,7 @@ public class PatientService extends AbstractService {
                     listMedicine.add(model);
                 }
             }
+            LOGGER.info("sIZE: " + listMedicine.size());
             final MedicineListWraper wraper = new MedicineListWraper();
             wraper.setItems(listMedicine);
 

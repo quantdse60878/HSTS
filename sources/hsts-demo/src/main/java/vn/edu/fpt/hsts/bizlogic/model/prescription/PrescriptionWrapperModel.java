@@ -183,9 +183,11 @@ public class PrescriptionWrapperModel {
             // Prepare template file path
             InputStream is = resolver.getResource(TEMPLATE).getInputStream();
 
-            final List<MedicineListWraper> data = new ArrayList<MedicineListWraper>();
+            List<MedicineListWraper> data = new ArrayList<MedicineListWraper>();
             if(null != tableData) {
                 data.add(this.tableData);
+            } else {
+                data.add(new MedicineListWraper());
             }
 
             JRBeanCollectionDataSource dataSource =
