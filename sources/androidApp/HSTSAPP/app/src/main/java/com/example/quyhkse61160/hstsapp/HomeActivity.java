@@ -222,6 +222,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home2);
 
+        Constant.TREATMENTS = Constant.getItems();
         mTitle = mDrawerTitle = getTitle();
 
         // load slide menu items
@@ -458,7 +459,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         }
 
         //Set Alarm
-//        amountTime = amountTime();
+        amountTime = amountTime();
         if (!hadStartAlarmService) {
 //            Intent alarmIntent = new Intent(this, AlarmService.class);
 //            startService(alarmIntent);

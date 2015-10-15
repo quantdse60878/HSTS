@@ -57,9 +57,7 @@ public class Constant {
                 treatment.setNextAppointment(jsonArray.getJSONObject(i).getString("nextAppointment"));
                 treatment.setFromDate(jsonArray.getJSONObject(i).getString("fromDate"));
                 treatment.setToDate(jsonArray.getJSONObject(i).getString("toDate"));
-                treatment.setAdviseFood(jsonArray.getJSONObject(i).getString("adviseFood"));
-                treatment.setAdviseMedicine(jsonArray.getJSONObject(i).getString("adviseMedicine"));
-                treatment.setAdvicePractice(jsonArray.getJSONObject(i).getString("advicePractice"));
+                treatment.setCaloriesBurnEveryday(jsonArray.getJSONObject(i).getString("caloriesBurnEveryday"));
                 treatment.setListFoodTreatment(Constant.getInfoTreatment(jsonArray.getJSONObject(i).getJSONArray(Constant.FOOD_FROM_JSON)
                         , Constant.FOOD_FROM_JSON));
                 treatment.setListMedicineTreatment(Constant.getInfoTreatment(jsonArray.getJSONObject(i).getJSONArray(Constant.MEDICINE_FROM_JSON)

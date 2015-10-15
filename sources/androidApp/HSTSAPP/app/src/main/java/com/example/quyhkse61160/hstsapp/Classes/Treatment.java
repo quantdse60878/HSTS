@@ -11,9 +11,7 @@ public class Treatment {
     private String nextAppointment ="";
     private String fromDate ="";
     private String toDate ="";
-    private String adviseFood ="";
-    private String adviseMedicine ="";
-    private String advicePractice ="";
+    private String caloriesBurnEveryday = "";
     private List<ToDoTime> listFoodTreatment = new ArrayList<>();
     private List<ToDoTime> listMedicineTreatment = new ArrayList<>();
     private List<ToDoTime> listPracticeTreatment = new ArrayList<>();
@@ -53,30 +51,6 @@ public class Treatment {
         this.toDate = toDate;
     }
 
-    public String getAdviseFood() {
-        return adviseFood;
-    }
-
-    public void setAdviseFood(String adviseFood) {
-        this.adviseFood = adviseFood;
-    }
-
-    public String getAdviseMedicine() {
-        return adviseMedicine;
-    }
-
-    public void setAdviseMedicine(String adviseMedicine) {
-        this.adviseMedicine = adviseMedicine;
-    }
-
-    public String getAdvicePractice() {
-        return advicePractice;
-    }
-
-    public void setAdvicePractice(String advicePractice) {
-        this.advicePractice = advicePractice;
-    }
-
     public List<ToDoTime> getListFoodTreatment() {
         return listFoodTreatment;
     }
@@ -99,5 +73,13 @@ public class Treatment {
 
     public void setListPracticeTreatment(List<ToDoTime> listPracticeTreatment) {
         this.listPracticeTreatment = listPracticeTreatment;
+    }
+
+    public String getCaloriesBurnEveryday() {
+        return caloriesBurnEveryday;
+    }
+
+    public void setCaloriesBurnEveryday(String caloriesBurnEveryday) {
+        this.caloriesBurnEveryday = caloriesBurnEveryday;
     }
 }

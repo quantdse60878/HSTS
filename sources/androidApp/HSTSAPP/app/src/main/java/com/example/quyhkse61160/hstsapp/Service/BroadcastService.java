@@ -84,8 +84,8 @@ public class BroadcastService extends Service {
                     Calendar c1 = Calendar.getInstance();
                     c1.set(Calendar.HOUR_OF_DAY, 22);
                     c1.set(Calendar.MINUTE, 00);
-//                    if(c.getTime().equals(c1.getTime())) {
-                    if (true) {
+                    if(c.getTime().equals(c1.getTime())) {
+//                    if (true) {
 
 
                         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");

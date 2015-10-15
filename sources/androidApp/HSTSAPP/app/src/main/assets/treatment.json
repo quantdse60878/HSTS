@@ -5,7 +5,7 @@
     "appointmentId": 2,
     "fromDate": "2015-10-01 00:00:00.0",
     "toDate": "2015-10-07 00:00:00.0",
-    "caloriesBurnEveryday": 800,
+    "caloriesBurnEveryday": "800",
     "listFoodTreatment": [
       {
         "name": "Cơm",
