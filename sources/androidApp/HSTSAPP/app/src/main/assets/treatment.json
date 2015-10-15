@@ -1,83 +1,83 @@
 [
   {
-    "illnessName": "beo phi do 1",
-    "nextAppointment": "2015-10-01 00:00:00.0",
+    "illnessName": "Béo phì",
+    "nextAppointment": "2015-10-07 00:00:00.0",
     "appointmentId": 2,
     "fromDate": "2015-10-01 00:00:00.0",
     "toDate": "2015-10-07 00:00:00.0",
-    "adviseFood": "Ăn chậm nhai kỹ",
-    "adviseMedicine": "Uống thuốc điều độ",
-    "advicePractice": "Tập luyện đều đặng",
     "caloriesBurnEveryday": 800,
     "listFoodTreatment": [
       {
-        "name": "cơm",
+        "name": "Cơm",
         "quantitative": "1 chén",
-        "advice": "ăn chậm nhai kỹ",
-        "numberOfTime": 5
-      },
-      {
-        "name": "cá",
-        "quantitative": "ít",
-        "advice": "không ăn cá da trơn",
-        "numberOfTime": 5
-      },
-      {
-        "name": "thịt",
-        "quantitative": "hạn chế",
-        "advice": "không ăn nhiều thịt mỡ",
+        "advice": "nhai kỹ",
         "numberOfTime": 3
       },
       {
-        "name": "rau",
+        "name": "Rau",
         "quantitative": "càng nhiều càng tốt",
-        "advice": null,
-        "numberOfTime": 5
+        "advice": "a",
+        "numberOfTime": 3
       },
       {
-        "name": "củ",
+        "name": "Thịt",
+        "quantitative": "hạn chế",
+        "advice": "a",
+        "numberOfTime": 2
+      },
+      {
+        "name": "Cá",
         "quantitative": "nhiều",
-        "advice": "",
+        "advice": "a",
         "numberOfTime": 3
+      },
+      {
+        "name": "Hoa quả",
+        "quantitative": "nhiều",
+        "advice": "ăn sau khi ăn cơm",
+        "numberOfTime": 2
       }
     ],
     "listMedicineTreatment": [
       {
-        "name": "A",
-        "quantitative": "1 viên",
-        "advice": "ăn trước khi uống",
+        "name": "Sibutramine",
+        "quantitative": 1,
+        "unit": "viên",
+        "advice": "uống trước khi ăn",
         "numberOfTime": 3
       },
       {
-        "name": "B",
-        "quantitative": "1 gói",
-        "advice": "uống trước khi ăn",
+        "name": "Orlistat",
+        "quantitative": 2,
+        "unit": "viên",
+        "advice": "uống sau khi ăn",
         "numberOfTime": 2
       },
       {
-        "name": "C",
-        "quantitative": "1 viên",
-        "advice": "ăn trước khi uống",
+        "name": "Bluepine",
+        "quantitative": 1,
+        "unit": "gói",
+        "advice": "uống trước khi ăn",
         "numberOfTime": 3
       }
     ],
     "listPracticeTreatment": [
       {
-        "name": "đi bộ",
-        "quantitative": 20,
-        "advice": "đi nhẹ nhàng, chậm rãi",
+        "name": "Đi bộ",
+        "quantitative": "60 phút",
+        "advice": "đi nhanh",
         "numberOfTime": 2
       },
       {
-        "name": "chạy bộ",
-        "quantitative": 10,
-        "advice": "chạy chậm nhiều bước",
+        "name": "Chạy bộ",
+        "quantitative": "20 phút",
+        "advice": "chạy liên tục",
         "numberOfTime": 2
       },
       {
-        "name": "đạp xe đạp",
-        "quantitative": 10,
-        "advice": "chọn xe đạp phù hợp",
+        "name": "Đạp xe đạp",
+        "quantitative": "30 phút",
+        "advice": "đi xe đạp nhẹ nhàng",
         "numberOfTime": 2
       }
     ]
