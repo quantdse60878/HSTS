@@ -89,6 +89,7 @@ public class NotifyToDoctor extends ActionBarActivity {
 
             String stringURL = Constant.hostURL + Constant.sendNotifyToDoctor;
             Log.d("QUYYYY1111", "Login url: " + stringURL);
+            Log.d("QUYYYY1111", "Login param: " + Constant.patientId + "-" + strings[0]);
 
             try {
                 URL url = new URL(stringURL);

@@ -8,6 +8,7 @@ import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -27,15 +28,22 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cz.msebera.android.httpclient.NameValuePair;
@@ -43,6 +51,7 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
 public class LoginActivity extends ActionBarActivity {
 
+    public static AssetManager am;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +59,7 @@ public class LoginActivity extends ActionBarActivity {
         //KhuongMH
         Constant.DATA_FROM_SERVER = HSTSUtils.loadData(getAssets());
         //KhuongMH
-
+        am = getAssets();
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
         if(!sharedPreferences.getString(Constant.PREF_USENAME_HADLOGIN, "").equals("")) {
             Intent myIntent = new Intent(LoginActivity.this, SelectDeviceActivity.class);
@@ -85,6 +94,32 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String dateString = df.format(date).replaceAll("/", "");
+        String FILENAME = "hakimquy" + ".txt";
+
+        Log.e("QUY", "------------------2222222222222-------------");
+        File root = Environment.getExternalStorageDirectory();
+        File dir = new File(root.getAbsolutePath() + "/kimquy");
+        dir.mkdirs();
+        File file = new File(dir, FILENAME);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            PrintWriter pw = new PrintWriter(fos);
+            pw.println("----------------------");
+            pw.flush();
+            pw.close();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.d("QUY", "------------------111111111111111-------------");
+
+
     }
 
     @Override
@@ -116,6 +151,7 @@ public class LoginActivity extends ActionBarActivity {
 
             String stringURL = Constant.hostURL + Constant.loginMethod;
             Log.d("QUYYYY1111", "Login url: " + stringURL);
+            Log.d("QUYYYY1111", "Login param: " + strings[0] + "-" + strings[1]);
 
             try {
                 URL url = new URL(stringURL);

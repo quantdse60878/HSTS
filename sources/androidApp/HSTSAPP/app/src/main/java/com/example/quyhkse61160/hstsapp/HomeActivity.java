@@ -78,6 +78,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     ViewPager viewPager;
     public static String timeAlert;
     private AlarmManagerBroadcastReceiver alarm;
+    public static boolean hadRegisterReceiver = false;
 
 
     // Code to manage Service lifecycle.
@@ -277,13 +278,16 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 //            Log.d(TAG, "Connect request result=" + result);
 //        }
 
-        registerReceiver(mConnectionDetector, mIntentFilter);
+        if(!hadRegisterReceiver) {
+            hadRegisterReceiver = true;
+            registerReceiver(mConnectionDetector, mIntentFilter);
+        }
 
 
-        Constant.TREATMENTS = Constant.getItems();
+//        Constant.TREATMENTS = Constant.getItems();
 
         //Set Alarm
-        amountTime = amountTime();
+//        amountTime = amountTime();
         if (!hadStartAlarmService) {
 //            Intent alarmIntent = new Intent(this, AlarmService.class);
 //            startService(alarmIntent);
@@ -397,6 +401,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         if (id == R.id.action_notify_doctor) {
             Intent intentNotify = new Intent(this, NotifyToDoctor.class);
             startActivity(intentNotify);
+        }
+        if(id == R.id.action_setstep) {
+            Intent intentStep = new Intent(this, SetNumberStepActivity.class);
+            startActivity(intentStep);
         }
 
         return super.onOptionsItemSelected(item);

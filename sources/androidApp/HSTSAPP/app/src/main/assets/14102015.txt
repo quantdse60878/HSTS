@@ -1,0 +1,22 @@
+{
+	"Descriptors" : null,
+	"Properties" : 2,
+	"Permissions" : 0,
+	"KeySize" : 16,
+	"Instance" : 0,
+	"WriteType" : 2,
+	"Value" : [49,44,48,48,44,49,44,52,56,50,53,44,48,44,52,52,48],
+
+	"Uuid" : 
+	{
+		"Uuid" : "00002a25-0000-1000-8000-00805f9b34fb",
+ 		"timestamp" : 10789,
+		"node" : 551359821051,
+		"leastSigBits" : -9223371485494954757,
+		"mostSigbits" : 46338402160640,
+		"hash" : -543486370,
+		"clockSequence" : 0,
+		"variant" : 2,
+		"version" : 1
+	}
+}

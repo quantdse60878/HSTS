@@ -21,7 +21,13 @@ import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.HomeActivity;
 import com.example.quyhkse61160.hstsapp.SelectDeviceActivity;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,10 +69,27 @@ public class BluetoothLeService extends Service {
 //            Log.d("QUYYYYYYYYY", "--" + stringdata + "--");
             if((HomeActivity.characteristicManufacturer != null) && (HomeActivity.characteristicStep != null)) {
                 if(characteristic.getUuid().toString().contains(Constant.numberOfStep_UUID.toString())) {
-                    String[] listData = stringdata.split(",");
-                    HomeActivity.numberOfStep = listData[HomeActivity.position];
+//                    String[] listData = stringdata.split(",");
+//                    HomeActivity.numberOfStep = listData[HomeActivity.position];
+//
+//                    Log.d("Quyyyyy111", "NumberOfStep: " + stringdata + "--");
 
-                    Log.d("Quyyyyy111", "NumberOfStep: " + stringdata + "--");
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = new Date();
+                    String dateString = df.format(date).replaceAll("/", "");
+                    String FILENAME = dateString + ".txt";
+
+                    FileOutputStream fos = null;
+                    try {
+                        fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+                        fos.write(data);
+                        fos.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
 
                 } else if(characteristic.getUuid().toString().contains(Constant.manufacturer_UUID.toString())) {
                     if (data != null && data.length > 0) {
