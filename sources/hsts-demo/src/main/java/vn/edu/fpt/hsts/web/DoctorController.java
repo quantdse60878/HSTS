@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
@@ -320,10 +321,11 @@ public class DoctorController extends AbstractController{
 
     @RequestMapping(value = "medicineList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public PatientExtendedPageModel medicineList() {
+    public List<MedicinePhaseModel> medicineList(@RequestParam(value = "appointmentId") final int appointmentId,
+                                                 @RequestParam(value = "diagnostic", required = false) final int illnessId) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            return null;
+            return doctorService.getMedicines(appointmentId, illnessId);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
@@ -363,8 +365,4 @@ public class DoctorController extends AbstractController{
             LOGGER.info(IConsts.END_METHOD);
         }
     }
-
-
-
-
 }

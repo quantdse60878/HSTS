@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPrescriptionModel;
+import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticePrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
@@ -30,8 +31,10 @@ import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
+import vn.edu.fpt.hsts.persistence.entity.MedicinePhase;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Notify;
+import vn.edu.fpt.hsts.persistence.entity.Phase;
 import vn.edu.fpt.hsts.persistence.entity.Practice;
 import vn.edu.fpt.hsts.persistence.entity.PracticeTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
@@ -48,6 +51,7 @@ import vn.edu.fpt.hsts.persistence.repo.PracticeRepo;
 import vn.edu.fpt.hsts.persistence.repo.PracticeTreatmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
+import javax.swing.*;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -134,6 +138,12 @@ public class DoctorService extends AbstractService {
      */
     @Autowired
     private NotifyRepo notifyRepo;
+
+    /**
+     * The {@link IllnessService}.
+     */
+    @Autowired
+    private IllnessService illnessService;
 
     @Value("${hsts.default.treatment.long}")
     private int treatmentLong;
@@ -327,4 +337,30 @@ public class DoctorService extends AbstractService {
         }
     }
 
+    public List<MedicinePhaseModel> getMedicines(final int appointmentId, final int diagnostic) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            // Find phase for diagnostic
+            final Phase phase = illnessService.getPhaseSugestion(appointmentId, diagnostic);
+            if(null == phase) {
+                return Collections.emptyList();
+            }
+            final List<MedicinePhase> medicinePhases = phase.getMedicinePhaseList();
+            if(null != medicinePhases && !medicinePhases.isEmpty()) {
+                if (LOGGER.isDebugEnabled()){
+                   LOGGER.debug("Got {} records", medicinePhases.size());
+                }
+                final List<MedicinePhaseModel> listData = new ArrayList<MedicinePhaseModel>();
+                for (MedicinePhase medicinePhase: medicinePhases) {
+                    MedicinePhaseModel model = new MedicinePhaseModel();
+                    model.fromEntity(medicinePhase);
+                    listData.add(model);
+                }
+                return listData;
+            }
+            return Collections.emptyList();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

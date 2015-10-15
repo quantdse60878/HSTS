@@ -21,7 +21,7 @@ public class MedicinePhase extends AbstractKeyEntity {
     @JoinColumn(name = "phaseId", nullable = false)
     private Phase phase;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "medicineId", nullable = false)
     private Medicine medicine;
 
