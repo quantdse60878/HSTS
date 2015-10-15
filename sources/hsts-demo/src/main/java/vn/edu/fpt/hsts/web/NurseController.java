@@ -223,7 +223,7 @@ public class NurseController extends AbstractController {
             Date toDayTime = new Date();
             String timeDownload = toDayTime.getTime() + "";
             response.setHeader("Content-disposition", "attachment; filename="
-                    + "Don-thuoc" + timeDownload + ".pdf");
+                    + "Don-thuoc" + timeDownload + ".docx");
             patientService.print(patientId, response);
         } finally {
             LOGGER.info(IConsts.END_METHOD);

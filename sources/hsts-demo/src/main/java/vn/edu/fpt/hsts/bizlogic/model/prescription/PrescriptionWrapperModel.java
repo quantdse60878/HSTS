@@ -14,6 +14,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -192,8 +193,7 @@ public class PrescriptionWrapperModel {
 
             // Report filled object
             JasperPrint report = JasperFillManager.fillReport(is, getParameters(), dataSource);
-
-            JRExporter exporter = new JRPdfExporter();
+            JRExporter exporter = new JRDocxExporter();
             exporter.setParameter(JRExporterParameter.JASPER_PRINT, report);
             exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
             exporter.exportReport();
