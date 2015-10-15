@@ -5,6 +5,21 @@
  * Author: dangquantran.
  * Date: 10/5/2015.
  */
+function deleteRow(t, myTable)
+{
+    var row = t.parentNode.parentNode;
+    document.getElementById(myTable).deleteRow(row.rowIndex);
+    console.log(row);
+}
+function deleteRowFood(t){
+    deleteRow(t,'Foods');
+}
+function deleteRowMedicine(t){
+    deleteRow(t,'medicine');
+}
+function deleteRowPractice(t){
+    deleteRow(t,'Practice');
+}
 /**
  * combobox
  */

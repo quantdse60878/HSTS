@@ -334,9 +334,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/app.min.js"></script>
+    <!-- fullCalendar 2.2.5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="plugins/fullcalendar/fullcalendar.min.js"></script>
     <!-- jQueryUI -->    
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script>    
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"> </script>
+    <script>   
+    $( "#Birthday" ).datepicker({
+      changeMonth: true,
+      defaultDate: "+1w",
+      changeYear: true
+    }); 
+    var appointmentDate = new date();
+    appointmentDate.setDate(addDays.getDate() + 7); 
+    $( "#Birthday" ).datepicker("setDate", appointmentDate);  
   (function( $ ) {
     $.widget( "custom.combobox", {
       _create: function() {
@@ -469,11 +480,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
  
   $(function() {
     $( "#combobox" ).combobox();  
-    $( "#Birthday" ).datepicker({
-      changeMonth: true,
-      defaultDate: "+1w",
-      changeYear: true
-    });  
+
+     
   });
   </script>
   <script type="text/javascript">

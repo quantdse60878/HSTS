@@ -362,21 +362,8 @@
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
-        function deleteRow(t, myTable)
-        {
-            var row = t.parentNode.parentNode;
-            document.getElementById(myTable).deleteRow(row.rowIndex);
-            console.log(row);
-        }
-        function deleteRowFood(t){
-            deleteRow(t,'Foods');
-        }
-        function deleteRowMedicine(t){
-            deleteRow(t,'medicine');
-        }
-        function deleteRowPractice(t){
-            deleteRow(t,'Practice');
-        }
+
+
         function confirmBox(form){
             confirm('Are you sure to make this prescription?');
         }
@@ -388,6 +375,9 @@
             defaultDate: "+1w",
             changeYear: true,
         });
+        var appointmentDate = new Date();
+        appointmentDate.setDate(appointmentDate.getDate() + 7);
+        $('#Appointment').datepicker("setDate", appointmentDate);
 
         var countMedicine = $('#medics').val();
 //        alert(countMedicine);
