@@ -41,21 +41,21 @@
     "listMedicineTreatment": [
       {
         "name": "Sibutramine",
-        "quantitative": 1,
+        "quantitative": "1",
         "unit": "viên",
         "advice": "uống trước khi ăn",
         "numberOfTime": 3
       },
       {
         "name": "Orlistat",
-        "quantitative": 2,
+        "quantitative": "2",
         "unit": "viên",
         "advice": "uống sau khi ăn",
         "numberOfTime": 2
       },
       {
         "name": "Bluepine",
-        "quantitative": 1,
+        "quantitative": "1",
         "unit": "gói",
         "advice": "uống trước khi ăn",
         "numberOfTime": 3
