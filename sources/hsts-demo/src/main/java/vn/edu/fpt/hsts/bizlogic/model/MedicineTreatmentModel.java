@@ -11,17 +11,27 @@ public class MedicineTreatmentModel implements Serializable {
 
         private String name;
         private String quantitative;
+        private String unit;
         private String advice;
         private int numberOfTime;
 
-    public MedicineTreatmentModel(String name, String quantitative, String advice, int numberOfTime) {
+    public MedicineTreatmentModel(String name, String quantitative, String unit, String advice, int numberOfTime) {
         this.name = name;
         this.quantitative = quantitative;
+        this.unit = unit;
         this.advice = advice;
         this.numberOfTime = numberOfTime;
     }
 
     public MedicineTreatmentModel() {
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public String getName() {

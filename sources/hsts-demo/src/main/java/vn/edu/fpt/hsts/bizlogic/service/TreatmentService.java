@@ -69,20 +69,19 @@ public class TreatmentService {
             TreatmentModel treatmentOfPatient = new TreatmentModel();
 
             MedicalRecord medicalRecord = listMedicalRecordsPatient.get(i);
-            treatmentOfPatient.setIllnessName(medicalRecord.getIllness().getName());
+            treatmentOfPatient.setIllnessName(medicalRecord.getIllness().getDescription());
 
             Appointment appointment = appointmentRepo.findAppointmentByMedicalRecordId(medicalRecord.getId());
             treatmentOfPatient.setAppointmentId(appointment.getId());
-            treatmentOfPatient.setNextAppointment(appointment.getNextAppointment().getMeetingDate().toString());
+            if(appointment.getNextAppointment()!=null) {
+                treatmentOfPatient.setNextAppointment(appointment.getNextAppointment().getMeetingDate().toString());
+            }
 
             Treatment treatment = treatmentRepo.findTreatmentByAppointmentId(appointment.getId());
             if(treatment!=null) {
                 treatmentOfPatient.setCaloriesBurnEveryday(treatment.getCaloriesBurnEveryday());
                 treatmentOfPatient.setFromDate(treatment.getFromDate().toString());
                 treatmentOfPatient.setToDate(treatment.getToDate().toString());
-                treatmentOfPatient.setAdviseFood(treatment.getAdviseFood());
-                treatmentOfPatient.setAdvicePractice(treatment.getAdvisePractice());
-                treatmentOfPatient.setAdviseMedicine(treatment.getAdviseMedicine());
 
                 List<MedicineTreatmentModel> medicineTreatmentModels = new ArrayList<MedicineTreatmentModel>();
                 List<FoodTreatmentModel> foodTreatmentModels = new ArrayList<FoodTreatmentModel>();
@@ -92,8 +91,8 @@ public class TreatmentService {
                 for(int j = 0; j < medicineTreatment.size(); j++) {
                     MedicineTreatment mItem = medicineTreatment.get(j);
                     // TODO change entity, comment code -> check again
-//                    MedicineTreatmentModel item = new MedicineTreatmentModel(mItem.getMedicine().getName(), mItem.getQuantitative(), mItem.getAdvice(), mItem.getNumberOfTime());
-//                    medicineTreatmentModels.add(item);
+                    MedicineTreatmentModel item = new MedicineTreatmentModel(mItem.getMedicine().getName(), mItem.getQuantitative() + "", mItem.getUnit(), mItem.getAdvice(), mItem.getNumberOfTime());
+                    medicineTreatmentModels.add(item);
                 }
                 List<FoodTreatment> foodTreatments = foodTreatmentRepo.findFoodTreatmentTreatmentId(treatment.getId());
                 for(int j = 0; j < foodTreatments.size(); j++) {
@@ -103,11 +102,11 @@ public class TreatmentService {
                 }
                 List<PracticeTreatment> practiceTreatments = practiceTreatmentRepo.findPracticeTreatmentByTreatmentId(treatment.getId());
                 // TODO change entity, comment code -> check again
-//                for(int j = 0; j < practiceTreatments.size(); j++) {
-//                    PracticeTreatment pItem = practiceTreatments.get(j);
-//                    PracticeTreatmentModel item = new PracticeTreatmentModel(pItem.getPractice().getName(), pItem.getTimeDuration(), pItem.getAdvice(), pItem.getNumberOfTime());
-//                    practiceTreatmentModels.add(item);
-//                }
+                for(int j = 0; j < practiceTreatments.size(); j++) {
+                    PracticeTreatment pItem = practiceTreatments.get(j);
+                    PracticeTreatmentModel item = new PracticeTreatmentModel(pItem.getPractice().getName(), pItem.getTimeDuration(), pItem.getAdvice(), pItem.getNumberOfTime());
+                    practiceTreatmentModels.add(item);
+                }
                 treatmentOfPatient.setListFoodTreatment(foodTreatmentModels);
                 treatmentOfPatient.setListMedicineTreatment(medicineTreatmentModels);
                 treatmentOfPatient.setListPracticeTreatment(practiceTreatmentModels);

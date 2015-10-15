@@ -15,9 +15,6 @@ public class TreatmentModel implements Serializable {
     private int appointmentId;
     private String fromDate;
     private String toDate;
-    private String adviseFood;
-    private String adviseMedicine;
-    private String advicePractice;
     private int caloriesBurnEveryday;
     private List<FoodTreatmentModel> listFoodTreatment = new ArrayList<FoodTreatmentModel>();
     private List<MedicineTreatmentModel> listMedicineTreatment = new ArrayList<MedicineTreatmentModel>();
@@ -26,14 +23,11 @@ public class TreatmentModel implements Serializable {
     public TreatmentModel() {
     }
 
-    public TreatmentModel(String illnessName, String nextAppointment, String fromDate, String toDate, String adviseFood, String adviseMedicine, String advicePractice, List<FoodTreatmentModel> listFoodTreatment, List<MedicineTreatmentModel> listMedicineTreatment, List<PracticeTreatmentModel> listPracticeTreatment) {
+    public TreatmentModel(String illnessName, String nextAppointment, String fromDate, String toDate, List<FoodTreatmentModel> listFoodTreatment, List<MedicineTreatmentModel> listMedicineTreatment, List<PracticeTreatmentModel> listPracticeTreatment) {
         this.illnessName = illnessName;
         this.nextAppointment = nextAppointment;
         this.fromDate = fromDate;
         this.toDate = toDate;
-        this.adviseFood = adviseFood;
-        this.adviseMedicine = adviseMedicine;
-        this.advicePractice = advicePractice;
         this.listFoodTreatment = listFoodTreatment;
         this.listMedicineTreatment = listMedicineTreatment;
         this.listPracticeTreatment = listPracticeTreatment;
@@ -85,30 +79,6 @@ public class TreatmentModel implements Serializable {
 
     public void setToDate(String toDate) {
         this.toDate = toDate;
-    }
-
-    public String getAdviseFood() {
-        return adviseFood;
-    }
-
-    public void setAdviseFood(String adviseFood) {
-        this.adviseFood = adviseFood;
-    }
-
-    public String getAdviseMedicine() {
-        return adviseMedicine;
-    }
-
-    public void setAdviseMedicine(String adviseMedicine) {
-        this.adviseMedicine = adviseMedicine;
-    }
-
-    public String getAdvicePractice() {
-        return advicePractice;
-    }
-
-    public void setAdvicePractice(String advicePractice) {
-        this.advicePractice = advicePractice;
     }
 
     public List<FoodTreatmentModel> getListFoodTreatment() {
