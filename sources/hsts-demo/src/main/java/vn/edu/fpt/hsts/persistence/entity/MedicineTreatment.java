@@ -39,7 +39,12 @@ public class MedicineTreatment extends AbstractKeyEntity {
     /**
      *
      */
-    private String quantitative;
+    private int quantitative;
+
+    /**
+     *
+     */
+    private String unit;
 
     /**
      *
@@ -71,19 +76,27 @@ public class MedicineTreatment extends AbstractKeyEntity {
         this.treatment = treatment;
     }
 
-    public String getQuantitative() {
-        return quantitative;
-    }
-
-    public void setQuantitative(final String quantitative) {
-        this.quantitative = quantitative;
-    }
-
     public int getNumberOfTime() {
         return numberOfTime;
     }
 
     public void setNumberOfTime(final int numberOfTime) {
         this.numberOfTime = numberOfTime;
+    }
+
+    public int getQuantitative() {
+        return quantitative;
+    }
+
+    public void setQuantitative(final int quantitative) {
+        this.quantitative = quantitative;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(final String unit) {
+        this.unit = unit;
     }
 }
