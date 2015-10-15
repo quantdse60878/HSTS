@@ -111,6 +111,9 @@ public class Constant {
                     numberOfTime.add("18:00");
                     numberOfTime.add("21:00");
                 }
+                if(field.equals(MEDICINE_FROM_JSON)){
+                    time.setUnit(source.getJSONObject(i).getString("unit"));
+                }
                 time.setNumberOfTime(numberOfTime);
                 time.setAdvice(source.getJSONObject(i).getString("advice"));
                 times.add(time);

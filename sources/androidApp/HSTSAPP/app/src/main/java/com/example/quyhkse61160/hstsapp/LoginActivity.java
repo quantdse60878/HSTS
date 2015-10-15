@@ -88,8 +88,8 @@ public class LoginActivity extends ActionBarActivity {
 
 //                Comment o day
 //                Intent intent = new Intent(LoginActivity.this, DeviceScanActivity.class);
-//                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                Intent intent = new Intent(LoginActivity.this, HomeActivity2.class);
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                Intent intent = new Intent(LoginActivity.this, HomeActivity2.class);
                 startActivity(intent);
             }
         });

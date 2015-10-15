@@ -52,10 +52,13 @@ public class NavDrawerListAdapter extends BaseAdapter{
 
         ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
         TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
+        ImageView iv_danger = (ImageView) convertView.findViewById(R.id.danger);
 
         imgIcon.setImageResource(navDrawerItems.get(position).getIcon());
         txtTitle.setText(navDrawerItems.get(position).getTitle());
-
+        if(navDrawerItems.get(position).isNotify()) {
+            iv_danger.setVisibility(View.VISIBLE);
+        }
         return convertView;
     }
 }

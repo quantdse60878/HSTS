@@ -1,6 +1,8 @@
 package com.example.quyhkse61160.hstsapp;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
@@ -11,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Ringtone;
@@ -18,8 +21,10 @@ import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.IBinder;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -27,18 +32,27 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.quyhkse61160.hstsapp.Adapter.NavDrawerListAdapter;
 import com.example.quyhkse61160.hstsapp.Adapter.ViewPagesAdapter;
 import com.example.quyhkse61160.hstsapp.Classes.AlarmManagerBroadcastReceiver;
+import com.example.quyhkse61160.hstsapp.Classes.NavDrawerItem;
 import com.example.quyhkse61160.hstsapp.Classes.ToDoItem;
 import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
 import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
 import com.example.quyhkse61160.hstsapp.Fragment.Tab1;
+import com.example.quyhkse61160.hstsapp.Fragment.Tab2;
+import com.example.quyhkse61160.hstsapp.Fragment.Tab3;
+import com.example.quyhkse61160.hstsapp.Fragment.Tab4;
 import com.example.quyhkse61160.hstsapp.Service.AlarmService;
 import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
 import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
@@ -80,6 +94,24 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     private AlarmManagerBroadcastReceiver alarm;
     public static boolean hadRegisterReceiver = false;
 
+
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private boolean flag = false;
+
+    // nav drawer title
+    private CharSequence mDrawerTitle;
+
+    // used to store app title
+    private CharSequence mTitle;
+
+    // slide menu items
+    private String[] navMenuTitles;
+    private TypedArray navMenuIcons;
+
+    private ArrayList<NavDrawerItem> navDrawerItems;
+    private NavDrawerListAdapter dadapter;
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -174,11 +206,154 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
     }
 
+    private void updateView(int index){
+        int temp = index - mDrawerList.getFirstVisiblePosition();
+        View v = mDrawerList.getChildAt(temp);
+
+        if(v == null){
+            return;
+        }
+        ImageView danger = (ImageView) v.findViewById(R.id.danger);
+        danger.setVisibility(View.INVISIBLE);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_fragment);
+        setContentView(R.layout.activity_home2);
+
+
+        mTitle = mDrawerTitle = getTitle();
+
+        // load slide menu items
+        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+
+        // nav drawer icons from resources
+        navMenuIcons = getResources()
+                .obtainTypedArray(R.array.nav_drawer_icons);
+//        navMenuIcons = getResources()
+//                .obtainTypedArray(R.array.nav_drawer_items);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
+
+        navDrawerItems = new ArrayList<NavDrawerItem>();
+
+        // adding nav drawer items to array
+        // Home
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
+        // Food
+        boolean hasFood = true;
+        boolean hasMedicine = true;
+        boolean hasPractice = true;
+//        for(Treatment treatment : Constant.TREATMENTS){
+//            for (ToDoTime time : treatment.getListFoodTreatment()) {
+//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+//                    hasFood = true;
+//                }
+//            }
+//            for (ToDoTime time : treatment.getListMedicineTreatment()) {
+//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+//                    hasMedicine = true;
+//                }
+//            }
+//            for (ToDoTime time : treatment.getListPracticeTreatment()) {
+//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+//                    hasPractice = true;
+//                }
+//            }
+//        }
+
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), hasFood));
+        // Medicines
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), hasMedicine));
+        // Practice
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), hasPractice));
+
+
+        // Recycle the typed array
+        navMenuIcons.recycle();
+
+        // setting the nav drawer list adapter
+        dadapter = new NavDrawerListAdapter(getApplicationContext(),
+                navDrawerItems);
+        mDrawerList.setAdapter(dadapter);
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+                    item.setNotify(false);
+                    updateView(position);
+                    displayView(0);
+                }
+                if (position == 1) {
+                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+                    item.setNotify(false);
+                    updateView(position);
+                    displayView(1);
+                }
+                if (position == 2) {
+                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+                    item.setNotify(false);
+                    updateView(position);
+                    displayView(2);
+                }
+                if (position == 3) {
+                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+                    item.setNotify(false);
+                    updateView(position);
+                    item.setNotify(false);
+                    displayView(3);
+                }
+            }
+        });
+
+        // enabling action bar app icon and behaving it as toggle button
+        actionBar = getSupportActionBar();
+
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
+        if(hasFood || hasMedicine || hasPractice) actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer_red);
+        else {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
+        }
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.drawable.ic_drawer, //nav menu toggle icon
+                R.string.app_name, // nav drawer open - description for accessibility
+                R.string.app_name // nav drawer close - description for accessibility
+        ){
+            public void onDrawerClosed(View view) {
+                actionBar.setTitle(mTitle);
+                // calling onPrepareOptionsMenu() to show action bar icons
+//                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                actionBar.setTitle(mDrawerTitle);
+                // calling onPrepareOptionsMenu() to hide action bar icons
+//                invalidateOptionsMenu();
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        if (savedInstanceState == null) {
+            // on first time display view for first nav item
+            displayView(0);
+        }
+
+
+
+
+
+
+
+
+
+
+
         checkNotifyIntent = new Intent(this, BroadcastService.class);
         //KhuongMH
         Bundle bundle = getIntent().getExtras();
@@ -229,38 +404,38 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         }
 
 
-        actionBar = getSupportActionBar();
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        adapter = new ViewPagesAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
-        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
-
-        ActionBar.Tab atab1 = actionBar.newTab().setText("THỨC ĂN").setTabListener(this);
-        ActionBar.Tab atab2 = actionBar.newTab().setText("THUỐC").setTabListener(this);
-        ActionBar.Tab atab3 = actionBar.newTab().setText("LUYỆN TẬP").setTabListener(this);
-        ActionBar.Tab atab4 = actionBar.newTab().setText("THÔNG BÁO").setTabListener(this);
-        actionBar.addTab(atab1);
-        actionBar.addTab(atab2);
-        actionBar.addTab(atab3);
-        actionBar.addTab(atab4);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                actionBar.setSelectedNavigationItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+//        actionBar = getSupportActionBar();
+//        viewPager = (ViewPager) findViewById(R.id.pager);
+//        adapter = new ViewPagesAdapter(getSupportFragmentManager());
+//        viewPager.setAdapter(adapter);
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
+//        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
+//
+//        ActionBar.Tab atab1 = actionBar.newTab().setText("THỨC ĂN").setTabListener(this);
+//        ActionBar.Tab atab2 = actionBar.newTab().setText("THUỐC").setTabListener(this);
+//        ActionBar.Tab atab3 = actionBar.newTab().setText("LUYỆN TẬP").setTabListener(this);
+//        ActionBar.Tab atab4 = actionBar.newTab().setText("THÔNG BÁO").setTabListener(this);
+//        actionBar.addTab(atab1);
+//        actionBar.addTab(atab2);
+//        actionBar.addTab(atab3);
+//        actionBar.addTab(atab4);
+//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                actionBar.setSelectedNavigationItem(position);
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
 
 
 //        startService(checkNotifyIntent);
@@ -338,6 +513,50 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
     }
 
+    @Override
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        actionBar.setTitle(mTitle);
+    }
+
+    private void displayView(int position) {
+        // update the main content by replacing fragments
+        Fragment fragment = null;
+        switch (position) {
+            case 0:
+                fragment = new Tab4();
+                break;
+            case 1:
+                fragment = new Tab1();
+                break;
+            case 2:
+                fragment = new Tab2();
+                break;
+            case 3:
+                fragment = new Tab3();
+                break;
+            default:
+                break;
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frame_container, fragment).commit();
+
+            // update selected item and title, then close the drawer
+            mDrawerList.setItemChecked(position, true);
+            mDrawerList.setSelection(position);
+            setTitle(navMenuTitles[position]);
+            flag = false;
+            mDrawerLayout.closeDrawer(mDrawerList);
+
+        } else {
+            // error in creating fragment
+            Log.d("MainActivity", "Error in creating fragment");
+        }
+    }
+
     public static List<String> amountTime() {
         List<Treatment> treatments = Constant.TREATMENTS;
         List<String> alarmTime = new ArrayList<>();
@@ -391,21 +610,41 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case android.R.id.home:{
+                if(!flag){
+                    mDrawerLayout.openDrawer(mDrawerList);
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                    actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
+                    actionBar.setDisplayHomeAsUpEnabled(true);
+                    flag = true;
+                }
+                else {
+                    mDrawerLayout.closeDrawer(mDrawerList);
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                    actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
+                    actionBar.setDisplayHomeAsUpEnabled(true);
+                    flag = false;
+                }
+                break;
+            }
+            case R.id.action_settings:
+                return true;
+            case R.id.action_logout:
+                return true;
+            case R.id.action_notify_doctor:{
+                Intent intentNotify = new Intent(this, NotifyToDoctor.class);
+                startActivity(intentNotify);
+                break;
+            }
+            case R.id.action_setstep:{
+                Intent intentStep = new Intent(this, SetNumberStepActivity.class);
+                startActivity(intentStep);
+                break;
+            }
+
         }
-        if (id == R.id.action_logout) {
-            return true;
-        }
-        if (id == R.id.action_notify_doctor) {
-            Intent intentNotify = new Intent(this, NotifyToDoctor.class);
-            startActivity(intentNotify);
-        }
-        if(id == R.id.action_setstep) {
-            Intent intentStep = new Intent(this, SetNumberStepActivity.class);
-            startActivity(intentStep);
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

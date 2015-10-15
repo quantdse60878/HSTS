@@ -12,7 +12,6 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:contentDescription="@string/desc_list_item_icon"
-        android:src="@android:drawable/ic_btn_speak_now"
         android:layout_centerVertical="true" />
 
     <TextView
@@ -25,5 +24,15 @@
         android:textColor="@android:color/black"
         android:gravity="center_vertical"
         android:paddingRight="40dp"/>
+
+    <ImageView
+        android:id="@+id/danger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/notification"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

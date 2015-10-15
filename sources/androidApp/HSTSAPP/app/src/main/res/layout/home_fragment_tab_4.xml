@@ -6,7 +6,11 @@
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,7 +24,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Tên Bệnh : "
+                    android:text="Bệnh Nhân : "
+                    android:textColor="#3ea000"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="KhuongMH "
+                    android:textColor="@android:color/black"
+                    android:textSize="17dp"
+                    android:id="@+id/notice_patient_name"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Chẩn Đoán : "
                     android:textColor="#3ea000"
                     android:textSize="17dp"
                     android:textStyle="bold" />
@@ -41,7 +66,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Điều Trị Từ : "
+                    android:text="Ngày Khám : "
                     android:textColor="#3ea000"
                     android:textSize="17dp"
                     android:textStyle="bold"/>
@@ -62,28 +87,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Điều Trị Đến : "
-                    android:textColor="#3ea000"
-                    android:textSize="17dp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Hihi"
-                    android:textColor="@android:color/black"
-                    android:textSize="17dp"
-                    android:id="@+id/notice_to_date"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Lần Gặp Tiếp Theo: "
+                    android:text="Tái Khám : "
                     android:textColor="#3ea000"
                     android:textSize="17dp"
                     android:textStyle="bold"/>
@@ -95,21 +99,132 @@
                     android:textSize="17dp"
                     android:id="@+id/notice_next_appointment"/>
             </LinearLayout>
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Những Thức Ăn Cần Thiết"
-                android:id="@+id/btn_foods"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Những Thuốc Cần Thiết"
-                android:id="@+id/btn_medicines"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Những Bài Tập Cần Thiết"
-                android:id="@+id/btn_pracrices"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/linear_around"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="20dp"
+                    android:background="#CCFF90"
+                    android:text="Danh Sách Cần Thực Hiện"
+                    android:textSize="17dp"/>
+
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <LinearLayout
+                            android:id="@+id/btn_foods"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="2dp"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:background="@drawable/linear_background"
+                            android:paddingRight="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/food_icon_v2"
+                                android:layout_margin="5dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Danh Sách Thức Ăn"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <LinearLayout
+                            android:id="@+id/btn_pracrices"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:background="@drawable/linear_background"
+                            android:paddingRight="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            >
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/walk_icon_v2"
+                                android:layout_margin="5dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Danh Sách Bài Tập"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:gravity="center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <LinearLayout
+                            android:id="@+id/btn_medicines"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="2dp"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:background="@drawable/linear_background"
+                            android:paddingRight="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            >
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/medicine_icon_v2"
+                                android:layout_margin="5dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Danh Sách Thuốc"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

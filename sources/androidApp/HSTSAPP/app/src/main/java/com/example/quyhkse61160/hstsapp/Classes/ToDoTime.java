@@ -11,6 +11,7 @@ public class ToDoTime {
     private String quantitative = "";
     private List<String> numberOfTime = new ArrayList<>();
     private String advice = "";
+    private String unit = "";
 
     public ToDoTime() {
     }
@@ -45,5 +46,13 @@ public class ToDoTime {
 
     public void setAdvice(String advice) {
         this.advice = advice;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

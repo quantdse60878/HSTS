@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,8 +26,8 @@ import java.util.HashMap;
  */
 public class Tab4 extends Fragment {
 
-    Button food, medicine, practice;
-    TextView ill, toDate, fromDate, nextApp, adviceFood, adviceMedicine, advicePractice;
+    LinearLayout food, medicine, practice;
+    TextView ill, fromDate, nextApp;
 
     public Tab4() {
         // Required empty public constructor
@@ -38,7 +39,6 @@ public class Tab4 extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.home_fragment_tab_4, container, false);
         ill = (TextView) v.findViewById(R.id.notice_illness_name);
-        toDate = (TextView) v.findViewById(R.id.notice_to_date);
         fromDate = (TextView) v.findViewById(R.id.notice_from_date);
         nextApp = (TextView) v.findViewById(R.id.notice_next_appointment);
 
@@ -48,9 +48,9 @@ public class Tab4 extends Fragment {
 //        nextApp.setText(Constant.TREATMENTS.get(0).getNextAppointment().split(" ")[0]);
 
 
-        food = (Button) v.findViewById(R.id.btn_foods);
-        medicine = (Button) v.findViewById(R.id.btn_medicines);
-        practice = (Button) v.findViewById(R.id.btn_pracrices);
+        food = (LinearLayout) v.findViewById(R.id.btn_foods);
+        medicine = (LinearLayout) v.findViewById(R.id.btn_medicines);
+        practice = (LinearLayout) v.findViewById(R.id.btn_pracrices);
         food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
