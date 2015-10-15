@@ -12,6 +12,7 @@
         <th>Times</th>
         <th>Quantitative</th>
         <th>Note</th>
+        <th>#</th>
     </tr>
     <tr th:each="practicePhase,row : ${PHASE.practicePhaseList}">
         <td th:text="${row.count}"></td>
@@ -37,6 +38,9 @@
         <td>
             <input type="text" class="form-control"
                    th:field="*{pPresModels[__${row.index}__].pNote}" placeholder="Advice"/>
+        </td>
+        <td>
+            <a class="btn btn-danger fa fa-remove" onclick="deleteRowPractice(this)"></a>
         </td>
     </tr>
 </table>

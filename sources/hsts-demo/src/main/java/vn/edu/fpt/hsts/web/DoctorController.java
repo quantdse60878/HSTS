@@ -149,9 +149,9 @@ public class DoctorController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
 
             mav.addObject("APPOINTMENT", appointment);
-            mav.addObject("MEDICS",  1);
-            mav.addObject("FOS", 1);
-            mav.addObject("PRACS", 1);
+            mav.addObject("MEDICS",  2);
+            mav.addObject("FOS", 2);
+            mav.addObject("PRACS", 2);
             // Initialization Data Prescription
             initDataPrescription(mav);
 
@@ -230,9 +230,9 @@ public class DoctorController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
             LOGGER.info("APPOINTMENTlist : " + appointment.getMedicalRecord().getAppointmentList().size());
-            mav.addObject("MEDICS",  1);
-            mav.addObject("FOS", 1);
-            mav.addObject("PRACS", 1);
+            mav.addObject("MEDICS",  2);
+            mav.addObject("FOS", 2);
+            mav.addObject("PRACS", 2);
             // Create notify
             notify(mav, true, "Make Prescription", "Success");
             return mav;

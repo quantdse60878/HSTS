@@ -362,6 +362,21 @@
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
+        function deleteRow(t, myTable)
+        {
+            var row = t.parentNode.parentNode;
+            document.getElementById(myTable).deleteRow(row.rowIndex);
+            console.log(row);
+        }
+        function deleteRowFood(t){
+            deleteRow(t,'Foods');
+        }
+        function deleteRowMedicine(t){
+            deleteRow(t,'medicine');
+        }
+        function deleteRowPractice(t){
+            deleteRow(t,'Practice');
+        }
         function confirmBox(form){
             confirm('Are you sure to make this prescription?');
         }
@@ -397,6 +412,8 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mNote" id="mPresModels'+countMedicine+'.mNote" placeholder="Advice"/>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>';
 
             countMedicine++;
             return newRow;
@@ -424,8 +441,10 @@
             newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels['+countFoods+'].fQuantity" id="fPresModels'+countFoods+'.fQuantity" placeholder="Quantity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels['+countFoods+'].fNote" id="fPresModels'+countFoods+'.fNote" placeholder="Advice"/>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowFood(this)"></a>'
 
-            countFoods++;
+                    countFoods++;
             return newRow;
         }
         ;
@@ -452,6 +471,8 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" name="pPresModels['+countPractice+'].pNote" id="pPresModels'+countPractice+'.pNote" placeholder="Advice"/>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowPractice(this)"></a>';
 
             countPractice++;
             return newRow;

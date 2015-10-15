@@ -64,3 +64,4 @@ local.properties
 
 # External tool builders
 .externalToolBuilders/
+*.log

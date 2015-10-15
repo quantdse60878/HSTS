@@ -11,6 +11,7 @@
         <th>Times</th>
         <th>Quantitative</th>
         <th>Note</th>
+        <th>#</th>
     </tr>
     <tr>
         <td>1</td>
@@ -31,6 +32,9 @@
         <td>
             <input type="text" class="form-control"
                    th:field="*{pPresModels[0].pNote}" placeholder="Advice"/>
+        </td>
+        <td>
+            <a class="btn btn-danger fa fa-remove" onclick="deleteRowPractice(this)"></a>
         </td>
     </tr>
 </table>

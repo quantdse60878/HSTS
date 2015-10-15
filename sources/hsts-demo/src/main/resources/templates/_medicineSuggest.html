@@ -13,6 +13,7 @@
         <th>Times</th>
         <th>Quanlity</th>
         <th>Note</th>
+        <th>#</th>
     </tr>
     <tr th:each="medicalPhase,row : ${PHASE.medicinePhaseList}">
         <td th:text="${row.count}"></td>
@@ -36,6 +37,9 @@
         <td>
             <input type="text" class="form-control"
                    th:field="*{mPresModels[__${row.index}__].mNote}" placeholder="Advice"/>
+        </td>
+        <td>
+            <a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>
         </td>
     </tr>
 

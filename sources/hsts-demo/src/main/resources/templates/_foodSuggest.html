@@ -12,6 +12,7 @@
         <th>Times</th>
         <th>Quantitative</th>
         <th>Note</th>
+        <th>#</th>
     </tr>
     <tr th:each="foodPhase,row : ${PHASE.foodPhaseList}">
         <td th:text="${row.count}"></td>
@@ -37,6 +38,10 @@
             <input type="text" class="form-control"
                    th:field="*{fPresModels[__${row.index}__].fNote}" placeholder="Advice"/>
         </td>
+        <td>
+            <a class="btn btn-danger fa fa-remove" onclick="deleteRowFood(this)"></a>
+        </td>
+
     </tr>
 </table>
 <a style="width: 50px;color: white;" class="btn btn-primary"
