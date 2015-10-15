@@ -33,10 +33,10 @@
         <item>Bài Tập</item>
     </string-array>
     <array name="nav_drawer_icons">
-        <item>@drawable/ic_drawer</item>
-        <item>@drawable/food_icon1</item>
-        <item>@drawable/medicine_icon</item>
-        <item>@drawable/walk_icon</item>
+        <item></item>
+        <item>@drawable/food_icon_v1</item>
+        <item>@drawable/medicine_icon_v1</item>
+        <item>@drawable/walk_icon_v1</item>
     </array>
 
     <string name="desc_list_item_icon">Item Icon</string>

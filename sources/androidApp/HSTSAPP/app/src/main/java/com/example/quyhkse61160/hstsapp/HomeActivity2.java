@@ -3,6 +3,8 @@ package com.example.quyhkse61160.hstsapp;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -29,6 +31,7 @@ public class HomeActivity2 extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private boolean flag = false;
 
     // nav drawer title
     private CharSequence mDrawerTitle;
@@ -54,10 +57,10 @@ public class HomeActivity2 extends ActionBarActivity {
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
 
         // nav drawer icons from resources
-//        navMenuIcons = getResources()
-//                .obtainTypedArray(R.array.nav_drawer_icons);
         navMenuIcons = getResources()
-                .obtainTypedArray(R.array.nav_drawer_items);
+                .obtainTypedArray(R.array.nav_drawer_icons);
+//        navMenuIcons = getResources()
+//                .obtainTypedArray(R.array.nav_drawer_items);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
@@ -85,16 +88,16 @@ public class HomeActivity2 extends ActionBarActivity {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0){
+                if (position == 0) {
                     displayView(0);
                 }
-                if(position == 1){
+                if (position == 1) {
                     displayView(1);
                 }
-                if(position == 2){
+                if (position == 2) {
                     displayView(2);
                 }
-                if(position == 3){
+                if (position == 3) {
                     displayView(3);
                 }
             }
@@ -102,8 +105,11 @@ public class HomeActivity2 extends ActionBarActivity {
 
         // enabling action bar app icon and behaving it as toggle button
         actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeButtonEnabled(true);
+
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        actionBar.setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.ic_drawer, //nav menu toggle icon
@@ -129,6 +135,12 @@ public class HomeActivity2 extends ActionBarActivity {
             displayView(0);
         }
     }
+
+    /**
+     * Let's the user tap the activity icon to go 'home'.
+     * Requires setHomeButtonEnabled() in onCreate().
+     */
+
 
     @Override
     public void setTitle(CharSequence title) {
@@ -186,10 +198,21 @@ public class HomeActivity2 extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case android.R.id.home:
+                if(!flag){
+                    mDrawerLayout.openDrawer(mDrawerList);
+                    flag = true;
+                }
+                else {
+                    mDrawerLayout.closeDrawer(mDrawerList);
+                    flag = false;
+                }
+                break;
+            case R.id.action_settings:
+                return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
