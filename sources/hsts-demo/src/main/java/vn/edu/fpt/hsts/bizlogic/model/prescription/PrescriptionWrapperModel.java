@@ -193,6 +193,12 @@ public class PrescriptionWrapperModel {
 
             // Report filled object
             JasperPrint report = JasperFillManager.fillReport(is, getParameters(), dataSource);
+
+            /**
+             * TODO
+             * Export to *.docx = OK
+             * Export to *.pdf = ??? encoding
+             */
             JRExporter exporter = new JRDocxExporter();
             exporter.setParameter(JRExporterParameter.JASPER_PRINT, report);
             exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
