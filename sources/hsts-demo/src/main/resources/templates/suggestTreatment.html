@@ -109,7 +109,7 @@
                                             <select id="combobox" th:name="diagnostic" class="form-control">
                                                 <option th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}" th:text="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name} : ''">Select one...</option>
                                                 <option th:each="illness : ${ILLNESSES}" th:value="${illness.id}"
-                                                        th:text="${illness.name}" th:unless="${DIAGNOSTIC.id == illness.id}"></option>
+                                                        th:text="${illness.name}"></option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2 pull-right">
@@ -149,22 +149,36 @@
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane active" id="tab_1-1">
-                                                <!-- medicine Suggest -->
-                                                <div layout:replace="_medicineSuggest"></div>
-                                                <!-- /.medicine Suggest -->
+                                                <h4>Medicine</h4>
+                                                <!-- table medicine -->
+                                                <table class="table table-striped" id="medicine">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 10px">#</th>
+                                                        <th>Medicine</th>
+                                                        <th>Times</th>
+                                                        <th>Quanlity</th>
+                                                        <th>Note</th>
+                                                    </tr>
+                                                    </thead>
+
+                                                </table>
+                                                <!-- /.table medicine -->
+                                                <a style="width: 50px;color: white;" class="btn btn-primary"
+                                                   onclick="addRowMedicine('medicine')">Add</a>
 
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane" id="tab_2-2">
                                                 <!-- food Suggest -->
-                                                <div layout:replace="_foodSuggest"></div>
+                                                <div layout:replace="_foodPrescription"></div>
                                                 <!-- /.food Suggest -->
 
                                             </div>
                                             <!-- /.tab-pane -->
                                             <div class="tab-pane" id="tab_3-3">
                                                 <!-- practice Suggest -->
-                                                <div layout:replace="_practiceSuggest"></div>
+                                                <div layout:replace="_practicePrescription"></div>
                                                 <!-- /.practice Suggest -->
 
                                             </div>
@@ -213,74 +227,7 @@
 
     </section>
     <!-- /.content -->
-    <!--POPUP-->
-    <div id="blanket" style="display:none;"></div>
-    <div id="popUpAppointment" style="display:none;">
-        <!-- box -->
-        <div class="box box-success box-solid">
-            <div class="box-header with-border">
-                <h3 class="box-title">Appointment Date</h3>
 
-                <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" onclick="popup('popUpAppointment')">
-                        <i class="fa fa-times"></i></button>
-                </div>
-                <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="form-group" style="margin-top: 15px;">
-                    <h3>Do you want to make appointment?</h3>
-                    <label for="Appointment" class="col-sm-5 control-label">Appointment Date</label>
-
-                    <div class="col-sm-7">
-                        <input class="form-control" type="text" value="30/09/2015"
-                               id="Appointment" data-provide="Appointment"/>
-                    </div>
-                </div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <a class="btn btn-default">No</a>
-                <a class="btn btn-primary pull-right">Yes</a>
-
-            </div>
-            <!-- /.footer -->
-        </div>
-        <!-- /.box -->
-    </div>
-    <!-- /.popUpAppointment -->
-    <div id="popupConfirm" style="display:none;">
-        <!-- box -->
-        <div class="box box-success box-solid">
-            <div class="box-header with-border">
-                <h3 class="box-title">Confirm</h3>
-
-                <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" onclick="popup('popupConfirm')">
-                        <i class="fa fa-times"></i></button>
-                </div>
-                <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="form-group" style="margin-top: 15px;">
-                    <h3>Do you want to make prescription?</h3>
-
-                </div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <a type="reset" class="btn btn-default">No</a>
-                <a onclick="popup('popupConfirm'); popup('popUpAppointment')" class="btn btn-primary pull-right">Yes</a>
-
-            </div>
-            <!-- /.footer -->
-        </div>
-        <!-- /.box -->
-    </div>
-    <!-- /.popupConfirm -->
-    <!-- / POPUP-->
 
     <!-- REQUIRED JS SCRIPTS -->
     <!-- jQueryUI -->
@@ -292,6 +239,37 @@
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
+        $(function () {
+            var count = 1;
+            var t = $("#medicine").DataTable( {
+                "processing": true,
+                "pagingType": "full",
+                "paging": true,
+                "lengthChange": false,
+                "ordering": true,
+                "info": true,
+                "searching": false,
+                "ajax": {
+                    "url": "medicineList",
+                    "dataSrc": "dataList",
+                    "type": "GET",
+                    "data": {
+                        appointmentId: 23,
+                        diagnostic: 1
+                    }
+                },
+
+                "columns": [
+                    { "data": "medicine.id" },
+                    { "data": "medicine.id" },
+                    { "data": "medicine.name" },
+                    { "data": "numberOfTime" },
+                    { "data": "quantityPerTime" }
+                ],
+
+            } );
+
+        });
         $("#combobox").combobox();
         $('#Appointment').datepicker({
             dateFormat: 'dd-mm-yy',

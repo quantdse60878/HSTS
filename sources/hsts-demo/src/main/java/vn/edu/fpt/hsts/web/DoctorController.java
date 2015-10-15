@@ -307,7 +307,8 @@ public class DoctorController extends AbstractController{
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("suggestTreatment");
-
+            // Initialization Data Prescription
+            initDataPrescription(mav);
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByID(23);
             mav.addObject("APPOINTMENT", appointment);
