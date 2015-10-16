@@ -151,12 +151,15 @@
 
     <!-- jQueryUI -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
-    <script th:src="@{/static/bower/jquery-ui/jquery-ui.js}"></script>
+
+    <!-- select 2-->
+    <link th:href="@{/static/bower/select2/select2.css}" rel="stylesheet" />
+    <script th:src="@{/static/bower/select2/select2.min.js}"></script>
     <!-- registerPatient -->
     <script th:src="@{/static/js/registerPatient.js}"></script>
     <!-- script add -->
     <script>
-        $("#combobox").combobox();
+        $("#combobox").select2();
         $("#Birthday").datepicker({
             changeMonth: true,
             dateFormat: 'dd-mm-yy',
