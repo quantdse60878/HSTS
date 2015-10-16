@@ -21,7 +21,7 @@ public class MedicinePrescriptionModel {
     /**
      * Medicine Quantity
      */
-    private int mQuantity;
+    private int mQuantity = 1;
     /**
      * Medicine Note
      */
