@@ -109,8 +109,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Doctor</label>
 
-                                    <div class="col-sm-5 ui-widget">
-                                        <select id="combobox" class="form-control" th:name="doctorId">
+                                    <div >
+                                        <select id="combobox" class="col-sm-3" th:name="doctorId">
                                             <option value="">Select one...</option>
                                             <option th:each="doctor : ${session.DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.username}"></option>
                                         </select>
