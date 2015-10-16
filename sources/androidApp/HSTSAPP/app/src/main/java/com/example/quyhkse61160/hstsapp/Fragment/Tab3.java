@@ -92,7 +92,7 @@ public class Tab3 extends Fragment {
                     d.put("PracticeName", time.getName());
                     if (time.getAdvice().isEmpty() || time.getAdvice().equals("null")) d.put("Advice", "");
                     else d.put("Advice", time.getAdvice());
-                    d.put("PracticeTime", time.getQuantitative() + " phút");
+                    d.put("PracticeTime", time.getQuantitative());
                     sections.add(d);
                 }
             }
