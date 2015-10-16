@@ -409,6 +409,7 @@
         function addRowMedicine(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
+            newRow.setAttribute("class","form-inline");
             var newCell;
 
             newCell = newRow.insertCell(newRow.cells.length);
@@ -423,8 +424,8 @@
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mQuantity" id="mPresModels'+countMedicine+'.mQuantity" placeholder="Quanlity"/>'+
-                    '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mUnit" id="mPresModels'+countMedicine+'.mUnit" placeholder="Unit"/>';
+                    '<input type="text" value="1" style="max-width: 90px;" class="form-control" name="mPresModels['+countMedicine+'].mQuantity" id="mPresModels'+countMedicine+'.mQuantity" placeholder="Quanlity"/>'+
+                    '<input type="text" style="max-width: 100px;" class="form-control" name="mPresModels['+countMedicine+'].mUnit" id="mPresModels'+countMedicine+'.mUnit" placeholder="Unit"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mNote" id="mPresModels'+countMedicine+'.mNote" placeholder="Advice"/>';

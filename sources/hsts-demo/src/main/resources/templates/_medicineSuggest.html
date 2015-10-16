@@ -11,7 +11,7 @@
         <th style="width: 10px">#</th>
         <th>Medicine</th>
         <th>Times</th>
-        <th>Quanlity</th>
+        <th style="min-width: 210px;">Quantity</th>
         <th>Note</th>
         <th>#</th>
     </tr>
@@ -32,9 +32,9 @@
                     th:text="${time}"></option>
         </select>
         </td>
-        <td><input type="text" class="form-control" th:field="*{mPresModels[__${row.index}__].mQuantity}"
+        <td class="form-inline"><input type="text" class="form-control" style="max-width: 90px;" th:field="*{mPresModels[__${row.index}__].mQuantity}"
                    placeholder="Quanlity"/>
-            <input type="text" class="form-control" th:field="*{mPresModels[__${row.index}__].mUnit}"
+            <input type="text" class="form-control" style="max-width: 100px;" th:field="*{mPresModels[__${row.index}__].mUnit}"
                    placeholder="Unit"/>
         </td>
         <td>
