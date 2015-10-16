@@ -149,9 +149,9 @@ public class DoctorController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
 
             mav.addObject("APPOINTMENT", appointment);
-            mav.addObject("MEDICS",  2);
-            mav.addObject("FOS", 2);
-            mav.addObject("PRACS", 2);
+            mav.addObject("MEDICS",  1);
+            mav.addObject("FOS", 1);
+            mav.addObject("PRACS", 1);
             // Initialization Data Prescription
             initDataPrescription(mav);
 
@@ -187,9 +187,9 @@ public class DoctorController extends AbstractController{
                 notify(mav, false, "Fail", "No regimen for suggest treatment");
             }
 
-            mav.addObject("MEDICS", phase.getMedicinePhaseList().size() + 1);
-            mav.addObject("FOS", phase.getFoodPhaseList().size() + 1);
-            mav.addObject("PRACS", phase.getPracticePhaseList().size() + 1);
+            mav.addObject("MEDICS", phase.getMedicinePhaseList().size());
+            mav.addObject("FOS", phase.getFoodPhaseList().size());
+            mav.addObject("PRACS", phase.getPracticePhaseList().size());
             // Find illness form diagnostic
             Illness illness = illnessService.findByID(diagnostic);
             mav.addObject("DIAGNOSTIC", illness);
@@ -230,9 +230,9 @@ public class DoctorController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
             LOGGER.info("APPOINTMENTlist : " + appointment.getMedicalRecord().getAppointmentList().size());
-            mav.addObject("MEDICS",  2);
-            mav.addObject("FOS", 2);
-            mav.addObject("PRACS", 2);
+            mav.addObject("MEDICS",  1);
+            mav.addObject("FOS", 1);
+            mav.addObject("PRACS", 1);
             // Create notify
             notify(mav, true, "Make Prescription", "Success");
             return mav;
