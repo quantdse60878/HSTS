@@ -67,8 +67,7 @@ public class BroadcastService extends Service {
     @Override
     public void onStart(Intent intent, int startId) {
         handlerThread.removeCallbacks(sendUpdateToUI);
-        handlerThread.postDelayed(sendUpdateToUI, 50);
-
+        handlerThread.postDelayed(sendUpdateToUI, 01);
     }
 
     private Runnable sendUpdateToUI = new Runnable() {
@@ -415,6 +414,9 @@ public class BroadcastService extends Service {
             Constant.TREATMENTS = Constant.getItems();
             Log.d("QUYYY111","Treatment--" + response);
             HomeActivity.amountTime = HomeActivity.amountTime();
+            Intent homeIntent = new Intent(this, HomeActivity.class);
+            homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(homeIntent);
             hadGetNotify(notifyId);
 
         } catch (MalformedURLException e) {

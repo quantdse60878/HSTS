@@ -2,11 +2,13 @@ package com.example.quyhkse61160.hstsapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.ActionBar;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
+import com.example.quyhkse61160.hstsapp.Service.NetworkChangeReceiver;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +55,9 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
 public class LoginActivity extends ActionBarActivity {
 
     public static AssetManager am;
+    public static boolean hadRegisterReceiver = false;
+    protected final NetworkChangeReceiver mConnectionDetector = new NetworkChangeReceiver();
+    protected final IntentFilter mIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,6 +196,10 @@ public class LoginActivity extends ActionBarActivity {
                     e.printStackTrace();
                 }
 
+                if(!hadRegisterReceiver) {
+                    hadRegisterReceiver = true;
+                    registerReceiver(mConnectionDetector, mIntentFilter);
+                }
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

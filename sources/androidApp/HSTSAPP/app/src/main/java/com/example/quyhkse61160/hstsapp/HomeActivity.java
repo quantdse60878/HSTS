@@ -222,6 +222,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home2);
 
+
         Constant.TREATMENTS = Constant.getItems();
         mTitle = mDrawerTitle = getTitle();
 
@@ -452,11 +453,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 //            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
 //            Log.d(TAG, "Connect request result=" + result);
 //        }
-
-        if(!hadRegisterReceiver) {
-            hadRegisterReceiver = true;
-            registerReceiver(mConnectionDetector, mIntentFilter);
-        }
 
         //Set Alarm
         amountTime = amountTime();
