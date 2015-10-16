@@ -12,10 +12,16 @@ public class MedicinePrescriptionModel {
      * Medicine Time
      */
     private int mTime;
+
+    /**
+     *
+     */
+    private String unit;
+
     /**
      * Medicine Quantity
      */
-    private String mQuantity;
+    private int mQuantity;
     /**
      * Medicine Note
      */
@@ -24,7 +30,7 @@ public class MedicinePrescriptionModel {
     public MedicinePrescriptionModel() {
     }
 
-    public MedicinePrescriptionModel(int m, int mTime, String mQuantity, String mNote) {
+    public MedicinePrescriptionModel(int m, int mTime, int mQuantity, String mNote) {
         this.m = m;
         this.mTime = mTime;
         this.mQuantity = mQuantity;
@@ -47,11 +53,11 @@ public class MedicinePrescriptionModel {
         this.mTime = mTime;
     }
 
-    public String getmQuantity() {
+    public int getmQuantity() {
         return mQuantity;
     }
 
-    public void setmQuantity(String mQuantity) {
+    public void setmQuantity(int mQuantity) {
         this.mQuantity = mQuantity;
     }
 
@@ -61,6 +67,14 @@ public class MedicinePrescriptionModel {
 
     public void setmNote(String mNote) {
         this.mNote = mNote;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     @Override

@@ -213,7 +213,7 @@ public class DoctorController extends AbstractController{
     @RequestMapping(value="prescription", method=RequestMethod.GET)
     public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel,
                                          @RequestParam("appointmentId") final int appointmentId,
-                                         @RequestParam(value = "appointmentDate", required = false) final String appointmentDate) throws BizlogicException {
+                                         @RequestParam(value = "appointmentDate", required = true) final String appointmentDate) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();

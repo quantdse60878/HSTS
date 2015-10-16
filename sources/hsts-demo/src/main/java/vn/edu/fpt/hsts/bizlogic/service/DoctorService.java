@@ -197,27 +197,21 @@ public class DoctorService extends AbstractService {
                 if (null == toDate) {
                     throw new BizlogicException("Wrong input date format: {}", null, appointmentDate);
                 }
-                // Create next appointment
-                Appointment nextAppointment = new Appointment();
-                nextAppointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
-                nextAppointment.setMeetingDate(toDate);
-                nextAppointment.setMedicalRecord(appointment.getMedicalRecord());
-
-                appointmentRepo.save(nextAppointment);
-
-                // Set old appointment link to new appointment
-                appointment.setNextAppointment(nextAppointment);
-
-                // Create notify to patient
-                final Notify notify = new Notify();
-                notify.setSender(getCurrentAccount());
-                notify.setReceiver(medicalRecord.getPatient().getAccount());
-                notify.setType(IDbConsts.INotifyType.DOCTOR_PATIENT_APPOINTMENT);
-                notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
-                final int patientId = medicalRecord.getPatient().getId();
-                notify.setMessage(String.valueOf(patientId));
-                notifyRepo.saveAndFlush(notify);
+            } else {
+                // Set to next 7 day
+                toDate = DateUtils.plusDateTime(new Date(), Calendar.DATE, treatmentLong);
             }
+
+            // Create next appointment
+            Appointment nextAppointment = new Appointment();
+            nextAppointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
+            nextAppointment.setMeetingDate(toDate);
+            nextAppointment.setMedicalRecord(appointment.getMedicalRecord());
+
+            appointmentRepo.save(nextAppointment);
+
+            // Set old appointment link to new appointment
+            appointment.setNextAppointment(nextAppointment);
 
             medicalRecordRepo.saveAndFlush(medicalRecord);
             appointmentRepo.save(appointment);
@@ -238,14 +232,7 @@ public class DoctorService extends AbstractService {
                 newTreatment.setFromDate(new Date());
                 //TODO
 //                newTreatment.setCaloriesBurnEveryday(Integer.parseInt(prescription.getKcalRequire()));
-                if (null != toDate) {
-                    // Set toDate = appointmentDate
-                    newTreatment.setToDate(toDate);
-                } else {
-                    // Set todate to next 7 day, note that UI should be check
-                    toDate = DateUtils.plusDateTime(new Date(), Calendar.DATE, treatmentLong);
-                    newTreatment.setToDate(toDate);
-                }
+                newTreatment.setToDate(toDate);
                 treatmentRepo.save(newTreatment);
 
                 // TODO implement for medicine, food, practice and multiple row, validate data
@@ -266,8 +253,8 @@ public class DoctorService extends AbstractService {
                         MedicineTreatment medicineTreatment = new MedicineTreatment();
                         medicineTreatment.setMedicine(medicine);
                         medicineTreatment.setNumberOfTime(medicineModel.getmTime());
-                        //TODO
-//                        medicineTreatment.setQuantitative(medicineModel.getmQuantity());
+                        medicineTreatment.setQuantitative(medicineModel.getmQuantity());
+                        medicineTreatment.setUnit(medicineModel.getUnit());
                         medicineTreatment.setAdvice(medicineModel.getmNote());
                         medicineTreatment.setTreatment(newTreatment);
                         medicineTreatmentRepo.save(medicineTreatment);
