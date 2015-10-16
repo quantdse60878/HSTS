@@ -10,7 +10,7 @@
         <th style="width: 10px">#</th>
         <th>Medicine</th>
         <th>Times</th>
-        <th style="min-width: 210px;">Quantity</th>
+        <th>Quantity</th>
         <th>Note</th>
         <th>#</th>
     </tr>
@@ -28,9 +28,10 @@
                     th:text="${time}"></option>
         </select>
         </td>
-        <td class="form-inline"><input type="text" style="max-width: 90px;" class="form-control" th:field="*{mPresModels[0].mQuantity}"
+        <td class="form-inline" style="max-width: 180px;">
+            <input type="text" style="max-width: 47%;" class="form-control" th:field="*{mPresModels[0].mQuantity}"
                    placeholder="Quanlity"/>
-            <input type="text" style="max-width: 100px;" class="form-control" th:field="*{mPresModels[0].mUnit}"
+            <input type="text" style="max-width: 50%;" class="form-control" th:field="*{mPresModels[0].mUnit}"
                    placeholder="Unit"/>
         </td>
         <td>
