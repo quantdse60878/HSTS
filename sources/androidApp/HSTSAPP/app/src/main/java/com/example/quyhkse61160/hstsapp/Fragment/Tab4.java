@@ -46,8 +46,10 @@ public class Tab4 extends Fragment {
 
         name.setText(Constant.PATIENT_NAME);
         ill.setText(Constant.TREATMENTS.get(0).getIllnessName());
-        fromDate.setText(Constant.TREATMENTS.get(0).getFromDate().split(" ")[0]);
-        nextApp.setText(Constant.TREATMENTS.get(0).getNextAppointment().split(" ")[0]);
+        String[] temp = Constant.TREATMENTS.get(0).getFromDate().split(" ")[0].split("-");
+        fromDate.setText(temp[2] + "-" + temp[1] + "-" + temp[0]);
+        temp = Constant.TREATMENTS.get(0).getNextAppointment().split(" ")[0].split("-");
+        nextApp.setText(temp[2] + "-" + temp[1] + "-" + temp[0]);
 
 
         food = (LinearLayout) v.findViewById(R.id.btn_foods);

@@ -91,7 +91,7 @@ public class Tab2 extends Fragment {
                     d.put("MedicineName", time.getName());
                     if (time.getAdvice().isEmpty() || time.getAdvice().equals("null")) d.put("Advice", "");
                     else d.put("Advice", time.getAdvice());
-                    d.put("NumberOfMedicine", time.getQuantitative());
+                    d.put("NumberOfMedicine", time.getQuantitative() + " " + time.getUnit());
                     sections.add(d);
                 }
             }
