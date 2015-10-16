@@ -53,6 +53,7 @@
                                 <th>Birthday</th>
                                 <th>Gender</th>
                                 <th style="width: 40px;">#</th>
+                                <th style="width: 40px;">#</th>
                             </tr>
                             </thead>
                             <!--<tbody id="table-body"></tbody>-->
@@ -62,6 +63,7 @@
                                 <th>Name</th>
                                 <th>Birthday</th>
                                 <th>Gender</th>
+                                <th style="width: 40px;">#</th>
                                 <th style="width: 40px;">#</th>
                             </tr>
                             </tfoot>
@@ -143,8 +145,13 @@
                         "render": function ( data, type, full, meta ) {
                             return '<a href="/patient?patientID='+ data + '" class="btn btn-primary">Update</a>';
                         }
+                    },
+                    {
+                        "data": "id",
+                        "render": function ( data, type, full, meta ) {
+                            return '<a href="/print?patientId='+ data + '" class="btn btn-success">Print prescription</a>';
+                        }
                     }
-
                 ]
             } );
 
