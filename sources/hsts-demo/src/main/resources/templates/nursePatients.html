@@ -44,7 +44,6 @@
                     </div>-->
                     <!-- /.box-header -->
                     <div class="box-body">
-
                         <table id="dataContent" class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -53,18 +52,16 @@
                                 <th>Birthday</th>
                                 <th>Gender</th>
                                 <th style="width: 40px;">#</th>
-                                <th style="width: 40px;">#</th>
                             </tr>
                             </thead>
                             <!--<tbody id="table-body"></tbody>-->
                             <tfoot>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Birthday</th>
-                                <th>Gender</th>
-                                <th style="width: 40px;">#</th>
-                                <th style="width: 40px;">#</th>
+                                <th style="width: 5%;">#</th>
+                                <th style="width: 40%;">Name</th>
+                                <th style="width: 15%;">Birthday</th>
+                                <th style="width: 20%;">Gender</th>
+                                <th style="width: 20%;">#</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -129,34 +126,32 @@
                            return count++;
                         }
                     },
-                    { "data": "account.fullName" },
+                    { "data": {
+                        "account.fullName": "account.fullName",
+                        "id": "id"
+                        },
+                        "render": function ( data, type, full, meta ) {
+                            return '<a href="/patient?patientID='+ data.id +  '">' + data.account.fullName + '</a>';
+                        }
+                    },
                     { "data": "account.birthday" },
                     { "data": "account.gender",
                         "render": function (data, type, full, meta) {
-                            var className = "btn btn-success";
+                            var className = "btn btn-success ";
                             if(data == "FEMALE") {
-                                className = "btn btn-danger";
+                                className = "btn btn-danger ";
                             }
-                            return '<input type ="text" disabled = "true" class="'+ className +'" value="' + data + '"/>';
+                            return '<input style = "width: 100%;" type ="text" disabled = "true" class="'+ className +'" value="' + data + '"/>';
                         }
                     },
                     {
                         "data": "id",
                         "render": function ( data, type, full, meta ) {
-                            return '<a href="/patient?patientID='+ data + '" class="btn btn-primary">Update</a>';
-                        }
-                    },
-                    {
-                        "data": "id",
-                        "render": function ( data, type, full, meta ) {
-                            return '<a href="/print?patientId='+ data + '" class="btn btn-success">Print prescription</a>';
+                            return '<a href="/print?patientId='+ data + '" class="btn btn-info">Print prescription</a>';
                         }
                     }
                 ]
             } );
-
-            var info = table.page.info();
-            console.log(info.pages);
         });
 
 
