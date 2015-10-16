@@ -229,6 +229,7 @@ public class DoctorService extends AbstractService {
 //                newTreatment.setAdvisePractice(prescription.getPracticeNote());
                 newTreatment.setAppointment(appointment);
                 newTreatment.setFromDate(new Date());
+                newTreatment.setCaloriesBurnEveryday(Integer.parseInt(prescription.getKcalRequire()));
                 if (null != toDate) {
                     // Set toDate = appointmentDate
                     newTreatment.setToDate(toDate);
