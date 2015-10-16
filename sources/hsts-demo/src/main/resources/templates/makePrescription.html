@@ -238,8 +238,24 @@
                                                     Date</label>
 
                                                 <div class="col-sm-4">
-                                                    <input th:if="${TREATMENT == null}" class="form-control" type="text" name="appointmentDate"
-                                                           id="Appointment" data-provide="Appointment"/>
+                                                    <div th:if="${TREATMENT == null}" class="input-group">
+                                                        <input class="form-control" type="text" name="appointmentDate"
+                                                               id="Appointment" data-provide="Appointment"/>
+                                                        <div class="input-group-btn">
+                                                            <!--<button type="button" class="btn btn-default dropdown-toggle"-->
+                                                                    <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>-->
+                                                            <!--<ul class="dropdown-menu dropdown-menu-right" id="changeWeek">-->
+                                                                <!--<li th:value="7"><a th:value="7">1 Week</a></li>-->
+                                                                <!--<li th:value="14"><a th:value="14">2 Week</a></li>-->
+
+                                                            <!--</ul>-->
+                                                            <!--<select id="changeWeek" class="btn btn-default dropdown-toggle">-->
+                                                                <!--<option value="7">1 Week</option>-->
+                                                                <!--<option value="14">2 Week</option>-->
+                                                            <!--</select>-->
+                                                        </div><!-- /btn-group -->
+                                                    </div>
+
                                                     <div th:if="${TREATMENT != null}" th:with="appointment=${TREATMENT.appointment}">
                                                         <input th:if="${appointment.nextAppointment == null}" class="form-control"
                                                                readonly="readonly" value=""/>
@@ -248,6 +264,7 @@
                                                                th:value="${#dates.format(appointment.nextAppointment.meetingDate, 'dd-MM-yyyy')}"/>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                         <!-- /.tab-pane -->
@@ -375,6 +392,14 @@
             defaultDate: "+1w",
             changeYear: true,
         });
+        $('#changeWeek').change(function() {
+            var appointmentDate = new Date();
+            appointmentDate.setDate(appointmentDate.getDate() + $( this ).val());
+            $( "#Appointment" ).datepicker( "option",
+                    $.datepicker.setDates(appointmentDate));
+
+        });
+
         var appointmentDate = new Date();
         appointmentDate.setDate(appointmentDate.getDate() + 7);
         $('#Appointment').datepicker("setDate", appointmentDate);
@@ -398,7 +423,8 @@
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mQuantity" id="mPresModels'+countMedicine+'.mQuantity" placeholder="Quanlity"/>';
+                    '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mQuantity" id="mPresModels'+countMedicine+'.mQuantity" placeholder="Quanlity"/>'+
+                    '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mUnit" id="mPresModels'+countMedicine+'.mUnit" placeholder="Unit"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mNote" id="mPresModels'+countMedicine+'.mNote" placeholder="Advice"/>';

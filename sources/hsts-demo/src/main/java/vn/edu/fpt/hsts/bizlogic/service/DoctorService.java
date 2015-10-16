@@ -254,7 +254,7 @@ public class DoctorService extends AbstractService {
                         medicineTreatment.setMedicine(medicine);
                         medicineTreatment.setNumberOfTime(medicineModel.getmTime());
                         medicineTreatment.setQuantitative(medicineModel.getmQuantity());
-                        medicineTreatment.setUnit(medicineModel.getUnit());
+                        medicineTreatment.setUnit(medicineModel.getmUnit());
                         medicineTreatment.setAdvice(medicineModel.getmNote());
                         medicineTreatment.setTreatment(newTreatment);
                         medicineTreatmentRepo.save(medicineTreatment);

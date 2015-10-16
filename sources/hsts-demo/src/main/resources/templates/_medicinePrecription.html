@@ -29,7 +29,10 @@
         </select>
         </td>
         <td><input type="text" class="form-control" th:field="*{mPresModels[0].mQuantity}"
-                   placeholder="Quanlity"/></td>
+                   placeholder="Quanlity"/>
+            <input type="text" class="form-control" th:field="*{mPresModels[0].mUnit}"
+                   placeholder="Unit"/>
+        </td>
         <td>
             <input type="text" class="form-control"
                    th:field="*{mPresModels[0].mNote}" placeholder="Advice"/>

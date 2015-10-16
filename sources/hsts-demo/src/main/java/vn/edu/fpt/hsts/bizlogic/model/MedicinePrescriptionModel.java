@@ -16,7 +16,7 @@ public class MedicinePrescriptionModel {
     /**
      *
      */
-    private String unit;
+    private String mUnit;
 
     /**
      * Medicine Quantity
@@ -30,9 +30,10 @@ public class MedicinePrescriptionModel {
     public MedicinePrescriptionModel() {
     }
 
-    public MedicinePrescriptionModel(int m, int mTime, int mQuantity, String mNote) {
+    public MedicinePrescriptionModel(int m, int mTime, String mUnit, int mQuantity, String mNote) {
         this.m = m;
         this.mTime = mTime;
+        this.mUnit = mUnit;
         this.mQuantity = mQuantity;
         this.mNote = mNote;
     }
@@ -69,20 +70,21 @@ public class MedicinePrescriptionModel {
         this.mNote = mNote;
     }
 
-    public String getUnit() {
-        return unit;
+    public String getmUnit() {
+        return mUnit;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setmUnit(String mUnit) {
+        this.mUnit = mUnit;
     }
 
     @Override
     public String toString() {
         return "MedicinePrescriptionModel{" +
-                "m='" + m + '\'' +
-                ", mTime='" + mTime + '\'' +
-                ", mQuantity='" + mQuantity + '\'' +
+                "m=" + m +
+                ", mTime=" + mTime +
+                ", mUnit='" + mUnit + '\'' +
+                ", mQuantity=" + mQuantity +
                 ", mNote='" + mNote + '\'' +
                 '}';
     }
