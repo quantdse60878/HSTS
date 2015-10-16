@@ -230,8 +230,7 @@ public class DoctorService extends AbstractService {
                 newTreatment.setStatus(IDbConsts.ITreatmentStatus.ON_TREATING);
                 newTreatment.setAppointment(appointment);
                 newTreatment.setFromDate(new Date());
-                //TODO
-//                newTreatment.setCaloriesBurnEveryday(Integer.parseInt(prescription.getKcalRequire()));
+                newTreatment.setCaloriesBurnEveryday(Integer.parseInt(prescription.getKcalRequire()));
                 newTreatment.setToDate(toDate);
                 treatmentRepo.save(newTreatment);
 
