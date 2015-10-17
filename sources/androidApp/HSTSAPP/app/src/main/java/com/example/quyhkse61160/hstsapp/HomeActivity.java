@@ -49,6 +49,7 @@ import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
 import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
+import com.example.quyhkse61160.hstsapp.Fragment.Notice_Tab;
 import com.example.quyhkse61160.hstsapp.Fragment.Tab1;
 import com.example.quyhkse61160.hstsapp.Fragment.Tab2;
 import com.example.quyhkse61160.hstsapp.Fragment.Tab3;
@@ -99,19 +100,13 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private boolean flag = false;
-
-    // nav drawer title
     private CharSequence mDrawerTitle;
-
-    // used to store app title
     private CharSequence mTitle;
-
-    // slide menu items
     private String[] navMenuTitles;
     private TypedArray navMenuIcons;
-
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter dadapter;
+    public static boolean hasNotify = false;
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -224,143 +219,13 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
 
         Constant.TREATMENTS = Constant.getItems();
-        mTitle = mDrawerTitle = getTitle();
-
-        // load slide menu items
-        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
-
-        // nav drawer icons from resources
-        navMenuIcons = getResources()
-                .obtainTypedArray(R.array.nav_drawer_icons);
-//        navMenuIcons = getResources()
-//                .obtainTypedArray(R.array.nav_drawer_items);
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
-
-        navDrawerItems = new ArrayList<NavDrawerItem>();
-
-        // adding nav drawer items to array
-        // Home
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
-        // Food
-        boolean hasFood = false;
-        boolean hasMedicine = false;
-        boolean hasPractice = false;
-        for(Treatment treatment : Constant.TREATMENTS){
-            for (ToDoTime time : treatment.getListFoodTreatment()) {
-                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
-                    hasFood = true;
-                }
-            }
-            for (ToDoTime time : treatment.getListMedicineTreatment()) {
-                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
-                    hasMedicine = true;
-                }
-            }
-            for (ToDoTime time : treatment.getListPracticeTreatment()) {
-                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
-                    hasPractice = true;
-                }
-            }
-        }
-
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), hasFood));
-        // Medicines
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), hasMedicine));
-        // Practice
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), hasPractice));
 
 
-        // Recycle the typed array
-        navMenuIcons.recycle();
-
-        // setting the nav drawer list adapter
-        dadapter = new NavDrawerListAdapter(getApplicationContext(),
-                navDrawerItems);
-        mDrawerList.setAdapter(dadapter);
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-                    item.setNotify(false);
-                    updateView(position);
-                    displayView(0);
-                }
-                if (position == 1) {
-                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-                    item.setNotify(false);
-                    updateView(position);
-                    displayView(1);
-                }
-                if (position == 2) {
-                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-                    item.setNotify(false);
-                    updateView(position);
-                    displayView(2);
-                }
-                if (position == 3) {
-                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-                    item.setNotify(false);
-                    updateView(position);
-                    item.setNotify(false);
-                    displayView(3);
-                }
-            }
-        });
-
-        // enabling action bar app icon and behaving it as toggle button
-        actionBar = getSupportActionBar();
-
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
-        if(hasFood || hasMedicine || hasPractice) actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer_red);
-        else {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
-        }
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.ic_drawer, //nav menu toggle icon
-                R.string.app_name, // nav drawer open - description for accessibility
-                R.string.app_name // nav drawer close - description for accessibility
-        ){
-            public void onDrawerClosed(View view) {
-                actionBar.setTitle(mTitle);
-                // calling onPrepareOptionsMenu() to show action bar icons
-//                invalidateOptionsMenu();
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                actionBar.setTitle(mDrawerTitle);
-                // calling onPrepareOptionsMenu() to hide action bar icons
-//                invalidateOptionsMenu();
-            }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        if (savedInstanceState == null) {
-            // on first time display view for first nav item
-            displayView(0);
-        }
-
-
-
-
-
-
-
-
-
-
-
-        checkNotifyIntent = new Intent(this, BroadcastService.class);
-        //KhuongMH
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             final Context context = getApplicationContext();
             if (bundle.getBoolean("openDialogForMe")) {
+                hasNotify = true;
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
                 r.play();
@@ -403,6 +268,161 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 dialog.show();
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        mTitle = mDrawerTitle = getTitle();
+
+        // load slide menu items
+        navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
+
+        // nav drawer icons from resources
+        navMenuIcons = getResources()
+                .obtainTypedArray(R.array.nav_drawer_icons);
+//        navMenuIcons = getResources()
+//                .obtainTypedArray(R.array.nav_drawer_items);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
+
+        navDrawerItems = new ArrayList<NavDrawerItem>();
+
+        // adding nav drawer items to array
+        // Home
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
+
+//        boolean hasFood = false;
+//        boolean hasMedicine = false;
+//        boolean hasPractice = false;
+//        for(Treatment treatment : Constant.TREATMENTS){
+//            for (ToDoTime time : treatment.getListFoodTreatment()) {
+//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+//                    hasFood = true;
+//                }
+//            }
+//            for (ToDoTime time : treatment.getListMedicineTreatment()) {
+//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+//                    hasMedicine = true;
+//                }
+//            }
+//            for (ToDoTime time : treatment.getListPracticeTreatment()) {
+//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+//                    hasPractice = true;
+//                }
+//            }
+//        }
+
+//        // Food
+//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), hasFood));
+//        // Medicines
+//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), hasMedicine));
+//        // Practice
+//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), hasPractice));
+
+        // Food
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
+        // Medicines
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+        // Practice
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
+
+
+        // Recycle the typed array
+        navMenuIcons.recycle();
+
+        // setting the nav drawer list adapter
+        dadapter = new NavDrawerListAdapter(getApplicationContext(),
+                navDrawerItems);
+        mDrawerList.setAdapter(dadapter);
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+//                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+//                    item.setNotify(false);
+                    updateView(position);
+                    displayView(0);
+                }
+                if (position == 1) {
+//                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+//                    item.setNotify(false);
+                    updateView(position);
+                    displayView(1);
+                }
+                if (position == 2) {
+//                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+//                    item.setNotify(false);
+                    updateView(position);
+                    displayView(2);
+                }
+                if (position == 3) {
+//                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+//                    item.setNotify(false);
+                    updateView(position);
+                    displayView(3);
+                }
+            }
+        });
+
+        // enabling action bar app icon and behaving it as toggle button
+        actionBar = getSupportActionBar();
+
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
+//        if(hasFood || hasMedicine || hasPractice) actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer_red);
+//        else {
+//            actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
+//        }
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.drawable.ic_drawer, //nav menu toggle icon
+                R.string.app_name, // nav drawer open - description for accessibility
+                R.string.app_name // nav drawer close - description for accessibility
+        ){
+            public void onDrawerClosed(View view) {
+                actionBar.setTitle(mTitle);
+                // calling onPrepareOptionsMenu() to show action bar icons
+//                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                actionBar.setTitle(mDrawerTitle);
+                // calling onPrepareOptionsMenu() to hide action bar icons
+//                invalidateOptionsMenu();
+            }
+        };
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        if (savedInstanceState == null) {
+            // on first time display view for first nav item
+            if(hasNotify) displayView(4);
+            else displayView(0);
+        }
+
+
+
+
+
+
+
+
+
+
+
+        checkNotifyIntent = new Intent(this, BroadcastService.class);
+        //KhuongMH
+
 
 
 //        actionBar = getSupportActionBar();
@@ -527,6 +547,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 break;
             case 3:
                 fragment = new Tab3();
+                break;
+            case 4:
+                fragment = new Notice_Tab();
                 break;
             default:
                 break;
