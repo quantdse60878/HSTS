@@ -107,6 +107,7 @@ public class NoticeTab extends Fragment {
         if (sections.isEmpty()) {
             llPractice.setVisibility(View.GONE);
         } else {
+            llPractice.setVisibility(View.VISIBLE);
             practiceAdapter = new PracticeAdapter(getActivity(), sections);
             practice.setAdapter(practiceAdapter);
         }

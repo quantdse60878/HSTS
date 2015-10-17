@@ -47,13 +47,11 @@ public class NoticeActivity extends ActionBarActivity {
             quantitative.setText("Số Lượng");
             for (Treatment treatment : treatments) {
                 for (ToDoTime time : treatment.getListFoodTreatment()) {
-                    if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
                         HashMap<String, String> d = new HashMap<>();
                         d.put("Name", time.getName());
                         d.put("Number", time.getNumberOfTime().size() + "");
                         d.put("Quantity", time.getQuantitative());
                         sections.add(d);
-                    }
                 }
             }
         }
@@ -63,13 +61,11 @@ public class NoticeActivity extends ActionBarActivity {
             quantitative.setText("Số Lượng/Lần");
             for (Treatment treatment : treatments) {
                 for (ToDoTime time : treatment.getListMedicineTreatment()) {
-                    if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
                         HashMap<String, String> d = new HashMap<>();
                         d.put("Name", time.getName());
                         d.put("Number", time.getNumberOfTime().size() + "");
                         d.put("Quantity", time.getQuantitative());
                         sections.add(d);
-                    }
                 }
             }
         }
@@ -79,13 +75,11 @@ public class NoticeActivity extends ActionBarActivity {
             quantitative.setText("Thời Gian");
             for (Treatment treatment : treatments) {
                 for (ToDoTime time : treatment.getListPracticeTreatment()) {
-                    if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
                         HashMap<String, String> d = new HashMap<>();
                         d.put("Name", time.getName());
                         d.put("Number", time.getNumberOfTime().size() + "");
-                        d.put("Quantity", time.getQuantitative() + " phút");
+                        d.put("Quantity", time.getQuantitative());
                         sections.add(d);
-                    }
                 }
             }
         }

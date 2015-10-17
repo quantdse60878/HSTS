@@ -15,9 +15,9 @@
         <LinearLayout
             android:id="@+id/first"
             android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="33"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="15dp">
             <TextView
                 android:id="@+id/txt_food"
                 android:layout_width="match_parent"
@@ -25,20 +25,21 @@
                 android:text="Thức Ăn"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                android:textColor="#01579B"/>
+                android:textColor="#01579B"
+                android:layout_marginBottom="15dp"/>
             <ListView
                 android:id="@+id/list_food"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_food"></ListView>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/second"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="33"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@+id/first">
+            android:layout_below="@+id/first"
+            android:layout_marginBottom="15dp">
             <TextView
                 android:id="@+id/txt_medicine"
                 android:layout_width="match_parent"
@@ -46,20 +47,21 @@
                 android:text="Thuốc"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                android:textColor="#01579B"/>
+                android:textColor="#01579B"
+                android:layout_marginBottom="15dp"/>
             <ListView
                 android:id="@+id/list_medicine"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_medicine"></ListView>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/third"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="33"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@+id/second">
+            android:layout_below="@+id/second"
+            android:layout_marginBottom="15dp">
             <TextView
                 android:id="@+id/txt_practice"
                 android:layout_width="match_parent"
@@ -67,11 +69,12 @@
                 android:text="Bài Tập"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                android:textColor="#01579B"/>
+                android:textColor="#01579B"
+                android:layout_marginBottom="15dp"/>
             <ListView
                 android:id="@+id/list_practice"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_practice"></ListView>
         </LinearLayout>
     </LinearLayout>
