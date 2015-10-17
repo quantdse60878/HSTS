@@ -5,6 +5,7 @@ import org.joda.time.Days;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
@@ -15,10 +16,10 @@ import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
 import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.IllnessRepo;
-import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
 import vn.edu.fpt.hsts.persistence.repo.PhaseRepo;
 
-import java.util.Calendar;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,10 @@ import java.util.List;
  */
 @Service
 public class IllnessService {
+
+    /**
+     * The logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(IllnessService.class);
 
     /**
@@ -34,12 +39,6 @@ public class IllnessService {
      */
     @Autowired
     private IllnessRepo illnessRepo;
-
-    /**
-     * The {@link MedicalRecordRepo}.
-     */
-    @Autowired
-    private MedicalRecordRepo medicalRecordRepo;
 
     /**
      * The {@link PhaseRepo}.
@@ -53,14 +52,61 @@ public class IllnessService {
     @Autowired
     private AppointmentRepo appointmentRepo;
 
+
+    /**
+     * The default clinical symptoms.
+     */
+    @Value("${hsts.default.clinical.symptoms}")
+    private String defaultSymptoms;
+
+    /**
+     * Find all illness.
+     * @return {@link java.util.List}
+     */
     public List<Illness> getAllIllness(){
-        return illnessRepo.findAll();
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final List<Illness> illnesses = illnessRepo.findAll();
+            if(null != illnesses) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Got {} records", illnesses.size());
+                }
+            }
+            return illnesses;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+
     }
 
+    /**
+     * Find Illness by an ID
+     * @param illnessID int
+     * @return {@link Illness}
+     */
     public Illness findByID(final int illnessID) {
-        return illnessRepo.findOne(illnessID);
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            Illness illness = illnessRepo.findOne(illnessID);
+            if (null != illness) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Result: name[{}], description[{}]", illness.getName(), illness.getDescription());
+                }
+            }
+            return illness;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+
     }
 
+    /**
+     * Find the phase to suggest prescription
+     * @param appointmentId int
+     * @param diagnostic int
+     * @return {@link Phase}
+     * @throws BizlogicException
+     */
     public Phase getPhaseSugestion(final int appointmentId, final int diagnostic) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
@@ -97,6 +143,46 @@ public class IllnessService {
             }
             // Select suitable phase
             return phaseRepo.findSuitablePhase(illness.getId(), numberOfDay);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    /**
+     * Find all illness names
+     * @return {@link List}
+     */
+    public List<String> findAllIllnessName() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final List<String> illnessNames = illnessRepo.findAllNames();
+            if (null != illnessNames) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Illness list size: {}", illnessNames.size());
+                }
+                return illnessNames;
+            }
+            return Collections.emptyList();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    /**
+     * Find all default clinical symptoms
+     * @return
+     */
+    public List<String> findDefaultClinicalSymptom() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            if (null == defaultSymptoms) {
+                return Collections.emptyList();
+            }
+            final String[] arr = defaultSymptoms.split(",");
+            if(LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Got {} records", arr.length);
+            }
+            return Arrays.asList(arr);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

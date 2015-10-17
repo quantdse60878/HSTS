@@ -13,9 +13,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.edu.fpt.hsts.persistence.entity.Illness;
 
+import java.util.List;
+
 @Repository
 public interface IllnessRepo extends JpaRepository<Illness, Integer> {
 
     @Query("select i from Illness i where name = :name")
     public Illness findByName(@Param("name") final String name);
+
+    @Query("select distinct name from Illness i")
+    public List<String> findAllNames();
 }
