@@ -26,6 +26,7 @@ public class NoticeActivity extends ActionBarActivity {
     NoticeAdapter adapter;
     ListView listView;
     TextView name, number, quantitative;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,47 +39,53 @@ public class NoticeActivity extends ActionBarActivity {
         actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
         Bundle bundle = getIntent().getExtras();
         String field = bundle.getString("field");
-        ArrayList<HashMap<String,String>> sections = new ArrayList<>();
+        ArrayList<HashMap<String, String>> sections = new ArrayList<>();
         List<Treatment> treatments = Constant.TREATMENTS;
-        if(field.equals("food")){
+        if (field.equals("food")) {
             name.setText("Tên Món Ăn");
             number.setText("Số Bữa Ăn");
             quantitative.setText("Số Lượng");
-            for(Treatment treatment : treatments){
-                for(ToDoTime time : treatment.getListFoodTreatment()){
-                        HashMap<String,String> d = new HashMap<>();
-                        d.put("Name",time.getName());
-                        d.put("Number",time.getNumberOfTime().size() + "");
-                        d.put("Quantity",time.getQuantitative());
+            for (Treatment treatment : treatments) {
+                for (ToDoTime time : treatment.getListFoodTreatment()) {
+                    if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+                        HashMap<String, String> d = new HashMap<>();
+                        d.put("Name", time.getName());
+                        d.put("Number", time.getNumberOfTime().size() + "");
+                        d.put("Quantity", time.getQuantitative());
                         sections.add(d);
+                    }
                 }
             }
         }
-        if(field.equals("medicine")){
+        if (field.equals("medicine")) {
             name.setText("Tên Thuốc");
             number.setText("Số Lần Uống");
             quantitative.setText("Số Lượng/Lần");
-            for(Treatment treatment : treatments){
-                for(ToDoTime time : treatment.getListMedicineTreatment()){
-                    HashMap<String,String> d = new HashMap<>();
-                    d.put("Name",time.getName());
-                    d.put("Number",time.getNumberOfTime().size() + "");
-                    d.put("Quantity",time.getQuantitative());
-                    sections.add(d);
+            for (Treatment treatment : treatments) {
+                for (ToDoTime time : treatment.getListMedicineTreatment()) {
+                    if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+                        HashMap<String, String> d = new HashMap<>();
+                        d.put("Name", time.getName());
+                        d.put("Number", time.getNumberOfTime().size() + "");
+                        d.put("Quantity", time.getQuantitative());
+                        sections.add(d);
+                    }
                 }
             }
         }
-        if(field.equals("practice")){
+        if (field.equals("practice")) {
             name.setText("Tên Bài Tập");
             number.setText("Số Lần Tập");
             quantitative.setText("Thời Gian");
-            for(Treatment treatment : treatments){
-                for(ToDoTime time : treatment.getListPracticeTreatment()){
-                    HashMap<String,String> d = new HashMap<>();
-                    d.put("Name",time.getName());
-                    d.put("Number",time.getNumberOfTime().size() + "");
-                    d.put("Quantity",time.getQuantitative() + " phút");
-                    sections.add(d);
+            for (Treatment treatment : treatments) {
+                for (ToDoTime time : treatment.getListPracticeTreatment()) {
+                    if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
+                        HashMap<String, String> d = new HashMap<>();
+                        d.put("Name", time.getName());
+                        d.put("Number", time.getNumberOfTime().size() + "");
+                        d.put("Quantity", time.getQuantitative() + " phút");
+                        sections.add(d);
+                    }
                 }
             }
         }
