@@ -24,8 +24,9 @@ import java.util.List;
 
 public class NoticeTab extends Fragment {
 
-    ListView food, medicine, practice;
-    LinearLayout llFood, llMedicine, llPractice;
+    LinearLayout food, medicine, practice;
+    LinearLayout llFood, llMedicine, llPractice, llNotice;
+    TextView notice;
     FoodAdapter foodAdapter;
     MedicineAdapter medicineAdapter;
     PracticeAdapter practiceAdapter;
@@ -37,14 +38,22 @@ public class NoticeTab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_notice_tab, container, false);
-        food = (ListView) v.findViewById(R.id.list_food);
-        medicine = (ListView) v.findViewById(R.id.list_medicine);
-        practice = (ListView) v.findViewById(R.id.list_practice);
+        food = (LinearLayout) v.findViewById(R.id.list_food);
+        medicine = (LinearLayout) v.findViewById(R.id.list_medicine);
+        practice = (LinearLayout) v.findViewById(R.id.list_practice);
         llFood = (LinearLayout) v.findViewById(R.id.first);
         llMedicine = (LinearLayout) v.findViewById(R.id.second);
         llPractice = (LinearLayout) v.findViewById(R.id.third);
+        llNotice = (LinearLayout) v.findViewById(R.id.fourth);
+        notice = (TextView) v.findViewById(R.id.time_notice);
 
         //update food notify
+        if(HomeActivity.timeAlert == null) {
+            llNotice.setVisibility(View.GONE);
+        } else {
+            llNotice.setVisibility(View.VISIBLE);
+            notice.setText(HomeActivity.timeAlert);
+        }
         sections = new ArrayList<>();
         List<Treatment> treatments = Constant.TREATMENTS;
         for (Treatment treatment : treatments) {
@@ -65,7 +74,10 @@ public class NoticeTab extends Fragment {
         } else {
             llFood.setVisibility(View.VISIBLE);
             foodAdapter = new FoodAdapter(getActivity(), sections);
-            food.setAdapter(foodAdapter);
+            for (int i=0; i < foodAdapter.getCount();i++){
+                View vi = foodAdapter.getView(i,null,food);
+                food.addView(vi);
+            }
         }
 
         //update medicine notify
@@ -87,13 +99,16 @@ public class NoticeTab extends Fragment {
         } else {
             llMedicine.setVisibility(View.VISIBLE);
             medicineAdapter = new MedicineAdapter(getActivity(), sections);
-            medicine.setAdapter(medicineAdapter);
+            for (int i=0; i < medicineAdapter.getCount();i++){
+                View vi = medicineAdapter.getView(i,null,medicine);
+                medicine.addView(vi);
+            }
         }
 
         //update food notify
         sections = new ArrayList<>();
         for (Treatment treatment : treatments) {
-            for (ToDoTime time : treatment.getListFoodTreatment()) {
+            for (ToDoTime time : treatment.getListPracticeTreatment()) {
                 if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
                     HashMap<String, String> d = new HashMap<>();
                     d.put("PracticeName", time.getName());
@@ -109,7 +124,10 @@ public class NoticeTab extends Fragment {
         } else {
             llPractice.setVisibility(View.VISIBLE);
             practiceAdapter = new PracticeAdapter(getActivity(), sections);
-            practice.setAdapter(practiceAdapter);
+            for (int i=0; i < practiceAdapter.getCount();i++){
+                View vi = practiceAdapter.getView(i,null,practice);
+                practice.addView(vi);
+            }
         }
         HomeActivity.hasNotify = false;
         return v;

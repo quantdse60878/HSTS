@@ -52,7 +52,7 @@ public class BroadcastService extends Service {
 
     private static final String TAG = "BroadcastService Notify";
     public static final String BROADCAST_ACTION = "com.example.quyhkse61160.hstsapp.trackingevent";
-    public static boolean flag = true;
+    public static boolean flag;
     private final Handler handlerThread = new Handler();
     Intent intent;
     int counter = 0;
@@ -196,6 +196,7 @@ public class BroadcastService extends Service {
 //                        Su dung private folder
                     }
              //Khuong ve nha code cho nay bo alarm thay bang kiem tra thoi gian trong list time. Neu trung thi hien nhu binh thuong
+                    Log.d("KhuongMH", "---------------" + c.getTime().getHours() + ":" + c.getTime().getMinutes());
                     for (
                             String time
                             : HomeActivity.amountTime)
@@ -204,10 +205,12 @@ public class BroadcastService extends Service {
                         Calendar c2 = Calendar.getInstance();
                         c2.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.split(":")[0]));
                         c2.set(Calendar.MINUTE, Integer.parseInt(time.split(":")[1]));
+
                         if (c2.getTime().getHours() == c.getTime().getHours()
                                 && c2.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
                             final Context context = getApplicationContext();
                             if (BroadcastService.flag) {
+                                Log.d("KhuongMH","FALSEEEEEEEEEEE");
                                 BroadcastService.flag = false;
                                 Intent in = new Intent(context, HomeActivity.class);
                                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

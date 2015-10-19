@@ -206,7 +206,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home2);
-
+        if(!hadRegisterReceiver) {
+            hadRegisterReceiver = true;
+            registerReceiver(mConnectionDetector, mIntentFilter);
+        }
 
         Constant.TREATMENTS = Constant.getItems();
 
@@ -318,12 +321,14 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 //        // Practice
 //        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), hasPractice));
 
-        // Food
+//        // Food
+//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
+//        // Medicines
+//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+//        // Practice
+//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
+        // Notice
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-        // Medicines
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
-        // Practice
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
 
 
         // Recycle the typed array
@@ -348,18 +353,24 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     updateView(position);
                     displayView(1);
                 }
-                if (position == 2) {
-//                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-//                    item.setNotify(false);
-                    updateView(position);
-                    displayView(2);
-                }
-                if (position == 3) {
-//                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-//                    item.setNotify(false);
-                    updateView(position);
-                    displayView(3);
-                }
+//                if (position == 2) {
+////                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+////                    item.setNotify(false);
+//                    updateView(position);
+//                    displayView(2);
+//                }
+//                if (position == 3) {
+////                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+////                    item.setNotify(false);
+//                    updateView(position);
+//                    displayView(3);
+//                }
+//                if (position == 4) {
+////                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
+////                    item.setNotify(false);
+//                    updateView(position);
+//                    displayView(4);
+//                }
             }
         });
 
@@ -396,19 +407,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
         if (savedInstanceState == null) {
             // on first time display view for first nav item
-            if(hasNotify) displayView(4);
+            if(hasNotify) displayView(1);
             else displayView(0);
         }
-
-
-
-
-
-
-
-
-
-
 
         checkNotifyIntent = new Intent(this, BroadcastService.class);
         //KhuongMH
@@ -530,17 +531,17 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 fragment = new Tab4();
                 break;
             case 1:
-                fragment = new Tab1();
-                break;
-            case 2:
-                fragment = new Tab2();
-                break;
-            case 3:
-                fragment = new Tab3();
-                break;
-            case 4:
                 fragment = new NoticeTab();
                 break;
+//            case 2:
+//                fragment = new Tab2();
+//                break;
+//            case 3:
+//                fragment = new Tab3();
+//                break;
+//            case 4:
+//                fragment = new NoticeTab();
+//                break;
             default:
                 break;
         }
