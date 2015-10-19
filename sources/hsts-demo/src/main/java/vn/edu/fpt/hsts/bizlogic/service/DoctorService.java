@@ -230,7 +230,7 @@ public class DoctorService extends AbstractService {
                 newTreatment.setStatus(IDbConsts.ITreatmentStatus.ON_TREATING);
                 newTreatment.setAppointment(appointment);
                 newTreatment.setFromDate(new Date());
-                newTreatment.setCaloriesBurnEveryday(Integer.parseInt(prescription.getKcalRequire()));
+                newTreatment.setCaloriesBurnEveryday(prescription.getKcalRequire());
                 newTreatment.setToDate(toDate);
                 treatmentRepo.save(newTreatment);
 
@@ -244,6 +244,9 @@ public class DoctorService extends AbstractService {
                     for(MedicinePrescriptionModel medicineModel: mPresModels) {
                         if (LOGGER.isDebugEnabled()) {
                             LOGGER.debug(medicineModel.toString());
+                        }
+                        if (medicineModel.getM() <= 0) {
+                            continue;
                         }
                         Medicine medicine = medicineRepo.findOne(medicineModel.getM());
                         if (null == medicine) {
@@ -264,6 +267,9 @@ public class DoctorService extends AbstractService {
                 final List<FoodPrescriptionModel> fPresModels = prescription.getfPresModels();
                 if(null != fPresModels && !fPresModels.isEmpty()) {
                     for (FoodPrescriptionModel foodModel: fPresModels) {
+                        if (foodModel.getF() <= 0) {
+                            continue;
+                        }
                         Food food = foodRepo.findOne(foodModel.getF());
                         if (null == food) {
                             throw new BizlogicException("Food with id[{}] is not found", null, foodModel.getF());
@@ -283,6 +289,9 @@ public class DoctorService extends AbstractService {
                 if (null != pPresModels && !pPresModels.isEmpty()) {
 
                     for(PracticePrescriptionModel practiceModel: pPresModels) {
+                        if (practiceModel.getP() <= 0) {
+                            continue;
+                        }
                         final Practice practice = practiceRepo.findOne(practiceModel.getP());
                         if (null == practice) {
                             throw new BizlogicException("Practice with name[{}] is not found", null, practiceModel.getP());

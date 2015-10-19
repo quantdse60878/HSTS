@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class PrescriptionModel {
     private String diagnostic;
-    private String kcalRequire;
+    private int kcalRequire;
     private List<MedicinePrescriptionModel> mPresModels;
     private List<FoodPrescriptionModel> fPresModels;
     private List<PracticePrescriptionModel> pPresModels;
@@ -17,7 +17,7 @@ public class PrescriptionModel {
     }
 
     public PrescriptionModel(String diagnostic,
-                             String kcalRequire,
+                             int kcalRequire,
                              List<MedicinePrescriptionModel> mPresModels,
                              List<FoodPrescriptionModel> fPresModels,
                              List<PracticePrescriptionModel> pPresModels) {
@@ -36,11 +36,11 @@ public class PrescriptionModel {
         this.diagnostic = diagnostic;
     }
 
-    public String getKcalRequire() {
+    public int getKcalRequire() {
         return kcalRequire;
     }
 
-    public void setKcalRequire(String kcalRequire) {
+    public void setKcalRequire(int kcalRequire) {
         this.kcalRequire = kcalRequire;
     }
 
