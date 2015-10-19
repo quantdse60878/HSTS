@@ -53,7 +53,8 @@
 
                         <!-- form start -->
                         <form class="form-horizontal" method="POST" th:action="updatePatient">
-
+                            <input type="hidden" th:name="patientId" class="form-control"
+                                   th:value="${PATIENT.id}"/>
                             <!-- New design-->
 
                             <div class="box-body">
