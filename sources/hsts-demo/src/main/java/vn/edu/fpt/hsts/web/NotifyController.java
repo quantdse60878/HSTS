@@ -77,12 +77,13 @@ public class NotifyController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "markAllReaded", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String markAllReaded() {
+    @RequestMapping(value = "markAllReaded", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Void markAllReaded() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             notifyService.markAllNotificationAsReaded();
-            return OK_STATUS;
+            return null;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

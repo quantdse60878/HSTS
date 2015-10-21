@@ -27,7 +27,7 @@
                         th:if="${practicePhase.practice.id != practice.id}"></option>
             </select>
         </td>
-        <td>
+        <td style="min-width: 75px;">
             <select class="form-control" th:field="*{pPresModels[__${row.index}__].pTime}">
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>

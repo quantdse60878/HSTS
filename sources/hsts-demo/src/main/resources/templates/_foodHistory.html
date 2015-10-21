@@ -15,7 +15,7 @@
     </tr>
     <tr th:each="foodTreatment,row : ${TREATMENT.foodTreatmentList}">
         <td th:text="${row.count}"></td>
-        <td>
+        <td style="min-width: 75px;">
             <input th:value="${foodTreatment.food.name}" readonly="readonly" class="form-control"/>
         </td>
         <td>

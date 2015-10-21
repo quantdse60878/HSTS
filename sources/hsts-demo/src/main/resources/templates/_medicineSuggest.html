@@ -27,7 +27,8 @@
                         th:if="${medicalPhase.medicine.id != medicine.id}"></option>
             </select>
         </td>
-        <td><select class="form-control" th:field="*{mPresModels[__${row.index}__].mTime}">
+        <td style="min-width: 75px;">
+            <select class="form-control" th:field="*{mPresModels[__${row.index}__].mTime}">
             <option th:each="time : ${TIMES}" th:value="${time}"
                     th:text="${time}"></option>
         </select>

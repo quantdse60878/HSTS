@@ -63,39 +63,43 @@
 <script type="text/javascript"
         th:src="@{/static/bower/admin-lte/plugins/datatables/dataTables.bootstrap.min.js}"></script>
 <script type="text/javascript">
-    $(function () {
-        $("#dataTable").DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "ordering": true,
-            "info": true
+    function markAllasRead(){
+        $.ajax({
+            url: "markAllReaded",
+            data: "",
+            success: function (result) {
+                return notifyScheduler();
+            }
         });
-    });
+    }
+    function notifyScheduler() {
+        $.getJSON("notifyWeb", function (result) {
+            // Set num notify.
+            var num = result.length;
+            // Delete Num.
+            $("#notifyNum").html('');
+            // Add Num.
+            if(num != 0){
+                $("#notifyNum").html(num);
+            }
 
-    $(document).ready(function () {
-        function notifyScheduler() {
-            $.getJSON("notifyWeb", function (result) {
-                // Set num notify.
-                var num = result.length;
-                if(num != 0){
-                    $("#notifyNum").html(num);
-                }
+            // Delete row.
+            $("#notifyRow").html('');
+            // Add row.
 
-                // Delete row.
-                $("#notifyRow").html('');
-                // Add row.
-
-                $.each(result, function (i, field) {
-                    $("#notifyRow").append(
-                            '<li>' +
-                            '<a href="' + field.targetLink + '">' +
-                            '<i class="fa fa-users text-aqua"></i>' + field.message + '</a>' +
-                            '</li>'
-                    )
-                })
-
+            $.each(result, function (i, field) {
+                $("#notifyRow").append(
+                        '<li>' +
+                        '<a href="' + field.targetLink + '">' +
+                        '<i class="fa fa-users text-aqua"></i>' + field.message + '</a>' +
+                        '</li>'
+                )
             })
-        };
+
+        })
+    };
+    $(document).ready(function () {
+        var notifyInit = setTimeout(notifyScheduler, 10);
         var notify = setInterval(notifyScheduler, 10000);
         var method = $('#METHOD').val();
         var mes = $('#MESSAGE').val();

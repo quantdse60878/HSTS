@@ -23,7 +23,7 @@
                         th:text="${medicine.name}"></option>
             </select>
         </td>
-        <td><select class="form-control" th:field="*{mPresModels[0].mTime}">
+        <td style="min-width: 75px;"><select class="form-control" th:field="*{mPresModels[0].mTime}">
             <option th:each="time : ${TIMES}" th:value="${time}"
                     th:text="${time}"></option>
         </select>

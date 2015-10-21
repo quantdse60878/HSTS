@@ -26,7 +26,7 @@
                         th:if="${foodPhase.food.id != food.id}"></option>
             </select>
         </td>
-        <td>
+        <td style="min-width: 75px;">
             <select class="form-control" th:field="*{fPresModels[__${row.index}__].fTime}">
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
