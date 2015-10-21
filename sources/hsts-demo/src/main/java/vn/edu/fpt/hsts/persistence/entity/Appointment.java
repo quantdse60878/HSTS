@@ -41,6 +41,8 @@ public class Appointment extends AbstractKeyEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
     private List<Treatment> treatmentList;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
+    private List<PreventionCheck> preventionCheckList;
     /**
      *
      */
@@ -69,6 +71,14 @@ public class Appointment extends AbstractKeyEntity {
     private int waists;
 
     public Appointment() {
+    }
+
+    public List<PreventionCheck> getPreventionCheckList() {
+        return preventionCheckList;
+    }
+
+    public void setPreventionCheckList(List<PreventionCheck> preventionCheckList) {
+        this.preventionCheckList = preventionCheckList;
     }
 
     public Date getMeetingDate() {

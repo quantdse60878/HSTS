@@ -79,10 +79,9 @@ public class TreatmentService {
 
             Treatment treatment = treatmentRepo.findTreatmentByAppointmentId(appointment.getId());
             if(treatment!=null) {
-                treatmentOfPatient.setCaloriesBurnEveryday(treatment.getCaloriesBurnEveryday());
                 treatmentOfPatient.setFromDate(treatment.getFromDate().toString());
                 treatmentOfPatient.setToDate(treatment.getToDate().toString());
-
+                treatmentOfPatient.setCaloriesBurnEveryday(treatment.getCaloriesBurnEveryday() + "");
                 List<MedicineTreatmentModel> medicineTreatmentModels = new ArrayList<MedicineTreatmentModel>();
                 List<FoodTreatmentModel> foodTreatmentModels = new ArrayList<FoodTreatmentModel>();
                 List<PracticeTreatmentModel> practiceTreatmentModels = new ArrayList<PracticeTreatmentModel>();

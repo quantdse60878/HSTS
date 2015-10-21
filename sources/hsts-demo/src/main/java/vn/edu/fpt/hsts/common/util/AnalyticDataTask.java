@@ -36,6 +36,8 @@ public class AnalyticDataTask {
     NotifyRepo notifyRepo;
     @Autowired
     AccountRepo accountRepo;
+    @Autowired
+    PreventionCheckRepo preventionCheckRepo;
 
     @Scheduled(fixedRate = 1000*20)
     public void updatePatientData() {
@@ -46,12 +48,15 @@ public class AnalyticDataTask {
         for(int i = 0; i < listRecordData.size(); i++) {
             MedicalRecordData recordData = listRecordData.get(i);
             Map<String, Object> vars = new HashMap<String, Object>();
-            vars.put("x", recordData.getAppointment().getHeight());
+
+            PreventionCheck preventionCheck = preventionCheckRepo.findPreventionCheckByAppointmentId(recordData.getAppointment().getId());
+
+            vars.put("x", preventionCheck.getHeight());
             vars.put("z", recordData.getNumberOfStep());
             try {
                 distance = Float.parseFloat(engine.eval(IConsts.FORMULA_CALCULATE_DISTANCE, new SimpleBindings(vars)).toString());
                 vars = new HashMap<String, Object>();
-                vars.put("y", recordData.getAppointment().getWeight());
+                vars.put("y", preventionCheck.getWeight());
                 vars.put("k", distance);
                 calories = (int) Double.parseDouble(engine.eval(IConsts.FORMULA_CALCULATE_CALORIES, new SimpleBindings(vars)).toString());
                 if(distance > 0 && calories > 0) {
@@ -68,7 +73,7 @@ public class AnalyticDataTask {
             Treatment treatment = treatmentRepo.findTreatmentByAppointmentId(appointment.getId());
             int ratioComplete = (calories*100)/treatment.getCaloriesBurnEveryday();
             recordData.setRatioCompletePractice(ratioComplete);
-            if(ratioComplete < 55) {
+            if(ratioComplete < 80) {
                 MedicalRecord medicalRecord = appointment.getMedicalRecord();
                 Account sender = medicalRecord.getDoctor().getAccount();
                 Account receiverId = medicalRecord.getPatient().getAccount();

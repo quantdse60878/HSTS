@@ -15,7 +15,7 @@ public class TreatmentModel implements Serializable {
     private int appointmentId;
     private String fromDate;
     private String toDate;
-    private int caloriesBurnEveryday;
+    private String caloriesBurnEveryday;
     private List<FoodTreatmentModel> listFoodTreatment = new ArrayList<FoodTreatmentModel>();
     private List<MedicineTreatmentModel> listMedicineTreatment = new ArrayList<MedicineTreatmentModel>();
     private List<PracticeTreatmentModel> listPracticeTreatment = new ArrayList<PracticeTreatmentModel>();
@@ -33,11 +33,11 @@ public class TreatmentModel implements Serializable {
         this.listPracticeTreatment = listPracticeTreatment;
     }
 
-    public int getCaloriesBurnEveryday() {
+    public String getCaloriesBurnEveryday() {
         return caloriesBurnEveryday;
     }
 
-    public void setCaloriesBurnEveryday(int caloriesBurnEveryday) {
+    public void setCaloriesBurnEveryday(String caloriesBurnEveryday) {
         this.caloriesBurnEveryday = caloriesBurnEveryday;
     }
 
