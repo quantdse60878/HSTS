@@ -68,7 +68,10 @@
                                             <a href="#tab_2" data-toggle="tab">Basic checking</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_3" data-toggle="tab">Medical registration</a>
+                                            <a href="#tab_3" data-toggle="tab">Prevention checking</a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab_4" data-toggle="tab">Medical registration</a>
                                         </li>
                                     </ul>
                                     <!-- End tab header -->
@@ -135,57 +138,113 @@
 
                                             <div th:class="form-group">
                                                 <!-- Mạch -->
-                                                <label for="mach" class="col-sm-3 control-label">Mạch</label>
+                                                <label for="hearthBeat" class="col-sm-3 control-label">Hearth Beat</label>
                                                 <div class="col-sm-2">
-                                                    <input type="text" th:name="mach" class="form-control" id="mach"
-                                                           placeholder="Mach"/>
+                                                    <input type="text" th:name="hearthBeat" class="form-control" id="hearthBeat"
+                                                           placeholder="Hearth Beat"/>
                                                 </div>
-                                                <label for="mach" class="col-sm-1 control-label">lần/phút</label>
+                                                <label for="hearthBeat" class="col-sm-1 control-label">times/minute</label>
 
                                                 <!-- Huyết áp-->
-                                                <label for="huyetap" class="col-sm-2 control-label">Huyết áp</label>
+                                                <label for="bloodPressure" class="col-sm-2 control-label">Blood Pressure</label>
                                                 <div class="col-sm-2">
-                                                    <input type="text" th:name="huyetap" class="form-control" id="huyetap"
-                                                           placeholder="Huyết áp"/>
+                                                    <input type="text" th:name="bloodPressure" class="form-control" id="bloodPressure"
+                                                           placeholder="Blood Pressure"/>
                                                 </div>
-                                                <label for="huyetap" class="col-sm-1 control-label">mmHg</label>
+                                                <label for="bloodPressure" class="col-sm-1 control-label">mmHg</label>
                                             </div>
 
 
-                                            <!-- Tỷ lệ mỡ cơ thể-->
                                             <div th:class="form-group">
-                                                <label for="mocothe" class="col-sm-3 control-label">Tỉ lệ mỡ cơ thể</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="mocothe" class="form-control" id="mocothe"
-                                                           placeholder="%"/>
-                                                </div>
-                                                <label for="mocothe" class="col-sm-1 control-label">%</label>
 
                                                 <!-- Vòng bụng-->
-                                                <label for="vongbung" class="col-sm-2 control-label">Vòng bụng</label>
+                                                <label for="waists" class="col-sm-2 control-label">Waists</label>
                                                 <div class="col-sm-2">
-                                                    <input type="text" th:name="vongbung" class="form-control" id="vongbung"
+                                                    <input type="text" th:name="waists" class="form-control" id="waists"
                                                            placeholder="cm"/>
                                                 </div>
-                                                <label for="mach" class="col-sm-1 control-label">cm</label>
-                                            </div>
+                                                <label for="waists" class="col-sm-1 control-label">cm</label>
 
-                                            <!-- Chuyển hóa cơ bản -->
-                                            <div th:class="form-group">
-                                                <label for="chuyenhoa" class="col-sm-3 control-label">Chuyển hóa cơ bản</label>
-                                                <div class="col-sm-4">
-                                                    <input type="text" th:name="chuyenhoa" class="form-control" id="chuyenhoa"
-                                                           placeholder="Chuyển hóa cơ bản"/>
+                                                <!-- BMI -->
+                                                <label for="bmi" class="col-sm-2 control-label">Waists</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" th:name="bmi" class="form-control" id="bmi"
+                                                           placeholder="BMI"/>
                                                 </div>
-                                                <label for="mach" class="col-sm-1 control-label">Kcal</label>
+                                                <label for="bmi" class="col-sm-1 control-label">kq/m2</label>
                                             </div>
-
                                         </div>
                                         <!-- End tab 2 -->
 
-                                        <!-- Tab 3: Medical registration -->
+                                        <!-- Tab 3: Prevention checking -->
                                         <div class="tab-pane" id="tab_3">
-                                            <!-- select -->
+                                            <div th:class="form-group">
+                                                <label for="bodyFat" class="col-sm-2 control-label">Body Fat</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" th:name="bodyFat" class="form-control" id="bodyFat"
+                                                           placeholder="Body Fat"/>
+                                                </div>
+                                                <label for="bodyFat" class="col-sm-1 control-label">%</label>
+                                            </div>
+
+                                            <div th:class="form-group">
+                                                <label for="visceralFat" class="col-sm-2 control-label">Visceral Fat</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" th:name="visceralFat" class="form-control" id="visceralFat"
+                                                           placeholder="Visceral Fat"/>
+                                                </div>
+                                                <label for="visceralFat" class="col-sm-1 control-label">level</label>
+                                            </div>
+
+                                            <div th:class="form-group">
+                                                <label for="muscleMass" class="col-sm-2 control-label">Muscle Fat</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" th:name="muscleMass" class="form-control" id="muscleMass"
+                                                           placeholder="Muscle Mass"/>
+                                                </div>
+                                                <label for="muscleMass" class="col-sm-1 control-label">%</label>
+                                            </div>
+
+                                            <div th:class="form-group">
+                                                <label for="bodyWater" class="col-sm-2 control-label">Body Water</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" th:name="bodyWater" class="form-control" id="bodyWater"
+                                                           placeholder="Body Water"/>
+                                                </div>
+                                                <label for="bodyWater" class="col-sm-1 control-label">%</label>
+                                            </div>
+
+                                            <div th:class="form-group">
+                                                <label for="phaseAngle" class="col-sm-2 control-label">Body Water</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" th:name="phaseAngle" class="form-control" id="phaseAngle"
+                                                           placeholder="Body Water"/>
+                                                </div>
+                                                <label for="phaseAngle" class="col-sm-1 control-label">o</label>
+                                            </div>
+
+                                            <div th:class="form-group">
+                                                <label for="impedance" class="col-sm-2 control-label">Impedance</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" th:name="impedance" class="form-control" id="impedance"
+                                                           placeholder="Impedance"/>
+                                                </div>
+                                                <label for="impedance" class="col-sm-1 control-label">Ohm</label>
+                                            </div>
+
+                                            <div th:class="form-group">
+                                                <label for="basalMetabolicRate" class="col-sm-2 control-label">Basal Metabolic Rate</label>
+                                                <div class="col-sm-2">
+                                                    <input type="text" th:name="basalMetabolicRate" class="form-control" id="basalMetabolicRate"
+                                                           placeholder="Basal Metabolic Rate"/>
+                                                </div>
+                                                <label for="basalMetabolicRate" class="col-sm-1 control-label">Kcal</label>
+                                            </div>
+                                        </div>
+                                        <!-- End tab 3 -->
+
+                                        <!-- Tab 4: Medical registration -->
+                                        <div class="tab-pane" id="tab_4">
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Doctor*</label>
 
@@ -195,10 +254,6 @@
                                                         <option th:each="doctor : ${session.DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.fullName}"></option>
                                                     </select>
                                                 </div>
-
-                                                <!-- New medical record -->
-                                                <label for="newRecord" class="col-sm-3 control-label">
-                                                    <input style="width: 15px;height: 15px;" type="checkbox" th:name="isNewMedicalRecord"/>New Medical Record</label>
                                             </div>
                                             <div class="form-group">
                                                 <label for="Medicalhistory" class="col-sm-3 control-label">Medical history</label>
@@ -215,7 +270,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- End tab 3 -->
+                                        <!-- End tab 4 -->
                                     </div>
                                     <!-- end tab content -->
                                 </div>
