@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.bizlogic.model.FoodIngredientModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
@@ -11,6 +12,7 @@ import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
 import vn.edu.fpt.hsts.persistence.repo.FoodIngredientRepo;
 
 import javax.transaction.Transactional;
+import java.text.ParseException;
 
 /**
  * Created by Aking on 10/21/2015.
@@ -25,70 +27,134 @@ public class FoodIngredientService {
     @Autowired
     FoodIngredientRepo foodIngredientRepo;
 
-    protected boolean isValid(final FoodIngredient foodIngredient){
+    protected FoodIngredient isValid(final FoodIngredientModel foodIngredientModel){
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            if (foodIngredient.getBreakfast() < 0){
-                return false;
+            FoodIngredient foodIngredient = new FoodIngredient();
+            Float tmp = Float.parseFloat(foodIngredientModel.getBreakfast());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setBreakfast(tmp);
             }
-            if (foodIngredient.getBreakTimeMorning() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getBreakTimeMorning());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setBreakTimeMorning(tmp);
             }
-            if (foodIngredient.getLunch() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getLunch());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setLunch(tmp);
             }
-            if (foodIngredient.getBreakTimeAfternoon() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getBreakTimeAfternoon());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setBreakTimeAfternoon(tmp);
             }
-            if (foodIngredient.getDinner() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getDinner());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setDinner(tmp);
             }
-            if (foodIngredient.getEatLateAtNight() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getEatLateAtNight());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setEatLateAtNight(tmp);
             }
-            if (foodIngredient.getStarch() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getStarch());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setStarch(tmp);
             }
-            if (foodIngredient.getProtein() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getProtein());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setProtein(tmp);
             }
-            if (foodIngredient.getFat() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getFat());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setFat(tmp);
             }
-            if (foodIngredient.getAnimalProtein() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getAnimalProtein());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setAnimalProtein(tmp);
             }
-            if (foodIngredient.getAnimalFat() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getAnimalFat());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setAnimalFat(tmp);
             }
-            if (foodIngredient.getCalcium() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getCalcium());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setCalcium(tmp);
             }
-            if (foodIngredient.getSodium() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getSodium());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setSodium(tmp);
             }
-            if (foodIngredient.getIron() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getIron());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setIron(tmp);
             }
-            if (foodIngredient.getZinc() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getZinc());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setZinc(tmp);
             }
-            if (foodIngredient.getVitaminB1() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getVitaminB1());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setVitaminB1(tmp);
             }
-            if (foodIngredient.getVitaminC() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getVitaminC());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setVitaminC(tmp);
             }
-            if (foodIngredient.getVitaminB2() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getVitaminB2());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setVitaminB2(tmp);
             }
-            if (foodIngredient.getVitaminPP() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getVitaminPP());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setVitaminPP(tmp);
             }
-            if (foodIngredient.getFiber() < 0){
-                return false;
+            tmp = Float.parseFloat(foodIngredientModel.getFiber());
+            if (tmp < 0) {
+                return null;
+            } else {
+                foodIngredient.setFiber(tmp);
             }
-            return true;
+            return foodIngredient;
+        }catch (Exception e){
+            LOGGER.info("Parse Exception: {}", null, e.getMessage());
+            return null;
         }finally {
             LOGGER.info(IConsts.END_METHOD);
         }
@@ -96,11 +162,12 @@ public class FoodIngredientService {
 
     @Transactional(rollbackOn = BizlogicException.class)
     public boolean insertNewFoodIngredient(final Appointment appointment,
-                                        final FoodIngredient foodIngredient){
+                                        final FoodIngredientModel foodIngredientModel){
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("appointment[{}], foodIngredient[{}]", appointment, foodIngredient);
-            if (isValid(foodIngredient)){
+            LOGGER.info("appointment[{}], foodIngredientModel[{}]", appointment, foodIngredientModel);
+            FoodIngredient foodIngredient = isValid(foodIngredientModel);
+            if (foodIngredient != null){
                 foodIngredient.setAppointment(appointment);
                 foodIngredientRepo.save(foodIngredient);
                 // flush to db

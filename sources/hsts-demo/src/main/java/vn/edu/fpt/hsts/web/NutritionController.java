@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.FoodIngredientModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AccountService;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
@@ -45,7 +46,7 @@ public class NutritionController extends AbstractController{
             mav.setViewName("nutrition");
             Patient patient = patientService.getPatientByID(patientID);
             mav.addObject("PATIENT", patient);
-            mav.addObject("model", new FoodIngredient());
+            mav.addObject("model", new FoodIngredientModel());
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
             mav.addObject("APPOINTMENT", appointment);
@@ -58,7 +59,7 @@ public class NutritionController extends AbstractController{
 
     @RequestMapping(value = "nutrition", method = RequestMethod.GET)
     public ModelAndView createNutrition(@RequestParam(value = "appointmentId") final int appointmentId,
-                                        @ModelAttribute FoodIngredient foodIngredient) {
+                                        @ModelAttribute FoodIngredientModel foodIngredientModel) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
@@ -66,9 +67,9 @@ public class NutritionController extends AbstractController{
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
-            mav.addObject("model", foodIngredient);
-            LOGGER.info(foodIngredient.toString());
-            boolean result = foodIngredientService.insertNewFoodIngredient(appointment,foodIngredient);
+            mav.addObject("model", foodIngredientModel);
+            LOGGER.info(foodIngredientModel.toString());
+            boolean result = foodIngredientService.insertNewFoodIngredient(appointment,foodIngredientModel);
             if (result){
                 notify(mav,result,"Create Nutrition", "Success");
             } else {
