@@ -22,9 +22,14 @@ import java.util.List;
 @Entity
 public class Patient extends AbstractKeyEntity {
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "accountId", nullable = false)
     private Account account;
+
+    /**
+     *
+     */
+    private String barcode;
 
     @OneToMany(mappedBy = "patient")
     private List<MedicalRecord> medicalRecords;
@@ -49,5 +54,13 @@ public class Patient extends AbstractKeyEntity {
 
     public void setMedicalRecords(final List<MedicalRecord> medicalRecords) {
         this.medicalRecords = medicalRecords;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(final String barcode) {
+        this.barcode = barcode;
     }
 }

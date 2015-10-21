@@ -42,6 +42,13 @@ public class Appointment extends AbstractKeyEntity {
     private List<Treatment> treatmentList;
 
     /**
+     *
+     */
+    @OneToOne
+    @JoinColumn(name = "nextAppointment")
+    private Appointment nextAppointment;
+
+    /**
      * The patient height.
      */
     private double height;
@@ -58,9 +65,17 @@ public class Appointment extends AbstractKeyEntity {
     /**
      *
      */
-    @OneToOne
-    @JoinColumn(name = "nextAppointment")
-    private Appointment nextAppointment;
+    private int bloodPressure;
+
+    /**
+     *
+     */
+    private int heartBeat;
+
+    /**
+     *
+     */
+    private int waists;
 
     public Appointment() {
     }
@@ -119,5 +134,29 @@ public class Appointment extends AbstractKeyEntity {
 
     public void setTreatmentList(final List<Treatment> treatmentList) {
         this.treatmentList = treatmentList;
+    }
+
+    public int getBloodPressure() {
+        return bloodPressure;
+    }
+
+    public void setBloodPressure(final int bloodPressure) {
+        this.bloodPressure = bloodPressure;
+    }
+
+    public int getHeartBeat() {
+        return heartBeat;
+    }
+
+    public void setHeartBeat(final int heartBeat) {
+        this.heartBeat = heartBeat;
+    }
+
+    public int getWaists() {
+        return waists;
+    }
+
+    public void setWaists(final int waists) {
+        this.waists = waists;
     }
 }

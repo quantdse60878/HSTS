@@ -88,6 +88,11 @@ public interface IDbConsts {
          *
          */
         byte FINISHED = 2;
+
+        /**
+         *
+         */
+        byte HISTORY = 3;
     }
 
     public interface INotifyType {

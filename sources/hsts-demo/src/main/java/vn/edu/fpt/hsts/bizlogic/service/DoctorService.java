@@ -220,14 +220,17 @@ public class DoctorService extends AbstractService {
             // Set old treatment to DONE
             // Find old nearest parent appointment
             final Appointment oldAppointment = appointmentRepo.findParentAppointment(appointmentId);
-            final List<Treatment> lastTreatments = oldAppointment.getTreatmentList();
-            if (null != lastTreatments && !lastTreatments.isEmpty()) {
-                for(Treatment treatment: lastTreatments) {
-                    treatment.setStatus(IDbConsts.ITreatmentStatus.FINISHED);
-                    treatment.setToDate(new Date());
-                    treatmentRepo.save(treatment);
+            if(null != oldAppointment) {
+                final List<Treatment> lastTreatments = oldAppointment.getTreatmentList();
+                if (null != lastTreatments && !lastTreatments.isEmpty()) {
+                    for(Treatment treatment: lastTreatments) {
+                        treatment.setStatus(IDbConsts.ITreatmentStatus.FINISHED);
+                        treatment.setToDate(new Date());
+                        treatmentRepo.save(treatment);
+                    }
                 }
             }
+
             if (null != prescription) {
 
                 // create new treatment
