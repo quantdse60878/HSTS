@@ -72,6 +72,16 @@ public class FoodIngredient extends AbstractKeyEntity {
     /**
      *
      */
+    private float animalProtein;
+
+    /**
+     *
+     */
+    private float animalFat;
+
+    /**
+     *
+     */
     private float calcium;
 
     /**
@@ -92,12 +102,22 @@ public class FoodIngredient extends AbstractKeyEntity {
     /**
      *
      */
-    private float vitaminB;
+    private float vitaminB1;
 
     /**
      *
      */
     private float vitaminC;
+
+    /**
+     *
+     */
+    private float vitaminB2;
+
+    /**
+     *
+     */
+    private float vitaminPP;
 
     /**
      *
@@ -219,12 +239,20 @@ public class FoodIngredient extends AbstractKeyEntity {
         this.zinc = zinc;
     }
 
-    public float getVitaminB() {
-        return vitaminB;
+    public float getAnimalProtein() {
+        return animalProtein;
     }
 
-    public void setVitaminB(final float vitaminB) {
-        this.vitaminB = vitaminB;
+    public void setAnimalProtein(float animalProtein) {
+        this.animalProtein = animalProtein;
+    }
+
+    public float getAnimalFat() {
+        return animalFat;
+    }
+
+    public void setAnimalFat(float animalFat) {
+        this.animalFat = animalFat;
     }
 
     public float getVitaminC() {
@@ -241,5 +269,56 @@ public class FoodIngredient extends AbstractKeyEntity {
 
     public void setFiber(final float fiber) {
         this.fiber = fiber;
+    }
+
+    public float getVitaminB1() {
+        return vitaminB1;
+    }
+
+    public void setVitaminB1(float vitaminB1) {
+        this.vitaminB1 = vitaminB1;
+    }
+
+    public float getVitaminB2() {
+        return vitaminB2;
+    }
+
+    public void setVitaminB2(float vitaminB2) {
+        this.vitaminB2 = vitaminB2;
+    }
+
+    public float getVitaminPP() {
+        return vitaminPP;
+    }
+
+    public void setVitaminPP(float vitaminPP) {
+        this.vitaminPP = vitaminPP;
+    }
+
+    @Override
+    public String toString() {
+        return "FoodIngredient{" +
+                "appointment=" + appointment +
+                ", breakfast=" + breakfast +
+                ", breakTimeMorning=" + breakTimeMorning +
+                ", lunch=" + lunch +
+                ", breakTimeAfternoon=" + breakTimeAfternoon +
+                ", dinner=" + dinner +
+                ", eatLateAtNight=" + eatLateAtNight +
+                ", starch=" + starch +
+                ", protein=" + protein +
+                ", fat=" + fat +
+                ", animalProtein=" + animalProtein +
+                ", animalFat=" + animalFat +
+                ", calcium=" + calcium +
+                ", sodium=" + sodium +
+                ", iron=" + iron +
+                ", zinc=" + zinc +
+                ", vitaminB1=" + vitaminB1 +
+                ", vitaminC=" + vitaminC +
+                ", vitaminB2=" + vitaminB2 +
+                ", vitaminPP=" + vitaminPP +
+                ", fiber=" + fiber +
+                '}';
     }
 }

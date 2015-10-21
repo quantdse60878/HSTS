@@ -163,28 +163,56 @@
                                             <!-- patient's Profile -->
                                             <div layout:replace="_patientProfile"></div>
                                             <!-- /.patient's Profile -->
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <div class="tab-pane" id="tab_4-4" th:if="${PHASE != null}">
                                             <!-- patient's Profile -->
                                             <div layout:replace="_patientProfile"></div>
                                             <!-- /.patient's Profile -->
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- /.tab-pane -->
                                         <div class="tab-pane" id="tab_1-1" th:if="${PHASE == null and TREATMENT == null}">
                                             <!-- medicine tab -->
                                             <div layout:replace="_medicinePrecription"></div>
                                             <!-- /.medicine tab -->
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
 
                                         <div class="tab-pane active" id="tab_1-1" th:if="${PHASE != null}">
                                             <!-- medicine Suggest -->
                                             <div layout:replace="_medicineSuggest"></div>
                                             <!-- /.medicine Suggest -->
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <div th:if="${TREATMENT != null}" class="tab-pane" id="tab_1-1">
                                             <!-- medicine History -->
                                             <div layout:replace="_medicineHistory"></div>
                                             <!-- /.medicine History -->
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- /.tab-pane -->
                                         <div class="tab-pane" id="tab_2-2">
@@ -205,7 +233,12 @@
                                                 <div layout:replace="_foodHistory"></div>
                                                 <!-- /.food History -->
                                             </div>
-
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <a href="#tab_3-3" onclick="changeTab('#tab_3-3')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- /.tab-pane -->
                                         <div class="tab-pane" id="tab_3-3">
@@ -226,6 +259,12 @@
                                                 <div layout:replace="_practiceHistory"></div>
                                                 <!-- /.practice History -->
                                             </div>
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <a href="#tab_5-5" onclick="changeTab('#tab_5-5')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- /.tab-pane -->
                                         <!-- tab-pane -->
@@ -242,17 +281,7 @@
                                                         <input class="form-control" type="text" name="appointmentDate"
                                                                id="Appointment" data-provide="Appointment"/>
                                                         <div class="input-group-btn">
-                                                            <!--<button type="button" class="btn btn-default dropdown-toggle"-->
-                                                                    <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>-->
-                                                            <!--<ul class="dropdown-menu dropdown-menu-right" id="changeWeek">-->
-                                                                <!--<li th:value="7"><a th:value="7">1 Week</a></li>-->
-                                                                <!--<li th:value="14"><a th:value="14">2 Week</a></li>-->
 
-                                                            <!--</ul>-->
-                                                            <!--<select id="changeWeek" class="btn btn-default dropdown-toggle">-->
-                                                                <!--<option value="7">1 Week</option>-->
-                                                                <!--<option value="14">2 Week</option>-->
-                                                            <!--</select>-->
                                                         </div><!-- /btn-group -->
                                                     </div>
 
@@ -266,6 +295,12 @@
                                                 </div>
 
                                             </div>
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_3-3" onclick="changeTab('#tab_3-3')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <button th:if="${TREATMENT == null}" type="submit" class="btn btn-primary pull-right">Done</button>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- /.tab-pane -->
                                     </div>
@@ -275,12 +310,7 @@
                                 <!-- END CUSTOM TABS -->
                             </div>
                             <!-- /.box-body -->
-                            <!-- footer -->
-                            <div class="box-footer">
-                                <button type="reset" class="btn btn-default">Cancel</button>
-                                <button type="submit" class="btn btn-primary pull-right">Make Prescription</button>
-                            </div>
-                            <!-- /.footer -->
+
                         </form>
                         <!-- /.form -->
                     </div>
@@ -380,7 +410,11 @@
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
 
-
+        function changeTab (a) {
+            console.log(a);
+            $('.nav-tabs > li.active').removeClass('active');
+            $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
+        };
         function confirmBox(form){
             confirm('Are you sure to make this prescription?');
         }
