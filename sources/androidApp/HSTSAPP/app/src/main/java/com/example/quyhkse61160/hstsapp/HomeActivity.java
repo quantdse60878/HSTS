@@ -43,9 +43,6 @@ import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
 import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Fragment.NoticeTab;
-import com.example.quyhkse61160.hstsapp.Fragment.Tab1;
-import com.example.quyhkse61160.hstsapp.Fragment.Tab2;
-import com.example.quyhkse61160.hstsapp.Fragment.Tab3;
 import com.example.quyhkse61160.hstsapp.Fragment.Tab4;
 import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
 import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
@@ -635,18 +632,17 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 }
                 break;
             }
-            case R.id.action_settings:
-                return true;
-            case R.id.action_logout:
-                return true;
-            case R.id.action_notify_doctor:{
-                Intent intentNotify = new Intent(this, NotifyToDoctor.class);
-                startActivity(intentNotify);
+            case R.id.action_change_password:{
+                Intent intentChangePassword = new Intent(this, ChangePasswordActivity.class);
+                startActivity(intentChangePassword);
                 break;
             }
-            case R.id.action_setstep:{
-                Intent intentStep = new Intent(this, SetNumberStepActivity.class);
-                startActivity(intentStep);
+            case R.id.action_logout:{
+                Constant.accountId = "";
+                Constant.PATIENT_NAME = "";
+                Constant.patientId = "";
+                Intent logout = new Intent(getApplication(),LoginActivity.class);
+                startActivity(logout);
                 break;
             }
 

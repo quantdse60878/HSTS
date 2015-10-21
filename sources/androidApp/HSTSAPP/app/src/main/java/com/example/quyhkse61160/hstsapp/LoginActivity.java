@@ -94,9 +94,9 @@ public class LoginActivity extends ActionBarActivity {
 
 //                Comment o day
 //                Intent intent = new Intent(LoginActivity.this, DeviceScanActivity.class);
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//                Intent intent = new Intent(LoginActivity.this, HomeActivity2.class);
-                startActivity(intent);
+//                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+////                Intent intent = new Intent(LoginActivity.this, HomeActivity2.class);
+//                startActivity(intent);
             }
         });
 
@@ -167,6 +167,7 @@ public class LoginActivity extends ActionBarActivity {
                 urlConnection.setDoOutput(true);
 
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
+                Constant.username = strings[0];
                 params.add(new BasicNameValuePair("username", strings[0]));
                 params.add(new BasicNameValuePair("password", strings[1]));
 
@@ -192,6 +193,7 @@ public class LoginActivity extends ActionBarActivity {
                     Constant.PATIENT_NAME = patientObject.getString("fullname");
                     Constant.patientId = patientObject.getString("patientId");
                     Log.d("QUYYY111", "Benh nhan: " + "Account: " + Constant.accountId + " Patient: " + Constant.patientId);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -206,15 +208,17 @@ public class LoginActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
             return "";
         }
 
         @Override
         protected void onPostExecute(String result) {
-
-
+            if((Constant.accountId.equals("0") && Constant.PATIENT_NAME == null) || Constant.patientId.equals("0")){
+                Toast.makeText(getApplicationContext(),R.string.login_error,Toast.LENGTH_LONG).show();
+            } else {
+                Intent continueIntent = new Intent(LoginActivity.this,HomeActivity.class);
+                startActivity(continueIntent);
+            }
         }
     }
 

@@ -10,4 +10,14 @@
     <string name="prompt_password">Mật Khẩu</string>
     <string name="prompt_username">Tên Đăng Nhập</string>
     <string name="unknown_device">Thiết bị chưa hỗ trợ</string>
+    <string name="action_change_password">Đổi Mật Khẩu</string>
+    <string name="action_notify">Thông báo bác sĩ</string>
+    <string name="header_name">HỆ THỐNG HỖ TRỢ ĐIỀU TRỊ BỆNH</string>
+    <string name="prompt_change_password_current">Mật Khẩu Hiện Tại</string>
+    <string name="prompt_change_password_new">Mật Khẩu Mới</string>
+    <string name="prompt_change_password_new_confirm">Xác Nhận Mật Khẩu Mới</string>
+    <string name="change_password_update">Cập Nhật Mật Khẩu</string>
+    <string name="change_password_cancel">Quay Lại</string>
+    <string name="change_password_error_password">Confirmed Password Bị Sai</string>
+    <string name="login_error">Tên Đăng Nhập hoặc Mật Khẩu bị sai.</string>
 </resources>

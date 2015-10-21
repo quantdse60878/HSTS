@@ -13,13 +13,14 @@ import java.util.UUID;
 
 public class Constant {
     //All constant of call api
-    public static final String hostURL = "http://192.168.34.1:8080";
+    public static final String hostURL = "http://192.168.5.1:8080";
     public static final String loginMethod = "/loginMobile";
     public static final String checkNotifyMethod = "/notify";
     public static final String getTreatment = "/getTreatment";
     public static final String sendMedicalData = "/sendMedicalData";
     public static final String hadGetTreatment = "/hadGetNotify";
     public static final String sendNotifyToDoctor = "/sendNotifyToDoctor";
+    public static final String changePassword = "/changePassword";
 
     //All constant of shared preference
     public static final String PREF_NAME = "HSTSAPPPREF";
@@ -28,6 +29,7 @@ public class Constant {
 
     public static String accountId = "2";
     public static String patientId = "1";
+    public static String username = "";
     public static boolean haveInternet = false;
 
     //
