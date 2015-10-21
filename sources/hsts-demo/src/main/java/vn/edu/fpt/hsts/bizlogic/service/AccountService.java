@@ -17,12 +17,18 @@ import vn.edu.fpt.hsts.bizlogic.model.AccountModel;
 import vn.edu.fpt.hsts.bizlogic.model.AccountPageModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
+import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.common.util.StringUtils;
+import vn.edu.fpt.hsts.criteria.PatientCriteria;
+import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
+import vn.edu.fpt.hsts.persistence.entity.Role;
 import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
+import vn.edu.fpt.hsts.persistence.repo.RoleRepo;
 import vn.edu.fpt.hsts.web.session.UserSession;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,6 +51,12 @@ public class AccountService {
      */
     @Autowired
     private AccountRepo accountRepo;
+
+    /**
+     * The {@link AuthenService}.
+     */
+    @Autowired
+    private AuthenService authenService;
 
     public Account checkLogin(final String username, final String password) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -147,6 +159,38 @@ public class AccountService {
                 LOGGER.debug("New account[{}]", result.toString());
             }
             return result.toString();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public Account initPatientAccount(final PatientCriteria criteria, final Date createDate) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final Account account = new Account();
+            String normalizeName = StringUtils.removeAcients(criteria.getPatientName().toLowerCase());
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Formatted name: {}", normalizeName);
+            }
+            final String newUsername = buildUniqueUsername(normalizeName);
+            account.setEmail(criteria.getEmail());
+            account.setUsername(newUsername);
+            account.setGender(criteria.getGender());
+            account.setFullName(criteria.getPatientName());
+            final Date birthdate = DateUtils.parseDate(criteria.getBirthday(), DateUtils.DATE_PATTERN_3);
+            account.setDateOfBirth(birthdate);
+            account.setFullName(criteria.getPatientName());
+            account.setUpdateTime(createDate);
+            final Role role = new Role();
+            role.setId(IDbConsts.IRoleType.PATIENT);
+            account.setRole(role);
+
+            // Account have been not actived yet, require change password
+            account.setStatus(IDbConsts.IAccountStatus.IN_ACTIVE);
+            account.setPassword(authenService.randomPassword());
+            account.setUpdateTime(new Date());
+
+            return account;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

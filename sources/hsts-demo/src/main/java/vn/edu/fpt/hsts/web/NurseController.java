@@ -24,9 +24,10 @@ import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.criteria.PatientCriteria;
+import vn.edu.fpt.hsts.criteria.CheckCriteria;
+import vn.edu.fpt.hsts.criteria.RegistrationCriteria;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
@@ -84,41 +85,75 @@ public class NurseController extends AbstractController {
      * @param symptoms
      * @return
      * @throws BizlogicException
-     * @throws BizlogicException
      */
     @RequestMapping(value = "registerNew", method = RequestMethod.POST)
-    public ModelAndView registerPatient(@RequestParam("patientName") final String patientName,
-                                        @RequestParam("email") final String email,
-                                        @RequestParam("birthday") final String birthday,
-                                        @RequestParam("gender") final byte gender,
-                                        @RequestParam("weight") final int weight,
-                                        @RequestParam("height") final int height,
-                                        @RequestParam("doctorId") final int doctorId,
-                                        @RequestParam(value = "medicalHistory") final String medicalHistory,
-                                        @RequestParam(value = "symptoms") final String symptoms) throws BizlogicException, BizlogicException {
+    public ModelAndView registerPatient(
+            // Tab 1 param
+            @RequestParam("patientName") final String patientName,
+            @RequestParam("email") final String email,
+            @RequestParam("birthday") final String birthday,
+            @RequestParam("gender") final byte gender,
+            // Tab 2 param
+            @RequestParam("weight") final int weight,
+            @RequestParam("height") final int height,
+            @RequestParam("hearthBeat") final int hearthBeat,
+            @RequestParam("bloodPressure") final int bloodPressure,
+            @RequestParam("waists") final int waists,
+            @RequestParam("bmi") final float bmi,
+            // Tab 3 param
+            @RequestParam("bodyFat") final float bodyFat,
+            @RequestParam("visceralFat") final byte visceralFat,
+            @RequestParam("muscleMass") final float muscleMass,
+            @RequestParam("bodyWater") final float bodyWater,
+            @RequestParam("phaseAngle") final float phaseAngle,
+            @RequestParam("impedance") final int impedance,
+            @RequestParam("basalMetabolicRate") final int basalMetabolicRate,
+            // Tab 4 param
+            @RequestParam("doctorId") final int doctorId,
+            @RequestParam(value = "medicalHistory") final String medicalHistory,
+            @RequestParam(value = "symptoms") final String symptoms)
+            throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("patientName[{}], email[{}], birthday[{}], gender[{}], weight[{}], height[{}], doctorId[{}], medicalHistory[{}], symptoms[{}]",
-                    patientName, email, birthday, gender, weight, height, doctorId, medicalHistory, symptoms);
+            // TODO reg input log
 
+            // Tab 1 criteria
+            final PatientCriteria pCriteria = new PatientCriteria();
+            pCriteria.setPatientName(patientName);
+            pCriteria.setEmail(email);
+            pCriteria.setBirthday(birthday);
+            pCriteria.setGender(gender);
+            pCriteria.setDoctorId(doctorId);
+            pCriteria.setMedicalHistory(medicalHistory);
+            pCriteria.setSymptom(symptoms);
+
+            // Tab 2_3 criteria
+            final CheckCriteria checkCriteria = new CheckCriteria();
+            checkCriteria.setBodyFat(bodyFat);
+            checkCriteria.setVisceralFat(visceralFat);
+            checkCriteria.setMuscleMass(muscleMass);
+            checkCriteria.setBodyWater(bodyWater);
+            checkCriteria.setPhaseAngle(phaseAngle);
+            checkCriteria.setImpedance(impedance);
+            checkCriteria.setBasalMetabolicRate(basalMetabolicRate);
+            checkCriteria.setWeight(weight);
+            checkCriteria.setHeight(height);
+            checkCriteria.setHearthBeat(hearthBeat);
+            checkCriteria.setBloodPressure(bloodPressure);
+            checkCriteria.setWaists(waists);
+            checkCriteria.setBmi(bmi);
+
+            // Tab 4 criteria
+            RegistrationCriteria rCriteria = new RegistrationCriteria();
+            rCriteria.setDoctorId(doctorId);
+            rCriteria.setMedicalHistory(medicalHistory);
+            rCriteria.setSymptom(symptoms);
+
+            patientService.createPatient(pCriteria, rCriteria, checkCriteria);
+
+            // Response view
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
-            /**
-             * Create new patient
-             */
-            PatientCriteria criteria = new PatientCriteria();
-            criteria.setPatientName(patientName);
-            criteria.setEmail(email);
-            criteria.setBirthday(birthday);
-            criteria.setGender(gender);
-            criteria.setWeight(weight);
-            criteria.setHeight(height);
-            criteria.setDoctorId(doctorId);
-            criteria.setMedicalHistory(medicalHistory);
-            criteria.setSymptom(symptoms);
-
-            patientService.createPatient(criteria);
-
             //create notify
             notify(mav, true, "Register Patient", "Success");
 
@@ -182,6 +217,8 @@ public class NurseController extends AbstractController {
                                         final boolean isNewMedicalRecord) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+
+            // TODO
             LOGGER.info("weight[{}], height[{}], doctorId[{}], medicalHistory[{}], symptoms[{}], isNewMedicalRecord[{}]",
                     weight, height, doctorId, medicalHistory, symptoms, isNewMedicalRecord);
 
@@ -192,8 +229,6 @@ public class NurseController extends AbstractController {
              */
             PatientCriteria criteria = new PatientCriteria();
             criteria.setId(patientId);
-            criteria.setWeight(weight);
-            criteria.setHeight(height);
             criteria.setDoctorId(doctorId);
             criteria.setMedicalHistory(medicalHistory);
             criteria.setSymptom(symptoms);

@@ -29,21 +29,6 @@ public class PatientCriteria extends SearchCriteria {
     /**
      *
      */
-    private byte type;
-
-    /**
-     *
-     */
-    private int weight;
-
-    /**
-     *
-     */
-    private int height;
-
-    /**
-     *
-     */
     private int doctorId;
 
     /**
@@ -60,18 +45,6 @@ public class PatientCriteria extends SearchCriteria {
      *
      */
     private String email;
-
-    public interface IRegisterPatientType {
-        /**
-         *
-         */
-        byte FIRST_REGISTER = 1;
-
-        /**
-         *
-         */
-        byte RE_EXAM = 2;
-    }
 
     public PatientCriteria() {
     }
@@ -98,30 +71,6 @@ public class PatientCriteria extends SearchCriteria {
 
     public void setGender(final byte gender) {
         this.gender = gender;
-    }
-
-    public byte getType() {
-        return type;
-    }
-
-    public void setType(final byte type) {
-        this.type = type;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(final int weight) {
-        this.weight = weight;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(final int height) {
-        this.height = height;
     }
 
     public int getDoctorId() {
@@ -163,8 +112,6 @@ public class PatientCriteria extends SearchCriteria {
         sb.append(", patientName= ").append(patientName);
         sb.append(", birthday= ").append(birthday);
         sb.append(", gender= ").append(gender);
-        sb.append(", weight= ").append(weight);
-        sb.append(", height= ").append(height);
         sb.append(", medicalHistory= ").append(medicalHistory);
         sb.append(", symptom= ").append(symptom);
         sb.append(", email=").append(email);

@@ -11,6 +11,8 @@
 	"jquery-ui": "1.11.4",
 	"datatables": null,
 	"bootstrap-tagsinput": null,
-	"bootstrap3-typeahead": null
+	"bootstrap3-typeahead": null,
+	"bootstrap-validator": null,
+	"jquery-validation": null
   }
 }

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import sun.util.resources.CalendarData_sr_Latn_RS;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrescriptionWrapperModel;
@@ -18,7 +17,10 @@ import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.common.util.StringUtils;
+import vn.edu.fpt.hsts.criteria.CheckCriteria;
 import vn.edu.fpt.hsts.criteria.PatientCriteria;
+import vn.edu.fpt.hsts.criteria.RegistrationCriteria;
+import vn.edu.fpt.hsts.criteria.SearchCriteria;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
@@ -27,17 +29,16 @@ import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Notify;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
-import vn.edu.fpt.hsts.persistence.entity.Role;
+import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
 import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
 import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
-import vn.edu.fpt.hsts.persistence.repo.IllnessRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordDataRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
 import vn.edu.fpt.hsts.persistence.repo.NotifyRepo;
 import vn.edu.fpt.hsts.persistence.repo.PatientRepo;
-import vn.edu.fpt.hsts.persistence.repo.RoleRepo;
+import vn.edu.fpt.hsts.persistence.repo.PreventionCheckRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
 import javax.servlet.http.HttpServletResponse;
@@ -47,7 +48,9 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by QUYHKSE61160 on 10/7/15.
@@ -81,23 +84,6 @@ public class PatientService extends AbstractService {
     @Autowired
     private MedicalRecordDataRepo medicalRecordDataRepo;
 
-    /**
-     * The {@link RoleRepo}.
-     */
-    @Autowired
-    private RoleRepo roleRepo;
-
-    /**
-     * The {@link AccountService}.
-     */
-    @Autowired
-    private AccountService accountService;
-
-    /**
-     * The {@link AuthenService}.
-     */
-    @Autowired
-    private AuthenService authenService;
 
     /**
      * The {@link DoctorRepo}.
@@ -105,11 +91,6 @@ public class PatientService extends AbstractService {
     @Autowired
     private DoctorRepo doctorRepo;
 
-    /**
-     * The {@link IllnessRepo}.
-     */
-    @Autowired
-    private IllnessRepo illnessRepo;
 
     /**
      * The {@link AppointmentRepo}.
@@ -135,6 +116,17 @@ public class PatientService extends AbstractService {
     @Autowired
     private TreatmentRepo treatmentRepo;
 
+    /**
+     * The {@link AccountService}.
+     */
+    @Autowired
+    private AccountService accountService;
+
+    /**
+     * The {@link PreventionCheckRepo}.
+     */
+    @Autowired
+    private PreventionCheckRepo preventionCheckRepo;
 
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -170,81 +162,89 @@ public class PatientService extends AbstractService {
 
 
     @Transactional(rollbackOn = BizlogicException.class)
-    public void createPatient(final PatientCriteria criteria) throws BizlogicException {
+    public void createPatient(final SearchCriteria ... criterias) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("criteria[{}]", criteria);
-
+            // TODO
+            if (null == criterias) {
+                return;
+            } else {
+                LOGGER.info("Criteria size = {}", criterias.length);
+            }
             Date currentDate = new Date();
             currentDate = DateUtils.roundDate(currentDate, false);
-            // TODO Create account
-            final Account account = new Account();
-            String normalizeName = StringUtils.removeAcients(criteria.getPatientName().toLowerCase());
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Formatted name: {}", normalizeName);
-            }
-            final String newUsername = accountService.buildUniqueUsername(normalizeName);
-            account.setEmail(criteria.getEmail());
-            account.setUsername(newUsername);
-            account.setGender(criteria.getGender());
-            account.setFullName(criteria.getPatientName());
-            final Date birthdate = DateUtils.parseDate(criteria.getBirthday(), DateUtils.DATE_PATTERN_3);
-            account.setDateOfBirth(birthdate);
-            account.setFullName(criteria.getPatientName());
-            account.setUpdateTime(currentDate);
-            final Role role = roleRepo.findOne(IDbConsts.IRoleType.PATIENT);
-            account.setRole(role);
-            // Account have been not actived yet, require change password
-            account.setStatus(IDbConsts.IAccountStatus.IN_ACTIVE);
-            account.setPassword(authenService.randomPassword());
-            account.setUpdateTime(new Date());
-            accountRepo.saveAndFlush(account);
-
-            // TODO Create patient
-            final Patient patient = new Patient();
-            patient.setAccount(account);
-            patientRepo.saveAndFlush(patient);
-
-            // TODO create medical record
+            Patient patient = new Patient();
             MedicalRecord medicalRecord = new MedicalRecord();
-            medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);
+            for (SearchCriteria criteria : criterias) {
+                if (criteria instanceof PatientCriteria) {
+                    // TODO
+                    // casting
+                    final PatientCriteria patientCriteria =  (PatientCriteria) criteria;
+                    final Account newAccount = accountService.initPatientAccount(patientCriteria, currentDate);
+                    accountRepo.saveAndFlush(newAccount);
 
-            Doctor doctor = doctorRepo.findOne(criteria.getDoctorId());
-            if(null == doctor) {
-                throw new BizlogicException("Doctor with username[{}] is not found", null, criteria.getDoctorId());
+                    // Save patient
+                    patient.setAccount(newAccount);
+                    patientRepo.saveAndFlush(patient);
+                    if (LOGGER.isDebugEnabled()) {
+                        LOGGER.debug("Create new patient[{}] successfully", newAccount.getUsername());
+                    }
+                } else if (criteria instanceof CheckCriteria) {
+                    final CheckCriteria pcCriteria = (CheckCriteria) criteria;
+                    // TODO Create appointment
+                    final Appointment appointment = new Appointment();
+                    appointment.setMedicalRecord(medicalRecord);
+                    appointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
+                    appointment.setMeetingDate(currentDate);
+                    appointment.setBloodPressure(pcCriteria.getBloodPressure());
+                    appointment.setHeartBeat(pcCriteria.getHearthBeat());
+                    appointment.setWaists(pcCriteria.getWaists());
+                    appointmentRepo.saveAndFlush(appointment);
+
+                    // Create prevention checking
+
+                    PreventionCheck preventionCheck = new PreventionCheck();
+                    preventionCheck.setPhaseAngle(pcCriteria.getPhaseAngle());
+                    preventionCheck.setAppointment(appointment);
+                    preventionCheck.setBasalMetabolicRate(pcCriteria.getBasalMetabolicRate());
+                    preventionCheck.setBmi(pcCriteria.getBmi());
+                    preventionCheck.setBodyFat(pcCriteria.getBodyFat());
+                    preventionCheck.setBodyWater(pcCriteria.getBodyWater());
+                    preventionCheck.setHeight(pcCriteria.getHeight());
+                    preventionCheck.setWeight(pcCriteria.getWeight());
+                    preventionCheck.setMuscleMass(pcCriteria.getMuscleMass());
+                    preventionCheck.setVisceralFat(pcCriteria.getVisceralFat());
+                    preventionCheck.setImpedance(pcCriteria.getImpedance());
+                    preventionCheckRepo.saveAndFlush(preventionCheck);
+                } else if (criteria instanceof RegistrationCriteria) {
+                    // TODO
+                    final RegistrationCriteria rCriteria = (RegistrationCriteria) criteria;
+
+                    medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);
+                    Doctor doctor = doctorRepo.findOne(rCriteria.getDoctorId());
+                    if(null == doctor) {
+                        throw new BizlogicException("Doctor with username[{}] is not found", null, rCriteria.getDoctorId());
+                    }
+                    medicalRecord.setDoctor(doctor);
+                    medicalRecord.setPatient(patient);
+                    medicalRecord.setSymptoms(rCriteria.getSymptom());
+                    medicalRecord.setStartTime(currentDate);
+
+                    medicalRecord.setMedicalHistory(rCriteria.getMedicalHistory());
+                    medicalRecordRepo.saveAndFlush(medicalRecord);
+                }
             }
-            medicalRecord.setDoctor(doctor);
-            medicalRecord.setPatient(patient);
-            medicalRecord.setSymptoms(criteria.getSymptom());
-            medicalRecord.setStartTime(currentDate);
-
-            medicalRecord.setMedicalHistory(criteria.getMedicalHistory());
-            medicalRecordRepo.saveAndFlush(medicalRecord);
-
-            // TODO Create appointment
-            final Appointment appointment = new Appointment();
-            appointment.setMedicalRecord(medicalRecord);
-            appointment.setWeight(criteria.getWeight());
-            appointment.setHeight(criteria.getHeight());
-            appointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
-            appointment.setMeetingDate(currentDate);
-            appointmentRepo.saveAndFlush(appointment);
-
             // TODO send email with creditial information to patient
 //            mailService.sendMail(criteria.getEmail(), "Credential email", account.getPassword());
 
             // Create notify to doctor
             final Notify notify = new Notify();
             notify.setSender(getCurrentAccount());
-            notify.setReceiver(doctor.getAccount());
+            notify.setReceiver(medicalRecord.getDoctor().getAccount());
             notify.setType(IDbConsts.INotifyType.NURSE_DOCTOR);
             notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
             notify.setMessage(String.valueOf(patient.getId()));
             notifyRepo.saveAndFlush(notify);
-
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Create new patient[{}] successfully", account.getUsername());
-            }
 
         } catch (BizlogicException be) {
             throw be;
@@ -365,8 +365,8 @@ public class PatientService extends AbstractService {
                 // TODO Create appointment
                 final Appointment appointment = new Appointment();
                 appointment.setMedicalRecord(medicalRecord);
-                appointment.setWeight(criteria.getWeight());
-                appointment.setHeight(criteria.getHeight());
+//                appointment.setWeight(criteria.getWeight());
+//                appointment.setHeight(criteria.getHeight());
                 appointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
                 appointment.setMeetingDate(currentDate);
                 appointmentRepo.saveAndFlush(appointment);
@@ -391,9 +391,9 @@ public class PatientService extends AbstractService {
                     // throw ex
                 }
                 // TODO update meeting date
-                appointment.setMeetingDate(currentDate);
-                appointment.setHeight(criteria.getHeight());
-                appointment.setWeight(criteria.getWeight());
+//                appointment.setMeetingDate(currentDate);
+//                appointment.setHeight(criteria.getHeight());
+//                appointment.setWeight(criteria.getWeight());
 
                 final MedicalRecord medicalRecord = appointment.getMedicalRecord();
                 if (medicalRecord.getDoctor().getId() != criteria.getDoctorId()) {
