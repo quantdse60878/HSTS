@@ -397,6 +397,7 @@
     <input th:value="${MEDICS}" id="medics" type="hidden"/>
     <input th:value="${FOS}" id="fos" type="hidden"/>
     <input th:value="${PRACS}" id="pracs" type="hidden"/>
+    <input th:value="${NEXTAPPOINTMENTDATE}" id="nextApDate" type="hidden"/>
     <!-- REQUIRED JS SCRIPTS -->
     <!-- jQueryUI -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
@@ -404,6 +405,9 @@
     <!-- Multi select -->
     <script th:src="@{/static/bower/bootstrap-multiselect/dist/js/bootstrap-multiselect.js}"></script>
     <script th:src="@{/static/js/prettify.js}"></script>
+    <!-- bootstrap-datepicker-->
+    <link th:href="@{/static/bower/admin-lte/plugins/datepicker/datepicker3.css}" rel="stylesheet" />
+    <script th:src="@{/static/bower/admin-lte/plugins/datepicker/bootstrap-datepicker.js}"></script>
     <!-- DataTable -->
     <script th:src="@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
     <!-- makePrescription -->
@@ -420,22 +424,16 @@
         }
 
         $("#combobox").combobox();
+
         $('#Appointment').datepicker({
-            dateFormat: 'dd-mm-yy',
-            changeMonth: true,
-            defaultDate: "+1w",
-            changeYear: true,
-        });
-        $('#changeWeek').change(function() {
-            var appointmentDate = new Date();
-            appointmentDate.setDate(appointmentDate.getDate() + $( this ).val());
-            $( "#Appointment" ).datepicker( "option",
-                    $.datepicker.setDates(appointmentDate));
-
+            format: 'dd-mm-yyyy'
         });
 
+        var nextAppointmentDate = $('#nextApDate').val();
+        nextAppointmentDate++;
+        nextAppointmentDate--;
         var appointmentDate = new Date();
-        appointmentDate.setDate(appointmentDate.getDate() + 7);
+        appointmentDate.setDate(appointmentDate.getDate()  + nextAppointmentDate);
         $('#Appointment').datepicker("setDate", appointmentDate);
 
         var countMedicine = $('#medics').val();

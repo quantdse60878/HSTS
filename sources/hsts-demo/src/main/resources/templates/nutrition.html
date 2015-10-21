@@ -10,7 +10,7 @@
         <section class="content-header">
             <h1>
                 Nutrition
-                <small th:text="${PATIENT.account.fullName}">Patient</small>
+                <small th:text="${APPOINTMENT.medicalRecord.patient.account.fullName}">Patient</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -26,7 +26,7 @@
                         <div class="box-body">
                             <!-- form start -->
                             <form onsubmit="return confirmBox(this);" class="form-horizontal" th:action="nutrition" method="get" th:object="${model}">
-                                <input type="hidden" name="patientID" th:value="${PATIENT.id}"/>
+                                <input type="hidden" name="appointmentId" th:value="${APPOINTMENT.id}"/>
                                 <!-- Custom Tabs (Pulled to the left) -->
                                 <div class="nav-tabs-custom" style="box-shadow: none;">
                                     <ul class="nav nav-tabs">
