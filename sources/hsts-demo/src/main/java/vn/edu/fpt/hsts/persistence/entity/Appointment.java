@@ -49,15 +49,6 @@ public class Appointment extends AbstractKeyEntity {
     private Appointment nextAppointment;
 
     /**
-     * The patient height.
-     */
-    private double height;
-
-    /**
-     * The patient weight.
-     */
-    private double weight;
-    /**
      * The status.
      */
     private byte status;
@@ -78,22 +69,6 @@ public class Appointment extends AbstractKeyEntity {
     private int waists;
 
     public Appointment() {
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(final double height) {
-        this.height = height;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(final double weight) {
-        this.weight = weight;
     }
 
     public Date getMeetingDate() {

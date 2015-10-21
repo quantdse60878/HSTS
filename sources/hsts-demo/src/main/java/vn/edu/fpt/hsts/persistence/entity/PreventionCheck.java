@@ -34,6 +34,16 @@ public class PreventionCheck extends AbstractKeyEntity {
     private byte visceralFat;
 
     /**
+     * The patient height.
+     */
+    private double height;
+
+    /**
+     * The patient weight.
+     */
+    private double weight;
+
+    /**
      *
      */
     private float bmi;
@@ -139,5 +149,19 @@ public class PreventionCheck extends AbstractKeyEntity {
         this.basalMetabolicRate = basalMetabolicRate;
     }
 
+    public double getHeight() {
+        return height;
+    }
 
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
 }
