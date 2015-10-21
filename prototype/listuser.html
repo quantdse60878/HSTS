@@ -188,12 +188,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="box">
                 <div class="box-header" style="padding: 0px;">
                   <div class="form-group">
-                    <h3 class="col-sm-1 control-label">Username</h3>
                     <div class="col-sm-4">
                       <!-- search form (Optional) -->
                       <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
-                          <input type="text" name="q" class="form-control" placeholder="Search...">
+                          <input type="text" name="q" class="form-control" placeholder="Search Username...">
                           <span class="input-group-btn">
                             <button type="submit" name="search" id="search-btn" class="btn btn-flat">
                               <i class="fa fa-search"></i></button>
@@ -202,6 +201,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </form>
                       <!-- /.search form -->
                     </div>
+					
+					<form action="#type your action here" method="POST">
+						<button class="btn btn-default" style="margin-top:10px; margin-right:10px;float:left;">Insert Accounts By Excel</button>
+						<input id="upfile" type="file" value="upload" style="visibility: hidden; margin-bottom: -11px;"/>
+						<button class="btn btn-default" style="float:left">Download Excel Template </button>
+					</form>
+					
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -211,7 +217,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <th>#</th>
                         <th>UserName</th>
                         <th>Role</th>
-                        <th>Status</th>                        
+                        <th>Status</th> 
+						<th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -222,6 +229,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						        Administrator
 						  </td>
                           <td>Active</td>
+						  <td>
+						  <a href="patient1.html" class="btn btn-primary">Update</a>
+						  <a href="patient1.html" class="btn btn-danger">Delete</a>
+						  </td>
                         </tr>         
                       
                         <tr>
@@ -233,6 +244,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <td>
 							De-active
 						  </td>
+						  <td>
+						  <a href="patient1.html" class="btn btn-primary">Update</a>
+						  <a href="patient1.html" class="btn btn-danger">Delete</a>
+						  </td>
                         </tr>                     
                     </tbody>
                     <tfoot>
@@ -241,6 +256,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <th>UserName</th>
                         <th>Role</th>
                         <th>Status</th>
+						<th></th>
                       </tr>
                     </tfoot>
                   </table>
