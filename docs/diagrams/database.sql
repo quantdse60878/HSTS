@@ -263,7 +263,7 @@ DROP TABLE IF EXISTS `hsts`.`Treatment` ;
 
 CREATE TABLE IF NOT EXISTS `hsts`.`Treatment` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `appointientId` INT NOT NULL,
+  `appointmentId` INT NOT NULL,
   `fromDate` DATE NOT NULL,
   `toDate` DATE NOT NULL,
   `adviseFood` VARCHAR(400) NULL,
