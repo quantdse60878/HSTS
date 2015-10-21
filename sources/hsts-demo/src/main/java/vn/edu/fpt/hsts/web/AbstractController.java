@@ -9,6 +9,7 @@ package vn.edu.fpt.hsts.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicineService;
@@ -43,9 +44,14 @@ public class AbstractController implements ControllerParam {
     private FoodService foodService;
 
     @Autowired
+    private DoctorService doctorService;
+
+    @Autowired
     private PracticeService practiceService;
 
     public void initDataPrescription(ModelAndView mav){
+        // Set next appointent date
+        mav.addObject("NEXTAPPOINTMENTDATE", doctorService.getTreatmentLong());
         // Get config time
         final String[] timeArr = treatmentService.getMedicineTimeConfig();
         mav.addObject("TIMES", timeArr);

@@ -147,8 +147,8 @@ public class DoctorController extends AbstractController{
 
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
-
             mav.addObject("APPOINTMENT", appointment);
+
             mav.addObject("MEDICS",  1);
             mav.addObject("FOS", 1);
             mav.addObject("PRACS", 1);
@@ -171,6 +171,7 @@ public class DoctorController extends AbstractController{
      */
     @RequestMapping(value = "suggestTreatment", method = RequestMethod.GET)
     public ModelAndView suggestTreatment(@RequestParam(value = "appointmentId") final int appointmentId,
+                                         @ModelAttribute PrescriptionModel prescriptionModel,
                                          @RequestParam(value = "diagnostic", required = false) final int diagnostic) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
@@ -198,7 +199,7 @@ public class DoctorController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
 
-            mav.addObject("model", new PrescriptionModel());
+            mav.addObject("model", prescriptionModel);
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

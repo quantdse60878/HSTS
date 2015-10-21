@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AccountService;
+import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
+import vn.edu.fpt.hsts.bizlogic.service.FoodIngredientService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
@@ -21,13 +23,19 @@ import vn.edu.fpt.hsts.persistence.entity.Patient;
  * Created by Aking on 10/21/2015.
  */
 @Controller
-public class NutritionController {
+public class NutritionController extends AbstractController{
     private static final Logger LOGGER = LoggerFactory.getLogger(NutritionController.class);
     @Autowired
     AccountService accountService;
 
     @Autowired
     PatientService patientService;
+
+    @Autowired
+    AppointmentService appointmentService;
+
+    @Autowired
+    FoodIngredientService foodIngredientService;
 
     @RequestMapping(value = "createNutrition", method = RequestMethod.GET)
     public ModelAndView createNutritionPage(@RequestParam("patientID") final int patientID) {
@@ -38,6 +46,9 @@ public class NutritionController {
             Patient patient = patientService.getPatientByID(patientID);
             mav.addObject("PATIENT", patient);
             mav.addObject("model", new FoodIngredient());
+            // Find Appointment
+            Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
+            mav.addObject("APPOINTMENT", appointment);
 
             return mav;
         } finally {
@@ -46,16 +57,23 @@ public class NutritionController {
     }
 
     @RequestMapping(value = "nutrition", method = RequestMethod.GET)
-    public ModelAndView createNutrition(@RequestParam("patientID") final int patientID,
+    public ModelAndView createNutrition(@RequestParam(value = "appointmentId") final int appointmentId,
                                         @ModelAttribute FoodIngredient foodIngredient) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("nutrition");
-            Patient patient = patientService.getPatientByID(patientID);
-            mav.addObject("PATIENT", patient);
+            // Find Appointment
+            Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
+            mav.addObject("APPOINTMENT", appointment);
             mav.addObject("model", foodIngredient);
             LOGGER.info(foodIngredient.toString());
+            boolean result = foodIngredientService.insertNewFoodIngredient(appointment,foodIngredient);
+            if (result){
+                notify(mav,result,"Create Nutrition", "Success");
+            } else {
+                notify(mav,result,"createNutrition", "Fail");
+            }
 
             return mav;
         } finally {
