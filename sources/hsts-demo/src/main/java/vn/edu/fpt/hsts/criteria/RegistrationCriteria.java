@@ -24,6 +24,11 @@ public class RegistrationCriteria extends SearchCriteria {
      */
     private String symptom;
 
+    /**
+     *
+     */
+    private String medicineHistory;
+
     public int getDoctorId() {
         return doctorId;
     }
@@ -46,5 +51,13 @@ public class RegistrationCriteria extends SearchCriteria {
 
     public void setSymptom(final String symptom) {
         this.symptom = symptom;
+    }
+
+    public String getMedicineHistory() {
+        return medicineHistory;
+    }
+
+    public void setMedicineHistory(String medicineHistory) {
+        this.medicineHistory = medicineHistory;
     }
 }

@@ -70,22 +70,6 @@ public class NurseController extends AbstractController {
         }
     }
 
-
-    /**
-     * The register patient mapping
-     *
-     * @param patientName
-     * @param email
-     * @param birthday
-     * @param gender
-     * @param weight
-     * @param height
-     * @param doctorId
-     * @param medicalHistory
-     * @param symptoms
-     * @return
-     * @throws BizlogicException
-     */
     @RequestMapping(value = "registerNew", method = RequestMethod.POST)
     public ModelAndView registerPatient(
             // Tab 1 param
@@ -111,7 +95,8 @@ public class NurseController extends AbstractController {
             // Tab 4 param
             @RequestParam("doctorId") final int doctorId,
             @RequestParam(value = "medicalHistory") final String medicalHistory,
-            @RequestParam(value = "symptoms") final String symptoms)
+            @RequestParam(value = "symptoms") final String symptoms,
+            @RequestParam("medicineHistory") final String medicineHistory)
             throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
@@ -148,6 +133,7 @@ public class NurseController extends AbstractController {
             rCriteria.setDoctorId(doctorId);
             rCriteria.setMedicalHistory(medicalHistory);
             rCriteria.setSymptom(symptoms);
+            rCriteria.setMedicineHistory(medicineHistory);
 
             patientService.createPatient(pCriteria, rCriteria, checkCriteria);
 
