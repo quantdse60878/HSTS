@@ -135,7 +135,11 @@ public class NurseController extends AbstractController {
             rCriteria.setSymptom(symptoms);
             rCriteria.setMedicineHistory(medicineHistory);
 
-            patientService.createPatient(pCriteria, rCriteria, checkCriteria);
+            /**
+             * The wrong order of criteria array may cause the program fail
+             * The criteria array should be order by: patient info -> registration -> check condition
+             */
+            patientService.register(0, pCriteria, rCriteria, checkCriteria);
 
             // Response view
             ModelAndView mav = new ModelAndView();
@@ -194,11 +198,26 @@ public class NurseController extends AbstractController {
 
     @RequestMapping(value = "updatePatient", method = RequestMethod.POST)
     public ModelAndView registerPatient(@RequestParam("patientId") final int patientId,
+                                        // Tab 2 param
                                         @RequestParam("weight") final int weight,
                                         @RequestParam("height") final int height,
+                                        @RequestParam("hearthBeat") final int hearthBeat,
+                                        @RequestParam("bloodPressure") final int bloodPressure,
+                                        @RequestParam("waists") final int waists,
+                                        @RequestParam("bmi") final float bmi,
+                                        // Tab 3 param
+                                        @RequestParam("bodyFat") final float bodyFat,
+                                        @RequestParam("visceralFat") final byte visceralFat,
+                                        @RequestParam("muscleMass") final float muscleMass,
+                                        @RequestParam("bodyWater") final float bodyWater,
+                                        @RequestParam("phaseAngle") final float phaseAngle,
+                                        @RequestParam("impedance") final int impedance,
+                                        @RequestParam("basalMetabolicRate") final int basalMetabolicRate,
+                                        // Tab 4 param
                                         @RequestParam("doctorId") final int doctorId,
                                         @RequestParam(value = "medicalHistory") final String medicalHistory,
                                         @RequestParam(value = "symptoms") final String symptoms,
+                                        @RequestParam("medicineHistory") final String medicineHistory,
                                         @RequestParam(value = "isNewMedicalRecord", required = false, defaultValue = "false")
                                         final boolean isNewMedicalRecord) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -208,19 +227,47 @@ public class NurseController extends AbstractController {
             LOGGER.info("weight[{}], height[{}], doctorId[{}], medicalHistory[{}], symptoms[{}], isNewMedicalRecord[{}]",
                     weight, height, doctorId, medicalHistory, symptoms, isNewMedicalRecord);
 
+            // Init criteria
+            // Tab 2_3 criteria
+            final CheckCriteria checkCriteria = new CheckCriteria();
+            checkCriteria.setBodyFat(bodyFat);
+            checkCriteria.setVisceralFat(visceralFat);
+            checkCriteria.setMuscleMass(muscleMass);
+            checkCriteria.setBodyWater(bodyWater);
+            checkCriteria.setPhaseAngle(phaseAngle);
+            checkCriteria.setImpedance(impedance);
+            checkCriteria.setBasalMetabolicRate(basalMetabolicRate);
+            checkCriteria.setWeight(weight);
+            checkCriteria.setHeight(height);
+            checkCriteria.setHearthBeat(hearthBeat);
+            checkCriteria.setBloodPressure(bloodPressure);
+            checkCriteria.setWaists(waists);
+            checkCriteria.setBmi(bmi);
+
+            // Tab 4 criteria
+            RegistrationCriteria rCriteria = new RegistrationCriteria();
+            rCriteria.setDoctorId(doctorId);
+            rCriteria.setMedicalHistory(medicalHistory);
+            rCriteria.setSymptom(symptoms);
+            rCriteria.setMedicineHistory(medicineHistory);
+
+            /**
+             * If new medical record
+             */
+            // TODO
+            if (isNewMedicalRecord) {
+                /**
+                 * The wrong order of criteria array may cause the program fail
+                 * The criteria array should be order by: patient info {null for update case}-> registration -> check condition
+                 */
+                patientService.register(patientId, rCriteria, checkCriteria);
+            } else {
+
+            }
+
+
             ModelAndView mav = new ModelAndView();
             mav.setViewName("updatePatient");
-            /**
-             * Update patient
-             */
-            PatientCriteria criteria = new PatientCriteria();
-            criteria.setId(patientId);
-            criteria.setDoctorId(doctorId);
-            criteria.setMedicalHistory(medicalHistory);
-            criteria.setSymptom(symptoms);
-
-            patientService.updatePatient(criteria, isNewMedicalRecord);
-
             Patient patient = patientService.getPatientByID(patientId);
             mav.addObject("PATIENT", patient);
 

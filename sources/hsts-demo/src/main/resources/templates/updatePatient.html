@@ -254,6 +254,9 @@
                                                         <option th:each="doctor : ${session.DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.fullName}"></option>
                                                     </select>
                                                 </div>
+
+                                                <label for="newRecord" class="col-sm-3 control-label">
+                                                    <input style="width: 15px;height: 15px;" type="checkbox" th:name="isNewMedicalRecord"/>New Medical Record</label>
                                             </div>
                                             <div class="form-group">
                                                 <label for="Medicalhistory" class="col-sm-3 control-label">Medical history</label>

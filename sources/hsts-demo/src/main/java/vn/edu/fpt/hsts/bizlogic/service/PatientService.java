@@ -162,10 +162,12 @@ public class PatientService extends AbstractService {
 
 
     @Transactional(rollbackOn = BizlogicException.class)
-    public void createPatient(final SearchCriteria ... criterias) throws BizlogicException {
+    public void register(final int patientId, final SearchCriteria ... criterias) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            // TODO
+            /**
+             * TODO reinput log, process for old medicine
+             */
             if (null == criterias) {
                 return;
             } else {
@@ -173,13 +175,24 @@ public class PatientService extends AbstractService {
             }
             Date currentDate = new Date();
             currentDate = DateUtils.roundDate(currentDate, false);
-            Patient patient = new Patient();
+            // Identity patient
+            Patient patient;
+            if (0 < patientId) {
+                // Existence patient
+                patient = patientRepo.findOne(patientId);
+                if (null == patient) {
+                    throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
+                }
+            } else {
+                // Register new
+                patient = new Patient();
+            }
             MedicalRecord medicalRecord = new MedicalRecord();
             for (SearchCriteria criteria : criterias) {
                 if (criteria instanceof PatientCriteria) {
                     // TODO
                     // casting
-                    final PatientCriteria patientCriteria =  (PatientCriteria) criteria;
+                    final PatientCriteria patientCriteria = (PatientCriteria) criteria;
                     final Account newAccount = accountService.initPatientAccount(patientCriteria, currentDate);
                     accountRepo.saveAndFlush(newAccount);
 
@@ -189,6 +202,23 @@ public class PatientService extends AbstractService {
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Create new patient[{}] successfully", newAccount.getUsername());
                     }
+                } else if (criteria instanceof RegistrationCriteria) {
+                    // TODO
+                    final RegistrationCriteria rCriteria = (RegistrationCriteria) criteria;
+
+                    medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);
+                    Doctor doctor = doctorRepo.findOne(rCriteria.getDoctorId());
+                    if (null == doctor) {
+                        throw new BizlogicException("Doctor with username[{}] is not found", null, rCriteria.getDoctorId());
+                    }
+                    medicalRecord.setDoctor(doctor);
+                    medicalRecord.setPatient(patient);
+                    medicalRecord.setSymptoms(rCriteria.getSymptom());
+                    medicalRecord.setStartTime(currentDate);
+
+                    medicalRecord.setMedicalHistory(rCriteria.getMedicalHistory());
+                    medicalRecordRepo.saveAndFlush(medicalRecord);
+
                 } else if (criteria instanceof CheckCriteria) {
                     final CheckCriteria pcCriteria = (CheckCriteria) criteria;
                     // TODO Create appointment
@@ -216,22 +246,6 @@ public class PatientService extends AbstractService {
                     preventionCheck.setVisceralFat(pcCriteria.getVisceralFat());
                     preventionCheck.setImpedance(pcCriteria.getImpedance());
                     preventionCheckRepo.saveAndFlush(preventionCheck);
-                } else if (criteria instanceof RegistrationCriteria) {
-                    // TODO
-                    final RegistrationCriteria rCriteria = (RegistrationCriteria) criteria;
-
-                    medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);
-                    Doctor doctor = doctorRepo.findOne(rCriteria.getDoctorId());
-                    if(null == doctor) {
-                        throw new BizlogicException("Doctor with username[{}] is not found", null, rCriteria.getDoctorId());
-                    }
-                    medicalRecord.setDoctor(doctor);
-                    medicalRecord.setPatient(patient);
-                    medicalRecord.setSymptoms(rCriteria.getSymptom());
-                    medicalRecord.setStartTime(currentDate);
-
-                    medicalRecord.setMedicalHistory(rCriteria.getMedicalHistory());
-                    medicalRecordRepo.saveAndFlush(medicalRecord);
                 }
             }
             // TODO send email with creditial information to patient
