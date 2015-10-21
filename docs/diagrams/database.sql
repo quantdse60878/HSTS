@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `hsts`.`Account` (
   `status` TINYINT NULL COMMENT '1 In-active\n2 Active\n3 Block',
   `dateOfBirth` DATE NULL,
   `gender` TINYINT NULL,
+  `updateTime` DATE NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_account_role_idx` (`roleId` ASC),
   CONSTRAINT `fk_account_role`
