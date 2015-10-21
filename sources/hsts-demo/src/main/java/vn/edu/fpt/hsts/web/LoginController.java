@@ -130,6 +130,20 @@ public class LoginController {
         return patient;
     }
 
+    @RequestMapping(value = "changePassword", method = RequestMethod.POST)
+    @ResponseBody
+    public String changePassword(@RequestParam("username") final String username,
+                                       @RequestParam("oldPassword") final String oldPassword,
+                                       @RequestParam("newPassword") final String newPassword) {
+        Account userLogin = new Account();
+        userLogin = accountService.changePassword(username, oldPassword, newPassword);
+        if(userLogin != null) {
+            return "200";
+        }
+        return "error";
+    }
+
+
     /**
      * The logout mapping
      * @param session

@@ -64,6 +64,22 @@ public class AccountService {
         }
     }
 
+    public Account changePassword(final String username, final String oldPassword, final String newPassword){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("username[{}], oldPassword[{}], newPassword[{}]", username, oldPassword, newPassword);
+            final Account account = accountRepo.findByUsernameAndPassword(username, oldPassword);
+            if(null != account) {
+                account.setPassword(newPassword);
+                accountRepo.save(account);
+                return account;
+            }
+            return null;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
     public AccountModel loginRest(final String username, final String password) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
