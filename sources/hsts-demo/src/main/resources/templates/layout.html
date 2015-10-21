@@ -63,6 +63,14 @@
 <script type="text/javascript"
         th:src="@{/static/bower/admin-lte/plugins/datatables/dataTables.bootstrap.min.js}"></script>
 <script type="text/javascript">
+    $(function () {
+        $("#dataTable").DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "ordering": true,
+            "info": true
+        });
+    });
     function markAllasRead(){
         $.ajax({
             url: "markAllReaded",
