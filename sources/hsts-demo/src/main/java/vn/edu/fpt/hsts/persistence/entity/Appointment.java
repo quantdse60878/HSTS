@@ -41,14 +41,22 @@ public class Appointment extends AbstractKeyEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
     private List<Treatment> treatmentList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
-    private List<PreventionCheck> preventionCheckList;
     /**
      *
      */
     @OneToOne
     @JoinColumn(name = "nextAppointment")
     private Appointment nextAppointment;
+
+    /**
+    * The patient height.
+    */
+    private double height;
+
+    /**
+     * The patient weight.
+     */
+    private double weight;
 
     /**
      * The status.
@@ -71,14 +79,6 @@ public class Appointment extends AbstractKeyEntity {
     private int waists;
 
     public Appointment() {
-    }
-
-    public List<PreventionCheck> getPreventionCheckList() {
-        return preventionCheckList;
-    }
-
-    public void setPreventionCheckList(List<PreventionCheck> preventionCheckList) {
-        this.preventionCheckList = preventionCheckList;
     }
 
     public Date getMeetingDate() {
@@ -143,5 +143,21 @@ public class Appointment extends AbstractKeyEntity {
 
     public void setWaists(final int waists) {
         this.waists = waists;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 }
