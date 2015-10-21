@@ -10,7 +10,6 @@
 	"jquery": "2.1.4",
 	"jquery-ui": "1.11.4",
 	"datatables": null,
-	"bootstrap-datepicker": null,
 	"bootstrap-tagsinput": null,
 	"bootstrap3-typeahead": null
   }
