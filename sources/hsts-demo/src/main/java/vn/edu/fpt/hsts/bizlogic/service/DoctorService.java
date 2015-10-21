@@ -148,6 +148,14 @@ public class DoctorService extends AbstractService {
     @Value("${hsts.default.treatment.long}")
     private int treatmentLong;
 
+    public int getTreatmentLong() {
+        return treatmentLong;
+    }
+
+    public void setTreatmentLong(int treatmentLong) {
+        this.treatmentLong = treatmentLong;
+    }
+
     public List<DoctorModel> findAll() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
