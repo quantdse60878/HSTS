@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.NutritionModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
@@ -92,7 +93,8 @@ public class PrescriptionController extends AbstractController{
 
             // Find FoodIngredient
             FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
-            mav.addObject("FOODINGREDIENT", foodIngredient);
+            NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
+            mav.addObject("FOODINGREDIENT", nutritionModel);
 
             // Set entry patient
             mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
@@ -151,7 +153,8 @@ public class PrescriptionController extends AbstractController{
 
             // Find FoodIngredient
             FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
-            mav.addObject("FOODINGREDIENT", foodIngredient);
+            NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
+            mav.addObject("FOODINGREDIENT", nutritionModel);
 
             // Set entry patient
             mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
@@ -188,7 +191,8 @@ public class PrescriptionController extends AbstractController{
 
             // Find FoodIngredient
             FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
-            mav.addObject("FOODINGREDIENT", foodIngredient);
+            NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
+            mav.addObject("FOODINGREDIENT", nutritionModel);
 
             // Find List Appointment
             List<Appointment> appointments = appointmentService.getAllAppointmentToCurrentDateOfPatient(appointment.getMedicalRecord().getPatient().getId());

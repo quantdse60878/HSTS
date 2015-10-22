@@ -26,7 +26,8 @@
                     <thead>
                     <tr>
                         <th>Rate Energy Meals</th>
-                        <th style="width: 190px;">Energy</th>
+                        <th style="width: 120px;">Energy</th>
+                        <th style="width: 120px;">Percent</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,7 +36,10 @@
                             <label class="control-label">Breakfast</label>
                         </td>
                         <td>
-                            <input th:field="*{breakfast}" type="text" class="form-control" readonly="readonly"/>
+                            <input th:field="*{fi.breakfast}" type="text" class="form-control" readonly="readonly"/>
+                        </td>
+                        <td>
+                            <input th:field="*{breakfastPercent}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     <tr>
@@ -43,7 +47,10 @@
                             <label class="control-label">BreakTime Morning</label>
                         </td>
                         <td>
-                            <input th:field="*{breakTimeMorning}" type="text" class="form-control" readonly="readonly"/>
+                            <input th:field="*{fi.breakTimeMorning}" type="text" class="form-control" readonly="readonly"/>
+                        </td>
+                        <td>
+                            <input th:field="*{breakTimeMorningPercent}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     <tr>
@@ -51,25 +58,37 @@
                             <label class="control-label">Lunch</label>
                         </td>
                         <td>
-                            <input th:field="*{lunch}"  readonly="readonly" type="text" class="form-control" placeholder="Lunch"/>
+                            <input th:field="*{fi.lunch}"  readonly="readonly" type="text" class="form-control" placeholder="Lunch"/>
+                        </td>
+                        <td>
+                            <input th:field="*{lunchPercent}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">BreakTime Afternoon</label></td>
                         <td>
-                            <input th:field="*{breakTimeAfternoon}" readonly="readonly" type="text" class="form-control" placeholder="BreakTime Afternoon"/>
+                            <input th:field="*{fi.breakTimeAfternoon}" readonly="readonly" type="text" class="form-control" placeholder="BreakTime Afternoon"/>
+                        </td>
+                        <td>
+                            <input th:field="*{breakTimeAfternoonPercent}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Dinner</label></td>
                         <td>
-                            <input th:field="*{dinner}"  readonly="readonly" type="text" class="form-control" placeholder="Dinner"/>
+                            <input th:field="*{fi.dinner}"  readonly="readonly" type="text" class="form-control" placeholder="Dinner"/>
+                        </td>
+                        <td>
+                            <input th:field="*{dinnerPercent}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Eat Late At Night</label></td>
                         <td>
-                            <input th:field="*{eatLateAtNight}" readonly="readonly" type="text" class="form-control" placeholder="Eat Late At Night"/>
+                            <input th:field="*{fi.eatLateAtNight}" readonly="readonly" type="text" class="form-control" placeholder="Eat Late At Night"/>
+                        </td>
+                        <td>
+                            <input th:field="*{eatLateAtNightPercent}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     </tbody>
@@ -87,10 +106,26 @@
                     <tbody>
                     <tr>
                         <td>
+                            <label class="control-label">ToTal Energy (Kcal)</label>
+                        </td>
+                        <td>
+                            <input th:field="*{totalEnergy}" type="text" readonly="readonly"  class="form-control" placeholder="Starch"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label">Energy (Kcal/Kg/24h)</label>
+                        </td>
+                        <td>
+                            <input th:field="*{energy}" type="text" readonly="readonly"  class="form-control" placeholder="Starch"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <label class="control-label">Starch (g)</label>
                         </td>
                         <td>
-                            <input th:field="*{starch}" type="text" readonly="readonly"  class="form-control" placeholder="Starch"/>
+                            <input th:field="*{fi.starch}" type="text" readonly="readonly"  class="form-control" placeholder="Starch"/>
                         </td>
                     </tr>
                     <tr>
@@ -98,7 +133,7 @@
                             <label class="control-label">Protein (g)</label>
                         </td>
                         <td>
-                            <input th:field="*{protein}" readonly="readonly" type="text" class="form-control" placeholder="Protein"/>
+                            <input th:field="*{fi.protein}" readonly="readonly" type="text" class="form-control" placeholder="Protein"/>
                         </td>
                     </tr>
                     <tr>
@@ -106,7 +141,7 @@
                             <label class="control-label">Fat (g)</label>
                         </td>
                         <td>
-                            <input th:field="*{fat}" readonly="readonly" type="text" class="form-control" placeholder="Fat"/>
+                            <input th:field="*{fi.fat}" readonly="readonly" type="text" class="form-control" placeholder="Fat"/>
                         </td>
                     </tr>
                     <tr>
@@ -114,7 +149,7 @@
                             <label class="control-label">Animal Protein (g)</label>
                         </td>
                         <td>
-                            <input th:field="*{animalProtein}" readonly="readonly" type="text" class="form-control" placeholder="Animal Protein"/>
+                            <input th:field="*{fi.animalProtein}" readonly="readonly" type="text" class="form-control" placeholder="Animal Protein"/>
                         </td>
                     </tr>
                     <tr>
@@ -122,25 +157,25 @@
                             <label class="control-label">Animal Fat (g)</label>
                         </td>
                         <td>
-                            <input th:field="*{animalFat}" readonly="readonly" type="text" class="form-control" placeholder="Animal Fat"/>
+                            <input th:field="*{fi.animalFat}" readonly="readonly" type="text" class="form-control" placeholder="Animal Fat"/>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Calcium (mg)</label></td>
                         <td>
-                            <input th:field="*{calcium}" readonly="readonly" type="text" class="form-control" placeholder="Calcium"/>
+                            <input th:field="*{fi.calcium}" readonly="readonly" type="text" class="form-control" placeholder="Calcium"/>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Sodium (mg)</label></td>
                         <td>
-                            <input th:field="*{sodium}" readonly="readonly" type="text" class="form-control" placeholder="Sodium"/>
+                            <input th:field="*{fi.sodium}" readonly="readonly" type="text" class="form-control" placeholder="Sodium"/>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Iron /1000 Kcal (mg)</label></td>
                         <td>
-                            <input th:field="*{iron}" readonly="readonly" type="text" class="form-control" placeholder="Iron"/>
+                            <input th:field="*{fi.iron}" readonly="readonly" type="text" class="form-control" placeholder="Iron"/>
                         </td>
                     </tr>
                     <tr>
@@ -148,7 +183,7 @@
                             <label class="control-label">Zinc /1000 Kcal (mg)</label>
                         </td>
                         <td>
-                            <input th:field="*{zinc}" readonly="readonly" type="text"  class="form-control" placeholder="Zinc"/>
+                            <input th:field="*{fi.zinc}" readonly="readonly" type="text"  class="form-control" placeholder="Zinc"/>
                         </td>
                     </tr>
                     <tr>
@@ -156,7 +191,7 @@
                             <label class="control-label">Vitamin B1/1000 Kcal (mg)</label>
                         </td>
                         <td>
-                            <input th:field="*{vitaminB1}" readonly="readonly" type="text" class="form-control" placeholder="Vitamin B1"/>
+                            <input th:field="*{fi.vitaminB1}" readonly="readonly" type="text" class="form-control" placeholder="Vitamin B1"/>
                         </td>
                     </tr>
                     <tr>
@@ -164,25 +199,25 @@
                             <label class="control-label">Vitamin C/1000 Kcal (mg)</label>
                         </td>
                         <td>
-                            <input th:field="*{vitaminC}" readonly="readonly" type="text" class="form-control" placeholder="Vitamin C"/>
+                            <input th:field="*{fi.vitaminC}" readonly="readonly" type="text" class="form-control" placeholder="Vitamin C"/>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Vitamin B2/1000 Kcal (mg)</label></td>
                         <td>
-                            <input th:field="*{vitaminB2}" readonly="readonly" type="text" class="form-control" placeholder="Vitamin B2"/>
+                            <input th:field="*{fi.vitaminB2}" readonly="readonly" type="text" class="form-control" placeholder="Vitamin B2"/>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Vitamin PP/1000 Kcal (mg)</label></td>
                         <td>
-                            <input th:field="*{vitaminPP}" readonly="readonly" type="text" class="form-control" placeholder="Vitamin PP"/>
+                            <input th:field="*{fi.vitaminPP}" readonly="readonly" type="text" class="form-control" placeholder="Vitamin PP"/>
                         </td>
                     </tr>
                     <tr>
                         <td><label class="control-label">Fiber (g)</label></td>
                         <td>
-                            <input th:field="*{fiber}" readonly="readonly" type="text" class="form-control" placeholder="Fiber"/>
+                            <input th:field="*{fi.fiber}" readonly="readonly" type="text" class="form-control" placeholder="Fiber"/>
                         </td>
                     </tr>
                     </tbody>
