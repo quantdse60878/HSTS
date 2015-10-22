@@ -179,7 +179,7 @@ public class DoctorService extends AbstractService {
     }
 
     @Transactional(rollbackOn = BizlogicException.class)
-    public void makePrescription(final PrescriptionModel prescription,
+    public boolean makePrescription(final PrescriptionModel prescription,
                                  final int appointmentId,
                                  final String appointmentDate) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -340,10 +340,13 @@ public class DoctorService extends AbstractService {
             foodTreatmentRepo.flush();
             practiceTreatmentRepo.flush();
 
+            return true;
         } catch (BizlogicException e) {
-            throw e;
+            LOGGER.info("BizlogicException: {}", null, e.getMessage());
+            return false;
         } catch (Exception e) {
-            throw new BizlogicException("Error while making new prescription: {}", null, e.getMessage());
+            LOGGER.info("Error while making new prescription: {}", null, e.getMessage());
+            return false;
         }finally {
             LOGGER.info(IConsts.END_METHOD);
         }

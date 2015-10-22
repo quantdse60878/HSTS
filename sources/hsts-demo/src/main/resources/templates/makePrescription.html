@@ -114,8 +114,12 @@
                                                     th:text="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name} : ''">Select
                                                 one...
                                             </option>
+
                                             <option th:each="illness : ${ILLNESSES}" th:value="${illness.id}"
-                                                    th:text="${illness.name}"></option>
+                                                    th:text="${illness.name}" th:if="${DIAGNOSTIC != null and DIAGNOSTIC.id != illness.id}"></option>
+
+                                            <option th:each="illness : ${ILLNESSES}" th:value="${illness.id}"
+                                                    th:text="${illness.name}" th:if="${DIAGNOSTIC == null}"></option>
                                         </select>
                                     </div>
                                     <div class="col-sm-2 pull-right" th:if="${TREATMENT == null}">
@@ -419,8 +423,20 @@
             $('.nav-tabs > li.active').removeClass('active');
             $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
         };
+        var check = $('#diagnostic').val();
         function confirmBox(form){
-            confirm('Are you sure to make this prescription?');
+//            alert(check);
+            if(check == ''){
+                alert('Please suggest diagnostic before make prescription!!!');
+                return false;
+            } else {
+                var r = confirm('Are you sure to make this prescription?');
+                if (r == true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
 
         $("#combobox").combobox();
