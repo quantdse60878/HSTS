@@ -9,9 +9,11 @@ package vn.edu.fpt.hsts.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
+import vn.edu.fpt.hsts.persistence.entity.Treatment;
 
 import java.util.List;
 
@@ -19,5 +21,8 @@ import java.util.List;
 public interface FoodTreatmentRepo extends JpaRepository<FoodTreatment, Integer> {
 
     @Query(value = "SELECT * FROM foodtreatment WHERE treatmentId = ?1", nativeQuery = true)
-    List<FoodTreatment> findFoodTreatmentTreatmentId(int treatmentId);
+    public List<FoodTreatment> findFoodTreatmentTreatmentId(int treatmentId);
+
+    @Query("select distinct t from FoodTreatment t where treatment = :treatment")
+    public List<FoodTreatment> getAllFoodTreatmentFromTreatment(@Param("treatment") final Treatment treatment);
 }

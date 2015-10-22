@@ -29,8 +29,11 @@ import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
+import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Illness;
+import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
+import vn.edu.fpt.hsts.persistence.entity.PracticeTreatment;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
 
@@ -233,8 +236,13 @@ public class PrescriptionController extends AbstractController{
 
                 // Find treatment form appointment
                 Treatment treatment = treatmentService.findTreatmentByAppointmentID(appointmentId);
+                List<MedicineTreatment> medicineTreatments = treatmentService.getAllMedicineTreatmentFromTreatment(treatment);
+                treatment.setMedicineTreatmentList(medicineTreatments);
+                List<FoodTreatment> foodTreatments = treatmentService.getAllFoodTreatmentFromTreatment(treatment);
+                treatment.setFoodTreatmentList(foodTreatments);
+                List<PracticeTreatment> practiceTreatments = treatmentService.getAllPracticeTreatmentFromTreatment(treatment);
+                treatment.setPracticeTreatmentList(practiceTreatments);
                 mav.addObject("TREATMENT", treatment);
-                LOGGER.info("Medicine: " + treatment.getMedicineTreatmentList().size());
                 mav.addObject("model", new PrescriptionModel());
             } else {
                 notify(mav, result, "Make Prescription", "Fail");

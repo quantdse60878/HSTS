@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
+import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
 
 import java.util.List;
@@ -27,4 +28,5 @@ public interface TreatmentRepo extends JpaRepository<Treatment, Integer>{
 
     @Query("select distinct t from Treatment t where appointment.medicalRecord.patient.id = :patientId and status = :status")
     public Treatment findLastTreatmenByPatientId(@Param("patientId") final int patientId, @Param("status") final byte status);
+
 }

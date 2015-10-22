@@ -142,4 +142,19 @@ public class TreatmentService {
         LOGGER.info("appointmentId[{}]", appointmentId);
         return treatmentRepo.findLastTreatmenByAppointmentId(appointmentId);
     }
+
+    public List<MedicineTreatment> getAllMedicineTreatmentFromTreatment(final Treatment treatment) {
+        LOGGER.info("treatment[{}]", treatment);
+        return medicineTreatmentRepo.getAllMedicineTreatmentFromTreatment(treatment);
+    }
+
+    public List<FoodTreatment> getAllFoodTreatmentFromTreatment(Treatment treatment) {
+        LOGGER.info("treatment[{}]", treatment);
+        return foodTreatmentRepo.getAllFoodTreatmentFromTreatment(treatment);
+    }
+
+    public List<PracticeTreatment> getAllPracticeTreatmentFromTreatment(Treatment treatment) {
+        LOGGER.info("treatment[{}]", treatment);
+        return practiceTreatmentRepo.getAllPracticeTreatmentFromTreatment(treatment);
+    }
 }
