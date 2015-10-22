@@ -26,8 +26,8 @@
                     <thead>
                     <tr>
                         <th>Rate Energy Meals</th>
-                        <th style="width: 120px;">Energy</th>
-                        <th style="width: 120px;">Percent</th>
+                        <th style="width: 150px;">Energy</th>
+                        <th style="width: 150px;">Percent</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,7 +39,7 @@
                             <input th:field="*{fi.breakfast}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                         <td>
-                            <input th:field="*{breakfastPercent}" type="text" class="form-control" readonly="readonly"/>
+                            <input th:value="${#numbers.formatDecimal(FOODINGREDIENT.breakfastPercent, 0, 'COMMA', 1, 'POINT')}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@
                             <input th:field="*{fi.breakTimeMorning}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                         <td>
-                            <input th:field="*{breakTimeMorningPercent}" type="text" class="form-control" readonly="readonly"/>
+                            <input th:value="${#numbers.formatDecimal(FOODINGREDIENT.breakTimeMorningPercent, 0, 'COMMA', 1, 'POINT')}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     <tr>
@@ -61,7 +61,7 @@
                             <input th:field="*{fi.lunch}"  readonly="readonly" type="text" class="form-control" placeholder="Lunch"/>
                         </td>
                         <td>
-                            <input th:field="*{lunchPercent}" type="text" class="form-control" readonly="readonly"/>
+                            <input th:value="${#numbers.formatDecimal(FOODINGREDIENT.lunchPercent, 0, 'COMMA', 1, 'POINT')}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     <tr>
@@ -70,7 +70,7 @@
                             <input th:field="*{fi.breakTimeAfternoon}" readonly="readonly" type="text" class="form-control" placeholder="BreakTime Afternoon"/>
                         </td>
                         <td>
-                            <input th:field="*{breakTimeAfternoonPercent}" type="text" class="form-control" readonly="readonly"/>
+                            <input th:value="${#numbers.formatDecimal(FOODINGREDIENT.breakTimeAfternoonPercent, 0, 'COMMA', 1, 'POINT')}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +79,7 @@
                             <input th:field="*{fi.dinner}"  readonly="readonly" type="text" class="form-control" placeholder="Dinner"/>
                         </td>
                         <td>
-                            <input th:field="*{dinnerPercent}" type="text" class="form-control" readonly="readonly"/>
+                            <input th:value="${#numbers.formatDecimal(FOODINGREDIENT.dinnerPercent, 0, 'COMMA', 1, 'POINT')}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     <tr>
@@ -88,7 +88,7 @@
                             <input th:field="*{fi.eatLateAtNight}" readonly="readonly" type="text" class="form-control" placeholder="Eat Late At Night"/>
                         </td>
                         <td>
-                            <input th:field="*{eatLateAtNightPercent}" type="text" class="form-control" readonly="readonly"/>
+                            <input th:value="${#numbers.formatDecimal(FOODINGREDIENT.eatLateAtNightPercent, 0, 'COMMA', 1, 'POINT')}" type="text" class="form-control" readonly="readonly"/>
                         </td>
                     </tr>
                     </tbody>
@@ -109,7 +109,7 @@
                             <label class="control-label">ToTal Energy (Kcal)</label>
                         </td>
                         <td>
-                            <input th:field="*{totalEnergy}" type="text" readonly="readonly"  class="form-control" placeholder="Starch"/>
+                            <input th:value="${#numbers.formatDecimal(FOODINGREDIENT.totalEnergy, 0, 'COMMA', 1, 'POINT')}" type="text" readonly="readonly"  class="form-control" placeholder="Starch"/>
                         </td>
                     </tr>
                     <tr>
@@ -117,7 +117,7 @@
                             <label class="control-label">Energy (Kcal/Kg/24h)</label>
                         </td>
                         <td>
-                            <input th:field="*{energy}" type="text" readonly="readonly"  class="form-control" placeholder="Starch"/>
+                            <input th:value="${#numbers.formatDecimal(FOODINGREDIENT.energy, 0, 'COMMA', 1, 'POINT')}" type="text" readonly="readonly"  class="form-control" placeholder="Starch"/>
                         </td>
                     </tr>
                     <tr>
