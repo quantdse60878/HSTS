@@ -16,4 +16,5 @@ public interface NotifyRepo extends JpaRepository<Notify, Integer> {
 
     @Query("select n from Notify n where receiver.id = :receiverId and status = :status")
     public List<Notify> findByReceiverId(@Param("receiverId") final int receiverId, @Param("status") final byte status);
+
 }

@@ -340,6 +340,7 @@ public class DoctorService extends AbstractService {
             }
             LOGGER.info("Create new treatment : End");
 
+            //TODO change status notify of doctor
             // Create notify to patient
             LOGGER.info("Create notify to patient : Start");
             final Notify notify = new Notify();
