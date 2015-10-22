@@ -22,6 +22,7 @@ import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodIngredientService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
+import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
@@ -30,6 +31,7 @@ import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
+import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
 
 import java.util.List;
@@ -76,6 +78,9 @@ public class DoctorController extends AbstractController{
     @Autowired
     private FoodIngredientService foodIngredientService;
 
+    @Autowired
+    private PreventionCheckService preventionCheckService;
+
     /**
      * The doctor patients page mapping
      * @return
@@ -114,10 +119,14 @@ public class DoctorController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
 
+            // Find PreventionCheck
+            PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
+            mav.addObject("PREVENTIONCHECK", preventionCheck);
+
             // Find FoodIngredient
             FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
             if (null != foodIngredient){
-                NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
+                NutritionModel nutritionModel = new NutritionModel(foodIngredient,preventionCheck.getWeight());
                 mav.addObject("FOODINGREDIENT", nutritionModel);
             }
 

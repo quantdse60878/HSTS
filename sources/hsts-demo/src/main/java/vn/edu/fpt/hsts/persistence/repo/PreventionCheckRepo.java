@@ -6,8 +6,12 @@ package vn.edu.fpt.hsts.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
+
+import java.util.List;
 
 @Repository
 public interface PreventionCheckRepo extends JpaRepository<PreventionCheck, Integer>  {
@@ -15,4 +19,6 @@ public interface PreventionCheckRepo extends JpaRepository<PreventionCheck, Inte
     @Query(value = "SELECT * FROM preventioncheck WHERE appointmentId = ?1", nativeQuery = true)
     PreventionCheck findPreventionCheckByAppointmentId(int appointmentId);
 
+    @Query("select p from PreventionCheck p where appointment = :appointment ORDER BY id DESC")
+    List<PreventionCheck> findPreventionCheckByAppointment(@Param("appointment")final Appointment appointment);
 }
