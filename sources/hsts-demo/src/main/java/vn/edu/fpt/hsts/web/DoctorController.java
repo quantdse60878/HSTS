@@ -226,7 +226,7 @@ public class DoctorController extends AbstractController{
             mav.addObject("model", prescriptionModel);
 
             LOGGER.info(prescriptionModel.toString());
-            doctorService.makePrescription(prescriptionModel, appointmentId, appointmentDate);
+            boolean result = doctorService.makePrescription(prescriptionModel, appointmentId, appointmentDate);
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
@@ -234,8 +234,14 @@ public class DoctorController extends AbstractController{
             mav.addObject("MEDICS",  1);
             mav.addObject("FOS", 1);
             mav.addObject("PRACS", 1);
+
             // Create notify
-            notify(mav, true, "Make Prescription", "Success");
+            if (result){
+                notify(mav, result, "Make Prescription", "Success");
+            } else {
+                notify(mav, result, "Make Prescription", "Fail");
+            }
+
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

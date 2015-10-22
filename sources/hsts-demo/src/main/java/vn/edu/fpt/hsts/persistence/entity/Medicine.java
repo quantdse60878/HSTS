@@ -22,6 +22,8 @@ public class Medicine extends AbstractKeyEntity {
     @Column(name = "medicineName")
     private String name;
 
+    private String unit;
+
     public Medicine() {
     }
 
@@ -31,5 +33,13 @@ public class Medicine extends AbstractKeyEntity {
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

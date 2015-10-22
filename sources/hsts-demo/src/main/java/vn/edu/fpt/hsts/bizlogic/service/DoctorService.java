@@ -181,7 +181,7 @@ public class DoctorService extends AbstractService {
     @Transactional(rollbackOn = BizlogicException.class)
     public boolean makePrescription(final PrescriptionModel prescription,
                                  final int appointmentId,
-                                 final String appointmentDate) throws BizlogicException {
+                                 final String appointmentDate) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("prescription[{}], appointmentId[{}], appointmentDate[{}]", prescription, appointmentId, appointmentDate);
@@ -189,7 +189,7 @@ public class DoctorService extends AbstractService {
             final Appointment appointment = appointmentRepo.findOne(appointmentId);
             if (null == appointment) {
                 LOGGER.error("Appointment with id[{}] is not found", appointmentId);
-                throw new BizlogicException("Appointment with id[{}] is not found", null, appointmentId);
+                return false;
             }
             appointment.setMeetingDate(new Date());
             appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
@@ -204,7 +204,8 @@ public class DoctorService extends AbstractService {
             if (StringUtils.isNotEmpty(appointmentDate)) {
                 toDate = DateUtils.parseDate(appointmentDate, DateUtils.DATE_PATTERN_3);
                 if (null == toDate) {
-                    throw new BizlogicException("Wrong input date format: {}", null, appointmentDate);
+                    LOGGER.info("Wrong input date format: {}", null, appointmentDate);
+                    return false;
                 }
             } else {
                 // Set to next 7 day
@@ -212,21 +213,27 @@ public class DoctorService extends AbstractService {
             }
 
             // Create next appointment
+            LOGGER.info("Create next appointment : Start");
             Appointment nextAppointment = new Appointment();
-            nextAppointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
+            nextAppointment.setStatus(IDbConsts.IAppointmentStatus.WATTING);
             nextAppointment.setMeetingDate(toDate);
             nextAppointment.setMedicalRecord(appointment.getMedicalRecord());
 
             appointmentRepo.save(nextAppointment);
+            LOGGER.info("Create next appointment : End");
 
             // Set old appointment link to new appointment
+            LOGGER.info("Set old appointment link to new appointment : Start");
             appointment.setNextAppointment(nextAppointment);
 
             medicalRecordRepo.saveAndFlush(medicalRecord);
             appointmentRepo.save(appointment);
+            LOGGER.info("Set old appointment link to new appointment : End");
 
             // Set old treatment to DONE
+            LOGGER.info("Set old treatment to DONE : Start");
             // Find old nearest parent appointment
+            LOGGER.info("Find old nearest parent appointment : Start");
             final Appointment oldAppointment = appointmentRepo.findParentAppointment(appointmentId);
             if(null != oldAppointment) {
                 final List<Treatment> lastTreatments = oldAppointment.getTreatmentList();
@@ -238,10 +245,11 @@ public class DoctorService extends AbstractService {
                     }
                 }
             }
+            LOGGER.info("Find old nearest parent appointment : End");
 
             if (null != prescription) {
-
                 // create new treatment
+                LOGGER.info("Create new treatment : Start");
                 final Treatment newTreatment = new Treatment();
                 newTreatment.setStatus(IDbConsts.ITreatmentStatus.ON_TREATING);
                 newTreatment.setAppointment(appointment);
@@ -249,11 +257,12 @@ public class DoctorService extends AbstractService {
                 newTreatment.setCaloriesBurnEveryday(prescription.getKcalRequire());
                 newTreatment.setToDate(toDate);
                 treatmentRepo.save(newTreatment);
-
+                LOGGER.info("Create new treatment : End");
                 // TODO implement for medicine, food, practice and multiple row, validate data
 
 
                 // Medicine
+                LOGGER.info("Create new MedicineTreatment : Start");
                 final List<MedicinePrescriptionModel> mPresModels = prescription.getmPresModels();
                 if (null != mPresModels && !mPresModels.isEmpty()) {
 
@@ -266,20 +275,22 @@ public class DoctorService extends AbstractService {
                         }
                         Medicine medicine = medicineRepo.findOne(medicineModel.getM());
                         if (null == medicine) {
-                            throw new BizlogicException("Medicine with id[{}] is not found", null, medicineModel.getM());
+                            LOGGER.info("Medicine with id[{}] is not found", null, medicineModel.getM());
+                            return false;
                         }
                         MedicineTreatment medicineTreatment = new MedicineTreatment();
                         medicineTreatment.setMedicine(medicine);
                         medicineTreatment.setNumberOfTime(medicineModel.getmTime());
                         medicineTreatment.setQuantitative(medicineModel.getmQuantity());
-                        medicineTreatment.setUnit(medicineModel.getmUnit());
                         medicineTreatment.setAdvice(medicineModel.getmNote());
                         medicineTreatment.setTreatment(newTreatment);
                         medicineTreatmentRepo.save(medicineTreatment);
                     }
                 }
+                LOGGER.info("Create new MedicineTreatment : End");
 
                 // Food
+                LOGGER.info("Create new FoodTreatment : Start");
                 final List<FoodPrescriptionModel> fPresModels = prescription.getfPresModels();
                 if(null != fPresModels && !fPresModels.isEmpty()) {
                     for (FoodPrescriptionModel foodModel: fPresModels) {
@@ -288,7 +299,8 @@ public class DoctorService extends AbstractService {
                         }
                         Food food = foodRepo.findOne(foodModel.getF());
                         if (null == food) {
-                            throw new BizlogicException("Food with id[{}] is not found", null, foodModel.getF());
+                            LOGGER.info("Food with id[{}] is not found", null, foodModel.getF());
+                            return false;
                         }
                         FoodTreatment foodTreatment = new FoodTreatment();
                         foodTreatment.setFood(food);
@@ -299,8 +311,10 @@ public class DoctorService extends AbstractService {
                         foodTreatmentRepo.save(foodTreatment);
                     }
                 }
+                LOGGER.info("Create new FoodTreatment : End");
 
                 // Practice
+                LOGGER.info("Create new PracticeTreatment : Start");
                 final List<PracticePrescriptionModel> pPresModels = prescription.getpPresModels();
                 if (null != pPresModels && !pPresModels.isEmpty()) {
 
@@ -310,7 +324,8 @@ public class DoctorService extends AbstractService {
                         }
                         final Practice practice = practiceRepo.findOne(practiceModel.getP());
                         if (null == practice) {
-                            throw new BizlogicException("Practice with name[{}] is not found", null, practiceModel.getP());
+                            LOGGER.info("Practice with name[{}] is not found", null, practiceModel.getP());
+                            return false;
                         }
                         PracticeTreatment practiceTreatment = new PracticeTreatment();
                         practiceTreatment.setTreatment(newTreatment);
@@ -321,9 +336,12 @@ public class DoctorService extends AbstractService {
                         practiceTreatmentRepo.save(practiceTreatment);
                     }
                 }
+                LOGGER.info("Create new PracticeTreatment : End");
             }
+            LOGGER.info("Create new treatment : End");
 
             // Create notify to patient
+            LOGGER.info("Create notify to patient : Start");
             final Notify notify = new Notify();
             notify.setSender(getCurrentAccount());
             notify.setReceiver(medicalRecord.getPatient().getAccount());
@@ -332,8 +350,10 @@ public class DoctorService extends AbstractService {
             final int patientId = medicalRecord.getPatient().getId();
             notify.setMessage(String.valueOf(patientId));
             notifyRepo.saveAndFlush(notify);
+            LOGGER.info("Create notify to patient : End");
 
             // flush all change to db
+            LOGGER.info("Flush all change to db");
             appointmentRepo.flush();
             treatmentRepo.flush();
             medicineTreatmentRepo.flush();
@@ -342,10 +362,10 @@ public class DoctorService extends AbstractService {
 
             return true;
         } catch (BizlogicException e) {
-            LOGGER.info("BizlogicException: {}", null, e.getMessage());
+            LOGGER.info("BizlogicException: {}", e.getMessage());
             return false;
         } catch (Exception e) {
-            LOGGER.info("Error while making new prescription: {}", null, e.getMessage());
+            LOGGER.info("Error while making new prescription: {}", e.getMessage());
             return false;
         }finally {
             LOGGER.info(IConsts.END_METHOD);

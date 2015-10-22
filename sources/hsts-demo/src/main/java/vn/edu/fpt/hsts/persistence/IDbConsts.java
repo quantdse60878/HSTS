@@ -51,6 +51,11 @@ public interface IDbConsts {
          *
          */
         byte FINISHED = 2;
+
+        /**
+         *
+         */
+        byte WATTING = 3;
     }
 
     public interface IMedicalRecordStatus {

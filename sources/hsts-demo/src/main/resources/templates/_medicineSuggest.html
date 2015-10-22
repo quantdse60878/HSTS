@@ -36,7 +36,8 @@
         <td class="form-inline" style="max-width: 180px;">
             <input type="text" class="form-control" style="max-width: 47%;" th:field="*{mPresModels[__${row.index}__].mQuantity}"
                    placeholder="Quanlity"/>
-            <input type="text" class="form-control" style="max-width: 50%;" th:field="*{mPresModels[__${row.index}__].mUnit}"
+            <input type="text" th:value="${medicalPhase.medicine.unit}"
+                   class="form-control" style="max-width: 50%;"
                    placeholder="Unit"/>
         </td>
         <td>
