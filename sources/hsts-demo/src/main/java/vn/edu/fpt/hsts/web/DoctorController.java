@@ -20,6 +20,7 @@ import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
+import vn.edu.fpt.hsts.bizlogic.service.FoodIngredientService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordService;
@@ -34,6 +35,7 @@ import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Food;
+import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
 import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
@@ -83,6 +85,9 @@ public class DoctorController extends AbstractController{
     @Autowired
     private TreatmentService treatmentService;
 
+    @Autowired
+    private FoodIngredientService foodIngredientService;
+
     /**
      * The doctor patients page mapping
      * @return
@@ -120,6 +125,10 @@ public class DoctorController extends AbstractController{
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
+
+            // Find FoodIngredient
+            FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
+            mav.addObject("FOODINGREDIENT", foodIngredient);
 
             // Find List Appointment
             List<Appointment> appointments = appointmentService.getAllAppointmentToCurrentDateOfPatient(appointment.getMedicalRecord().getPatient().getId());

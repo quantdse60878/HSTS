@@ -192,7 +192,7 @@ function blanket_size(popUpDivVar) {
     var blanket = document.getElementById('blanket');
     blanket.style.height = blanket_height + 'px';
     var popUpDiv = document.getElementById(popUpDivVar);
-    popUpDiv_height = blanket_height / 2 - 150;//150 is half popup's height
+    popUpDiv_height = blanket_height / 2 - 325;//150 is half popup's height
     popUpDiv.style.top = popUpDiv_height + 'px';
 }
 ;
@@ -220,7 +220,7 @@ function window_pos(popUpDivVar) {
         }
     }
     var popUpDiv = document.getElementById(popUpDivVar);
-    window_width = window_width / 2 - 200;//200 is half popup's width
+    window_width = window_width / 2 - 300;//200 is half popup's width
     popUpDiv.style.left = window_width + 'px';
 }
 ;

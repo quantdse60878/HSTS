@@ -55,6 +55,13 @@
             z-index: 9002;
         }
 
+        #Nutritional {
+            position: absolute;
+            width: 600px;
+            height: 650px;
+            z-index: 9002;
+        }
+
     </style>
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -330,74 +337,13 @@
 
     </section>
     <!-- /.content -->
+
     <!--POPUP-->
-    <div id="blanket" style="display:none;"></div>
-    <div id="popUpAppointment" style="display:none;">
-        <!-- box -->
-        <div class="box box-success box-solid">
-            <div class="box-header with-border">
-                <h3 class="box-title">Appointment Date</h3>
-
-                <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" onclick="popup('popUpAppointment')">
-                        <i class="fa fa-times"></i></button>
-                </div>
-                <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="form-group" style="margin-top: 15px;">
-                    <h3>Do you want to make appointment?</h3>
-                    <label for="Appointment" class="col-sm-5 control-label">Appointment Date</label>
-
-                    <div class="col-sm-7">
-                        <input class="form-control" type="text" value="30/09/2015"
-                               id="Appointment" data-provide="Appointment"/>
-                    </div>
-                </div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <a class="btn btn-default">No</a>
-                <a class="btn btn-primary pull-right">Yes</a>
-
-            </div>
-            <!-- /.footer -->
-        </div>
-        <!-- /.box -->
+    <div th:if="${FOODINGREDIENT != null}">
+        <div layout:replace="_popupNutritional"></div>
     </div>
-    <!-- /.popUpAppointment -->
-    <div id="popupConfirm" style="display:none;">
-        <!-- box -->
-        <div class="box box-success box-solid">
-            <div class="box-header with-border">
-                <h3 class="box-title">Confirm</h3>
-
-                <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" onclick="popup('popupConfirm')">
-                        <i class="fa fa-times"></i></button>
-                </div>
-                <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="form-group" style="margin-top: 15px;">
-                    <h3>Do you want to make prescription?</h3>
-
-                </div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <a type="reset" onclick="return false;" class="btn btn-default">No</a>
-                <a onclick="return true;" class="btn btn-primary pull-right">Yes</a>
-
-            </div>
-            <!-- /.footer -->
-        </div>
-        <!-- /.box -->
-    </div>
-    <!-- /.popupConfirm -->
     <!-- / POPUP-->
+
     <input th:value="${MEDICS}" id="medics" type="hidden"/>
     <input th:value="${FOS}" id="fos" type="hidden"/>
     <input th:value="${PRACS}" id="pracs" type="hidden"/>

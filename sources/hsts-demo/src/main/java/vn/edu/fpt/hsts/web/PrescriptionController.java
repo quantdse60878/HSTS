@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
+import vn.edu.fpt.hsts.bizlogic.service.FoodIngredientService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordService;
@@ -25,6 +26,7 @@ import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
+import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
 import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
@@ -62,6 +64,9 @@ public class PrescriptionController extends AbstractController{
     @Autowired
     private TreatmentService treatmentService;
 
+    @Autowired
+    private FoodIngredientService foodIngredientService;
+
     /**
      * Create Prescription Page
      * @param patientID
@@ -86,6 +91,10 @@ public class PrescriptionController extends AbstractController{
             // Find Appointment
             Appointment appointment = appointmentService.findEntryAppointmentByPatientId(patientID);
             mav.addObject("APPOINTMENT", appointment);
+
+            // Find FoodIngredient
+            FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
+            mav.addObject("FOODINGREDIENT", foodIngredient);
 
             // Set entry patient
             mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
@@ -142,6 +151,10 @@ public class PrescriptionController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
 
+            // Find FoodIngredient
+            FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
+            mav.addObject("FOODINGREDIENT", foodIngredient);
+
             // Set entry patient
             mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
 
@@ -175,6 +188,10 @@ public class PrescriptionController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
 
+            // Find FoodIngredient
+            FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
+            mav.addObject("FOODINGREDIENT", foodIngredient);
+
             // Find List Appointment
             List<Appointment> appointments = appointmentService.getAllAppointmentToCurrentDateOfPatient(appointment.getMedicalRecord().getPatient().getId());
             mav.addObject("APPOINTMENTS", appointments);
@@ -192,7 +209,7 @@ public class PrescriptionController extends AbstractController{
                 // Find treatment form appointment
                 Treatment treatment = treatmentService.findTreatmentByAppointmentID(appointmentId);
                 mav.addObject("TREATMENT", treatment);
-                LOGGER.info("Medicine: " + treatment.getMedicineTreatmentList().get(0).getId());
+                LOGGER.info("Medicine: " + treatment.getFromDate());
                 mav.addObject("model", new PrescriptionModel());
             } else {
                 notify(mav, result, "Make Prescription", "Fail");

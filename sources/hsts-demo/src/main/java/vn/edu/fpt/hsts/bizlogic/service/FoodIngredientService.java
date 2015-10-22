@@ -13,6 +13,7 @@ import vn.edu.fpt.hsts.persistence.repo.FoodIngredientRepo;
 
 import javax.transaction.Transactional;
 import java.text.ParseException;
+import java.util.List;
 
 /**
  * Created by Aking on 10/21/2015.
@@ -182,6 +183,20 @@ public class FoodIngredientService {
         }finally {
             LOGGER.info(IConsts.END_METHOD);
 
+        }
+    }
+
+    public FoodIngredient findFoodIngredientByAppoiment(Appointment appointment) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try{
+            LOGGER.info("appointment[{}]", appointment);
+            List<FoodIngredient> foodIngredients = foodIngredientRepo.findLastFoodIngredientByAppointment(appointment);
+            if (null != foodIngredients && !foodIngredients.isEmpty()) {
+                return foodIngredients.get(0);
+            }
+            return null;
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
         }
     }
 }
