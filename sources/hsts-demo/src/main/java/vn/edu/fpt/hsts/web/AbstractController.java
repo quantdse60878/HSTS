@@ -9,6 +9,7 @@ package vn.edu.fpt.hsts.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
@@ -16,6 +17,7 @@ import vn.edu.fpt.hsts.bizlogic.service.MedicineService;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.bizlogic.service.PracticeService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
+import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Food;
 import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
@@ -49,21 +51,31 @@ public class AbstractController implements ControllerParam {
     @Autowired
     private PracticeService practiceService;
 
+    @Autowired
+    private AppointmentService appointmentService;
+
     public void initDataPrescription(ModelAndView mav){
+        mav.addObject("MEDICS",  1);
+        mav.addObject("FOS", 1);
+        mav.addObject("PRACS", 1);
         // Set next appointent date
         mav.addObject("NEXTAPPOINTMENTDATE", doctorService.getTreatmentLong());
+
         // Get config time
         final String[] timeArr = treatmentService.getMedicineTimeConfig();
         mav.addObject("TIMES", timeArr);
+
         // get illnessList
         List<Illness> illnessList = illnessService.getAllIllness();
         mav.addObject("ILLNESSES", illnessList);
         //get medicineList
         List<Medicine> medicineList = medicineService.getAllMedicine();
         mav.addObject("MEDICINES", medicineList);
+
         //get foodList
         List<Food> foodList = foodService.getAllFood();
         mav.addObject("FOODS", foodList);
+
         //get practiceList
         List<Practice> practiceList = practiceService.getAllPractice();
         mav.addObject("PRACTICES", practiceList);
@@ -72,8 +84,10 @@ public class AbstractController implements ControllerParam {
     public void notify(ModelAndView mav, Boolean result,String method, String mess){
         // Set name of action
         mav.addObject("METHOD", method);
+
         // Set message notify
         mav.addObject("MESSAGE", mess);
+
         if (result){
             // Set type. sussces TYPE = info, fail TYPE = danger
             mav.addObject("TYPE", "info");

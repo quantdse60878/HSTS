@@ -31,6 +31,7 @@ import vn.edu.fpt.hsts.bizlogic.service.PracticeService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
+import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Food;
 import vn.edu.fpt.hsts.persistence.entity.Illness;
@@ -82,27 +83,6 @@ public class DoctorController extends AbstractController{
     @Autowired
     private TreatmentService treatmentService;
 
-    @Autowired
-    private IllnessService illnessService;
-
-    @Autowired
-    private PhaseService phaseService;
-
-    @Autowired
-    private MedicineService medicineService;
-
-    @Autowired
-    private FoodService foodService;
-
-    @Autowired
-    private PracticeService practiceService;
-
-    /**
-     * The {@link NotifyService}.
-     */
-    @Autowired
-    private NotifyService notifyService;
-
     /**
      * The doctor patients page mapping
      * @return
@@ -126,120 +106,38 @@ public class DoctorController extends AbstractController{
     }
 
     /**
-     * Create page prescription
-     * @param patientID
-     * @return
-     */
-    @RequestMapping(value = "createPrescription", method = RequestMethod.GET)
-    public ModelAndView createPrescriptionPage(@RequestParam("patientID") final int patientID,
-                                               @RequestParam(value = "notificationId", required = false, defaultValue = ZERO) final int notificationId) {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            LOGGER.info("patientId[{}], notificationId[{}]", patientID, notificationId);
-
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("makePrescription");
-
-            // Set notify as readed
-            if (0 < notificationId) {
-                notifyService.markAsRead(notificationId);
-            }
-
-            // Find Appointment
-            Appointment appointment = appointmentService.findEntryAppointmentByPatientId(patientID);
-            mav.addObject("APPOINTMENT", appointment);
-
-            mav.addObject("MEDICS",  1);
-            mav.addObject("FOS", 1);
-            mav.addObject("PRACS", 1);
-            // Initialization Data Prescription
-            initDataPrescription(mav);
-
-            mav.addObject("model", new PrescriptionModel());
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
-
-    /**
-     * Suggest Treatment for doctor
+     * The view Prescription page mapping
      * @param appointmentId
-     * @param diagnostic
-     * @return
-     * @throws BizlogicException
-     */
-    @RequestMapping(value = "suggestTreatment", method = RequestMethod.GET)
-    public ModelAndView suggestTreatment(@RequestParam(value = "appointmentId") final int appointmentId,
-                                         @ModelAttribute PrescriptionModel prescriptionModel,
-                                         @RequestParam(value = "diagnostic", required = false) final int diagnostic) throws BizlogicException {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("makePrescription");
-            // Initialization Data Prescription
-            initDataPrescription(mav);
-
-            // Find phase for diagnostic
-            final Phase phase = illnessService.getPhaseSugestion(appointmentId, diagnostic);
-            mav.addObject("PHASE", phase);
-            if (phase == null){
-                notify(mav, false, "Fail", "No regimen for suggest treatment");
-            }
-
-            mav.addObject("MEDICS", phase.getMedicinePhaseList().size());
-            mav.addObject("FOS", phase.getFoodPhaseList().size());
-            mav.addObject("PRACS", phase.getPracticePhaseList().size());
-            // Find illness form diagnostic
-            Illness illness = illnessService.findByID(diagnostic);
-            mav.addObject("DIAGNOSTIC", illness);
-
-            // Find Appointment
-            Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
-            mav.addObject("APPOINTMENT", appointment);
-
-            mav.addObject("model", prescriptionModel);
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
-
-    /**
-     * The Prescription  mapping
-     * @param prescriptionModel
      * @return
      */
-    @RequestMapping(value="prescription", method=RequestMethod.GET)
-    public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel,
-                                         @RequestParam("appointmentId") final int appointmentId,
-                                         @RequestParam(value = "appointmentDate", required = true) final String appointmentDate) throws BizlogicException {
+    @RequestMapping(value = "viewPrescription", method = RequestMethod.GET)
+    public ModelAndView makePrescriptionPage(@RequestParam("appointmentId") final int appointmentId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
 
-            // Initialization Data Prescription
-            initDataPrescription(mav);
-
-            mav.addObject("model", prescriptionModel);
-
-            LOGGER.info(prescriptionModel.toString());
-            boolean result = doctorService.makePrescription(prescriptionModel, appointmentId, appointmentDate);
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
-            LOGGER.info("APPOINTMENTlist : " + appointment.getMedicalRecord().getAppointmentList().size());
-            mav.addObject("MEDICS",  1);
-            mav.addObject("FOS", 1);
-            mav.addObject("PRACS", 1);
 
-            // Create notify
-            if (result){
-                notify(mav, result, "Make Prescription", "Success");
-            } else {
-                notify(mav, result, "Make Prescription", "Fail");
+            // Find List Appointment
+            List<Appointment> appointments = appointmentService.getAllAppointmentToCurrentDateOfPatient(appointment.getMedicalRecord().getPatient().getId());
+            mav.addObject("APPOINTMENTS", appointments);
+
+            // Set entry patient
+            mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
+
+            // Check appointment status
+            if (appointment.getStatus() == IDbConsts.IAppointmentStatus.ENTRY){
+                // Initialization Data Prescription
+                initDataPrescription(mav);
+                mav.addObject("model", new PrescriptionModel());
+            } else if (appointment.getStatus() == IDbConsts.IAppointmentStatus.FINISHED){
+                // Find treatment form appointment
+                Treatment treatment = treatmentService.findTreatmentByAppointmentID(appointmentId);
+                mav.addObject("TREATMENT", treatment);
+                mav.addObject("model", new PrescriptionModel());
             }
 
             return mav;
@@ -264,39 +162,6 @@ public class DoctorController extends AbstractController{
 //            patientService.makeAppointment(recordID, appointmentDate);
             //create notify
             notify(mav, true, "Make Appointment", "Success");
-
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
-
-    /**
-     * The view Prescription page mapping
-     * @param appointmentId
-     * @return
-     */
-    @RequestMapping(value = "viewPrescription", method = RequestMethod.GET)
-    public ModelAndView makePrescriptionPage(@RequestParam("appointmentId") final int appointmentId) {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("makePrescription");
-            // Find Appointment
-            Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
-            mav.addObject("APPOINTMENT", appointment);
-            // Check appointment status
-            if (appointment.getStatus() == 1){
-                // Initialization Data Prescription
-                initDataPrescription(mav);
-
-                mav.addObject("model", new PrescriptionModel());
-            } else if (appointment.getStatus() == 2){
-                // Find treatment form appointment
-                Treatment treatment = treatmentService.findTreatmentByAppointmentID(appointmentId);
-                mav.addObject("TREATMENT", treatment);
-                mav.addObject("model", new PrescriptionModel());
-            }
 
             return mav;
         } finally {

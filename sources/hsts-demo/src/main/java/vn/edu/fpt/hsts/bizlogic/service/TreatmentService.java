@@ -139,6 +139,7 @@ public class TreatmentService {
     }
 
     public Treatment findTreatmentByAppointmentID(final int appointmentId) {
+        LOGGER.info("appointmentId[{}]", appointmentId);
         return treatmentRepo.findLastTreatmenByAppointmentId(appointmentId);
     }
 }

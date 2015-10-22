@@ -186,7 +186,7 @@ public class DoctorService extends AbstractService {
         try {
             LOGGER.info("prescription[{}], appointmentId[{}], appointmentDate[{}]", prescription, appointmentId, appointmentDate);
             // Find appointment by id
-            final Appointment appointment = appointmentRepo.findOne(appointmentId);
+            final Appointment appointment = appointmentRepo.getOne(appointmentId);
             if (null == appointment) {
                 LOGGER.error("Appointment with id[{}] is not found", appointmentId);
                 return false;

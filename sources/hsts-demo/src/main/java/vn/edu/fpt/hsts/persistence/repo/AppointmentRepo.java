@@ -15,6 +15,7 @@ import vn.edu.fpt.hsts.App;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -35,4 +36,7 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
 
     @Query("select a from Appointment a where nextAppointment.id = :nextAppointmentId")
     public Appointment findParentAppointment(@Param("nextAppointmentId") final int appointmentId);
+
+    @Query("select a from Appointment a where meetingDate <= :date and medicalRecord.patient.id = :patientId")
+    List<Appointment> getAllAppointmentToDate(@Param("date")final Date date, @Param("patientId") final int patientId);
 }

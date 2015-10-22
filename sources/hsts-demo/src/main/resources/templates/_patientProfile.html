@@ -5,7 +5,7 @@
 <body>
 <h4>Patient's Profile</h4>
 <!-- box-body -->
-<div class="box-body" th:with="ACC=${APPOINTMENT.medicalRecord.patient.account}">
+<div class="box-body" th:with="ACC=${PATIENT.account}">
     <div class="form-group">
         <label class="col-sm-3 control-label">Name</label>
 
@@ -56,16 +56,14 @@
             history</label>
 
         <div class="col-sm-6">
-                                                            <textarea class="form-control" readonly="readonly"
-                                                                      th:text="${APPOINTMENT.medicalRecord.medicalHistory}"></textarea>
+            <textarea class="form-control" readonly="readonly" th:text="${APPOINTMENT.medicalRecord.medicalHistory}"></textarea>
         </div>
     </div>
     <div class="form-group">
         <label for="clinicalSymptoms" class="col-sm-3 control-label">Symptoms</label>
 
         <div class="col-sm-6">
-                                                            <textarea class="form-control" readonly="readonly"
-                                                                      th:text="${APPOINTMENT.medicalRecord.symptoms}"></textarea>
+            <textarea class="form-control" readonly="readonly" th:text="${APPOINTMENT.medicalRecord.symptoms}"></textarea>
         </div>
     </div>
 

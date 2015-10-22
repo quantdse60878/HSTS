@@ -60,7 +60,7 @@
     <section class="content-header">
         <h1>
             Diagnostic
-            <small th:text="${APPOINTMENT.medicalRecord.patient.account.fullName}">Patient Name</small>
+            <small th:text="${PATIENT.account.fullName}">Patient Name</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -87,7 +87,7 @@
                                         <span class="fa fa-caret-down"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li th:each="appointment : ${APPOINTMENT.medicalRecord.appointmentList}"><a th:href="@{/viewPrescription(appointmentId=${appointment.id})}"
+                                        <li th:each="appointment : ${APPOINTMENTS}"><a th:href="@{/viewPrescription(appointmentId=${appointment.id})}"
                                                class="btn btn-default"
                                                th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>
                                         </li>

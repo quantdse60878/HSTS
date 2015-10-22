@@ -10,6 +10,8 @@ import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +37,18 @@ public class AppointmentService {
                 return appointmentList.get(0);
             }
             return null;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public List<Appointment> getAllAppointmentToCurrentDateOfPatient(final int patientID){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            List<Appointment> appointments = new ArrayList<Appointment>();
+            Date date = new Date();
+            appointments = appointmentRepo.getAllAppointmentToDate(date, patientID);
+            return appointments;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
