@@ -116,8 +116,10 @@ public class DoctorController extends AbstractController{
 
             // Find FoodIngredient
             FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
-            NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
-            mav.addObject("FOODINGREDIENT", nutritionModel);
+            if (null != foodIngredient){
+                NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
+                mav.addObject("FOODINGREDIENT", nutritionModel);
+            }
 
             // Find List Appointment
             List<Appointment> appointments = appointmentService.getAllAppointmentToCurrentDateOfPatient(appointment.getMedicalRecord().getPatient().getId());

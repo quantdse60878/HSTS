@@ -93,8 +93,10 @@ public class PrescriptionController extends AbstractController{
 
             // Find FoodIngredient
             FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
-            NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
-            mav.addObject("FOODINGREDIENT", nutritionModel);
+            if (null != foodIngredient){
+                NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
+                mav.addObject("FOODINGREDIENT", nutritionModel);
+            }
 
             // Set entry patient
             mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
@@ -153,8 +155,10 @@ public class PrescriptionController extends AbstractController{
 
             // Find FoodIngredient
             FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
-            NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
-            mav.addObject("FOODINGREDIENT", nutritionModel);
+            if (null != foodIngredient){
+                NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
+                mav.addObject("FOODINGREDIENT", nutritionModel);
+            }
 
             // Set entry patient
             mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
@@ -191,8 +195,10 @@ public class PrescriptionController extends AbstractController{
 
             // Find FoodIngredient
             FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
-            NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
-            mav.addObject("FOODINGREDIENT", nutritionModel);
+            if (null != foodIngredient){
+                NutritionModel nutritionModel = new NutritionModel(foodIngredient,appointment.getWeight());
+                mav.addObject("FOODINGREDIENT", nutritionModel);
+            }
 
             // Find List Appointment
             List<Appointment> appointments = appointmentService.getAllAppointmentToCurrentDateOfPatient(appointment.getMedicalRecord().getPatient().getId());
@@ -211,7 +217,7 @@ public class PrescriptionController extends AbstractController{
                 // Find treatment form appointment
                 Treatment treatment = treatmentService.findTreatmentByAppointmentID(appointmentId);
                 mav.addObject("TREATMENT", treatment);
-                LOGGER.info("Medicine: " + treatment.getFromDate());
+                LOGGER.info("Medicine: " + treatment.getMedicineTreatmentList().size());
                 mav.addObject("model", new PrescriptionModel());
             } else {
                 notify(mav, result, "Make Prescription", "Fail");
