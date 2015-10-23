@@ -8,8 +8,6 @@
 
 <label class="form-lable">Nutritional Assessment</label>
 <a class="btn btn-link" onclick="popup('Nutritional')" th:if="${FOODINGREDIENT != null}">View Detail</a>
-<small th:if="${FOODINGREDIENT != null}"> or</small>
-<a class="btn btn-link" th:href="@{/createNutrition(patientID=${PATIENT.id})}">Create New</a>
 
 <table class="table table-striped" id="Foods">
     <tr>
