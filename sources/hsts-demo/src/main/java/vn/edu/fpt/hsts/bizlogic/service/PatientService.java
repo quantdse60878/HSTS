@@ -162,14 +162,14 @@ public class PatientService extends AbstractService {
 
 
     @Transactional(rollbackOn = BizlogicException.class)
-    public void register(final int patientId, final SearchCriteria ... criterias) throws BizlogicException {
+    public Patient register(final int patientId, final SearchCriteria ... criterias) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             /**
              * TODO reinput log, process for old medicine
              */
             if (null == criterias) {
-                return;
+                return null;
             } else {
                 LOGGER.info("Criteria size = {}", criterias.length);
             }
@@ -259,7 +259,7 @@ public class PatientService extends AbstractService {
             notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
             notify.setMessage(String.valueOf(patient.getId()));
             notifyRepo.saveAndFlush(notify);
-
+            return patient;
         } catch (BizlogicException be) {
             throw be;
         } catch (Exception e) {
@@ -350,86 +350,75 @@ public class PatientService extends AbstractService {
 
     }
 
-    public void updatePatient(final PatientCriteria criteria, final boolean isNewMedicalRecord) throws BizlogicException {
+    @Transactional(rollbackOn = BizlogicException.class)
+    public Patient updatePatient(final int patientId, final RegistrationCriteria registrationCriteria, final CheckCriteria checkCriteria) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("criteria[{}], isNewMedicalRecord[{}]", criteria, isNewMedicalRecord);
             Date currentDate = new Date();
             currentDate = DateUtils.roundDate(currentDate, false);
-            if (isNewMedicalRecord) {
-                // Patient re-exam after a long time
-
-                // TODO create medical record
-                MedicalRecord medicalRecord = new MedicalRecord();
-                medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);
-
-                Doctor doctor = doctorRepo.findOne(criteria.getDoctorId());
-                if(null == doctor) {
-                    throw new BizlogicException("Doctor with username[{}] is not found", null, criteria.getDoctorId());
-                }
-                medicalRecord.setDoctor(doctor);
-                Patient patient = patientRepo.findOne(criteria.getId());
-                medicalRecord.setPatient(patient);
-                medicalRecord.setSymptoms(criteria.getSymptom());
-                medicalRecord.setStartTime(currentDate);
-
-                medicalRecord.setMedicalHistory(criteria.getMedicalHistory());
-                medicalRecordRepo.saveAndFlush(medicalRecord);
-
-                // TODO Create appointment
-                final Appointment appointment = new Appointment();
-                appointment.setMedicalRecord(medicalRecord);
-//                appointment.setWeight(criteria.getWeight());
-//                appointment.setHeight(criteria.getHeight());
-                appointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
-                appointment.setMeetingDate(currentDate);
-                appointmentRepo.saveAndFlush(appointment);
-
-                // Create notify to doctor
-                final Notify notify = new Notify();
-                notify.setSender(getCurrentAccount());
-                notify.setReceiver(doctor.getAccount());
-                notify.setType(IDbConsts.INotifyType.NURSE_DOCTOR);
-                notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
-                notify.setMessage(String.valueOf(patient.getId()));
-                notifyRepo.saveAndFlush(notify);
-
+            final Patient patient = patientRepo.findOne(patientId);
+            if (null == patient) {
+                throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
+            }
+            /**
+             * TODO find last appointment with status ENTRY
+             * note that for case patient re-exam after a long time, system should implement a scheduler to mark all out-of-date appointment
+             */
+            final List<Appointment> entryAppointmentList = appointmentRepo.findLastAppointmentByPatientId(patient.getId(),
+                    IDbConsts.IAppointmentStatus.ENTRY);
+            if(null == entryAppointmentList || entryAppointmentList.isEmpty()) {
+                /*
+                *   TODO Throw ex, but should check business logic at higher level before
+                *   Make sure that only 1 appointment has status ENTRY at a time
+                */
+                throw new BizlogicException("Not found any ENTRY appointment with patientId[{}]", null, patientId);
             } else {
-                /**
-                 * TODO find last appointment with status ENTRY
-                 * note that for case patient re-exam after a long time, system should implement a scheduler to mark all out-of-date appointment
-                 */
-                final Appointment appointment = appointmentRepo.findLastAppointmentByPatientId(criteria.getId(),
-                        IDbConsts.IAppointmentStatus.ENTRY);
-                if(null == appointment) {
-                    // throw ex
+                for (Appointment appointment: entryAppointmentList) {
+                    appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
+                    appointmentRepo.save(appointment);
                 }
-                // TODO update meeting date
-//                appointment.setMeetingDate(currentDate);
-//                appointment.setHeight(criteria.getHeight());
-//                appointment.setWeight(criteria.getWeight());
+            }
+            Appointment appointment = entryAppointmentList.get(0);
+            appointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
+            appointment.setMeetingDate(currentDate);
 
-                final MedicalRecord medicalRecord = appointment.getMedicalRecord();
-                if (medicalRecord.getDoctor().getId() != criteria.getDoctorId()) {
-                   LOGGER.debug("Nurse assign patient[{}] to new doctor[{}]", criteria.getDoctorId());
-                    final Doctor doctor = doctorRepo.findOne(criteria.getDoctorId());
-                    medicalRecord.setDoctor(doctor);
-                }
-                appointmentRepo.saveAndFlush(appointment);
-                medicalRecordRepo.saveAndFlush(medicalRecord);
-
-                // Create notify to doctor
-                final Notify notify = new Notify();
-                notify.setSender(getCurrentAccount());
-                final Account doctorAccount = medicalRecord.getDoctor().getAccount();
-                notify.setReceiver(doctorAccount);
-                notify.setType(IDbConsts.INotifyType.NURSE_DOCTOR);
-                notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
-                final int patientId = medicalRecord.getPatient().getId();
-                notify.setMessage(String.valueOf(patientId));
-                notifyRepo.saveAndFlush(notify);
+            final MedicalRecord medicalRecord = appointment.getMedicalRecord();
+            if (medicalRecord.getDoctor().getId() != registrationCriteria.getDoctorId()) {
+               LOGGER.debug("Nurse assign patient[{}] to new doctor[{}]", registrationCriteria.getDoctorId());
+                final Doctor doctor = doctorRepo.findOne(registrationCriteria.getDoctorId());
+                medicalRecord.setDoctor(doctor);
             }
 
+            // Create prevention checking
+
+            PreventionCheck preventionCheck = new PreventionCheck();
+            preventionCheck.setPhaseAngle(checkCriteria.getPhaseAngle());
+            preventionCheck.setAppointment(appointment);
+            preventionCheck.setBasalMetabolicRate(checkCriteria.getBasalMetabolicRate());
+            preventionCheck.setBmi(checkCriteria.getBmi());
+            preventionCheck.setBodyFat(checkCriteria.getBodyFat());
+            preventionCheck.setBodyWater(checkCriteria.getBodyWater());
+            preventionCheck.setHeight(checkCriteria.getHeight());
+            preventionCheck.setWeight(checkCriteria.getWeight());
+            preventionCheck.setMuscleMass(checkCriteria.getMuscleMass());
+            preventionCheck.setVisceralFat(checkCriteria.getVisceralFat());
+            preventionCheck.setImpedance(checkCriteria.getImpedance());
+            preventionCheckRepo.saveAndFlush(preventionCheck);
+
+            appointmentRepo.saveAndFlush(appointment);
+            medicalRecordRepo.saveAndFlush(medicalRecord);
+
+            // Create notify to doctor
+            final Notify notify = new Notify();
+            notify.setSender(getCurrentAccount());
+            final Account doctorAccount = medicalRecord.getDoctor().getAccount();
+            notify.setReceiver(doctorAccount);
+            notify.setType(IDbConsts.INotifyType.NURSE_DOCTOR);
+            notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
+            notify.setMessage(String.valueOf(patientId));
+            notifyRepo.saveAndFlush(notify);
+
+            return patient;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
@@ -456,6 +445,7 @@ public class PatientService extends AbstractService {
 
     public void print(final int patientId, final HttpServletResponse response) throws BizlogicException, IOException, JRException {
         LOGGER.info(IConsts.BEGIN_METHOD);
+        OutputStream out = null;
         try {
             // Find last prescription with patient id
             Patient patient = patientRepo.findOne(patientId);
@@ -488,7 +478,7 @@ public class PatientService extends AbstractService {
                     listMedicine.add(model);
                 }
             }
-            LOGGER.info("sIZE: " + listMedicine.size());
+            LOGGER.info("Size: " + listMedicine.size());
             final MedicineListWraper wraper = new MedicineListWraper();
             wraper.setItems(listMedicine);
 
@@ -512,8 +502,19 @@ public class PatientService extends AbstractService {
             prescription.setDoctorName(lastTreatment.getAppointment().getMedicalRecord().getDoctor().getAccount().getFullName());
             prescription.setTableData(wraper);
 
-            final OutputStream out = response.getOutputStream();
+            out = response.getOutputStream();
             prescription.toPdf(out);
+        } finally {
+            out.close();
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public Patient findPatient(final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            return patientRepo.findOne(patientId);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

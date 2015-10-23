@@ -146,7 +146,7 @@ public class DoctorController extends AbstractController{
             }
 
             // Find Appointment
-            Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
+            Appointment appointment = appointmentService.findEntryAppointmentByPatientId(patientID);
             mav.addObject("APPOINTMENT", appointment);
 
             mav.addObject("MEDICS",  1);

@@ -48,7 +48,7 @@ public class NutritionController extends AbstractController{
             mav.addObject("PATIENT", patient);
             mav.addObject("model", new FoodIngredientModel());
             // Find Appointment
-            Appointment appointment = appointmentService.findAppointmentByPatientID(patientID);
+            Appointment appointment = appointmentService.findEntryAppointmentByPatientId(patientID);
             mav.addObject("APPOINTMENT", appointment);
 
             return mav;

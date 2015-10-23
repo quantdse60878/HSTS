@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
@@ -25,7 +26,17 @@ public class AppointmentService {
         return appointmentRepo.findOne(appointmentID);
     }
 
-    public Appointment findAppointmentByPatientID(int patientID) {
-        return appointmentRepo.findLastAppointmentByPatientId(patientID, IDbConsts.IAppointmentStatus.ENTRY);
+    public Appointment findEntryAppointmentByPatientId(final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final List<Appointment> appointmentList = appointmentRepo.findLastAppointmentByPatientId(patientId, IDbConsts.IAppointmentStatus.ENTRY);
+            if (null != appointmentList && !appointmentList.isEmpty()) {
+                return appointmentList.get(0);
+            }
+            return null;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
     }
 }

@@ -223,7 +223,7 @@ public class NurseController extends AbstractController {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
 
-            // TODO
+            // TODO re-input log
             LOGGER.info("weight[{}], height[{}], doctorId[{}], medicalHistory[{}], symptoms[{}], isNewMedicalRecord[{}]",
                     weight, height, doctorId, medicalHistory, symptoms, isNewMedicalRecord);
 
@@ -255,20 +255,19 @@ public class NurseController extends AbstractController {
              * If new medical record
              */
             // TODO
+            Patient patient;
             if (isNewMedicalRecord) {
                 /**
                  * The wrong order of criteria array may cause the program fail
                  * The criteria array should be order by: patient info {null for update case}-> registration -> check condition
                  */
-                patientService.register(patientId, rCriteria, checkCriteria);
+                patient = patientService.register(patientId, rCriteria, checkCriteria);
             } else {
-
+                patient = patientService.updatePatient(patientId, rCriteria, checkCriteria);
             }
-
 
             ModelAndView mav = new ModelAndView();
             mav.setViewName("updatePatient");
-            Patient patient = patientService.getPatientByID(patientId);
             mav.addObject("PATIENT", patient);
 
             //create notify
@@ -287,11 +286,12 @@ public class NurseController extends AbstractController {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("patientId", patientId);
-            //TODO re-format filename
-            Date toDayTime = new Date();
-            String timeDownload = toDayTime.getTime() + "";
+            Patient patient = patientService.findPatient(patientId);
+            if(null == patient) {
+                throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
+            }
             response.setHeader("Content-disposition", "attachment; filename="
-                    + "Don-thuoc" + timeDownload + ".docx");
+                    + "Don-thuoc" + patient.getAccount().getFullName() + ".docx");
             patientService.print(patientId, response);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
