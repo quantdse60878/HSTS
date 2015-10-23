@@ -192,7 +192,7 @@ function blanket_size(popUpDivVar) {
     var blanket = document.getElementById('blanket');
     blanket.style.height = blanket_height + 'px';
     var popUpDiv = document.getElementById(popUpDivVar);
-    popUpDiv_height = blanket_height / 2 - 325;//150 is half popup's height
+    popUpDiv_height = blanket_height / 2 - 300;//150 is half popup's height
     popUpDiv.style.top = popUpDiv_height + 'px';
 }
 ;
