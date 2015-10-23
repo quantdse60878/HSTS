@@ -112,6 +112,7 @@ public class DoctorController extends AbstractController{
     public ModelAndView makePrescriptionPage(@RequestParam("appointmentId") final int appointmentId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+            LOGGER.info("appointmentId[{}]", appointmentId);
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
 
@@ -138,7 +139,7 @@ public class DoctorController extends AbstractController{
             mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
 
             // Check appointment status
-            if (appointment.getStatus() == IDbConsts.IAppointmentStatus.ENTRY){
+            if (appointment.getStatus() == IDbConsts.IAppointmentStatus.WATTING){
                 // Initialization Data Prescription
                 initDataPrescription(mav);
                 mav.addObject("model", new PrescriptionModel());

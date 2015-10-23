@@ -46,9 +46,8 @@ public class AppointmentService {
     public List<Appointment> getAllAppointmentToCurrentDateOfPatient(final int patientID){
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            List<Appointment> appointments = new ArrayList<Appointment>();
             Date date = new Date();
-            appointments = appointmentRepo.getAllAppointmentToDate(date, patientID);
+            List<Appointment> appointments = appointmentRepo.getAllAppointmentToDate(date, patientID, IDbConsts.IAppointmentStatus.ENTRY);
             return appointments;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
