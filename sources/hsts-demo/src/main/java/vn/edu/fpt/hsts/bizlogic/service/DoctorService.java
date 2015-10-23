@@ -215,7 +215,7 @@ public class DoctorService extends AbstractService {
             // Create next appointment
             LOGGER.info("Create next appointment : Start");
             Appointment nextAppointment = new Appointment();
-            nextAppointment.setStatus(IDbConsts.IAppointmentStatus.WATTING);
+            nextAppointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
             nextAppointment.setMeetingDate(toDate);
             nextAppointment.setMedicalRecord(appointment.getMedicalRecord());
 

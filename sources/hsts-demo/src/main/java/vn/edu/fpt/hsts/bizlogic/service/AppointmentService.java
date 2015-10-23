@@ -32,7 +32,8 @@ public class AppointmentService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("patientId[{}]", patientId);
-            final List<Appointment> appointmentList = appointmentRepo.findLastAppointmentByPatientId(patientId, IDbConsts.IAppointmentStatus.ENTRY);
+            final byte[] statuses = {IDbConsts.IAppointmentStatus.WATTING};
+            final List<Appointment> appointmentList = appointmentRepo.findLastAppointmentByPatientId(patientId, statuses);
             if (null != appointmentList && !appointmentList.isEmpty()) {
                 return appointmentList.get(0);
             }

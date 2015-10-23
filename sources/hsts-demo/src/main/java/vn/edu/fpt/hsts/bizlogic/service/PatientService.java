@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.App;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrescriptionWrapperModel;
@@ -183,6 +184,16 @@ public class PatientService extends AbstractService {
                 if (null == patient) {
                     throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
                 }
+                // Set all old medical record to FINISH
+                final List<MedicalRecord> medicalRecordList = patient.getMedicalRecords();
+                if (null != medicalRecordList && !medicalRecordList.isEmpty()) {
+                    for (MedicalRecord medicalRecord: medicalRecordList) {
+                        if(medicalRecord.getStatus() != IDbConsts.IMedicalRecordStatus.NO_ILLNESS) {
+                            medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
+                            medicalRecordRepo.saveAndFlush(medicalRecord);
+                        }
+                    }
+                }
             } else {
                 // Register new
                 patient = new Patient();
@@ -224,7 +235,7 @@ public class PatientService extends AbstractService {
                     // TODO Create appointment
                     final Appointment appointment = new Appointment();
                     appointment.setMedicalRecord(medicalRecord);
-                    appointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
+                    appointment.setStatus(IDbConsts.IAppointmentStatus.WATTING);
                     appointment.setMeetingDate(currentDate);
                     appointment.setBloodPressure(pcCriteria.getBloodPressure());
                     appointment.setHeartBeat(pcCriteria.getHearthBeat());
@@ -361,17 +372,18 @@ public class PatientService extends AbstractService {
                 throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
             }
             /**
-             * TODO find last appointment with status WATTING
+             * TODO find last appointment with status WATTING or ENTRY
              * note that for case patient re-exam after a long time, system should implement a scheduler to mark all out-of-date appointment
              */
+            final byte[] statuses = {IDbConsts.IAppointmentStatus.WATTING, IDbConsts.IAppointmentStatus.ENTRY};
             final List<Appointment> entryAppointmentList = appointmentRepo.findLastAppointmentByPatientId(patient.getId(),
-                    IDbConsts.IAppointmentStatus.WATTING);
+                    statuses);
             if(null == entryAppointmentList || entryAppointmentList.isEmpty()) {
                 /*
                 *   TODO Throw ex, but should check business logic at higher level before
                 *   Make sure that only 1 appointment has status ENTRY at a time
                 */
-                throw new BizlogicException("Not found any ENTRY appointment with patientId[{}]", null, patientId);
+                return null;
             } else {
                 for (Appointment appointment: entryAppointmentList) {
                     appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
@@ -379,7 +391,7 @@ public class PatientService extends AbstractService {
                 }
             }
             Appointment appointment = entryAppointmentList.get(0);
-            appointment.setStatus(IDbConsts.IAppointmentStatus.ENTRY);
+            appointment.setStatus(IDbConsts.IAppointmentStatus.WATTING);
             appointment.setMeetingDate(currentDate);
 
             final MedicalRecord medicalRecord = appointment.getMedicalRecord();
