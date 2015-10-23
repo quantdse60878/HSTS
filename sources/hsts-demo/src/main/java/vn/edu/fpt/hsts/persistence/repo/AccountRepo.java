@@ -41,4 +41,7 @@ public interface AccountRepo extends JpaRepository<Account, Integer> {
 
     @Query("select a from Account a where username like :criteria")
     public List<Account> findByUsernameStartWith(@Param("criteria") final String criteria);
+
+    @Query("select a from Account a where email = :email")
+    public Account findByEmail(@Param("email") final String email);
 }

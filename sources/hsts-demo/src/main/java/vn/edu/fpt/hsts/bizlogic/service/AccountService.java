@@ -195,4 +195,18 @@ public class AccountService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public boolean validateEmail(final String email) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("email[{}]", email);
+            final Account existenceAcc = accountRepo.findByEmail(email);
+            if (null == existenceAcc) {
+                return true;
+            }
+            return false;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }
