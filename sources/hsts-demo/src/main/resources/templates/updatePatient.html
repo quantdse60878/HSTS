@@ -112,6 +112,12 @@
                                                            th:value="${PATIENT.account.gender == 1}? 'Male' : 'Female'"/>
                                                 </div>
                                             </div>
+
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_2" onclick="changeTab('#tab_2')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- End tab 1 -->
 
@@ -173,6 +179,12 @@
                                                 </div>
                                                 <label for="bmi" class="col-sm-1 control-label">kq/m2</label>
                                             </div>
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_1" onclick="changeTab('#tab_1')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- End tab 2 -->
 
@@ -240,6 +252,12 @@
                                                 </div>
                                                 <label for="basalMetabolicRate" class="col-sm-1 control-label">Kcal</label>
                                             </div>
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_2" onclick="changeTab('#tab_2')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <a href="#tab_4" onclick="changeTab('#tab_4')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- End tab 3 -->
 
@@ -280,6 +298,11 @@
                                                     <input th:type="text" class="form-control" placeholder="Medicine history" name="medicineHistory" rows="3" data-role="tagsinput" id="medicineHistory"></input>
                                                 </div>
                                             </div>
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- End tab 4 -->
                                     </div>

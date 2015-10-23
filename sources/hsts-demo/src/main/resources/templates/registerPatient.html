@@ -103,7 +103,7 @@
 
                                                 <div class="radio col-sm-5">
                                                     <label>
-                                                        <input type="radio" th:name="gender" id="optionsRadios1" value="1"/>
+                                                        <input type="radio" th:name="gender" id="optionsRadios1" value="1" checked="checked"/>
                                                         Male
                                                     </label>
                                                     <label>
@@ -112,8 +112,11 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <!-- TODO next button -->
-
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_2" onclick="changeTab('#tab_2')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- End tab 1 -->
 
@@ -175,6 +178,13 @@
                                                 </div>
                                                 <label for="bmi" class="col-sm-1 control-label">kq/m2</label>
                                             </div>
+
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_1" onclick="changeTab('#tab_1')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- End tab 2 -->
 
@@ -242,6 +252,13 @@
                                                 </div>
                                                 <label for="basalMetabolicRate" class="col-sm-1 control-label">Kcal</label>
                                             </div>
+
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_2" onclick="changeTab('#tab_2')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <a href="#tab_4" onclick="changeTab('#tab_4')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- End tab 3 -->
 
@@ -279,6 +296,12 @@
                                                     <input th:type="text" class="form-control" placeholder="Medicine history" name="medicineHistory" rows="3" data-role="tagsinput" id="medicineHistory"></input>
                                                 </div>
                                             </div>
+
+                                            <!-- footer -->
+                                            <div style="margin: 15px;">
+                                                <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                            </div>
+                                            <!-- /.footer -->
                                         </div>
                                         <!-- End tab 4 -->
                                     </div>
@@ -330,6 +353,11 @@
         $("#Birthday").datepicker({
             format: 'dd-mm-yyyy'
         });
+        function changeTab (a) {
+            console.log(a);
+            $('.nav-tabs > li.active').removeClass('active');
+            $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
+        };
     </script>
 </div>
 <!-- /.content-wrapper -->
