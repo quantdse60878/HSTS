@@ -197,8 +197,6 @@ CREATE TABLE IF NOT EXISTS `hsts`.`Appointment` (
   `appointmentMessage` VARCHAR(200) NULL,
   `status` TINYINT NULL COMMENT 'status = 1 la cuoc hen chua duoc gap bac si\nstatus = 2 la cuoc hen da duoc gap bac si',
   `nextAppointment` INT NULL,
-  `height` INT NULL,
-  `weight` INT NULL,
   `bloodPressure` INT NULL,
   `heartbeat` INT NULL,
   `waists` INT NULL,
@@ -595,6 +593,8 @@ CREATE TABLE IF NOT EXISTS `hsts`.`PreventionCheck` (
   `phaseAngle` FLOAT NULL,
   `impedance` INT NULL,
   `basalMetabolicRate` INT NULL,
+   `height` INT NULL,
+  `weight` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_pc_ap_idx_1` (`appointmentId` ASC),
   CONSTRAINT `fk_pc_ap_1`
