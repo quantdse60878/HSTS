@@ -361,11 +361,11 @@ public class PatientService extends AbstractService {
                 throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
             }
             /**
-             * TODO find last appointment with status ENTRY
+             * TODO find last appointment with status WATTING
              * note that for case patient re-exam after a long time, system should implement a scheduler to mark all out-of-date appointment
              */
             final List<Appointment> entryAppointmentList = appointmentRepo.findLastAppointmentByPatientId(patient.getId(),
-                    IDbConsts.IAppointmentStatus.ENTRY);
+                    IDbConsts.IAppointmentStatus.WATTING);
             if(null == entryAppointmentList || entryAppointmentList.isEmpty()) {
                 /*
                 *   TODO Throw ex, but should check business logic at higher level before
