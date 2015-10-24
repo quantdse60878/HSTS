@@ -15,10 +15,12 @@ import vn.edu.fpt.hsts.bizlogic.service.AccountService;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodIngredientService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
+import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
+import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 
 /**
  * Created by Aking on 10/21/2015.
@@ -38,6 +40,9 @@ public class NutritionController extends AbstractController{
     @Autowired
     FoodIngredientService foodIngredientService;
 
+    @Autowired
+    PreventionCheckService preventionCheckService;
+
     @RequestMapping(value = "createNutrition", method = RequestMethod.GET)
     public ModelAndView createNutritionPage(@RequestParam("patientID") final int patientID) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -47,9 +52,14 @@ public class NutritionController extends AbstractController{
             Patient patient = patientService.getPatientByID(patientID);
             mav.addObject("PATIENT", patient);
             mav.addObject("model", new FoodIngredientModel());
+
             // Find Appointment
             Appointment appointment = appointmentService.findEntryAppointmentByPatientId(patientID);
             mav.addObject("APPOINTMENT", appointment);
+
+            // Find PreventionCheck
+            PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
+            mav.addObject("PREVENTIONCHECK", preventionCheck);
 
             return mav;
         } finally {
