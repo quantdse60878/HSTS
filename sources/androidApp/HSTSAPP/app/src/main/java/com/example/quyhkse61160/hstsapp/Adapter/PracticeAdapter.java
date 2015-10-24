@@ -51,14 +51,14 @@ public class PracticeAdapter extends BaseAdapter {
         }
         TextView txtFoodName = (TextView) vi.findViewById(R.id.item_practice_name);
         TextView txtQuantitativeOfMedicine = (TextView) vi.findViewById(R.id.item_time_practice);
-        TextView txtAdvice = (TextView) vi.findViewById(R.id.item_advice_of_practice);
+//        TextView txtAdvice = (TextView) vi.findViewById(R.id.item_advice_of_practice);
 
 
         HashMap<String, String> item = new HashMap<>();
         item = data.get(position);
 
         txtFoodName.setText(item.get("PracticeName"));
-        txtAdvice.setText(item.get("Advice"));
+//        txtAdvice.setText(item.get("Advice"));
         txtQuantitativeOfMedicine.setText(item.get("PracticeTime"));
 
 

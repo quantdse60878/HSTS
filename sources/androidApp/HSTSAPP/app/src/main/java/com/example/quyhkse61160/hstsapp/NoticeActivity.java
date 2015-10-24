@@ -47,11 +47,17 @@ public class NoticeActivity extends ActionBarActivity {
             quantitative.setText("Số Lượng");
             for (Treatment treatment : treatments) {
                 for (ToDoTime time : treatment.getListFoodTreatment()) {
-                        HashMap<String, String> d = new HashMap<>();
-                        d.put("Name", time.getName());
-                        d.put("Number", time.getNumberOfTime().size() + "");
-                        d.put("Quantity", time.getQuantitative());
-                        sections.add(d);
+                    HashMap<String, String> d = new HashMap<>();
+                    String temp = time.getName();
+                    if (!time.getAdvice().isEmpty() && !time.getAdvice().equals("null")) {
+                        temp += "(" + time.getAdvice() + ")";
+                    }
+                    d.put("Name", temp);
+//                        d.put("Number", time.getNumberOfTime().size() + "");
+                    temp = "Ngày ";
+                    temp = time.getNumberOfTime().size() + " lần, ăn " + time.getQuantitative() + "/lần";
+                    d.put("Quantity", temp);
+                    sections.add(d);
                 }
             }
         }
@@ -61,11 +67,18 @@ public class NoticeActivity extends ActionBarActivity {
             quantitative.setText("Số Lượng/Lần");
             for (Treatment treatment : treatments) {
                 for (ToDoTime time : treatment.getListMedicineTreatment()) {
-                        HashMap<String, String> d = new HashMap<>();
-                        d.put("Name", time.getName());
-                        d.put("Number", time.getNumberOfTime().size() + "");
-                        d.put("Quantity", time.getQuantitative());
-                        sections.add(d);
+                    HashMap<String, String> d = new HashMap<>();
+                    String temp = time.getName();
+                    if (!time.getAdvice().isEmpty() && !time.getAdvice().equals("null")) {
+                        temp += "(" + time.getAdvice() + ")";
+                    }
+                    d.put("Name", temp);
+//                        d.put("Number", time.getNumberOfTime().size() + "");
+                    temp = "Ngày ";
+                    temp = time.getNumberOfTime().size() + " lần, uống " + time.getQuantitative()+ "/lần";
+                    d.put("Quantity", temp);
+                    sections.add(d);
+                    sections.add(d);
                 }
             }
         }
@@ -75,11 +88,18 @@ public class NoticeActivity extends ActionBarActivity {
             quantitative.setText("Thời Gian");
             for (Treatment treatment : treatments) {
                 for (ToDoTime time : treatment.getListPracticeTreatment()) {
-                        HashMap<String, String> d = new HashMap<>();
-                        d.put("Name", time.getName());
-                        d.put("Number", time.getNumberOfTime().size() + "");
-                        d.put("Quantity", time.getQuantitative());
-                        sections.add(d);
+                    HashMap<String, String> d = new HashMap<>();
+                    String temp = time.getName();
+                    if (!time.getAdvice().isEmpty() && !time.getAdvice().equals("null")) {
+                        temp += "(" + time.getAdvice() + ")";
+                    }
+                    d.put("Name", temp);
+//                        d.put("Number", time.getNumberOfTime().size() + "");
+                    temp = "Ngày ";
+                    temp = time.getNumberOfTime().size() + " lần, tập  " + time.getQuantitative()+ "/lần";
+                    d.put("Quantity", temp);
+                    sections.add(d);
+                    sections.add(d);
                 }
             }
         }

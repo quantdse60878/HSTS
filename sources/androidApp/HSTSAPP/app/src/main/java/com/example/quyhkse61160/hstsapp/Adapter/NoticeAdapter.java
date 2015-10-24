@@ -49,14 +49,14 @@ public class NoticeAdapter extends BaseAdapter {
             vi = inflater.inflate(R.layout.activity_notice_item, null);
         }
         TextView txtDate = (TextView) vi.findViewById(R.id.notice_item_hour);
-        TextView txtName = (TextView) vi.findViewById(R.id.notice_item_name);
+//        TextView txtName = (TextView) vi.findViewById(R.id.notice_item_name);
         TextView txtQuantity = (TextView) vi.findViewById(R.id.notice_item_quantity);
 
         HashMap<String, String> item = new HashMap<>();
         item = data.get(position);
 
         txtDate.setText(item.get("Name"));
-        txtName.setText(item.get("Number"));
+//        txtName.setText(item.get("Number"));
         txtQuantity.setText(item.get("Quantity"));
 
         return vi;

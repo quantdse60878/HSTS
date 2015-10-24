@@ -16,22 +16,23 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="3"
             android:text="Tên"
             android:textStyle="bold"
             android:textSize="15dp"
             android:textColor="#01579B"
+            android:paddingRight="10dp"
             android:id="@+id/notice_title_name"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="Số Bữa"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:textColor="#01579B"
-            android:id="@+id/notice_title_number"/>
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="5"-->
+            <!--android:text="Số Bữa"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="15dp"-->
+            <!--android:textColor="#01579B"-->
+            <!--android:id="@+id/notice_title_number"/>-->
 
         <TextView
             android:layout_width="match_parent"

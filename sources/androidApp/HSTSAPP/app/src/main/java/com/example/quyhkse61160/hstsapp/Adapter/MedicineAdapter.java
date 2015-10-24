@@ -50,14 +50,14 @@ public class MedicineAdapter extends BaseAdapter {
             vi = inflater.inflate(R.layout.home_fragment_tab_2_item, null);
         }
         TextView txtMedicineName = (TextView) vi.findViewById(R.id.item_medicine_name);
-        TextView txtAdvice = (TextView) vi.findViewById(R.id.item_advice_of_medicine);
+//        TextView txtAdvice = (TextView) vi.findViewById(R.id.item_advice_of_medicine);
         TextView txtNumberOfMedicine = (TextView) vi.findViewById(R.id.item_number_of_medicine);
 
         HashMap<String, String> item = new HashMap<>();
         item = data.get(position);
 
         txtMedicineName.setText(item.get("MedicineName"));
-        txtAdvice.setText(item.get("Advice"));
+//        txtAdvice.setText(item.get("Advice"));
         txtNumberOfMedicine.setText(item.get("NumberOfMedicine"));
 
 

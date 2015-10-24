@@ -54,16 +54,21 @@ public class NoticeTab extends Fragment {
             llNotice.setVisibility(View.VISIBLE);
             notice.setText(HomeActivity.timeAlert);
         }
+        String temp = "";
         sections = new ArrayList<>();
         List<Treatment> treatments = Constant.TREATMENTS;
         for (Treatment treatment : treatments) {
             for (ToDoTime time : treatment.getListFoodTreatment()) {
                 if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
                     HashMap<String, String> d = new HashMap<>();
-                    d.put("FoodName", time.getName());
-                    if (time.getAdvice().isEmpty() || time.getAdvice().equals("null"))
-                        d.put("Advice", "");
-                    else d.put("Advice", time.getAdvice());
+                    temp = time.getName();
+                    if (!time.getAdvice().isEmpty() && !time.getAdvice().equals("null")){
+                        temp += "(" + time.getAdvice() + ")";
+                    }
+                    d.put("FoodName", temp);
+//                    if (time.getAdvice().isEmpty() || time.getAdvice().equals("null"))
+//                        d.put("Advice", "");
+//                    else d.put("Advice", time.getAdvice());
                     d.put("QuantitativeOfFood", time.getQuantitative());
                     sections.add(d);
                 }
@@ -86,9 +91,13 @@ public class NoticeTab extends Fragment {
             for (ToDoTime time : treatment.getListMedicineTreatment()) {
                 if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
                     HashMap<String, String> d = new HashMap<>();
-                    d.put("MedicineName", time.getName());
-                    if (time.getAdvice().isEmpty() || time.getAdvice().equals("null")) d.put("Advice", "");
-                    else d.put("Advice", time.getAdvice());
+                    temp = time.getName();
+                    if (!time.getAdvice().isEmpty() && !time.getAdvice().equals("null")){
+                        temp += "(" + time.getAdvice() + ")";
+                    }
+                    d.put("MedicineName", temp);
+//                    if (time.getAdvice().isEmpty() || time.getAdvice().equals("null")) d.put("Advice", "");
+//                    else d.put("Advice", time.getAdvice());
                     d.put("NumberOfMedicine", time.getQuantitative() + " " + time.getUnit());
                     sections.add(d);
                 }
@@ -111,9 +120,13 @@ public class NoticeTab extends Fragment {
             for (ToDoTime time : treatment.getListPracticeTreatment()) {
                 if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
                     HashMap<String, String> d = new HashMap<>();
-                    d.put("PracticeName", time.getName());
-                    if (time.getAdvice().isEmpty() || time.getAdvice().equals("null")) d.put("Advice", "");
-                    else d.put("Advice", time.getAdvice());
+                    temp = time.getName();
+                    if (!time.getAdvice().isEmpty() && !time.getAdvice().equals("null")){
+                        temp += "(" + time.getAdvice() + ")";
+                    }
+                    d.put("PracticeName", temp);
+//                    if (time.getAdvice().isEmpty() || time.getAdvice().equals("null")) d.put("Advice", "");
+//                    else d.put("Advice", time.getAdvice());
                     d.put("PracticeTime", time.getQuantitative());
                     sections.add(d);
                 }
