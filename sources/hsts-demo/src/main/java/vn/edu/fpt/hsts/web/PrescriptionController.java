@@ -84,9 +84,7 @@ public class PrescriptionController extends AbstractController{
             mav.setViewName("makePrescription");
 
             // Set notify as readed
-            if (0 < notificationId) {
-                notifyService.markAsRead(notificationId);
-            }
+            notifyService.markAllNotifitionRelatedToPatientAsRead(patientID);
 
             // Find Appointment
             Appointment appointment = appointmentService.findEntryAppointmentByPatientId(patientID);

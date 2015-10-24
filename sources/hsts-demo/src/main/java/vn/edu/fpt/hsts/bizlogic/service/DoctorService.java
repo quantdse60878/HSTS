@@ -352,17 +352,7 @@ public class DoctorService extends AbstractService {
             notify.setMessage(String.valueOf(patientId));
             notifyRepo.saveAndFlush(notify);
             LOGGER.info("Create notify to patient : End");
-
-            // Mark related notifition as readed
-            final String message = String.valueOf(patientId);
-            final List<Notify> notifyList = notifyRepo.findUnreadNotifyByMessageContent(message, IDbConsts.INotifyType.NURSE_DOCTOR, IDbConsts.INotifyStatus.UNCOMPLETED);
-            if (null != notifyList && !notifyList.isEmpty()) {
-                for (Notify n: notifyList) {
-                    n.setStatus(IDbConsts.INotifyStatus.COMPLETED);
-                    notifyRepo.saveAndFlush(n);
-                }
-            }
-
+            
             // flush all change to db
             LOGGER.info("Flush all change to db");
             appointmentRepo.flush();

@@ -193,4 +193,20 @@ public class NotifyService extends AbstractService {
         }
     }
 
+    public void markAllNotifitionRelatedToPatientAsRead(final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final String message = String.valueOf(patientId);
+            final List<Notify> notifyList = notifyRepo.findUnreadNotifyByMessageContent(message, IDbConsts.INotifyType.NURSE_DOCTOR, IDbConsts.INotifyStatus.UNCOMPLETED);
+            if (null != notifyList && !notifyList.isEmpty()) {
+                for (Notify n: notifyList) {
+                    n.setStatus(IDbConsts.INotifyStatus.COMPLETED);
+                    notifyRepo.saveAndFlush(n);
+                }
+            }
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }
