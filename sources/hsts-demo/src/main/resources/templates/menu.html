@@ -13,13 +13,13 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img th:src="@{/static/image/avatar.png}" class="img-circle" alt="User Image"/>
+                <img th:src="@{|/static/image/${session.USER.role.name}.png|}" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
                 <p th:text="${session.USER.fullName}"></p>
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i>
-                    <i th:text=" ${session.USER.role.name}" style="font-size: 13px;color: #ff0000;"></i></a>
+                    <i th:text="${session.USER.role.name}" style="font-size: 13px;color: #ff0000;"></i></a>
             </div>
         </div>
 
@@ -44,8 +44,8 @@
             </li>
             <li class="active treeview" th:if="${session.USER.role.name == 'Doctor Manager'}">
                 <ul class="treeview-menu">
-                    <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Register Regimen</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Edit Regimen</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-briefcase"></i> Register Regimen</a></li>
+                    <li><a href="#"><i class="fa fa-plus-square"></i> Edit Regimen</a></li>
                 </ul>
             </li>
             <li class="active treeview" th:if="${session.USER.role.name == 'Admin'}">
