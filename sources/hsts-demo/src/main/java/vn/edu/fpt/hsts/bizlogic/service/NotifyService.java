@@ -198,7 +198,8 @@ public class NotifyService extends AbstractService {
         try {
             LOGGER.info("patientId[{}]", patientId);
             final String message = String.valueOf(patientId);
-            final List<Notify> notifyList = notifyRepo.findUnreadNotifyByMessageContent(message, IDbConsts.INotifyType.NURSE_DOCTOR, IDbConsts.INotifyStatus.UNCOMPLETED);
+            final List<Notify> notifyList = notifyRepo.findUnreadNotifyByMessageContent(getUserSession().getId(), message,
+                    IDbConsts.INotifyType.NURSE_DOCTOR, IDbConsts.INotifyStatus.UNCOMPLETED);
             if (null != notifyList && !notifyList.isEmpty()) {
                 for (Notify n: notifyList) {
                     n.setStatus(IDbConsts.INotifyStatus.COMPLETED);
