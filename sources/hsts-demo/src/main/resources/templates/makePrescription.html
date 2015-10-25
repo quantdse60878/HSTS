@@ -151,7 +151,7 @@
                         <!-- ./form -->
                         <!-- form start -->
                         <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}"
-                              onsubmit="return confirmBox(this);">
+                               data-toggle="validator" onsubmit="return confirmBox(this);">
                             <input type="hidden" name="diagnostic" id="diagnostic"
                                    th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"/>
 
@@ -397,6 +397,14 @@
     <!-- bootstrap-datepicker-->
     <link th:href="@{/static/bower/admin-lte/plugins/datepicker/datepicker3.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/datepicker/bootstrap-datepicker.js}"></script>
+
+    <!-- Bootstrap multiple tags -->
+    <link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>
+    <script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>
+
+    <!-- Bootstrap validator-->
+    <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
+
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
@@ -452,14 +460,14 @@
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.setAttribute("class", "form-inline");
+            newCell.setAttribute("class", "form-inline form-group");
             newCell.setAttribute("style", "max-width: 180px;");
             newCell.innerHTML =
-                    '<input type="text" value="1" style="max-width: 47%;margin-right: 3%;" class="form-control" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quanlity"/>' +
-                    '<input type="text" style="max-width: 50%;" class="form-control" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit"/>';
+                    '<input type="text" value="1" style="max-width: 47%;margin-right: 3%;" class="form-control" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quantity" data-remote="/validateData" required="required"/>' +
+                    '<input type="text" style="max-width: 50%;" class="form-control" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit" required="required"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="mPresModels[' + countMedicine + '].mNote" id="mPresModels' + countMedicine + '.mNote" placeholder="Advice"/>';
+                    '<input type="text" class="form-control" name="mPresModels[' + countMedicine + '].mNote" id="mPresModels' + countMedicine + '.mNote" placeholder="Advice" required="required"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>';
 
@@ -486,9 +494,9 @@
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity"/>';
+            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" required="required"/>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice"/>';
+            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice" required="required"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowFood(this)"></a>'
 
