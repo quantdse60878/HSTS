@@ -62,6 +62,13 @@
             z-index: 9002;
         }
 
+        #praticeResult {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            z-index: 9002;
+        }
+
     </style>
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -177,7 +184,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab_4-4" th:if="${PHASE == null}">
                                             <!-- patient's Profile -->
-                                            <div layout:replace="_practiceData"></div>
+                                            <div layout:replace="_patientProfile"></div>
                                             <!-- /.patient's Profile -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
@@ -391,6 +398,9 @@
     <div id="blanket" style="display:none;"></div>
     <div th:if="${FOODINGREDIENT != null}">
         <div layout:replace="_popupNutritional"></div>
+    </div>
+    <div th:if="${DATAPRACS != null}">
+        <div layout:replace="_practiceData"></div>
     </div>
     <!-- / POPUP-->
 

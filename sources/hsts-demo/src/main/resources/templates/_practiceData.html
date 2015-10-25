@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
-<div id="praticeResult">
+<div id="praticeResult" style="display: none;">
     <!-- box -->
     <div class="box box-success box-solid">
         <div class="box-header with-border">
@@ -18,7 +18,11 @@
         <!-- /.box-header -->
         <div class="box-body" th:object="${DATAPRACS}" style="overflow: auto;">
             <h4>Practice Result</h4>
-
+            <div class="box-body" style="text-align: center;">
+                <img th:src="@{/static/image/star.png}" th:if="*{ratioCompletePractice >= 0}" style="width: 70px;"/>
+                <img th:src="@{/static/image/star.png}" th:if="*{ratioCompletePractice >= 50}" style="width: 70px;"/>
+                <img th:src="@{/static/image/star.png}" th:if="*{ratioCompletePractice >= 85}" style="width: 70px;"/>
+            </div>
             <div style="margin: auto;">
                 <table id="practiceData" class="table table-bordered table-striped">
                     <thead>
