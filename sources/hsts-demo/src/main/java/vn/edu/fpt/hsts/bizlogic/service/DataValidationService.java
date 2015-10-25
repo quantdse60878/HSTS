@@ -30,9 +30,27 @@ public class DataValidationService extends AbstractService {
         try {
             // Min vals
             minVals.put("weight", (float) 20);
+            minVals.put("height", (float) 110);
+            minVals.put("bodyFat", (float) 1);
+            minVals.put("visceralFat", (float) 1);
+            minVals.put("muscleMass", (float) 1);
+            minVals.put("bodyWater", (float) 1);
+            minVals.put("phaseAngle", (float) 1);
+            minVals.put("impedance", (float) 1);
+            minVals.put("basalMetabolicRate", (float) 1);
+            minVals.put("mQuantity", (float) 1);
 
             // Max vals
             maxVals.put("weight", (float) 200);
+            maxVals.put("height", (float) 250);
+            maxVals.put("bodyFat", (float) 100);
+            maxVals.put("visceralFat",(float) 100);
+            maxVals.put("muscleMass", (float) 100);
+            maxVals.put("bodyWater", (float) 100);
+            maxVals.put("phaseAngle", (float) 100);
+            maxVals.put("impedance", (float) 5000);
+            maxVals.put("basalMetabolicRate", (float) 5000);
+            maxVals.put("mQuantity", (float) 10);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
@@ -49,8 +67,15 @@ public class DataValidationService extends AbstractService {
         try {
             final Enumeration<String> params = request.getParameterNames();
             while (params.hasMoreElements()) {
-                final String paramName = params.nextElement();
+                String paramName = params.nextElement();
                 final float paramValue = Float.parseFloat(request.getParameter(paramName));
+
+                // For case validate model attribute with list index, ex: mPresModel[2].mQuantity
+                if (paramName.contains(".")) {
+                    // Get the lastest string to use as paramName
+                    final int index = paramName.lastIndexOf(".");
+                    paramName = paramName.substring(index + 1);
+                }
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("{}[{}]", paramName, paramValue);
                 }
