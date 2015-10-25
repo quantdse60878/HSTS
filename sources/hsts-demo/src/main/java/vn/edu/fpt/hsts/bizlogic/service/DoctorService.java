@@ -426,7 +426,7 @@ public class DoctorService extends AbstractService {
                 }
                 kcalConsumed = kcalConsumed/count;
                 resultModel.setAvgKcalConsumed(kcalConsumed);
-                int ratioCompletePractice = (kcalConsumed/kcalEstimate)*100;
+                float ratioCompletePractice = ((float)kcalConsumed/(float)kcalEstimate)*100;
                 resultModel.setRatioCompletePractice(ratioCompletePractice);
                 if (ratioCompletePractice >= 130){
                     resultModel.setStatus(3);

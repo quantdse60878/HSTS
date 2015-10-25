@@ -7,15 +7,16 @@ public class PracticeResultModel {
     private int avgKcalConsumed;
     private int kcalEstimate;
     private int status;
-    private int ratioCompletePractice;
+    private float ratioCompletePractice;
 
     public PracticeResultModel() {
     }
 
-    public PracticeResultModel(int avgKcalConsumed, int kcalEstimate, int status, int ratioCompletePractice) {
-        this.avgKcalConsumed = avgKcalConsumed;
-        this.kcalEstimate = kcalEstimate;
-        this.status = status;
+    public float getRatioCompletePractice() {
+        return ratioCompletePractice;
+    }
+
+    public void setRatioCompletePractice(float ratioCompletePractice) {
         this.ratioCompletePractice = ratioCompletePractice;
     }
 
@@ -33,15 +34,6 @@ public class PracticeResultModel {
 
     public void setKcalEstimate(int kcalEstimate) {
         this.kcalEstimate = kcalEstimate;
-    }
-
-
-    public int getRatioCompletePractice() {
-        return ratioCompletePractice;
-    }
-
-    public void setRatioCompletePractice(int ratioCompletePractice) {
-        this.ratioCompletePractice = ratioCompletePractice;
     }
 
     public int getStatus() {

@@ -4,71 +4,77 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
 <div id="praticeResult">
-        <!-- box -->
-        <div class="box box-success box-solid">
-            <div class="box-header with-border">
-                <h3 class="box-title">Practice Result</h3>
+    <!-- box -->
+    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title">Practice Result</h3>
 
-                <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" onclick="popup('praticeResult')">
-                        <i class="fa fa-times"></i></button>
-                </div>
-                <!-- /.box-tools -->
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" onclick="popup('praticeResult')">
+                    <i class="fa fa-times"></i></button>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body" th:object="${DATAPRACS}" style="overflow: auto;height: 600px;">
-                <h4>Practice Result</h4>
-                <div style="margin: auto;">
-                    <table id="practiceData" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th style="width: 200px;">Result</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <label class="control-label">AVG Kcal Consumed/ Kcal Estimate</label>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label">BreakTime Morning</label>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label class="control-label">Lunch</label>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label">BreakTime Afternoon</label></td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label">Dinner</label></td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label class="control-label">Eat Late At Night</label></td>
-                            <td>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" th:object="${DATAPRACS}" style="overflow: auto;">
+            <h4>Practice Result</h4>
+
+            <div style="margin: auto;">
+                <table id="practiceData" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th style="width: 200px;">Result</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label class="control-label">AVG Kcal Consumed/ Kcal Estimate</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <i th:text="*{avgKcalConsumed}" class="text-orange"></i> / <i th:text="*{kcalEstimate}"
+                                                                                          class="text-green"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label">Status</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" readonly="readonly"
+                                   style="text-align: center;background-color: #f0ad4e;color: white;" th:if="*{status == 3}"
+                                   value="Under Required"/>
+                            <input type="text" class="form-control" readonly="readonly"
+                                   style="text-align: center;background-color: #5bc0de;color: white;" th:if="*{status == 2}"
+                                   value="Completed"/>
+                            <input type="text" class="form-control" readonly="readonly"
+                                   style="text-align: center;background-color: #d9534f;color: white;" th:if="*{status == 1}"
+                                   value="Excessived"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label">Complete Practice Percent</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" readonly="readonly"
+                                   style="text-align: center;background-color: #f0ad4e;color: white;" th:if="*{status == 3}"
+                                   th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>
+                            <input type="text" class="form-control" readonly="readonly"
+                                   style="text-align: center;background-color: #5bc0de;color: white;" th:if="*{status == 2}"
+                                   th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>
+                            <input type="text" class="form-control" readonly="readonly"
+                                   style="text-align: center;background-color: #d9534f;color: white;" th:if="*{status == 1}"
+                                   th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <!-- /.box -->
+    </div>
+    <!-- /.box -->
 </div>
 </body>
 </html>
