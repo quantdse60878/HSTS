@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<h4>Information checking</h4>
+<!-- table Information -->
+<table class="table table-striped" id="information">
+    <tr>
+        <th colspan="3">Basic checking</th>
+        <th colspan="3">Prevention checking</th>
+    </tr>
+
+    <tr>
+        <td>
+            <label class="control-label">Weight</label>
+        </td>
+        <td>
+            <input type="text" th:value="${PREVENTIONCHECK.weight}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> Kg</label>
+        </td>
+
+        <td>
+            <label class="control-label">Body Fat</label>
+        </td>
+        <td>
+            <input type="text" th:value="${PREVENTIONCHECK.bodyFat}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> %</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label class="control-label">Height</label>
+        </td>
+        <td>
+            <input type="text" th:value="${PREVENTIONCHECK.height}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> Cm</label>
+        </td>
+
+        <td>
+            <label class="control-label">Visceral Fat</label>
+        </td>
+        <td>
+            <input type="text" th:value="${PREVENTIONCHECK.visceralFat}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> Level</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label class="control-label">Hearth Beat</label>
+        </td>
+        <td>
+            <input type="text" th:value="${APPOINTMENT.heartBeat}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> Times/minute</label>
+        </td>
+
+        <td>
+            <label class="control-label">Muscle Mass</label>
+        </td>
+        <td>
+            <input type="text" th:value="${PREVENTIONCHECK.muscleMass}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> %</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label class="control-label">Blood Pressure</label>
+        </td>
+        <td>
+            <input type="text" th:value="${APPOINTMENT.bloodPressure}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> mmHg</label>
+        </td>
+
+        <td>
+            <label class="control-label">Body Water</label>
+        </td>
+        <td>
+            <input type="text" th:value="${PREVENTIONCHECK.bodyWater}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> %</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label class="control-label">Waists</label>
+        </td>
+        <td>
+            <input type="text" th:value="${APPOINTMENT.waists}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> Cm</label>
+        </td>
+
+        <td>
+            <label class="control-label">Phase Angle</label>
+        </td>
+        <td>
+            <input type="text" th:value="${PREVENTIONCHECK.phaseAngle}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> o</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="3">
+        </td>
+
+        <td>
+            <label class="control-label">Impedance</label>
+        </td>
+        <td>
+            <input type="text" th:value="${PREVENTIONCHECK.impedance}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> Ohm</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="3">
+        </td>
+
+        <td>
+            <label class="control-label">Basal Metabolic Rate</label>
+        </td>
+        <td>
+            <input type="text" th:value="${PREVENTIONCHECK.basalMetabolicRate}" class="form-control" readonly="readonly"/>
+        </td>
+        <td>
+            <label class="control-label"> Kcal</label>
+        </td>
+    </tr>
+</table>
+<!-- /.table Information -->
+
+</body>
+</html>

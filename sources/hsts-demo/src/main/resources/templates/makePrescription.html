@@ -165,10 +165,10 @@
 
                                     <ul class="nav nav-tabs">
                                         <li class="active" th:if="${PHASE == null}">
-                                            <a href="#tab_4-4" data-toggle="tab">Patient's Profile</a>
+                                            <a href="#tab_4-4" data-toggle="tab">Infomation checking</a>
                                         </li>
                                         <li th:if="${PHASE != null}">
-                                            <a href="#tab_4-4" data-toggle="tab">Patient's Profile</a>
+                                            <a href="#tab_4-4" data-toggle="tab">Infomation checking</a>
                                         </li>
                                         <li class="active" th:if="${PHASE != null}">
                                             <a href="#tab_1-1" data-toggle="tab">Medicine</a>
@@ -184,7 +184,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab_4-4" th:if="${PHASE == null}">
                                             <!-- patient's Profile -->
-                                            <div layout:replace="_patientProfile"></div>
+                                            <div layout:replace="_informationChecking"></div>
                                             <!-- /.patient's Profile -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
@@ -195,7 +195,7 @@
                                         </div>
                                         <div class="tab-pane" id="tab_4-4" th:if="${PHASE != null}">
                                             <!-- patient's Profile -->
-                                            <div layout:replace="_patientProfile"></div>
+                                            <div layout:replace="_informationChecking"></div>
                                             <!-- /.patient's Profile -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
