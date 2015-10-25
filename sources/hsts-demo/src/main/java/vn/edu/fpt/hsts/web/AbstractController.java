@@ -116,6 +116,7 @@ public class AbstractController implements ControllerParam {
 
         // Get PracticeResultModel
         PracticeResultModel practiceResultModel = doctorService.getInfoPracticeDataOfPatient(appointment);
+        mav.addObject("DATAPRACS", practiceResultModel);
     }
 
     public void notify(ModelAndView mav, Boolean result,String method, String mess){

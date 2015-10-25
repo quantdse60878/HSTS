@@ -6,13 +6,13 @@ package vn.edu.fpt.hsts.bizlogic.model;
 public class PracticeResultModel {
     private int avgKcalConsumed;
     private int kcalEstimate;
-    private String status;
+    private int status;
     private int ratioCompletePractice;
 
     public PracticeResultModel() {
     }
 
-    public PracticeResultModel(int avgKcalConsumed, int kcalEstimate, String status, int ratioCompletePractice) {
+    public PracticeResultModel(int avgKcalConsumed, int kcalEstimate, int status, int ratioCompletePractice) {
         this.avgKcalConsumed = avgKcalConsumed;
         this.kcalEstimate = kcalEstimate;
         this.status = status;
@@ -35,13 +35,6 @@ public class PracticeResultModel {
         this.kcalEstimate = kcalEstimate;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public int getRatioCompletePractice() {
         return ratioCompletePractice;
@@ -51,12 +44,20 @@ public class PracticeResultModel {
         this.ratioCompletePractice = ratioCompletePractice;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "PracticeResultModel{" +
                 "avgKcalConsumed=" + avgKcalConsumed +
                 ", kcalEstimate=" + kcalEstimate +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 ", ratioCompletePractice=" + ratioCompletePractice +
                 '}';
     }

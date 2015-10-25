@@ -3,20 +3,72 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
-<div id="praticeData">
-    <div id="chart" style="width: 70%;">
-    <h4>Calories Chart</h4>
-    <div class="chart">
-        <canvas id="barChart" style="height:230px"></canvas>
-    </div>
-    <i class="fa fa-square text-orange"></i>
-    <h4 style="display: inline;"> Calories Required </h4>
-    <i class="fa fa-square text-green"></i>
-    <h4 style="display: inline;"> Calories Consumed</h4>
-</div>
-    <div id="totalPrac" style="width: 30%;">
+<div id="praticeResult">
+        <!-- box -->
+        <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Practice Result</h3>
 
-    </div>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" onclick="popup('praticeResult')">
+                        <i class="fa fa-times"></i></button>
+                </div>
+                <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" th:object="${DATAPRACS}" style="overflow: auto;height: 600px;">
+                <h4>Practice Result</h4>
+                <div style="margin: auto;">
+                    <table id="practiceData" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th style="width: 200px;">Result</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <label class="control-label">AVG Kcal Consumed/ Kcal Estimate</label>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">BreakTime Morning</label>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Lunch</label>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label">BreakTime Afternoon</label></td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label">Dinner</label></td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label">Eat Late At Night</label></td>
+                            <td>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.box -->
 </div>
 </body>
 </html>

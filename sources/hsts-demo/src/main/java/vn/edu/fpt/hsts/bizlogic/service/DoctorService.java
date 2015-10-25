@@ -412,9 +412,33 @@ public class DoctorService extends AbstractService {
             LOGGER.info("appointment[{}]", appointment);
             PracticeResultModel resultModel = new PracticeResultModel();
             Appointment oldAppointment = appointmentRepo.findParentAppointment(appointment.getId());
-            List<MedicalRecordData> medicalRecordDatas = medicalRecordDataRepo.findRecordDataByAppointment(oldAppointment, oldAppointment.getMeetingDate(), appointment.getMeetingDate());
-            LOGGER.info("medicalRecordDatas: " + medicalRecordDatas.size());
-            return resultModel;
+
+            if (null != oldAppointment){
+                Treatment treatment =treatmentRepo.findLastTreatmenByAppointmentId(oldAppointment.getId());
+                List<MedicalRecordData> medicalRecordDatas = medicalRecordDataRepo.findRecordDataByAppointment(oldAppointment, oldAppointment.getMeetingDate(), appointment.getMeetingDate());
+                LOGGER.info("medicalRecordDatas: " + medicalRecordDatas.size());
+                int kcalEstimate = treatment.getCaloriesBurnEveryday();
+                resultModel.setKcalEstimate(kcalEstimate);
+                int kcalConsumed = 0;
+                int count = medicalRecordDatas.size();
+                for (int i = 0; i < count; i++) {
+                    kcalConsumed += medicalRecordDatas.get(i).getCalories();
+                }
+                kcalConsumed = kcalConsumed/count;
+                resultModel.setAvgKcalConsumed(kcalConsumed);
+                int ratioCompletePractice = (kcalConsumed/kcalEstimate)*100;
+                resultModel.setRatioCompletePractice(ratioCompletePractice);
+                if (ratioCompletePractice >= 130){
+                    resultModel.setStatus(3);
+                } else if (ratioCompletePractice < 130 && ratioCompletePractice >= 85){
+                    resultModel.setStatus(2);
+                } else if (ratioCompletePractice < 85){
+                    resultModel.setStatus(1);
+                }
+                LOGGER.info(resultModel.toString());
+                return resultModel;
+            }
+            return null;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
