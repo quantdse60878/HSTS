@@ -10,12 +10,21 @@ package vn.edu.fpt.hsts.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.service.DataValidationService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.util.StringUtils;
 import vn.edu.fpt.hsts.web.session.UserSession;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Home controller, for processing common mapping, redirect, etc.
@@ -30,6 +39,12 @@ public class HomeController {
      */
     @Autowired
     private UserSession userSession;
+
+    /**
+     * The {@link DataValidationService}.
+     */
+    @Autowired
+    private DataValidationService dataValidationService;
 
     @RequestMapping(value = "/")
     public String home() {
@@ -76,6 +91,21 @@ public class HomeController {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("404");
             return modelAndView;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/validateData", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> validateData(final HttpServletRequest request) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final boolean result = dataValidationService.validateRequestParam(request);
+            if (result) {
+                return new ResponseEntity<String>(HttpStatus.OK);
+            }
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
