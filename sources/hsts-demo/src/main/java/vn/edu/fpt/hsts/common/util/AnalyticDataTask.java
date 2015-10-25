@@ -13,10 +13,9 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TimerTask;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.*;
 
 /**
  * Created by QUYHKSE61160 on 10/5/15.
@@ -25,6 +24,25 @@ import java.util.TimerTask;
 
 @Component
 public class AnalyticDataTask {
+
+
+    //    X: Height
+//    Y: Weight
+//    Z: NumberofStep
+//    K: Distance
+    public static String FORMULA_CALCULATE_DISTANCE = "z * x * 0.414 / 100000";
+    public static String FORMULA_CALCULATE_CALORIES = "y / 0.4536 * 0.53 * 1.609 * z * x * 0.414 / 100000";
+    public static List<String> variable = new ArrayList<String>() {{
+        add("z");
+        add("x");
+        add("y");
+    }};
+    public static List<String> valueVariable = new ArrayList<String>() {{
+        add("2,NumberOfStep");
+        add("1,Height");
+        add("1,Weight");
+    }};
+
 
     @Autowired
     MedicalRecordDataRepo medicalRecordDataRepo;
@@ -39,41 +57,79 @@ public class AnalyticDataTask {
     @Autowired
     PreventionCheckRepo preventionCheckRepo;
 
-    @Scheduled(fixedRate = 1000*20)
+    @Scheduled(fixedRate = 1000 * 20)
     public void updatePatientData() {
         List<MedicalRecordData> listRecordData = medicalRecordDataRepo.findRecordDataNotUpdate();
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
         float distance = 0;
         int calories = 0;
-        for(int i = 0; i < listRecordData.size(); i++) {
+        for (int i = 0; i < listRecordData.size(); i++) {
             MedicalRecordData recordData = listRecordData.get(i);
-            Map<String, Object> vars = new HashMap<String, Object>();
-
             PreventionCheck preventionCheck = preventionCheckRepo.findPreventionCheckByAppointmentId(recordData.getAppointment().getId());
 
-            vars.put("x", preventionCheck.getHeight());
-            vars.put("z", recordData.getNumberOfStep());
-            try {
-                distance = Float.parseFloat(engine.eval(IConsts.FORMULA_CALCULATE_DISTANCE, new SimpleBindings(vars)).toString());
-                vars = new HashMap<String, Object>();
-                vars.put("y", preventionCheck.getWeight());
-                vars.put("k", distance);
-                calories = (int) Double.parseDouble(engine.eval(IConsts.FORMULA_CALCULATE_CALORIES, new SimpleBindings(vars)).toString());
-                if(distance > 0 && calories > 0) {
-                    recordData.setDistance(distance);
-                    recordData.setCalories(calories);
-                    recordData.setType(IDbConsts.IMedicalRecordDataType.CALCULATED);
+            String formularDistance = FORMULA_CALCULATE_DISTANCE;
+            String formularCalories = FORMULA_CALCULATE_CALORIES;
+            for (int j = 0; j < variable.size(); j++) {
+                String[] tableAndProperties = valueVariable.get(j).split(",");
+                Method method;
+                try {
+                    if (tableAndProperties[0].equals("2")) {
+                        method = recordData.getClass().getMethod("get" + tableAndProperties[1]);
+                        formularDistance = formularDistance.replace(variable.get(j), "" + method.invoke(recordData));
+                        formularCalories = formularCalories.replace(variable.get(j), "" + method.invoke(recordData));
+                    } else if (tableAndProperties[0].equals("1")) {
+                        method = preventionCheck.getClass().getMethod("get" + tableAndProperties[1]);
+                        formularDistance = formularDistance.replace(variable.get(j), "" + method.invoke(preventionCheck));
+                        formularCalories = formularCalories.replace(variable.get(j), "" + method.invoke(preventionCheck));
+                    }
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
                 }
-                System.out.println("----------");
+
+            }
+            try {
+                distance = Float.parseFloat(engine.eval(formularDistance).toString());
+                calories = (int) Double.parseDouble(engine.eval(formularCalories).toString());
             } catch (ScriptException e) {
                 e.printStackTrace();
             }
+            System.out.println("1");
+            if (distance > 0 && calories > 0) {
+                recordData.setDistance(distance);
+                recordData.setCalories(calories);
+                recordData.setType(IDbConsts.IMedicalRecordDataType.CALCULATED);
+            }
+
+//            Map<String, Object> vars = new HashMap<String, Object>();
+
+
+//            vars.put("x", preventionCheck.getHeight());
+//            vars.put("z", recordData.getNumberOfStep());
+//            try {
+//                distance = Float.parseFloat(engine.eval(FORMULA_CALCULATE_DISTANCE, new SimpleBindings(vars)).toString());
+//                vars = new HashMap<String, Object>();
+//                vars.put("y", preventionCheck.getWeight());
+//                vars.put("k", distance);
+//                calories = (int) Double.parseDouble(engine.eval(FORMULA_CALCULATE_CALORIES, new SimpleBindings(vars)).toString());
+//                if (distance > 0 && calories > 0) {
+//                    recordData.setDistance(distance);
+//                    recordData.setCalories(calories);
+//                    recordData.setType(IDbConsts.IMedicalRecordDataType.CALCULATED);
+//                }
+//                System.out.println("----------");
+//            } catch (ScriptException e) {
+//                e.printStackTrace();
+//            }
 
             Appointment appointment = recordData.getAppointment();
             Treatment treatment = treatmentRepo.findTreatmentByAppointmentId(appointment.getId());
-            int ratioComplete = (calories*100)/treatment.getCaloriesBurnEveryday();
+            int ratioComplete = (calories * 100) / treatment.getCaloriesBurnEveryday();
             recordData.setRatioCompletePractice(ratioComplete);
-            if(ratioComplete < 80) {
+            if (ratioComplete < 85) {
                 MedicalRecord medicalRecord = appointment.getMedicalRecord();
                 Account sender = medicalRecord.getDoctor().getAccount();
                 Account receiverId = medicalRecord.getPatient().getAccount();
@@ -97,7 +153,6 @@ public class AnalyticDataTask {
         }
 
         medicalRecordDataRepo.save(listRecordData);
-
 
 
     }

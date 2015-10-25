@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+
+<div class="content-wrapper" layout:fragment="body">
+
+    <style type="text/css">
+        .hideButton {
+            display: none;
+        }
+        .viewButton {
+
+        }
+    </style>
+
+
+        <h3>Formula to Calculate Distance</h3>
+        <input oninput="hideButton()" class="formulaInput" id="formulaDistance" name="newDistanceFormula" th:value="${DISTANCEFORMULA}" style="width: 500px;"/>
+        <br/>
+
+        <h3>Formula to Calculate Calories</h3>
+        <input oninput="hideButton()" class="formulaInput" id="formulaCalories" name="newCaloriesFormula" th:value="${CALORIESFORMULA}" style="width: 500px;"/>
+        <br/>
+
+        <button type="reset" onclick="scanVariable()">Scan</button>
+        <h3>Variable</h3>
+        <br/>
+        <table border="1" id="tableVariable">
+            <tr th:each="variable : ${LISTVARIABLE}">
+                <td class="variable" th:text="${variable.key}" style="width: 100px;"></td>
+                <td class="valueOfVariable">
+                </td>
+            </tr>
+        </table>
+    <button onclick="setupNewFormula()">Check Formula</button>
+    <table id="viewButton" class="hideButton">
+        <tr>
+            <td>
+                <form method="POST" th:action="openFormula">
+                    <button type="submit">Cancel</button>
+                </form>
+            </td>
+            <td>
+                <form onsubmit="return confirm('Do you want to create new formula!');" class="form-horizontal"
+                      th:action="setupNewFormula" method="POST">
+                    <input type="hidden" id="newVariable" name="listNewVariable"/>
+                    <input type="hidden" id="newValue" name="listNewValueOfVariable"/>
+                    <input type="hidden" id="newDistance" name="newDistanceFormula"/>
+                    <input type="hidden" id="newCalories" name="newCaloriesFormula"/>
+                    <button type="submit" id="setupFormula">Setup New Formula</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <script th:inline="javascript">
+        console.log("----------1111-------");
+        listVariable = [[${LISTVARIABLE}]];
+        listPrevention = [[${LISTPREVENTION}]];
+        listMedicalRecordData = [[${LISTMEDICALRECORDDATA}]];
+    </script>
+    <script type="text/javascript" th:src="@{/static/js/staffFormula.js}"></script>
+</div>
+
+</body>
+</html>

@@ -41,6 +41,9 @@ public class Appointment extends AbstractKeyEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
     private List<Treatment> treatmentList;
 
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "appointment")
+    private List<FoodIngredient> foodIngredientListList;
     /**
      *
      */

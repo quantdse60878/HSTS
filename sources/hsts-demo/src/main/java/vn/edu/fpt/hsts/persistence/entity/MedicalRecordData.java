@@ -30,8 +30,6 @@ public class MedicalRecordData extends AbstractKeyEntity {
      */
     @JoinColumn(name = "dateCollectData")
     private Date collectedDate;
-
-
     /**
      * Number of steps.
      */
