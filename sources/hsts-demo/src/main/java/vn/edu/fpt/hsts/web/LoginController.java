@@ -71,6 +71,7 @@ public class LoginController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
     /**
      * The login mapping
      * @param username
@@ -99,6 +100,9 @@ public class LoginController {
                     List<DoctorModel> doctorList = doctorService.findAll();
                     session.setAttribute("DOCTORS", doctorList);
                     mav.setViewName("registerPatient");
+                } else if (user.getRole().getName().equals("Admin")){
+
+                    mav.setViewName("adminlistuser");
                 }
 
                 return mav;
