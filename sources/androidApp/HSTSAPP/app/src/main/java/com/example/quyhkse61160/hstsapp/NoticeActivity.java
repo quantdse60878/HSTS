@@ -25,14 +25,14 @@ import java.util.List;
 public class NoticeActivity extends ActionBarActivity {
     NoticeAdapter adapter;
     ListView listView;
-    TextView name, number, quantitative;
+    TextView name, quantitative;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
         name = (TextView) findViewById(R.id.notice_title_name);
-        number = (TextView) findViewById(R.id.notice_title_number);
+//        number = (TextView) findViewById(R.id.notice_title_number);
         quantitative = (TextView) findViewById(R.id.notice_title_quantitative);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
@@ -42,9 +42,9 @@ public class NoticeActivity extends ActionBarActivity {
         ArrayList<HashMap<String, String>> sections = new ArrayList<>();
         List<Treatment> treatments = Constant.TREATMENTS;
         if (field.equals("food")) {
-            name.setText("Tên Món Ăn");
-            number.setText("Số Bữa Ăn");
-            quantitative.setText("Số Lượng");
+            name.setText("Món Ăn");
+//            number.setText("Số Bữa Ăn");
+            quantitative.setText("Định Lượng");
             for (Treatment treatment : treatments) {
                 for (ToDoTime time : treatment.getListFoodTreatment()) {
                     HashMap<String, String> d = new HashMap<>();
@@ -62,9 +62,9 @@ public class NoticeActivity extends ActionBarActivity {
             }
         }
         if (field.equals("medicine")) {
-            name.setText("Tên Thuốc");
-            number.setText("Số Lần Uống");
-            quantitative.setText("Số Lượng/Lần");
+            name.setText("Thuốc");
+//            number.setText("Số Lần Uống");
+            quantitative.setText("Định Lượng");
             for (Treatment treatment : treatments) {
                 for (ToDoTime time : treatment.getListMedicineTreatment()) {
                     HashMap<String, String> d = new HashMap<>();
@@ -83,8 +83,8 @@ public class NoticeActivity extends ActionBarActivity {
             }
         }
         if (field.equals("practice")) {
-            name.setText("Tên Bài Tập");
-            number.setText("Số Lần Tập");
+            name.setText("Bài Tập");
+//            number.setText("Số Lần Tập");
             quantitative.setText("Thời Gian");
             for (Treatment treatment : treatments) {
                 for (ToDoTime time : treatment.getListPracticeTreatment()) {
@@ -96,7 +96,7 @@ public class NoticeActivity extends ActionBarActivity {
                     d.put("Name", temp);
 //                        d.put("Number", time.getNumberOfTime().size() + "");
                     temp = "Ngày ";
-                    temp = time.getNumberOfTime().size() + " lần, tập  " + time.getQuantitative()+ "/lần";
+                    temp = time.getNumberOfTime().size() + " lần, tập " + time.getQuantitative()+ "/lần";
                     d.put("Quantity", temp);
                     sections.add(d);
                     sections.add(d);
