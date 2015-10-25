@@ -213,6 +213,9 @@ public class PatientService extends AbstractService {
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Create new patient[{}] successfully", newAccount.getUsername());
                     }
+                    // TODO send email with creditial information to patient
+                    mailService.sendMail(patientCriteria.getEmail(), "Credential email", newAccount.getPassword());
+
                 } else if (criteria instanceof RegistrationCriteria) {
                     // TODO
                     final RegistrationCriteria rCriteria = (RegistrationCriteria) criteria;
@@ -259,8 +262,6 @@ public class PatientService extends AbstractService {
                     preventionCheckRepo.saveAndFlush(preventionCheck);
                 }
             }
-            // TODO send email with creditial information to patient
-//            mailService.sendMail(criteria.getEmail(), "Credential email", account.getPassword());
 
             // Create notify to doctor
             final Notify notify = new Notify();
