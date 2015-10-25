@@ -94,9 +94,10 @@
                                         <span class="fa fa-caret-down"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li th:each="appointment : ${APPOINTMENTS}"><a th:href="@{/viewPrescription(appointmentId=${appointment.id})}"
-                                               class="btn btn-default"
-                                               th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>
+                                        <li th:each="appointment : ${APPOINTMENTS}"><a
+                                                th:href="@{/viewPrescription(appointmentId=${appointment.id})}"
+                                                class="btn btn-default"
+                                                th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -115,15 +116,18 @@
                                     <!--<input type="hidden" th:name="patientID" th:value="${APPOINTMENT.medicalRecord.patient.id}"/>-->
                                     <div class="col-sm-4 ui-widget">
                                         <input th:if="${TREATMENT != null}"
-                                               th:value="${TREATMENT.appointment.medicalRecord.illness != null}? ${TREATMENT.appointment.medicalRecord.illness.name} : 'Unknown Disease'" readonly="readonly" class="form-control"/>
-                                        <select th:if="${TREATMENT == null}" id="combobox" th:name="diagnostic" class="form-control">
+                                               th:value="${TREATMENT.appointment.medicalRecord.illness != null}? ${TREATMENT.appointment.medicalRecord.illness.name} : 'Unknown Disease'"
+                                               readonly="readonly" class="form-control"/>
+                                        <select th:if="${TREATMENT == null}" id="combobox" th:name="diagnostic"
+                                                class="form-control">
                                             <option th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"
                                                     th:text="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name} : ''">Select
                                                 one...
                                             </option>
 
                                             <option th:each="illness : ${ILLNESSES}" th:value="${illness.id}"
-                                                    th:text="${illness.name}" th:if="${DIAGNOSTIC != null and DIAGNOSTIC.id != illness.id}"></option>
+                                                    th:text="${illness.name}"
+                                                    th:if="${DIAGNOSTIC != null and DIAGNOSTIC.id != illness.id}"></option>
 
                                             <option th:each="illness : ${ILLNESSES}" th:value="${illness.id}"
                                                     th:text="${illness.name}" th:if="${DIAGNOSTIC == null}"></option>
@@ -139,7 +143,8 @@
                         </form>
                         <!-- ./form -->
                         <!-- form start -->
-                        <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}" onsubmit="return confirmBox(this);">
+                        <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}"
+                              onsubmit="return confirmBox(this);">
                             <input type="hidden" name="diagnostic" id="diagnostic"
                                    th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"/>
 
@@ -172,11 +177,12 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab_4-4" th:if="${PHASE == null}">
                                             <!-- patient's Profile -->
-                                            <div layout:replace="_patientProfile"></div>
+                                            <div layout:replace="_practiceData"></div>
                                             <!-- /.patient's Profile -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+                                                   class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
                                         </div>
@@ -186,19 +192,23 @@
                                             <!-- /.patient's Profile -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+                                                   class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
                                         </div>
                                         <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="tab_1-1" th:if="${PHASE == null and TREATMENT == null}">
+                                        <div class="tab-pane" id="tab_1-1"
+                                             th:if="${PHASE == null and TREATMENT == null}">
                                             <!-- medicine tab -->
                                             <div layout:replace="_medicinePrecription"></div>
                                             <!-- /.medicine tab -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab" class="btn btn-default">Previous</a>
-                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                                <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab"
+                                                   class="btn btn-default">Previous</a>
+                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab"
+                                                   class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
                                         </div>
@@ -209,8 +219,10 @@
                                             <!-- /.medicine Suggest -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab" class="btn btn-default">Previous</a>
-                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                                <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab"
+                                                   class="btn btn-default">Previous</a>
+                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab"
+                                                   class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
                                         </div>
@@ -220,8 +232,10 @@
                                             <!-- /.medicine History -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab" class="btn btn-default">Previous</a>
-                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                                <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab"
+                                                   class="btn btn-default">Previous</a>
+                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab"
+                                                   class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
                                         </div>
@@ -246,8 +260,10 @@
                                             </div>
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab" class="btn btn-default">Previous</a>
-                                                <a href="#tab_3-3" onclick="changeTab('#tab_3-3')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+                                                   class="btn btn-default">Previous</a>
+                                                <a href="#tab_3-3" onclick="changeTab('#tab_3-3')" data-toggle="tab"
+                                                   class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
                                         </div>
@@ -270,10 +286,35 @@
                                                 <div layout:replace="_practiceHistory"></div>
                                                 <!-- /.practice History -->
                                             </div>
+                                            <!-- sidebar -->
+                                            <div class="sidebar">
+                                                <ul class="sidebar-menu">
+                                                    <li class="active treeview">
+                                                        <a href="#">
+                                                            <h3 class="box-title">Calories Chart</h3> <i class="fa fa-angle-left pull-right"></i>
+                                                        </a>
+                                                        <ul class="treeview-menu">
+                                                            <li class="active">
+                                                                <a href="#">
+                                                                <div class="chart">
+                                                                    <canvas id="barChart" style="height:230px"></canvas>
+                                                                </div>
+                                                                <i class="fa fa-square text-orange"></i>
+                                                                <h4 style="display: inline;"> Calories Required </h4>
+                                                                <i class="fa fa-square text-green"></i>
+                                                                <h4 style="display: inline;"> Calories Consumed</h4>
+                                                                    </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- /.sidebar -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab" class="btn btn-default">Previous</a>
-                                                <a href="#tab_5-5" onclick="changeTab('#tab_5-5')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab"
+                                                   class="btn btn-default">Previous</a>
+                                                <a href="#tab_5-5" onclick="changeTab('#tab_5-5')" data-toggle="tab"
+                                                   class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
                                         </div>
@@ -291,15 +332,20 @@
                                                     <div th:if="${TREATMENT == null}" class="input-group">
                                                         <input class="form-control" type="text" name="appointmentDate"
                                                                id="Appointment" data-provide="Appointment"/>
+
                                                         <div class="input-group-btn">
 
-                                                        </div><!-- /btn-group -->
+                                                        </div>
+                                                        <!-- /btn-group -->
                                                     </div>
 
-                                                    <div th:if="${TREATMENT != null}" th:with="appointment=${TREATMENT.appointment}">
-                                                        <input th:if="${appointment.nextAppointment == null}" class="form-control"
+                                                    <div th:if="${TREATMENT != null}"
+                                                         th:with="appointment=${TREATMENT.appointment}">
+                                                        <input th:if="${appointment.nextAppointment == null}"
+                                                               class="form-control"
                                                                readonly="readonly" value=""/>
-                                                        <input th:if="${appointment.nextAppointment != null}" class="form-control"
+                                                        <input th:if="${appointment.nextAppointment != null}"
+                                                               class="form-control"
                                                                readonly="readonly"
                                                                th:value="${#dates.format(appointment.nextAppointment.meetingDate, 'dd-MM-yyyy')}"/>
                                                     </div>
@@ -308,8 +354,11 @@
                                             </div>
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_3-3" onclick="changeTab('#tab_3-3')" data-toggle="tab" class="btn btn-default">Previous</a>
-                                                <button th:if="${TREATMENT == null}" type="submit" class="btn btn-primary pull-right">Done</button>
+                                                <a href="#tab_3-3" onclick="changeTab('#tab_3-3')" data-toggle="tab"
+                                                   class="btn btn-default">Previous</a>
+                                                <button th:if="${TREATMENT == null}" type="submit"
+                                                        class="btn btn-primary pull-right">Done
+                                                </button>
                                             </div>
                                             <!-- /.footer -->
                                         </div>
@@ -349,30 +398,29 @@
     <input th:value="${PRACS}" id="pracs" type="hidden"/>
     <input th:value="${NEXTAPPOINTMENTDATE}" id="nextApDate" type="hidden"/>
     <!-- REQUIRED JS SCRIPTS -->
+    <!-- jQuery 2.1.4 -->
+    <script th:src="@{/static/bower/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
+    <!-- ChartJS 1.0.1 -->
+    <script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>
     <!-- jQueryUI -->
-    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
     <script th:src="@{/static/bower/jquery-ui/jquery-ui.js}"></script>
-    <!-- Multi select -->
-    <script th:src="@{/static/bower/bootstrap-multiselect/dist/js/bootstrap-multiselect.js}"></script>
-    <script th:src="@{/static/js/prettify.js}"></script>
+
     <!-- bootstrap-datepicker-->
-    <link th:href="@{/static/bower/admin-lte/plugins/datepicker/datepicker3.css}" rel="stylesheet" />
+    <link th:href="@{/static/bower/admin-lte/plugins/datepicker/datepicker3.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/datepicker/bootstrap-datepicker.js}"></script>
-    <!-- DataTable -->
-    <script th:src="@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
 
-        function changeTab (a) {
+        function changeTab(a) {
             console.log(a);
             $('.nav-tabs > li.active').removeClass('active');
             $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
-        };
+        }
+        ;
         var check = $('#diagnostic').val();
-        function confirmBox(form){
-//            alert(check);
-            if(check == ''){
+        function confirmBox(form) {
+            if (check == '') {
                 alert('Please suggest diagnostic before make prescription!!!');
                 return false;
             } else {
@@ -395,11 +443,10 @@
         nextAppointmentDate++;
         nextAppointmentDate--;
         var appointmentDate = new Date();
-        appointmentDate.setDate(appointmentDate.getDate()  + nextAppointmentDate);
+        appointmentDate.setDate(appointmentDate.getDate() + nextAppointmentDate);
         $('#Appointment').datepicker("setDate", appointmentDate);
 
         var countMedicine = $('#medics').val();
-//        alert(countMedicine);
         function addRowMedicine(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
@@ -408,22 +455,22 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = ++count;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<select class="form-control" name="mPresModels['+countMedicine+'].m" id="mPresModels'+countMedicine+'.m">'
+            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModels' + countMedicine + '.m">'
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<select class="form-control" name="mPresModels['+countMedicine+'].mTime" id="mPresModels'+countMedicine+'.mTime">'
+            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime">'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.setAttribute("class","form-inline");
-            newCell.setAttribute("style","max-width: 180px;");
+            newCell.setAttribute("class", "form-inline");
+            newCell.setAttribute("style", "max-width: 180px;");
             newCell.innerHTML =
-                    '<input type="text" value="1" style="max-width: 47%;margin-right: 3%;" class="form-control" name="mPresModels['+countMedicine+'].mQuantity" id="mPresModels'+countMedicine+'.mQuantity" placeholder="Quanlity"/>'+
-                    '<input type="text" style="max-width: 50%;" class="form-control" name="mPresModels['+countMedicine+'].mUnit" id="mPresModels'+countMedicine+'.mUnit" placeholder="Unit"/>';
+                    '<input type="text" value="1" style="max-width: 47%;margin-right: 3%;" class="form-control" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quanlity"/>' +
+                    '<input type="text" style="max-width: 50%;" class="form-control" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="mPresModels['+countMedicine+'].mNote" id="mPresModels'+countMedicine+'.mNote" placeholder="Advice"/>';
+                    '<input type="text" class="form-control" name="mPresModels[' + countMedicine + '].mNote" id="mPresModels' + countMedicine + '.mNote" placeholder="Advice"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>';
 
@@ -441,22 +488,22 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = ++count;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<select class="form-control" name="fPresModels['+countFoods+'].f" id="fPresModels'+countFoods+'.f">'
+            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" id="fPresModels' + countFoods + '.f">'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<select class="form-control" name="fPresModels['+countFoods+'].fTime" id="fPresModels'+countFoods+'.fTime">'
+                    '<select class="form-control" name="fPresModels[' + countFoods + '].fTime" id="fPresModels' + countFoods + '.fTime">'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels['+countFoods+'].fQuantity" id="fPresModels'+countFoods+'.fQuantity" placeholder="Quantity"/>';
+            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels['+countFoods+'].fNote" id="fPresModels'+countFoods+'.fNote" placeholder="Advice"/>';
+            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowFood(this)"></a>'
 
-                    countFoods++;
+            countFoods++;
             return newRow;
         }
         ;
@@ -469,20 +516,20 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = ++count;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<select class="form-control" name="pPresModels['+countPractice+'].p" id="pPresModels'+countPractice+'.p">'
+            newCell.innerHTML = '<select class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModels' + countPractice + '.p">'
                     + '<option th:each="practice : ${PRACTICES}" th:value="${practice.id}" th:text="${practice.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<select class="form-control" name="pPresModels['+countPractice+'].pTime" id="pPresModels'+countPractice+'.pTime">'
+                    '<select class="form-control" name="pPresModels[' + countPractice + '].pTime" id="pPresModels' + countPractice + '.pTime">'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" placeholder="Quantity" name="pPresModels['+countPractice+'].pIntensity" id="pPresModels'+countPractice+'.pIntensity"/>';
+                    '<input type="text" class="form-control" placeholder="Quantity" name="pPresModels[' + countPractice + '].pIntensity" id="pPresModels' + countPractice + '.pIntensity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="pPresModels['+countPractice+'].pNote" id="pPresModels'+countPractice+'.pNote" placeholder="Advice"/>';
+                    '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].pNote" id="pPresModels' + countPractice + '.pNote" placeholder="Advice"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowPractice(this)"></a>';
 
