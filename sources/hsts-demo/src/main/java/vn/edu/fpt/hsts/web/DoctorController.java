@@ -120,28 +120,12 @@ public class DoctorController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
 
-            // Find PreventionCheck
-            PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
-            mav.addObject("PREVENTIONCHECK", preventionCheck);
-
-            // Find FoodIngredient
-            FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
-            if (null != foodIngredient){
-                NutritionModel nutritionModel = new NutritionModel(foodIngredient,preventionCheck.getWeight());
-                mav.addObject("FOODINGREDIENT", nutritionModel);
-            }
-
-            // Find List Appointment
-            List<Appointment> appointments = appointmentService.getAllAppointmentToCurrentDateOfPatient(appointment.getMedicalRecord().getPatient().getId());
-            mav.addObject("APPOINTMENTS", appointments);
-
-            // Set entry patient
-            mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
+            // Initialization Data Prescription
+            initDataPrescription(mav, appointment);
 
             // Check appointment status
             if (appointment.getStatus() == IDbConsts.IAppointmentStatus.WATTING){
-                // Initialization Data Prescription
-                initDataPrescription(mav);
+
                 mav.addObject("model", new PrescriptionModel());
             } else if (appointment.getStatus() == IDbConsts.IAppointmentStatus.FINISHED){
                 // Find treatment form appointment
@@ -189,11 +173,6 @@ public class DoctorController extends AbstractController{
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("suggestTreatment");
-            // Initialization Data Prescription
-            initDataPrescription(mav);
-            // Find Appointment
-            Appointment appointment = appointmentService.findAppointmentByID(23);
-            mav.addObject("APPOINTMENT", appointment);
             mav.addObject("model", new PrescriptionModel());
 
             return mav;
