@@ -19,13 +19,13 @@
     </tr>
     <tr th:each="foodTreatment,row : ${TREATMENT.foodTreatmentList}">
         <td th:text="${row.count}"></td>
-        <td style="min-width: 75px;">
+        <td style="min-width: 155px;">
             <input th:value="${foodTreatment.food.name}" readonly="readonly" class="form-control"/>
         </td>
-        <td>
+        <td  style="min-width: 75px;">
             <input th:value="${foodTreatment.numberOfTime}" readonly="readonly" class="form-control"/>
         </td>
-        <td>
+        <td class="form-group">
             <input th:value="${foodTreatment.quantitative}" readonly="readonly" class="form-control"/>
         </td>
         <td>

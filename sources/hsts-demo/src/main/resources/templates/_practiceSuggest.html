@@ -17,7 +17,7 @@
     <tr th:each="practicePhase,row : ${PHASE.practicePhaseList}">
         <td th:text="${row.count}"></td>
 
-        <td>
+        <td style="min-width: 155px;">
             <select class="form-control" th:field="*{pPresModels[__${row.index}__].p}">
                 <option th:value="${practicePhase.practice.id}"
                         th:text="${practicePhase.practice.name}"></option>
@@ -33,8 +33,10 @@
                         th:text="${time}"></option>
             </select>
         </td>
-        <td><input type="text" class="form-control" th:field="*{pPresModels[__${row.index}__].pIntensity}"
-                   placeholder="Quantity"/></td>
+        <td class="form-group">
+            <input type="text" class="form-control" th:field="*{pPresModels[__${row.index}__].pIntensity}"
+                   placeholder="Quantity" required="required"/>
+        </td>
         <td>
             <input type="text" class="form-control"
                    th:field="*{pPresModels[__${row.index}__].pNote}" placeholder="Advice"/>
@@ -47,16 +49,16 @@
 <a style="width: 50px;color: white;" class="btn btn-primary"
    onclick="addRowPractice('Practice')">Add</a>
 <div class="form-group" style="margin-top: 15px;" th:if="${DATAPRACS != null}">
-    <label class="form-lable">Practice Data</label>
+    <label class="col-md-3 control-label">Practice Data</label>
     <a class="btn btn-link" onclick="popup('praticeResult')">View Detail</a>
 </div>
 <div class="form-group">
-    <label class="col-sm-2 control-label">Kcal Estimate</label>
+    <label class="col-md-3 control-label">Kcal Estimate</label>
 
-    <div class="col-sm-4">
-        <input th:field="*{kcalRequire}" type="text" class="form-control" />
+    <div class="col-md-4">
+        <input th:field="*{kcalRequire}" type="text" class="form-control" data-remote="/validateData"/>
     </div>
-    <label class="col-sm-1 control-label">Kcal/Day</label>
+    <label class="col-md-1 control-label">Kcal/Day</label>
 </div>
 </body>
 </html>

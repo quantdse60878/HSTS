@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td>1</td>
-        <td>
+        <td style="min-width: 155px;">
             <select class="form-control" th:field="*{fPresModels[0].f}">
                 <option th:each="food : ${FOODS}" th:value="${food.id}"
                         th:text="${food.name}"></option>
@@ -33,8 +33,10 @@
                         th:text="${time}"></option>
             </select>
         </td>
-        <td><input type="text" class="form-control" th:field="*{fPresModels[0].fQuantity}"
-                   placeholder="Quantity"/></td>
+        <td class="form-group">
+            <input type="text" class="form-control" th:field="*{fPresModels[0].fQuantity}"
+                   placeholder="Quantity" required="required"/>
+        </td>
         <td>
             <input type="text" class="form-control"
                    th:field="*{fPresModels[0].fNote}" placeholder="Advice"/>
