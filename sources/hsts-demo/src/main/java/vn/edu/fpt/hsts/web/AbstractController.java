@@ -10,6 +10,7 @@ package vn.edu.fpt.hsts.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.NutritionModel;
+import vn.edu.fpt.hsts.bizlogic.model.PracticeResultModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodIngredientService;
@@ -112,6 +113,9 @@ public class AbstractController implements ControllerParam {
         // Find List Appointment
         List<Appointment> appointments = appointmentService.getAllAppointmentToCurrentDateOfPatient(appointment.getMedicalRecord().getPatient().getId());
         mav.addObject("APPOINTMENTS", appointments);
+
+        // Get PracticeResultModel
+        PracticeResultModel practiceResultModel = doctorService.getInfoPracticeDataOfPatient(appointment);
     }
 
     public void notify(ModelAndView mav, Boolean result,String method, String mess){

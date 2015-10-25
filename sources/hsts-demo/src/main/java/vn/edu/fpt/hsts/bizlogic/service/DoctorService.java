@@ -17,6 +17,7 @@ import vn.edu.fpt.hsts.bizlogic.model.FoodPrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticePrescriptionModel;
+import vn.edu.fpt.hsts.bizlogic.model.PracticeResultModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
@@ -30,6 +31,7 @@ import vn.edu.fpt.hsts.persistence.entity.Food;
 import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
+import vn.edu.fpt.hsts.persistence.entity.MedicalRecordData;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
 import vn.edu.fpt.hsts.persistence.entity.MedicinePhase;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
@@ -43,6 +45,7 @@ import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
 import vn.edu.fpt.hsts.persistence.repo.FoodRepo;
 import vn.edu.fpt.hsts.persistence.repo.FoodTreatmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.IllnessRepo;
+import vn.edu.fpt.hsts.persistence.repo.MedicalRecordDataRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicineRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicineTreatmentRepo;
@@ -144,6 +147,9 @@ public class DoctorService extends AbstractService {
      */
     @Autowired
     private IllnessService illnessService;
+
+    @Autowired
+    private MedicalRecordDataRepo medicalRecordDataRepo;
 
     @Value("${hsts.default.treatment.long}")
     private int treatmentLong;
@@ -395,6 +401,20 @@ public class DoctorService extends AbstractService {
                 return listData;
             }
             return Collections.emptyList();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public PracticeResultModel getInfoPracticeDataOfPatient(final Appointment appointment) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointment[{}]", appointment);
+            PracticeResultModel resultModel = new PracticeResultModel();
+            Appointment oldAppointment = appointmentRepo.findParentAppointment(appointment.getId());
+            List<MedicalRecordData> medicalRecordDatas = medicalRecordDataRepo.findRecordDataByAppointment(oldAppointment, oldAppointment.getMeetingDate(), appointment.getMeetingDate());
+            LOGGER.info("medicalRecordDatas: " + medicalRecordDatas.size());
+            return resultModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

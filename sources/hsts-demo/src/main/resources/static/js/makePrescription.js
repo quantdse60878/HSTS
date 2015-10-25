@@ -5,6 +5,72 @@
  * Author: dangquantran.
  * Date: 10/5/2015.
  */
+$(function () {
+    //-------------
+    //- BAR CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var barChartCanvas = $("#barChart").get(0).getContext("2d");
+    // This will get the first returned node in the jQuery collection.
+    var barChart = new Chart(barChartCanvas);
+    var barChartData = {
+        labels: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+        datasets: [
+            {
+                label: "Electronics",
+                fillColor: "#ff851b",
+                strokeColor: "#ff851b",
+                pointColor: "#ff851b",
+                pointStrokeColor: "#c1c7d1",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [65, 59, 80, 81, 56, 55, 40]
+            },
+            {
+                label: "Digital Goods",
+                fillColor: "#00a65a",
+                strokeColor: "#00a65a",
+                pointColor: "#00a65a",
+                pointStrokeColor: "rgba(60,141,188,1)",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(60,141,188,1)",
+                data: [28, 48, 40, 19, 86, 27, 90]
+            }
+        ]
+    };
+
+    var barChartOptions = {
+        //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+        scaleBeginAtZero: true,
+        //Boolean - Whether grid lines are shown across the chart
+        scaleShowGridLines: true,
+        //String - Colour of the grid lines
+        scaleGridLineColor: "rgba(0,0,0,.05)",
+        //Number - Width of the grid lines
+        scaleGridLineWidth: 1,
+        //Boolean - Whether to show horizontal lines (except X axis)
+        scaleShowHorizontalLines: true,
+        //Boolean - Whether to show vertical lines (except Y axis)
+        scaleShowVerticalLines: true,
+        //Boolean - If there is a stroke on each bar
+        barShowStroke: true,
+        //Number - Pixel width of the bar stroke
+        barStrokeWidth: 2,
+        //Number - Spacing between each of the X value sets
+        barValueSpacing: 5,
+        //Number - Spacing between data sets within X values
+        barDatasetSpacing: 1,
+        //String - A legend template
+        legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+        //Boolean - whether to make the chart responsive
+        responsive: true,
+        maintainAspectRatio: true
+    };
+
+    barChartOptions.datasetFill = false;
+    barChart.Bar(barChartData, barChartOptions);
+});
+
 function deleteRow(t, myTable)
 {
     var row = t.parentNode.parentNode;
@@ -231,32 +297,3 @@ function popup(windowname) {
     toggle(windowname);
 }
 ;
-/* For multiselect_medical.*/
-$('#multiselect_medical').multiselect({
-    includeSelectAllOption: true,
-    nonSelectedText: 'Select Times',
-    nSelectedText: 'Select',
-    selectAllText: 'Select All',
-    numberDisplayed: 0,
-    buttonWidth: '140px'
-});
-
-/* For multiselect_food.*/
-$('#multiselect_food').multiselect({
-    includeSelectAllOption: true,
-    nonSelectedText: 'Select Times',
-    nSelectedText: 'Select',
-    selectAllText: 'Select All',
-    numberDisplayed: 0,
-    buttonWidth: '140px'
-});
-
-/* For multiselect_practice.*/
-$('#multiselect_practice').multiselect({
-    includeSelectAllOption: true,
-    nonSelectedText: 'Select Times',
-    nSelectedText: 'Select',
-    selectAllText: 'Select All',
-    numberDisplayed: 0,
-    buttonWidth: '140px'
-});
