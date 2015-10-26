@@ -452,19 +452,24 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = ++count;
             newCell = newRow.insertCell(newRow.cells.length);
+            newCell.setAttribute("style", "min-width: 140px;");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModels' + countMedicine + '.m">'
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
+            newCell.setAttribute("style", "min-width: 75px;");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime">'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.setAttribute("class", "form-inline form-group");
-            newCell.setAttribute("style", "max-width: 180px;");
+            newCell.setAttribute("class", "form-group");
+            newCell.setAttribute("style", "width: 120px;");
             newCell.innerHTML =
-                    '<input type="text" value="1" style="max-width: 47%;margin-right: 3%;" class="form-control" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quantity" data-remote="/validateData" required="required"/>' +
-                    '<input type="text" style="max-width: 50%;" class="form-control" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit" required="required"/>';
+                    '<input type="text" value="1" class="form-control" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quantity" data-remote="/validateData" required="required"/>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.setAttribute("class", "form-group");
+            newCell.setAttribute("style", "width: 120px;");
+            newCell.innerHTML = '<input type="text" class="form-control" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit" required="required"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" name="mPresModels[' + countMedicine + '].mNote" id="mPresModels' + countMedicine + '.mNote" placeholder="Advice" required="required"/>';
@@ -494,6 +499,7 @@
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
+            newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" required="required"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice" required="required"/>';
@@ -522,8 +528,9 @@
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
+            newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
-                    '<input type="text" class="form-control" placeholder="Quantity" name="pPresModels[' + countPractice + '].pIntensity" id="pPresModels' + countPractice + '.pIntensity"/>';
+                    '<input type="text" class="form-control" required="required" placeholder="Quantity" name="pPresModels[' + countPractice + '].pIntensity" id="pPresModels' + countPractice + '.pIntensity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].pNote" id="pPresModels' + countPractice + '.pNote" placeholder="Advice"/>';
