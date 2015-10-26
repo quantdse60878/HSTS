@@ -58,6 +58,7 @@ public class LoginActivity extends ActionBarActivity {
     public static boolean hadRegisterReceiver = false;
     protected final NetworkChangeReceiver mConnectionDetector = new NetworkChangeReceiver();
     protected final IntentFilter mIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,68 +68,76 @@ public class LoginActivity extends ActionBarActivity {
         //KhuongMH
         am = getAssets();
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
-        if(!sharedPreferences.getString(Constant.PREF_USENAME_HADLOGIN, "").equals("")) {
-            Intent myIntent = new Intent(LoginActivity.this, SelectDeviceActivity.class);
-            LoginActivity.this.startActivity(myIntent);
-        }
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
-        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
+        if (!sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")) {
+            if (!sharedPreferences.getString(Constant.PREF_HADSELECTDEVICE, "").equals("")) {
+                Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                LoginActivity.this.startActivity(myIntent);
+            } else {
+                Intent myIntent = new Intent(LoginActivity.this, SelectDeviceActivity.class);
+                LoginActivity.this.startActivity(myIntent);
+            }
 
-        if(!hadRegisterReceiver) {
-            hadRegisterReceiver = true;
-            registerReceiver(mConnectionDetector, mIntentFilter);
-        }
+        } else {
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
+            actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
 
-
-        setContentView(R.layout.activity_main);
-        final EditText txtUsername = (EditText) findViewById(R.id.txt_login_username);
-        final EditText txtPassword = (EditText) findViewById(R.id.txt_login_password);
-        Button btnLogin = (Button) findViewById(R.id.btn_login_login);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(txtUsername.getText().length() > 0 && txtPassword.getText().length() > 0) {
-
-                    LoginAsyncTask login = new LoginAsyncTask();
-                    login.execute(txtUsername.getText().toString(), txtPassword.getText().toString());
+            if (!hadRegisterReceiver) {
+                hadRegisterReceiver = true;
+                registerReceiver(mConnectionDetector, mIntentFilter);
+            }
 
 
-                } else {
-                    Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ thông tin.", Toast.LENGTH_SHORT).show();
-                }
+            setContentView(R.layout.activity_main);
+            final EditText txtUsername = (EditText) findViewById(R.id.txt_login_username);
+            final EditText txtPassword = (EditText) findViewById(R.id.txt_login_password);
+            Button btnLogin = (Button) findViewById(R.id.btn_login_login);
+            btnLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (txtUsername.getText().length() > 0 && txtPassword.getText().length() > 0) {
+
+                        LoginAsyncTask login = new LoginAsyncTask();
+                        login.execute(txtUsername.getText().toString(), txtPassword.getText().toString());
+
+
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ thông tin.", Toast.LENGTH_SHORT).show();
+                    }
 
 //                Comment o day
 //                Intent intent = new Intent(LoginActivity.this, DeviceScanActivity.class);
 //                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 ////                Intent intent = new Intent(LoginActivity.this, HomeActivity2.class);
 //                startActivity(intent);
+                }
+            });
+
+
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+            String dateString = df.format(date).replaceAll("/", "");
+            String FILENAME = "hakimquy" + ".txt";
+
+            File root = Environment.getExternalStorageDirectory();
+            File dir = new File(root.getAbsolutePath() + "/kimquy");
+            dir.mkdirs();
+            File file = new File(dir, FILENAME);
+            try {
+                FileOutputStream fos = new FileOutputStream(file);
+                PrintWriter pw = new PrintWriter(fos);
+                pw.println("----------------------");
+                pw.flush();
+                pw.close();
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
 
 
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        String dateString = df.format(date).replaceAll("/", "");
-        String FILENAME = "hakimquy" + ".txt";
-
-        File root = Environment.getExternalStorageDirectory();
-        File dir = new File(root.getAbsolutePath() + "/kimquy");
-        dir.mkdirs();
-        File file = new File(dir, FILENAME);
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            PrintWriter pw = new PrintWriter(fos);
-            pw.println("----------------------");
-            pw.flush();
-            pw.close();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
 
     }
 
@@ -215,19 +224,14 @@ public class LoginActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            if((Constant.accountId.equals("0") && Constant.PATIENT_NAME == null) || Constant.patientId.equals("0")){
-                Toast.makeText(getApplicationContext(),R.string.login_error,Toast.LENGTH_LONG).show();
+            if ((Constant.accountId.equals("0") && Constant.PATIENT_NAME == null) || Constant.patientId.equals("0")) {
+                Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_LONG).show();
             } else {
-                Intent continueIntent = new Intent(LoginActivity.this,DeviceScanActivity.class);
+                Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
                 startActivity(continueIntent);
             }
         }
     }
-
-
-
-
-
 
 
 }
