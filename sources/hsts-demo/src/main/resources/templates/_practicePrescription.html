@@ -17,12 +17,14 @@
         <td>1</td>
         <td style="min-width: 155px;">
             <select class="form-control" th:field="*{pPresModels[0].p}">
+                <option value="0">Select practice</option>
                 <option th:each="practice : ${PRACTICES}" th:value="${practice.id}"
                         th:text="${practice.name}"></option>
             </select>
         </td>
         <td style="min-width: 75px;">
             <select class="form-control" th:field="*{pPresModels[0].pTime}">
+                <option value="0">Select time</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
@@ -33,7 +35,7 @@
         </td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{pPresModels[0].pNote}" placeholder="Advice" data-role="tagsinput"/>
+                   th:field="*{pPresModels[0].pNote}" placeholder="Advice"/>
         </td>
         <td>
             <a class="btn btn-danger fa fa-remove" onclick="deleteRowPractice(this)"></a>

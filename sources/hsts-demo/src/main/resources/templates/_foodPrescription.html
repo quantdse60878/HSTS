@@ -23,12 +23,14 @@
         <td>1</td>
         <td style="min-width: 155px;">
             <select class="form-control" th:field="*{fPresModels[0].f}">
+                <option value="0">Select food</option>
                 <option th:each="food : ${FOODS}" th:value="${food.id}"
                         th:text="${food.name}"></option>
             </select>
         </td>
         <td style="min-width: 75px;">
             <select class="form-control" th:field="*{fPresModels[0].fTime}">
+                <option value="0">Select time</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
@@ -39,7 +41,7 @@
         </td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{fPresModels[0].fNote}" placeholder="Advice" data-role="tagsinput"/>
+                   th:field="*{fPresModels[0].fNote}" placeholder="Advice"/>
         </td>
         <td>
             <a class="btn btn-danger fa fa-remove" onclick="deleteRowFood(this)"></a>

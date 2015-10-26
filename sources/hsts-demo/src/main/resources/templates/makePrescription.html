@@ -416,13 +416,15 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = ++countM;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.setAttribute("style", "min-width: 140px;");
+            newCell.setAttribute("style", "min-width: 155px;");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModels' + countMedicine + '.m">'
+                    + '<option value="0">Select medicine</option>'
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("style", "min-width: 75px;");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime">'
+                    + '<option value="0">Select time</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
@@ -436,10 +438,9 @@
             newCell.innerHTML = '<input type="text" class="form-control" data-remote="/validateStr" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit" required="required"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="mPresModels[' + countMedicine + '].mNote" id="mPresModels' + countMedicine + '.mNote" placeholder="Advice" required="required" data-role="tagsinput"/>';
+                    '<input type="text" class="form-control" placeholder="Advice" id="mPresModels' + countMedicine + '.mNote" name="mPresModels[' + countMedicine + '].mNote"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>';
-
             countMedicine++;
             return newRow;
         }
@@ -455,18 +456,20 @@
             newCell.innerHTML = ++countF;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" id="fPresModels' + countFoods + '.f">'
+                    + '<option value="0">Select food</option>'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<select class="form-control" name="fPresModels[' + countFoods + '].fTime" id="fPresModels' + countFoods + '.fTime">'
+                    + '<option value="0">Select time</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<input type="text" class="form-control" data-remote="/validateStr" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" required="required"/>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice" required="required" data-role="tagsinput"/>';
+            newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice" required="required"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowFood(this)"></a>'
 
@@ -484,11 +487,13 @@
             newCell.innerHTML = ++countP;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<select class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModels' + countPractice + '.p">'
+                    + '<option value="0">Select practice</option>'
                     + '<option th:each="practice : ${PRACTICES}" th:value="${practice.id}" th:text="${practice.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<select class="form-control" name="pPresModels[' + countPractice + '].pTime" id="pPresModels' + countPractice + '.pTime">'
+                    + '<option value="0">Select time</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
@@ -497,7 +502,7 @@
                     '<input type="text" class="form-control" required="required"  data-remote="/validateStr" placeholder="Quantity" name="pPresModels[' + countPractice + '].pIntensity" id="pPresModels' + countPractice + '.pIntensity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].pNote" id="pPresModels' + countPractice + '.pNote" placeholder="Advice" data-role="tagsinput"/>';
+                    '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].pNote" id="pPresModels' + countPractice + '.pNote" placeholder="Advice"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowPractice(this)"></a>';
 

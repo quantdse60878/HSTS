@@ -8,40 +8,40 @@
 <div class="box-body" th:with="ACC=${PATIENT.account}">
     <label class="control-label">Name:</label>
 
-    <input type="text" readonly="readonly" class="form-control" style="text-align: right;"
+    <input type="text" readonly="readonly" class="form-control" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
            th:value="${ACC.fullName}"/>
     <label class="control-label">BirthDay:</label>
 
-    <input type="text" readonly="readonly" style="text-align: right;" class="form-control"
+    <input type="text" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;" class="form-control"
            th:value="${#dates.format(ACC.dateOfBirth, 'dd-MM-yyyy')}"/>
 
     <label class="control-label">Gender:</label>
 
-    <input type="text" readonly="readonly" th:if="${ACC.gender == 1}" style="text-align: right;"
+    <input type="text" readonly="readonly" th:if="${ACC.gender == 1}" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
            class="form-control" value="Male"/>
-    <input type="text" readonly="readonly" th:if="${ACC.gender == 2}" style="text-align: right;"
+    <input type="text" readonly="readonly" th:if="${ACC.gender == 2}" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
            class="form-control" value="Female"/>
 
     <label class="control-label">BMI:</label>
 
     <input type="text" readonly="readonly" class="form-control"
-           style="text-align: right;background-color: #5bc0de;color: white;"
+           style="text-align: right;border: none;background-color: inherit;color: #337ab7;;box-shadow: none;font-weight: bold;"
            th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi lt 27}"/>
     <input type="text" readonly="readonly" class="form-control"
-           style="text-align: right;background-color: #f0ad4e;color: white;"
+           style="text-align: right;border: none;background-color: inherit;color: #f0ad4e;box-shadow: none;font-weight: bold;"
            th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi ge 27 and PREVENTIONCHECK.bmi lt 40}"/>
     <input type="text" readonly="readonly" class="form-control"
-           style="text-align: right;background-color: #d9534f;color: white;"
+           style="text-align: right;border: none;background-color: inherit;color: #d9534f;box-shadow: none;font-weight: bold;"
            th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi ge 40}"/>
 
 
     <label for="Medicalhistory" class="control-label">Medical history:</label>
 
-    <textarea class="form-control" readonly="readonly"
+    <textarea class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
               th:text="${APPOINTMENT.medicalRecord.medicalHistory}"></textarea>
     <label for="clinicalSymptoms" class="control-label">Symptoms:</label>
 
-    <textarea class="form-control" readonly="readonly"
+    <textarea class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
               th:text="${APPOINTMENT.medicalRecord.symptoms}"></textarea>
 
 </div>

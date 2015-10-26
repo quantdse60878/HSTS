@@ -17,30 +17,31 @@
     </tr>
     <tr>
         <td>1</td>
-        <td style="min-width: 140px;">
+        <td style="min-width: 155px;">
             <select class="form-control" th:field="*{mPresModels[0].m}">
-
+                <option value="0">Select medicine</option>
                 <option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"
                         th:text="${medicine.name}"></option>
             </select>
         </td>
         <td style="min-width: 75px;">
             <select class="form-control" th:field="*{mPresModels[0].mTime}">
-            <option th:each="time : ${TIMES}" th:value="${time}"
-                    th:text="${time}"></option>
-        </select>
+                <option value="0">Select time</option>
+                <option th:each="time : ${TIMES}" th:value="${time}"
+                        th:text="${time}"></option>
+            </select>
         </td>
         <td class="form-group" style="width: 120px;">
             <input type="text" class="form-control" th:field="*{mPresModels[0].mQuantity}"
                    placeholder="Quanlity" data-remote="/validateData"/>
         </td>
         <td class="form-group" style="width: 120px;">
-            <input type="text"  class="form-control" required="required" data-remote="/validateStr"
+            <input type="text" class="form-control" required="required" data-remote="/validateStr"
                    placeholder="Unit"/>
         </td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{mPresModels[0].mNote}" placeholder="Advice" data-role="tagsinput"/>
+                   th:field="*{mPresModels[0].mNote}" placeholder="Advice"/>
         </td>
         <td>
             <a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>

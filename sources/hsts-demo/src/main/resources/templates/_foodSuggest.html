@@ -34,6 +34,7 @@
         </td>
         <td style="min-width: 75px;">
             <select class="form-control" th:field="*{fPresModels[__${row.index}__].fTime}">
+                <option value="0">Select time</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
@@ -44,7 +45,7 @@
         </td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{fPresModels[__${row.index}__].fNote}" placeholder="Advice" data-role="tagsinput"/>
+                   th:field="*{fPresModels[__${row.index}__].fNote}" placeholder="Advice"/>
         </td>
         <td>
             <a class="btn btn-danger fa fa-remove" onclick="deleteRowFood(this)"></a>

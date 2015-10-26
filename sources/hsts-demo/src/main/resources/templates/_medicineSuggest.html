@@ -18,7 +18,7 @@
     </tr>
     <tr th:each="medicalPhase,row : ${PHASE.medicinePhaseList}">
         <td th:text="${row.count}"></td>
-        <td style="min-width: 140px;">
+        <td style="min-width: 155px;">
             <select class="form-control" th:field="*{mPresModels[__${row.index}__].m}">
                 <option th:value="${medicalPhase.medicine.id}"
                         th:text="${medicalPhase.medicine.name}"></option>
@@ -30,6 +30,7 @@
         </td>
         <td style="min-width: 75px;">
             <select class="form-control" th:field="*{mPresModels[__${row.index}__].mTime}">
+                <option value="0">Select time</option>
             <option th:each="time : ${TIMES}" th:value="${time}"
                     th:text="${time}"></option>
         </select>
@@ -46,7 +47,7 @@
         </td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{mPresModels[__${row.index}__].mNote}" placeholder="Advice" data-role="tagsinput"/>
+                   th:field="*{mPresModels[__${row.index}__].mNote}" placeholder="Advice"/>
         </td>
         <td>
             <a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>
