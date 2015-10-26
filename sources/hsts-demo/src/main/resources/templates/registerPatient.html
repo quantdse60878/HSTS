@@ -24,6 +24,10 @@
             margin: 0;
             padding: 5px 10px;
         }
+
+        .bootstrap-tagsinput{
+            width: 400px;
+        }
     </style>
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -309,14 +313,14 @@
                                                 <label for="Medicalhistory" class="col-sm-3 control-label">Medical history</label>
 
                                                 <div class="col-sm-6">
-                                                    <input th:type="text" class="form-control" placeholder="Medical history" name="medicalHistory" rows="3" data-role="tagsinput" required="required"></input>
+                                                    <input th:type="text" class="form-control" placeholder="Medical history" name="medicalHistory" data-role="tagsinput" required="required"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="clinicalSymptoms" class="col-sm-3 control-label">Clinical symptoms</label>
 
                                                 <div class="col-sm-6">
-                                                    <input th:type="text" class="form-control" placeholder="Clinical symptoms" name="symptoms" rows="3" data-role="tagsinput" required="required"></input>
+                                                    <input th:type="text" class="form-control" placeholder="Clinical symptoms" name="symptoms" data-role="tagsinput" required="required"/>
                                                 </div>
                                             </div>
 
@@ -324,7 +328,7 @@
                                                 <label for="medicineHistory" class="col-sm-3 control-label">Tiền sử dùng thuốc</label>
 
                                                 <div class="col-sm-6">
-                                                    <input th:type="text" class="form-control" placeholder="Medicine history" name="medicineHistory" rows="3" data-role="tagsinput" id="medicineHistory"></input>
+                                                    <input th:type="text" class="form-control" placeholder="Medicine history" name="medicineHistory" data-role="tagsinput" id="medicineHistory"/>
                                                 </div>
                                             </div>
 
