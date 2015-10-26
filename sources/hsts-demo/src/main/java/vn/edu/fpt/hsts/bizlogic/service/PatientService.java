@@ -488,8 +488,11 @@ public class PatientService extends AbstractService {
             calendar.setTime(new Date());
             final String address = "TP. Hồ Chí Minh ngày " + calendar.get(Calendar.DATE) + " tháng " + calendar.get(Calendar.MONTH) + " năm " + calendar.get(Calendar.YEAR);
             prescription.setAddress(address);
-            // TODO
-            prescription.setAdvice(lastTreatment.getAdviseMedicine());
+            String advice = lastTreatment.getAdviseMedicine();
+            if (StringUtils.isEmpty(advice)) {
+                advice = "N/A";
+            }
+            prescription.setAdvice(advice);
             final String appointmentDate = DateUtils.formatDate(lastTreatment.getAppointment().getNextAppointment().getMeetingDate(), DateUtils.DATE_PATTERN_3);
             prescription.setAppointmentDate(appointmentDate);
             prescription.setDoctorName(lastTreatment.getAppointment().getMedicalRecord().getDoctor().getAccount().getFullName());
