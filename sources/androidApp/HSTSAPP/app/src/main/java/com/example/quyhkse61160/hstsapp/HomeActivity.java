@@ -413,89 +413,23 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
 
 
-//        actionBar = getSupportActionBar();
-//        viewPager = (ViewPager) findViewById(R.id.pager);
-//        adapter = new ViewPagesAdapter(getSupportFragmentManager());
-//        viewPager.setAdapter(adapter);
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
-//        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
-//
-//        ActionBar.Tab atab1 = actionBar.newTab().setText("THỨC ĂN").setTabListener(this);
-//        ActionBar.Tab atab2 = actionBar.newTab().setText("THUỐC").setTabListener(this);
-//        ActionBar.Tab atab3 = actionBar.newTab().setText("LUYỆN TẬP").setTabListener(this);
-//        ActionBar.Tab atab4 = actionBar.newTab().setText("THÔNG BÁO").setTabListener(this);
-//        actionBar.addTab(atab1);
-//        actionBar.addTab(atab2);
-//        actionBar.addTab(atab3);
-//        actionBar.addTab(atab4);
-//        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                actionBar.setSelectedNavigationItem(position);
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
-
-
 //        startService(checkNotifyIntent);
 //        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
-//        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
-//        final Intent intent = getIntent();
-//        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-//        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-//
-//        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-//        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-//        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-//        if (mBluetoothLeService != null) {
-//            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
-//            Log.d(TAG, "Connect request result=" + result);
-//        }
+        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
+        final Intent intent = getIntent();
+        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+
+        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        if (mBluetoothLeService != null) {
+            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+            Log.d(TAG, "Connect request result=" + result);
+        }
 
         //Set Alarm
         amountTime = amountTime();
-        if (!hadStartAlarmService) {
-//            Intent alarmIntent = new Intent(this, AlarmService.class);
-//            startService(alarmIntent);
-//            hadStartAlarmService = true;
-        }
-//            for (ToDoTime item2 : Constant.Foods) {
-//                if (item2.getTimeUse().equals(item)) {
-//                    message += "Thức ăn : \n";
-//                    for (ToDoItem item3 : item2.getItems()) {
-//                        message += item3.getName() + " - " + item3.getQuantity() + "\n";
-//
-//                    }
-//                }
-//            }
-//            for (ToDoTime item2 : Constant.Medicines) {
-//                if (item2.getTimeUse().equals(item)) {
-//                    message += "Thuốc : \n";
-//                    for (ToDoItem item3 : item2.getItems()) {
-//                        message += item3.getName() + " - " + item3.getQuantity() + "\n";
-//                    }
-//                }
-//            }
-//            for (ToDoTime item2 : Constant.Practice) {
-//                if (item2.getTimeUse().equals(item)) {
-//                    message += "Bài tập : \n";
-//                    for (ToDoItem item3 : item2.getItems()) {
-//                        message += item3.getName() + " - " + item3.getQuantity() + "\n";
-//                    }
-//                }
-//            }
-//            alarm.setAlarm(context, item, message);
-//        }
 
 //        startService(checkNotifyIntent);
 //        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);

@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Build;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -21,6 +22,7 @@ import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.HomeActivity;
 import com.example.quyhkse61160.hstsapp.SelectDeviceActivity;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -65,8 +67,10 @@ public class BluetoothLeService extends Service {
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             final byte[] data = characteristic.getValue();
+
+
             String stringdata = new String(data);
-//            Log.d("QUYYYYYYYYY", "--" + stringdata + "--");
+            Log.d("QUYYYYYYYYY", "--" + stringdata + "--");
             if((HomeActivity.characteristicManufacturer != null) && (HomeActivity.characteristicStep != null)) {
                 if(characteristic.getUuid().toString().contains(Constant.numberOfStep_UUID.toString())) {
 //                    String[] listData = stringdata.split(",");
@@ -74,20 +78,36 @@ public class BluetoothLeService extends Service {
 //
 //                    Log.d("Quyyyyy111", "NumberOfStep: " + stringdata + "--");
 
-                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                    Date date = new Date();
-                    String dateString = df.format(date).replaceAll("/", "");
-                    String FILENAME = dateString + ".txt";
+                    if (data != null && data.length > 0) {
 
-                    FileOutputStream fos = null;
-                    try {
-                        fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-                        fos.write(data);
-                        fos.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        String byteData = "";
+                        for(int i = 0; i < data.length; i++) {
+                            if(i < data.length-1)
+                                byteData = byteData + data[i] + ",";
+                            else
+                                byteData = byteData + data[i];
+                        }
+
+
+                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        Date date = new Date();
+                        String dateString = df.format(date).replaceAll("/", "");
+                        String FILENAME = dateString + ".txt";
+                        File root = Environment.getExternalStorageDirectory();
+                        File dir = new File(root.getAbsolutePath() + "/kimquy");
+                        dir.mkdirs();
+                        File file = new File(dir, FILENAME);
+                        FileOutputStream fos = null;
+                        try {
+                            fos = new FileOutputStream(file);
+                            fos.write(byteData.getBytes());
+                            fos.close();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d("QUYYYYYYYYY", "--hehe--");
                     }
 
 

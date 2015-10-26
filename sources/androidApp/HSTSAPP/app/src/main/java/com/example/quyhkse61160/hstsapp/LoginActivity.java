@@ -75,6 +75,12 @@ public class LoginActivity extends ActionBarActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
         actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
 
+        if(!hadRegisterReceiver) {
+            hadRegisterReceiver = true;
+            registerReceiver(mConnectionDetector, mIntentFilter);
+        }
+
+
         setContentView(R.layout.activity_main);
         final EditText txtUsername = (EditText) findViewById(R.id.txt_login_username);
         final EditText txtPassword = (EditText) findViewById(R.id.txt_login_password);
@@ -198,10 +204,6 @@ public class LoginActivity extends ActionBarActivity {
                     e.printStackTrace();
                 }
 
-                if(!hadRegisterReceiver) {
-                    hadRegisterReceiver = true;
-                    registerReceiver(mConnectionDetector, mIntentFilter);
-                }
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -216,7 +218,7 @@ public class LoginActivity extends ActionBarActivity {
             if((Constant.accountId.equals("0") && Constant.PATIENT_NAME == null) || Constant.patientId.equals("0")){
                 Toast.makeText(getApplicationContext(),R.string.login_error,Toast.LENGTH_LONG).show();
             } else {
-                Intent continueIntent = new Intent(LoginActivity.this,HomeActivity.class);
+                Intent continueIntent = new Intent(LoginActivity.this,DeviceScanActivity.class);
                 startActivity(continueIntent);
             }
         }

@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class Constant {
     //All constant of call api
-    public static final String hostURL = "http://192.168.176.1:8080";
+    public static final String hostURL = "http://192.168.1.101:8080";
     public static final String loginMethod = "/loginMobile";
     public static final String checkNotifyMethod = "/notify";
     public static final String getTreatment = "/getTreatment";
@@ -27,8 +27,8 @@ public class Constant {
     public static final String PREF_USENAME_HADLOGIN = "HSTSAPPPREFLOGIN";
     public static String NUMBEROFSTEP_POSITION = "3";
 
-    public static String accountId = "2";
-    public static String patientId = "1";
+    public static String accountId = "0";
+    public static String patientId = "0";
     public static String username = "";
     public static boolean haveInternet = false;
 

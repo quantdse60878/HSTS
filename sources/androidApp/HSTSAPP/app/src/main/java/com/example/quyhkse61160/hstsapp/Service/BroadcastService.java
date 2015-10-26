@@ -95,7 +95,6 @@ public class BroadcastService extends Service {
                         String dateString = df.format(date).replaceAll("/", "");
                         String FILENAME = dateString + ".txt";
 
-                        Log.e("QUY", "------------------2222222222222-------------");
                         File root = Environment.getExternalStorageDirectory();
                         File dir = new File(root.getAbsolutePath() + "/kimquy");
                         dir.mkdirs();
@@ -114,23 +113,16 @@ public class BroadcastService extends Service {
                                 System.out.println(stringBuffer);
                                 String fileData = new String(stringBuffer);
 
-                                try {
-                                    JSONObject jsonObject = new JSONObject(fileData);
-
-                                    JSONArray listArray = jsonObject.getJSONArray("Value");
-                                    byte[] listByteData = new byte[listArray.length()];
-                                    for (int i = 0; i < listArray.length(); i++) {
-                                        listByteData[i] = Byte.parseByte(listArray.get(i).toString());
-                                    }
-                                    String listData = new String(listByteData);
-                                    String numberOfStep = listData.split(",")[3];
-                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                                    sendMedicalData(numberOfStep, sdf.format(date));
-                                    Log.d("QUY", "QUY");
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                String[] listArray = fileData.split(",");
+                                byte[] listByteData = new byte[listArray.length];
+                                for (int i = 0; i < listArray.length; i++) {
+                                    listByteData[i] = Byte.parseByte(listArray[i]);
                                 }
+                                String listData = new String(listByteData);
+                                String numberOfStep = listData.split(",")[3];
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                                sendMedicalData(numberOfStep, sdf.format(date));
+                                Log.d("QUY", "QUY");
 
 
                             } catch (IOException e) {
@@ -141,61 +133,8 @@ public class BroadcastService extends Service {
 
                         Log.d("QUY", "------------------111111111111111-------------");
 
-
-//                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-//                        Date date = new Date();
-//                        String dateString = df.format(date).replaceAll("/", "");
-//                        try {
-//                            InputStream is = LoginActivity.am.open(dateString + ".txt");
-//                            int size = is.available();
-//                            byte[] buffer = new byte[size];
-//                            is.read(buffer);
-//                            String fileData = new String(buffer);
-//
-//                            Log.d("QUyyy11", "--" + fileData + "--");
-//                            try {
-//                                JSONObject jsonObject = new JSONObject(fileData);
-//
-//                                JSONArray listArray = jsonObject.getJSONArray("Value");
-//                                byte[] listByteData = new byte[listArray.length()];
-//                                for(int i = 0; i < listArray.length(); i++) {
-//                                    listByteData[i] = Byte.parseByte(listArray.get(i).toString());
-//                                }
-//                                String listData = new String(listByteData);
-//                                String numberOfStep = listData.split(",")[3];
-//                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-//                                sendMedicalData(numberOfStep, sdf.format(date));
-//                                Log.d("QUY", "QUY");
-//
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//
-//
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-
-                        //Su dung private folder
-//                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-//                        Date date = new Date();
-//                        String dateString = df.format(date).replaceAll("/", "");
-//                        try {
-//                            FileInputStream is = openFileInput(dateString + ".txt");
-//                            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-//                            String stringData = reader.readLine();
-//                            is.close();
-//                            String numberOfStep = stringData.split(",")[3];
-//
-//                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-//                            sendMedicalData(numberOfStep, sdf.format(date));
-//
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                        Su dung private folder
                     }
-             //Khuong ve nha code cho nay bo alarm thay bang kiem tra thoi gian trong list time. Neu trung thi hien nhu binh thuong
+                    //Khuong ve nha code cho nay bo alarm thay bang kiem tra thoi gian trong list time. Neu trung thi hien nhu binh thuong
                     Log.d("KhuongMH", "---------------" + c.getTime().getHours() + ":" + c.getTime().getMinutes());
                     for (
                             String time
@@ -210,7 +149,7 @@ public class BroadcastService extends Service {
                                 && c2.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
                             final Context context = getApplicationContext();
                             if (BroadcastService.flag) {
-                                Log.d("KhuongMH","FALSEEEEEEEEEEE");
+                                Log.d("KhuongMH", "FALSEEEEEEEEEEE");
                                 BroadcastService.flag = false;
                                 Intent in = new Intent(context, HomeActivity.class);
                                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -313,6 +252,9 @@ public class BroadcastService extends Service {
             while ((temp = bReader.readLine()) != null) {
                 response += temp;
             }
+
+            Log.d("QUYYY111", "response: " + response);
+
             try {
                 JSONArray array = new JSONArray(response);
                 final Context context = getApplicationContext();
@@ -415,7 +357,7 @@ public class BroadcastService extends Service {
             }
             Constant.DATA_FROM_SERVER = response;
             Constant.TREATMENTS = Constant.getItems();
-            Log.d("QUYYY111","Treatment--" + response);
+            Log.d("QUYYY111", "Treatment--" + response);
             HomeActivity.amountTime = HomeActivity.amountTime();
             Intent homeIntent = new Intent(this, HomeActivity.class);
             homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
