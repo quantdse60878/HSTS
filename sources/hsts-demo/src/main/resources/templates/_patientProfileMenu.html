@@ -26,10 +26,10 @@
 
     <input type="text" readonly="readonly" class="form-control"
            style="text-align: right;background-color: #5bc0de;color: white;"
-           th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi lt 25}"/>
+           th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi lt 27}"/>
     <input type="text" readonly="readonly" class="form-control"
            style="text-align: right;background-color: #f0ad4e;color: white;"
-           th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi ge 25 and PREVENTIONCHECK.bmi lt 40}"/>
+           th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi ge 27 and PREVENTIONCHECK.bmi lt 40}"/>
     <input type="text" readonly="readonly" class="form-control"
            style="text-align: right;background-color: #d9534f;color: white;"
            th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi ge 40}"/>

@@ -151,7 +151,7 @@
                         <!-- ./form -->
                         <!-- form start -->
                         <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}"
-                               data-toggle="validator" onsubmit="return confirmBox(this);">
+                              data-toggle="validator" onsubmit="return confirmBox(this);">
                             <input type="hidden" name="diagnostic" id="diagnostic"
                                    th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"/>
 
@@ -389,66 +389,27 @@
     <!-- REQUIRED JS SCRIPTS -->
     <!-- jQuery 2.1.4 -->
     <script th:src="@{/static/bower/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
-    <!-- ChartJS 1.0.1 -->
-    <script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>
     <!-- jQueryUI -->
     <script th:src="@{/static/bower/jquery-ui/jquery-ui.js}"></script>
-
     <!-- bootstrap-datepicker-->
     <link th:href="@{/static/bower/admin-lte/plugins/datepicker/datepicker3.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/datepicker/bootstrap-datepicker.js}"></script>
-
     <!-- Bootstrap multiple tags -->
     <link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>
-
     <!-- Bootstrap validator-->
     <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
-
+    <!-- ChartJS 1.0.1 -->
+    <script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
-
-        function changeTab(a) {
-            console.log(a);
-            $('.nav-tabs > li.active').removeClass('active');
-            $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
-        }
-        ;
-        var check = $('#diagnostic').val();
-        function confirmBox(form) {
-            if (check == '') {
-                alert('Please suggest diagnostic before make prescription!!!');
-                return false;
-            } else {
-                var r = confirm('Are you sure to make this prescription?');
-                if (r == true) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }
-
-        $("#combobox").combobox();
-
-        $('#Appointment').datepicker({
-            format: 'dd-mm-yyyy'
-        });
-
-        var nextAppointmentDate = $('#nextApDate').val();
-        nextAppointmentDate++;
-        nextAppointmentDate--;
-        var appointmentDate = new Date();
-        appointmentDate.setDate(appointmentDate.getDate() + nextAppointmentDate);
-        $('#Appointment').datepicker("setDate", appointmentDate);
-
         var countMedicine = $('#medics').val();
+        var count = countMedicine;
         function addRowMedicine(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
             var newCell;
-            var count = countMedicine;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = ++count;
             newCell = newRow.insertCell(newRow.cells.length);
