@@ -7,106 +7,151 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" layout:fragment="body">
 
-  <section class="content-header">
-    <h1>
-      Search Accounts
-    </h1>
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="listuser.html">Admin</a></li>
-      <li class="active">Accounts</li>
-    </ol>
-  </section>
+    <section class="content-header">
+        <h1>
+            Search Accounts
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="listuser.html">Admin</a></li>
+            <li class="active">Accounts</li>
+        </ol>
+    </section>
 
-  <!-- Main content -->
-  <section class="content">
+    <!-- Main content -->
+    <section class="content">
 
-    <!-- Your Page Content Here -->
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="box">
-          <div class="box-header" style="padding: 0px;">
-            <div class="form-group">
-              <div class="col-sm-4">
-                <!-- search form (Optional) -->
-                <form action="#" method="get" class="sidebar-form">
-                  <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search Username..."/>
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header" style="padding: 0px;">
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <!-- search form (Optional) -->
+                                <form action="#" method="get" class="sidebar-form">
+                                    <div class="input-group">
+                                        <input type="text" name="q" class="form-control"
+                                               placeholder="Search Username..."/>
                           <span class="input-group-btn">
                             <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                              <i class="fa fa-search"></i></button>
+                                <i class="fa fa-search"></i></button>
                           </span>
-                  </div>
-                </form>
-                <!-- /.search form -->
-              </div>
+                                    </div>
+                                </form>
+                                <!-- /.search form -->
+                            </div>
 
-              <form action="#type your action here" method="POST">
-                <button class="btn btn-default" style="margin-top:10px; margin-right:10px;float:left;">Insert Accounts By Excel</button>
-                <input id="upfile" type="file" value="upload" style="visibility: hidden; margin-bottom: -11px;"/>
-                <button class="btn btn-default" style="float:left">Download Excel Template </button>
-              </form>
+                            <form action="adminReg" method="POST" style="padding-top: 12px"
+                                  enctype="multipart/form-data">
+                                <input type="file" name="excel" id="excel" data-filename-placement="inside"
+                                       style="float:left;" onchange="check_file()"/>
+                                <button class="btn btn-default" style="float:left; margin-right: 5px;"
+                                        onclick="return false;">Download Excel Template
+                                </button>
+                                <input type="submit" value="Insert Account" class="btn btn-primary"/>
+                            </form>
 
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="listAccount" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>UserName</th>
+                                <th>Role</th>
+                                <th>Gender</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="table-body"></tbody>
+                            <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>UserName</th>
+                                <th>Role</th>
+                                <th>Gender</th>
+                                <th></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
             </div>
-          </div><!-- /.box-header -->
-          <div class="box-body">
-            <table id="listPatients" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>#</th>
-                <th>UserName</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>1</td>
-                <td><a href="#">khuongmh</a></td>
-                <td>
-                  Administrator
-                </td>
-                <td>Active</td>
-                <td>
-                  <a href="patient1.html" class="btn btn-primary">Update</a>
-                  <a href="patient1.html" class="btn btn-danger">Delete</a>
-                </td>
-              </tr>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
 
-              <tr>
-                <td>2</td>
-                <td><a href="updateuser.html">quantd</a></td>
-                <td>
-                  Patient
-                </td>
-                <td>
-                  De-active
-                </td>
-                <td>
-                  <a href="patient1.html" class="btn btn-primary">Update</a>
-                  <a href="patient1.html" class="btn btn-danger">Delete</a>
-                </td>
-              </tr>
-              </tbody>
-              <tfoot>
-              <tr>
-                <th>#</th>
-                <th>UserName</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-              </tfoot>
-            </table>
-          </div><!-- /.box-body -->
-        </div><!-- /.box -->
-      </div><!-- /.col -->
-    </div><!-- /.row -->
+    </section>
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/bootstrap.file-input.js}">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                method: "GET",
+                url: "/accountList",
+                data: {}
+            }).done(function (data) {
+                console.log(data);
+                $("#table-body").html("");
+                var bodyContent = "";
+                if (data != null) {
 
-  </section>
+                    $.each(data, function (key, element) {
+                        bodyContent += '<tr>' +
+                                '<td>' + (key + 1) + '</td>' +
+                                '<td>' + element.username + '</td>' +
+                                '<td>' + element.role.name + '</td>' +
+                                '<td>' + element.gender + '</td>' +
+                                '<td>' +
+                                '<a href="/account?id='+ element.id +'" class = "btn btn-primary">Update</a>' +
+                                '<a href="/deleteAccount?id=' + element.id + '" class="btn btn-danger">Delete</a>' +
+                                '</td>' +
+                                '</tr>';
+                    });
+                }
+                $("#table-body").html(bodyContent);
+            });
+        });
 
 
+        $('input[type=file]').bootstrapFileInput();
+
+        function getExtension(filename) {
+            var parts = filename.split('.');
+            return parts[parts.length - 1];
+        }
+
+        function isExcel(filename) {
+            var ext = getExtension(filename);
+            switch (ext.toLowerCase()) {
+                case 'xls':
+                    return true;
+                case 'xlsx':
+                    return true;
+            }
+            return false;
+        }
+        $(function () {
+            $('form').submit(function () {
+                function failValidation(msg) {
+                    alert(msg); // just an alert for now but you can spice this up later
+                    return false;
+                }
+
+                var file = $('input[type=file]');
+                if (!isExcel(file.val())) {
+                    return failValidation('Please select a valid excel file.');
+                }
+            });
+
+        });
+    </script>
 </div>
 <!-- /.content-wrapper -->
 

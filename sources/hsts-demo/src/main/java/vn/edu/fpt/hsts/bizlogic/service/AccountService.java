@@ -22,8 +22,10 @@ import vn.edu.fpt.hsts.common.util.StringUtils;
 import vn.edu.fpt.hsts.criteria.PatientCriteria;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
+import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.entity.Role;
 import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
+import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
 import vn.edu.fpt.hsts.persistence.repo.RoleRepo;
 import vn.edu.fpt.hsts.web.session.UserSession;
 
@@ -47,10 +49,22 @@ public class AccountService {
     private UserSession userSession;
 
     /**
+     * The {@link MailService}.
+     */
+    @Autowired
+    private MailService mailService;
+
+    /**
      * The {@link AccountRepo}.
      */
     @Autowired
     private AccountRepo accountRepo;
+
+    /**
+     * The {@link DoctorRepo}.
+     */
+    @Autowired
+    private DoctorRepo doctorRepo;
 
     /**
      * The {@link AuthenService}.
@@ -74,6 +88,14 @@ public class AccountService {
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
+    }
+
+    public List<Account> findAccounts(){
+        return accountRepo.findAll();
+    }
+
+    public Account findExactlyAccount(int id){
+        return accountRepo.findOne(id);
     }
 
     public Account changePassword(final String username, final String oldPassword, final String newPassword){
@@ -206,6 +228,29 @@ public class AccountService {
             }
             return false;
         } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public boolean regAccounts(List<Account> list){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("listSize[{}]", list.size());
+            for (Account account : list){
+//                mailService.sendMail(account.getEmail(),MailService.SUBJECT_MAIL,"Username : " + account.getUsername() + " - "
+//                                                                                + "Password : " + account.getPassword());
+                accountRepo.save(account);
+                if(account.getRole().getId() == IDbConsts.IRoleType.DOCTOR){
+                    Doctor doctor = new Doctor();
+                    doctor.setAccount(account);
+                    doctorRepo.save(doctor);
+                }
+            }
+            return true;
+        } catch(Exception e){
+            e.printStackTrace();
+            return false;
+        } finally{
             LOGGER.info(IConsts.END_METHOD);
         }
     }

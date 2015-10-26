@@ -16,4 +16,33 @@ public class RoleModel extends AbstractKeyModel<Role> {
         return Role.class;
     }
 
+    private String name;
+
+    /**
+     *
+     */
+    private String description;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public void fromEntity(Role entity) {
+        super.fromEntity(entity);
+        name = entity.getName();
+        description = entity.getDescription();
+    }
 }

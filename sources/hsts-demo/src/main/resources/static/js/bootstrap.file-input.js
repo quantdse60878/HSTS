@@ -15,7 +15,7 @@
             }
 
             // Set the word to be displayed on the button
-            var buttonWord = 'Browse';
+            var buttonWord = 'Import Excel File';
 
             if (typeof $elem.attr('title') != 'undefined') {
                 buttonWord = $elem.attr('title');

@@ -32,58 +32,58 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form class="form-horizontal">
+                        <form action="" method="POST" class="form-horizontal">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="Username" class="col-sm-3 control-label">Username</label>
+                                    <label class="col-sm-3 control-label">Username</label>
 
                                     <div class="col-sm-3">
-                                        <input type="text" readonly class="form-control" id="Name" value="quantd">
+                                        <input type="text" class="form-control" id="name" value="${account.username}"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Password" class="col-sm-3 control-label">Password</label>
+                                    <label class="col-sm-3 control-label">New Password</label>
 
                                     <div class="col-sm-3">
-                                        <input type="password" class="form-control" id="Password">
+                                        <input type="password" class="form-control" id="password"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Password" class="col-sm-3 control-label">Confirm Password</label>
+                                    <label class="col-sm-3 control-label">Confirm Password</label>
 
                                     <div class="col-sm-3">
-                                        <input type="password" class="form-control" id="Password">
+                                        <input type="password" class="form-control" id="confPassword"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="FullName" class="col-sm-3 control-label">FullName</label>
+                                    <label class="col-sm-3 control-label">FullName</label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="FullName" placeholder="FullName">
+                                        <input type="text" class="form-control" id="fullname" placeholder="FullName" value="${account.fullName}"/>
                                     </div>
+
                                 </div>
                                 <div class="form-group">
-                                    <label for="Address" class="col-sm-3 control-label">Address</label>
+                                    <label class="col-sm-3 control-label">Email</label>
 
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="FullName" placeholder="Address">
+                                        <input type="text" class="form-control" id="email" placeholder="Email" value="${account.email}"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Address" class="col-sm-3 control-label">Role</label>
+                                    <label class="col-sm-3 control-label">Role</label>
 
                                     <div class="col-sm-5 ui-widget">
-                                        <select id="combobox">
+                                        <select id="role">
                                             <option value="ss">Select one...</option>
-                                            <option value="Patient">Patient</option>
-                                            <option value="Doctor">Doctor</option>
-                                            <option value="Nurse">Nurse</option>
-                                            <option value="Staff">Staff</option>
+                                            <option value="2">Doctor</option>
+                                            <option value="3">Nurse</option>
+                                            <option value="4">Staff</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Address" class="col-sm-3 control-label">Status</label>
+                                    <label class="col-sm-3 control-label">Status</label>
 
                                     <div class="col-sm-5 ui-widget">
                                         <select id="combobox">
@@ -103,11 +103,8 @@
                     </div>
                     <!-- /.box -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.col -->
         </div>
-        <!-- /.row -->
 
     </section>
 </div>

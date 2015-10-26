@@ -27,6 +27,8 @@ public class MailService extends JavaMailSenderImpl {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MailService.class);
 
+    public static final String SUBJECT_MAIL = "[HSTS]Your Account Information";
+
     /**
      *
      */
