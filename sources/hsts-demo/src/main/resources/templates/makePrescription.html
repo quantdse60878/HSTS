@@ -405,13 +405,13 @@
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
         var countMedicine = $('#medics').val();
-        var count = countMedicine;
+        var countM = countMedicine;
         function addRowMedicine(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
             var newCell;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = ++count;
+            newCell.innerHTML = ++countM;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("style", "min-width: 140px;");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModels' + countMedicine + '.m">'
@@ -443,13 +443,13 @@
         ;
 
         var countFoods = $('#fos').val();
+        var countF = countFoods;
         function addRowFoods(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
             var newCell;
-            var count = countFoods;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = ++count;
+            newCell.innerHTML = ++countF;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" id="fPresModels' + countFoods + '.f">'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
@@ -472,13 +472,13 @@
         }
         ;
         var countPractice = $('#pracs').val();
+        var countP = countPractice;
         function addRowPractice(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
             var newCell;
-            var count = countPractice;
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = ++count;
+            newCell.innerHTML = ++countP;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<select class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModels' + countPractice + '.p">'
                     + '<option th:each="practice : ${PRACTICES}" th:value="${practice.id}" th:text="${practice.name}"></option>'

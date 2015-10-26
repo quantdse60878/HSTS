@@ -1,9 +1,5 @@
 /**
- * FPT University Capstone Project 2015.
- * Program: HSTS.
- * Program manager: Kieu Trong Khanh.
- * Author: dangquantran.
- * Date: 10/5/2015.
+ * Created by Aking on 9/28/2015.
  */
 $(function () {
     //-------------
@@ -71,20 +67,37 @@ $(function () {
     barChart.Bar(barChartData, barChartOptions);
 });
 
-function deleteRow(t, myTable)
-{
-    var row = t.parentNode.parentNode;
-    document.getElementById(myTable).deleteRow(row.rowIndex);
-    console.log(row);
-}
 function deleteRowFood(t){
-    deleteRow(t,'Foods');
+    var row = t.parentNode.parentNode;
+    var nextRow = row.nextElementSibling;
+    document.getElementById('Foods').deleteRow(row.rowIndex);
+    countF = reCounterRow(nextRow);
 }
 function deleteRowMedicine(t){
-    deleteRow(t,'medicine');
+    var row = t.parentNode.parentNode;
+    //console.log(row.rowIndex);
+    var nextRow = row.nextElementSibling;
+    //console.log(nextRow);
+    document.getElementById('medicine').deleteRow(row.rowIndex);
+    //console.log(row);
+    countM = reCounterRow(nextRow);
 }
+
 function deleteRowPractice(t){
-    deleteRow(t,'Practice');
+    var row = t.parentNode.parentNode;
+    var nextRow = row.nextElementSibling;
+    document.getElementById('Practice').deleteRow(row.rowIndex);
+    countP = reCounterRow(nextRow);
+}
+function reCounterRow(row){
+    var count = row.rowIndex;
+    row.firstElementChild.textContent = count;
+    var nextRow = row.nextElementSibling;
+    //console.log(nextRow);
+    if (nextRow != undefined){
+        count = reCounterRow(nextRow);
+    }
+    return count;
 }
 /**
  * combobox
@@ -297,3 +310,36 @@ function popup(windowname) {
     toggle(windowname);
 }
 ;
+function changeTab(a) {
+    console.log(a);
+    $('.nav-tabs > li.active').removeClass('active');
+    $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
+}
+;
+var check = $('#diagnostic').val();
+function confirmBox(form) {
+    if (check == '') {
+        alert('Please suggest diagnostic before make prescription!!!');
+        return false;
+    } else {
+        var r = confirm('Are you sure to make this prescription?');
+        if (r == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+$("#combobox").combobox();
+
+$('#Appointment').datepicker({
+    format: 'dd-mm-yyyy'
+});
+
+var nextAppointmentDate = $('#nextApDate').val();
+nextAppointmentDate++;
+nextAppointmentDate--;
+var appointmentDate = new Date();
+appointmentDate.setDate(appointmentDate.getDate() + nextAppointmentDate);
+$('#Appointment').datepicker("setDate", appointmentDate);
