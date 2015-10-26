@@ -122,10 +122,10 @@
 
                                         <!-- Tab 2: Basic patient data -->
                                         <div class="tab-pane" id="tab_2">
-                                            <table class="table table-bordered table-striped" style="width: 200px">
+                                            <table class="table table-bordered table-striped" style="width: 500px">
                                                 <thead>
                                                 <tr>
-                                                    <th style="width: 200px;">Measurement index</th>
+                                                    <th style="width: 300px;">Measurement index</th>
                                                     <th style="width: 200px;">Value</th>
                                                 </tr>
                                                 </thead>
@@ -150,7 +150,8 @@
                                                 </tr>
                                                  <tr>
                                                      <td>
-                                                         <label for="hearthBeat" class="control-label">Hearth Beat* (times/minute)</label>
+                                                         <label for="hearthBeat" class="control-label">Hearth Beat*
+                                                             (times/minute)</label>
                                                      </td>
                                                      <td class="form-group">
                                                          <input type="text" th:name="hearthBeat" class="form-control" id="hearthBeat"
@@ -195,68 +196,81 @@
 
                                         <!-- Tab 3: Prevention checking -->
                                         <div class="tab-pane" id="tab_3">
-                                            <div th:class="form-group">
-                                                <label for="bodyFat" class="col-sm-2 control-label">Body Fat</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="bodyFat" class="form-control" id="bodyFat"
-                                                           placeholder="Body Fat" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="bodyFat" class="col-sm-1 control-label">%</label>
-                                            </div>
+                                            <table  class="table table-bordered table-striped" style="width: 500px">
+                                                <thead>
+                                                    <th style="width: 300px;">Measurement index</th>
+                                                    <th style="width: 200px;">Value</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="bodyFat" class="control-label">Body Fat* (%)</label>
+                                                        </td>
+                                                        <td class="form-group">
+                                                            <input type="text" th:name="bodyFat" class="form-control" id="bodyFat"
+                                                                   placeholder="Body Fat" data-remote="/validateData" required="required"/>
+                                                        </td>
+                                                    </tr>
 
-                                            <div th:class="form-group">
-                                                <label for="visceralFat" class="col-sm-2 control-label">Visceral Fat</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="visceralFat" class="form-control" id="visceralFat"
-                                                           placeholder="Visceral Fat" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="visceralFat" class="col-sm-1 control-label">level</label>
-                                            </div>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="visceralFat" class="control-label">Visceral Fat (level)</label>
+                                                        </td>
+                                                        <td class="form-group">
+                                                            <input type="text" th:name="visceralFat" class="form-control" id="visceralFat"
+                                                                   placeholder="Visceral Fat" data-remote="/validateData" required="required"/>
+                                                        </td>
+                                                    </tr>
 
-                                            <div th:class="form-group">
-                                                <label for="muscleMass" class="col-sm-2 control-label">Muscle Mass</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="muscleMass" class="form-control" id="muscleMass"
-                                                           placeholder="Muscle Mass" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="muscleMass" class="col-sm-1 control-label">%</label>
-                                            </div>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="muscleMass" class="control-label">Muscle Mass* (%)</label>
+                                                        </td>
+                                                        <td class="form-group">
+                                                            <input type="text" th:name="muscleMass" class="form-control" id="muscleMass"
+                                                                   placeholder="Muscle Mass" data-remote="/validateData" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="bodyWater" class="control-label">Body Water (%)</label>
+                                                        </td>
+                                                        <td class="form-group">
+                                                            <input type="text" th:name="bodyWater" class="form-control" id="bodyWater"
+                                                                   placeholder="Body Water" data-remote="/validateData" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="phaseAngle" class="control-label">Phase angle (o)</label>
+                                                        </td>
+                                                        <td class="form-group">
+                                                            <input type="text" th:name="phaseAngle" class="form-control" id="phaseAngle"
+                                                                   placeholder="Phase angle" data-remote="/validateData" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="impedance" class="control-label">Impedance (Ohm)</label>
+                                                        </td>
+                                                        <td class="form-group">
+                                                            <input type="text" th:name="impedance" class="form-control" id="impedance"
+                                                                   placeholder="Impedance" data-remote="/validateData" required="required"/>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label for="basalMetabolicRate" class="control-label">Basal Metabolic Rate
+                                                                (Kcal)</label>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" th:name="basalMetabolicRate" class="form-control" id="basalMetabolicRate"
+                                                                   placeholder="Basal Metabolic Rate" data-remote="/validateData" required="required"/>
+                                                        </td>
 
-                                            <div th:class="form-group">
-                                                <label for="bodyWater" class="col-sm-2 control-label">Body Water</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="bodyWater" class="form-control" id="bodyWater"
-                                                           placeholder="Body Water" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="bodyWater" class="col-sm-1 control-label">%</label>
-                                            </div>
-
-                                            <div th:class="form-group">
-                                                <label for="phaseAngle" class="col-sm-2 control-label">Phase angle</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="phaseAngle" class="form-control" id="phaseAngle"
-                                                           placeholder="Phase angle" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="phaseAngle" class="col-sm-1 control-label">o</label>
-                                            </div>
-
-                                            <div th:class="form-group">
-                                                <label for="impedance" class="col-sm-2 control-label">Impedance</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="impedance" class="form-control" id="impedance"
-                                                           placeholder="Impedance" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="impedance" class="col-sm-1 control-label">Ohm</label>
-                                            </div>
-
-                                            <div th:class="form-group">
-                                                <label for="basalMetabolicRate" class="col-sm-2 control-label">Basal Metabolic Rate</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="basalMetabolicRate" class="form-control" id="basalMetabolicRate"
-                                                           placeholder="Basal Metabolic Rate" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="basalMetabolicRate" class="col-sm-1 control-label">Kcal</label>
-                                            </div>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
                                             <!-- footer -->
                                             <div style="margin: 15px;">
