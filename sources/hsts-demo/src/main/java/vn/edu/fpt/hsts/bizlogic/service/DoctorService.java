@@ -183,6 +183,7 @@ public class DoctorService extends AbstractService {
                 LOGGER.error("Appointment with id[{}] is not found", appointmentId);
                 throw new BizlogicException("Appointment with id[{}] is not found", null, appointmentId);
             }
+            appointment.setMeetingDate(new Date());
             appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
             Date toDate = null;
             final MedicalRecord medicalRecord = appointment.getMedicalRecord();
@@ -217,11 +218,15 @@ public class DoctorService extends AbstractService {
             appointmentRepo.save(appointment);
 
             // Set old treatment to DONE
-            final Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(appointmentId);
-            if (null != treatment) {
-                treatment.setStatus(IDbConsts.ITreatmentStatus.FINISHED);
-                treatment.setToDate(new Date());
-                treatmentRepo.save(treatment);
+            // Find old nearest parent appointment
+            final Appointment oldAppointment = appointmentRepo.findParentAppointment(appointmentId);
+            final List<Treatment> lastTreatments = oldAppointment.getTreatmentList();
+            if (null != lastTreatments && !lastTreatments.isEmpty()) {
+                for(Treatment treatment: lastTreatments) {
+                    treatment.setStatus(IDbConsts.ITreatmentStatus.FINISHED);
+                    treatment.setToDate(new Date());
+                    treatmentRepo.save(treatment);
+                }
             }
             if (null != prescription) {
 

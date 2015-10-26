@@ -191,7 +191,7 @@
 
                                                 <div class="col-sm-5">
                                                     <select id="doctorSelect" th:name="doctorId">
-                                                        <option value="">Select one...</option>
+                                                        <option value = "" th:disabled="disable">Select one...</option>
                                                         <option th:each="doctor : ${session.DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.fullName}"></option>
                                                     </select>
                                                 </div>
@@ -249,6 +249,10 @@
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet" />
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
+
+    <!-- Bootstrap multiple tags -->
+    <link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>
+    <script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>
 
     <!-- registerPatient -->
     <script th:src="@{/static/js/registerPatient.js}"></script>

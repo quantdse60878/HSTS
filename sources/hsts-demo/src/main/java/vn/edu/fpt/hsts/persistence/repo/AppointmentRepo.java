@@ -32,4 +32,7 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
 
     @Query("select a from Appointment a where medicalRecord.patient.id = :patientId and status = :status ORDER BY meetingDate DESC")
     public Appointment findLastAppointmentByPatientId(@Param("patientId") final int patientId, @Param("status") final byte status);
+
+    @Query("select a from Appointment a where nextAppointment.id = :nextAppointmentId")
+    public Appointment findParentAppointment(@Param("nextAppointmentId") final int appointmentId);
 }
