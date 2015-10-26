@@ -21,27 +21,52 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
+import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
+import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
-import vn.edu.fpt.hsts.criteria.PatientCriteria;
 import vn.edu.fpt.hsts.criteria.CheckCriteria;
+import vn.edu.fpt.hsts.criteria.PatientCriteria;
 import vn.edu.fpt.hsts.criteria.RegistrationCriteria;
+import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
+import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 public class NurseController extends AbstractController {
+
+    /**
+     * The logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(NurseController.class);
 
+    /**
+     * The {@link PatientService}.
+     */
     @Autowired
     PatientService patientService;
 
+    /**
+     * The {@link DoctorService}.
+     */
     @Autowired
     DoctorService doctorService;
+
+    /**
+     * The {@link PreventionCheckService}.
+     */
+    @Autowired
+    private PreventionCheckService preventionCheckService;
+
+    /**
+     * The {@link TreatmentService}.
+     */
+    @Autowired
+    private TreatmentService treatmentService;
 
     /**
      * The register patient page mapping
@@ -80,7 +105,7 @@ public class NurseController extends AbstractController {
             // Tab 2 param
             @RequestParam("weight") final int weight,
             @RequestParam("height") final int height,
-            @RequestParam("hearthBeat") final int hearthBeat,
+            @RequestParam("heartBeat") final int heartBeat,
             @RequestParam("bloodPressure") final int bloodPressure,
             @RequestParam("waists") final int waists,
             @RequestParam("bmi") final float bmi,
@@ -123,7 +148,7 @@ public class NurseController extends AbstractController {
             checkCriteria.setBasalMetabolicRate(basalMetabolicRate);
             checkCriteria.setWeight(weight);
             checkCriteria.setHeight(height);
-            checkCriteria.setHearthBeat(hearthBeat);
+            checkCriteria.setHeartBeat(heartBeat);
             checkCriteria.setBloodPressure(bloodPressure);
             checkCriteria.setWaists(waists);
             checkCriteria.setBmi(bmi);
@@ -201,7 +226,7 @@ public class NurseController extends AbstractController {
                                         // Tab 2 param
                                         @RequestParam("weight") final int weight,
                                         @RequestParam("height") final int height,
-                                        @RequestParam("hearthBeat") final int hearthBeat,
+                                        @RequestParam("heartBeat") final int heartBeat,
                                         @RequestParam("bloodPressure") final int bloodPressure,
                                         @RequestParam("waists") final int waists,
                                         @RequestParam("bmi") final float bmi,
@@ -239,7 +264,7 @@ public class NurseController extends AbstractController {
             checkCriteria.setBasalMetabolicRate(basalMetabolicRate);
             checkCriteria.setWeight(weight);
             checkCriteria.setHeight(height);
-            checkCriteria.setHearthBeat(hearthBeat);
+            checkCriteria.setHeartBeat(heartBeat);
             checkCriteria.setBloodPressure(bloodPressure);
             checkCriteria.setWaists(waists);
             checkCriteria.setBmi(bmi);
@@ -278,6 +303,34 @@ public class NurseController extends AbstractController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    @RequestMapping(value = "bindingOld", method = RequestMethod.GET)
+    public ModelAndView bindingOld(@RequestParam("patientId") final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("oldMeasurement");
+
+            Patient patient = patientService.getPatientByID(patientId);
+            mav.addObject("PATIENT", patient);
+
+            // Find last old preventcheck
+            final PreventionCheck pc = preventionCheckService.findLastPreventionCheckByPatientId(patientId);
+            mav.addObject("PC", pc);
+
+
+            // Find last old medicine treatment
+            final String oldMedicine = treatmentService.findLastMedicines(patientId);
+            mav.addObject("OLDMEDICINE", oldMedicine);
+
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
 
     @RequestMapping(value = "/print", method = RequestMethod.GET)
     @ResponseBody

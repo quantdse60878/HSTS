@@ -242,7 +242,7 @@ public class PatientService extends AbstractService {
                     appointment.setStatus(IDbConsts.IAppointmentStatus.WATTING);
                     appointment.setMeetingDate(currentDate);
                     appointment.setBloodPressure(pcCriteria.getBloodPressure());
-                    appointment.setHeartBeat(pcCriteria.getHearthBeat());
+                    appointment.setHeartBeat(pcCriteria.getHeartBeat());
                     appointment.setWaists(pcCriteria.getWaists());
                     appointmentRepo.saveAndFlush(appointment);
 

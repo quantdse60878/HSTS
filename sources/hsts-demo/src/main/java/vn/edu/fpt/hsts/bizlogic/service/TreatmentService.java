@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.bizlogic.model.FoodTreatmentModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicineTreatmentModel;
@@ -11,10 +12,21 @@ import vn.edu.fpt.hsts.bizlogic.model.PracticeTreatmentModel;
 import vn.edu.fpt.hsts.bizlogic.model.TreatmentModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.util.StringUtils;
-import vn.edu.fpt.hsts.persistence.entity.*;
-import vn.edu.fpt.hsts.persistence.repo.*;
+import vn.edu.fpt.hsts.persistence.entity.Appointment;
+import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
+import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
+import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
+import vn.edu.fpt.hsts.persistence.entity.PracticeTreatment;
+import vn.edu.fpt.hsts.persistence.entity.Treatment;
+import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
+import vn.edu.fpt.hsts.persistence.repo.FoodTreatmentRepo;
+import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
+import vn.edu.fpt.hsts.persistence.repo.MedicineTreatmentRepo;
+import vn.edu.fpt.hsts.persistence.repo.PracticeTreatmentRepo;
+import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -156,5 +168,29 @@ public class TreatmentService {
     public List<PracticeTreatment> getAllPracticeTreatmentFromTreatment(Treatment treatment) {
         LOGGER.info("treatment[{}]", treatment);
         return practiceTreatmentRepo.getAllPracticeTreatmentFromTreatment(treatment);
+    }
+
+    public String findLastMedicines(final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            // Find last treatment
+            final List<Treatment> lastTreatment = treatmentRepo.findLastTreatmenByPatientId(patientId, new PageRequest(0, 1));
+            if (null != lastTreatment && !lastTreatment.isEmpty()) {
+                final Treatment treatment = lastTreatment.get(0);
+                final List<MedicineTreatment> medicineTreatments = medicineTreatmentRepo.findMedicineTreatmentByTreatmentId(treatment.getId());
+                if (null != medicineTreatments && !medicineTreatments.isEmpty()) {
+                    final StringBuilder sb = new StringBuilder();
+                    for (MedicineTreatment mt: medicineTreatments) {
+                        sb.append(mt.getMedicine().getName()).append(",");
+                    }
+                    final int index = sb.lastIndexOf(",");
+                    sb.substring(0, index -1);
+                }
+            }
+            return "";
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
     }
 }

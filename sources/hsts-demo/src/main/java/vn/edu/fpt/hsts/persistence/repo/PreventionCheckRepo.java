@@ -21,4 +21,7 @@ public interface PreventionCheckRepo extends JpaRepository<PreventionCheck, Inte
 
     @Query("select p from PreventionCheck p where appointment = :appointment ORDER BY id DESC")
     List<PreventionCheck> findPreventionCheckByAppointment(@Param("appointment")final Appointment appointment);
+
+    @Query("select distinct p from PreventionCheck p where appointment.id = :appointmentId ORDER BY id DESC")
+    public List<PreventionCheck> findPreventionCheckByAppointment(@Param("appointmentId") final int appointmentId);
 }

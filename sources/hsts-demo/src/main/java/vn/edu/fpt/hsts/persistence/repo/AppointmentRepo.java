@@ -7,6 +7,8 @@
  */
 package vn.edu.fpt.hsts.persistence.repo;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -39,4 +41,7 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
 
     @Query("select a from Appointment a where status > :status and meetingDate <= :date and medicalRecord.patient.id = :patientId ORDER BY id DESC")
     List<Appointment> getAllAppointmentToDate(@Param("date")final Date date, @Param("patientId") final int patientId, @Param("status") final byte status);
+
+    @Query(value = "select a from Appointment a where medicalRecord.patient.id = :patientId ORDER BY id DESC")
+    public List<Appointment> findLastAppointmentByPatient(@Param("patientId") final int patientId, final Pageable pageable);
 }

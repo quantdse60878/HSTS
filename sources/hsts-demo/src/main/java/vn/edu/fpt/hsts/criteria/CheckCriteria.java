@@ -22,7 +22,7 @@ public class CheckCriteria extends SearchCriteria {
     /**
      *
      */
-    private int hearthBeat;
+    private int heartBeat;
 
     /**
      *
@@ -149,12 +149,12 @@ public class CheckCriteria extends SearchCriteria {
         this.weight = weight;
     }
 
-    public int getHearthBeat() {
-        return hearthBeat;
+    public int getHeartBeat() {
+        return heartBeat;
     }
 
-    public void setHearthBeat(int hearthBeat) {
-        this.hearthBeat = hearthBeat;
+    public void setHeartBeat(int hearthBeat) {
+        this.heartBeat = hearthBeat;
     }
 
     public int getBloodPressure() {
