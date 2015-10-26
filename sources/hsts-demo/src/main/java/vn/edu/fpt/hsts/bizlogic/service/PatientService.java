@@ -393,6 +393,9 @@ public class PatientService extends AbstractService {
                 }
             }
             Appointment appointment = entryAppointmentList.get(0);
+            appointment.setHeartBeat(checkCriteria.getHeartBeat());
+            appointment.setWaists(checkCriteria.getWaists());
+            appointment.setBloodPressure(checkCriteria.getBloodPressure());
             appointment.setStatus(IDbConsts.IAppointmentStatus.WATTING);
             appointment.setMeetingDate(currentDate);
 
