@@ -122,69 +122,74 @@
 
                                         <!-- Tab 2: Basic patient data -->
                                         <div class="tab-pane" id="tab_2">
-                                            <div class="form-group">
-                                                <label for="Weight" class="col-sm-3 control-label">Weight*</label>
-
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="weight" class="form-control" id="Weight"
-                                                           placeholder="Weight" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="Weight" class="col-sm-1 control-label"> Kg</label>
-
-                                                <label for="Height" class="col-sm-2 control-label">Height*</label>
-
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="height" class="form-control" id="Height"
-                                                           placeholder="Height" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="Height" class="col-sm-1 control-label"> Cm</label>
-                                            </div>
-
-
-                                            <div th:class="form-group">
-                                                <!-- Mạch -->
-                                                <label for="hearthBeat" class="col-sm-3 control-label">Hearth Beat</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="hearthBeat" class="form-control" id="hearthBeat"
-                                                           placeholder="Hearth Beat" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="hearthBeat" class="col-sm-1 control-label">times/minute</label>
-
-                                                <!-- Huyết áp-->
-                                                <label for="bloodPressure" class="col-sm-2 control-label">Blood Pressure</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="bloodPressure" class="form-control" id="bloodPressure"
-                                                           placeholder="Blood Pressure" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="bloodPressure" class="col-sm-1 control-label">mmHg</label>
-                                            </div>
-
-
-                                            <div th:class="form-group">
-
-                                                <!-- Vòng bụng-->
-                                                <label for="waists" class="col-sm-2 control-label">Waists</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="waists" class="form-control" id="waists"
-                                                           placeholder="cm" data-remote="/validateData" required="required"/>
-                                                </div>
-                                                <label for="waists" class="col-sm-1 control-label">cm</label>
-
-                                                <!-- BMI -->
-                                                <label for="bmi" class="col-sm-2 control-label">BMI</label>
-                                                <div class="col-sm-2">
-                                                    <input type="text" th:name="bmi" class="form-control" id="bmi"
-                                                           placeholder="BMI" required="required"/>
-                                                </div>
-                                                <label for="bmi" class="col-sm-1 control-label">kq/m2</label>
-                                            </div>
-
-                                            <!-- footer -->
-                                            <div style="margin: 15px;">
-                                                <a href="#tab_1" onclick="changeTab('#tab_1')" data-toggle="tab" class="btn btn-default">Previous</a>
-                                                <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
-                                            </div>
-                                            <!-- /.footer -->
+                                            <table class="table table-bordered table-striped" style="width: 200px">
+                                                <thead>
+                                                <tr>
+                                                    <th style="width: 200px;">Measurement index</th>
+                                                    <th style="width: 200px;">Value</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label for="Weight" class="control-label">Weight* (Kg)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="weight" class="form-control" id="Weight"
+                                                               placeholder="Weight" data-remote="/validateData" required="required"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="Height" class="control-label">Height* (cm)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="height" class="form-control" id="Height"
+                                                               placeholder="Height" data-remote="/validateData" required="required"/>
+                                                    </td>
+                                                </tr>
+                                                 <tr>
+                                                     <td>
+                                                         <label for="hearthBeat" class="control-label">Hearth Beat* (times/minute)</label>
+                                                     </td>
+                                                     <td class="form-group">
+                                                         <input type="text" th:name="hearthBeat" class="form-control" id="hearthBeat"
+                                                                placeholder="Hearth Beat" data-remote="/validateData" required="required"/>
+                                                     </td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>
+                                                         <label for="bloodPressure" class="control-label">Blood Pressure* (mmHg)</label>
+                                                     </td>
+                                                     <td class="form-group">
+                                                         <input type="text" th:name="bloodPressure" class="form-control" id="bloodPressure"
+                                                                placeholder="Blood Pressure" data-remote="/validateData" required="required"/>
+                                                     </td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>
+                                                         <label for="waists" class="control-label">Waists* (cm)</label>
+                                                     </td>
+                                                     <td class="form-group">
+                                                         <input type="text" th:name="waists" class="form-control" id="waists"
+                                                                placeholder="cm" data-remote="/validateData" required="required"/>
+                                                     </td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>
+                                                         <label for="bmi" class="control-label">BMI*</label>
+                                                     </td>
+                                                     <td>
+                                                         <input type="text" th:name="bmi" class="form-control" id="bmi"
+                                                                placeholder="BMI" required="required"/>
+                                                     </td>
+                                                 </tr>
+                                                 </tbody>
+                                            </table>
+                                             <div style="margin: 15px;">
+                                                 <a href="#tab_1" onclick="changeTab('#tab_1')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                 <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                             </div>
                                         </div>
                                         <!-- End tab 2 -->
 
