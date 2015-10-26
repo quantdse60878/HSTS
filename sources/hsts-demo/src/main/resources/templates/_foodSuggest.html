@@ -40,7 +40,7 @@
         </td>
         <td class="form-group">
             <input type="text" class="form-control" th:field="*{fPresModels[__${row.index}__].fQuantity}"
-                   placeholder="Quantity" required="required"/>
+                   placeholder="Quantity" required="required" data-remote="/validateStr"/>
         </td>
         <td>
             <input type="text" class="form-control"
