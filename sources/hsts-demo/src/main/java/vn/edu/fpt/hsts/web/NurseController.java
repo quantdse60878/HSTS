@@ -108,7 +108,6 @@ public class NurseController extends AbstractController {
             @RequestParam("heartBeat") final int heartBeat,
             @RequestParam("bloodPressure") final int bloodPressure,
             @RequestParam("waists") final int waists,
-            @RequestParam("bmi") final float bmi,
             // Tab 3 param
             @RequestParam("bodyFat") final float bodyFat,
             @RequestParam("visceralFat") final byte visceralFat,
@@ -151,7 +150,7 @@ public class NurseController extends AbstractController {
             checkCriteria.setHeartBeat(heartBeat);
             checkCriteria.setBloodPressure(bloodPressure);
             checkCriteria.setWaists(waists);
-            checkCriteria.setBmi(bmi);
+            checkCriteria.setBmi(weight / (height * height));
 
             // Tab 4 criteria
             RegistrationCriteria rCriteria = new RegistrationCriteria();
@@ -229,7 +228,6 @@ public class NurseController extends AbstractController {
                                         @RequestParam("heartBeat") final int heartBeat,
                                         @RequestParam("bloodPressure") final int bloodPressure,
                                         @RequestParam("waists") final int waists,
-                                        @RequestParam("bmi") final float bmi,
                                         // Tab 3 param
                                         @RequestParam("bodyFat") final float bodyFat,
                                         @RequestParam("visceralFat") final byte visceralFat,
@@ -267,7 +265,7 @@ public class NurseController extends AbstractController {
             checkCriteria.setHeartBeat(heartBeat);
             checkCriteria.setBloodPressure(bloodPressure);
             checkCriteria.setWaists(waists);
-            checkCriteria.setBmi(bmi);
+            checkCriteria.setBmi(weight/(height * height));
 
             // Tab 4 criteria
             RegistrationCriteria rCriteria = new RegistrationCriteria();

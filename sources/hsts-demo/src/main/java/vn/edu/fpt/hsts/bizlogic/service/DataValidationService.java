@@ -124,7 +124,6 @@ public class DataValidationService extends AbstractService {
             minVals.put("hearthBeat", (float) 20);
             minVals.put("bloodPressure", (float) 10);
             minVals.put("waists", (float) 50);
-            minVals.put("bmi", (float) 10);
 
             minVals.put("bodyFat", (float) 1);
             minVals.put("visceralFat", (float) 1);
@@ -152,7 +151,6 @@ public class DataValidationService extends AbstractService {
             maxVals.put("hearthBeat", (float) 200);
             maxVals.put("bloodPressure", (float) 200);
             maxVals.put("waists", (float) 300);
-            maxVals.put("bmi", (float) 50);
 
             maxVals.put("bodyFat", (float) 100);
             maxVals.put("visceralFat",(float) 100);
