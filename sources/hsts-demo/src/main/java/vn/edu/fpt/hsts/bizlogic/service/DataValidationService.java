@@ -28,29 +28,19 @@ public class DataValidationService extends AbstractService {
     private void initParam() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            // Min vals
-            minVals.put("weight", (float) 20);
-            minVals.put("height", (float) 110);
-            minVals.put("bodyFat", (float) 1);
-            minVals.put("visceralFat", (float) 1);
-            minVals.put("muscleMass", (float) 1);
-            minVals.put("bodyWater", (float) 1);
-            minVals.put("phaseAngle", (float) 1);
-            minVals.put("impedance", (float) 1);
-            minVals.put("basalMetabolicRate", (float) 1);
-            minVals.put("mQuantity", (float) 1);
+            /**
+             * Min vals
+             */
+            if (null != minVals) {
+               this.configureMinValue();
+            }
 
-            // Max vals
-            maxVals.put("weight", (float) 200);
-            maxVals.put("height", (float) 250);
-            maxVals.put("bodyFat", (float) 100);
-            maxVals.put("visceralFat",(float) 100);
-            maxVals.put("muscleMass", (float) 100);
-            maxVals.put("bodyWater", (float) 100);
-            maxVals.put("phaseAngle", (float) 100);
-            maxVals.put("impedance", (float) 5000);
-            maxVals.put("basalMetabolicRate", (float) 5000);
-            maxVals.put("mQuantity", (float) 10);
+            /**
+             * Max params.
+             */
+            if (null != maxVals) {
+                this.configMaxValue();
+            }
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
@@ -97,6 +87,62 @@ public class DataValidationService extends AbstractService {
             return true;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public void configureMinValue() {
+        LOGGER.debug(IConsts.BEGIN_METHOD);
+        try {
+            // Nurse register
+            minVals.put("weight", (float) 20);
+            minVals.put("height", (float) 110);
+            minVals.put("hearthBeat", (float) 20);
+            minVals.put("bloodPressure", (float) 10);
+            minVals.put("waists", (float) 50);
+            minVals.put("bmi", (float) 10);
+
+            minVals.put("bodyFat", (float) 1);
+            minVals.put("visceralFat", (float) 1);
+            minVals.put("muscleMass", (float) 1);
+            minVals.put("bodyWater", (float) 1);
+            minVals.put("phaseAngle", (float) 1);
+            minVals.put("impedance", (float) 1);
+            minVals.put("basalMetabolicRate", (float) 1);
+
+            // Prescription model attribute
+            minVals.put("mQuantity", (float) 1);
+
+            // Nutrition model attribute
+        } finally {
+            LOGGER.debug(IConsts.END_METHOD);
+        }
+    }
+
+    public void configMaxValue() {
+        LOGGER.debug(IConsts.BEGIN_METHOD);
+        try {
+            // Nurse register
+            maxVals.put("weight", (float) 200);
+            maxVals.put("height", (float) 250);
+            maxVals.put("hearthBeat", (float) 200);
+            maxVals.put("bloodPressure", (float) 200);
+            maxVals.put("waists", (float) 300);
+            maxVals.put("bmi", (float) 50);
+
+            maxVals.put("bodyFat", (float) 100);
+            maxVals.put("visceralFat",(float) 100);
+            maxVals.put("muscleMass", (float) 100);
+            maxVals.put("bodyWater", (float) 100);
+            maxVals.put("phaseAngle", (float) 100);
+            maxVals.put("impedance", (float) 5000);
+            maxVals.put("basalMetabolicRate", (float) 5000);
+
+            // Prescription Model attribute
+            maxVals.put("mQuantity", (float) 10);
+
+            // Nutrition model attribute
+        } finally {
+            LOGGER.debug(IConsts.END_METHOD);
         }
     }
 }
