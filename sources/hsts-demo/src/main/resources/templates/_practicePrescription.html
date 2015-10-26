@@ -33,7 +33,7 @@
         </td>
         <td>
             <input type="text" class="form-control"
-                   th:field="*{pPresModels[0].pNote}" placeholder="Advice"/>
+                   th:field="*{pPresModels[0].pNote}" placeholder="Advice" data-role="tagsinput"/>
         </td>
         <td>
             <a class="btn btn-danger fa fa-remove" onclick="deleteRowPractice(this)"></a>
@@ -51,7 +51,7 @@
     <label class="col-md-3 control-label">Kcal Estimate</label>
 
     <div class="col-md-4">
-        <input th:field="*{kcalRequire}" type="text" class="form-control" data-remote="/validateData" />
+        <input th:field="*{kcalRequire}" type="text" class="form-control" data-remote="/validateData" required="required"/>
     </div>
     <label class="col-md-1 control-label">Kcal/Day</label>
 </div>
