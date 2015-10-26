@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
@@ -90,6 +91,30 @@ public class DataValidationService extends AbstractService {
         }
     }
 
+
+    public boolean validateRequestString(final HttpServletRequest request) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final Enumeration<String> params = request.getParameterNames();
+            while (params.hasMoreElements()) {
+                String paramName = params.nextElement();
+                String paramValue = request.getParameter(paramName).trim();
+                // Check for specific validation
+                if(StringUtils.isEmpty(paramValue)) {
+                    return false;
+                }
+                boolean result =  this.validateString(paramName, paramValue);
+                if (result) {
+                    continue;
+                }
+                return false;
+            }
+            return true;
+        }  finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
     public void configureMinValue() {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
@@ -141,6 +166,25 @@ public class DataValidationService extends AbstractService {
             maxVals.put("mQuantity", (float) 10);
 
             // Nutrition model attribute
+        } finally {
+            LOGGER.debug(IConsts.END_METHOD);
+        }
+    }
+
+    public boolean validateString(final String paramName, final String paramValue){
+        LOGGER.debug(IConsts.BEGIN_METHOD);
+        try {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("paramName[{}], paramValue[{}]", paramName, paramValue);
+            }
+            // For specical case for each parameter, implement here
+            if("GOOD".equals(paramName)) {
+                LOGGER.debug("Good");
+                return true;
+            } else if("BAAD".equals(paramName)) {
+                return false;
+            }
+            return true;
         } finally {
             LOGGER.debug(IConsts.END_METHOD);
         }

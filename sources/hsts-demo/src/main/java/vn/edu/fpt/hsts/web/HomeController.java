@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.service.DataValidationService;
@@ -102,6 +101,21 @@ public class HomeController {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             final boolean result = dataValidationService.validateRequestParam(request);
+            if (result) {
+                return new ResponseEntity<String>(HttpStatus.OK);
+            }
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/validateStr", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> validateString(final HttpServletRequest request) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final boolean result = dataValidationService.validateRequestString(request);
             if (result) {
                 return new ResponseEntity<String>(HttpStatus.OK);
             }
