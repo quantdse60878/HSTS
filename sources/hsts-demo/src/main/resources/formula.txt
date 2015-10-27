@@ -1,0 +1,5 @@
+z * x * 0.414 / 100000
+y / 0.4536 * 0.53 * 1.609 * z * x * 0.414 / 100000
+z,2,NumberOfStep
+x,1,Height
+y,1,Weight

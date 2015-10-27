@@ -74,6 +74,7 @@ public class StaffController extends AbstractController {
         for(int i = 0; i < AnalyticDataTask.variable.size(); i++) {
             listVariables.add(new Variable(AnalyticDataTask.variable.get(i), AnalyticDataTask.valueVariable.get(i).split(",")[1]));
         }
+        formulaService.saveNewFormula();
         mav.addObject("DISTANCEFORMULA", AnalyticDataTask.FORMULA_CALCULATE_DISTANCE);
         mav.addObject("CALORIESFORMULA", AnalyticDataTask.FORMULA_CALCULATE_CALORIES);
         mav.addObject("LISTVARIABLE", listVariables);

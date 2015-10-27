@@ -13,6 +13,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -26,6 +27,7 @@ import java.util.*;
 public class AnalyticDataTask {
 
 
+    public static boolean isFirst = true;
     //    X: Height
 //    Y: Weight
 //    Z: NumberofStep
@@ -59,6 +61,39 @@ public class AnalyticDataTask {
 
     @Scheduled(fixedRate = 1000 * 20)
     public void updatePatientData() {
+
+        if(isFirst) {
+            File file = new File(AnalyticDataTask.class.getClassLoader().getResource("formula.txt").getFile());
+            BufferedReader br = null;
+
+            try {
+
+                String sCurrentLine;
+
+                br = new BufferedReader(new FileReader(file));
+
+                AnalyticDataTask.FORMULA_CALCULATE_DISTANCE = br.readLine();
+                AnalyticDataTask.FORMULA_CALCULATE_CALORIES = br.readLine();
+                AnalyticDataTask.variable = new ArrayList<>();
+                AnalyticDataTask.valueVariable = new ArrayList<>();
+                String tmp = "";
+                while ((tmp = br.readLine()) != null) {
+                    String[] listData = tmp.split(",");
+                    AnalyticDataTask.variable.add(listData[0]);
+                    AnalyticDataTask.valueVariable.add(listData[1] + "," + listData[2]);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (br != null)br.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            isFirst = false;
+        }
+
         List<MedicalRecordData> listRecordData = medicalRecordDataRepo.findRecordDataNotUpdate();
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
         float distance = 0;
