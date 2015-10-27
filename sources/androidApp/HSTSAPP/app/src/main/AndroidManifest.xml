@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -81,6 +81,10 @@
         <activity
             android:name=".SetNumberStepActivity"
             android:label="Set Number Step" >
+        </activity>
+        <activity
+            android:name=".SetupActivity"
+            android:label="@string/title_activity_setup" >
         </activity>
     </application>
 

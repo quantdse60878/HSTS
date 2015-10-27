@@ -58,5 +58,7 @@
     <string name="change_password_error_password">Confirmed Password Is Wrong</string>
     <string name="change_password_success_password">Updated Password Successful</string>
     <string name="login_error">Wrong Username Password</string>
+    <string name="title_activity_setup">SetupActivity</string>
+    <string name="action_settings">Settings</string>
     <!-- KhuongMH -->
 </resources>
