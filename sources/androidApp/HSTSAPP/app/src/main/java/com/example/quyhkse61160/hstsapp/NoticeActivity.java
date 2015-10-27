@@ -42,6 +42,7 @@ public class NoticeActivity extends ActionBarActivity {
         ArrayList<HashMap<String, String>> sections = new ArrayList<>();
         List<Treatment> treatments = Constant.TREATMENTS;
         if (field.equals("food")) {
+            actionBar.setTitle("Danh Sách Thức Ăn");
             name.setText("Món Ăn");
 //            number.setText("Số Bữa Ăn");
             quantitative.setText("Định Lượng");
@@ -62,6 +63,7 @@ public class NoticeActivity extends ActionBarActivity {
             }
         }
         if (field.equals("medicine")) {
+            actionBar.setTitle("Danh Sách Thuốc");
             name.setText("Thuốc");
 //            number.setText("Số Lần Uống");
             quantitative.setText("Định Lượng");
@@ -83,6 +85,7 @@ public class NoticeActivity extends ActionBarActivity {
             }
         }
         if (field.equals("practice")) {
+            actionBar.setTitle("Danh Sách Bài Tập");
             name.setText("Bài Tập");
 //            number.setText("Số Lần Tập");
             quantitative.setText("Thời Gian");
