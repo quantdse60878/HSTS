@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.quyhkse61160.hstsapp.Common.Constant;
 
 import java.util.ArrayList;
 
@@ -81,6 +84,10 @@ public class DeviceScanActivity extends ListActivity {
         final BluetoothDevice device = mLeDeviceListAdapter.getDevice(position);
         if (device == null) return;
         final Intent intent = new Intent(this, HomeActivity.class);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Constant.PREF_HADSELECTDEVICE,device.getAddress());
+        editor.commit();
         intent.putExtra(SelectDeviceActivity.EXTRAS_DEVICE_NAME, device.getName());
         intent.putExtra(SelectDeviceActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
         if (mScanning) {

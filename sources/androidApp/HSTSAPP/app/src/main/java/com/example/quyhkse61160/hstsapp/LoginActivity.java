@@ -58,6 +58,8 @@ public class LoginActivity extends ActionBarActivity {
     public static boolean hadRegisterReceiver = false;
     protected final NetworkChangeReceiver mConnectionDetector = new NetworkChangeReceiver();
     protected final IntentFilter mIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+    public SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +69,14 @@ public class LoginActivity extends ActionBarActivity {
         Constant.DATA_FROM_SERVER = HSTSUtils.loadData(getAssets());
         //KhuongMH
         am = getAssets();
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
-        if (!sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")) {
+        sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
+        Log.d("KhuongMHH -----11111  ", sharedPreferences.getString(Constant.PREF_DATA, ""));
+        if (!sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")
+                && !sharedPreferences.getString(Constant.PREF_DATA, "").equals("")) {
+            Constant.accountId = sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "");
+            Constant.PATIENT_NAME = sharedPreferences.getString(Constant.PREF_PATIENT_NAME, "");
+            Constant.patientId = sharedPreferences.getString(Constant.PREF_PATIENTID_HADLOGIN, "");
+            Constant.DATA_FROM_SERVER = sharedPreferences.getString(Constant.PREF_DATA, "");
             if (!sharedPreferences.getString(Constant.PREF_HADSELECTDEVICE, "").equals("")) {
                 Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
                 LoginActivity.this.startActivity(myIntent);
@@ -76,7 +84,6 @@ public class LoginActivity extends ActionBarActivity {
                 Intent myIntent = new Intent(LoginActivity.this, SelectDeviceActivity.class);
                 LoginActivity.this.startActivity(myIntent);
             }
-
         } else {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
@@ -227,6 +234,11 @@ public class LoginActivity extends ActionBarActivity {
             if ((Constant.accountId.equals("0") && Constant.PATIENT_NAME == null) || Constant.patientId.equals("0")) {
                 Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_LONG).show();
             } else {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(Constant.PREF_ACCOUNTID_HADLOGIN,Constant.accountId);
+                editor.putString(Constant.PREF_PATIENTID_HADLOGIN,Constant.patientId);
+                editor.putString(Constant.PREF_PATIENT_NAME,Constant.PATIENT_NAME);
+                editor.commit();
                 Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
                 startActivity(continueIntent);
             }

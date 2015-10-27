@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
@@ -355,7 +356,12 @@ public class BroadcastService extends Service {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            Log.d("DKMMMMM", "OKKKKKKKKKKKKK");
             Constant.DATA_FROM_SERVER = response;
+            SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(Constant.PREF_DATA,Constant.DATA_FROM_SERVER);
+            editor.commit();
             Constant.TREATMENTS = Constant.getItems();
             Log.d("QUYYY111", "Treatment--" + response);
             HomeActivity.amountTime = HomeActivity.amountTime();

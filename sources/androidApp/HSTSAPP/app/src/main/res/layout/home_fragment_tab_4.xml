@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.quyhkse61160.hstsapp.Fragment.Tab4">
 
@@ -7,208 +8,247 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
+        android:background="#E0E0E0"
+        android:paddingBottom="10dp"
         android:paddingLeft="10dp"
-        android:paddingBottom="10dp">
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Bệnh Nhân : "
-                    android:textColor="#3ea000"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="KhuongMH "
-                    android:textColor="@android:color/black"
-                    android:textSize="17dp"
-                    android:id="@+id/notice_patient_name"/>
-            </LinearLayout>
-            <LinearLayout
+                android:layout_height="match_parent"
+                android:background="@drawable/linear_background"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Chẩn Đoán : "
-                    android:textColor="#3ea000"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Stupid "
-                    android:textColor="@android:color/black"
-                    android:textSize="17dp"
-                    android:id="@+id/notice_illness_name"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Ngày Khám : "
-                    android:textColor="#3ea000"
-                    android:textSize="17dp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Bệnh Nhân : "
+                        android:textColor="#3ea000"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/notice_patient_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="KhuongMH "
+                        android:textColor="@android:color/black"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Ngày Mai "
-                    android:textColor="@android:color/black"
-                    android:textSize="17dp"
-                    android:id="@+id/notice_from_date"/>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Chẩn Đoán : "
+                        android:textColor="#3ea000"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/notice_illness_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Stupid "
+                        android:textColor="@android:color/black"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Ngày Khám : "
+                        android:textColor="#3ea000"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/notice_from_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Ngày Mai "
+                        android:textColor="@android:color/black"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Tái Khám : "
+                        android:textColor="#3ea000"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/notice_next_appointment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Hoho"
+                        android:textColor="@android:color/black"
+                        android:textSize="17dp" />
+                </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Tái Khám : "
-                    android:textColor="#3ea000"
-                    android:textSize="17dp"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Hoho"
-                    android:textColor="@android:color/black"
-                    android:textSize="17dp"
-                    android:id="@+id/notice_next_appointment"/>
-            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/linear_around"
-                android:orientation="vertical"
-                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
                     android:paddingLeft="20dp"
-                    android:background="#CCFF90"
+                    android:paddingBottom="10dp"
                     android:text="Danh Sách Cần Thực Hiện"
-                    android:textSize="17dp"/>
+                    android:textStyle="bold"
+                    android:textSize="17dp" />
+                <!--android:background="#CCFF90"-->
 
 
                 <LinearLayout
-                    android:layout_marginTop="5dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
+                    android:layout_marginTop="5dp">
+
                     <RelativeLayout
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
+
                         <LinearLayout
                             android:id="@+id/btn_foods"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="2dp"
-                            android:orientation="vertical"
-                            android:gravity="center"
                             android:background="@drawable/linear_background"
-                            android:paddingRight="5dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
                             android:paddingBottom="5dp"
                             android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
                             android:paddingTop="5dp">
+
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/food_icon_v2"
-                                android:layout_margin="5dp"/>
+                                android:layout_margin="5dp"
+                                android:src="@drawable/food_icon_v2" />
                         </LinearLayout>
                     </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
-                        <LinearLayout
-                            android:id="@+id/btn_pracrices"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="3dp"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:background="@drawable/linear_background"
-                            android:paddingRight="5dp"
-                            android:paddingBottom="5dp"
-                            android:paddingLeft="5dp"
-                            android:paddingTop="5dp"
-                            >
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/walk_icon_v2"
-                                android:layout_margin="5dp"/>
-                        </LinearLayout>
-                    </RelativeLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:gravity="center"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
-                    <RelativeLayout
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
+
                         <LinearLayout
                             android:id="@+id/btn_medicines"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="2dp"
-                            android:orientation="vertical"
-                            android:gravity="center"
+                            android:layout_marginLeft="3dp"
                             android:background="@drawable/linear_background"
-                            android:paddingRight="5dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
                             android:paddingBottom="5dp"
                             android:paddingLeft="5dp"
-                            android:paddingTop="5dp"
-                            >
+                            android:paddingRight="5dp"
+                            android:paddingTop="5dp">
+
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/medicine_icon_v2"
-                                android:layout_margin="5dp"/>
+                                android:layout_margin="5dp"
+                                android:src="@drawable/medicine_icon_v2" />
                         </LinearLayout>
                     </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center">
+
                     <RelativeLayout
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center">
+                        android:layout_weight="1">
 
+                        <LinearLayout
+                            android:id="@+id/btn_pracrices"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="2dp"
+                            android:background="@drawable/linear_background"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingTop="5dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:src="@drawable/walk_icon_v2" />
+                        </LinearLayout>
                     </RelativeLayout>
+                    <!--<RelativeLayout-->
+                    <!--android:layout_width="0dip"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:gravity="center">-->
+
+                    <!--</RelativeLayout>-->
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
