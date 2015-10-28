@@ -108,9 +108,15 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Gender</label>
 
-                                                <div class="radio col-sm-2">
-                                                    <input type="text" readonly="readonly" class="form-control"
-                                                           th:value="${PATIENT.account.gender == 1}? 'Male' : 'Female'"/>
+                                                <!--<div class="radio col-sm-2">-->
+                                                    <!--<input type="text" readonly="readonly" class="form-control"-->
+                                                           <!--th:value="${PATIENT.account.gender == 1}? 'Male' : 'Female'"/>-->
+                                                <!--</div>-->
+
+                                                <div class="btn-group col-sm-2" data-toggle="buttons">
+                                                    <label th:class="(${PATIENT.account.gender == 1})?'btn btn-success active':'btn btn-danger active'">
+                                                        <input type="radio" th:text="${PATIENT.account.gender == 1}? 'Male' : 'Femail'"/>
+                                                    </label>
                                                 </div>
                                             </div>
 

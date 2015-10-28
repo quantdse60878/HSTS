@@ -65,17 +65,14 @@
                                 <div class="nav-tabs-custom" style="box-shadow: none;">
                                     <!-- Tab header -->
                                     <ul class="nav nav-tabs">
-                                        <li class="active" >
+                                        <li class="active">
                                             <a href="#tab_1" data-toggle="tab">Patient's Profile</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_2" data-toggle="tab">Basic checking</a>
+                                            <a href="#tab_2" data-toggle="tab">Medical Checking</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_3" data-toggle="tab">Prevention checking</a>
-                                        </li>
-                                        <li>
-                                            <a href="#tab_4" data-toggle="tab">Medical registration</a>
+                                            <a href="#tab_3" data-toggle="tab">Medical registration</a>
                                         </li>
                                     </ul>
                                     <!-- End tab header -->
@@ -111,9 +108,15 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Gender</label>
 
-                                                <div class="radio col-sm-2">
-                                                    <input type="text" readonly="readonly" class="form-control"
-                                                           th:value="${PATIENT.account.gender == 1}? 'Male' : 'Female'"/>
+                                                <!--<div class="radio col-sm-2">-->
+                                                <!--<input type="text" readonly="readonly" class="form-control"-->
+                                                <!--th:value="${PATIENT.account.gender == 1}? 'Male' : 'Female'"/>-->
+                                                <!--</div>-->
+
+                                                <div class="btn-group col-sm-2" data-toggle="buttons">
+                                                    <label th:class="(${PATIENT.account.gender == 1})?'btn btn-success active':'btn btn-danger active'">
+                                                        <input type="radio" th:text="${PATIENT.account.gender == 1}? 'Male' : 'Femail'"/>
+                                                    </label>
                                                 </div>
                                             </div>
 
@@ -127,191 +130,180 @@
 
                                         <!-- Tab 2: Basic patient data -->
                                         <div class="tab-pane" id="tab_2">
-                                            <table class="table table-bordered table-striped" style="width: 500px">
+                                            <table class="table table-bordered table-striped" id="tableMedicalCheck">
                                                 <thead>
                                                 <tr>
-                                                    <th style="width: 300px;">Measurement index</th>
-                                                    <th style="width: 200px;">Value</th>
+                                                    <th style="width: 200px; text-align: center">Measurement index</th>
+                                                    <th style="width: 125px; text-align: center">Value</th>
+                                                    <th style="width: 200px; text-align: center">Measurement index</th>
+                                                    <th style="width: 125px; text-align: center" >Value</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <label for="Weight" class="control-label">Weight* (Kg)</label>
+                                                        <label for="Weight" class="control-label">Weight*</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="text" th:name="weight" class="form-control" id="Weight"
-                                                               placeholder="Weight" data-remote="/validateData" required="required" data-error="Wrong input"
-                                                               th:value="(*{PC}!= null and *{PC.weight != null})?*{PC.weight}:0"/>
+                                                               placeholder="Kg" data-remote="/validateData"
+                                                               required="required" data-error="Wrong input"/>
+
+                                                        <div class="help-block with-errors"></div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="visceralFat" class="control-label">Visceral Fat*</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="visceralFat" class="form-control"
+                                                               id="visceralFat"
+                                                               placeholder="level" data-remote="/validateData"
+                                                               required="required" data-error="Wrong input"/>
+
                                                         <div class="help-block with-errors"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <label for="Height" class="control-label">Height* (cm)</label>
+                                                        <label for="Height" class="control-label">Height*</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="text" th:name="height" class="form-control" id="Height"
-                                                               placeholder="Height" data-remote="/validateData" required="required" data-error="Wrong input" th:value="(*{PC} != null and *{PC.height != null})?*{PC.height}:0"/>
+                                                               placeholder="cm" data-remote="/validateData"
+                                                               required="required" data-error="Wrong input"/>
+
                                                         <div class="help-block with-errors"></div>
                                                     </td>
-                                                </tr>
-                                                <tr>
+
                                                     <td>
-                                                        <label for="heartBeat" class="control-label">Hearth Beat*
-                                                            (times/minute)</label>
+                                                        <label for="muscleMass" class="control-label">Muscle Mass*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="heartBeat" class="form-control" id="heartBeat"
-                                                               placeholder="Hearth Beat" data-remote="/validateData" required="required" data-error="Wrong input"
-                                                               th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.heartBeat != null})?*{PC.appointment.heartBeat}:0"/>
+                                                        <input type="text" th:name="muscleMass" class="form-control"
+                                                               id="muscleMass"
+                                                               placeholder="%" data-remote="/validateData"
+                                                               required="required"/>
+
                                                         <div class="help-block with-errors"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <label for="bloodPressure" class="control-label">Blood Pressure* (mmHg)</label>
+                                                        <label for="heartBeat" class="control-label">Heart Beat*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="bloodPressure" class="form-control" id="bloodPressure"
-                                                               placeholder="Blood Pressure" data-remote="/validateData" required="required" data-error="Wrong input"
-                                                               th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.bloodPressure != null})?*{PC.appointment.bloodPressure}:0"/>
+                                                        <input type="text" th:name="heartBeat" class="form-control"
+                                                               id="heartBeat"
+                                                               placeholder="times/minute" data-remote="/validateData"
+                                                               required="required" data-error="Wrong input"/>
+
+                                                        <div class="help-block with-errors"></div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="bodyWater" class="control-label">Body Water*</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="bodyWater" class="form-control"
+                                                               id="bodyWater"
+                                                               placeholder="%" data-remote="/validateData"
+                                                               required="required" data-error="Wrong input"/>
+
                                                         <div class="help-block with-errors"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <label for="waists" class="control-label">Waists* (cm)</label>
+                                                        <label for="bloodPressure" class="control-label">Blood Pressure*</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="bloodPressure" class="form-control"
+                                                               id="bloodPressure"
+                                                               placeholder="mmHg" data-remote="/validateData"
+                                                               required="required" data-error="Wrong input"/>
+
+                                                        <div class="help-block with-errors"></div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="phaseAngle" class="control-label">Phase Angle*</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="phaseAngle" class="form-control"
+                                                               id="phaseAngle"
+                                                               placeholder="o" data-remote="/validateData"
+                                                               required="required" data-error="Wrong input"/>
+
+                                                        <div class="help-block with-errors"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="waists" class="control-label">Waists*</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="text" th:name="waists" class="form-control" id="waists"
-                                                               placeholder="cm" data-remote="/validateData" required="required" data-error="Wrong input"
-                                                               th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.waists != null})?*{PC.appointment.waists}:0"/>
+                                                               placeholder="cm" data-remote="/validateData"
+                                                               required="required" data-error="Wrong input"/>
+
+                                                        <div class="help-block with-errors"></div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="impedance" class="control-label">Impedance*</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="impedance" class="form-control"
+                                                               id="impedance"
+                                                               placeholder="Ohm" data-remote="/validateData"
+                                                               required="required" data-error="Wrong input"/>
+
                                                         <div class="help-block with-errors"></div>
                                                     </td>
                                                 </tr>
-                                                <!--<tr>-->
-                                                    <!--<td>-->
-                                                        <!--<label for="bmi" class="control-label">BMI*</label>-->
-                                                    <!--</td>-->
-                                                    <!--<td>-->
-                                                        <!--<input type="text" th:name="bmi" class="form-control" id="bmi"-->
-                                                               <!--placeholder="BMI" required="required"-->
-                                                               <!--th:value="(*{PC}!= null and *{PC.bmi != null})?*{PC.bmi}:0"/>-->
-                                                    <!--</td>-->
-                                                <!--</tr>-->
+
+                                                <tr>
+                                                    <td>
+                                                        <label for="bodyFat" class="control-label">Body Fat*</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="bodyFat" class="form-control"
+                                                               id="bodyFat"
+                                                               placeholder="%" data-remote="/validateData"
+                                                               required="required" data-error="Wrong input"/>
+
+                                                        <div class="help-block with-errors"></div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="basalMetabolicRate" class="control-label">Basal
+                                                            Metabolic Rate*</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" th:name="basalMetabolicRate" class="form-control"
+                                                               id="basalMetabolicRate"
+                                                               placeholder="Kcal"
+                                                               data-remote="/validateData" required="required"
+                                                               data-error="Wrong input"/>
+
+                                                        <div class="help-block with-errors"></div>
+                                                    </td>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                             <div style="margin: 15px;">
-                                                <a href="#tab_1" onclick="changeTab('#tab_1')" data-toggle="tab" class="btn btn-default">Previous</a>
-                                                <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
+                                                <a href="#tab_1" onclick="changeTab('#tab_1')" data-toggle="tab"
+                                                   class="btn btn-default">Previous</a>
+                                                <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab"
+                                                   class="btn btn-primary pull-right">Next</a>
                                             </div>
                                         </div>
                                         <!-- End tab 2 -->
 
-                                        <!-- Tab 3: Prevention checking -->
+
+                                        <!-- Tab 3: Medical registration -->
                                         <div class="tab-pane" id="tab_3">
-                                            <table  class="table table-bordered table-striped" style="width: 500px">
-                                                <thead>
-                                                <th style="width: 300px;">Measurement index</th>
-                                                <th style="width: 200px;">Value</th>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <label for="bodyFat" class="control-label">Body Fat* (%)</label>
-                                                    </td>
-                                                    <td class="form-group">
-                                                        <input type="text" th:name="bodyFat" class="form-control" id="bodyFat"
-                                                               placeholder="Body Fat" data-remote="/validateData" required="required" data-error="Wrong input"
-                                                               th:value="(*{PC}!= null and *{PC.bodyFat != null})?*{PC.bodyFat}:0"/>
-                                                        <div class="help-block with-errors"></div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <label for="visceralFat" class="control-label">Visceral Fat (level)</label>
-                                                    </td>
-                                                    <td class="form-group">
-                                                        <input type="text" th:name="visceralFat" class="form-control" id="visceralFat"
-                                                               placeholder="Visceral Fat" data-remote="/validateData" required="required" data-error="Wrong input"
-                                                               th:value="(*{PC}!= null and *{PC.visceralFat != null})?*{PC.visceralFat}:0"/>
-                                                        <div class="help-block with-errors"></div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <label for="muscleMass" class="control-label">Muscle Mass* (%)</label>
-                                                    </td>
-                                                    <td class="form-group">
-                                                        <input type="text" th:name="muscleMass" class="form-control" id="muscleMass"
-                                                               placeholder="Muscle Mass" data-remote="/validateData" required="required"
-                                                               th:value="(*{PC}!= null and *{PC.muscleMass != null})?*{PC.muscleMass}:0"/>
-                                                        <div class="help-block with-errors"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="bodyWater" class="control-label">Body Water (%)</label>
-                                                    </td>
-                                                    <td class="form-group">
-                                                        <input type="text" th:name="bodyWater" class="form-control" id="bodyWater"
-                                                               placeholder="Body Water" data-remote="/validateData" required="required" data-error="Wrong input"
-                                                               th:value="(*{PC}!= null and *{PC.bodyWater != null})?*{PC.bodyWater}:0"/>
-                                                        <div class="help-block with-errors"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="phaseAngle" class="control-label">Phase angle (o)</label>
-                                                    </td>
-                                                    <td class="form-group">
-                                                        <input type="text" th:name="phaseAngle" class="form-control" id="phaseAngle"
-                                                               placeholder="Phase angle" data-remote="/validateData" required="required" data-error="Wrong input"
-                                                               th:value="(*{PC}!= null and *{PC.phaseAngle != null})?*{PC.phaseAngle}:0"/>
-                                                        <div class="help-block with-errors"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="impedance" class="control-label">Impedance (Ohm)</label>
-                                                    </td>
-                                                    <td class="form-group">
-                                                        <input type="text" th:name="impedance" class="form-control" id="impedance"
-                                                               placeholder="Impedance" data-remote="/validateData" required="required" data-error="Wrong input"
-                                                               th:value="(*{PC}!= null and *{PC.impedance != null})?*{PC.impedance}:0"/>
-                                                        <div class="help-block with-errors"></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <label for="basalMetabolicRate" class="control-label">Basal Metabolic Rate
-                                                            (Kcal)</label>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" th:name="basalMetabolicRate" class="form-control" id="basalMetabolicRate"
-                                                               placeholder="Basal Metabolic Rate" data-remote="/validateData" required="required" data-error="Wrong input"
-                                                               th:value="(*{PC}!= null and *{PC.basalMetabolicRate != null})?*{PC.basalMetabolicRate}:0"/>
-                                                        <div class="help-block with-errors"></div>
-                                                    </td>
-
-                                                </tr>
-                                                </tbody>
-                                            </table>
-
-                                            <!-- footer -->
-                                            <div style="margin: 15px;">
-                                                <a href="#tab_2" onclick="changeTab('#tab_2')" data-toggle="tab" class="btn btn-default">Previous</a>
-                                                <a href="#tab_4" onclick="changeTab('#tab_4')" data-toggle="tab" class="btn btn-primary pull-right">Next</a>
-                                            </div>
-                                            <!-- /.footer -->
-                                        </div>
-                                        <!-- End tab 3 -->
-
-                                        <!-- Tab 4: Medical registration -->
-                                        <div class="tab-pane" id="tab_4">
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Doctor*</label>
 
@@ -344,16 +336,17 @@
                                                 <label for="medicineHistory" class="col-sm-3 control-label">Tiền sử dùng thuốc</label>
 
                                                 <div class="col-sm-6">
-                                                    <input th:type="text" class="form-control" placeholder="Medicine history" name="medicineHistory" rows="3" data-role="tagsinput" id="medicineHistory" th:value="*{OLDMEDICINE != null}?OLDMEDICINE:null"></input>
+                                                    <input th:type="text" class="form-control" placeholder="Medicine history" name="medicineHistory" rows="3" data-role="tagsinput" id="medicineHistory"></input>
                                                 </div>
                                             </div>
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <a href="#tab_2" onclick="changeTab('#tab_2')" data-toggle="tab" class="btn btn-default">Previous</a>
+                                                <button type="submit" class="btn btn-primary pull-right">Register</button>
                                             </div>
                                             <!-- /.footer -->
                                         </div>
-                                        <!-- End tab 4 -->
+                                        <!-- End tab 3 -->
                                     </div>
                                     <!-- end tab content -->
                                 </div>
@@ -365,7 +358,6 @@
                             <div class="box-footer">
                                 <button type="reset" class="btn btn-default">Cancel</button>
                                 <a th:href="@{/bindingOld(patientId=${PATIENT.id})}" class="btn btn-primary">Use old measurement index</a>
-                                <button type="submit" class="btn btn-primary pull-right">Register</button>
                             </div>
                             <!-- /.box-footer -->
                         </form>
@@ -396,46 +388,16 @@
     <!-- Bootstrap validator-->
     <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
 
-    <!-- registerPatient -->
-    <script th:src="@{/static/js/registerPatient.js}"></script>
     <!-- script add -->
-    <script>
-        $("#doctorSelect").select2();
-        $("#Birthday").datepicker({
-            format: 'dd-mm-yyyy'
-        });
-        //        var countMedicalhistory = 2;
-        //        var countClinicalSymptoms = 2;
-        //
-        //        function addRowMedicalhistory(tableID) {
-        //            var tableElement = document.getElementById(tableID);
-        //            var newRow = tableElement.insertRow(tableElement.rows.length);
-        //            var newCell;
-        //
-        //            newCell = newRow.insertCell(newRow.cells.length);
-        //            newCell.innerHTML = countMedicalhistory + "/";
-        //            newCell = newRow.insertCell(newRow.cells.length);
-        //            newCell.innerHTML = '<input type="text" class="form-control" placeholder="Medical history"/>';
-        //
-        //            countMedicalhistory++;
-        //            return newRow;
-        //        }
-        //        ;
-        //        function addRowClinicalSymptoms(tableID) {
-        //            var tableElement = document.getElementById(tableID);
-        //            var newRow = tableElement.insertRow(tableElement.rows.length);
-        //            var newCell;
-        //
-        //            newCell = newRow.insertCell(newRow.cells.length);
-        //            newCell.innerHTML = countClinicalSymptoms + "/";
-        //            newCell = newRow.insertCell(newRow.cells.length);
-        //            newCell.innerHTML = '<input type="text" class="form-control" placeholder="Clinical Symptoms"/>';
-        //
-        //            countClinicalSymptoms++;
-        //            return newRow;
-        //        }
-        //        ;
-    </script>
+    <script th:src="@{/static/js/bootstrap-validator-ext.js}"/>
+    <script th:src="@{/static/js/registerPatient.js}"/>
+
+    <!-- script add -->
+    <script th:src="@{/static/js/bootstrap-validator-ext.js}"/>
+    <script th:src="@{/static/js/updatePatient.js}"/>
+
+    <!-- css add -->
+    <link th:href="@{/static/css/updatePatient.css}" rel="stylesheet"/>
 </div>
 <!-- /.content-wrapper -->
 
