@@ -22,6 +22,8 @@ import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 
+import java.util.List;
+
 /**
  * Created by Aking on 10/21/2015.
  */
@@ -42,6 +44,24 @@ public class NutritionController extends AbstractController{
 
     @Autowired
     PreventionCheckService preventionCheckService;
+
+    @RequestMapping(value = "nutriPatients", method = RequestMethod.GET)
+    public ModelAndView nutriPatientsPage() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("nutriPatients");
+
+            // Get list patients
+            List<Patient> patientList = patientService.getPatientByApponitmentDate();
+            LOGGER.info("listpatiens: " + patientList.size());
+            mav.addObject("LISTPATIENTS", patientList);
+
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 
     @RequestMapping(value = "createNutrition", method = RequestMethod.GET)
     public ModelAndView createNutritionPage(@RequestParam("patientID") final int patientID) {

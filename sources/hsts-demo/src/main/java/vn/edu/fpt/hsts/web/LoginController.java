@@ -131,9 +131,16 @@ public class LoginController {
                     mav.addObject("LISTPREVENTION", listPrevention);
                     mav.addObject("LISTMEDICALRECORDDATA", listMedicalRecordData);
 
-                }else if (user.getRole().getName().equals("Admin")){
+                } else if (user.getRole().getName().equals("Admin")){
                     mav.setViewName("adminlistuser");
-				}
+				} else if (user.getRole().getName().equals("Nutrition")){
+                    mav.setViewName("nutriPatients");
+                    List<Patient> patientList = patientService.getPatientByApponitmentDate();
+                    LOGGER.info("listpatiens: " + patientList.size());
+                    mav.addObject("LISTPATIENTS", patientList);
+                } else if (user.getRole().getName().equals("Doctor Manager")) {
+                    mav.setViewName("regimens");
+                }
 
                 return mav;
             }

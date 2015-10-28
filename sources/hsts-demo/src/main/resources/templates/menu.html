@@ -42,10 +42,19 @@
                    <!-- /.patient's Profile -->
                </div>
             </li>
+            <li class="active treeview" th:if="${session.USER.role.name == 'Nutrition'}">
+                <ul class="treeview-menu">
+                    <li class="active"><a href="nutriPatients"><i class="fa fa-users"></i> Patients</a></li>
+                </ul>
+                <div th:if="${PATIENT != null}">
+                    <!-- patient's Profile -->
+                    <div layout:replace="_patientProfileMenu"></div>
+                    <!-- /.patient's Profile -->
+                </div>
+            </li>
             <li class="active treeview" th:if="${session.USER.role.name == 'Doctor Manager'}">
                 <ul class="treeview-menu">
-                    <li class="active"><a href="#"><i class="fa fa-briefcase"></i> Register Regimen</a></li>
-                    <li><a href="#"><i class="fa fa-plus-square"></i> Edit Regimen</a></li>
+                    <li class="active"><a href="regimens"><i class="fa fa-briefcase"></i> Regimens</a></li>
                 </ul>
             </li>
             <li class="active treeview" th:if="${session.USER.role.name == 'Admin'}">
