@@ -24,24 +24,6 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <!--
-                    <div class="box-header" style="padding: 0px;">
-                        <div class="form-group">
-                            <h3 class="col-sm-1 control-label">Name</h3>
-
-                            <div class="col-sm-4">
-                                <form th:action="nSearchPatients" method="get" class="sidebar-form">
-                                    <div class="input-group">
-                                        <input type="text" th:name="q" class="form-control" placeholder="Search..."/>
-                          <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i></button>
-                          </span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>-->
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table id="dataContent" class="table table-bordered table-striped">
@@ -51,17 +33,17 @@
                                 <th>Name</th>
                                 <th>Birthday</th>
                                 <th>Gender</th>
-                                <th style="width: 40px;">#</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <!--<tbody id="table-body"></tbody>-->
                             <tfoot>
                             <tr>
-                                <th style="width: 5%;">#</th>
-                                <th style="width: 40%;">Name</th>
-                                <th style="width: 15%;">Birthday</th>
-                                <th style="width: 20%;">Gender</th>
-                                <th style="width: 20%;">#</th>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Birthday</th>
+                                <th>Gender</th>
+                                <th>#</th>
                             </tr>
                             </tfoot>
                         </table>
@@ -77,89 +59,11 @@
     <!-- /.content -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
     <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-//            $.ajax({
-//                method: "GET",
-//                url: "/patientList",
-//                data: {}
-//            })
-//            .done(function(data) {
-//                console.log(data);
-//                $("#table-body").html("");
-//                var bodyContent = "";
-//                if(data.dataList != null) {
-//
-//                    $.each( data.dataList , function( key, element ) {
-//                        bodyContent += "<tr><td>" + (key + 1) + "</td>" +
-//                                "<td>" + element.account.fullName + "</td>" +
-//                                "<td>" + element.account.birthday + "</td>" +
-//                                "<td>" + element.account.gender + "</td>" +
-//                                "<td></td></tr>";
-//
-//                    });
-//                }
-//                $("#table-body").html(bodyContent);
-//            });
-            var count = 1;
-            var table = $('#dataContent').dataTable( {
-                "processing": true,
-                "pagingType": "full",
-                "paging": true,
-                "lengthChange": false,
-                "ordering": true,
-                "info": true,
 
-                "ajax": {
-                    "url": "/patientList",
-                    "dataSrc": "dataList",
-                    "page": "pageNumber",
-                    "pages": "pageSize",
-                    "recordsTotal": "totalElements",
-                    "recordsFiltered": "numberOfElements",
-                    "type": "GET"
-                },
+    <script th:src = "@{/static/js/nursePatients.js}"></script>
 
-                "columns": [
-                    { "data": "null",
-                        "render": function (data, type, full, meta) {
-                           return count++;
-                        }
-                    },
-                    { "data": {
-                        "account.fullName": "account.fullName",
-                        "id": "id"
-                        },
-                        "render": function ( data, type, full, meta ) {
-                            return '<a href="/patient?patientID='+ data.id +  '" style= "text-align: center;" >' + data.account.fullName + '</a>';
-                        }
-                    },
-                    { "data": "account.birthday" },
-                    { "data": "account.gender",
-                        "render": function (data, type, full, meta) {
-                            var className = "btn btn-success ";
-                            if(data == "FEMALE") {
-                                className = "btn btn-danger ";
-                            }
-                            return '<input style = "width: 100%;" type ="text" disabled = "true" class="'+ className +'" value="' + data + '"/>';
-                        }
-                    },
-                    {
-                        "data": "id",
-                        "render": function ( data, type, full, meta ) {
-                            return '<a href="/print?patientId='+ data + '" class="btn btn-info">Print prescription</a>';
-                        }
-                    }
-                ]
-            } );
-        });
-
-
-
-//        setInterval(function() {
-//            // Code
-//        }, 500)
-    </script>
+    <!-- css add -->
+    <link th:href="@{/static/css/nursePatients.css}" rel="stylesheet"/>
 </div>
 <!-- /.content-wrapper -->
 </body>
