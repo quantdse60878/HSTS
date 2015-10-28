@@ -32,34 +32,28 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form action="" method="POST" class="form-horizontal">
+                        <form action="updateAccount" method="POST" class="form-horizontal">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Username</label>
 
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="name" value="${account.username}"/>
+                                        <input type="hidden" name="id" th:value="${account.id}"/>
+                                        <input type="text" readonly="true" class="form-control" name="name" th:value="${account.username}"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">New Password</label>
+                                    <label class="col-sm-3 control-label">Reset Password</label>
 
                                     <div class="col-sm-3">
-                                        <input type="password" class="form-control" id="password"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Confirm Password</label>
-
-                                    <div class="col-sm-3">
-                                        <input type="password" class="form-control" id="confPassword"/>
+                                        <a href="" class="btn btn-default">Reset Password</a>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">FullName</label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" id="fullname" placeholder="FullName" value="${account.fullName}"/>
+                                        <input type="text" class="form-control" name="fullName" placeholder="FullName" th:value="${account.fullName}"/>
                                     </div>
 
                                 </div>
@@ -67,36 +61,45 @@
                                     <label class="col-sm-3 control-label">Email</label>
 
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="email" placeholder="Email" value="${account.email}"/>
+                                        <input type="text" class="form-control" name="email" placeholder="Email" th:value="${account.email}"/>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Role</label>
-
-                                    <div class="col-sm-5 ui-widget">
-                                        <select id="role">
-                                            <option value="ss">Select one...</option>
-                                            <option value="2">Doctor</option>
-                                            <option value="3">Nurse</option>
-                                            <option value="4">Staff</option>
+                                    <div  class="col-sm-3" th:if="${account.role.name =='Admin'}">
+                                        <input type="text" readonly="true" class="form-control" name="role.name" th:value="${account.role.name}"/>
+                                    </div>
+                                    <div class="col-sm-5 ui-widget" th:if="${account.role.name !='Admin'}">
+                                        <select name="role.name" th:field="${account.role.name}">
+                                            <option value="...">Select one...</option>
+                                            <option value="Doctor">Doctor</option>
+                                            <option value="DoctorManager">Doctor Manager</option>
+                                            <option value="Nurse">Nurse</option>
+                                            <option value="Staff">Staff</option>
+                                            <option value="Admin" th:if="${account.role.name =='Admin'}">Admin</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Status</label>
+                                    <div  class="col-sm-3" th:if="${account.role.name =='Admin'}">
+                                        <input type="text" readonly="true" class="form-control" name="status" th:value="${account.role.name}"/>
+                                    </div>
 
-                                    <div class="col-sm-5 ui-widget">
-                                        <select id="combobox">
-                                            <option value="Active">Active</option>
-                                            <option value="De-active">De-active</option>
+                                    <div class="col-sm-5 ui-widget" th:if="${account.role.name !='Admin'}">
+                                        <select name="status" th:field="${account.status}" th:disabled="${account.role.name =='Admin'}">
+                                            <option value="1">In-Active</option>
+                                            <option value="2">Active</option>
+                                            <option value="3">Block</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="reset" class="btn btn-default">Cancel</button>
-                                <button type="submit" class="btn btn-primary pull-right">Update</button>
+                                <input type="submit" name="action" class="btn btn-default" value="Cancel"/>
+                                <input type="submit" name="action" value="Update" class="btn btn-primary pull-right"/>
                             </div>
                             <!-- /.box-footer -->
                         </form>

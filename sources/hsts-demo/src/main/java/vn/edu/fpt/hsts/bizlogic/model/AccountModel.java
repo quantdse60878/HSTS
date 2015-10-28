@@ -55,6 +55,19 @@ public class AccountModel extends AbstractKeyModel<Account> {
      */
     private RoleModel role;
 
+    /**
+     * Status
+     */
+    private byte status;
+
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -128,5 +141,6 @@ public class AccountModel extends AbstractKeyModel<Account> {
         final RoleModel role = new RoleModel();
         role.fromEntity(entity.getRole());
         setRole(role);
+        status = entity.getStatus();
     }
 }

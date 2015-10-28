@@ -55,7 +55,7 @@ public class Account extends AbstractKeyEntity {
     /**
      * The user role.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "roleId", nullable = false)
     private Role role;
 

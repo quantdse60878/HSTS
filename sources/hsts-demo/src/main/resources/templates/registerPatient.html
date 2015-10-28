@@ -291,13 +291,12 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Doctor*</label>
 
-                                            <div class="col-sm-5">
-                                                <select id="doctorSelect" th:name="doctorId">
-                                                    <option value="" th:disabled="disable">Select one...</option>
-                                                    <option th:each="doctor : ${session.DOCTORS}"
-                                                            th:value="${doctor.id}"
-                                                            th:text="${doctor.account.fullName}"></option>
-                                                </select>
+                                                <div class="col-sm-5">
+                                                    <select id="doctorSelect" th:name="doctorId">
+                                                        <option value = "" th:disabled="disable">Select one...</option>
+                                                        <option th:each="doctor : ${session.DOCTORS}" th:if="${doctor.account.status != 3}" th:value="${doctor.id}" th:text="${doctor.account.fullName}"></option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">

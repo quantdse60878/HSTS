@@ -177,5 +177,11 @@ public interface IDbConsts {
          *
          */
         int STAFF = 5;
+
+        /**
+         *
+         */
+        int ADMIN = 6;
+
     }
 }

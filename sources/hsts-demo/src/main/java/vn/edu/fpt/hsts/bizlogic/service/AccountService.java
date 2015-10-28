@@ -98,6 +98,8 @@ public class AccountService {
         return accountRepo.findOne(id);
     }
 
+    public void updateAccount(Account account){ accountRepo.save(account); }
+
     public Account changePassword(final String username, final String oldPassword, final String newPassword){
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
@@ -253,5 +255,10 @@ public class AccountService {
         } finally{
             LOGGER.info(IConsts.END_METHOD);
         }
+    }
+
+    public void deleteAccount(Account account) {
+        if(account.getRole().getName().equals("Doctor")) doctorRepo.delete(account.getId());
+        accountRepo.delete(account);
     }
 }

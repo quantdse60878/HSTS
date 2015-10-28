@@ -63,13 +63,46 @@ public class AdminController {
      * Create main page admin.
      * @return
      */
-    @RequestMapping(value = "adminAccs", method = RequestMethod.GET)
-    public ModelAndView adminPage() {
+    @RequestMapping(value = "updateAccount", method = RequestMethod.POST)
+    public ModelAndView updateAccount(@RequestParam("id") String id,
+                                      @RequestParam("fullName") String fullName,
+                                      @RequestParam("email") String email,
+                                      @RequestParam("role.name") String role,
+                                      @RequestParam("action") String action,
+                                      @RequestParam("status") String status) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+            Account account = accountService.findExactlyAccount(Integer.parseInt(id));
+            if(null!=account && !action.toLowerCase().equals("cancel")){
+                account.setFullName(fullName);
+                account.setEmail(email);
+                if(!account.getRole().getName().equals("Admin")){
+                    Role r = roleRepo.findByRoleName(role);
+                    account.setRole(r);
+                    final byte value = (byte) Integer.parseInt(status);
+                    account.setStatus(value);
+                }
+                accountService.updateAccount(account);
+            }
             ModelAndView mav = new ModelAndView();
             mav.setViewName("adminlistuser");
 
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "deleteAccount", method = RequestMethod.GET)
+    public ModelAndView deleteAccount(@RequestParam("id") String id){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try{
+            Account account = accountService.findExactlyAccount(Integer.parseInt(id));
+            if(null!=account){
+                accountService.deleteAccount(account);
+            }
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("adminlistuser");
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
@@ -104,8 +137,8 @@ public class AdminController {
             ModelAndView mav = new ModelAndView();
             Account account = accountService.findExactlyAccount(Integer.parseInt(id));
             if(null!=account){
-                mav.addObject("account",account);
                 mav.setViewName("adminaccount");
+                mav.addObject("account", account);
                 return mav;
             } else {
                 mav.setViewName("500");
