@@ -7,6 +7,8 @@
  */
 package vn.edu.fpt.hsts.persistence.repo;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,5 +33,7 @@ public interface DoctorRepo extends JpaRepository<Doctor, Integer> {
     @Query("select d from Doctor d where d.account.username = :username")
     public Doctor findByUsername(@Param("username") final String username);
 
+    @Query("select d from Doctor d where lower(account.fullName) like lower(:criteria) order by account.fullName")
+    public Page<Doctor> findByNameLike(@Param("criteria")final String searchCriteria, final Pageable pageable);
 
 }

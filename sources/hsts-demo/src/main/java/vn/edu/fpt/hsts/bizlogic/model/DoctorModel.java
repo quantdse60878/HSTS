@@ -59,7 +59,7 @@ public class DoctorModel extends AbstractKeyModel<Doctor>{
     public void fromEntity(Doctor entity) {
         super.fromEntity(entity);
         account = new AccountModel();
-        account.fromEntity(entity.getAccount());
+        setShortModel(entity.getAccount(), account);
         department = entity.getDepartment();
         major = entity.getMajor();
     }

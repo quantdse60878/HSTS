@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.DoctorPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.NutritionModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
@@ -219,6 +220,19 @@ public class DoctorController extends AbstractController{
             MedicalRecord medicalRecord = medicalRecordService.findMedicalRecordByID(recordID);
             mav.addObject("MEDICALRECORD", medicalRecord);
             return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/doctor/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public DoctorPageModel getDoctors(@RequestParam(value = "name", required = false, defaultValue = EMPTY) final String name,
+                                      @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
+                                      @RequestParam(value = "pageSize", required = false, defaultValue = "5") final int pageSize) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return doctorService.getDoctors(name, page, pageSize);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

@@ -102,8 +102,8 @@ public class LoginController {
                     LOGGER.info("listpatiens: " + patientList.size());
                     mav.addObject("LISTPATIENTS", patientList);
                 } else if (user.getRole().getName().equals("Nurse")) {
-                    List<DoctorModel> doctorList = doctorService.findAll();
-                    session.setAttribute("DOCTORS", doctorList);
+//                    List<DoctorModel> doctorList = doctorService.findAll();
+//                    session.setAttribute("DOCTORS", doctorList);
                     mav.setViewName("registerPatient");
                 } else if (user.getRole().getName().equals("Staff")) {
                     mav.setViewName("staffFormula");

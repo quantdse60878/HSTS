@@ -165,9 +165,9 @@ public class IllnessService {
                     LOGGER.debug("Got {} records", illnessNames.size());
                 }
             }
-            for(int i = 0; i< 100; i++) {
-                illnessNames.add(new String("test data" + i));
-            }
+//            for(int i = 0; i< 100; i++) {
+//                illnessNames.add(new String("test data" + i));
+//            }
             return illnessNames;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

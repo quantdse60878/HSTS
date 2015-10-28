@@ -11,8 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
+import vn.edu.fpt.hsts.bizlogic.model.DoctorPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePrescriptionModel;
@@ -444,6 +448,20 @@ public class DoctorService extends AbstractService {
         } catch (Exception e){
             LOGGER.info("Exception: " + e.getMessage());
             return null;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public DoctorPageModel getDoctors(final String nameSearch, final int page, final int pageSize) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("nameSearch[{}], page[{}], pageSize[{}]", nameSearch, page, pageSize);
+            final PageRequest pageRequest = new PageRequest(page, pageSize);
+            final String searchCond = "%" + nameSearch + "%";
+            Page<Doctor> doctors = doctorRepo.findByNameLike(searchCond, pageRequest);
+            final DoctorPageModel pageModel = new DoctorPageModel(doctors);
+            return pageModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
