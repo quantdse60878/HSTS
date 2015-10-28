@@ -150,7 +150,7 @@ public class NurseController extends AbstractController {
             checkCriteria.setHeartBeat(heartBeat);
             checkCriteria.setBloodPressure(bloodPressure);
             checkCriteria.setWaists(waists);
-            checkCriteria.setBmi(weight / (height * height));
+            checkCriteria.setBmi(weight / ((height/100) * (height/100)));
 
             // Tab 4 criteria
             RegistrationCriteria rCriteria = new RegistrationCriteria();
