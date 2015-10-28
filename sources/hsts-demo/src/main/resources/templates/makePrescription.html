@@ -418,13 +418,13 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("style", "min-width: 155px;");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModels' + countMedicine + '.m">'
-                    + '<option value="0">Select medicine</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("style", "min-width: 75px;");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime">'
-                    + '<option value="0">Select time</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
@@ -456,13 +456,13 @@
             newCell.innerHTML = ++countF;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" id="fPresModels' + countFoods + '.f">'
-                    + '<option value="0">Select food</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<select class="form-control" name="fPresModels[' + countFoods + '].fTime" id="fPresModels' + countFoods + '.fTime">'
-                    + '<option value="0">Select time</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
@@ -487,13 +487,13 @@
             newCell.innerHTML = ++countP;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<select class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModels' + countPractice + '.p">'
-                    + '<option value="0">Select practice</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="practice : ${PRACTICES}" th:value="${practice.id}" th:text="${practice.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<select class="form-control" name="pPresModels[' + countPractice + '].pTime" id="pPresModels' + countPractice + '.pTime">'
-                    + '<option value="0">Select time</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);

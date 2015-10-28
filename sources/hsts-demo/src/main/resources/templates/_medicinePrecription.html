@@ -19,14 +19,14 @@
         <td>1</td>
         <td style="min-width: 155px;">
             <select class="form-control" th:field="*{mPresModels[0].m}">
-                <option value="0">Select medicine</option>
+                <option value="0">Select</option>
                 <option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"
                         th:text="${medicine.name}"></option>
             </select>
         </td>
         <td style="min-width: 75px;">
             <select class="form-control" th:field="*{mPresModels[0].mTime}">
-                <option value="0">Select time</option>
+                <option value="0">Select</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>

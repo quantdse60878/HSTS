@@ -74,8 +74,8 @@ public class AnalyticDataTask {
 
                 AnalyticDataTask.FORMULA_CALCULATE_DISTANCE = br.readLine();
                 AnalyticDataTask.FORMULA_CALCULATE_CALORIES = br.readLine();
-                AnalyticDataTask.variable = new ArrayList<>();
-                AnalyticDataTask.valueVariable = new ArrayList<>();
+//                AnalyticDataTask.variable = new ArrayList<>();
+//                AnalyticDataTask.valueVariable = new ArrayList<>();
                 String tmp = "";
                 while ((tmp = br.readLine()) != null) {
                     String[] listData = tmp.split(",");

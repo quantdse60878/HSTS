@@ -34,7 +34,7 @@
         </td>
         <td style="min-width: 75px;">
             <select class="form-control" th:field="*{fPresModels[__${row.index}__].fTime}">
-                <option value="0">Select time</option>
+                <option value="0">Select</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
