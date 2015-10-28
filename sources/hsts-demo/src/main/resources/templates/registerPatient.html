@@ -6,29 +6,6 @@
 <body>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" layout:fragment="body">
-    <style>
-        .custom-combobox {
-            position: relative;
-            display: inline-block;
-        }
-
-        .custom-combobox-toggle {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            margin-left: -1px;
-            padding: 0;
-        }
-
-        .custom-combobox-input {
-            margin: 0;
-            padding: 5px 10px;
-        }
-
-        .bootstrap-tagsinput {
-            width: 400px;
-        }
-    </style>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -47,10 +24,6 @@
             <div class="col-md-12">
 
                 <div class="box box-info">
-                    <!--                        <div class="box-header with-border">
-                                                <h3 class="box-title">Patient's Profile</h3>
-                                            </div>-->
-                    <!-- /.box-header -->
 
                     <!-- form start -->
                     <form class="form-horizontal" method="POST" th:action="registerNew" data-toggle="validator">
@@ -416,6 +389,5 @@
     <link th:href="@{/static/css/registerPatient.css}" rel="stylesheet"/>
 </div>
 <!-- /.content-wrapper -->
-
 </body>
 </html>
