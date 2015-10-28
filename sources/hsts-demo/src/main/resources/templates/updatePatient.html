@@ -384,46 +384,9 @@
     <!-- Bootstrap validator-->
     <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
 
-    <!-- registerPatient -->
-    <script th:src="@{/static/js/registerPatient.js}"></script>
     <!-- script add -->
-    <script>
-        $("#doctorSelect").select2();
-        $("#Birthday").datepicker({
-            format: 'dd-mm-yyyy'
-        });
-//        var countMedicalhistory = 2;
-//        var countClinicalSymptoms = 2;
-//
-//        function addRowMedicalhistory(tableID) {
-//            var tableElement = document.getElementById(tableID);
-//            var newRow = tableElement.insertRow(tableElement.rows.length);
-//            var newCell;
-//
-//            newCell = newRow.insertCell(newRow.cells.length);
-//            newCell.innerHTML = countMedicalhistory + "/";
-//            newCell = newRow.insertCell(newRow.cells.length);
-//            newCell.innerHTML = '<input type="text" class="form-control" placeholder="Medical history"/>';
-//
-//            countMedicalhistory++;
-//            return newRow;
-//        }
-//        ;
-//        function addRowClinicalSymptoms(tableID) {
-//            var tableElement = document.getElementById(tableID);
-//            var newRow = tableElement.insertRow(tableElement.rows.length);
-//            var newCell;
-//
-//            newCell = newRow.insertCell(newRow.cells.length);
-//            newCell.innerHTML = countClinicalSymptoms + "/";
-//            newCell = newRow.insertCell(newRow.cells.length);
-//            newCell.innerHTML = '<input type="text" class="form-control" placeholder="Clinical Symptoms"/>';
-//
-//            countClinicalSymptoms++;
-//            return newRow;
-//        }
-//        ;
-    </script>
+    <script th:src="@{/static/js/bootstrap-validator-ext.js}"/>
+    <script th:src="@{/static/js/registerPatient.js}"/>
 </div>
 <!-- /.content-wrapper -->
 

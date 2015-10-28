@@ -12,7 +12,6 @@
 	"datatables": null,
 	"bootstrap-tagsinput": null,
 	"bootstrap3-typeahead": null,
-	"bootstrap-validator": null,
-	"jquery-validation": null
+	"bootstrap-validator": null
   }
 }

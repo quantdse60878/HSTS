@@ -46,6 +46,16 @@ public class Phase extends AbstractKeyEntity {
     private List<FoodPhase> foodPhaseList;
 
 
+    /**
+     *
+     */
+    private int fromDate;
+
+    /**
+     *
+     */
+    private int toDate;
+
 
     /**
      *
@@ -91,5 +101,21 @@ public class Phase extends AbstractKeyEntity {
 
     public void setUpdateTime(final Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public int getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(final int fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public int getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(final int toDate) {
+        this.toDate = toDate;
     }
 }

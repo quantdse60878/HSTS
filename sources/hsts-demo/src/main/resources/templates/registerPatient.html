@@ -365,10 +365,6 @@
 
     <!-- jQueryUI -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
-    <!--<script th:src="@{/static/bower/jquery-ui/jquery-ui.js}"></script>-->
-
-    <!-- registerPatient -->
-    <!--<script th:src="@{/static/js/registerPatient.js}"></script>-->
 
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet" />
@@ -384,18 +380,10 @@
 
     <!-- Bootstrap validator-->
     <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
+
     <!-- script add -->
-    <script>
-        $("#doctorSelect").select2();
-        $("#Birthday").datepicker({
-            format: 'dd-mm-yyyy'
-        });
-        function changeTab (a) {
-            console.log(a);
-            $('.nav-tabs > li.active').removeClass('active');
-            $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
-        };
-    </script>
+    <script th:src="@{/static/js/bootstrap-validator-ext.js}"/>
+    <script th:src="@{/static/js/registerPatient.js}"/>
 </div>
 <!-- /.content-wrapper -->
 
