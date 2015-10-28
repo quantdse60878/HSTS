@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.fpt.hsts.bizlogic.model.IllnessModel;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
@@ -38,10 +39,12 @@ public class IllnessController extends AbstractController {
 
     @RequestMapping(value = "/illnessName/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<String> illnessList() {
+    public List<String> illnessList(@RequestParam(value = "searchString", required = false, defaultValue = EMPTY) final String searchString,
+                                    @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
+                                    @RequestParam(value = "pageSize", required = false, defaultValue = UNLIMIT_PAGE_SIZE) final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            return illnessService.findAllIllnessName();
+            return illnessService.findAllIllnessName(searchString, page, pageSize);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

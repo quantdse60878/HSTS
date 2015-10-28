@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
@@ -152,17 +153,22 @@ public class IllnessService {
      * Find all illness names
      * @return {@link List}
      */
-    public List<String> findAllIllnessName() {
+    public List<String> findAllIllnessName(final String searchStr, final int page, final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            final List<String> illnessNames = illnessRepo.findAllNames();
+            LOGGER.info("searchStr[{}], page[{}], pageSize[{}]", searchStr, page, pageSize);
+            final PageRequest pageRequest = new PageRequest(page, pageSize);
+            final String searchCond = "%" + searchStr + "%";
+            final List<String> illnessNames = illnessRepo.findByName(searchCond, pageRequest);
             if (null != illnessNames) {
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Illness list size: {}", illnessNames.size());
+                    LOGGER.debug("Got {} records", illnessNames.size());
                 }
-                return illnessNames;
             }
-            return Collections.emptyList();
+            for(int i = 0; i< 100; i++) {
+                illnessNames.add(new String("test data" + i));
+            }
+            return illnessNames;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

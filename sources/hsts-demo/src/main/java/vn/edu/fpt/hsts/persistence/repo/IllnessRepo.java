@@ -7,6 +7,7 @@
  */
 package vn.edu.fpt.hsts.persistence.repo;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,4 +24,7 @@ public interface IllnessRepo extends JpaRepository<Illness, Integer> {
 
     @Query("select distinct name from Illness i")
     public List<String> findAllNames();
+
+    @Query("select i.name from Illness i where lower(name) like lower(:searchCriteria)")
+    public List<String> findByName(@Param("searchCriteria") final String searchCriteria, final Pageable pageable);
 }
