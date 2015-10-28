@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.NutritionModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticeResultModel;
+import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodIngredientService;
@@ -70,7 +71,7 @@ public class AbstractController implements ControllerParam {
     @Autowired
     private FoodIngredientService foodIngredientService;
 
-    public void initDataPrescription(ModelAndView mav, Appointment appointment){
+    public void initDataPrescription(ModelAndView mav, Appointment appointment, PrescriptionModel prescriptionModel){
         mav.addObject("MEDICS",  1);
         mav.addObject("FOS", 1);
         mav.addObject("PRACS", 1);
@@ -105,6 +106,8 @@ public class AbstractController implements ControllerParam {
         if (null != foodIngredient){
             NutritionModel nutritionModel = new NutritionModel(foodIngredient,preventionCheck.getWeight());
             mav.addObject("FOODINGREDIENT", nutritionModel);
+            int kcalEstimate = (int) (nutritionModel.getTotalEnergy() - preventionCheck.getBasalMetabolicRate());
+            prescriptionModel.setKcalRequire(kcalEstimate);
         }
 
         // Set entry patient
@@ -117,6 +120,9 @@ public class AbstractController implements ControllerParam {
         // Get PracticeResultModel
         PracticeResultModel practiceResultModel = doctorService.getInfoPracticeDataOfPatient(appointment);
         mav.addObject("DATAPRACS", practiceResultModel);
+
+        // Add model
+        mav.addObject("model", prescriptionModel);
     }
 
     public void notify(ModelAndView mav, Boolean result,String method, String mess){

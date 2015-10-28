@@ -96,6 +96,7 @@ public class PrescriptionController extends AbstractController{
 
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
+            PrescriptionModel prescriptionModel = new PrescriptionModel();
 
             // Set notify as readed
             notifyService.markAllNotifitionRelatedToPatientAsRead(patientID);
@@ -105,9 +106,10 @@ public class PrescriptionController extends AbstractController{
             mav.addObject("APPOINTMENT", appointment);
 
             // Initialization Data Prescription
-            initDataPrescription(mav, appointment);
+            initDataPrescription(mav, appointment, prescriptionModel);
 
-            mav.addObject("model", new PrescriptionModel());
+
+
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
@@ -130,7 +132,6 @@ public class PrescriptionController extends AbstractController{
             LOGGER.info("appointmentId[{}], prescriptionModel[{}], diagnostic[{}]", appointmentId, prescriptionModel, diagnostic);
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
-            mav.addObject("model", prescriptionModel);
 
             // Find phase for diagnostic
             final Phase phase = illnessService.getPhaseSugestion(appointmentId, diagnostic);
@@ -148,7 +149,7 @@ public class PrescriptionController extends AbstractController{
             mav.addObject("APPOINTMENT", appointment);
 
             // Initialization Data Prescription
-            initDataPrescription(mav, appointment);
+            initDataPrescription(mav, appointment, prescriptionModel);
 
             mav.addObject("MEDICS", phase.getMedicinePhaseList().size());
             mav.addObject("FOS", phase.getFoodPhaseList().size());
@@ -180,7 +181,7 @@ public class PrescriptionController extends AbstractController{
             mav.addObject("APPOINTMENT", appointment);
 
             // Initialization Data Prescription
-            initDataPrescription(mav, appointment);
+            initDataPrescription(mav, appointment, prescriptionModel);
 
             LOGGER.info(prescriptionModel.toString());
             boolean result = doctorService.makePrescription(prescriptionModel, appointmentId, appointmentDate);
@@ -198,12 +199,8 @@ public class PrescriptionController extends AbstractController{
                 List<PracticeTreatment> practiceTreatments = treatmentService.getAllPracticeTreatmentFromTreatment(treatment);
                 treatment.setPracticeTreatmentList(practiceTreatments);
                 mav.addObject("TREATMENT", treatment);
-
-                mav.addObject("model", new PrescriptionModel());
             } else {
                 notify(mav, result, "Make Prescription", "Fail");
-
-                mav.addObject("model", new PrescriptionModel());
             }
 
             return mav;

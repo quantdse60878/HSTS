@@ -121,17 +121,13 @@ public class DoctorController extends AbstractController{
             mav.addObject("APPOINTMENT", appointment);
 
             // Initialization Data Prescription
-            initDataPrescription(mav, appointment);
+            initDataPrescription(mav, appointment, new PrescriptionModel());
 
             // Check appointment status
-            if (appointment.getStatus() == IDbConsts.IAppointmentStatus.WATTING){
-
-                mav.addObject("model", new PrescriptionModel());
-            } else if (appointment.getStatus() == IDbConsts.IAppointmentStatus.FINISHED){
+            if (appointment.getStatus() == IDbConsts.IAppointmentStatus.FINISHED){
                 // Find treatment form appointment
                 Treatment treatment = treatmentService.findTreatmentByAppointmentID(appointmentId);
                 mav.addObject("TREATMENT", treatment);
-                mav.addObject("model", new PrescriptionModel());
             }
 
             return mav;
