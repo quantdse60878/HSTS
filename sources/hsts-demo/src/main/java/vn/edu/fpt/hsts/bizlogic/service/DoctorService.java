@@ -459,7 +459,7 @@ public class DoctorService extends AbstractService {
             LOGGER.info("nameSearch[{}], page[{}], pageSize[{}]", nameSearch, page, pageSize);
             final PageRequest pageRequest = new PageRequest(page, pageSize);
             final String searchCond = "%" + nameSearch + "%";
-            Page<Doctor> doctors = doctorRepo.findByNameLike(searchCond, pageRequest);
+            Page<Doctor> doctors = doctorRepo.findByNameLike(searchCond, IDbConsts.IAccountStatus.ACTIVE, pageRequest);
             final DoctorPageModel pageModel = new DoctorPageModel(doctors);
             return pageModel;
         } finally {
