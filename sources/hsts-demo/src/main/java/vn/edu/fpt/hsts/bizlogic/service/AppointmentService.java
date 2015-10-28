@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
@@ -49,6 +50,27 @@ public class AppointmentService {
             Date date = new Date();
             List<Appointment> appointments = appointmentRepo.getAllAppointmentToDate(date, patientID, IDbConsts.IAppointmentStatus.ENTRY);
             return appointments;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public Appointment findAppointmentDate(final String appointmentDate) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointmentDate[{}]", appointmentDate);
+            Date date = DateUtils.parseDate(appointmentDate, DateUtils.DATE_PATTERN_3);
+            return appointmentRepo.findAppointmentByDate(date);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public Appointment findParentOfAppointment(final Appointment appointment) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointment[{}]", appointment);
+            return appointmentRepo.findParentAppointment(appointment.getId());
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

@@ -44,4 +44,8 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
 
     @Query(value = "select a from Appointment a where medicalRecord.patient.id = :patientId ORDER BY id DESC")
     public List<Appointment> findLastAppointmentByPatient(@Param("patientId") final int patientId, final Pageable pageable);
+
+    @Query("select a from Appointment a where meetingDate = :date")
+    public Appointment findAppointmentByDate(@Param("date") final Date date);
+
 }

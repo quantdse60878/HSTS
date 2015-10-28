@@ -28,7 +28,6 @@
             margin: 0;
             padding: 5px 10px;
         }
-
         /*STYLES FOR CSS POPUP*/
         #blanket {
             background-color: #111;
@@ -39,20 +38,6 @@
             top: 0px;
             left: 0px;
             width: 100%;
-        }
-
-        #popUpAppointment {
-            position: absolute;
-            width: 400px;
-            height: 300px;
-            z-index: 9002;
-        }
-
-        #popupConfirm {
-            position: absolute;
-            width: 400px;
-            height: 300px;
-            z-index: 9002;
         }
 
         #Nutritional {
@@ -97,20 +82,26 @@
 
                             <!-- input-group -->
                             <div class="input-group col-md-3 pull-right">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle"
-                                            data-toggle="dropdown">
-                                        <span th:text="${#dates.format(APPOINTMENT.meetingDate, 'dd-MM-yyyy')}"></span>
-                                        <span class="fa fa-caret-down"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li th:each="appointment : ${APPOINTMENTS}"><a
-                                                th:href="@{/viewPrescription(appointmentId=${appointment.id})}"
-                                                class="btn btn-default"
-                                                th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>
-                                        </li>
-                                    </ul>
+                                <div class="ui-widget">
+                                    <select id="infordate" class="form-control">
+                                        <option th:each="appointment : ${APPOINTMENTS}"
+                                                    th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</option>
+                                    </select>
                                 </div>
+                                <!--<div class="input-group-btn">-->
+                                    <!--<button type="button" class="btn btn-default dropdown-toggle"-->
+                                            <!--data-toggle="dropdown">-->
+                                        <!--<span th:text="${#dates.format(APPOINTMENT.meetingDate, 'dd-MM-yyyy')}"></span>-->
+                                        <!--<span class="fa fa-caret-down"></span>-->
+                                    <!--</button>-->
+                                    <!--<ul class="dropdown-menu">-->
+                                        <!--<li th:each="appointment : ${APPOINTMENTS}"><a-->
+                                                <!--th:href="@{/viewPrescription(appointmentId=${appointment.id})}"-->
+                                                <!--class="btn btn-default"-->
+                                                <!--th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                <!--</div>-->
                                 <!-- /btn-group -->
                             </div>
                             <!-- /input-group -->
@@ -333,7 +324,7 @@
                                                                class="form-control"
                                                                readonly="readonly" value=""/>
                                                         <input th:if="${appointment.nextAppointment != null}"
-                                                               class="form-control"
+                                                               class="form-control" style="text-align: right;"
                                                                readonly="readonly"
                                                                th:value="${#dates.format(appointment.nextAppointment.meetingDate, 'dd-MM-yyyy')}"/>
                                                     </div>

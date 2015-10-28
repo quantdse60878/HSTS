@@ -85,6 +85,7 @@ public class AbstractController implements ControllerParam {
         // get illnessList
         List<Illness> illnessList = illnessService.getAllIllness();
         mav.addObject("ILLNESSES", illnessList);
+
         //get medicineList
         List<Medicine> medicineList = medicineService.getAllMedicine();
         mav.addObject("MEDICINES", medicineList);
@@ -120,6 +121,14 @@ public class AbstractController implements ControllerParam {
         // Get PracticeResultModel
         PracticeResultModel practiceResultModel = doctorService.getInfoPracticeDataOfPatient(appointment);
         mav.addObject("DATAPRACS", practiceResultModel);
+
+        // Find old Appointment
+        Appointment oldAppointment = appointmentService.findParentOfAppointment(appointment);
+        if (oldAppointment != null){
+            // Find illness form diagnostic
+            Illness illness = oldAppointment.getMedicalRecord().getIllness();
+            mav.addObject("DIAGNOSTIC", illness);
+        }
 
         // Add model
         mav.addObject("model", prescriptionModel);
