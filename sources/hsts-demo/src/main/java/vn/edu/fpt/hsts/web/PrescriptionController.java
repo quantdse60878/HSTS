@@ -140,18 +140,18 @@ public class PrescriptionController extends AbstractController{
             // Initialization Data Prescription
             initDataPrescription(mav, appointment, prescriptionModel);
 
-            int diagno = Integer.parseInt(diagnostic);
+            // Find illness form diagnostic
+            Illness illness = illnessService.findByName(diagnostic);
+            mav.addObject("DIAGNOSTIC", illness);
 
             // Find phase for diagnostic
-            final Phase phase = illnessService.getPhaseSugestion(appointmentId, diagno);
+            final Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
             mav.addObject("PHASE", phase);
             if (phase == null) {
                 notify(mav, false, "Fail!!! ", "No regimen for suggest treatment");
             }
 
-            // Find illness form diagnostic
-            Illness illness = illnessService.findByID(diagno);
-            mav.addObject("DIAGNOSTIC", illness);
+
 
             mav.addObject("MEDICS", phase.getMedicinePhaseList().size());
             mav.addObject("FOS", phase.getFoodPhaseList().size());
@@ -160,8 +160,13 @@ public class PrescriptionController extends AbstractController{
             return mav;
         } catch (Exception e){
             LOGGER.info("diagnostic[{}]", diagnostic);
+
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
+
+            // Create new illness
+            Illness illness = illnessService.createNewIllness(diagnostic);
+            mav.addObject("DIAGNOSTIC", illness);
 
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);

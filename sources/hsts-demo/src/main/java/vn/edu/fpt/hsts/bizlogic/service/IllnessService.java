@@ -62,13 +62,14 @@ public class IllnessService {
 
     /**
      * Find all illness.
+     *
      * @return {@link java.util.List}
      */
-    public List<Illness> getAllIllness(){
+    public List<Illness> getAllIllness() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             final List<Illness> illnesses = illnessRepo.findAll();
-            if(null != illnesses) {
+            if (null != illnesses) {
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("Got {} records", illnesses.size());
                 }
@@ -82,6 +83,7 @@ public class IllnessService {
 
     /**
      * Find Illness by an ID
+     *
      * @param illnessID int
      * @return {@link Illness}
      */
@@ -103,15 +105,16 @@ public class IllnessService {
 
     /**
      * Find the phase to suggest prescription
+     *
      * @param appointmentId int
-     * @param diagnostic int
+     * @param illness    illness
      * @return {@link Phase}
      * @throws BizlogicException
      */
-    public Phase getPhaseSugestion(final int appointmentId, final int diagnostic) throws BizlogicException {
+    public Phase getPhaseSugestion(final int appointmentId, final Illness illness) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info(" appointmentId[{}], dianostic[{}]", appointmentId, diagnostic);
+            LOGGER.info(" appointmentId[{}], dianostic[{}]", appointmentId, illness);
 
             final Appointment appointment = appointmentRepo.findOne(appointmentId);
             if (null == appointment) {
@@ -120,12 +123,6 @@ public class IllnessService {
             }
 
             final MedicalRecord medicalRecord = appointment.getMedicalRecord();
-
-            final Illness illness = illnessRepo.findOne(diagnostic);
-            if (null == illness) {
-                LOGGER.error("Illness with id[{}] not found", diagnostic);
-                throw new BizlogicException("Illness with id[{}] not found", null, diagnostic);
-            }
 
             // Find the different between 2 day
             Date startDate = medicalRecord.getStartTime();
@@ -139,7 +136,7 @@ public class IllnessService {
             int numberOfDay = Days.daysBetween(dt1, dt2).getDays();
             LOGGER.info("Between day: {}", numberOfDay);
 
-            if(0 > numberOfDay) {
+            if (0 > numberOfDay) {
                 numberOfDay = Math.abs(numberOfDay);
             }
             // Select suitable phase
@@ -151,6 +148,7 @@ public class IllnessService {
 
     /**
      * Find all illness names
+     *
      * @return {@link List}
      */
     public List<String> findAllIllnessName(final String searchStr, final int page, final int pageSize) {
@@ -176,6 +174,7 @@ public class IllnessService {
 
     /**
      * Find all default clinical symptoms
+     *
      * @return
      */
     public List<String> findDefaultClinicalSymptom() {
@@ -185,12 +184,24 @@ public class IllnessService {
                 return Collections.emptyList();
             }
             final String[] arr = defaultSymptoms.split(",");
-            if(LOGGER.isDebugEnabled()) {
+            if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Got {} records", arr.length);
             }
             return Arrays.asList(arr);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
+    }
+
+    public Illness createNewIllness(final String diagnostic) {
+        Illness illness = new Illness();
+        illness.setName(diagnostic);
+        illness.setDescription(diagnostic);
+        illnessRepo.saveAndFlush(illness);
+        return illness = illnessRepo.findByName(diagnostic);
+    }
+
+    public Illness findByName(final String diagnostic) {
+        return illnessRepo.findByName(diagnostic);
     }
 }
