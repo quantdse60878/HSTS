@@ -498,7 +498,7 @@ function confirmBox(form) {
     if (r == true) {
         // Hidden field for diagnostic
         //Get
-        var bla = $('#select2Box').val();
+        var bla = $('#select2Box').text().trim();
         console.log(bla);
         if (bla != null){
             //Set
