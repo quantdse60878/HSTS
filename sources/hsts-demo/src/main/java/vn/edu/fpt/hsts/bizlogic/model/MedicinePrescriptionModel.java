@@ -66,6 +66,16 @@ public class MedicinePrescriptionModel {
         this.mNote = mNote;
     }
 
+    public boolean isValid(){
+        if (m <= 0){
+            return false;
+        } else if (mTime <= 0){
+            return false;
+        } else if (mQuantity <= 0 && mQuantity > 15){
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public String toString() {
@@ -76,4 +86,5 @@ public class MedicinePrescriptionModel {
                 ", mNote='" + mNote + '\'' +
                 '}';
     }
+
 }

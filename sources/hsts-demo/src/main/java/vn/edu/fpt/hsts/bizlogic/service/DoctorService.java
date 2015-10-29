@@ -263,9 +263,7 @@ public class DoctorService extends AbstractService {
                         if (LOGGER.isDebugEnabled()) {
                             LOGGER.debug(medicineModel.toString());
                         }
-                        if (medicineModel.getM() <= 0) {
-                            continue;
-                        }
+                        if (medicineModel.isValid()) {
                         Medicine medicine = medicineRepo.findOne(medicineModel.getM());
                         if (null == medicine) {
                             LOGGER.info("Medicine with id[{}] is not found", null, medicineModel.getM());
@@ -279,6 +277,8 @@ public class DoctorService extends AbstractService {
                         medicineTreatment.setTreatment(newTreatment);
                         medicineTreatmentRepo.save(medicineTreatment);
                     }
+                    }
+
                 }
                 LOGGER.info("Create new MedicineTreatment : End");
 
@@ -287,9 +287,7 @@ public class DoctorService extends AbstractService {
                 final List<FoodPrescriptionModel> fPresModels = prescription.getfPresModels();
                 if(null != fPresModels && !fPresModels.isEmpty()) {
                     for (FoodPrescriptionModel foodModel: fPresModels) {
-                        if (foodModel.getF() <= 0) {
-                            continue;
-                        }
+                        if (foodModel.isValid()) {
                         Food food = foodRepo.findOne(foodModel.getF());
                         if (null == food) {
                             LOGGER.info("Food with id[{}] is not found", null, foodModel.getF());
@@ -303,6 +301,8 @@ public class DoctorService extends AbstractService {
                         foodTreatment.setAdvice(foodModel.getfNote());
                         foodTreatmentRepo.save(foodTreatment);
                     }
+                    }
+
                 }
                 LOGGER.info("Create new FoodTreatment : End");
 
@@ -312,9 +312,7 @@ public class DoctorService extends AbstractService {
                 if (null != pPresModels && !pPresModels.isEmpty()) {
 
                     for(PracticePrescriptionModel practiceModel: pPresModels) {
-                        if (practiceModel.getP() <= 0) {
-                            continue;
-                        }
+                        if (practiceModel.isValid()) {
                         final Practice practice = practiceRepo.findOne(practiceModel.getP());
                         if (null == practice) {
                             LOGGER.info("Practice with name[{}] is not found", null, practiceModel.getP());
@@ -327,6 +325,7 @@ public class DoctorService extends AbstractService {
                         practiceTreatment.setAdvice(practiceModel.getpNote());
                         practiceTreatment.setTimeDuration(practiceModel.getpIntensity());
                         practiceTreatmentRepo.save(practiceTreatment);
+                    }
                     }
                 }
                 LOGGER.info("Create new PracticeTreatment : End");

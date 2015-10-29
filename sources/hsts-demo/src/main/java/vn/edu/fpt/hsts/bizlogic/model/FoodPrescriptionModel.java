@@ -63,6 +63,16 @@ public class FoodPrescriptionModel {
         this.fNote = fNote;
     }
 
+    public boolean isValid(){
+        if (f <= 0){
+            return false;
+        } else if (fTime <= 0){
+            return false;
+        } else if (null == fQuantity && fQuantity.isEmpty()){
+            return false;
+        }
+        return true;
+    }
     @Override
     public String toString() {
         return "FoodPrescriptionModel{" +

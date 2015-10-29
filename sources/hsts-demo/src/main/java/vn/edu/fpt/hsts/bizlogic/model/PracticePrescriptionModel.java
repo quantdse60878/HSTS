@@ -63,6 +63,16 @@ public class PracticePrescriptionModel {
         this.pNote = pNote;
     }
 
+    public boolean isValid(){
+        if (p <= 0){
+            return false;
+        } else if (pTime <= 0){
+            return false;
+        } else if (null == pIntensity && pIntensity.isEmpty()){
+            return false;
+        }
+        return true;
+    }
     @Override
     public String toString() {
         return "PracticePrescriptionModel{" +
