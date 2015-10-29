@@ -119,7 +119,7 @@
                                         <input th:if="${TREATMENT != null}"
                                                th:value="${TREATMENT.appointment.medicalRecord.illness != null}? ${TREATMENT.appointment.medicalRecord.illness.name} : 'Unknown Disease'"
                                                readonly="readonly" class="form-control"/>
-                                        <select id="select2Box" th:name="diagnostic">
+                                        <select id="select2Box" th:name="diagnostic" th:if="${TREATMENT == null}">
                                         </select>
                                     </div>
                                     <div class="col-sm-2 pull-right" th:if="${TREATMENT == null}">
@@ -134,7 +134,7 @@
                         <!-- form start -->
                         <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}"
                               data-toggle="validator" onsubmit="return confirmBox(this);">
-                            <input type="hidden" name="diagnostic" id="diagnostic"/>
+                            <input type="hidden" name="diagnostic" id="diagnostic" th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name}"/>
                             <div class="box-body">
 
                                 <!-- Sidebar Menu -->
