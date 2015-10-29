@@ -180,13 +180,13 @@ public class TreatmentService {
                 final Treatment treatment = lastTreatment.get(0);
                 final List<MedicineTreatment> medicineTreatments = medicineTreatmentRepo.findMedicineTreatmentByTreatmentId(treatment.getId());
                 if (null != medicineTreatments && !medicineTreatments.isEmpty()) {
-                    final StringBuilder sb = new StringBuilder();
+                    StringBuilder sb = new StringBuilder();
                     for (MedicineTreatment mt: medicineTreatments) {
                         sb.append(mt.getMedicine().getName()).append(",");
                     }
                     final int index = sb.lastIndexOf(",");
-                    sb.substring(0, index -1);
-                    return sb.toString();
+                    String result = sb.toString().substring(0, index);
+                    return result;
                 }
             }
             return "";

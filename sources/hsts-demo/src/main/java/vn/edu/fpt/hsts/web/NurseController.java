@@ -321,6 +321,7 @@ public class NurseController extends AbstractController {
 
             // Find last old medicine treatment
             final String oldMedicine = treatmentService.findLastMedicines(patientId);
+            LOGGER.info("OLD: {}", oldMedicine);
             mav.addObject("OLDMEDICINE", oldMedicine);
 
             return mav;

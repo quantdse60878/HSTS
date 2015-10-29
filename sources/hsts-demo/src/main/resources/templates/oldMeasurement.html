@@ -305,10 +305,9 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="medicineHistory" class="col-sm-3 control-label">Tiền sử dùng thuốc</label>
-
+                                                <label for="medicineHistory" class="col-sm-3 control-label">Medcine history</label>
                                                 <div class="col-sm-6">
-                                                    <input th:type="text" class="form-control" placeholder="Medicine history" name="medicineHistory" rows="3" data-role="tagsinput" id="medicineHistory"></input>
+                                                    <input th:type="text" class="form-control" placeholder="Medicine history" name="medicineHistory" rows="3" data-role="tagsinput" id="medicineHistory" th:value="*{OLDMEDICINE}"></input>
                                                 </div>
                                             </div>
                                             <!-- footer -->
