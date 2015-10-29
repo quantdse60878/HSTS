@@ -500,8 +500,11 @@ function confirmBox(form) {
         //Get
         var bla = $('#select2Box').val();
         console.log(bla);
-        //Set
-        $('#diagnostic').val(bla);
+        if (bla != null){
+            //Set
+            $('#diagnostic').val(bla);
+        }
+
         return true;
     } else {
         return false;
