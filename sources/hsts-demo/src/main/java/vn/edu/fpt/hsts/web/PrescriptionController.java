@@ -126,7 +126,7 @@ public class PrescriptionController extends AbstractController{
     @RequestMapping(value = "suggestTreatment", method = RequestMethod.GET)
     public ModelAndView suggestTreatment(@RequestParam(value = "appointmentId") final int appointmentId,
                                          @ModelAttribute PrescriptionModel prescriptionModel,
-                                         @RequestParam(value = "diagnostic", required = false) final String diagnostic) throws BizlogicException {
+                                         @RequestParam(value = "diagnostic", required = false) final String diagnostic){
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("appointmentId[{}], prescriptionModel[{}], diagnostic[{}]", appointmentId, prescriptionModel, diagnostic);
@@ -146,9 +146,10 @@ public class PrescriptionController extends AbstractController{
 
             // Find phase for diagnostic
             final Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
-            mav.addObject("PHASE", phase);
             if (phase == null) {
                 notify(mav, false, "Fail!!! ", "No regimen for suggest treatment");
+            } else {
+                mav.addObject("PHASE", phase);
             }
 
 

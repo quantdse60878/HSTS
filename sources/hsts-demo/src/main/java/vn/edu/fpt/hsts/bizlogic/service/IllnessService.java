@@ -111,7 +111,7 @@ public class IllnessService {
      * @return {@link Phase}
      * @throws BizlogicException
      */
-    public Phase getPhaseSugestion(final int appointmentId, final Illness illness) throws BizlogicException {
+    public Phase getPhaseSugestion(final int appointmentId, final Illness illness) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info(" appointmentId[{}], dianostic[{}]", appointmentId, illness);
@@ -119,7 +119,6 @@ public class IllnessService {
             final Appointment appointment = appointmentRepo.findOne(appointmentId);
             if (null == appointment) {
                 LOGGER.error("Appointment with id[{}] not found", appointmentId);
-                throw new BizlogicException("Appointment with id[{}] not found", null, appointmentId);
             }
 
             final MedicalRecord medicalRecord = appointment.getMedicalRecord();
