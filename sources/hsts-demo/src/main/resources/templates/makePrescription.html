@@ -376,6 +376,7 @@
     </div>
     <!-- / POPUP-->
 
+    <input th:value="*{PHASE != null}? 'check' : ''" id="phase" type="hidden"/>
     <input th:value="${MEDICS}" id="medics" type="hidden"/>
     <input th:value="${FOS}" id="fos" type="hidden"/>
     <input th:value="${PRACS}" id="pracs" type="hidden"/>

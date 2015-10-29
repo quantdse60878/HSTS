@@ -448,7 +448,7 @@ function changeTab(a) {
     $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
 }
 ;
-var check = $('#diagnostic').val();
+var check = $('#phase').val();
 function confirmBox(form) {
     if (check == '') {
         alert('Please suggest diagnostic before make prescription!!!');
