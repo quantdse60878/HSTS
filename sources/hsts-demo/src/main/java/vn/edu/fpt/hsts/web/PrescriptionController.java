@@ -159,6 +159,7 @@ public class PrescriptionController extends AbstractController{
 
             return mav;
         } catch (Exception e){
+            LOGGER.info("diagnostic[{}]", diagnostic);
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
 
