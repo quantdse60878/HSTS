@@ -6,9 +6,6 @@
  * Date: 10/28/2015.
  */
 
-$("#Birthday").datepicker({
-    format: 'dd-mm-yyyy'
-});
 function changeTab (a) {
     console.log(a);
     $('.nav-tabs > li.active').removeClass('active');

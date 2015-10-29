@@ -31,10 +31,10 @@ $("#doctorSelect").select2({
         processResults: function (data, params) {
             params.page = params.page || 0;
             var names = data.dataList.map(function (doctor) {
-                        return {
-                            id: doctor.id,
-                            text: doctor.account.fullName
-                        }
+                return {
+                    id: doctor.id,
+                    text: doctor.account.fullName
+                }
             });
             return {results: names,
                 pagination: {
