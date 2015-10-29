@@ -181,10 +181,10 @@ public class DoctorController extends AbstractController{
     @RequestMapping(value = "medicineList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<MedicinePhaseModel> medicineList(@RequestParam(value = "appointmentId") final int appointmentId,
-                                                 @RequestParam(value = "diagnostic", required = false) final int illnessId) throws BizlogicException {
+                                                 @RequestParam(value = "diagnostic", required = false) final String diagnostic) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            return doctorService.getMedicines(appointmentId, illnessId);
+            return doctorService.getMedicines(appointmentId, diagnostic);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

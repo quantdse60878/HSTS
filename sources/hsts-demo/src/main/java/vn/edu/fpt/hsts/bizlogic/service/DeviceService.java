@@ -26,7 +26,7 @@ public class DeviceService {
     private DeviceRepo deviceRepo;
 
     public List<String> getListParamFromBrandName(String brandName) {
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
         Device device = deviceRepo.findDeviceByBrandName(brandName);
         List<ParamMeasurement> paramMeasurementList = paramMeasurementRepo.findParamMeasurementByDeviceId(device.getId());
         for(ParamMeasurement paramMeasurement : paramMeasurementList) {

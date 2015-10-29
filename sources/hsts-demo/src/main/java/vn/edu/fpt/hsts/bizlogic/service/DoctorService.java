@@ -366,11 +366,14 @@ public class DoctorService extends AbstractService {
         }
     }
 
-    public List<MedicinePhaseModel> getMedicines(final int appointmentId, final int diagnostic) throws BizlogicException {
+    public List<MedicinePhaseModel> getMedicines(final int appointmentId, final String diagnostic) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+            // Find Illness
+            Illness illness = illnessRepo.findByName(diagnostic);
+
             // Find phase for diagnostic
-            final Phase phase = illnessService.getPhaseSugestion(appointmentId, diagnostic);
+            final Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
             if(null == phase) {
                 return Collections.emptyList();
             }
