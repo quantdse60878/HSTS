@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import vn.edu.fpt.hsts.App;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrescriptionWrapperModel;
@@ -27,6 +26,7 @@ import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
+import vn.edu.fpt.hsts.persistence.entity.Medicine;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Notify;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
@@ -37,6 +37,8 @@ import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordDataRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
+import vn.edu.fpt.hsts.persistence.repo.MedicineRepo;
+import vn.edu.fpt.hsts.persistence.repo.MedicineTreatmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.NotifyRepo;
 import vn.edu.fpt.hsts.persistence.repo.PatientRepo;
 import vn.edu.fpt.hsts.persistence.repo.PreventionCheckRepo;
@@ -49,9 +51,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by QUYHKSE61160 on 10/7/15.
@@ -129,6 +129,18 @@ public class PatientService extends AbstractService {
     @Autowired
     private PreventionCheckRepo preventionCheckRepo;
 
+    /**
+     * The {@link MedicineRepo}.
+     */
+    @Autowired
+    private MedicineRepo medicineRepo;
+
+    /**
+     * The {@link MedicineTreatmentRepo}.
+     */
+    @Autowired
+    private MedicineTreatmentRepo medicineTreatmentRepo;
+
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         Patient patient = new Patient();
@@ -199,6 +211,7 @@ public class PatientService extends AbstractService {
                 patient = new Patient();
             }
             MedicalRecord medicalRecord = new MedicalRecord();
+            String medicineHistories = null;
             for (SearchCriteria criteria : criterias) {
                 if (criteria instanceof PatientCriteria) {
                     // TODO
@@ -234,6 +247,9 @@ public class PatientService extends AbstractService {
                     medicalRecord.setMedicalHistory(rCriteria.getMedicalHistory());
                     medicalRecordRepo.saveAndFlush(medicalRecord);
 
+                    // Process medicine history
+                    medicineHistories = rCriteria.getMedicineHistory();
+
                 } else if (criteria instanceof CheckCriteria) {
                     final CheckCriteria pcCriteria = (CheckCriteria) criteria;
                     // TODO Create appointment
@@ -261,6 +277,32 @@ public class PatientService extends AbstractService {
                     preventionCheck.setVisceralFat(pcCriteria.getVisceralFat());
                     preventionCheck.setImpedance(pcCriteria.getImpedance());
                     preventionCheckRepo.saveAndFlush(preventionCheck);
+
+                    // Process medicine history
+                    if (null != medicineHistories) {
+                        final String[] tmp = medicineHistories.split(",");
+                        if (null != tmp && tmp.length > 0) {
+                            final Treatment oldTreatment = new Treatment();
+                            oldTreatment.setFromDate(new Date());
+                            oldTreatment.setToDate(new Date());
+                            oldTreatment.setStatus(IDbConsts.ITreatmentStatus.HISTORY);
+                            oldTreatment.setAppointment(appointment);
+                            treatmentRepo.saveAndFlush(oldTreatment);
+                            for (String oldMedicine: tmp) {
+                                final MedicineTreatment mt = new MedicineTreatment();
+                                mt.setTreatment(oldTreatment);
+                                Medicine m = medicineRepo.findByName(oldMedicine);
+                                if(null == m) {
+                                    m = new Medicine();
+                                    m.setName(oldMedicine);
+                                    m.setUnit("");
+                                    medicineRepo.saveAndFlush(m);
+                                }
+                                mt.setMedicine(m);
+                                medicineTreatmentRepo.saveAndFlush(mt);
+                            }
+                        }
+                    }
                 }
             }
 
