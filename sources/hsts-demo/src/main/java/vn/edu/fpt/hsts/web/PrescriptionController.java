@@ -133,7 +133,6 @@ public class PrescriptionController extends AbstractController{
         try {
             LOGGER.info("appointmentId[{}], prescriptionModel[{}], diagnostic[{}]", appointmentId, prescriptionModel, diagnostic);
 
-
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
@@ -146,11 +145,12 @@ public class PrescriptionController extends AbstractController{
             if(illness == null) {
                 illness = illnessService.createNewIllness(diagnostic);
             } else {
+                // Find phase for diagnostic
                 final Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
                 if (phase == null) {
                     notify(mav, false, "Fail!!! ", "No regimen for suggest treatment");
-                    mav.addObject("PHASE", phase);
                 } else {
+                    mav.addObject("PHASE", phase);
                     mav.addObject("MEDICS", phase.getMedicinePhaseList().size());
                     mav.addObject("FOS", phase.getFoodPhaseList().size());
                     mav.addObject("PRACS", phase.getPracticePhaseList().size());
@@ -158,12 +158,9 @@ public class PrescriptionController extends AbstractController{
             }
             mav.addObject("DIAGNOSTIC", illness);
 
-            // Find phase for diagnostic
-
-
             return mav;
         } catch (Exception e){
-
+            LOGGER.info("Exception: " + e.getMessage());
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
