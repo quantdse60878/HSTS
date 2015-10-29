@@ -128,10 +128,11 @@ public class PrescriptionController extends AbstractController{
                                          @ModelAttribute PrescriptionModel prescriptionModel,
                                          @RequestParam(value = "diagnostic", required = false) final String diagnostic){
         LOGGER.info(IConsts.BEGIN_METHOD);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("makePrescription");
         try {
             LOGGER.info("appointmentId[{}], prescriptionModel[{}], diagnostic[{}]", appointmentId, prescriptionModel, diagnostic);
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("makePrescription");
+
 
             // Find Appointment
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
@@ -142,46 +143,32 @@ public class PrescriptionController extends AbstractController{
 
             // Find illness form diagnostic
             Illness illness = illnessService.findByName(diagnostic);
+            if(illness == null) {
+                illness = illnessService.createNewIllness(diagnostic);
+            } else {
+                final Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
+                if (phase == null) {
+                    notify(mav, false, "Fail!!! ", "No regimen for suggest treatment");
+                    mav.addObject("PHASE", phase);
+                } else {
+                    mav.addObject("MEDICS", phase.getMedicinePhaseList().size());
+                    mav.addObject("FOS", phase.getFoodPhaseList().size());
+                    mav.addObject("PRACS", phase.getPracticePhaseList().size());
+                }
+            }
             mav.addObject("DIAGNOSTIC", illness);
 
             // Find phase for diagnostic
-            final Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
-            if (phase == null) {
-                notify(mav, false, "Fail!!! ", "No regimen for suggest treatment");
-            } else {
-                mav.addObject("PHASE", phase);
-            }
 
-
-
-            mav.addObject("MEDICS", phase.getMedicinePhaseList().size());
-            mav.addObject("FOS", phase.getFoodPhaseList().size());
-            mav.addObject("PRACS", phase.getPracticePhaseList().size());
 
             return mav;
         } catch (Exception e){
-            LOGGER.info("diagnostic[{}]", diagnostic);
 
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("makePrescription");
-
-            // Create new illness
-            Illness illness = illnessService.createNewIllness(diagnostic);
-            mav.addObject("DIAGNOSTIC", illness);
-
-            // Find Appointment
-            Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
-            mav.addObject("APPOINTMENT", appointment);
-
-            // Initialization Data Prescription
-            initDataPrescription(mav, appointment, prescriptionModel);
-
-            notify(mav, false, "Fail!!! ", "Can't find regimen for suggest treatment");
-
-            return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
+
+        return mav;
     }
 
     /**
