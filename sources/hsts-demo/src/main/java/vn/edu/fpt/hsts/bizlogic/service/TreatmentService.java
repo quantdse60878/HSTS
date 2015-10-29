@@ -186,6 +186,7 @@ public class TreatmentService {
                     }
                     final int index = sb.lastIndexOf(",");
                     sb.substring(0, index -1);
+                    return sb.toString();
                 }
             }
             return "";
