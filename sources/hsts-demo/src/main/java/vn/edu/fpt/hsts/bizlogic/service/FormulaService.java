@@ -2,10 +2,13 @@ package vn.edu.fpt.hsts.bizlogic.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.util.AnalyticDataTask;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecordData;
+import vn.edu.fpt.hsts.persistence.entity.ParamMeasurement;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
+import vn.edu.fpt.hsts.persistence.repo.ParamMeasurementRepo;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,6 +28,9 @@ public class FormulaService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FormulaService.class);
 
+    @Autowired
+    private ParamMeasurementRepo paramMeasurementRepo;
+
     public List<String> getListFieldOfPreventionCheck() {
         List<String> result = new ArrayList<String>();
         for(Field f : PreventionCheck.class.getDeclaredFields()) {
@@ -34,8 +40,9 @@ public class FormulaService {
     }
     public List<String> getListFieldOfMedicalRecordData() {
         List<String> result = new ArrayList<String>();
-        for(Field f : MedicalRecordData.class.getDeclaredFields()) {
-            result.add(f.getName());
+        List<ParamMeasurement> paramMeasurementList = paramMeasurementRepo.findAll();
+        for(ParamMeasurement item : paramMeasurementList) {
+            result.add(item.getMeasurementName());
         }
         return result;
     }

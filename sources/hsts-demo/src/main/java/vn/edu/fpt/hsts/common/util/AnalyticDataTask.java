@@ -58,6 +58,10 @@ public class AnalyticDataTask {
     AccountRepo accountRepo;
     @Autowired
     PreventionCheckRepo preventionCheckRepo;
+    @Autowired
+    ParamMeasurementRepo paramMeasurementRepo;
+    @Autowired
+    PropertyRecordRepo propertyRecordRepo;
 
     @Scheduled(fixedRate = 1000 * 20)
     public void updatePatientData() {
@@ -109,9 +113,12 @@ public class AnalyticDataTask {
                 Method method;
                 try {
                     if (tableAndProperties[0].equals("2")) {
-                        method = recordData.getClass().getMethod("get" + tableAndProperties[1]);
-                        formularDistance = formularDistance.replace(variable.get(j), "" + method.invoke(recordData));
-                        formularCalories = formularCalories.replace(variable.get(j), "" + method.invoke(recordData));
+
+                        ParamMeasurement paramMeasurement = paramMeasurementRepo.findParamMeasurementByMeasurementName(tableAndProperties[1]);
+                        PropertyRecord propertyRecord = propertyRecordRepo.findPropertyRecordByMrdAndpm(recordData.getId(), paramMeasurement.getId());
+//                        method = recordData.getClass().getMethod("get" + tableAndProperties[1]);
+                        formularDistance = formularDistance.replace(variable.get(j), "" + propertyRecord.getParamMeasurementValue());
+                        formularCalories = formularCalories.replace(variable.get(j), "" + propertyRecord.getParamMeasurementValue());
                     } else if (tableAndProperties[0].equals("1")) {
                         method = preventionCheck.getClass().getMethod("get" + tableAndProperties[1]);
                         formularDistance = formularDistance.replace(variable.get(j), "" + method.invoke(preventionCheck));
@@ -134,8 +141,20 @@ public class AnalyticDataTask {
             }
             System.out.println("1");
             if (distance > 0 && calories > 0) {
-                recordData.setDistance(distance);
-                recordData.setCalories(calories);
+
+                ParamMeasurement paramDistance = paramMeasurementRepo.findParamMeasurementByMeasurementName("Distance");
+                ParamMeasurement paramCalories = paramMeasurementRepo.findParamMeasurementByMeasurementName("Calories");
+                PropertyRecord recordDistance = new PropertyRecord();
+                PropertyRecord recordCalories = new PropertyRecord();
+
+                recordDistance.setParamMeasurementValue(distance + "");
+                recordDistance.setMedicalRecordData(recordData);
+                recordDistance.setParamMeasurement(paramDistance);
+                recordCalories.setParamMeasurementValue(calories + "");
+                recordCalories.setMedicalRecordData(recordData);
+                recordCalories.setParamMeasurement(paramCalories);
+                propertyRecordRepo.save(recordDistance);
+                propertyRecordRepo.save(recordCalories);
                 recordData.setType(IDbConsts.IMedicalRecordDataType.CALCULATED);
             }
 

@@ -28,35 +28,8 @@ import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.common.util.StringUtils;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
-import vn.edu.fpt.hsts.persistence.entity.Account;
-import vn.edu.fpt.hsts.persistence.entity.Appointment;
-import vn.edu.fpt.hsts.persistence.entity.Doctor;
-import vn.edu.fpt.hsts.persistence.entity.Food;
-import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
-import vn.edu.fpt.hsts.persistence.entity.Illness;
-import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
-import vn.edu.fpt.hsts.persistence.entity.MedicalRecordData;
-import vn.edu.fpt.hsts.persistence.entity.Medicine;
-import vn.edu.fpt.hsts.persistence.entity.MedicinePhase;
-import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
-import vn.edu.fpt.hsts.persistence.entity.Notify;
-import vn.edu.fpt.hsts.persistence.entity.Phase;
-import vn.edu.fpt.hsts.persistence.entity.Practice;
-import vn.edu.fpt.hsts.persistence.entity.PracticeTreatment;
-import vn.edu.fpt.hsts.persistence.entity.Treatment;
-import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
-import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
-import vn.edu.fpt.hsts.persistence.repo.FoodRepo;
-import vn.edu.fpt.hsts.persistence.repo.FoodTreatmentRepo;
-import vn.edu.fpt.hsts.persistence.repo.IllnessRepo;
-import vn.edu.fpt.hsts.persistence.repo.MedicalRecordDataRepo;
-import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
-import vn.edu.fpt.hsts.persistence.repo.MedicineRepo;
-import vn.edu.fpt.hsts.persistence.repo.MedicineTreatmentRepo;
-import vn.edu.fpt.hsts.persistence.repo.NotifyRepo;
-import vn.edu.fpt.hsts.persistence.repo.PracticeRepo;
-import vn.edu.fpt.hsts.persistence.repo.PracticeTreatmentRepo;
-import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
+import vn.edu.fpt.hsts.persistence.entity.*;
+import vn.edu.fpt.hsts.persistence.repo.*;
 
 import javax.swing.*;
 import javax.transaction.Transactional;
@@ -154,6 +127,9 @@ public class DoctorService extends AbstractService {
 
     @Autowired
     private MedicalRecordDataRepo medicalRecordDataRepo;
+
+    @Autowired
+    private PropertyRecordRepo propertyRecordRepo;
 
     @Value("${hsts.default.treatment.long}")
     private int treatmentLong;
@@ -434,7 +410,9 @@ public class DoctorService extends AbstractService {
                     int kcalConsumed = 0;
                     int count = medicalRecordDatas.size();
                     for (int i = 0; i < count; i++) {
-                        kcalConsumed += medicalRecordDatas.get(i).getCalories();
+
+                        PropertyRecord propertyRecord = propertyRecordRepo.findPropertyRecordByMrdAndpm(medicalRecordDatas.get(i).getId(), 2);
+                        kcalConsumed += Integer.parseInt(propertyRecord.getParamMeasurementValue());
                     }
                     kcalConsumed = kcalConsumed / count;
                     resultModel.setAvgKcalConsumed(kcalConsumed);

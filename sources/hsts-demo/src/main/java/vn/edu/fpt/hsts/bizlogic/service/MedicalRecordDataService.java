@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecordData;
-import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
-import vn.edu.fpt.hsts.persistence.repo.MedicalRecordDataRepo;
-import vn.edu.fpt.hsts.persistence.repo.MedicalRecordRepo;
+import vn.edu.fpt.hsts.persistence.entity.ParamMeasurement;
+import vn.edu.fpt.hsts.persistence.entity.PropertyRecord;
+import vn.edu.fpt.hsts.persistence.repo.*;
 
 import java.util.Date;
 
@@ -21,18 +21,31 @@ public class MedicalRecordDataService {
     private MedicalRecordDataRepo medicalRecordDataRepo;
     @Autowired
     private AppointmentRepo appointmentRepo;
+    @Autowired
+    private PropertyRecordRepo propertyRecordRepo;
+    @Autowired
+    private ParamMeasurementRepo paramMeasurementRepo;
 
     public boolean sendMedicalData(final int appointmentId, final int numberOfStep, final Date collectDate) {
 
         MedicalRecordData medicalRecordData = new MedicalRecordData();
         medicalRecordData.setType(IDbConsts.IMedicalRecordDataType.UN_CALCULATED);
-        medicalRecordData.setNumberOfStep(numberOfStep);
+//        medicalRecordData.setNumberOfStep(numberOfStep);
 
         Appointment appointment = appointmentRepo.findOne(appointmentId);
-
         medicalRecordData.setAppointment(appointment);
         medicalRecordData.setCollectedDate(collectDate);
         medicalRecordDataRepo.save(medicalRecordData);
+
+        ParamMeasurement paramMeasurement = paramMeasurementRepo.findOne(1);
+
+        PropertyRecord propertyRecord = new PropertyRecord();
+        propertyRecord.setParamMeasurementValue(numberOfStep + "");
+        propertyRecord.setMedicalRecordData(medicalRecordData);
+        propertyRecord.setParamMeasurement(paramMeasurement);
+        propertyRecordRepo.save(propertyRecord);
+
+
 
         return true;
     }

@@ -9,49 +9,26 @@ package vn.edu.fpt.hsts.persistence.entity;
 
 import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class MedicalRecordData extends AbstractKeyEntity {
 
-    /**
-     * The medical record.
-     */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "appointmentId", nullable = false)
     private Appointment appointment;
 
-    /**
-     * Collected time.
-     */
     @JoinColumn(name = "dateCollectData")
     private Date collectedDate;
-    /**
-     * Number of steps.
-     */
-    private int numberOfStep;
 
-    /**
-     * Calories burned.
-     */
-    private int calories;
+    private byte type;
 
-    /**
-     *
-     */
-    private float distance;
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "medicalRecordData")
+    private List<PropertyRecord> listRecord;
 
     private int ratioCompletePractice;
-
-    /**
-     *
-     */
-    private byte type;
 
     public MedicalRecordData() {
     }
@@ -64,27 +41,19 @@ public class MedicalRecordData extends AbstractKeyEntity {
         this.ratioCompletePractice = ratioCompletePractice;
     }
 
-    public int getNumberOfStep() {
-        return numberOfStep;
-    }
-
-    public void setNumberOfStep(final int numberOfStep) {
-        this.numberOfStep = numberOfStep;
-    }
-
-    public int getCalories() {
-        return calories;
-    }
-
-    public void setCalories(final int calories) {
-        this.calories = calories;
-    }
-
     public Appointment getAppointment() {
         return appointment;
     }
 
-    public void setAppointment(final Appointment appointment) {
+    public List<PropertyRecord> getListRecord() {
+        return listRecord;
+    }
+
+    public void setListRecord(List<PropertyRecord> listRecord) {
+        this.listRecord = listRecord;
+    }
+
+    public void setAppointment(Appointment appointment) {
         this.appointment = appointment;
     }
 
@@ -92,23 +61,15 @@ public class MedicalRecordData extends AbstractKeyEntity {
         return collectedDate;
     }
 
-    public void setCollectedDate(final Date collectedDate) {
+    public void setCollectedDate(Date collectedDate) {
         this.collectedDate = collectedDate;
-    }
-
-    public float getDistance() {
-        return distance;
-    }
-
-    public void setDistance(final float distance) {
-        this.distance = distance;
     }
 
     public byte getType() {
         return type;
     }
 
-    public void setType(final byte type) {
+    public void setType(byte type) {
         this.type = type;
     }
 }

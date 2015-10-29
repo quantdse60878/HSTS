@@ -24,16 +24,6 @@ public class Device extends AbstractKeyEntity {
      */
     private String brandUuid;
 
-    /**
-     *
-     */
-    private String numberOfStepUuid;
-
-    /**
-     *
-     */
-    private String positionNumberOfStep;
-
     public Device() {
     }
 
@@ -51,21 +41,5 @@ public class Device extends AbstractKeyEntity {
 
     public void setBrandUuid(final String brandUuid) {
         this.brandUuid = brandUuid;
-    }
-
-    public String getNumberOfStepUuid() {
-        return numberOfStepUuid;
-    }
-
-    public void setNumberOfStepUuid(final String numberOfStepUuid) {
-        this.numberOfStepUuid = numberOfStepUuid;
-    }
-
-    public String getPositionNumberOfStep() {
-        return positionNumberOfStep;
-    }
-
-    public void setPositionNumberOfStep(final String positionNumberOfStep) {
-        this.positionNumberOfStep = positionNumberOfStep;
     }
 }
