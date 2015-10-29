@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class Constant {
     //All constant of call api
-    public static String hostURL = "http://192.168.1.117:8080";
+    public static String hostURL = "http://192.168.7.106:8080";
     public static final String loginMethod = "/loginMobile";
     public static final String checkNotifyMethod = "/notify";
     public static final String getTreatment = "/getTreatment";
@@ -21,6 +21,7 @@ public class Constant {
     public static final String hadGetTreatment = "/hadGetNotify";
     public static final String sendNotifyToDoctor = "/sendNotifyToDoctor";
     public static final String changePassword = "/changePassword";
+    public static final String sendUuidToAndroid = "/sendUuidToAndroid";
 
     //All constant of shared preference
     public static final String PREF_NAME = "HSTSAPPPREF";
@@ -29,11 +30,13 @@ public class Constant {
     public static final String PREF_HADSELECTDEVICE = "HSTSAPPPREFSELECTDEVICE";
     public static final String PREF_DATA = "HSTSAPPDATA";
     public static final String PREF_PATIENT_NAME = "HSTSAPPPREFPATIENTNAME";
-    public static String NUMBEROFSTEP_POSITION = "3";
 
     public static String accountId = "0";
     public static String patientId = "0";
     public static String username = "";
+    public static String numberOfStep = "2000";
+    public static int position = -1;
+    public static String manufacturer = "";
     public static boolean haveInternet = false;
 
     //
@@ -42,8 +45,9 @@ public class Constant {
     public static String CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb";
     public static final UUID main_service_UUID = UUID.fromString("0000ff01-0000-1000-8000-00805f9b34fb");
     public static final UUID movementData_current_UUID = UUID.fromString("0000f019-0000-1000-8000-00805f9b34fb");
-    public static final UUID numberOfStep_UUID = UUID.fromString("00002a25-0000-1000-8000-00805f9b34fb");
+    public static UUID numberOfStep_UUID = UUID.fromString("00002a25-0000-1000-8000-00805f9b34fb");
     public static final UUID manufacturer_UUID = UUID.fromString("00002a29-0000-1000-8000-00805f9b34fb");
+    public static int numberOfStep_potition = 3;
 
     //KhuongMH
     public static String DATA_FROM_SERVER = "";

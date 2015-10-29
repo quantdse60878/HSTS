@@ -87,7 +87,7 @@ public class SelectDeviceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_device);
 
-        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
+        position = Constant.position;
         final Intent intent = getIntent();
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);

@@ -120,7 +120,7 @@ public class BroadcastService extends Service {
                                     listByteData[i] = Byte.parseByte(listArray[i]);
                                 }
                                 String listData = new String(listByteData);
-                                String numberOfStep = listData.split(",")[3];
+                                String numberOfStep = listData.split(",")[Constant.numberOfStep_potition];
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                                 sendMedicalData(numberOfStep, sdf.format(date));
                                 Log.d("QUY", "QUY");

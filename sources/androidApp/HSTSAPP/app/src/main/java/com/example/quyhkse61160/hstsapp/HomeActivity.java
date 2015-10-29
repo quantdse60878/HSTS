@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -19,6 +20,8 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.ViewPager;
@@ -34,6 +37,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.quyhkse61160.hstsapp.Adapter.NavDrawerListAdapter;
 import com.example.quyhkse61160.hstsapp.Adapter.ViewPagesAdapter;
@@ -42,16 +46,35 @@ import com.example.quyhkse61160.hstsapp.Classes.NavDrawerItem;
 import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
 import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
+import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
 import com.example.quyhkse61160.hstsapp.Fragment.NoticeTab;
 import com.example.quyhkse61160.hstsapp.Fragment.Tab4;
 import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
 import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
 import com.example.quyhkse61160.hstsapp.Service.NetworkChangeReceiver;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
+
+import cz.msebera.android.httpclient.NameValuePair;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
 
 public class HomeActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -64,9 +87,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public static int appointmentId = 2;
     public static List<String> listNumberOfStep = new ArrayList<>();
     public static List<String> dateSaveStep = new ArrayList<>();
-    public static String numberOfStep = "2000";
-    public static int position = 0;
-    public static String manufacturer = "Unknown";
     public static BluetoothGattCharacteristic characteristicStep = null;
     public static BluetoothGattCharacteristic characteristicManufacturer = null;
     private Timer timer = new Timer();
@@ -81,6 +101,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public static String timeAlert;
     private AlarmManagerBroadcastReceiver alarm;
     public static boolean hadRegisterReceiver = false;
+    private final Handler handlerThread = new Handler();
 
 
     private DrawerLayout mDrawerLayout;
@@ -153,11 +174,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 if (gattService == null) {
                     Log.d("-------", "NULL CMNR");
                 } else {
-                    Log.d("-------", "GGWP");
                     Log.d("-------", "--" + gattService.getUuid().toString() + "--");
                     characteristicStep = gattService.getCharacteristic(Constant.numberOfStep_UUID);
                     characteristicManufacturer = gattService.getCharacteristic(Constant.manufacturer_UUID);
-//                    mBluetoothLeService.readCharacteristic(characteristicStep);
                     mBluetoothLeService.readCharacteristic(characteristicManufacturer);
                 }
             }
@@ -176,10 +195,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     @Override
                     public void run() {
                         // This code will always run on the UI thread, therefore is safe to modify UI elements.
-                        mBluetoothLeService.readCharacteristic(characteristicStep);
-//                        mBluetoothLeService.readCharacteristic(characteristicManufacturer);
-
-                        Log.d("QUYYY1111111", "Manufacturer: " + manufacturer + "------" + "Number of step: " + numberOfStep);
+                        if (Constant.numberOfStep_potition != -1) {
+                            mBluetoothLeService.readCharacteristic(characteristicStep);
+                            Log.d("QUYYY1111111", "Manufacturer: " + Constant.manufacturer + "------" + "Number of step: " + Constant.numberOfStep);
+                        }
                     }
                 });
             }
@@ -207,7 +226,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             hadRegisterReceiver = true;
             registerReceiver(mConnectionDetector, mIntentFilter);
         }
-
+        SendBrandAsyncTask sendBrandAsyncTask = new SendBrandAsyncTask();
+        sendBrandAsyncTask.execute();
         Constant.TREATMENTS = Constant.getItems();
 
 
@@ -290,40 +310,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         // Home
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
 
-//        boolean hasFood = false;
-//        boolean hasMedicine = false;
-//        boolean hasPractice = false;
-//        for(Treatment treatment : Constant.TREATMENTS){
-//            for (ToDoTime time : treatment.getListFoodTreatment()) {
-//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
-//                    hasFood = true;
-//                }
-//            }
-//            for (ToDoTime time : treatment.getListMedicineTreatment()) {
-//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
-//                    hasMedicine = true;
-//                }
-//            }
-//            for (ToDoTime time : treatment.getListPracticeTreatment()) {
-//                if (time.getNumberOfTime().contains(HomeActivity.timeAlert)) {
-//                    hasPractice = true;
-//                }
-//            }
-//        }
-
-//        // Food
-//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), hasFood));
-//        // Medicines
-//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), hasMedicine));
-//        // Practice
-//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), hasPractice));
-
-//        // Food
-//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-//        // Medicines
-//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
-//        // Practice
-//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
         // Notice
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
 
@@ -350,24 +336,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     updateView(position);
                     displayView(1);
                 }
-//                if (position == 2) {
-////                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-////                    item.setNotify(false);
-//                    updateView(position);
-//                    displayView(2);
-//                }
-//                if (position == 3) {
-////                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-////                    item.setNotify(false);
-//                    updateView(position);
-//                    displayView(3);
-//                }
-//                if (position == 4) {
-////                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-////                    item.setNotify(false);
-//                    updateView(position);
-//                    displayView(4);
-//                }
             }
         });
 
@@ -415,7 +383,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
 //        startService(checkNotifyIntent);
 //        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
-        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
         final Intent intent = getIntent();
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
@@ -600,5 +567,78 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         String time = intent.getStringExtra("time");
         Log.d("QUYYYY1111", "Check Notify: " + counter + "--" + time);
     }
+
+
+    private class SendBrandAsyncTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            while (Constant.manufacturer.equals("")) {
+                try {
+                    Log.e("Quy", "FUCK");
+                    Thread.sleep(1000);
+                    Log.e("Quy", "You");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            sendManufacturer();
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+        }
+    }
+
+
+    private void sendManufacturer() {
+        String stringURL = Constant.hostURL + Constant.sendUuidToAndroid;
+        Log.d("---Brand Name---", Constant.manufacturer + "_________" + stringURL);
+
+        try {
+            URL url = new URL(stringURL);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(100000);
+            urlConnection.setConnectTimeout(30000);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("brandName", Constant.manufacturer));
+
+            OutputStream os = urlConnection.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            writer.write(HSTSUtils.getQuery(params));
+            writer.flush();
+            writer.close();
+            os.close();
+
+            urlConnection.connect();
+
+            InputStream inStream = urlConnection.getInputStream();
+            BufferedReader bReader = new BufferedReader(new InputStreamReader(inStream));
+            String temp, response = "";
+            while ((temp = bReader.readLine()) != null) {
+                response += temp;
+            }
+            Log.e("Quy11111", "--" + response);
+            try {
+                JSONArray listUuid = new JSONArray(response);
+                String result = listUuid.getString(0);
+                String[] stringResponse = result.split(",");
+                Constant.numberOfStep_UUID = UUID.fromString(stringResponse[0]);
+                Constant.numberOfStep_potition = Integer.parseInt(stringResponse[1]);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

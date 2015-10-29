@@ -79,10 +79,6 @@
             android:label="@string/title_activity_home2" >
         </activity>
         <activity
-            android:name=".SetNumberStepActivity"
-            android:label="Set Number Step" >
-        </activity>
-        <activity
             android:name=".SetupActivity"
             android:label="@string/title_activity_setup" >
         </activity>

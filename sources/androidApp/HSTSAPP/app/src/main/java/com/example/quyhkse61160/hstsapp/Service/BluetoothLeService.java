@@ -68,7 +68,6 @@ public class BluetoothLeService extends Service {
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
             final byte[] data = characteristic.getValue();
 
-
             String stringdata = new String(data);
             Log.d("QUYYYYYYYYY", "--" + stringdata + "--");
             if((HomeActivity.characteristicManufacturer != null) && (HomeActivity.characteristicStep != null)) {
@@ -116,9 +115,16 @@ public class BluetoothLeService extends Service {
                         final StringBuilder stringBuilder = new StringBuilder(data.length);
                         for(byte byteChar : data)
                             stringBuilder.append(String.format("%02X ", byteChar));
-                        Log.d("Quyyyyy111", "Manufacturer: " + stringBuilder.toString() + "--");
                     }
-                    HomeActivity.manufacturer = stringdata;
+                    String byteData = "";
+                    for(int i = 0; i < data.length; i++) {
+                        if(i < data.length-1)
+                            byteData = byteData + data[i] + ",";
+                        else
+                            byteData = byteData + data[i];
+                    }
+                    Constant.manufacturer = byteData;
+                    Log.e("-===-", "--" + Constant.manufacturer);
                 }
             }
             broadcastUpdate(ACTION_DATA_AVAILABLE);
