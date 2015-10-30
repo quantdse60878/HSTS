@@ -354,7 +354,7 @@ function reCounterRow(row){
                     return {
                         label: text,
                         value: text,
-                        url: "/viewPrescription?appointmentDate=" + text,
+                        url: url,
                         option: this
                     };
             }) );

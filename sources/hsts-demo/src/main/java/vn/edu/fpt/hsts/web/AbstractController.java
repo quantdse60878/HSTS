@@ -7,6 +7,8 @@
  */
 package vn.edu.fpt.hsts.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.NutritionModel;
@@ -23,6 +25,7 @@ import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.bizlogic.service.PracticeService;
 import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
+import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Food;
 import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
@@ -35,6 +38,7 @@ import vn.edu.fpt.hsts.web.config.ControllerParam;
 import java.util.List;
 
 public class AbstractController implements ControllerParam {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractController.class);
     /**
      * The {@link TreatmentService}.
      */
@@ -72,66 +76,76 @@ public class AbstractController implements ControllerParam {
     private FoodIngredientService foodIngredientService;
 
     public void initDataPrescription(ModelAndView mav, Appointment appointment, PrescriptionModel prescriptionModel){
-        mav.addObject("MEDICS",  1);
-        mav.addObject("FOS", 1);
-        mav.addObject("PRACS", 1);
-        // Set next appointent date
-        mav.addObject("NEXTAPPOINTMENTDATE", doctorService.getTreatmentLong());
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("mav[{}], appointment[{}], prescriptionModel[{}]", mav, appointment, prescriptionModel);
 
-        // Get config time
-        final String[] timeArr = treatmentService.getMedicineTimeConfig();
-        mav.addObject("TIMES", timeArr);
+            mav.addObject("MEDICS",  1);
+            mav.addObject("FOS", 1);
+            mav.addObject("PRACS", 1);
 
-        // get illnessList
-        List<Illness> illnessList = illnessService.getAllIllness();
-        mav.addObject("ILLNESSES", illnessList);
+            // Set next appointent date
+            mav.addObject("NEXTAPPOINTMENTDATE", doctorService.getTreatmentLong());
 
-        //get medicineList
-        List<Medicine> medicineList = medicineService.getAllMedicine();
-        mav.addObject("MEDICINES", medicineList);
+            // Get config time
+            final String[] timeArr = treatmentService.getMedicineTimeConfig();
+            mav.addObject("TIMES", timeArr);
 
-        //get foodList
-        List<Food> foodList = foodService.getAllFood();
-        mav.addObject("FOODS", foodList);
+            // get illnessList
+            List<Illness> illnessList = illnessService.getAllIllness();
+            mav.addObject("ILLNESSES", illnessList);
 
-        //get practiceList
-        List<Practice> practiceList = practiceService.getAllPractice();
-        mav.addObject("PRACTICES", practiceList);
+            //get medicineList
+            List<Medicine> medicineList = medicineService.getAllMedicine();
+            mav.addObject("MEDICINES", medicineList);
 
-        // Find PreventionCheck
-        PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
-        mav.addObject("PREVENTIONCHECK", preventionCheck);
+            //get foodList
+            List<Food> foodList = foodService.getAllFood();
+            mav.addObject("FOODS", foodList);
 
-        // Find FoodIngredient
-        FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
-        if (null != foodIngredient){
-            NutritionModel nutritionModel = new NutritionModel(foodIngredient,preventionCheck.getWeight());
-            mav.addObject("FOODINGREDIENT", nutritionModel);
-            int kcalEstimate = (int) (nutritionModel.getTotalEnergy() - preventionCheck.getBasalMetabolicRate());
-            prescriptionModel.setKcalRequire(kcalEstimate);
+            //get practiceList
+            List<Practice> practiceList = practiceService.getAllPractice();
+            mav.addObject("PRACTICES", practiceList);
+
+            // Find PreventionCheck
+            PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
+            mav.addObject("PREVENTIONCHECK", preventionCheck);
+
+            // Find FoodIngredient
+            FoodIngredient foodIngredient = foodIngredientService.findFoodIngredientByAppoiment(appointment);
+            if (null != foodIngredient){
+                NutritionModel nutritionModel = new NutritionModel(foodIngredient,preventionCheck.getWeight());
+                mav.addObject("FOODINGREDIENT", nutritionModel);
+                LOGGER.info("nutritionModel[{}]", nutritionModel);
+                int kcalEstimate = (int) (nutritionModel.getTotalEnergy() - preventionCheck.getBasalMetabolicRate());
+                prescriptionModel.setKcalRequire(kcalEstimate);
+            }
+
+            // Set entry patient
+            mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
+
+            // Find List Appointment
+            List<Appointment> appointments = appointmentService.getAllAppointmentToCurrentDateOfPatient(appointment.getMedicalRecord().getPatient().getId());
+            mav.addObject("APPOINTMENTS", appointments);
+
+            // Get PracticeResultModel
+            PracticeResultModel practiceResultModel = doctorService.getInfoPracticeDataOfPatient(appointment);
+            mav.addObject("DATAPRACS", practiceResultModel);
+            LOGGER.info("practiceResultModel[{}]", practiceResultModel);
+
+            // Find old Appointment
+            Appointment oldAppointment = appointmentService.findParentOfAppointment(appointment);
+            if (oldAppointment != null){
+                // Find illness form diagnostic
+                Illness illness = oldAppointment.getMedicalRecord().getIllness();
+                mav.addObject("DIAGNOSTIC", illness);
+            }
+
+            // Add model
+            mav.addObject("model", prescriptionModel);
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
         }
-
-        // Set entry patient
-        mav.addObject("PATIENT", appointment.getMedicalRecord().getPatient());
-
-        // Find List Appointment
-        List<Appointment> appointments = appointmentService.getAllAppointmentToCurrentDateOfPatient(appointment.getMedicalRecord().getPatient().getId());
-        mav.addObject("APPOINTMENTS", appointments);
-
-        // Get PracticeResultModel
-        PracticeResultModel practiceResultModel = doctorService.getInfoPracticeDataOfPatient(appointment);
-        mav.addObject("DATAPRACS", practiceResultModel);
-
-        // Find old Appointment
-        Appointment oldAppointment = appointmentService.findParentOfAppointment(appointment);
-        if (oldAppointment != null){
-            // Find illness form diagnostic
-            Illness illness = oldAppointment.getMedicalRecord().getIllness();
-            mav.addObject("DIAGNOSTIC", illness);
-        }
-
-        // Add model
-        mav.addObject("model", prescriptionModel);
     }
 
     public void notify(ModelAndView mav, Boolean result,String method, String mess){

@@ -85,6 +85,7 @@
                                 <div class="ui-widget">
                                     <select id="infordate" class="form-control">
                                         <option th:each="appointment : ${APPOINTMENTS}"
+                                                th:value="@{/viewPrescription(appointmentId=${appointment.id})}"
                                                     th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</option>
                                     </select>
                                 </div>

@@ -55,12 +55,12 @@ public class AppointmentService {
         }
     }
 
-    public Appointment findAppointmentDate(final String appointmentDate) {
+    public Appointment findAppointmentDate(final String appointmentDate, final int patientId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("appointmentDate[{}]", appointmentDate);
+            LOGGER.info("appointmentDate[{}], patientId[{}]", appointmentDate, patientId);
             Date date = DateUtils.parseDate(appointmentDate, DateUtils.DATE_PATTERN_3);
-            return appointmentRepo.findAppointmentByDate(date);
+            return appointmentRepo.findAppointmentByDate(date, patientId);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

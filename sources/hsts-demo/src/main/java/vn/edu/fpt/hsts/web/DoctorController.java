@@ -106,19 +106,19 @@ public class DoctorController extends AbstractController{
 
     /**
      * The view Prescription page mapping
-     * @param appointmentDate
+     * @param appointmentId
      * @return
      */
     @RequestMapping(value = "viewPrescription", method = RequestMethod.GET)
-    public ModelAndView makePrescriptionPage(@RequestParam("appointmentDate") final String appointmentDate) {
+    public ModelAndView makePrescriptionPage(@RequestParam("appointmentId") final int appointmentId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("appointmentDate[{}]", appointmentDate);
+            LOGGER.info("appointmentId[{}]", appointmentId);
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");
 
             // Find Appointment
-            Appointment appointment = appointmentService.findAppointmentDate(appointmentDate);
+            Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
 
             // Initialization Data Prescription
