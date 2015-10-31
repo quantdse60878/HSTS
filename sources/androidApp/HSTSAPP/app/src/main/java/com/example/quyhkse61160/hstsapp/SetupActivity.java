@@ -30,7 +30,7 @@ public class SetupActivity extends ActionBarActivity {
         btnSetup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Constant.hostURL = txtip.getText().toString();
+                Constant.hostURL = "http://" + txtip.getText().toString() + ":8080";
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.example.quyhkse61160.hstsapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -18,12 +20,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
+import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
 import com.example.quyhkse61160.hstsapp.Service.NetworkChangeReceiver;
 
 import org.json.JSONException;
@@ -157,7 +161,7 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -170,8 +174,8 @@ public class LoginActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings_IP) {
-            Intent intent = new Intent(LoginActivity.this,SetupActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(LoginActivity.this,SetupActivity.class);
+//            startActivity(intent);
             return true;
         }
 
@@ -230,7 +234,24 @@ public class LoginActivity extends ActionBarActivity {
 
 
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setTitle("Lỗi").setMessage("Không thể kết nối tới server. Bạn có muốn đổi IP không ?")
+                        .setPositiveButton(R.string.action_settings_IP, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(LoginActivity.this,SetupActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.show();
             } catch (IOException e) {
                 e.printStackTrace();
             }

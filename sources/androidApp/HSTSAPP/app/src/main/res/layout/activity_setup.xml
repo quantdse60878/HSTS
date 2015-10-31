@@ -6,7 +6,10 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.quyhkse61160.hstsapp.SetupActivity">
 
-    <TextView android:text="IP:" android:layout_width="wrap_content"
+    <TextView android:text="IP Mới:"
+        android:textColor="@android:color/black"
+        android:textSize="15dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView" />
     <EditText
@@ -14,7 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
         android:layout_alignParentEnd="true"
-        android:id="@+id/txt_ip" />
+        android:id="@+id/txt_ip"
+        android:hint="Ví dụ: 192.168.1.169"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
