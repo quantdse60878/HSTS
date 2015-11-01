@@ -7,9 +7,4 @@
       <pdfEncoding>Identity-H</pdfEncoding>
       <pdfEmbedded>false</pdfEmbedded>
    </fontFamily>
-   <fontFamily name="IDAutomationC39M">
-      <normal>static/fonts/IDAutomationC39M.ttf</normal>
-      <pdfEncoding>Identity-H</pdfEncoding>
-      <pdfEmbedded>true</pdfEmbedded>
-   </fontFamily>
 </fontFamilies>
