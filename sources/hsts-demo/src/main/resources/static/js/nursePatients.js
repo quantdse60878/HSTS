@@ -70,7 +70,7 @@ $(document).ready(function(){
                 "width": "20%"},
             { "data": "account.gender",
                 "render": function (data, type, full, meta) {
-                    var className = "btn btn-success";
+                    var className = "btn btn-info";
                     if(data == "FEMALE") {
                         className = "btn btn-danger";
                     }

@@ -21,11 +21,17 @@ public class PatientExtendedModel extends AbstractKeyModel<Patient>{
      */
     private AccountModel account;
 
+    /**
+     *
+     */
+    private String barcode;
+
     @Override
     public void fromEntity(Patient entity) {
         super.fromEntity(entity);
         account = new AccountModel();
         account.fromEntity(entity.getAccount());
+        barcode = entity.getBarcode();
     }
 
     public AccountModel getAccount() {
@@ -34,5 +40,13 @@ public class PatientExtendedModel extends AbstractKeyModel<Patient>{
 
     public void setAccount(final AccountModel account) {
         this.account = account;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 }

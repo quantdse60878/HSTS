@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrescriptionWrapperModel;
@@ -139,6 +140,12 @@ public class PatientService extends AbstractService {
     @Autowired
     private MedicineTreatmentRepo medicineTreatmentRepo;
 
+    /**
+     * The {@link BarcodeService}.
+     */
+    @Autowired
+    private BarcodeService barcodeService;
+
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         Patient patient = new Patient();
@@ -221,9 +228,14 @@ public class PatientService extends AbstractService {
                     // Save patient
                     patient.setAccount(newAccount);
                     patientRepo.saveAndFlush(patient);
+
+                    // Generate new barcode for patient
+                    final String barcode = barcodeService.getPatientBarcode(patient.getId());
+
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Create new patient[{}] successfully", newAccount.getUsername());
                     }
+
                     //  send email with creditial information to patient
                     mailService.pushMail(newAccount);
 
@@ -480,15 +492,15 @@ public class PatientService extends AbstractService {
         }
     }
 
-    public PatientExtendedPageModel findPatients(final String name, final int page, final int pageSize) {
+    public PatientExtendedPageModel findPatients(final String keyword, final int page, final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("name[{}], page[{}], pageSize[{}]", name, page, pageSize);
+            LOGGER.info("keyword[{}], page[{}], pageSize[{}]", keyword, page, pageSize);
             Page<Patient> pageEntitties = null;
             final PageRequest pageRequest = new PageRequest(page, pageSize);
-            if (StringUtils.isNotEmpty(name)) {
-                String searchName = "%" + name + "%";
-                pageEntitties = patientRepo.findByNameLike(searchName, pageRequest);
+            if (StringUtils.isNotEmpty(keyword)) {
+                String searchName = "%" + keyword + "%";
+                pageEntitties = patientRepo.findByNameOrBarcodeLike(searchName, pageRequest);
             } else {
                 pageEntitties = patientRepo.findAll(pageRequest);
             }
@@ -594,6 +606,22 @@ public class PatientService extends AbstractService {
         } catch (Exception e) {
             // All error -> false
             return false;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public PatientExtendedModel findPatientByBarcode(final String barcode) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("barcode[{}]", barcode);
+            Patient patient = patientRepo.findPatientByBarcode(barcode);
+            if(null == patient) {
+                return null;
+            }
+            PatientExtendedModel model = new PatientExtendedModel();
+            model.fromEntity(patient);
+            return model;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

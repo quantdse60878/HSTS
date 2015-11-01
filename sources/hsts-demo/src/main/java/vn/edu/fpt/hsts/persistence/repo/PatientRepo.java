@@ -24,9 +24,15 @@ public interface PatientRepo extends JpaRepository<Patient, Integer> {
     @Query(value = "select patient.* from Patient patient join MedicalRecord mr on patient.id = mr.patientId join Appointment a on mr.id = a.medicalRecordId where a.appointmentDateTime = :appointmentDateTime and a.status = 3 and mr.status in (1,3)", nativeQuery = true)
     public List<Patient> findByAppoinmentDate(@Param(value = "appointmentDateTime") final Date date);
 
-    @Query("select p from Patient p where lower(name) like lower(:name)")
+    @Query("select p from Patient p where lower(account.fullName) like lower(:name)")
     public Page<Patient> findByNameLike(@Param("name") final String name, final Pageable pageable);
 
     @Query("select p from Patient p where account.id = :accountId")
     public Patient findByAccountId(@Param("accountId") final int accountId);
+
+    @Query("select p from Patient p where lower(account.username) like lower(:keyword) or lower(account.fullName) like lower(:keyword) or lower(barcode) like lower(:keyword)")
+    public Page<Patient> findByNameOrBarcodeLike(@Param("keyword") final String keyword, final Pageable pageable);
+
+    @Query("select distinct p from Patient p where lower(barcode) = lower(:barcode)")
+    public Patient findPatientByBarcode(@Param("barcode") final String barcode);
 }

@@ -22,6 +22,10 @@ public interface ControllerParam {
     /**
      *
      */
+    final String PAGE_SIZE_5 = "5";
+    /**
+     *
+     */
     final String EMPTY = "";
 
     /**
