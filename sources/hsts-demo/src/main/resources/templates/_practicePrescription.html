@@ -23,7 +23,7 @@
             </select>
             <div class="help-block with-errors"></div>
         </td>
-        <td style="min-width: 75px;" class="form-group">
+        <td style="min-width: 120px;" class="form-group">
             <select class="form-control" th:field="*{pPresModels[0].pTime}" data-error="Choose at least one">
                 <option value="0" disabled="disabled">Select</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
@@ -54,8 +54,8 @@
 </div>
 <div class="form-group">
     <label class="col-md-3 control-label">Kcal Estimate</label>
-    <div class="col-md-4">
-        <input th:field="*{kcalRequire}" style="text-align: right;" type="text" class="form-control" data-remote="/validateData" required="required" data-error="Wrong input"/>
+    <div class="col-md-2">
+        <input th:field="*{kcalRequire}" style="text-align: right;" type="text" class="form-control hsts" data-remote="/validateData" required="required" data-error="Wrong input"/>
     </div>
     <label class="col-md-1 control-label">Kcal/Day</label>
     <div class="help-block with-errors"></div>

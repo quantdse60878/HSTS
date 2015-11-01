@@ -133,13 +133,7 @@ public class AbstractController implements ControllerParam {
             mav.addObject("DATAPRACS", practiceResultModel);
             LOGGER.info("practiceResultModel[{}]", practiceResultModel);
 
-            // Find old Appointment
-            Appointment oldAppointment = appointmentService.findParentOfAppointment(appointment);
-            if (oldAppointment != null){
-                // Find illness form diagnostic
-                Illness illness = oldAppointment.getMedicalRecord().getIllness();
-                mav.addObject("DIAGNOSTIC", illness);
-            }
+
 
             // Add model
             mav.addObject("model", prescriptionModel);

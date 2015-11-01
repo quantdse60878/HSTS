@@ -33,7 +33,7 @@
             </select>
             <div class="help-block with-errors"></div>
         </td>
-        <td style="min-width: 75px;" class="form-group">
+        <td style="min-width: 120px;" class="form-group">
             <select class="form-control" th:field="*{fPresModels[__${row.index}__].fTime}" required="required" data-error="Choose at least one">
                 <option value="0" disabled="disabled">Select</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"

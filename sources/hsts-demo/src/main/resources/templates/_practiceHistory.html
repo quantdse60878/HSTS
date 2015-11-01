@@ -19,7 +19,7 @@
         <td style="min-width: 155px;">
             <input th:value="${practiceTreatment.practice.name}" readonly="readonly" class="form-control"/>
         </td>
-        <td style="min-width: 75px;">
+        <td style="min-width: 120px;">
             <input th:value="${practiceTreatment.numberOfTime}" style="text-align: right;" readonly="readonly" class="form-control"/>
         </td>
         <td>
@@ -37,8 +37,8 @@
 <div class="form-group">
     <label class="col-md-3 control-label">Kcal Estimate</label>
 
-    <div class="col-md-4">
-        <input readonly="readonly" style="text-align: right;" th:value="${TREATMENT.caloriesBurnEveryday}" type="text" class="form-control" />
+    <div class="col-md-2">
+        <input readonly="readonly" style="text-align: right;" th:value="${TREATMENT.caloriesBurnEveryday}" type="text" class="form-control hsts" />
     </div>
     <label class="col-md-1 control-label">Kcal/Day</label>
 </div>

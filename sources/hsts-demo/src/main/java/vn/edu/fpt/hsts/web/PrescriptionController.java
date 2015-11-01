@@ -97,7 +97,13 @@ public class PrescriptionController extends AbstractController{
             // Initialization Data Prescription
             initDataPrescription(mav, appointment, prescriptionModel);
 
-
+            // Find old Appointment
+            Appointment oldAppointment = appointmentService.findParentOfAppointment(appointment);
+            if (oldAppointment != null){
+                // Find illness form diagnostic
+                Illness illness = oldAppointment.getMedicalRecord().getIllness();
+                mav.addObject("DIAGNO", illness);
+            }
 
             return mav;
         } finally {
@@ -181,6 +187,10 @@ public class PrescriptionController extends AbstractController{
 
             LOGGER.info(prescriptionModel.toString());
             boolean result = doctorService.makePrescription(prescriptionModel, appointmentId, appointmentDate);
+
+            // Find illness form diagnostic
+            Illness illness = illnessService.findByName(prescriptionModel.getDiagnostic());
+            mav.addObject("DIAGNOSTIC", illness);
 
             // Create notify
             if (result){
