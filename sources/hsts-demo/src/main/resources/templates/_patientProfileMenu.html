@@ -26,13 +26,13 @@
 
     <input type="text" readonly="readonly" class="form-control"
            style="text-align: right;border: none;background-color: inherit;color: #337ab7;;box-shadow: none;font-weight: bold;"
-           th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi lt 27}"/>
+           th:value="${#numbers.formatDecimal(PREVENTIONCHECK.bmi, 0, 'POINT', 1, 'COMMA')}" th:if="${PREVENTIONCHECK.bmi lt 27}"/>
     <input type="text" readonly="readonly" class="form-control"
            style="text-align: right;border: none;background-color: inherit;color: #f0ad4e;box-shadow: none;font-weight: bold;"
-           th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi ge 27 and PREVENTIONCHECK.bmi lt 40}"/>
+           th:value="${#numbers.formatDecimal(PREVENTIONCHECK.bmi, 0, 'POINT', 1, 'COMMA')}" th:if="${PREVENTIONCHECK.bmi ge 27 and PREVENTIONCHECK.bmi lt 40}"/>
     <input type="text" readonly="readonly" class="form-control"
            style="text-align: right;border: none;background-color: inherit;color: #d9534f;box-shadow: none;font-weight: bold;"
-           th:value="${PREVENTIONCHECK.bmi}" th:if="${PREVENTIONCHECK.bmi ge 40}"/>
+           th:value="${#numbers.formatDecimal(PREVENTIONCHECK.bmi, 0, 'POINT', 1, 'COMMA')}" th:if="${PREVENTIONCHECK.bmi ge 40}"/>
 
 
     <label for="Medicalhistory" class="control-label">Medical history:</label>

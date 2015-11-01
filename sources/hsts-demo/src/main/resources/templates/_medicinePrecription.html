@@ -19,7 +19,6 @@
         <td>1</td>
         <td style="min-width: 155px;" class="form-group">
             <select class="form-control" name="mPresModels[0].m" id="mPresModelsM0" data-error="Choose at least one" required="required">
-                <option value="0">Select</option>
                 <option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"
                         th:text="${medicine.name}"></option>
             </select>
@@ -55,7 +54,7 @@
 </table>
 <!-- /.table medicine -->
 <a style="width: 50px;color: white;" class="btn btn-primary"
-   onclick="addRowMedicine('medicine')">Add</a>
+   onclick="addRowMedicine('medicine');">Add</a>
 
 </body>
 </html>

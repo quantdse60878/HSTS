@@ -28,6 +28,7 @@
             margin: 0;
             padding: 5px 10px;
         }
+
         /*STYLES FOR CSS POPUP*/
         #blanket {
             background-color: #111;
@@ -53,7 +54,8 @@
             height: 600px;
             z-index: 9002;
         }
-        .bootstrap-tagsinput{
+
+        .bootstrap-tagsinput {
             width: 150px;
         }
 
@@ -78,32 +80,19 @@
 
                     <div class="box-body">
                         <div class="box-header">
-                            <h4 class="col-md-6" style="margin-top: 4px;"><i class="fa fa-th"></i> Prescriptions</h4>
+                            <h4 class="col-md-3" style="margin-top: 4px;"><i class="fa fa-th"></i> Prescriptions</h4>
 
                             <!-- input-group -->
-                            <div class="input-group col-md-3 pull-right">
+                            <div class="input-group col-md-2 pull-right" style="margin-right: 20px;">
                                 <div class="ui-widget">
                                     <select id="infordate" class="form-control">
                                         <option th:each="appointment : ${APPOINTMENTS}"
                                                 th:value="@{/viewPrescription(appointmentId=${appointment.id})}"
-                                                    th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</option>
+                                                th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">
+                                            meetingDate
+                                        </option>
                                     </select>
                                 </div>
-                                <!--<div class="input-group-btn">-->
-                                    <!--<button type="button" class="btn btn-default dropdown-toggle"-->
-                                            <!--data-toggle="dropdown">-->
-                                        <!--<span th:text="${#dates.format(APPOINTMENT.meetingDate, 'dd-MM-yyyy')}"></span>-->
-                                        <!--<span class="fa fa-caret-down"></span>-->
-                                    <!--</button>-->
-                                    <!--<ul class="dropdown-menu">-->
-                                        <!--<li th:each="appointment : ${APPOINTMENTS}"><a-->
-                                                <!--th:href="@{/viewPrescription(appointmentId=${appointment.id})}"-->
-                                                <!--class="btn btn-default"-->
-                                                <!--th:text="${#dates.format(appointment.meetingDate, 'dd-MM-yyyy')}">meetingDate</a>-->
-                                        <!--</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                                <!-- /btn-group -->
                             </div>
                             <!-- /input-group -->
                             <h4 class="col-md-3 pull-right"> Information Date</h4>
@@ -121,7 +110,10 @@
                                                th:value="${TREATMENT.appointment.medicalRecord.illness != null}? ${TREATMENT.appointment.medicalRecord.illness.name} : 'Unknown Disease'"
                                                readonly="readonly" class="form-control"/>
                                         <select id="select2Box" th:name="diagnostic" th:if="${TREATMENT == null}">
-                                            <option th:if="${DIAGNOSTIC != null}" th:value = "${DIAGNOSTIC.id}" th:text="${DIAGNOSTIC.name}" selected="selected"></option>
+                                            <option th:if="${DIAGNO != null}" th:value="${DIAGNO.name}"
+                                                    th:text="${DIAGNO.name}" selected="selected"></option>
+                                            <option th:if="${DIAGNOSTIC != null}" th:value="${DIAGNOSTIC.name}"
+                                                    th:text="${DIAGNOSTIC.name}" selected="selected"></option>
                                         </select>
                                     </div>
                                     <div class="col-sm-2 pull-right" th:if="${TREATMENT == null}">
@@ -136,7 +128,9 @@
                         <!-- form start -->
                         <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}"
                               data-toggle="validator" onsubmit="return confirmBox(this);">
-                            <input type="hidden" name="diagnostic" id="diagnostic" th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name}"/>
+                            <input type="hidden" name="diagnostic" id="diagnostic"
+                                   th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name}"/>
+
                             <div class="box-body">
 
                                 <!-- Sidebar Menu -->
@@ -146,16 +140,16 @@
                                 <div class="nav-tabs-custom" style="box-shadow: none;">
 
                                     <ul class="nav nav-tabs">
-                                        <li class="active" th:if="${PHASE == null}">
+                                        <li class="active" th:if="${DIAGNOSTIC == null}">
                                             <a href="#tab_4-4" data-toggle="tab">Infomation checking</a>
                                         </li>
-                                        <li th:if="${PHASE != null}">
+                                        <li th:if="${DIAGNOSTIC != null}">
                                             <a href="#tab_4-4" data-toggle="tab">Infomation checking</a>
                                         </li>
-                                        <li class="active" th:if="${PHASE != null}">
+                                        <li class="active" th:if="${DIAGNOSTIC != null}">
                                             <a href="#tab_1-1" data-toggle="tab">Medicine</a>
                                         </li>
-                                        <li th:if="${PHASE == null}">
+                                        <li th:if="${DIAGNOSTIC == null}">
                                             <a href="#tab_1-1" data-toggle="tab">Medicine</a>
                                         </li>
                                         <li><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
@@ -164,7 +158,7 @@
                                     </ul>
 
                                     <div class="tab-content">
-                                        <div class="tab-pane active" id="tab_4-4" th:if="${PHASE == null}">
+                                        <div class="tab-pane active" id="tab_4-4" th:if="${DIAGNOSTIC == null}">
                                             <!-- patient's Profile -->
                                             <div layout:replace="_informationChecking"></div>
                                             <!-- /.patient's Profile -->
@@ -175,7 +169,7 @@
                                             </div>
                                             <!-- /.footer -->
                                         </div>
-                                        <div class="tab-pane" id="tab_4-4" th:if="${PHASE != null}">
+                                        <div class="tab-pane" id="tab_4-4" th:if="${DIAGNOSTIC != null}">
                                             <!-- patient's Profile -->
                                             <div layout:replace="_informationChecking"></div>
                                             <!-- /.patient's Profile -->
@@ -202,10 +196,18 @@
                                             <!-- /.footer -->
                                         </div>
 
-                                        <div class="tab-pane active" id="tab_1-1" th:if="${PHASE != null}">
-                                            <!-- medicine Suggest -->
-                                            <div layout:replace="_medicineSuggest"></div>
-                                            <!-- /.medicine Suggest -->
+                                        <div class="tab-pane active" id="tab_1-1" th:if="${DIAGNOSTIC != null}">
+                                            <div th:if="${PHASE != null}">
+                                                <!-- medicine Suggest -->
+                                                <div layout:replace="_medicineSuggest"></div>
+                                                <!-- /.medicine Suggest -->
+                                            </div>
+
+                                            <div th:if="${PHASE == null}">
+                                                <!-- medicine Suggest -->
+                                                <div layout:replace="_medicinePrecription"></div>
+                                                <!-- /.medicine Suggest -->
+                                            </div>
                                             <!-- footer -->
                                             <div style="margin: 15px;">
                                                 <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab"
@@ -297,7 +299,7 @@
 
                                                 <div class="col-sm-4">
                                                     <div th:if="${TREATMENT == null}" class="input-group">
-                                                        <input class="form-control" type="text" name="appointmentDate"
+                                                        <input class="form-control hsts" type="text" name="appointmentDate"
                                                                id="Appointment" data-provide="Appointment"/>
 
                                                         <div class="input-group-btn">
@@ -309,10 +311,10 @@
                                                     <div th:if="${TREATMENT != null}"
                                                          th:with="appointment=${TREATMENT.appointment}">
                                                         <input th:if="${appointment.nextAppointment == null}"
-                                                               class="form-control"
+                                                               class="form-control hsts"
                                                                readonly="readonly" value=""/>
                                                         <input th:if="${appointment.nextAppointment != null}"
-                                                               class="form-control" style="text-align: right;"
+                                                               class="form-control hsts" style="text-align: right;"
                                                                readonly="readonly"
                                                                th:value="${#dates.format(appointment.nextAppointment.meetingDate, 'dd-MM-yyyy')}"/>
                                                     </div>
@@ -406,8 +408,8 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("style", "min-width: 155px;");
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModels' + countMedicine + '.m" data-error="Choose at least one" required="required">'
-                    + '<option value="0" disabled="disabled">Select</option>'
+            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModelsM' + countMedicine + '" data-error="Choose at least one" required="required">'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
@@ -415,7 +417,7 @@
             newCell.setAttribute("style", "min-width: 75px;");
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime" data-error="Choose at least one" required="required">'
-                    + '<option value="0" disabled="disabled">Select</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
@@ -435,6 +437,8 @@
                     '<input type="text" class="form-control" placeholder="Advice" id="mPresModels' + countMedicine + '.mNote" name="mPresModels[' + countMedicine + '].mNote"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>';
+            window.setTimeout(loadSelect('#mPresModelsM1'),100);
+
             countMedicine++;
             return newRow;
         }
@@ -451,7 +455,7 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" id="fPresModels' + countFoods + '.f" data-error="Choose at least one" required="required">'
-                    + '<option value="0" disabled="disabled">Select</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
@@ -459,7 +463,7 @@
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
                     '<select class="form-control" name="fPresModels[' + countFoods + '].fTime" id="fPresModels' + countFoods + '.fTime" data-error="Choose at least one" required="required">'
-                    + '<option value="0" disabled="disabled">Select</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
@@ -487,7 +491,7 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModels' + countPractice + '.p" data-error="Choose at least one" required="required">'
-                    + '<option value="0" disabled="disabled">Select</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="practice : ${PRACTICES}" th:value="${practice.id}" th:text="${practice.name}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
@@ -495,7 +499,7 @@
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
                     '<select class="form-control" name="pPresModels[' + countPractice + '].pTime" id="pPresModels' + countPractice + '.pTime" data-error="Choose at least one" required="required">'
-                    + '<option value="0" disabled="disabled">Select</option>'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
@@ -503,7 +507,7 @@
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
                     '<input type="text" class="form-control" required="required"  data-remote="/validateStr" placeholder="Quantity" name="pPresModels[' + countPractice + '].pIntensity" id="pPresModels' + countPractice + '.pIntensity" data-error="Wrong input"/>';
-                    + '<div class="help-block with-errors"></div>';
+            +'<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].pNote" id="pPresModels' + countPractice + '.pNote" placeholder="Advice"/>';
