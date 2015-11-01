@@ -531,6 +531,7 @@ public class PatientService extends AbstractService {
             DateTime dt2 = new DateTime(lastTreatment.getToDate());
 
             int numberOfDay = Days.daysBetween(dt1, dt2).getDays();
+            String advice = "";
             if (null != medicineTreatments) {
                 int count = 1;
                 for (MedicineTreatment mt: medicineTreatments) {
@@ -539,10 +540,13 @@ public class PatientService extends AbstractService {
                     model.setMedicineName(mt.getMedicine().getName());
                     int qty = numberOfDay * mt.getNumberOfTime() * mt.getQuantitative();
                     model.setQty(String.valueOf(qty));
-                    model.setUnit(mt.getUnit());
-                    String usage = "Ngày uống " + mt.getNumberOfTime() + " lần, mỗi lần " + mt.getQuantitative() + " " + mt.getUnit();
+                    model.setUnit(mt.getMedicine().getUnit()) ;
+                    String usage = "Ngày uống " + mt.getNumberOfTime() + " lần, mỗi lần " + mt.getQuantitative() + " " + mt.getMedicine().getUnit();
                     model.setUsage(usage);
                     listMedicine.add(model);
+
+                    // Set advice
+                    advice += "- " + model.getMedicineName() + ": " + mt.getAdvice() + "\n";
                 }
             }
             LOGGER.info("Size: " + listMedicine.size());
@@ -553,13 +557,15 @@ public class PatientService extends AbstractService {
             prescription.setPatientName(patient.getAccount().getFullName());
             prescription.setBirthday(DateUtils.formatDate(patient.getAccount().getDateOfBirth(), DateUtils.DATE_PATTERN_3));
             String diagnose = lastTreatment.getAppointment().getMedicalRecord().getIllness().getDescription();
+            if (StringUtils.isEmpty(diagnose)) {
+                diagnose = lastTreatment.getAppointment().getMedicalRecord().getIllness().getName();
+            }
             prescription.setDiagnose(diagnose);
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             final String address = "TP. Hồ Chí Minh ngày " + calendar.get(Calendar.DATE) + " tháng " + calendar.get(Calendar.MONTH) + " năm " + calendar.get(Calendar.YEAR);
             prescription.setAddress(address);
-            String advice = lastTreatment.getAdviseMedicine();
             if (StringUtils.isEmpty(advice)) {
                 advice = "N/A";
             }
