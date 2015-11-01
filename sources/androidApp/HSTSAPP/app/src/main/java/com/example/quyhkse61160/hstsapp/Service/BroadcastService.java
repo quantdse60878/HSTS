@@ -8,9 +8,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.media.audiofx.BassBoost;
+import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.WindowManager;
 
@@ -58,6 +64,7 @@ public class BroadcastService extends Service {
     Intent intent;
     int counter = 0;
     public static int alertMinute = 0;
+    public static int alertMinute2 = 1;
 
     @Override
     public void onCreate() {
@@ -84,13 +91,45 @@ public class BroadcastService extends Service {
                     Calendar c1 = Calendar.getInstance();
                     c1.set(Calendar.HOUR_OF_DAY, 22);
                     c1.set(Calendar.MINUTE, 00);
-
+                    Calendar c2 = Calendar.getInstance();
+                    c2.set(Calendar.HOUR_OF_DAY, 21);
+                    c2.set(Calendar.MINUTE, 59);
                     Log.d("QUYYY111", "Time Tracking:--" + c.getTime().toString() + "--" + c1.getTime().toString());
+                    if (c.getTime().equals(c2.getTime())) {
+                        ConnectivityManager manager = (ConnectivityManager)
+                                getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
 
+                        boolean wifi = manager.getNetworkInfo(
+                                ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+
+                        boolean tele3g = manager.getNetworkInfo(
+                                ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+
+                        if (!wifi && !tele3g) {
+                            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                            r.play();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                            builder.setTitle("Nhắc Nhở").setMessage("HSTS App không tìm thấy kết nối mạng để đồng bộ dữ liệu. Bạn có muốn mở mạng không ?")
+                                    .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                                        }
+                                    })
+                                    .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    });
+                            AlertDialog dialog = builder.create();
+                            dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                            dialog.show();
+                        }
+                    }
                     if (c.getTime().equals(c1.getTime())) {
 //                    if (true) {
-
-
                         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
                         String dateString = df.format(date).replaceAll("/", "");
@@ -122,6 +161,7 @@ public class BroadcastService extends Service {
                                 String listData = new String(listByteData);
                                 String numberOfStep = listData.split(",")[Constant.numberOfStep_potition];
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
                                 sendMedicalData(numberOfStep, sdf.format(date));
                                 Log.d("QUY", "QUY");
 
@@ -129,7 +169,6 @@ public class BroadcastService extends Service {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
                         }
 
                         Log.d("QUY", "------------------111111111111111-------------");
@@ -142,12 +181,12 @@ public class BroadcastService extends Service {
                             : HomeActivity.amountTime)
 
                     {
-                        Calendar c2 = Calendar.getInstance();
-                        c2.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.split(":")[0]));
-                        c2.set(Calendar.MINUTE, Integer.parseInt(time.split(":")[1]));
+                        Calendar c3 = Calendar.getInstance();
+                        c3.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.split(":")[0]));
+                        c3.set(Calendar.MINUTE, Integer.parseInt(time.split(":")[1]));
 
-                        if (c2.getTime().getHours() == c.getTime().getHours()
-                                && c2.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
+                        if (c3.getTime().getHours() == c.getTime().getHours()
+                                && c3.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
                             final Context context = getApplicationContext();
                             if (BroadcastService.flag) {
                                 Log.d("KhuongMH", "FALSEEEEEEEEEEE");
@@ -155,9 +194,9 @@ public class BroadcastService extends Service {
                                 Intent in = new Intent(context, HomeActivity.class);
                                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 in.putExtra("openDialogForMe", Boolean.TRUE);
-                                if (c2.getTime().getHours() < 10)
-                                    HomeActivity.timeAlert = "0" + c2.getTime().getHours() + ":00";
-                                else HomeActivity.timeAlert = c2.getTime().getHours() + ":00";
+                                if (c3.getTime().getHours() < 10)
+                                    HomeActivity.timeAlert = "0" + c3.getTime().getHours() + ":00";
+                                else HomeActivity.timeAlert = c3.getTime().getHours() + ":00";
                                 context.startActivity(in);
                             }
 
@@ -360,7 +399,7 @@ public class BroadcastService extends Service {
             Constant.DATA_FROM_SERVER = response;
             SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(Constant.PREF_DATA,Constant.DATA_FROM_SERVER);
+            editor.putString(Constant.PREF_DATA, Constant.DATA_FROM_SERVER);
             editor.commit();
             Constant.TREATMENTS = Constant.getItems();
             Log.d("QUYYY111", "Treatment--" + response);
