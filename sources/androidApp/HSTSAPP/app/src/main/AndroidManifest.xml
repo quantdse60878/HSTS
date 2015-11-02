@@ -82,6 +82,12 @@
             android:name=".SetupActivity"
             android:label="@string/title_activity_setup" >
         </activity>
+
+        <service
+            android:name=".Service.GetWristbandDataService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

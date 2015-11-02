@@ -93,8 +93,8 @@ public class LoginActivity extends ActionBarActivity {
             actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
             actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
 
-            if (!hadRegisterReceiver) {
-                hadRegisterReceiver = true;
+            if (!HomeActivity.hadRegisterReceiver) {
+                HomeActivity.hadRegisterReceiver = true;
                 registerReceiver(mConnectionDetector, mIntentFilter);
             }
 
