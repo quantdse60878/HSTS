@@ -61,7 +61,13 @@
                 <ul class="treeview-menu">
                     <li class="active"><a href="adminAccs"><i class="fa fa-users"></i> Accounts</a></li>
                 </ul>
+            </li><li class="active treeview" th:if="${session.USER.role.name == 'Staff'}">
+                <ul class="treeview-menu">
+                    <li class="active"><a href="viewDevices"><i class="fa fa-briefcase"></i>Manage Device</a></li>
+                    <li><a href="viewFomular"><i class="fa fa-users"></i> Manage Formula</a></li>
+                </ul>
             </li>
+
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

@@ -104,30 +104,36 @@ public class LoginController {
                 } else if (user.getRole().getName().equals("Nurse")) {
                     mav.setViewName("registerPatient");
                 } else if (user.getRole().getName().equals("Staff")) {
-                    mav.setViewName("staffFormula");
-                    List<String> listPrevention1 = formulaService.getListFieldOfPreventionCheck();
-                    List<String> listPrevention = new ArrayList<String>();
-                    List<String> listMedicalRecordData1 = formulaService.getListFieldOfMedicalRecordData();
-                    List<String> listMedicalRecordData = new ArrayList<String>();
-                    for (String p : listPrevention1) {
-                        if(!p.equals("appointment")) {
-                            listPrevention.add(p.substring(0, 1).toUpperCase() + p.substring(1));
-                        }
-                    }
-                    for (String m : listMedicalRecordData1) {
-                        if(!m.equals("appointment")) {
-                            listMedicalRecordData.add(m.substring(0, 1).toUpperCase() + m.substring(1));
-                        }
-                    }
-                    List<Variable> listVariables = new ArrayList<Variable>();
-                    for(int i = 0; i < AnalyticDataTask.variable.size(); i++) {
-                        listVariables.add(new Variable(AnalyticDataTask.variable.get(i), AnalyticDataTask.valueVariable.get(i).split(",")[1]));
-                    }
-                    mav.addObject("DISTANCEFORMULA", AnalyticDataTask.FORMULA_CALCULATE_DISTANCE);
-                    mav.addObject("CALORIESFORMULA", AnalyticDataTask.FORMULA_CALCULATE_CALORIES);
-                    mav.addObject("LISTVARIABLE", listVariables);
-                    mav.addObject("LISTPREVENTION", listPrevention);
-                    mav.addObject("LISTMEDICALRECORDDATA", listMedicalRecordData);
+                    mav.setViewName("stafflistdevice");
+                    List<String> temp = new ArrayList<String>();
+                    temp.add("111");
+                    temp.add("222");
+                    temp.add("333");
+                    temp.add("444");
+                    mav.addObject("temp",temp);
+//                    List<String> listPrevention1 = formulaService.getListFieldOfPreventionCheck();
+//                    List<String> listPrevention = new ArrayList<String>();
+//                    List<String> listMedicalRecordData1 = formulaService.getListFieldOfMedicalRecordData();
+//                    List<String> listMedicalRecordData = new ArrayList<String>();
+//                    for (String p : listPrevention1) {
+//                        if(!p.equals("appointment")) {
+//                            listPrevention.add(p.substring(0, 1).toUpperCase() + p.substring(1));
+//                        }
+//                    }
+//                    for (String m : listMedicalRecordData1) {
+//                        if(!m.equals("appointment")) {
+//                            listMedicalRecordData.add(m.substring(0, 1).toUpperCase() + m.substring(1));
+//                        }
+//                    }
+//                    List<Variable> listVariables = new ArrayList<Variable>();
+//                    for(int i = 0; i < AnalyticDataTask.variable.size(); i++) {
+//                        listVariables.add(new Variable(AnalyticDataTask.variable.get(i), AnalyticDataTask.valueVariable.get(i).split(",")[1]));
+//                    }
+//                    mav.addObject("DISTANCEFORMULA", AnalyticDataTask.FORMULA_CALCULATE_DISTANCE);
+//                    mav.addObject("CALORIESFORMULA", AnalyticDataTask.FORMULA_CALCULATE_CALORIES);
+//                    mav.addObject("LISTVARIABLE", listVariables);
+//                    mav.addObject("LISTPREVENTION", listPrevention);
+//                    mav.addObject("LISTMEDICALRECORDDATA", listMedicalRecordData);
 
                 } else if (user.getRole().getName().equals("Admin")){
                     mav.setViewName("adminlistuser");
@@ -139,7 +145,9 @@ public class LoginController {
                 } else if (user.getRole().getName().equalsIgnoreCase("Doctor Manager")) {
                     mav.setViewName("regimens");
                 }
-
+//                else if (user.getRole().getName().equals("Staff")){
+//                    mav.setViewName("stafflistdevice");
+//                }
                 return mav;
             }
             mav.setViewName("login");
