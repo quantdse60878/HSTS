@@ -103,6 +103,12 @@ var $selectPatient = $("#patientName").select2({
 
 $selectPatient.on("change", function (e) {
     var val = $selectPatient.val();
+    if (val == null ) {
+        return;
+    }
+    if (val == "") {
+        return;
+    }
     if (val.indexOf("404") == 0) {
         // Bind patient profile
         loadPatientProfile(val);
