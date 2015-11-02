@@ -78,30 +78,23 @@
                                             <div class="help-block with-errors"></div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">Gender*</label>
+                                            <label class="col-sm-3 control-label">Male*</label>
 
-                                            <!--<div class="radio col-sm-5">-->
-                                            <!--<label>-->
-                                            <!--<input type="radio" th:name="gender" id="optionsRadios1" value="1"-->
-                                            <!--checked="checked"/>-->
-                                            <!--Male-->
-                                            <!--</label>-->
-                                            <!--<label>-->
-                                            <!--<input type="radio" th:name="gender" id="optionsRadios2" value="2"/>-->
-                                            <!--Female-->
-                                            <!--</label>-->
+                                            <!--<div class="btn-group col-sm-3" data-toggle="buttons">-->
+                                                <!--<label class="btn btn-default active">-->
+                                                    <!--<input type="radio" name="gender" value="1" checked="" required="required"-->
+                                                           <!--data-error="Choose at least one gender"/>Male-->
+                                                <!--</label>-->
+
+                                                <!--<label class="btn btn-default">-->
+                                                    <!--<input type="radio" name="gender" value="2"/>Female-->
+                                                <!--</label>-->
+                                                <!--<div class="help-block with-errors"></div>-->
                                             <!--</div>-->
-                                            <div class="btn-group col-sm-3" data-toggle="buttons">
-                                                <label class="btn btn-default active">
-                                                    <input type="radio" name="gender" value="1" checked="" required="required"
-                                                           data-error="Choose at least one gender"/>Male
-                                                </label>
-
-                                                <label class="btn btn-default">
-                                                    <input type="radio" name="gender" value="2"/>Female
-                                                </label>
-                                                <div class="help-block with-errors"></div>
+                                            <div class="btn-group col-sm-1">
+                                            <input type="checkbox" name="gender" value="1" checked="checked" id="gender"/>
                                             </div>
+
                                         </div>
 
 
@@ -376,9 +369,15 @@
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
 
+    <link th:href="@{/static/bower/select2-bootstrap-theme/dist/select2-bootstrap.css}" rel="stylesheet"/>
+
     <!-- bootstrap-datepicker-->
     <link th:href="@{/static/bower/admin-lte/plugins/datepicker/datepicker3.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/datepicker/bootstrap-datepicker.js}"></script>
+
+    <!-- iCheck -->
+    <script th:src="@{/static/bower/icheck/icheck.min.js}"/>
+    <link th:href="@{/static/bower/icheck/skins/all.css}" rel="stylesheet"/>
 
     <!-- Bootstrap multiple tags -->
     <link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>

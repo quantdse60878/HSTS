@@ -99,7 +99,7 @@ public class NurseController extends AbstractController {
             @RequestParam("patientName") final String patientName,
             @RequestParam("email") final String email,
             @RequestParam("birthday") final String birthday,
-            @RequestParam("gender") final byte gender,
+            @RequestParam(value = "gender", required = false, defaultValue = "2") final byte gender,
             // Tab 2 param
             @RequestParam("weight") final int weight,
             @RequestParam("height") final int height,
@@ -129,6 +129,9 @@ public class NurseController extends AbstractController {
             pCriteria.setPatientName(patientName);
             pCriteria.setEmail(email);
             pCriteria.setBirthday(birthday);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("gender[{}]", gender);
+            }
             pCriteria.setGender(gender);
             pCriteria.setDoctorId(doctorId);
             pCriteria.setMedicalHistory(medicalHistory);

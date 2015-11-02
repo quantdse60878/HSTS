@@ -13,6 +13,7 @@
 	"bootstrap-tagsinput": null,
 	"bootstrap3-typeahead": null,
 	"bootstrap-validator": null,
-	"select2-skins": null
+	"select2-bootstrap-theme": null,
+	"icheck": null
   }
 }

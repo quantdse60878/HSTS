@@ -6,8 +6,9 @@
  * Date: 10/28/2015.
  */
 
-$(document).ready(function(){
-
+$("#gender").iCheck({
+    checkboxClass: 'icheckbox_flat-red',
+    radioClass: 'iradio_flat-red'
 });
 
 $("#Birthday").datepicker({
@@ -22,6 +23,7 @@ function changeTab (a) {
 };
 
 $("#doctorSelect").select2({
+    theme: "bootstrap",
     width: "inherit",
     ajax: {
         url: "/doctor/list",
@@ -56,6 +58,7 @@ $("#doctorSelect").select2({
 });
 
 var $selectPatient = $("#patientName").select2({
+    theme: "bootstrap",
     width: "100%",
     allowClear: true,
     placeholder: "Select a patient or input new",
@@ -94,15 +97,21 @@ var $selectPatient = $("#patientName").select2({
             text: tag.term,
             tag: true
         };
-    }
+    },
+    maximumSelectionLength: 1
 });
 
 $selectPatient.on("change", function (e) {
     var val = $selectPatient.val();
+    if (val == null ) {
+        return;
+    }
+    if (val == "") {
+        return;
+    }
     if (val.indexOf("404") == 0) {
         // Bind patient profile
         loadPatientProfile(val);
-
     };
 });
 
