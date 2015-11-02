@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -270,6 +271,27 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 r.play();
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Nhắc Nhở").setMessage("Hôm qua bạn chưa hoàn thành chế độ điều trị, hãy cố gắng thực hiện để việc điều trị được tốt hơn.");
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.show();
+            }if (bundle.getBoolean("noConnection")) {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setTitle("Nhắc Nhở").setMessage("HSTS App không tìm thấy kết nối mạng để đồng bộ dữ liệu. Bạn có muốn mở mạng không ?")
+                        .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                            }
+                        })
+                        .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();

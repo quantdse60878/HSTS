@@ -60,6 +60,7 @@ public class BroadcastService extends Service {
     private static final String TAG = "BroadcastService Notify";
     public static final String BROADCAST_ACTION = "com.example.quyhkse61160.hstsapp.trackingevent";
     public static boolean flag;
+    public static boolean flag2;
     private final Handler handlerThread = new Handler();
     Intent intent;
     int counter = 0;
@@ -75,7 +76,7 @@ public class BroadcastService extends Service {
     @Override
     public void onStart(Intent intent, int startId) {
         handlerThread.removeCallbacks(sendUpdateToUI);
-        handlerThread.postDelayed(sendUpdateToUI, 01);
+        handlerThread.postDelayed(sendUpdateToUI, 1000);
     }
 
     private Runnable sendUpdateToUI = new Runnable() {
@@ -85,7 +86,9 @@ public class BroadcastService extends Service {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    final Context context = getApplicationContext();
                     BroadcastService.flag = true;
+                    BroadcastService.flag2 = true;
                     checkNotify();
                     Calendar c = Calendar.getInstance();
                     Calendar c1 = Calendar.getInstance();
@@ -96,37 +99,26 @@ public class BroadcastService extends Service {
                     c2.set(Calendar.MINUTE, 59);
                     Log.d("QUYYY111", "Time Tracking:--" + c.getTime().toString() + "--" + c1.getTime().toString());
                     if (c.getTime().equals(c2.getTime())) {
-                        ConnectivityManager manager = (ConnectivityManager)
-                                getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+                        if (BroadcastService.flag2) {
+                            Log.d("KhuongMH", "FLAG2 FALSEEEEEEEEEEEE");
+                            BroadcastService.flag2 = false;
+                            ConnectivityManager manager = (ConnectivityManager)
+                                    getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
 
-                        boolean wifi = manager.getNetworkInfo(
-                                ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+                            boolean wifi = manager.getNetworkInfo(
+                                    ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
 
-                        boolean tele3g = manager.getNetworkInfo(
-                                ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+                            boolean tele3g = manager.getNetworkInfo(
+                                    ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
 
-                        if (!wifi && !tele3g) {
-                            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-                            r.play();
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                            builder.setTitle("Nhắc Nhở").setMessage("HSTS App không tìm thấy kết nối mạng để đồng bộ dữ liệu. Bạn có muốn mở mạng không ?")
-                                    .setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-                                        }
-                                    })
-                                    .setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-
-                                        }
-                                    });
-                            AlertDialog dialog = builder.create();
-                            dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-                            dialog.show();
+                            if (!wifi && !tele3g) {
+                                Intent in = new Intent(context, HomeActivity.class);
+                                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                in.putExtra("noConnection", Boolean.TRUE);
+                                context.startActivity(in);
+                            }
                         }
+
                     }
                     if (c.getTime().equals(c1.getTime())) {
 //                    if (true) {
@@ -187,9 +179,9 @@ public class BroadcastService extends Service {
 
                         if (c3.getTime().getHours() == c.getTime().getHours()
                                 && c3.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
-                            final Context context = getApplicationContext();
+
                             if (BroadcastService.flag) {
-                                Log.d("KhuongMH", "FALSEEEEEEEEEEE");
+                                Log.d("KhuongMH", "FLAG1 FALSEEEEEEEEEEE");
                                 BroadcastService.flag = false;
                                 Intent in = new Intent(context, HomeActivity.class);
                                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -206,10 +198,7 @@ public class BroadcastService extends Service {
                 }
             }
 
-            ).
-
-                    start();
-
+            ).start();
             handlerThread.postDelayed(this, 60000);
 
         }

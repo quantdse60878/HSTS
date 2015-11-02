@@ -93,11 +93,6 @@ public class LoginActivity extends ActionBarActivity {
             actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
             actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
 
-            if (!HomeActivity.hadRegisterReceiver) {
-                HomeActivity.hadRegisterReceiver = true;
-                registerReceiver(mConnectionDetector, mIntentFilter);
-            }
-
 
             setContentView(R.layout.activity_main);
             final EditText txtUsername = (EditText) findViewById(R.id.txt_login_username);
@@ -268,6 +263,12 @@ public class LoginActivity extends ActionBarActivity {
                 editor.putString(Constant.PREF_PATIENTID_HADLOGIN,Constant.patientId);
                 editor.putString(Constant.PREF_PATIENT_NAME,Constant.PATIENT_NAME);
                 editor.commit();
+
+                if (!HomeActivity.hadRegisterReceiver) {
+                    HomeActivity.hadRegisterReceiver = true;
+                    registerReceiver(mConnectionDetector, mIntentFilter);
+                }
+
                 Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
                 startActivity(continueIntent);
             }

@@ -56,7 +56,7 @@ public class NoticeActivity extends ActionBarActivity {
                     d.put("Name", temp);
 //                        d.put("Number", time.getNumberOfTime().size() + "");
                     temp = "Ngày ";
-                    temp = time.getNumberOfTime().size() + " lần, ăn " + time.getQuantitative() + "/lần";
+                    temp += time.getNumberOfTime().size() + " lần, ăn " + time.getQuantitative() + "/lần";
                     d.put("Quantity", temp);
                     sections.add(d);
                 }
@@ -77,9 +77,8 @@ public class NoticeActivity extends ActionBarActivity {
                     d.put("Name", temp);
 //                        d.put("Number", time.getNumberOfTime().size() + "");
                     temp = "Ngày ";
-                    temp = time.getNumberOfTime().size() + " lần, uống " + time.getQuantitative()+ "/lần";
+                    temp += time.getNumberOfTime().size() + " lần, uống " + time.getQuantitative()+ " " + time.getUnit() + "/lần";
                     d.put("Quantity", temp);
-                    sections.add(d);
                     sections.add(d);
                 }
             }
@@ -99,9 +98,8 @@ public class NoticeActivity extends ActionBarActivity {
                     d.put("Name", temp);
 //                        d.put("Number", time.getNumberOfTime().size() + "");
                     temp = "Ngày ";
-                    temp = time.getNumberOfTime().size() + " lần, tập " + time.getQuantitative()+ "/lần";
+                    temp += time.getNumberOfTime().size() + " lần, tập " + time.getQuantitative()+ "/lần";
                     d.put("Quantity", temp);
-                    sections.add(d);
                     sections.add(d);
                 }
             }
@@ -114,7 +112,7 @@ public class NoticeActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_notice, menu);
+//        getMenuInflater().inflate(R.menu.menu_notice, menu);
         return true;
     }
 
