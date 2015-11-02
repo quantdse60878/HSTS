@@ -107,6 +107,12 @@ $selectPatient.on("change", function (e) {
     var textData = $selectPatient.text().trim();
     console.log("Value: " + val);
     console.log("Text: " + textData);
+    if (val == null) {
+        return;
+    }
+    if (val == "") {
+        return;
+    }
     if (val.indexOf("404") == 0) {
         // Bind patient profile
         loadPatientProfile(val);
