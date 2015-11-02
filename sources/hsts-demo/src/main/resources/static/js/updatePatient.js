@@ -6,6 +6,11 @@
  * Date: 10/28/2015.
  */
 
+$("#isNewMedicalRecord").iCheck({
+    checkboxClass: 'icheckbox_flat-red',
+    radioClass: 'iradio_flat-red'
+});
+
 function changeTab (a) {
     console.log(a);
     $('.nav-tabs > li.active').removeClass('active');

@@ -231,7 +231,8 @@ public class PatientService extends AbstractService {
 
                     // Generate new barcode for patient
                     final String barcode = barcodeService.getPatientBarcode(patient.getId());
-
+                    patient.setBarcode(barcode);
+                    patientRepo.save(patient);
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Create new patient[{}] successfully", newAccount.getUsername());
                     }
