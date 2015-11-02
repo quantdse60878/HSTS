@@ -5,9 +5,46 @@ function loadSelect(id) {
     $(id).select2({
         placeholder: "Select",
         width: "200px",
+        ajax: {
+            url: "/medicineName/list",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    searchString: params.term, // search term
+                    page: params.page,
+                };
+            },
+            processResults: function (data, page) {
+                var names = data.map(function (name) {
+                    return {
+                        id: name,
+                        text: name
+                    }
+                });
+                return {
+                    results: names, more: false
+                };
+            },
+            cache: false
+        },
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        tags: true,
+        createTag: function (tag) {
+            return {
+                id: tag.term,
+                text: tag.term,
+                tag: true
+            };
+        }
     });
 };
-loadSelect('#mPresModelsM0');
+for(var i=0; i<= $('#medics').val(); i++){
+    loadSelect('#mPresModelsM'+i+'');
+}
+
 
 $("#select2Box").select2({
     width: "200px",
@@ -469,10 +506,3 @@ var appointmentDate = new Date();
 appointmentDate.setDate(appointmentDate.getDate() + nextAppointmentDate);
 $('#Appointment').datepicker("setDate", appointmentDate);
 
-//$( "#medicine" ).change(function() {
-//    alert( "Handler for .change() called." );
-//});
-
-function changeData() {
-    $("#mPresModelsM1").select2();
-}''

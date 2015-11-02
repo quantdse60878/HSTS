@@ -7,7 +7,7 @@ public class MedicinePrescriptionModel {
     /**
      * Medicine
      */
-    private int m;
+    private String m;
     /**
      * Medicine Time
      */
@@ -18,6 +18,12 @@ public class MedicinePrescriptionModel {
      * Medicine Quantity
      */
     private int mQuantity = 1;
+
+    /**
+     * Medicine Unit
+     */
+    private String mUnit;
+
     /**
      * Medicine Note
      */
@@ -26,19 +32,19 @@ public class MedicinePrescriptionModel {
     public MedicinePrescriptionModel() {
     }
 
-    public MedicinePrescriptionModel(int m, int mTime, int mQuantity, String mNote) {
-        this.m = m;
-        this.mTime = mTime;
-
-        this.mQuantity = mQuantity;
-        this.mNote = mNote;
+    public String getmUnit() {
+        return mUnit;
     }
 
-    public int getM() {
+    public void setmUnit(String mUnit) {
+        this.mUnit = mUnit;
+    }
+
+    public String getM() {
         return m;
     }
 
-    public void setM(int m) {
+    public void setM(String m) {
         this.m = m;
     }
 
@@ -67,7 +73,7 @@ public class MedicinePrescriptionModel {
     }
 
     public boolean isValid(){
-        if (m <= 0){
+        if (null == m || m.isEmpty()){
             return false;
         } else if (mTime <= 0){
             return false;
