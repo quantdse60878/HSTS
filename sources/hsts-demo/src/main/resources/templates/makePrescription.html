@@ -104,7 +104,6 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Diagnostic</label>
                                     <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
-                                    <!--<input type="hidden" th:name="patientID" th:value="${APPOINTMENT.medicalRecord.patient.id}"/>-->
                                     <div class="col-sm-4 ui-widget">
                                         <input th:if="${TREATMENT != null}"
                                                th:value="${TREATMENT.appointment.medicalRecord.illness != null}? ${TREATMENT.appointment.medicalRecord.illness.name} : 'Unknown Disease'"
@@ -196,7 +195,7 @@
                                             <!-- /.footer -->
                                         </div>
 
-                                        <div class="tab-pane active" id="tab_1-1" th:if="${DIAGNOSTIC != null}">
+                                        <div class="tab-pane active" id="tab_1-1" th:if="${DIAGNOSTIC != null and TREATMENT == null}">
                                             <div th:if="${PHASE != null}">
                                                 <!-- medicine Suggest -->
                                                 <div layout:replace="_medicineSuggest"></div>

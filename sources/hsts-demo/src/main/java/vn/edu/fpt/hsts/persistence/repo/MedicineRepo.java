@@ -12,9 +12,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
+
+import java.util.List;
+
 @Repository
 public interface MedicineRepo extends JpaRepository<Medicine, Integer> {
 
     @Query("select m from Medicine m where lower(name) = lower(:name)")
     public Medicine findByName(@Param("name") final String name);
+
+    @Query("select i.name from Medicine i")
+    List<String> findAllByName();
 }

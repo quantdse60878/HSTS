@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
@@ -521,10 +522,11 @@ public class PatientService extends AbstractService {
                 throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
             }
 
-            final Treatment lastTreatment = treatmentRepo.findLastTreatmenByPatientId(patientId, IDbConsts.ITreatmentStatus.ON_TREATING);
-            if(null == lastTreatment) {
-                throw new BizlogicException("Last treatment with patientId[{}] is not found", null, patientId);
+            final List<Treatment> lastTreatmentList = treatmentRepo.findLastTreatmenByPatientId(patientId, IDbConsts.ITreatmentStatus.ON_TREATING);
+            if(CollectionUtils.isEmpty(lastTreatmentList)) {
+                return null;
             }
+            final Treatment lastTreatment = lastTreatmentList.get(0);
             final List<MedicineTreatment> medicineTreatments = lastTreatment.getMedicineTreatmentList();
             List<PrintingMedicineModel> listMedicine = new ArrayList<PrintingMedicineModel>();
 
@@ -601,11 +603,11 @@ public class PatientService extends AbstractService {
                 return false;
             }
 
-            final Treatment lastTreatment = treatmentRepo.findLastTreatmenByPatientId(patientId, IDbConsts.ITreatmentStatus.ON_TREATING);
-            if(null == lastTreatment) {
+            final List<Treatment> lastTreatment = treatmentRepo.findLastTreatmenByPatientId(patientId, IDbConsts.ITreatmentStatus.ON_TREATING);
+            if(CollectionUtils.isEmpty(lastTreatment)) {
                 return false;
             }
-            final long countMedicines = medicineTreatmentRepo.countByTreatmentId(lastTreatment.getId());
+            final long countMedicines = medicineTreatmentRepo.countByTreatmentId(lastTreatment.get(0).getId());
             if (0 >= countMedicines) {
                 return false;
             }
