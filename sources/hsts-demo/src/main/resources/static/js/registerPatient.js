@@ -97,7 +97,8 @@ var $selectPatient = $("#patientName").select2({
             text: tag.term,
             tag: true
         };
-    }
+    },
+    maximumSelectionLength: 1
 });
 
 $selectPatient.on("change", function (e) {
@@ -105,7 +106,6 @@ $selectPatient.on("change", function (e) {
     if (val.indexOf("404") == 0) {
         // Bind patient profile
         loadPatientProfile(val);
-
     };
 });
 
