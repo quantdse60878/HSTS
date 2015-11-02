@@ -481,13 +481,13 @@ function confirmBox(form) {
     if (r == true) {
         // Hidden field for diagnostic
         //Get
-        var bla = $('#select2Box').text().trim();
+        var bla = $('#select2Box').val().trim();
         console.log(bla);
         if (bla != null) {
             //Set
             $('#diagnostic').val(bla);
+            console.log($('#diagnostic').val());
         }
-
         return true;
     } else {
         return false;
