@@ -25,7 +25,7 @@
                 <div class="box box-default">
                     <div class="box-body">
                         <!-- form start -->
-                        <form onsubmit="return confirmBox(this);" class="form-horizontal" th:action="nutrition"
+                        <form class="form-horizontal" th:action="nutrition"
                               method="get" th:object="${model}" data-toggle="validator">
                             <input type="hidden" name="appointmentId" th:value="${APPOINTMENT.id}"/>
                             <!-- Custom Tabs (Pulled to the left) -->
@@ -255,13 +255,31 @@
                                         <div class="">
                                             <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
                                                class="btn btn-default">Previous</a>
-                                            <button class="btn btn-primary pull-right">Done</button>
+                                            <button class="btn btn-primary pull-right" type="button" data-toggle="modal" data-target="#myModal">Done</button>
                                         </div>
                                     </div>
                                     <!-- /.tab-pane -->
                                 </div>
                             </div>
-
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Confirm Box</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Are you sure to make this Food Ingredient?</h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-primary">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.Modal -->
 
                         </form>
                         <!-- /.form -->
@@ -283,10 +301,6 @@
             console.log(a);
             $('.nav-tabs > li.active').removeClass('active');
             $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
-        }
-        ;
-        function confirmBox(form) {
-            confirm('Are you sure to make this Food Ingredient?');
         }
         ;
 

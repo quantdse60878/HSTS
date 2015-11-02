@@ -477,8 +477,8 @@ function confirmBox(form) {
     //} else {
     //
     //}
-    var r = confirm('Are you sure to make this prescription?');
-    if (r == true) {
+    //var r = confirm('Are you sure to make this prescription?');
+    //if (r == true) {
         // Hidden field for diagnostic
         //Get
         var bla = $('#select2Box').val().trim();
@@ -489,9 +489,9 @@ function confirmBox(form) {
             console.log($('#diagnostic').val());
         }
         return true;
-    } else {
-        return false;
-    }
+    //} else {
+    //    return false;
+    //}
 }
 
 

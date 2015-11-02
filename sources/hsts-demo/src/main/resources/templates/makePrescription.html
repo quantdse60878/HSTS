@@ -326,7 +326,7 @@
                                             <div style="margin: 15px;">
                                                 <a href="#tab_3-3" onclick="changeTab('#tab_3-3')" data-toggle="tab"
                                                    class="btn btn-default">Previous</a>
-                                                <button th:if="${TREATMENT == null}" type="submit"
+                                                <button th:if="${TREATMENT == null}" type="button" data-toggle="modal" data-target="#myModal"
                                                         class="btn btn-primary pull-right">Done
                                                 </button>
                                             </div>
@@ -340,7 +340,25 @@
                                 <!-- END CUSTOM TABS -->
                             </div>
                             <!-- /.box-body -->
-
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Confirm Box</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Are you sure to make this prescription?</h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-primary">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.Modal -->
                         </form>
                         <!-- /.form -->
                     </div>
