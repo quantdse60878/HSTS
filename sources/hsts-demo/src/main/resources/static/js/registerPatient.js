@@ -60,8 +60,8 @@ $("#doctorSelect").select2({
 var $selectPatient = $("#patientName").select2({
     theme: "bootstrap",
     width: "100%",
-    allowClear: true,
-    placeholder: "Select a patient or input new",
+    allowClear: false,
+    //placeholder: "Select a patient or input new",
     ajax: {
         url: "/patient/list",
         dataType: 'json',
@@ -98,20 +98,30 @@ var $selectPatient = $("#patientName").select2({
             tag: true
         };
     },
-    maximumSelectionLength: 1
+    maximumSelectionLength: 2
 });
+
 
 $selectPatient.on("change", function (e) {
     var val = $selectPatient.val();
-    if (val == null ) {
-        return;
-    }
-    if (val == "") {
-        return;
-    }
+    var textData = $selectPatient.text().trim();
+    console.log("Value: " + val);
+    console.log("Text: " + textData);
     if (val.indexOf("404") == 0) {
         // Bind patient profile
         loadPatientProfile(val);
+    };
+});
+
+
+$selectPatient.on("change", function (e) {
+    var val = $selectPatient.val();
+    var textData = $selectPatient.text().trim();
+    console.log("Value: " + val);
+    console.log("Text: " + textData);
+    if (val.indexOf("404") == 0) {
+        // Bind patient profile
+        //loadPatientProfile(val);
     };
 });
 
