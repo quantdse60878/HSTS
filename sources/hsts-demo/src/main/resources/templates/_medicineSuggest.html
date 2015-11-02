@@ -19,34 +19,41 @@
     <tr th:each="medicalPhase,row : ${PHASE.medicinePhaseList}">
         <td th:text="${row.count}"></td>
         <td style="min-width: 155px;" class="form-group">
-            <select class="form-control" th:name="mPresModels[__${row.index}__].m" th:id="mPresModelsM__${row.index}__" required="required" data-error="Choose at least one">
+            <select class="form-control" th:name="mPresModels[__${row.index}__].m" th:id="mPresModelsM__${row.index}__"
+                    data-error="Choose at least one" required="required">
                 <option th:value="${medicalPhase.medicine.name}"
                         th:text="${medicalPhase.medicine.name}"></option>
                 <!--<option th:each="medicine : ${MEDICINES}"-->
-                        <!--th:value="${medicine.id}"-->
-                        <!--th:text="${medicine.name}"-->
-                        <!--th:if="${medicalPhase.medicine.id != medicine.id}"></option>-->
+                <!--th:value="${medicine.id}"-->
+                <!--th:text="${medicine.name}"-->
+                <!--th:if="${medicalPhase.medicine.id != medicine.id}"></option>-->
 
             </select>
+
             <div class="help-block with-errors"></div>
         </td>
         <td style="min-width: 120px;" class="form-group">
-            <select class="form-control" th:field="*{mPresModels[__${row.index}__].mTime}" required="required" data-error="Choose at least one">
-                <option value="0" disabled="disabled">Select</option>
-            <option th:each="time : ${TIMES}" th:value="${time}"
-                    th:text="${time}"></option>
-        </select>
+            <select class="form-control" th:field="*{mPresModels[__${row.index}__].mTime}" required="required"
+                    data-error="Choose at least one">
+                <option value="0">Select</option>
+                <option th:each="time : ${TIMES}" th:value="${time}"
+                        th:text="${time}"></option>
+            </select>
+
             <div class="help-block with-errors"></div>
         </td>
         <td class="form-group" style="width: 120px;">
-            <input type="text" class="form-control" th:field="*{mPresModels[__${row.index}__].mQuantity}" style="text-align: right;"
+            <input type="text" class="form-control" th:field="*{mPresModels[__${row.index}__].mQuantity}"
+                   style="text-align: right;"
                    placeholder="Quantity" data-remote="/validateData" required="required" data-error="Wrong input"/>
+
             <div class="help-block with-errors"></div>
         </td>
         <td class="form-group" style="width: 120px;">
             <input type="text" th:value="${medicalPhase.medicine.unit}" th:name="mPresModels[__${row.index}__].mUnit"
                    class="form-control" required="required" data-remote="/validateStr"
                    placeholder="Unit" data-error="Wrong input"/>
+
             <div class="help-block with-errors"></div>
         </td>
         <td>

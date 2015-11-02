@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -51,6 +52,7 @@ import com.example.quyhkse61160.hstsapp.Fragment.NoticeTab;
 import com.example.quyhkse61160.hstsapp.Fragment.Tab4;
 import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
 import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
+import com.example.quyhkse61160.hstsapp.Service.GetWristbandDataService;
 import com.example.quyhkse61160.hstsapp.Service.NetworkChangeReceiver;
 
 import org.json.JSONArray;
@@ -81,7 +83,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     private final static String TAG = HomeActivity.class.getSimpleName();
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
-    private BluetoothLeService mBluetoothLeService;
+    public static BluetoothLeService mBluetoothLeService;
     private String mDeviceName;
     private String mDeviceAddress;
     public static int appointmentId = 2;
@@ -89,7 +91,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public static List<String> dateSaveStep = new ArrayList<>();
     public static BluetoothGattCharacteristic characteristicStep = null;
     public static BluetoothGattCharacteristic characteristicManufacturer = null;
-    private Timer timer = new Timer();
+//    private Timer timer = new Timer();
     protected final IntentFilter mIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
     protected final NetworkChangeReceiver mConnectionDetector = new NetworkChangeReceiver();
     private Intent checkNotifyIntent;
@@ -101,6 +103,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public static String timeAlert;
     private AlarmManagerBroadcastReceiver alarm;
     public static boolean hadRegisterReceiver = false;
+    public static boolean hadHadCharacteristic = false;
     private final Handler handlerThread = new Handler();
 
 
@@ -177,6 +180,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     Log.d("-------", "--" + gattService.getUuid().toString() + "--");
                     characteristicStep = gattService.getCharacteristic(Constant.numberOfStep_UUID);
                     characteristicManufacturer = gattService.getCharacteristic(Constant.manufacturer_UUID);
+                    hadHadCharacteristic = true;
                     mBluetoothLeService.readCharacteristic(characteristicManufacturer);
                 }
             }
@@ -184,7 +188,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
 //        txtNumberOfStep.setText(numberOfStep);
 
-        timer.schedule(new TimerTask() {
+        /*timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 // Your logic here...
@@ -195,16 +199,20 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     @Override
                     public void run() {
                         // This code will always run on the UI thread, therefore is safe to modify UI elements.
-                        if (Constant.numberOfStep_potition != -1) {
-                            mBluetoothLeService.readCharacteristic(characteristicStep);
-                            Log.d("QUYYY1111111", "Manufacturer: " + Constant.manufacturer + "------" + "Number of step: " + Constant.numberOfStep);
-                        }
+
                     }
                 });
             }
-        }, 10000, 10000);
+        }, 10000, 10000);*/
 
 
+    }
+
+    public static void readData(){
+        if (Constant.numberOfStep_potition != -1) {
+            mBluetoothLeService.readCharacteristic(characteristicStep);
+            Log.d("QUYYY1111111", "Manufacturer: " + Constant.manufacturer + "------" + "Number of step: " + Constant.numberOfStep);
+        }
     }
 
     private void updateView(int index){
@@ -263,6 +271,27 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 r.play();
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Nhắc Nhở").setMessage("Hôm qua bạn chưa hoàn thành chế độ điều trị, hãy cố gắng thực hiện để việc điều trị được tốt hơn.");
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.show();
+            }if (bundle.getBoolean("noConnection")) {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setTitle("Nhắc Nhở").setMessage("HSTS App không tìm thấy kết nối mạng để đồng bộ dữ liệu. Bạn có muốn mở mạng không ?")
+                        .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                            }
+                        })
+                        .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
@@ -411,8 +440,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 //            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
 //            Log.d(TAG, "Connect request result=" + result);
 //        }
-
-
+        Context context = getApplicationContext();
+        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
+        context.startService(notifyIntent);
     }
 
     @Override

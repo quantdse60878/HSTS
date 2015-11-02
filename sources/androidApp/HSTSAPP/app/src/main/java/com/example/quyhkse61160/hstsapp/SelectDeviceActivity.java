@@ -105,7 +105,10 @@ public class SelectDeviceActivity extends AppCompatActivity {
             Log.d(TAG, "Connect request result=" + result);
         }
 
-        registerReceiver(mConnectionDetector, mIntentFilter);
+        if (!HomeActivity.hadRegisterReceiver) {
+            HomeActivity.hadRegisterReceiver = true;
+            registerReceiver(mConnectionDetector, mIntentFilter);
+        }
 
 
     }
@@ -119,7 +122,7 @@ public class SelectDeviceActivity extends AppCompatActivity {
         super.onDestroy();
         unbindService(mServiceConnection);
         unregisterReceiver(mGattUpdateReceiver);
-        unregisterReceiver(mConnectionDetector);
+//        unregisterReceiver(mConnectionDetector);
         mBluetoothLeService = null;
     }
 

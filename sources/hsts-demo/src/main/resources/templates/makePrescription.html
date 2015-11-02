@@ -110,9 +110,9 @@
                                                readonly="readonly" class="form-control"/>
                                         <select id="select2Box" th:name="diagnostic" th:if="${TREATMENT == null}">
                                             <option th:if="${DIAGNO != null}" th:value="${DIAGNO.name}"
-                                                    th:text="${DIAGNO.name}" selected="selected"></option>
+                                                    th:text="${DIAGNO.name}"></option>
                                             <option th:if="${DIAGNOSTIC != null}" th:value="${DIAGNOSTIC.name}"
-                                                    th:text="${DIAGNOSTIC.name}" selected="selected"></option>
+                                                    th:text="${DIAGNOSTIC.name}"></option>
                                         </select>
                                     </div>
                                     <div class="col-sm-2 pull-right" th:if="${TREATMENT == null}">
@@ -204,7 +204,9 @@
 
                                             <div th:if="${PHASE == null}">
                                                 <!-- medicine Suggest -->
+                                                <!-- medicine tab -->
                                                 <div layout:replace="_medicinePrecription"></div>
+                                                <!-- medicine tab -->
                                                 <!-- /.medicine Suggest -->
                                             </div>
                                             <!-- footer -->
@@ -216,7 +218,7 @@
                                             </div>
                                             <!-- /.footer -->
                                         </div>
-                                        <div th:if="${TREATMENT != null}" class="tab-pane" id="tab_1-1">
+                                        <div th:if="${TREATMENT != null}" class="tab-pane active" id="tab_1-1">
                                             <!-- medicine History -->
                                             <div layout:replace="_medicineHistory"></div>
                                             <!-- /.medicine History -->
