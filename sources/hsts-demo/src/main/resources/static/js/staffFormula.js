@@ -107,7 +107,7 @@ function setupNewFormula() {
     }
     var a = eval(checkFormulaCalories);
     var b = eval(checkFormulaDistance);
-    if(a == 0 || b == 0 || a == "Infinity" || b == "Infinity") {
+    if(a <= 0 || b <= 0 || a == "Infinity" || b == "Infinity") {
         formulaRight = false;
         document.getElementById("viewButton").className = "hideButton";
         confirm("Please input right formula. Thanks!");
