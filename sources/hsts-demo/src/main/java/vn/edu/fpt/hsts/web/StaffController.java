@@ -99,7 +99,7 @@ public class StaffController extends AbstractController {
         return mav;
     }
 
-    @RequestMapping(value = "openFormula", method = RequestMethod.POST)
+    @RequestMapping(value = "openFormula", method = RequestMethod.GET)
     public ModelAndView openFormula() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("staffFormula");
