@@ -10,7 +10,7 @@ for (var i = 0; i < listValueVariable.length; i++) {
     var selectValue = document.createElement("select");
     selectValue.className = "valueOfVariableItem";
     selectValue.setAttribute("name", "valueOfVariable");
-    listData = listPrevention + listMedicalRecordData;
+    listData = listPrevention + "," + listMedicalRecordData;
     listData = listData.split(",");
     for (var j = 0; j < listData.length; j++) {
         var option = document.createElement("option");
