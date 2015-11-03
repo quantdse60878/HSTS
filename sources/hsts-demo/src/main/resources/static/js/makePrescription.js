@@ -485,8 +485,8 @@ function confirmBox(form) {
         console.log(bla);
         if (bla != null) {
             //Set
-            $('#diagnostic').val(bla);
-            console.log($('#diagnostic').val());
+            $('#diagnosticValue').val(bla);
+            console.log($('#diagnosticValue').val());
         }
         return true;
     //} else {

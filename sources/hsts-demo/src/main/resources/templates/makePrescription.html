@@ -127,7 +127,7 @@
                         <!-- form start -->
                         <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}"
                               data-toggle="validator" onsubmit="return confirmBox(this);">
-                            <input type="hidden" name="diagnostic" id="diagnostic"
+                            <input type="hidden" name="diagnostic" id="diagnosticValue"
                                    th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name}"/>
 
                             <div class="box-body">
@@ -412,8 +412,7 @@
 
     <!-- Bootstrap validator-->
     <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
-    <script th:src="@{/static/js/bootstrap-validator-ext.js}"></script>
-
+    <!--<script th:src="@{/static/js/bootstrap-validator-ext.js}"></script>-->
 
     <script type="text/javascript">
         var countMedicine = $('#medics').val();
