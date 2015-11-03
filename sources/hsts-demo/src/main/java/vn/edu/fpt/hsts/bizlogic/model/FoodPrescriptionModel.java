@@ -17,6 +17,10 @@ public class FoodPrescriptionModel {
      */
     private String fQuantity;
     /**
+     * Food Unit
+     */
+    private int fUnit;
+    /**
      * Food Note
      */
     private String fNote;
@@ -24,11 +28,12 @@ public class FoodPrescriptionModel {
     public FoodPrescriptionModel() {
     }
 
-    public FoodPrescriptionModel(int f, int fTime, String fQuantity, String fNote) {
-        this.f = f;
-        this.fTime = fTime;
-        this.fQuantity = fQuantity;
-        this.fNote = fNote;
+    public int getfUnit() {
+        return fUnit;
+    }
+
+    public void setfUnit(int fUnit) {
+        this.fUnit = fUnit;
     }
 
     public int getF() {
@@ -73,12 +78,14 @@ public class FoodPrescriptionModel {
         }
         return true;
     }
+
     @Override
     public String toString() {
         return "FoodPrescriptionModel{" +
-                "f='" + f + '\'' +
-                ", fTime='" + fTime + '\'' +
+                "f=" + f +
+                ", fTime=" + fTime +
                 ", fQuantity='" + fQuantity + '\'' +
+                ", fUnit=" + fUnit +
                 ", fNote='" + fNote + '\'' +
                 '}';
     }

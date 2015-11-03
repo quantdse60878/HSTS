@@ -16,13 +16,14 @@
         <th>Name</th>
         <th>Times</th>
         <th>Quantitative</th>
+        <th>Unit</th>
         <th>Note</th>
         <th>#</th>
     </tr>
     <tr>
         <td>1</td>
         <td style="min-width: 155px;" class="form-group">
-            <select class="form-control" th:field="*{fPresModels[0].f}" required="required" data-error="Choose at least one">
+            <select class="form-control" th:field="*{fPresModels[0].f}" onchange="findUnits(this)" required="required" data-error="Choose at least one">
                 <option value="0" disabled="disabled">Select</option>
                 <option th:each="food : ${FOODS}" th:value="${food.id}"
                         th:text="${food.name}"></option>
@@ -31,7 +32,7 @@
         </td>
         <td style="min-width: 120px;" class="form-group">
             <select class="form-control" th:field="*{fPresModels[0].fTime}" required="required" data-error="Choose at least one">
-                <option value="0" disabled="disabled">Select</option>
+                <option value="0">Select</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
@@ -40,6 +41,12 @@
         <td class="form-group">
             <input type="text" class="form-control" th:field="*{fPresModels[0].fQuantity}"
                    placeholder="Quantity" required="required" data-remote="/validateStr" data-error="Wrong input"/>
+            <div class="help-block with-errors"></div>
+        </td>
+        <td class="form-group">
+            <select class="form-control" th:field="*{fPresModels[0].fUnit}" required="required" data-error="Choose at least one">
+                <option value="0">Select</option>
+            </select>
             <div class="help-block with-errors"></div>
         </td>
         <td>

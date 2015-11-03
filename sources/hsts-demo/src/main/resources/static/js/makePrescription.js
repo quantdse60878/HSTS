@@ -1,6 +1,31 @@
 /**
  * Created by Aking on 9/28/2015.
  */
+function findUnits(food) {
+    var id = food.getAttribute('id');
+    var preID = id.split('.')[0];
+    var unitID = "#"+preID + '.fUnit';
+    var foodId = food.value;
+    $.ajax({
+        dataType: "json",
+        url: 'getFoodUnits',
+        data: {
+            'foodId': foodId
+        },
+        success: function (json) {
+            //console.log("success");
+            var options = [];
+            //$(unitID).innerHTML = "";
+            for (var i = 0; i < json.length; i++){
+                var tmp = json[i];
+                //console.log(tmp);
+                options= options + '<option value="'+ tmp +'">'+ tmp +'</option>';
+            }
+            $(options).appendTo( unitID );
+        }
+    });
+}
+
 function loadSelect(id) {
     $(id).select2({
         placeholder: "Select",
