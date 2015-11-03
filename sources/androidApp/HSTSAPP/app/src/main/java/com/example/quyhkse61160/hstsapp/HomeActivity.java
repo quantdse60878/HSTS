@@ -410,7 +410,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
 
 
-//        startService(checkNotifyIntent);
+        startService(checkNotifyIntent);
 //        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
         final Intent intent = getIntent();
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
