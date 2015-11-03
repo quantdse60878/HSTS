@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+
+    <section class="content-header">
+        <h1>
+            Search Accounts
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="listuser.html">Admin</a></li>
+            <li class="active">Accounts</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header" style="padding: 0px;">
+                        <div class="form-group">
+                                <!-- search form (Optional) -->
+                                <form action="createNewDevice" method="get" onsubmit="return WP()" class="sidebar-form" style="border: none">
+                                        <input type="hidden" id="uuid" name="uuid" value=""/>
+                                        <select id="devices" th:name="devices" onchange="GG()">
+                                        </select>
+                                        <input type="submit" id="create" name="search" value="Create New Device" style="background-color: #00a65a; color: white;border-radius: 5px"/>
+
+                                </form>
+                                <!-- /.search form -->
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="listAccount" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Measurement Name</th>
+                                <th>Position Have Value</th>
+                                <th>UUID</th>
+                                <th>Type</th>
+                            </tr>
+                            </thead>
+                            <tbody id="table-body"></tbody>
+                            <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Measurement Name</th>
+                                <th>Position Have Value</th>
+                                <th>UUID</th>
+                                <th>Type</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </section>
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/bootstrap.file-input.js}">
+    </script>
+    <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
+    <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/stafflistdevice.js}"></script>
+</div>
+<!-- /.content-wrapper -->
+
+</body>
+</html>
