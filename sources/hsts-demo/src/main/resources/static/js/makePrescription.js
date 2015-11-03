@@ -510,8 +510,8 @@ $('#Appointment').datepicker("setDate", appointmentDate);
 var currentValue = "";
 
 function setMedicineUnit(ev) {
-    var targetValue = ev.target.textContent.trim();
-    targetValue = targetValue.substring(currentValue.length, targetValue.length);
+    var target = ev.target;
+    var targetValue = target.options[target.selectedIndex].text;;
     for(var i =  0; listMedicine.length; i++) {
         var item = listMedicine[i];
         var a = JSON.stringify(item);
