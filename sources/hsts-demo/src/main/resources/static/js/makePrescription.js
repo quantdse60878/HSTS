@@ -507,3 +507,21 @@ var appointmentDate = new Date();
 appointmentDate.setDate(appointmentDate.getDate() + nextAppointmentDate);
 $('#Appointment').datepicker("setDate", appointmentDate);
 
+var currentValue = "";
+
+function setMedicineUnit(ev) {
+    var targetValue = ev.target.textContent.trim();
+    targetValue = targetValue.substring(currentValue.length, targetValue.length);
+    for(var i =  0; listMedicine.length; i++) {
+        var item = listMedicine[i];
+        var a = JSON.stringify(item);
+        var b = JSON.parse(a);
+        if(targetValue == b.name) {
+            currentValue = currentValue + targetValue;
+            var tdTag = ev.target.parentElement;
+            var unitTag = tdTag.nextElementSibling.nextElementSibling.nextElementSibling;
+            var unitInput = unitTag.children[0];
+            unitInput.value = b.unit;
+        }
+    }
+}
