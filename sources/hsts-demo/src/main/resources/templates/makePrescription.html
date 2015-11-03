@@ -427,7 +427,7 @@
             newCell.setAttribute("style", "min-width: 155px;");
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModelsM' + countMedicine + '" data-error="Choose at least one" required="required">'
-                    + '<option value="0">Select</option>'
+                    + '<option value="0" >Select</option>'
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
@@ -435,7 +435,7 @@
             newCell.setAttribute("style", "min-width: 75px;");
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime" data-error="Choose at least one" required="required">'
-                    + '<option value="0">Select</option>'
+                    + '<option value="0" >Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
@@ -455,7 +455,6 @@
                     '<input type="text" class="form-control" placeholder="Advice" id="mPresModels' + countMedicine + '.mNote" name="mPresModels[' + countMedicine + '].mNote"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>';
-            window.setTimeout(loadSelect('#mPresModelsM1'),100);
 
             countMedicine++;
             return newRow;

@@ -41,9 +41,10 @@ function loadSelect(id) {
         }
     });
 };
-for(var i=0; i<= $('#medics').val(); i++){
-    loadSelect('#mPresModelsM'+i+'');
-}
+// create select2 medicine
+//for(var i=0; i<= $('#medics').val(); i++){
+//    loadSelect('#mPresModelsM'+i+'');
+//}
 
 
 $("#select2Box").select2({
