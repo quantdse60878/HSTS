@@ -304,7 +304,7 @@ public class DoctorService extends AbstractService {
                             foodTreatment.setFood(food);
                             foodTreatment.setTreatment(newTreatment);
                             foodTreatment.setNumberOfTime(foodModel.getfTime());
-                            foodTreatment.setQuantitative(foodModel.getfQuantity());
+                            foodTreatment.setQuantitative(Integer.parseInt(foodModel.getfQuantity()));
                             foodTreatment.setAdvice(foodModel.getfNote());
                             foodTreatmentRepo.save(foodTreatment);
                         }

@@ -108,7 +108,7 @@ public class TreatmentService {
                 List<FoodTreatment> foodTreatments = foodTreatmentRepo.findFoodTreatmentTreatmentId(treatment.getId());
                 for(int j = 0; j < foodTreatments.size(); j++) {
                     FoodTreatment fItem = foodTreatments.get(j);
-                    FoodTreatmentModel item = new FoodTreatmentModel(fItem.getFood().getName(), fItem.getQuantitative(), fItem.getAdvice(), fItem.getNumberOfTime());
+                    FoodTreatmentModel item = new FoodTreatmentModel(fItem.getFood().getName(), fItem.getQuantitative() + fItem.getUnitName(), fItem.getAdvice(), fItem.getNumberOfTime());
                     foodTreatmentModels.add(item);
                 }
                 List<PracticeTreatment> practiceTreatments = practiceTreatmentRepo.findPracticeTreatmentByTreatmentId(treatment.getId());
