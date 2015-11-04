@@ -17,6 +17,7 @@
         <th>Menu</th>
         <th>Times</th>
         <th>Quantitative</th>
+        <th>Unit</th>
         <th>Note</th>
         <th>#</th>
     </tr>
@@ -44,6 +45,11 @@
         <td class="form-group">
             <input type="text" class="form-control" th:field="*{fPresModels[__${row.index}__].fQuantity}"
                    placeholder="Quantity" required="required" data-remote="/validateStr" data-error="Wrong input"/>
+            <div class="help-block with-errors"></div>
+        </td>
+        <td class="form-group">
+            <select class="form-control" th:field="*{fPresModels[__${row.index}__].fUnit}" required="required" data-error="Choose at least one">
+            </select>
             <div class="help-block with-errors"></div>
         </td>
         <td>

@@ -18,15 +18,16 @@
     <tr>
         <td>1</td>
         <td style="min-width: 155px;" class="form-group">
-            <select class="form-control" name="mPresModels[0].m" id="mPresModelsM0" data-error="Choose at least one" required="required">
-                <!--<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"-->
-                        <!--th:text="${medicine.name}"></option>-->
+            <select class="form-control" name="mPresModels[0].m" id="mPresModelsM0" onchange="setMedicineUnit(event)" data-error="Choose at least one" required="required">
+                <option value="0" >Select</option>
+                <option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"
+                        th:text="${medicine.name}"></option>
             </select>
             <div class="help-block with-errors"></div>
         </td>
         <td style="min-width: 120px;" class="form-group">
             <select class="form-control" th:field="*{mPresModels[0].mTime}" data-error="Choose at least one" required="required">
-                <option value="0">Select</option>
+                <option value="0" >Select</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>

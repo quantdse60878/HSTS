@@ -28,7 +28,7 @@
             <li class="header">MAIN NAVIGATION</li>
             <li class="active treeview" th:if="${session.USER.role.name == 'Nurse'}">
                 <ul class="treeview-menu">
-                    <li class="active"><a href="registerPatient"><i class="fa fa-user-plus"></i> Register Patient</a></li>
+                    <li class="active"><a href="registerPatient"> <i class="glyphicon glyphicon-user"></i> Register Patient</a></li>
                     <li><a href="searchPatient"><i class="fa fa-users"></i> Patients</a></li>
                 </ul>
             </li>
@@ -61,7 +61,13 @@
                 <ul class="treeview-menu">
                     <li class="active"><a href="adminAccs"><i class="fa fa-users"></i> Accounts</a></li>
                 </ul>
+            </li><li class="active treeview" th:if="${session.USER.role.name == 'Staff'}">
+                <ul class="treeview-menu">
+                    <li><a href="viewDevices"><i class="fa fa-briefcase"></i>Manage Device</a></li>
+                    <li><a href="openFormula"><i class="fa fa-users"></i> Manage Formula</a></li>
+                </ul>
             </li>
+
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

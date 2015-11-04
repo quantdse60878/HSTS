@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form action="#">
+        <div id="parent" style="width: 200px; float: left">
+            <input type="text" id="name" oninput="viewAutoComplete()" style="width:100%;"/>
+            <div id="item" style="background-color: #31b131; width:100%; visibility:hidden">
+            </div>
+        </div>
+        <input type="submit" style="float: left"/>
+    </form>
+</body>
+<script type="text/javascript">
+    var x = ["BodyFat", "VisceralFat", "Height", "Weight", "Bmi", "MuscleMass", "BodyWater", "PhaseAngle", "Impedance", "BasalMetabolicRate", "BloodPressure", "HeartBeat", "WaistsNumberOfStep", "Calories", "Distance"];
+
+    function viewAutoComplete(){
+        var val = document.getElementById("name").value;
+        var item = document.getElementById("item");
+        if(val!=""){
+            item.style.visibility = "visible";
+            item.innerHTML = "";
+            for(var i=0; i< x.length; i++){
+                if(x[i].toLowerCase().indexOf(val.toLowerCase()) > -1){
+                    var btn = document.createElement("p");
+                    var t = document.createTextNode(x[i]);
+                    var att = document.createAttribute("onclick");
+                    att.value = "fillInput('" + x[i] + "')";
+                    btn.appendChild(t);
+                    btn.setAttributeNode(att);
+                    item.appendChild(btn);
+                }
+            }
+        } else {
+            item.style.visibility = "hidden";
+        }
+    }
+
+    function fillInput(c){
+        item.style.visibility = "hidden";
+        document.getElementById("name").value = c;
+    }
+</script>
+</html>

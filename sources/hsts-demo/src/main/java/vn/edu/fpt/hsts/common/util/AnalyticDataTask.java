@@ -81,6 +81,8 @@ public class AnalyticDataTask {
 //                AnalyticDataTask.variable = new ArrayList<>();
 //                AnalyticDataTask.valueVariable = new ArrayList<>();
                 String tmp = "";
+                AnalyticDataTask.valueVariable = new ArrayList<String>();
+                AnalyticDataTask.variable = new ArrayList<String>();
                 while ((tmp = br.readLine()) != null) {
                     String[] listData = tmp.split(",");
                     AnalyticDataTask.variable.add(listData[0]);

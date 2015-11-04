@@ -1,6 +1,31 @@
 /**
  * Created by Aking on 9/28/2015.
  */
+function findUnits(food) {
+    var id = food.getAttribute('id');
+    var preID = id.split('.')[0];
+    var unitID = "#"+preID + '.fUnit';
+    var foodId = food.value;
+    $.ajax({
+        dataType: "json",
+        url: 'getFoodUnits',
+        data: {
+            'foodId': foodId
+        },
+        success: function (json) {
+            //console.log("success");
+            var options = [];
+            //$(unitID).innerHTML = "";
+            for (var i = 0; i < json.length; i++){
+                var tmp = json[i];
+                //console.log(tmp);
+                options= options + '<option value="'+ tmp +'">'+ tmp +'</option>';
+            }
+            $(options).appendTo( unitID );
+        }
+    });
+}
+
 function loadSelect(id) {
     $(id).select2({
         placeholder: "Select",
@@ -41,9 +66,10 @@ function loadSelect(id) {
         }
     });
 };
-for(var i=0; i<= $('#medics').val(); i++){
-    loadSelect('#mPresModelsM'+i+'');
-}
+// create select2 medicine
+//for(var i=0; i<= $('#medics').val(); i++){
+//    loadSelect('#mPresModelsM'+i+'');
+//}
 
 
 $("#select2Box").select2({
@@ -477,21 +503,21 @@ function confirmBox(form) {
     //} else {
     //
     //}
-    var r = confirm('Are you sure to make this prescription?');
-    if (r == true) {
+    //var r = confirm('Are you sure to make this prescription?');
+    //if (r == true) {
         // Hidden field for diagnostic
         //Get
         var bla = $('#select2Box').val().trim();
         console.log(bla);
         if (bla != null) {
             //Set
-            $('#diagnostic').val(bla);
-            console.log($('#diagnostic').val());
+            $('#diagnosticValue').val(bla);
+            console.log($('#diagnosticValue').val());
         }
         return true;
-    } else {
-        return false;
-    }
+    //} else {
+    //    return false;
+    //}
 }
 
 
@@ -506,3 +532,21 @@ var appointmentDate = new Date();
 appointmentDate.setDate(appointmentDate.getDate() + nextAppointmentDate);
 $('#Appointment').datepicker("setDate", appointmentDate);
 
+var currentValue = "";
+
+function setMedicineUnit(ev) {
+    var target = ev.target;
+    var targetValue = target.options[target.selectedIndex].text;;
+    for(var i =  0; listMedicine.length; i++) {
+        var item = listMedicine[i];
+        var a = JSON.stringify(item);
+        var b = JSON.parse(a);
+        if(targetValue == b.name) {
+            currentValue = currentValue + targetValue;
+            var tdTag = ev.target.parentElement;
+            var unitTag = tdTag.nextElementSibling.nextElementSibling.nextElementSibling;
+            var unitInput = unitTag.children[0];
+            unitInput.value = b.unit;
+        }
+    }
+}

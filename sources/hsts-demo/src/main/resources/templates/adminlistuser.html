@@ -27,22 +27,7 @@
                 <div class="box">
                     <div class="box-header" style="padding: 0px;">
                         <div class="form-group">
-                            <div class="col-sm-4">
-                                <!-- search form (Optional) -->
-                                <form action="#" method="get" class="sidebar-form">
-                                    <div class="input-group">
-                                        <input type="text" name="q" class="form-control"
-                                               placeholder="Search Username..."/>
-                          <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i></button>
-                          </span>
-                                    </div>
-                                </form>
-                                <!-- /.search form -->
-                            </div>
-
-                            <form action="adminReg" method="POST" style="padding-top: 12px"
+                            <form action="adminReg" method="POST" style="padding-left: 12px;padding-top: 12px"
                                   enctype="multipart/form-data">
                                 <input type="file" name="excel" id="excel" data-filename-placement="inside"
                                        style="float:left;" onchange="check_file()"/>
@@ -54,7 +39,6 @@
                                 </a>
                                 <input type="submit" value="Insert Account" class="btn btn-primary"/>
                             </form>
-
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -70,6 +54,7 @@
                             </tr>
                             </thead>
                             <tbody id="table-body"></tbody>
+                            <!--<tbody id="table-body"><tr><td>1</td><td>doctor</td><td>Doctor</td><td>FEMALE</td><td><a href="/account?id=1" class="btn btn-primary" style="margin-right: 5px;float: left;">Update</a></td></tr><tr><td>2</td><td>nutrition</td><td>Nutrition</td><td>FEMALE</td><td><a href="/account?id=2" class="btn btn-primary" style="margin-right: 5px;float: left;">Update</a></td></tr><tr><td>3</td><td>nurse</td><td>Nurse</td><td>FEMALE</td><td><a href="/account?id=3" class="btn btn-primary" style="margin-right: 5px;float: left;">Update</a></td></tr><tr><td>4</td><td>staff</td><td>Staff</td><td>FEMALE</td><td><a href="/account?id=4" class="btn btn-primary" style="margin-right: 5px;float: left;">Update</a></td></tr><tr><td>5</td><td>patient</td><td>Patient</td><td>FEMALE</td><td><a href="/account?id=5" class="btn btn-primary" style="margin-right: 5px;float: left;">Update</a></td></tr><tr><td>6</td><td>admin</td><td>Admin</td><td>FEMALE</td><td><a href="/account?id=6" class="btn btn-primary" style="margin-right: 5px;float: left;">Update</a></td></tr></tbody>-->
                             <tfoot>
                             <tr>
                                 <th>#</th>
@@ -91,6 +76,9 @@
 
     </section>
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/bower/admin-lte/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{/static/bower/admin-lte/plugins/datatables/dataTables.bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/bootstrap.file-input.js}">
     </script>
     <script type="text/javascript">
@@ -112,10 +100,13 @@
                                 '<td>' + element.role.name + '</td>' +
                                 '<td>' + element.gender + '</td>' +
                                 '<td>' +
-                                '<a href="/account?id='+ element.id +'" class = "btn btn-primary" style="margin-right: 5px;">Update</a>';
+                                '<a href="/account?id='+ element.id +'" class = "btn btn-primary" style="margin-right: 5px;float: left;">Update</a>';
                         if(element.role.name != "Admin"){
                             if (element.status == 1) {
-                                bodyContent +='<a href="/deleteAccount?id=' + element.id + '" class="btn btn-danger" onclick="ask()">Delete</a>';
+                                bodyContent +='<form action="deleteAccount" method="GET" onsubmit="return ask()" style="float: left;">' +
+                                        '<input type="hidden" name="id" value="' + element.id + '"/>' +
+                                        '<input type="submit" value="Delete" class="btn btn-danger" />' +
+                                        '</form>';
                             }
                         }
                         bodyContent += '</td>' +
@@ -123,6 +114,7 @@
                     });
                 }
                 $("#table-body").html(bodyContent);
+                $("#listAccount").DataTable();
             });
         });
 

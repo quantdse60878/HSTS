@@ -127,7 +127,7 @@
                         <!-- form start -->
                         <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}"
                               data-toggle="validator" onsubmit="return confirmBox(this);">
-                            <input type="hidden" name="diagnostic" id="diagnostic"
+                            <input type="hidden" name="diagnostic" id="diagnosticValue"
                                    th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name}"/>
 
                             <div class="box-body">
@@ -326,7 +326,7 @@
                                             <div style="margin: 15px;">
                                                 <a href="#tab_3-3" onclick="changeTab('#tab_3-3')" data-toggle="tab"
                                                    class="btn btn-default">Previous</a>
-                                                <button th:if="${TREATMENT == null}" type="submit"
+                                                <button th:if="${TREATMENT == null}" type="button" data-toggle="modal" data-target="#myModal"
                                                         class="btn btn-primary pull-right">Done
                                                 </button>
                                             </div>
@@ -340,7 +340,25 @@
                                 <!-- END CUSTOM TABS -->
                             </div>
                             <!-- /.box-body -->
-
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Confirm Box</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Are you sure to make this prescription?</h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-primary">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.Modal -->
                         </form>
                         <!-- /.form -->
                     </div>
@@ -394,8 +412,11 @@
 
     <!-- Bootstrap validator-->
     <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
-    <script th:src="@{/static/js/bootstrap-validator-ext.js}"></script>
+    <!--<script th:src="@{/static/js/bootstrap-validator-ext.js}"></script>-->
 
+    <script th:inline="javascript">
+        listMedicine = [[${MEDICINES}]];
+    </script>
 
     <script type="text/javascript">
         var countMedicine = $('#medics').val();
@@ -409,8 +430,8 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("style", "min-width: 155px;");
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModelsM' + countMedicine + '" data-error="Choose at least one" required="required">'
-                    + '<option value="0">Select</option>'
+            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModelsM' + countMedicine + '" onchange="setMedicineUnit(event)" data-error="Choose at least one" required="required">'
+                    + '<option value="0" >Select</option>'
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
@@ -418,7 +439,7 @@
             newCell.setAttribute("style", "min-width: 75px;");
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime" data-error="Choose at least one" required="required">'
-                    + '<option value="0">Select</option>'
+                    + '<option value="0" >Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
@@ -438,7 +459,6 @@
                     '<input type="text" class="form-control" placeholder="Advice" id="mPresModels' + countMedicine + '.mNote" name="mPresModels[' + countMedicine + '].mNote"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>';
-            window.setTimeout(loadSelect('#mPresModelsM1'),100);
 
             countMedicine++;
             return newRow;
