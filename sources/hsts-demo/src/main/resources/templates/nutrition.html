@@ -25,16 +25,17 @@
                 <div class="box box-default">
                     <div class="box-body">
                         <!-- form start -->
-                        <form class="form-horizontal" th:action="nutrition"
+                        <form class="form-horizontal" th:action="nutrition" id="mainForm"
                               method="get" th:object="${model}" data-toggle="validator">
                             <input type="hidden" name="appointmentId" th:value="${APPOINTMENT.id}"/>
                             <!-- Custom Tabs (Pulled to the left) -->
                             <div class="nav-tabs-custom" style="box-shadow: none;">
                                 <ul class="nav nav-tabs">
-                                    <li class="active">
-                                        <a href="#tab_1-1" data-toggle="tab">Meal Assessment</a>
+                                    <li class="active" id="li_tab_1-1">
+                                        <a href="#tab_1-1" data-toggle="tab" onclick="changeTab('#tab_2-2', '#li_tab_2-2')">Meal Assessment</a>
                                     </li>
-                                    <li><a href="#tab_2-2" data-toggle="tab">Nutritional Assessment</a></li>
+                                    <li id="li_tab_2-2">
+                                        <a href="#tab_2-2" data-toggle="tab" onclick="changeTab('#tab_1-1', '#li_tab_1-1')">Nutritional Assessment</a></li>
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab_1-1">
@@ -55,8 +56,8 @@
                                                     </td>
                                                     <td class="form-group">
                                                         <input th:field="*{breakfast}" type="text" class="form-control hsts"
-                                                               placeholder="Breakfast" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Breakfast"/>
+                                                        <div class="help-block with-errors" id="invalidbreakfast"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -65,8 +66,8 @@
                                                     </td>
                                                     <td class="form-group">
                                                         <input th:field="*{breakTimeMorning}" type="text"
-                                                               class="form-control hsts" placeholder="BreakTime Morning" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               class="form-control hsts" placeholder="BreakTime Morning"/>
+                                                        <div class="help-block with-errors" id="invalidbreakTimeMorning"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -75,39 +76,39 @@
                                                     </td>
                                                     <td class="form-group">
                                                         <input th:field="*{lunch}" type="text" class="form-control hsts"
-                                                               placeholder="Lunch" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Lunch"/>
+                                                        <div class="help-block with-errors" id="invalidlunch"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><label class="control-label">BreakTime Afternoon*</label></td>
                                                     <td class="form-group">
                                                         <input th:field="*{breakTimeAfternoon}" type="text"
-                                                               class="form-control hsts" placeholder="BreakTime Afternoon" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               class="form-control hsts" placeholder="BreakTime Afternoon"/>
+                                                        <div class="help-block with-errors" id="invalidbreakTimeAfternoon"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><label class="control-label">Dinner*</label></td>
                                                     <td class="form-group">
                                                         <input th:field="*{dinner}" type="text" class="form-control hsts"
-                                                               placeholder="Dinner" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Dinner"/>
+                                                        <div class="help-block with-errors" id="invaliddinner"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><label class="control-label">Eat Late At Night*</label></td>
                                                     <td class="form-group">
                                                         <input th:field="*{eatLateAtNight}" type="text"
-                                                               class="form-control hsts" placeholder="Eat Late At Night" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               class="form-control hsts" placeholder="Eat Late At Night"/>
+                                                        <div class="help-block with-errors" id="invalideatLateAtNight"></div>
                                                     </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="">
-                                            <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab"
+                                            <a href="#tab_2-2" onclick="changeTab('#tab_2-2', '#li_tab_2-2')" data-toggle="tab"
                                                class="btn btn-primary pull-right">Next</a>
                                         </div>
                                     </div>
@@ -132,15 +133,15 @@
                                                     </td>
                                                     <td class="form-group">
                                                         <input th:field="*{starch}" type="text" class="form-control hsts"
-                                                               placeholder="Starch" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Starch"/>
+                                                        <div class="help-block with-errors" id="invalidstarch"></div>
                                                     </td>
 
                                                     <td><label class="control-label">Iron* /1000 Kcal (mg)</label></td>
                                                     <td class="form-group">
                                                         <input th:field="*{iron}" type="text" class="form-control hsts"
-                                                               placeholder="Iron" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Iron"/>
+                                                        <div class="help-block with-errors" id="invalidiron"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -150,7 +151,7 @@
                                                     <td class="form-group">
                                                         <input th:field="*{protein}" type="text" class="form-control hsts"
                                                                placeholder="Protein" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                        <div class="help-block with-errors" id="invalidprotein"></div>
                                                     </td>
 
                                                     <td>
@@ -158,8 +159,8 @@
                                                     </td>
                                                     <td>
                                                         <input th:field="*{zinc}" type="text" class="form-control hsts"
-                                                               placeholder="Zinc" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Zinc"/>
+                                                        <div class="help-block with-errors" id="invalidzinc"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -168,8 +169,8 @@
                                                     </td>
                                                     <td>
                                                         <input th:field="*{fat}" type="text" class="form-control hsts"
-                                                               placeholder="Fat" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Fat"/>
+                                                        <div class="help-block with-errors" id="invalidfat"></div>
                                                     </td>
 
                                                     <td>
@@ -177,8 +178,8 @@
                                                     </td>
                                                     <td>
                                                         <input th:field="*{vitaminB1}" type="text" class="form-control hsts"
-                                                               placeholder="Vitamin B1" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Vitamin B1"/>
+                                                        <div class="help-block with-errors" id="invalidvitaminB1"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -187,8 +188,8 @@
                                                     </td>
                                                     <td>
                                                         <input th:field="*{animalProtein}" type="text"
-                                                               class="form-control hsts" placeholder="Animal Protein" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               class="form-control hsts" placeholder="Animal Protein"/>
+                                                        <div class="help-block with-errors" id="invalidanimalProtein"></div>
                                                     </td>
 
                                                     <td>
@@ -196,8 +197,8 @@
                                                     </td>
                                                     <td>
                                                         <input th:field="*{vitaminC}" type="text" class="form-control hsts"
-                                                               placeholder="Vitamin C" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Vitamin C"/>
+                                                        <div class="help-block with-errors" id="invalidvitaminC"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -206,54 +207,54 @@
                                                     </td>
                                                     <td>
                                                         <input th:field="*{animalFat}" type="text" class="form-control hsts"
-                                                               placeholder="Animal Fat" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Animal Fat"/>
+                                                        <div class="help-block with-errors" id="invalidanimalFat"></div>
                                                     </td>
 
                                                     <td><label class="control-label">Vitamin B2*/1000 Kcal (mg)</label>
                                                     </td>
                                                     <td>
                                                         <input th:field="*{vitaminB2}" type="text" class="form-control hsts"
-                                                               placeholder="Vitamin B2" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Vitamin B2"/>
+                                                        <div class="help-block with-errors" id="invalidvitaminB2"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><label class="control-label">Calcium* (mg)</label></td>
                                                     <td>
                                                         <input th:field="*{calcium}" type="text" class="form-control hsts"
-                                                               placeholder="Calcium" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Calcium"/>
+                                                        <div class="help-block with-errors" id="invalidcalcium"></div>
                                                     </td>
 
                                                     <td><label class="control-label">Vitamin PP*/1000 Kcal (mg)</label>
                                                     </td>
                                                     <td>
                                                         <input th:field="*{vitaminPP}" type="text" class="form-control hsts"
-                                                               placeholder="Vitamin PP" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Vitamin PP"/>
+                                                        <div class="help-block with-errors" id="invalidvitaminPP"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><label class="control-label">Sodium* (mg)</label></td>
                                                     <td>
                                                         <input th:field="*{sodium}" type="text" class="form-control hsts"
-                                                               placeholder="Sodium" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                               placeholder="Sodium"/>
+                                                        <div class="help-block with-errors" id="invalidsodium"></div>
                                                     </td>
 
                                                     <td><label class="control-label">Fiber* (g)</label></td>
                                                     <td>
                                                         <input th:field="*{fiber}" type="text" class="form-control hsts"
                                                                placeholder="Fiber" data-remote="/validateData" data-error="Wrong input"/>
-                                                        <div class="help-block with-errors"></div>
+                                                        <div class="help-block with-errors" id="invalidfiber"></div>
                                                     </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="">
-                                            <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+                                            <a href="#tab_1-1" onclick="changeTab('#tab_1-1', '#li_tab_1-1')" data-toggle="tab"
                                                class="btn btn-default">Previous</a>
                                             <button class="btn btn-primary pull-right" type="button" data-toggle="modal" data-target="#myModal">Done</button>
                                         </div>
@@ -295,19 +296,15 @@
 
     </section>
     <!-- /.content -->
-    <script>
-
-        function changeTab(a) {
-            console.log(a);
-            $('.nav-tabs > li.active').removeClass('active');
-            $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
-        }
-        ;
-
-    </script>
+    <!-- jQuery -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
-    <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
-    <script th:src="@{/static/js/bootstrap-validator-ext.js}"></script>
+    <!-- jquery validation -->
+    <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
+    <!-- Bootstrap validator-->
+    <!--<script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>-->
+    <!--<script th:src="@{/static/js/bootstrap-validator-ext.js}"></script>-->
+
+    <script th:src="@{/static/js/nutrition.js}"></script>
 </div>
 <!-- /.content-wrapper -->
 </body>
