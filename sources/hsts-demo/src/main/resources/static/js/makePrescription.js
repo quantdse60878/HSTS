@@ -44,7 +44,8 @@ function fillInput(id,item,c){
 function findUnits(food) {
     var id = food.getAttribute('id');
     var preID = id.split('.')[0];
-    var unitID = "#"+preID + '.fUnit';
+    var unitIdN = preID + 'fUnit';
+    var unitID = "#"+preID + 'fUnit';
     var foodId = food.value;
     $.ajax({
         dataType: "json",
@@ -54,14 +55,14 @@ function findUnits(food) {
         },
         success: function (json) {
             //console.log("success");
-            var options = [];
-            //$(unitID).innerHTML = "";
+            var options = '<option value="0">Select</option>';
+            document.getElementById(unitIdN).innerHTML = "";
             for (var i = 0; i < json.length; i++){
                 var tmp = json[i];
                 //console.log(tmp);
                 options= options + '<option value="'+ tmp +'">'+ tmp +'</option>';
             }
-            options.appendChild( unitID );
+            $(options).appendTo(unitID);
         }
     });
 }
