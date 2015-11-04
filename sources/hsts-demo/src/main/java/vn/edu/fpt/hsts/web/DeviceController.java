@@ -25,7 +25,15 @@ public class DeviceController {
     @RequestMapping(value = "sendUuidToAndroid", method = RequestMethod.POST)
     @ResponseBody
     public List<String> sendUuidToAndroid(@RequestParam("brandName") final String brandName) {
-        return deviceService.getListParamFromBrandName(brandName);
+
+        String[] listArray = brandName.split(",");
+        byte[] listByteData = new byte[listArray.length];
+        for (int i = 0; i < listArray.length; i++) {
+            listByteData[i] = Byte.parseByte(listArray[i]);
+        }
+        String listData = new String(listByteData);
+        listData = listData.replaceAll("\u0000", " ");
+        return deviceService.getListParamFromBrandName(listData);
     }
 
 }

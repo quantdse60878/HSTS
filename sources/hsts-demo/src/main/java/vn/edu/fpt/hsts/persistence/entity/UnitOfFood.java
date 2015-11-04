@@ -16,7 +16,7 @@ public class UnitOfFood extends AbstractKeyEntity {
     @JoinColumn(name = "foodId", nullable = false)
     private Food food;
     private String unitName;
-    private int caloriesEstimate;
+    private float caloriesEstimate;
 
     public UnitOfFood() {
     }
@@ -37,11 +37,11 @@ public class UnitOfFood extends AbstractKeyEntity {
         this.unitName = unitName;
     }
 
-    public int getCaloriesEstimate() {
+    public float getCaloriesEstimate() {
         return caloriesEstimate;
     }
 
-    public void setCaloriesEstimate(int caloriesEstimate) {
+    public void setCaloriesEstimate(float caloriesEstimate) {
         this.caloriesEstimate = caloriesEstimate;
     }
 }
