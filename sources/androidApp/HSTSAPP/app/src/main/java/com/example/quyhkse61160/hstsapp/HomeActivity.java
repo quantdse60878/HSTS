@@ -398,7 +398,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
+2
         if (savedInstanceState == null) {
             // on first time display view for first nav item
             if(hasNotify) displayView(1);
