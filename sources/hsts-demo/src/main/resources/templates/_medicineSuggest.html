@@ -20,7 +20,7 @@
         <td th:text="${row.count}"></td>
         <td style="min-width: 155px;" class="form-group">
             <select class="form-control" th:name="mPresModels[__${row.index}__].m" th:id="mPresModelsM__${row.index}__"
-                    data-error="Choose at least one" required="required">
+                    onchange="setMedicineUnit(event)" data-error="Choose at least one" required="required">
                 <option th:value="${medicalPhase.medicine.id}"
                         th:text="${medicalPhase.medicine.name}"></option>
                 <option th:each="medicine : ${MEDICINES}"
@@ -28,7 +28,6 @@
                 th:text="${medicine.name}"
                 th:if="${medicalPhase.medicine.id != medicine.id}"></option>
             </select>
-
             <div class="help-block with-errors"></div>
         </td>
         <td style="min-width: 120px;" class="form-group">
