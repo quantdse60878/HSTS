@@ -7,8 +7,8 @@
  */
 
 $("#gender").iCheck({
-    checkboxClass: 'icheckbox_flat-red',
-    radioClass: 'iradio_flat-red'
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue'
 });
 
 $("#birthday").datepicker({
@@ -16,12 +16,13 @@ $("#birthday").datepicker({
     startDate: '1950-01-01',
     endDate: 'today'
 });
+
 function changeTab (a, li) {
     console.log("a: " + a);
     console.log("li: " + li);
-    $('li.active').removeClass('active');
+    $('.nav-tabs > li.active').removeClass('active');
     $(li).addClass('active');
-    $('.tab-pane.active').removeClass('active');
+    $('.tab-content > .tab-pane.active').removeClass('active');
     $(a).addClass('active');
 };
 
@@ -344,7 +345,6 @@ var validator = $("#mainForm").validate({
             var targetTab = jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id');
             changeTab('#' + targetTab, '#li_' + targetTab);
             console.log("end change");
-
         }
     }
 });
