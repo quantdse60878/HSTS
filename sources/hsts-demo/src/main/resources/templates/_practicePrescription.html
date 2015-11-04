@@ -16,11 +16,13 @@
     <tr>
         <td>1</td>
         <td style="min-width: 155px;" class="form-group">
-            <select class="form-control" th:field="*{pPresModels[0].p}" required="required" data-error="Choose at least one">
-                <option value="0" disabled="disabled">Select</option>
-                <option th:each="practice : ${PRACTICES}" th:value="${practice.id}"
-                        th:text="${practice.name}"></option>
-            </select>
+            <!--<select class="form-control" th:field="*{pPresModels[0].p}" required="required" data-error="Choose at least one">-->
+                <!--<option value="0" disabled="disabled">Select</option>-->
+                <!--<option th:each="practice : ${PRACTICES}" th:value="${practice.id}"-->
+                        <!--th:text="${practice.name}"></option>-->
+            <!--</select>-->
+            <input type="text" class="form-control" name="pPresModels[0].p" id="pPresModelsP0" oninput="viewAutoComplete('pPresModelsP0','pPresModelsP0item')"/>
+            <div id="pPresModelsP0item" class="form-control" style="visibility: hidden;height: auto;"></div>
             <div class="help-block with-errors"></div>
         </td>
         <td style="min-width: 120px;" class="form-group">

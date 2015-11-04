@@ -22,4 +22,8 @@ public class PracticeService {
     public List<Practice> getAllPractice(){
         return practiceRepo.findAll();
     }
+
+    public List<String> getAllPracticeName() {
+        return practiceRepo.findAllName();
+    }
 }

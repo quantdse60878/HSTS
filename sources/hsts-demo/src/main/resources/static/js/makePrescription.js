@@ -1,6 +1,46 @@
 /**
  * Created by Aking on 9/28/2015.
  */
+function viewAutoCompleteP(input){
+    //console.log(input);
+    var id = input.getAttribute('id');
+    var item = id + "item";
+    viewAutoComplete(id,item);
+}
+function viewAutoComplete(id,item){
+    var val = document.getElementById(id).value;
+    var it = document.getElementById(item);
+    if(val!=""){
+        it.style.visibility = "visible";
+        it.style.height = "auto";
+        it.innerHTML = "";
+        for(var i=0; i< listPracticeName.length; i++){
+            if(listPracticeName[i].toLowerCase().indexOf(val.toLowerCase()) > -1){
+                var btn = document.createElement("p");
+                var t = document.createTextNode(listPracticeName[i]);
+                var att = document.createAttribute("onclick");
+                att.value = "fillInput('"+id+"','"+item+"','" + listPracticeName[i] + "')";
+                btn.appendChild(t);
+                btn.setAttribute("class","form-control");
+                btn.setAttribute("style","margin: 0px;border: 0px;box-shadow: none;");
+                btn.setAttributeNode(att);
+                it.appendChild(btn);
+            }
+        }
+    } else {
+        it.style.visibility = "hidden";
+        it.style.height = "0px";
+    }
+
+}
+function fillInput(id,item,c){
+    var it = document.getElementById(item);
+    it.style.visibility = "hidden";
+    it.style.height = "0px";
+    document.getElementById(id).value = c;
+}
+
+
 function findUnits(food) {
     var id = food.getAttribute('id');
     var preID = id.split('.')[0];
@@ -21,7 +61,7 @@ function findUnits(food) {
                 //console.log(tmp);
                 options= options + '<option value="'+ tmp +'">'+ tmp +'</option>';
             }
-            $(options).appendTo( unitID );
+            options.appendChild( unitID );
         }
     });
 }

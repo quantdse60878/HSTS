@@ -15,7 +15,7 @@ public class FoodPrescriptionModel {
     /**
      * Food Quantity
      */
-    private String fQuantity;
+    private int fQuantity;
     /**
      * Food Unit
      */
@@ -52,11 +52,11 @@ public class FoodPrescriptionModel {
         this.fTime = fTime;
     }
 
-    public String getfQuantity() {
+    public int getfQuantity() {
         return fQuantity;
     }
 
-    public void setfQuantity(String fQuantity) {
+    public void setfQuantity(int fQuantity) {
         this.fQuantity = fQuantity;
     }
 
@@ -73,7 +73,7 @@ public class FoodPrescriptionModel {
             return false;
         } else if (fTime <= 0){
             return false;
-        } else if (null == fQuantity && fQuantity.isEmpty()){
+        } else if (fQuantity <= 0){
             return false;
         }
         return true;

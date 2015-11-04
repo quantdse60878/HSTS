@@ -407,8 +407,6 @@
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
-    <!-- makePrescription -->
-    <script th:src="@{/static/js/makePrescription.js}"></script>
 
     <!-- Bootstrap validator-->
     <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
@@ -416,9 +414,13 @@
 
     <script th:inline="javascript">
         listMedicine = [[${MEDICINES}]];
+        listPracticeName = [[${PRACTICENAMES}]];
     </script>
-
+    <!-- makePrescription -->
+    <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
+
+
         var countMedicine = $('#medics').val();
         var countM = countMedicine;
         function addRowMedicine(tableID) {
@@ -511,10 +513,9 @@
             newCell.innerHTML = ++countP;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModels' + countPractice + '.p" data-error="Choose at least one" required="required">'
-                    + '<option value="0">Select</option>'
-                    + '<option th:each="practice : ${PRACTICES}" th:value="${practice.id}" th:text="${practice.name}"></option>'
-                    + '</select>'
+            newCell.innerHTML =
+                    '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModelsP' + countPractice + '" oninput="viewAutoCompleteP(this)"/>'
+                    +'<div id="pPresModelsP' + countPractice + 'item" class="form-control" style="visibility: hidden;height: 100%;"></div>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
