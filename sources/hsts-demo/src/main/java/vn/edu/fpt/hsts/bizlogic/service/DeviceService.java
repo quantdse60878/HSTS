@@ -65,4 +65,13 @@ public class DeviceService {
     public void createNewDevice(Device device) {
         deviceRepo.save(device);
     }
+
+    public List<String> getListNameOfDevice() {
+        List<Device> devices = deviceRepo.findAll();
+        List<String> list = new ArrayList<String>();
+        for (Device item: devices){
+            list.add(item.getBrandName());
+        }
+        return list;
+    }
 }
