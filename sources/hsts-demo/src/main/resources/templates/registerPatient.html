@@ -26,7 +26,7 @@
                 <div class="box box-info">
 
                     <!-- form start -->
-                    <form class="form-horizontal" method="POST" th:action="registerNew" data-toggle="validator">
+                    <form class="form-horizontal" method="POST" th:action="registerNew" id = "mainForm">
 
                         <!-- New design-->
 
@@ -34,14 +34,14 @@
                             <div class="nav-tabs-custom" style="box-shadow: none;">
                                 <!-- Tab header -->
                                 <ul class="nav nav-tabs">
-                                    <li class="active">
-                                        <a href="#tab_1" data-toggle="tab">Patient's Profile</a>
+                                    <li class="active" id="li_tab_1">
+                                        <a href="#tab_1" data-toggle="tab" onclick="changeTab('#tab_1', '#li_tab_1')">Patient's Profile</a>
                                     </li>
-                                    <li>
-                                        <a href="#tab_2" data-toggle="tab">Medical Checking</a>
+                                    <li id="li_tab_2">
+                                        <a href="#tab_2" data-toggle="tab" onclick="changeTab('#tab_2', '#li_tab_2')">Medical Checking</a>
                                     </li>
-                                    <li>
-                                        <a href="#tab_3" data-toggle="tab">Medical registration</a>
+                                    <li id="li_tab_3">
+                                        <a href="tab_3" data-toggle="tab" onclick="changeTab('#tab_3', '#li_tab_3')">Medical registration</a>
                                     </li>
                                 </ul>
                                 <!-- End tab header -->
@@ -54,7 +54,7 @@
                                             <label class="col-sm-3 control-label">Name*</label>
 
                                             <div class="col-sm-5">
-                                                <select id="patientName" th:name="patientName" th:width="0">
+                                                <select id="patientName" th:name="patientName" th:width="0" data-rule-required="true">
                                                     <option value="">Type patient name</option>
                                                 </select>
                                             </div>
@@ -63,8 +63,7 @@
                                             <label for="Birthday" class="col-sm-3 control-label">Birthday*</label>
 
                                             <div class="col-sm-3">
-                                                <input type="text" th:name="birthday" class="form-control" id="Birthday"
-                                                       required="required" data-error="Please choose patient's birthday"/>
+                                                <input type="text" th:name="birthday" class="form-control" id="Birthday" data-rule-required="true"/>
                                                 <div class="help-block with-errors"></div>
                                             </div>
                                         </div>
@@ -72,9 +71,8 @@
                                             <label for="email" class="col-sm-3 control-label">Email*</label>
 
                                             <div class="col-sm-5">
-                                                <input type="email" id="email" th:name="email" class="form-control"
-                                                       data-remote="/validateEmail"
-                                                       data-error="That email is invalid, or already use" required="required"/>
+                                                <input type="text" id="email" th:name="email" class="form-control"
+                                                       data-rule-required="true" data-rule-email="true"/>
                                             </div>
                                             <div class="help-block with-errors"></div>
                                         </div>
@@ -101,7 +99,7 @@
 
                                         <!-- footer -->
                                         <div style="margin: 15px;">
-                                            <a href="#tab_2" onclick="changeTab('#tab_2')" data-toggle="tab"
+                                            <a data-toggle="tab" onclick="validateAndChangeTab('#tab_2', '#li_tab_2')"
                                                class="btn btn-primary pull-right">Next</a>
                                         </div>
                                         <!-- /.footer -->
@@ -126,8 +124,7 @@
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="weight" class="form-control" id="Weight"
-                                                           placeholder="Kg" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           placeholder="Kg" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -138,8 +135,7 @@
                                                 <td class="form-group">
                                                     <input type="text" th:name="visceralFat" class="form-control"
                                                            id="visceralFat"
-                                                           placeholder="level" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           placeholder="level" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -150,8 +146,7 @@
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="height" class="form-control" id="Height"
-                                                           placeholder="cm" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           placeholder="cm" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -162,8 +157,7 @@
                                                 <td class="form-group">
                                                     <input type="text" th:name="muscleMass" class="form-control"
                                                            id="muscleMass"
-                                                           placeholder="%" data-remote="/validateData"
-                                                           required="required"/>
+                                                           placeholder="%" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -175,8 +169,7 @@
                                                 <td class="form-group">
                                                     <input type="number" th:name="heartBeat" class="form-control"
                                                            id="heartBeat"
-                                                           placeholder="times/minute" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           placeholder="times/minute" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -187,8 +180,7 @@
                                                 <td class="form-group">
                                                     <input type="text" th:name="bodyWater" class="form-control"
                                                            id="bodyWater"
-                                                           placeholder="%" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           placeholder="%" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -200,8 +192,7 @@
                                                 <td class="form-group">
                                                     <input type="number" th:name="bloodPressure" class="form-control"
                                                            id="bloodPressure"
-                                                           placeholder="mmHg" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           placeholder="mmHg" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -212,8 +203,7 @@
                                                 <td class="form-group">
                                                     <input type="text" th:name="phaseAngle" class="form-control"
                                                            id="phaseAngle"
-                                                           placeholder="o" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           placeholder="o" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -224,8 +214,7 @@
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="waists" class="form-control" id="waists"
-                                                           placeholder="cm" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           placeholder="cm" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -236,8 +225,7 @@
                                                 <td class="form-group">
                                                     <input type="number" th:name="impedance" class="form-control"
                                                            id="impedance"
-                                                           placeholder="Ohm" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           placeholder="Ohm" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -250,8 +238,7 @@
                                                 <td class="form-group">
                                                     <input type="text" th:name="bodyFat" class="form-control"
                                                            id="bodyFat"
-                                                           placeholder="%" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           placeholder="%" data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -264,8 +251,7 @@
                                                     <input type="number" th:name="basalMetabolicRate" class="form-control"
                                                            id="basalMetabolicRate"
                                                            placeholder="Kcal"
-                                                           data-remote="/validateData" required="required"
-                                                           data-error="Wrong input"/>
+                                                           data-rule-required="true"/>
 
                                                     <div class="help-block with-errors"></div>
                                                 </td>
@@ -273,9 +259,9 @@
                                             </tbody>
                                         </table>
                                         <div style="margin: 15px;">
-                                            <a href="#tab_1" onclick="changeTab('#tab_1')" data-toggle="tab"
+                                            <a  data-toggle="tab" onclick="changeTab('#tab_1', '#li_tab_1')"
                                                class="btn btn-default">Previous</a>
-                                            <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab"
+                                            <a onclick="validateAndChangeTab('#tab_3', '#li_tab_3')" data-toggle="tab"
                                                class="btn btn-primary pull-right">Next</a>
                                         </div>
                                     </div>
@@ -287,7 +273,7 @@
                                             <label class="col-sm-3 control-label">Doctor*</label>
 
                                             <div class="col-sm-5">
-                                                <select id="doctorSelect" th:name="doctorId" th:width="0px">
+                                                <select id="doctorSelect" th:name="doctorId" th:width="0px" data-rule-required="true">
                                                     <!--<option value="" th:disabled="disable">Select one...</option>-->
                                                     <!--<option th:each="doctor : ${session.DOCTORS}"-->
                                                             <!--th:value="${doctor.id}"-->
@@ -301,7 +287,7 @@
 
                                             <div class="col-sm-6">
                                                 <input th:type="text" class="form-control" placeholder="Medical history"
-                                                       name="medicalHistory" data-role="tagsinput" required="required"/>
+                                                       name="medicalHistory" data-role="tagsinput" data-rule-required="true"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -311,7 +297,7 @@
                                             <div class="col-sm-6">
                                                 <input th:type="text" class="form-control"
                                                        placeholder="Clinical symptoms" name="symptoms"
-                                                       data-role="tagsinput" required="required"/>
+                                                       data-role="tagsinput" data-rule-required="true"/>
                                             </div>
                                         </div>
 
@@ -322,13 +308,13 @@
                                             <div class="col-sm-6">
                                                 <input th:type="text" class="form-control"
                                                        placeholder="Medicine history" name="medicineHistory"
-                                                       data-role="tagsinput" id="medicineHistory"/>
+                                                       data-role="tagsinput" id="medicineHistory" data-rule-required="true"/>
                                             </div>
                                         </div>
 
                                         <!-- footer -->
                                         <div style="margin: 15px;">
-                                            <a href="#tab_2" onclick="changeTab('#tab_2')" data-toggle="tab"
+                                            <a data-toggle="tab" onclick="changeTab('#tab_2', '#li_tab_2')"
                                                class="btn btn-default">Previous</a>
                                             <button type="submit" class="btn btn-primary pull-right">Register</button>
                                         </div>
@@ -365,7 +351,10 @@
     <!-- POPUP -->
     <!-- jQueryUI -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
 
+    <script type="text/javascript"
+            th:src="@{/static/bower/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js}"></script>
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
@@ -385,10 +374,10 @@
     <script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>
 
     <!-- Bootstrap validator-->
-    <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
+    <!--<script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>-->
 
-    <!-- script add -->
-    <script th:src="@{/static/js/bootstrap-validator-ext.js}"/>
+    <!--&lt;!&ndash; script add &ndash;&gt;-->
+    <!--<script th:src="@{/static/js/bootstrap-validator-ext.js}"/>-->
     <script th:src="@{/static/js/registerPatient.js}"/>
 
     <!-- css add -->

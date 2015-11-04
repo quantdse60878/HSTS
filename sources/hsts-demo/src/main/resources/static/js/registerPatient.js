@@ -16,10 +16,13 @@ $("#Birthday").datepicker({
     startDate: '1950-01-01',
     endDate: 'today'
 });
-function changeTab (a) {
-    console.log(a);
-    $('.nav-tabs > li.active').removeClass('active');
-    $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
+function changeTab (a, li) {
+    console.log("a: " + a);
+    console.log("li: " + li);
+    $('li.active').removeClass('active');
+    $(li).addClass('active');
+    $('.tab-pane.active').removeClass('active');
+    $(a).addClass('active');
 };
 
 $("#doctorSelect").select2({
@@ -119,6 +122,33 @@ $selectPatient.on("change", function (e) {
     };
 });
 
+var validator = $("#mainForm").validate({
+    ignore: []
+});
+
+
+function validateAndChangeTab(targetTab, targetLi) {
+    var valid = true;
+    var $fields = $('.tab-pane.active').find('input');
+    console.log($fields);
+    $fields.each (function() {
+        if (!validator.element(this) && valid) {
+            valid = false;
+        }
+    });
+
+    $fields = $('.tab-pane.active').find('select');
+    $fields.each (function() {
+        if (!validator.element(this) && valid) {
+            valid = false;
+        }
+    });
+    console.log("Valid: " + valid);
+    if (valid) {
+        changeTab(targetTab, targetLi);
+    }
+
+};
 
 $selectPatient.on("change", function (e) {
     var val = $selectPatient.val();
@@ -185,7 +215,7 @@ function popup(windowname) {
     window_pos(windowname);
     toggle('blanket');
     toggle(windowname);
-}
+};
 
 function blanket_size(popUpDivVar) {
     if (typeof window.innerWidth != 'undefined') {
