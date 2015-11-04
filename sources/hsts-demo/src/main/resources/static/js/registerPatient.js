@@ -509,3 +509,8 @@ function toggle(div_id) {
     }
 }
 
+$("#fileUploader").fileinput({
+    uploadUrl: "http://localhost/file-upload-single/1", // server upload action
+    uploadAsync: true,
+    maxFileCount: 5
+});
