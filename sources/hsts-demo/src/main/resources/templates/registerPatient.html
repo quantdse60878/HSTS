@@ -53,43 +53,33 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Name*</label>
 
-                                            <div class="col-sm-5">
-                                                <select id="patientName" th:name="patientName" th:width="0" data-rule-required="true">
+                                            <div class="col-sm-4">
+                                                <select id="patientName" th:name="patientName">
                                                     <option value="">Type patient name</option>
                                                 </select>
                                             </div>
+                                            <div class="col-sm-3 help-block with-errors" id = "invalidPatientName">
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="Birthday" class="col-sm-3 control-label">Birthday*</label>
+                                            <label for="birthday" class="col-sm-3 control-label">Birthday*</label>
 
                                             <div class="col-sm-3">
-                                                <input type="text" th:name="birthday" class="form-control" id="Birthday" data-rule-required="true"/>
-                                                <div class="help-block with-errors"></div>
+                                                <input type="text" th:name="birthday" class="form-control" id="birthday"/>
+                                            </div>
+                                            <div class="col-sm-3 help-block with-errors" id = "invalidBirthday">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="email" class="col-sm-3 control-label">Email*</label>
 
                                             <div class="col-sm-5">
-                                                <input type="text" id="email" th:name="email" class="form-control"
-                                                       data-rule-required="true" data-rule-email="true"/>
+                                                <input type="text" id="email" th:name="email" class="form-control"/>
                                             </div>
-                                            <div class="help-block with-errors"></div>
+                                            <div class="help-block with-errors" id = "invalidEmail"></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Male*</label>
-
-                                            <!--<div class="btn-group col-sm-3" data-toggle="buttons">-->
-                                                <!--<label class="btn btn-default active">-->
-                                                    <!--<input type="radio" name="gender" value="1" checked="" required="required"-->
-                                                           <!--data-error="Choose at least one gender"/>Male-->
-                                                <!--</label>-->
-
-                                                <!--<label class="btn btn-default">-->
-                                                    <!--<input type="radio" name="gender" value="2"/>Female-->
-                                                <!--</label>-->
-                                                <!--<div class="help-block with-errors"></div>-->
-                                            <!--</div>-->
                                             <div class="btn-group col-sm-1">
                                             <input type="checkbox" name="gender" value="1" checked="checked" id="gender"/>
                                             </div>
@@ -124,9 +114,10 @@
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="weight" class="form-control" id="Weight"
-                                                           placeholder="Kg" data-rule-required="true"/>
+                                                           placeholder="Kg"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidWeight">
+                                                    </div>
                                                 </td>
 
                                                 <td>
@@ -135,20 +126,20 @@
                                                 <td class="form-group">
                                                     <input type="text" th:name="visceralFat" class="form-control"
                                                            id="visceralFat"
-                                                           placeholder="level" data-rule-required="true"/>
+                                                           placeholder="level"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidVisceralFat"></div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="Height" class="control-label">Height*</label>
+                                                    <label for="height" class="control-label">Height*</label>
                                                 </td>
                                                 <td class="form-group">
-                                                    <input type="number" th:name="height" class="form-control" id="Height"
-                                                           placeholder="cm" data-rule-required="true"/>
+                                                    <input type="number" th:name="height" class="form-control" id="height"
+                                                           placeholder="cm" />
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidHeight"></div>
                                                 </td>
 
                                                 <td>
@@ -157,9 +148,9 @@
                                                 <td class="form-group">
                                                     <input type="text" th:name="muscleMass" class="form-control"
                                                            id="muscleMass"
-                                                           placeholder="%" data-rule-required="true"/>
+                                                           placeholder="%"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidMuscleMass"></div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -169,9 +160,9 @@
                                                 <td class="form-group">
                                                     <input type="number" th:name="heartBeat" class="form-control"
                                                            id="heartBeat"
-                                                           placeholder="times/minute" data-rule-required="true"/>
+                                                           placeholder="times/minute" />
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidHeartBeat"></div>
                                                 </td>
 
                                                 <td>
@@ -180,9 +171,9 @@
                                                 <td class="form-group">
                                                     <input type="text" th:name="bodyWater" class="form-control"
                                                            id="bodyWater"
-                                                           placeholder="%" data-rule-required="true"/>
+                                                           placeholder="%" />
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidBodyWater"></div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -192,9 +183,9 @@
                                                 <td class="form-group">
                                                     <input type="number" th:name="bloodPressure" class="form-control"
                                                            id="bloodPressure"
-                                                           placeholder="mmHg" data-rule-required="true"/>
+                                                           placeholder="mmHg" />
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id = "invalidBloodPressure"></div>
                                                 </td>
 
                                                 <td>
@@ -203,9 +194,9 @@
                                                 <td class="form-group">
                                                     <input type="text" th:name="phaseAngle" class="form-control"
                                                            id="phaseAngle"
-                                                           placeholder="o" data-rule-required="true"/>
+                                                           placeholder="o" />
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id = "invalidPhaseAngle"></div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -214,9 +205,9 @@
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="waists" class="form-control" id="waists"
-                                                           placeholder="cm" data-rule-required="true"/>
+                                                           placeholder="cm" />
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id = "invalidWaists"></div>
                                                 </td>
 
                                                 <td>
@@ -225,9 +216,9 @@
                                                 <td class="form-group">
                                                     <input type="number" th:name="impedance" class="form-control"
                                                            id="impedance"
-                                                           placeholder="Ohm" data-rule-required="true"/>
+                                                           placeholder="Ohm" />
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id = "invalidImpedance"></div>
                                                 </td>
                                             </tr>
 
@@ -238,9 +229,9 @@
                                                 <td class="form-group">
                                                     <input type="text" th:name="bodyFat" class="form-control"
                                                            id="bodyFat"
-                                                           placeholder="%" data-rule-required="true"/>
+                                                           placeholder="%" />
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id = "invalidBodyFat"></div>
                                                 </td>
 
                                                 <td>
@@ -250,10 +241,9 @@
                                                 <td>
                                                     <input type="number" th:name="basalMetabolicRate" class="form-control"
                                                            id="basalMetabolicRate"
-                                                           placeholder="Kcal"
-                                                           data-rule-required="true"/>
+                                                           placeholder="Kcal"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidBasalMetabolicRate"></div>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -273,32 +263,31 @@
                                             <label class="col-sm-3 control-label">Doctor*</label>
 
                                             <div class="col-sm-5">
-                                                <select id="doctorSelect" th:name="doctorId" th:width="0px" data-rule-required="true">
-                                                    <!--<option value="" th:disabled="disable">Select one...</option>-->
-                                                    <!--<option th:each="doctor : ${session.DOCTORS}"-->
-                                                            <!--th:value="${doctor.id}"-->
-                                                            <!--th:text="${doctor.account.fullName}"></option>-->
+                                                <select id="doctorSelect" th:name="doctorId" >
                                                 </select>
+
                                             </div>
+                                            <div class="help-block with-errors" id="invalidDoctorId"></div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="Medicalhistory" class="col-sm-3 control-label">Medical
+                                            <label for="medicalHistory" class="col-sm-3 control-label">Medical
                                                 history</label>
 
                                             <div class="col-sm-6">
                                                 <input th:type="text" class="form-control" placeholder="Medical history"
-                                                       name="medicalHistory" data-role="tagsinput" data-rule-required="true"/>
+                                                       th:name="medicalHistory" id="medicalHistory" data-role="tagsinput"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="clinicalSymptoms" class="col-sm-3 control-label">Clinical
+                                            <label for="symptoms" class="col-sm-3 control-label">Clinical
                                                 symptoms</label>
 
                                             <div class="col-sm-6">
                                                 <input th:type="text" class="form-control"
-                                                       placeholder="Clinical symptoms" name="symptoms"
-                                                       data-role="tagsinput" data-rule-required="true"/>
+                                                       placeholder="Clinical symptoms" th:name="symptoms" id = "symptoms"
+                                                       data-role="tagsinput"/>
                                             </div>
+                                            <div class="help-block with-errors" id="invalidSymptoms"></div>
                                         </div>
 
                                         <div class="form-group">
@@ -307,8 +296,8 @@
 
                                             <div class="col-sm-6">
                                                 <input th:type="text" class="form-control"
-                                                       placeholder="Medicine history" name="medicineHistory"
-                                                       data-role="tagsinput" id="medicineHistory" data-rule-required="true"/>
+                                                       placeholder="Medicine history" th:name="medicineHistory" data-role="tagsinput"
+                                                       id="medicineHistory" />
                                             </div>
                                         </div>
 
@@ -349,8 +338,10 @@
         <div layout:replace="_popupPatient"></div>
     </div>
     <!-- POPUP -->
-    <!-- jQueryUI -->
+    <!-- jQuery -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+
+    <!-- jquery validation -->
     <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
 
     <script type="text/javascript"

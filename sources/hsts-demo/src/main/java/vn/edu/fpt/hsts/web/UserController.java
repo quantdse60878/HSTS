@@ -65,16 +65,13 @@ public class UserController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "/validateEmail", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/validateEmail", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> validateEmail(@RequestParam("email") final String email) {
+    public boolean validateEmail(@RequestParam("email") final String email) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             final boolean result = accountService.validateEmail(email);
-            if(result) {
-                return new ResponseEntity<String>(HttpStatus.OK);
-            }
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            return result;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
