@@ -190,6 +190,18 @@ public class StaffController extends AbstractController {
         }
     }
 
+    @RequestMapping(value = "deviceName/listnamedevice", method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> findNames(){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            List<String> list = deviceService.getListNameOfDevice();
+            return list;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
     @RequestMapping(value = "createNewDevice", method = RequestMethod.POST)
     public ModelAndView openFormula(@RequestParam(value = "devices") final String devices,
                                     @RequestParam(value = "uuid") final String uuid) {
@@ -200,18 +212,6 @@ public class StaffController extends AbstractController {
         deviceService.createNewDevice(device);
         mav.setViewName("stafflistdevice");
         return mav;
-    }
-
-    @RequestMapping(value = "viewFomular", method = RequestMethod.GET)
-    public ModelAndView staffFomularPage() {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("staffFormula");
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
     }
 
     @RequestMapping(value = "viewDevices", method = RequestMethod.GET)

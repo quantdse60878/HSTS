@@ -18,27 +18,35 @@
         <td th:text="${row.count}"></td>
 
         <td style="min-width: 155px;" class="form-group">
-            <select class="form-control" th:field="*{pPresModels[__${row.index}__].p}" required="required" data-error="Choose at least one">
-                <option th:value="${practicePhase.practice.id}"
-                        th:text="${practicePhase.practice.name}"></option>
-                <option th:each="practice : ${PRACTICES}"
-                        th:value="${practice.id}"
-                        th:text="${practice.name}"
-                        th:if="${practicePhase.practice.id != practice.id}"></option>
-            </select>
+            <!--<select class="form-control" th:field="*{pPresModels[__${row.index}__].p}" required="required" data-error="Choose at least one">-->
+            <!--<option th:value="${practicePhase.practice.id}"-->
+            <!--th:text="${practicePhase.practice.name}"></option>-->
+            <!--<option th:each="practice : ${PRACTICES}"-->
+            <!--th:value="${practice.id}"-->
+            <!--th:text="${practice.name}"-->
+            <!--th:if="${practicePhase.practice.id != practice.id}"></option>-->
+            <!--</select>-->
+            <input type="text" class="form-control" th:name="pPresModels[__${row.index}__].p"
+                   th:id="pPresModelsP__${row.index}__"
+                   oninput="viewAutoCompleteP(this)"/>
+            <div th:id="pPresModelsP__${row.index}__item" class="form-control"
+                 style="visibility: hidden;height: auto;"></div>
             <div class="help-block with-errors"></div>
         </td>
         <td style="min-width: 120px;" class="form-group">
-            <select class="form-control" th:field="*{pPresModels[__${row.index}__].pTime}" required="required" data-error="Choose at least one">
+            <select class="form-control" th:field="*{pPresModels[__${row.index}__].pTime}" required="required"
+                    data-error="Choose at least one">
                 <option value="0" disabled="disabled">Select</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
+
             <div class="help-block with-errors"></div>
         </td>
         <td class="form-group">
             <input type="text" class="form-control" th:field="*{pPresModels[__${row.index}__].pIntensity}"
                    placeholder="Quantity" required="required" data-remote="/validateStr" data-error="Wrong input"/>
+
             <div class="help-block with-errors"></div>
         </td>
         <td>
@@ -52,6 +60,7 @@
 </table>
 <a style="width: 50px;color: white;" class="btn btn-primary"
    onclick="addRowPractice('Practice')">Add</a>
+
 <div class="form-group" style="margin-top: 15px;" th:if="${DATAPRACS != null}">
     <label class="col-md-3 control-label">Practice Data</label>
     <a class="btn btn-link" onclick="popup('praticeResult')">View Detail</a>
@@ -60,10 +69,12 @@
     <label class="col-md-3 control-label">Kcal Estimate</label>
 
     <div class="col-md-2">
-        <input th:field="*{kcalRequire}" style="text-align: right;" type="text" class="form-control hsts" data-remote="/validateData"
-                required="required" data-error="Wrong input"/>
+        <input th:field="*{kcalRequire}" style="text-align: right;" type="text" class="form-control hsts"
+               data-remote="/validateData"
+               required="required" data-error="Wrong input"/>
     </div>
     <label class="col-md-1 control-label">Kcal/Day</label>
+
     <div class="help-block with-errors"></div>
 </div>
 </body>

@@ -265,7 +265,7 @@ public class DoctorService extends AbstractService {
                         }
                         if (medicineModel.isValid()) {
                             LOGGER.info("Medicine valid");
-                            Medicine medicine = medicineRepo.findByName(medicineModel.getM());
+                            Medicine medicine = medicineRepo.findOne(Integer.parseInt(medicineModel.getM()));
                             if (null == medicine) {
                                 LOGGER.info("Medicine with id[{}] is not found", null, medicineModel.getM());
                                 // Create new medicine
@@ -304,7 +304,7 @@ public class DoctorService extends AbstractService {
                             foodTreatment.setFood(food);
                             foodTreatment.setTreatment(newTreatment);
                             foodTreatment.setNumberOfTime(foodModel.getfTime());
-                            foodTreatment.setQuantitative(Integer.parseInt(foodModel.getfQuantity()));
+                            foodTreatment.setQuantitative(foodModel.getfQuantity());
                             foodTreatment.setAdvice(foodModel.getfNote());
                             foodTreatmentRepo.save(foodTreatment);
                         }
@@ -320,10 +320,14 @@ public class DoctorService extends AbstractService {
 
                     for (PracticePrescriptionModel practiceModel : pPresModels) {
                         if (practiceModel.isValid()) {
-                            final Practice practice = practiceRepo.findOne(practiceModel.getP());
+                            Practice practice = practiceRepo.findByName(practiceModel.getP());
                             if (null == practice) {
                                 LOGGER.info("Practice with name[{}] is not found", null, practiceModel.getP());
-                                return false;
+                                // Create new practice
+                                practice = new Practice();
+                                practice.setName(practiceModel.getP());
+                                practiceRepo.saveAndFlush(practice);
+                                LOGGER.info("Create new practice", practice.getName());
                             }
                             PracticeTreatment practiceTreatment = new PracticeTreatment();
                             practiceTreatment.setTreatment(newTreatment);

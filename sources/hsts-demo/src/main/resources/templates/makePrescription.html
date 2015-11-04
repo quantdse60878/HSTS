@@ -407,8 +407,6 @@
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
-    <!-- makePrescription -->
-    <script th:src="@{/static/js/makePrescription.js}"></script>
 
     <!-- Bootstrap validator-->
     <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
@@ -416,9 +414,13 @@
 
     <script th:inline="javascript">
         listMedicine = [[${MEDICINES}]];
+        listPracticeName = [[${PRACTICENAMES}]];
     </script>
-
+    <!-- makePrescription -->
+    <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
+
+
         var countMedicine = $('#medics').val();
         var countM = countMedicine;
         function addRowMedicine(tableID) {
@@ -475,7 +477,7 @@
             newCell.innerHTML = ++countF;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" id="fPresModels' + countFoods + '.f" data-error="Choose at least one" required="required">'
+            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" onchange="findUnits(this)" id="fPresModels' + countFoods + '.f" data-error="Choose at least one" required="required">'
                     + '<option value="0">Select</option>'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
                     + '</select>'
@@ -490,7 +492,12 @@
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<input type="text" class="form-control" data-remote="/validateStr" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" required="required" data-error="Wrong input"/>'
+            newCell.innerHTML = '<input type="text" value="0" class="form-control" data-remote="/validateStr" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" required="required" data-error="Wrong input"/>'
+                    + '<div class="help-block with-errors"></div>';
+            newCell = newRow.insertCell(newRow.cells.length);
+            newCell.setAttribute("class", "form-group");
+            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].fUnit" id="fPresModels' + countFoods + 'fUnit" required="required" data-error="Choose at least one">'
+                    + '<option value="0">Select</option></select>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice"/>';
@@ -511,10 +518,9 @@
             newCell.innerHTML = ++countP;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModels' + countPractice + '.p" data-error="Choose at least one" required="required">'
-                    + '<option value="0">Select</option>'
-                    + '<option th:each="practice : ${PRACTICES}" th:value="${practice.id}" th:text="${practice.name}"></option>'
-                    + '</select>'
+            newCell.innerHTML =
+                    '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModelsP' + countPractice + '" oninput="viewAutoCompleteP(this)"/>'
+                    +'<div id="pPresModelsP' + countPractice + 'item" class="form-control" style="visibility: hidden;height: 100%;"></div>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");

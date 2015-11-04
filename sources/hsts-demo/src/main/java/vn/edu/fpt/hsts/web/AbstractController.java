@@ -80,7 +80,7 @@ public class AbstractController implements ControllerParam {
         try {
             LOGGER.info("mav[{}], appointment[{}], prescriptionModel[{}]", mav, appointment, prescriptionModel);
 
-            mav.addObject("MEDICS",  1);
+            mav.addObject("MEDICS", 1);
             mav.addObject("FOS", 1);
             mav.addObject("PRACS", 1);
 
@@ -106,6 +106,10 @@ public class AbstractController implements ControllerParam {
             //get practiceList
             List<Practice> practiceList = practiceService.getAllPractice();
             mav.addObject("PRACTICES", practiceList);
+
+            // Get practice name list
+            List<String> practiceNameList = practiceService.getAllPracticeName();
+            mav.addObject("PRACTICENAMES", practiceNameList);
 
             // Find PreventionCheck
             PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
