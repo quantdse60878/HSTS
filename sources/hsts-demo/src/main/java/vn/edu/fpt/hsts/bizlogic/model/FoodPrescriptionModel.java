@@ -19,7 +19,7 @@ public class FoodPrescriptionModel {
     /**
      * Food Unit
      */
-    private int fUnit;
+    private String fUnit;
     /**
      * Food Note
      */
@@ -28,11 +28,11 @@ public class FoodPrescriptionModel {
     public FoodPrescriptionModel() {
     }
 
-    public int getfUnit() {
+    public String getfUnit() {
         return fUnit;
     }
 
-    public void setfUnit(int fUnit) {
+    public void setfUnit(String fUnit) {
         this.fUnit = fUnit;
     }
 

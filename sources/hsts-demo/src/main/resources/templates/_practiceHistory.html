@@ -38,7 +38,7 @@
     <label class="col-md-3 control-label">Kcal Estimate</label>
 
     <div class="col-md-2">
-        <input readonly="readonly" style="text-align: right;" th:value="${TREATMENT.caloriesBurnEveryday}" type="text" class="form-control hsts" />
+        <input readonly="readonly" style="text-align: right;" th:value="${#numbers.formatDecimal(TREATMENT.caloriesBurnEveryday, 1, 'POINT', 1, 'COMMA')}" type="text" class="form-control hsts" />
     </div>
     <label class="col-md-1 control-label">Kcal/Day</label>
 </div>

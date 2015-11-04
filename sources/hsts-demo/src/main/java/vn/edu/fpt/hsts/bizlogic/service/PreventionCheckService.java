@@ -6,12 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.App;
+import vn.edu.fpt.hsts.bizlogic.model.FoodIngredientModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
+import vn.edu.fpt.hsts.persistence.entity.Food;
+import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
+import vn.edu.fpt.hsts.persistence.entity.UnitOfFood;
 import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
+import vn.edu.fpt.hsts.persistence.repo.FoodTreatmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.PreventionCheckRepo;
+import vn.edu.fpt.hsts.persistence.repo.UnitOfFoodRepo;
 
 import java.util.List;
 
@@ -36,6 +42,10 @@ public class PreventionCheckService {
      */
     @Autowired
     private AppointmentRepo appointmentRepo;
+
+
+
+
 
     public PreventionCheck findLastPreventionCheckFromAppointment(final Appointment appointment){
         LOGGER.info(IConsts.BEGIN_METHOD);

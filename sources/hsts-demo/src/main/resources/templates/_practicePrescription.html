@@ -21,7 +21,7 @@
                 <!--<option th:each="practice : ${PRACTICES}" th:value="${practice.id}"-->
                         <!--th:text="${practice.name}"></option>-->
             <!--</select>-->
-            <input type="text" class="form-control" name="pPresModels[0].p" id="pPresModelsP0" oninput="viewAutoComplete('pPresModelsP0','pPresModelsP0item')"/>
+            <input type="text" placeholder="Practice Name" class="form-control" name="pPresModels[0].p" id="pPresModelsP0" oninput="viewAutoComplete('pPresModelsP0','pPresModelsP0item')"/>
             <div id="pPresModelsP0item" class="form-control" style="visibility: hidden;height: auto;"></div>
             <div class="help-block with-errors"></div>
         </td>
@@ -57,7 +57,7 @@
 <div class="form-group">
     <label class="col-md-3 control-label">Kcal Estimate</label>
     <div class="col-md-2">
-        <input th:field="*{kcalRequire}" style="text-align: right;" type="text" class="form-control hsts" data-remote="/validateData" required="required" data-error="Wrong input"/>
+        <input th:name="kcalRequire" th:value="${#numbers.formatDecimal(model.kcalRequire, 1, 'POINT', 1, 'COMMA')}" style="text-align: right;" type="text" class="form-control hsts" data-remote="/validateData" required="required" data-error="Wrong input"/>
     </div>
     <label class="col-md-1 control-label">Kcal/Day</label>
     <div class="help-block with-errors"></div>

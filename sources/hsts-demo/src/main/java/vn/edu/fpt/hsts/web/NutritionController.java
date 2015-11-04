@@ -69,11 +69,13 @@ public class NutritionController extends AbstractController{
             mav.setViewName("nutrition");
             Patient patient = patientService.getPatientByID(patientID);
             mav.addObject("PATIENT", patient);
-            mav.addObject("model", new FoodIngredientModel());
 
             // Find Appointment
             Appointment appointment = appointmentService.findEntryAppointmentByPatientId(patientID);
             mav.addObject("APPOINTMENT", appointment);
+
+            FoodIngredientModel foodIngredientModel = foodIngredientService.createFoodIngredientModelFromData(appointment);
+            mav.addObject("model", foodIngredientModel);
 
             // Find PreventionCheck
             PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
