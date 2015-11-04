@@ -11,15 +11,18 @@ $("#gender").iCheck({
     radioClass: 'iradio_flat-red'
 });
 
-$("#Birthday").datepicker({
+$("#birthday").datepicker({
     format: 'dd-mm-yyyy',
     startDate: '1950-01-01',
     endDate: 'today'
 });
-function changeTab (a) {
-    console.log(a);
-    $('.nav-tabs > li.active').removeClass('active');
-    $('.nav-tabs > li > a[href="' + a + '"]').parent().addClass('active');
+function changeTab (a, li) {
+    console.log("a: " + a);
+    console.log("li: " + li);
+    $('li.active').removeClass('active');
+    $(li).addClass('active');
+    $('.tab-pane.active').removeClass('active');
+    $(a).addClass('active');
 };
 
 $("#doctorSelect").select2({
@@ -119,6 +122,247 @@ $selectPatient.on("change", function (e) {
     };
 });
 
+// Validator
+var validator = $("#mainForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        patientName: {
+            required: true
+        },
+        birthday: {
+            required: true
+        },
+        // compound rule
+        email: {
+            required: true,
+            email: true,
+            remote: {
+                // Explicit
+                url: "/validateEmail",
+                type: "POST",
+                data: {
+                    email: function() {
+                        return $( "#email" ).val();
+                    }
+                }
+            }
+        },
+        weight: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        visceralFat: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        height: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        muscleMass: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        heartBeat: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        bodyWater: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        bloodPressure: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        phaseAngle: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        waists: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        impedance: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        bodyFat: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        basalMetabolicRate: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
+        },
+        doctorId: {
+            required: true
+        },
+        symptoms: {
+            required: true
+        }
+    },
+    messages: {
+        //patientName: {
+        //    maxlenght: "Name is too long, please modify it"
+        //},
+        birthday: "Please input valid birthday",
+        email: {
+            email: "This email is invalid format",
+            remote: "This email is already use"
+        },
+        weight: {
+            remote: "Invalid weight out of range, please fix"
+        },
+        visceralFat: {
+            remote: "Invalid visceral fat out of range, please fix"
+        },
+        height: {
+            remote: "Invalid height out of range, please fix"
+        },
+        muscleMass: {
+            remote: "Invalid muscleMass out of range, please fix"
+        },
+        heartBeat: {
+            remote: "Invalid heartBeat out of range, please fix"
+        },
+        bodyWater: {
+            remote: "Invalid bodyWater out of range, please fix"
+        },
+        bloodPressure: {
+            remote: "Invalid bloodPressure out of range, please fix"
+        },
+        phaseAngle: {
+            remote: "Invalid phaseAngle out of range, please fix"
+        },
+        waists: {
+            remote: "Invalid waists out of range, please fix"
+        },
+        impedance: {
+            remote: "Invalid impedance out of range, please fix"
+        },
+        bodyFat: {
+            remote: "Invalid bodyFat out of range, please fix"
+        },
+        basalMetabolicRate: {
+            remote: "Invalid bodyFat out of range, please fix"
+        },
+        doctorId: {
+            required: "Please choose at least one doctor"
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "patientName"){
+            error.appendTo($('#invalidPatientName'));
+        }  else if (element.attr("name") == "birthday") {
+            error.appendTo($('#invalidBirthday'));
+        } else if (element.attr("name") == "email") {
+            error.appendTo($('#invalidEmail'));
+        } else if (element.attr("name") == "weight") {
+            error.appendTo($('#invalidWeight'));
+        } else if (element.attr("name") == "visceralFat") {
+            error.appendTo($('#invalidVisceralFat'));
+        } else if (element.attr("name") == "height") {
+            error.appendTo($('#invalidHeight'));
+        } else if (element.attr("name") == "muscleMass") {
+            error.appendTo($('#invalidMuscleMass'));
+        } else if (element.attr("name") == "heartBeat") {
+            error.appendTo($('#invalidHeartBeat'));
+        } else if (element.attr("name") == "bodyWater") {
+            error.appendTo($('#invalidBodyWater'));
+        } else if (element.attr("name") == "bloodPressure") {
+            error.appendTo($('#invalidBloodPressure'));
+        } else if (element.attr("name") == "phaseAngle") {
+            error.appendTo($('#invalidPhaseAngle'));
+        } else if (element.attr("name") == "phaseAngle") {
+            error.appendTo($('#invalidPhaseAngle'));
+        } else if (element.attr("name") == "waists") {
+            error.appendTo($('#invalidWaists'));
+        } else if (element.attr("name") == "impedance") {
+            error.appendTo($('#invalidImpedance'));
+        } else if (element.attr("name") == "bodyFat") {
+            error.appendTo($('#invalidBodyFat'));
+        } else if (element.attr("name") == "basalMetabolicRate") {
+            error.appendTo($('#invalidBasalMetabolicRate'));
+        } else if (element.attr("name") == "doctorId") {
+            error.appendTo($('#invalidDoctorId'));
+        } else if (element.attr("name") == "doctorId") {
+            error.appendTo($('#invalidDoctorId'));
+        } else if (element.attr("name") == "symptoms") {
+            error.appendTo($('#invalidSymptoms'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function(form) {
+    form.submit();
+}
+});
+
+
+function validateAndChangeTab(targetTab, targetLi) {
+    var valid = true;
+    var $fields = $('.tab-pane.active').find('input');
+    console.log($fields);
+    $fields.each (function() {
+        if (!validator.element(this) && valid) {
+            valid = false;
+        }
+    });
+
+    $fields = $('.tab-pane.active').find('select');
+    $fields.each (function() {
+        if (!validator.element(this) && valid) {
+            valid = false;
+        }
+    });
+    console.log("Valid: " + valid);
+    if (valid) {
+        changeTab(targetTab, targetLi);
+    }
+
+};
 
 $selectPatient.on("change", function (e) {
     var val = $selectPatient.val();
@@ -185,7 +429,7 @@ function popup(windowname) {
     window_pos(windowname);
     toggle('blanket');
     toggle(windowname);
-}
+};
 
 function blanket_size(popUpDivVar) {
     if (typeof window.innerWidth != 'undefined') {

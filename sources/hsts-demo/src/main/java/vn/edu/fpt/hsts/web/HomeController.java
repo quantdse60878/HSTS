@@ -95,31 +95,25 @@ public class HomeController {
         }
     }
 
-    @RequestMapping(value = "/validateData", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/validateData", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> validateData(final HttpServletRequest request) {
+    public boolean validateData(final HttpServletRequest request) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             final boolean result = dataValidationService.validateRequestParam(request);
-            if (result) {
-                return new ResponseEntity<String>(HttpStatus.OK);
-            }
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            return result;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
 
-    @RequestMapping(value = "/validateStr", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/validateStr", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> validateString(final HttpServletRequest request) {
+    public boolean validateString(final HttpServletRequest request) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             final boolean result = dataValidationService.validateRequestString(request);
-            if (result) {
-                return new ResponseEntity<String>(HttpStatus.OK);
-            }
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            return result;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
