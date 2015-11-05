@@ -29,6 +29,7 @@ import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
+import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
@@ -53,9 +54,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by QUYHKSE61160 on 10/7/15.
@@ -700,6 +704,57 @@ public class PatientService extends AbstractService {
                 LOGGER.error("Error while uploading new file[{}]", file.getOriginalFilename());
                 return new FileUploadModel(false);
             }
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public String getOldMedicalHistory(final int patientId){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final List<String> medicalHistories = medicalRecordRepo.findMedicalHistoryByPatientId(patientId);
+            if (!CollectionUtils.isEmpty(medicalHistories)) {
+                final Set<String> dataSet = new HashSet<String>();
+                for (String m: medicalHistories) {
+                    final List<String> spliters = Arrays.asList(m.split(","));
+                    dataSet.addAll(spliters);
+                }
+
+                // return
+                final StringBuilder sb = new StringBuilder();
+                for(String str: dataSet) {
+                    if (StringUtils.isNotEmpty(str)) {
+                       sb.append(str).append(",");
+                    }
+                }
+                return sb.toString();
+            }
+            return "";
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public String getOldSymtoms(final int patientId){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final PageRequest pageRequest = new PageRequest(0, 1);
+            final List<MedicalRecord> medicalRecordList = medicalRecordRepo.findByPatientId(patientId, pageRequest);
+            if (!CollectionUtils.isEmpty(medicalRecordList)) {
+                final Illness illness = medicalRecordList.get(0).getIllness();
+                if (null != illness) {
+                    String result = illness.getName();
+                    if (StringUtils.isNotEmpty(illness.getDescription())) {
+                        result = illness.getDescription();
+                    }
+                    return result;
+                }
+            }
+            return "";
+        } catch (Exception e) {
+            return "";
+        } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }

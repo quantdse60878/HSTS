@@ -333,6 +333,14 @@ public class NurseController extends AbstractController {
             LOGGER.info("OLD: {}", oldMedicine);
             mav.addObject("OLDMEDICINE", oldMedicine);
 
+            // Find old medical history
+            final String oldMedical = patientService.getOldMedicalHistory(patientId);
+            mav.addObject("OLDMEDICAL", oldMedical);
+
+            // Find old symptom
+            final String oldSymptom = patientService.getOldSymtoms(patientId);
+            mav.addObject("OLDSYMPTOMS", oldSymptom);
+
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

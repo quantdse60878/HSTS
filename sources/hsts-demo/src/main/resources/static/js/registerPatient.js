@@ -516,6 +516,11 @@ var medicalTagInput = $('#medicalHistory');
 var symptomsTagInput = $('#symptoms');
 var medicineHistoryTagInput = $('#medicineHistory');
 
+// Add tag for symptoms
+symptomsTagInput.tagsinput('add', 'NEW MEDICAL RECORD');
+
+
+// Upload file function
 var fileUploader = $("#fileUploader").fileinput({
     uploadUrl: "/uploadImage", // server upload action
     uploadAsync: true,

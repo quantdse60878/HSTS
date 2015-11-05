@@ -6,7 +6,7 @@
  * Date: 10/28/2015.
  */
 
-$("#isNewMedicalRecord").iCheck({
+var newMRCheck = $("#isNewMedicalRecord").iCheck({
     checkboxClass: 'icheckbox_flat-blue',
     radioClass: 'iradio_flat-blue'
 });
@@ -267,3 +267,54 @@ function validateAndChangeTab(targetTab, targetLi) {
         changeTab(targetTab, targetLi);
     }
 };
+
+// Init tag input for medical history, medicine history and symtoms
+var medicalTagInput = $('#medicalHistory');
+var symptomsTagInput = $('#symptoms');
+var medicineHistoryTagInput = $('#medicineHistory');
+
+// Add tag for symptoms
+symptomsTagInput.tagsinput('add', 'RE-EXAMINATE');
+
+
+// Upload file function
+var fileUploader = $("#fileUploader").fileinput({
+    uploadUrl: "/uploadImage", // server upload action
+    uploadAsync: true,
+    maxFileCount: 5,
+    allowedFileTypes: ['image'],
+    allowedFileExtensions: ['jpg', 'gif', 'png'],
+    maxFileSize: 5170 // 5 MB
+});
+
+fileUploader.on('fileuploaded', function(event, data, previewId, index) {
+    var response = data.response;
+    console.log('File uploaded triggered: ' + response.result);
+    console.log('File uploaded triggered: ' + response.fileName);
+    // Add to tag input
+    medicalTagInput.tagsinput('add', response.fileName + "");
+});
+
+fileUploader.on('filebatchuploadcomplete', function(event, data, previewId, index) {
+    console.log('File batch upload successfully');
+    fileUploader.fileinput('refresh');
+    $('#uploadModal').modal('hide');
+});
+
+newMRCheck.on('ifChecked', function(event){
+    console.log("test1");
+    // Remove Re-exam tag
+    symptomsTagInput.tagsinput('remove', 'RE-EXAMINATE');
+    // Add New medical record tag
+    symptomsTagInput.tagsinput('add', 'NEW MEDICAL RECORD');
+
+});
+
+newMRCheck.on('ifUnchecked', function(event){
+    console.log("test2");
+    // Add Re-exam tag
+    symptomsTagInput.tagsinput('add', 'RE-EXAMINATE');
+    // Remove New medical record tag
+    symptomsTagInput.tagsinput('remove', 'NEW MEDICAL RECORD');
+
+});

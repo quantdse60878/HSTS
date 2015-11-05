@@ -265,8 +265,8 @@
                                                 <input th:type="text" class="form-control" placeholder="Medical history"
                                                        th:name="medicalHistory" id="medicalHistory" data-role="tagsinput"/>
                                             </div>
-                                            <div class="col-sim-2">
-                                                <a href="#uploadModal" data-toggle="modal" data-target="#uploadModal" class="btn btn-info">Upload medical history image</a>
+                                            <div class="col-sm-2">
+                                                <a href="#uploadModal" data-toggle="modal" data-target="#uploadModal" class="btn btn-info">Upload images</a>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -317,12 +317,14 @@
                         <!-- Modal -->
 
                     </form>
+
+                    <!-- upload file pop up-->
                     <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="uploadModalLabel">Upload medical history image</h4>
+                                    <h4 class="modal-title" id="uploadModalLabel">Upload images</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div>
@@ -335,6 +337,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- .upload file pop up-->
                 </div>
                 <!-- /.box -->
             </div>

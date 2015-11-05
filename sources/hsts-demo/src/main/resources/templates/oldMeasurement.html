@@ -44,7 +44,7 @@
                                             <a href="#tab_2" data-toggle="tab" onclick="changeTab('#tab_2', '#li_tab_2')">Medical Checking</a>
                                         </li>
                                         <li id="li_tab_3">
-                                            <a href="tab_3" data-toggle="tab" onclick="changeTab('#tab_3', '#li_tab_3')">Medical registration</a>
+                                            <a href="#tab_3" data-toggle="tab" onclick="changeTab('#tab_3', '#li_tab_3')">Medical registration</a>
                                         </li>
                                     </ul>
                                     <!-- End tab header -->
@@ -259,8 +259,8 @@
                                                 <div class="col-sm-5">
                                                     <select id="doctorSelect" th:name="doctorId" >
                                                     </select>
-                                                    <div class="help-block with-errors"></div>
                                                 </div>
+                                                <div class="help-block with-errors" id="invalidDoctorId"></div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="isNewMedicalRecord" class="col-sm-3 control-label">New Medical Record</label>
@@ -271,21 +271,25 @@
                                             <div class="form-group">
                                                 <label for="Medicalhistory" class="col-sm-3 control-label">Medical history</label>
 
-                                                <div class="col-sm-6">
-                                                    <input th:type="text" class="form-control" placeholder="Medical history" name="medicalHistory" rows="3" data-role="tagsinput"></input>
+                                                <div class="col-sm-5">
+                                                    <input th:type="text" class="form-control" placeholder="Medical history" name="medicalHistory" rows="3" data-role="tagsinput" th:value="*{OLDMEDICAL}" id="medicalHistory"></input>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <a href="#uploadModal" data-toggle="modal" data-target="#uploadModal" class="btn btn-info">Upload medical history image</a>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="clinicalSymptoms" class="col-sm-3 control-label">Clinical symptoms</label>
 
-                                                <div class="col-sm-6">
-                                                    <input th:type="text" class="form-control" placeholder="Clinical symptoms" name="symptoms" rows="3" data-role="tagsinput"></input>
+                                                <div class="col-sm-5">
+                                                    <input th:type="text" class="form-control" placeholder="Clinical symptoms" name="symptoms" rows="3" data-role="tagsinput" th:value="*{OLDSYMPTOMS}" id="symptoms"></input>
                                                 </div>
+                                                <div class="help-block with-errors" id="invalidSymptoms"></div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="medicineHistory" class="col-sm-3 control-label">Medcine history</label>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-5">
                                                     <input th:type="text" class="form-control" placeholder="Medicine history" name="medicineHistory" rows="3" data-role="tagsinput" id="medicineHistory" th:value="*{OLDMEDICINE}"></input>
                                                 </div>
                                             </div>
@@ -312,6 +316,27 @@
                             </div>
                             <!-- /.box-footer -->
                         </form>
+
+                        <!-- upload file pop up-->
+                        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="uploadModalLabel">Upload medical history image</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div>
+                                            <input id="fileUploader" name="fileUploader" type="file" multiple="multiple" class="file-loading"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- . upload file pop up-->
                     </div>
                     <!-- /.box -->
                 </div>
@@ -342,11 +367,9 @@
     <link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>
 
-    <!-- Bootstrap validator-->
-    <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
-
-    <!-- script add -->
-    <script th:src="@{/static/js/bootstrap-validator-ext.js}"/>
+    <!-- Bootstrap file input-->
+    <link th:href="@{/static/bower/bootstrap-fileinput/css/fileinput.min.css}" rel="stylesheet"/>
+    <script th:src="@{/static/bower/bootstrap-fileinput/js/fileinput.min.js}"/>
 
     <script th:src="@{/static/js/updatePatient.js}"/>
 
