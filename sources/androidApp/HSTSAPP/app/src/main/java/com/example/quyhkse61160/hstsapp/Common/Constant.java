@@ -31,8 +31,8 @@ public class Constant {
     public static final String PREF_DATA = "HSTSAPPDATA";
     public static final String PREF_PATIENT_NAME = "HSTSAPPPREFPATIENTNAME";
 
-    public static String accountId = "0";
-    public static String patientId = "0";
+    public static String accountId = "13";
+    public static String patientId = "9";
     public static String username = "";
     public static String numberOfStep = "2000";
     public static int position = -1;
@@ -54,7 +54,7 @@ public class Constant {
     public static String FOOD_FROM_JSON = "listFoodTreatment";
     public static String MEDICINE_FROM_JSON = "listMedicineTreatment";
     public static String PRACTICE_FROM_JSON = "listPracticeTreatment";
-    public static String PATIENT_NAME = "";
+    public static String PATIENT_NAME = "Trần Đăng Quân";
 
 
     public static List<Treatment> getItems() {

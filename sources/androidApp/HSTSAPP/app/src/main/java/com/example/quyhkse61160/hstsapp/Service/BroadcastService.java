@@ -76,7 +76,7 @@ public class BroadcastService extends Service {
     @Override
     public void onStart(Intent intent, int startId) {
         handlerThread.removeCallbacks(sendUpdateToUI);
-        handlerThread.postDelayed(sendUpdateToUI, 1000);
+        handlerThread.postDelayed(sendUpdateToUI, 10);
     }
 
     private Runnable sendUpdateToUI = new Runnable() {
@@ -253,7 +253,7 @@ public class BroadcastService extends Service {
         intent.putExtra("counter", String.valueOf(++counter));
 
         String stringURL = Constant.hostURL + Constant.checkNotifyMethod;
-        Log.d("QUYYYY1111", "Login url: " + stringURL);
+        Log.d("QUYYYY1111", "Login url: " + stringURL + "----ReceiverId: " + Constant.accountId);
         Calendar c = Calendar.getInstance();
         try {
             URL url = new URL(stringURL);

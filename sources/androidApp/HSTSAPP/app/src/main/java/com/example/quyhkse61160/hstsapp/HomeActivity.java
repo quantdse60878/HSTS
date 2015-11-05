@@ -118,6 +118,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter dadapter;
     public static boolean hasNotify = false;
+    public static boolean hasRunBroadcastService = false;
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -230,12 +231,13 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home2);
+        Log.e("QUYYY11", "00HomeActivity - RegisterReceiver: " + hadRegisterReceiver);
         if(!hadRegisterReceiver) {
             hadRegisterReceiver = true;
             registerReceiver(mConnectionDetector, mIntentFilter);
         }
         SendBrandAsyncTask sendBrandAsyncTask = new SendBrandAsyncTask();
-        sendBrandAsyncTask.execute();
+//        sendBrandAsyncTask.execute();
         Constant.TREATMENTS = Constant.getItems();
 
 
@@ -308,17 +310,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
         mTitle = mDrawerTitle = getTitle();
 
         // load slide menu items
@@ -354,14 +345,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-//                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-//                    item.setNotify(false);
                     updateView(position);
                     displayView(0);
                 }
                 if (position == 1) {
-//                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-//                    item.setNotify(false);
                     updateView(position);
                     displayView(1);
                 }
@@ -372,10 +359,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         actionBar = getSupportActionBar();
 
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
-//        if(hasFood || hasMedicine || hasPractice) actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer_red);
-//        else {
-//            actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
-//        }
         actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -387,14 +370,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         ){
             public void onDrawerClosed(View view) {
                 actionBar.setTitle(mTitle);
-                // calling onPrepareOptionsMenu() to show action bar icons
-//                invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
                 actionBar.setTitle(mDrawerTitle);
-                // calling onPrepareOptionsMenu() to hide action bar icons
-//                invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -405,30 +384,18 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             else displayView(0);
         }
 
-        checkNotifyIntent = new Intent(this, BroadcastService.class);
+        if(!hasRunBroadcastService){
+            hasRunBroadcastService = true;
+            checkNotifyIntent = new Intent(this, BroadcastService.class);
+            startService(checkNotifyIntent);
+        }
         //KhuongMH
 
-
-
-        startService(checkNotifyIntent);
-//        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
-        final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-        if (mBluetoothLeService != null) {
-            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
-            Log.d(TAG, "Connect request result=" + result);
-        }
 
         //Set Alarm
         amountTime = amountTime();
 
-//        startService(checkNotifyIntent);
-//        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
+
 //        final Intent intent = getIntent();
 //        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
 //        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
@@ -440,9 +407,10 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 //            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
 //            Log.d(TAG, "Connect request result=" + result);
 //        }
-        Context context = getApplicationContext();
-        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
-        context.startService(notifyIntent);
+//
+//        Context context = getApplicationContext();
+//        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
+//        context.startService(notifyIntent);
     }
 
     @Override
@@ -669,6 +637,4 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             e.printStackTrace();
         }
     }
-
-
 }

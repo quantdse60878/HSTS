@@ -59,8 +59,6 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
 public class LoginActivity extends ActionBarActivity {
 
     public static AssetManager am;
-    public static boolean hadRegisterReceiver = false;
-    protected final NetworkChangeReceiver mConnectionDetector = new NetworkChangeReceiver();
     protected final IntentFilter mIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
     public SharedPreferences sharedPreferences;
 
@@ -68,7 +66,6 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //KhuongMH
         Constant.DATA_FROM_SERVER = HSTSUtils.loadData(getAssets());
         //KhuongMH
@@ -85,8 +82,8 @@ public class LoginActivity extends ActionBarActivity {
                 Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
                 LoginActivity.this.startActivity(myIntent);
             } else {
-                Intent myIntent = new Intent(LoginActivity.this, SelectDeviceActivity.class);
-                LoginActivity.this.startActivity(myIntent);
+//                Intent myIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+//                LoginActivity.this.startActivity(myIntent);
             }
         } else {
             ActionBar actionBar = getSupportActionBar();
@@ -103,9 +100,11 @@ public class LoginActivity extends ActionBarActivity {
                 public void onClick(View v) {
 
                     if(txtUsername.getText().toString().equals("258456") && txtPassword.getText().toString().equals("258456")) {
-                        Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+//                        Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+                        Intent continueIntent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(continueIntent);
-                    }else if (txtUsername.getText().length() > 0 && txtPassword.getText().length() > 0) {
+                        finish();
+                    } else if (txtUsername.getText().length() > 0 && txtPassword.getText().length() > 0) {
 
                         LoginAsyncTask login = new LoginAsyncTask();
                         login.execute(txtUsername.getText().toString(), txtPassword.getText().toString());
@@ -261,11 +260,6 @@ public class LoginActivity extends ActionBarActivity {
                 editor.putString(Constant.PREF_PATIENTID_HADLOGIN,Constant.patientId);
                 editor.putString(Constant.PREF_PATIENT_NAME,Constant.PATIENT_NAME);
                 editor.commit();
-
-                if (!HomeActivity.hadRegisterReceiver) {
-                    HomeActivity.hadRegisterReceiver = true;
-                    registerReceiver(mConnectionDetector, mIntentFilter);
-                }
 
                 Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
                 startActivity(continueIntent);
