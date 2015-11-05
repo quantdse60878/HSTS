@@ -435,7 +435,7 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("style", "min-width: 75px;");
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime" data-error="Choose at least one" required="required">'
+            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime" data-rule-min="1" data-msg-min="Please select." >'
                     + '<option value="0" >Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>'
@@ -444,12 +444,12 @@
             newCell.setAttribute("class", "form-group");
             newCell.setAttribute("style", "width: 120px;");
             newCell.innerHTML =
-                    '<input type="text" value="1" class="form-control" style="text-align: right;" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quantity" data-remote="/validateData" required="required" data-error="Wrong input"/>'
+                    '<input type="text" value="1" class="form-control" style="text-align: right;" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quantity" data-rule-range="0,10" data-msg-range="Out of range 0-10"/>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.setAttribute("style", "width: 120px;");
-            newCell.innerHTML = '<input type="text" class="form-control" data-remote="/validateStr" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit" required="required" data-error="Wrong input"/>'
+            newCell.innerHTML = '<input type="text" class="form-control" data-remote="/validateStr" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit" data-rule-required="true" data-msg-required="Please input." onload="addValidate(this)"/>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =

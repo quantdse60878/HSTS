@@ -19,6 +19,7 @@ var validator = $("#mainForm").validate({
     invalidHandler: function(e, validator) {
         if (validator.errorList.length > 0) {
             console.log("Change to first tab has error");
+            console.log(validator.errorList);
             var targetTab = jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id');
             changeTab('#' + targetTab, '#li_' + targetTab);
             console.log("end change");
@@ -676,4 +677,9 @@ function setMedicineUnit(ev) {
             unitInput.value = b.unit;
         }
     }
+}
+
+function addValidate(element) {
+    validator.validate();
+    $(element).rules("add", "required");
 }
