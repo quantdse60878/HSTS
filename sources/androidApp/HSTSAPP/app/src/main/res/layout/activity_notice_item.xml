@@ -4,12 +4,12 @@
     android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
         android:text="Paracitamon 500mg"
         android:id="@+id/notice_item_hour"
         android:textSize="14dp"
-        android:paddingTop="18dp"
+        android:paddingTop="5dp"
         android:paddingRight="10dp"
         android:textColor="@android:color/black"/>
     <!--<TextView-->
@@ -30,6 +30,6 @@
         android:text="1"
         android:id="@+id/notice_item_quantity"
         android:textSize="14dp"
-        android:paddingBottom="15dp"
+        android:paddingBottom="10dp"
         android:textColor="@android:color/black"/>
 </LinearLayout>

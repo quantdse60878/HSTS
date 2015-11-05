@@ -4,284 +4,279 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
 <!-- Nutritional -->
-<div id="Nutritional" style="display:none;">
-    <!-- box -->
-    <div class="box box-success box-solid">
-        <div class="box-header with-border">
-            <h3 class="box-title">Nutritional</h3>
-
-            <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" onclick="popup('Nutritional')">
-                    <i class="fa fa-times"></i></button>
+<!-- Modal -->
+<div class="modal fade" id="myModalNutritional" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nutritional</h4>
             </div>
-            <!-- /.box-tools -->
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body" th:object="${FOODINGREDIENT}" style="overflow: auto;height: 600px;">
-            <h4>Meal Assessment</h4>
+                <div class="modal-body" th:object="${FOODINGREDIENT}" style="overflow: auto;height: 550px;">
+                    <h4>Meal Assessment</h4>
 
-            <div style="margin: auto;">
-                <table id="rateEnergyMeals" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Rate Energy Meals</th>
-                        <th style="width: 150px;">Energy</th>
-                        <th style="width: 150px;">Percent</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <label class="control-label">Breakfast</label>
-                        </td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.breakfast, 1, 'POINT', 1, 'COMMA')}" type="text" class="form-control" readonly="readonly"/>
-                        </td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.breakfastPercent, 1, 'POINT', 1, 'COMMA')}"
-                                   type="text" class="form-control" readonly="readonly"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">BreakTime Morning</label>
-                        </td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.breakTimeMorning, 1, 'POINT', 1, 'COMMA')}" type="text" class="form-control"
-                                   readonly="readonly"/>
-                        </td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.breakTimeMorningPercent, 1, 'POINT', 1, 'COMMA')}"
-                                   type="text" class="form-control" readonly="readonly"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Lunch</label>
-                        </td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.lunch, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Lunch"/>
-                        </td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.lunchPercent, 1, 'POINT', 1, 'COMMA')}"
-                                   type="text" class="form-control" readonly="readonly"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">BreakTime Afternoon</label></td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.breakTimeAfternoon, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text"
-                                   class="form-control" placeholder="BreakTime Afternoon"/>
-                        </td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.breakTimeAfternoonPercent, 1, 'POINT', 1, 'COMMA')}"
-                                   type="text" class="form-control" readonly="readonly"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">Dinner</label></td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.dinner, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Dinner"/>
-                        </td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.dinnerPercent, 1, 'POINT', 1, 'COMMA')}"
-                                   type="text" class="form-control" readonly="readonly"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">Eat Late At Night</label></td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.eatLateAtNight, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Eat Late At Night"/>
-                        </td>
-                        <td>
-                            <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.eatLateAtNightPercent, 1, 'POINT', 1, 'COMMA')}"
-                                   type="text" class="form-control" readonly="readonly"/>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <h4>Nutritional Assessment</h4>
+                    <div style="margin: auto;">
+                        <table id="rateEnergyMeals" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Rate Energy Meals</th>
+                                <th style="width: 150px;">Energy</th>
+                                <th style="width: 150px;">Percent</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Breakfast</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.breakfast, 1, 'POINT', 1, 'COMMA')}" type="text" class="form-control" readonly="readonly"/>
+                                </td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.breakfastPercent, 1, 'POINT', 1, 'COMMA')}"
+                                           type="text" class="form-control" readonly="readonly"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">BreakTime Morning</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.breakTimeMorning, 1, 'POINT', 1, 'COMMA')}" type="text" class="form-control"
+                                           readonly="readonly"/>
+                                </td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.breakTimeMorningPercent, 1, 'POINT', 1, 'COMMA')}"
+                                           type="text" class="form-control" readonly="readonly"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Lunch</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.lunch, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Lunch"/>
+                                </td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.lunchPercent, 1, 'POINT', 1, 'COMMA')}"
+                                           type="text" class="form-control" readonly="readonly"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">BreakTime Afternoon</label></td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.breakTimeAfternoon, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text"
+                                           class="form-control" placeholder="BreakTime Afternoon"/>
+                                </td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.breakTimeAfternoonPercent, 1, 'POINT', 1, 'COMMA')}"
+                                           type="text" class="form-control" readonly="readonly"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Dinner</label></td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.dinner, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Dinner"/>
+                                </td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.dinnerPercent, 1, 'POINT', 1, 'COMMA')}"
+                                           type="text" class="form-control" readonly="readonly"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Eat Late At Night</label></td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.eatLateAtNight, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Eat Late At Night"/>
+                                </td>
+                                <td>
+                                    <input style="text-align: center;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.eatLateAtNightPercent, 1, 'POINT', 1, 'COMMA')}"
+                                           type="text" class="form-control" readonly="readonly"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h4>Nutritional Assessment</h4>
 
-            <div style="margin: auto;">
-                <table id="evaluationIndex" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Evaluation Index</th>
-                        <th style="width: 190px;">Result</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <label class="control-label">ToTal Energy (Kcal)</label>
-                        </td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.totalEnergy, 1, 'POINT', 1, 'COMMA')}"
-                                   type="text" readonly="readonly" class="form-control" placeholder="Starch"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Energy (Kcal/Kg/24h)</label>
-                        </td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.energy, 1, 'POINT', 1, 'COMMA')}"
-                                   type="text" readonly="readonly" class="form-control" placeholder="Starch"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Starch (g)</label>
-                        </td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.starch, 1, 'POINT', 1, 'COMMA')}" type="text" readonly="readonly" class="form-control"
-                                   placeholder="Starch"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Protein (g)</label>
-                        </td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.protein, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Protein"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Fat (g)</label>
-                        </td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.fat, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Fat"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Animal Protein (g)</label>
-                        </td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.animalProtein, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Animal Protein"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Animal Fat (g)</label>
-                        </td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.animalFat, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Animal Fat"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">Calcium (mg)</label></td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.calcium, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Calcium"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">Sodium (mg)</label></td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.sodium, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Sodium"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">Iron /1000 Kcal (mg)</label></td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.iron, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Iron"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Zinc /1000 Kcal (mg)</label>
-                        </td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.zinc, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Zinc"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Vitamin B1/1000 Kcal (mg)</label>
-                        </td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.vitaminB1, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Vitamin B1"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Vitamin C/1000 Kcal (mg)</label>
-                        </td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.vitaminC, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Vitamin C"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">Vitamin B2/1000 Kcal (mg)</label></td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.vitaminB2, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Vitamin B2"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">Vitamin PP/1000 Kcal (mg)</label></td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.vitaminPP, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Vitamin PP"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label class="control-label">Fiber (g)</label></td>
-                        <td>
-                            <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-                                   th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.fiber, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
-                                   placeholder="Fiber"/>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <div style="margin: auto;">
+                        <table id="evaluationIndex" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Evaluation Index</th>
+                                <th style="width: 190px;">Result</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <label class="control-label">ToTal Energy (Kcal)</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.totalEnergy, 1, 'POINT', 1, 'COMMA')}"
+                                           type="text" readonly="readonly" class="form-control" placeholder="Starch"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Energy (Kcal/Kg/24h)</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.energy, 1, 'POINT', 1, 'COMMA')}"
+                                           type="text" readonly="readonly" class="form-control" placeholder="Starch"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Starch (g)</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.starch, 1, 'POINT', 1, 'COMMA')}" type="text" readonly="readonly" class="form-control"
+                                           placeholder="Starch"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Protein (g)</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.protein, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Protein"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Fat (g)</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.fat, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Fat"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Animal Protein (g)</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.animalProtein, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Animal Protein"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Animal Fat (g)</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.animalFat, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Animal Fat"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Calcium (mg)</label></td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.calcium, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Calcium"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Sodium (mg)</label></td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.sodium, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Sodium"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Iron /1000 Kcal (mg)</label></td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.iron, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Iron"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Zinc /1000 Kcal (mg)</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.zinc, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Zinc"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Vitamin B1/1000 Kcal (mg)</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.vitaminB1, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Vitamin B1"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Vitamin C/1000 Kcal (mg)</label>
+                                </td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.vitaminC, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Vitamin C"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Vitamin B2/1000 Kcal (mg)</label></td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.vitaminB2, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Vitamin B2"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Vitamin PP/1000 Kcal (mg)</label></td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.vitaminPP, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Vitamin PP"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="control-label">Fiber (g)</label></td>
+                                <td>
+                                    <input style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+                                           th:value="${#numbers.formatDecimal(FOODINGREDIENT.fi.fiber, 1, 'POINT', 1, 'COMMA')}" readonly="readonly" type="text" class="form-control"
+                                           placeholder="Fiber"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
         </div>
     </div>
-    <!-- /.box -->
 </div>
-<!-- /.Nutritional -->
+<!-- /.Modal -->
 </body>
 </html>

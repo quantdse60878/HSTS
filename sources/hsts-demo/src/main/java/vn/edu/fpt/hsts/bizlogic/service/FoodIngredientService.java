@@ -242,54 +242,56 @@ public class FoodIngredientService {
             LOGGER.info("appointment[{}]", appointment);
             FoodIngredientModel foodIngredientModel = new FoodIngredientModel();
             Appointment oldAppointment = appointmentRepo.findParentAppointment(appointment.getId());
-            List<FoodTreatment> foodTreatments = foodTreatmentRepo.findFoodTreatmentByAppointmentId(oldAppointment.getId());
-            FoodTreatment foodTreatment;
-            UnitOfFood unitOfFood;
-            float totalBre = 0;
-            float totalLun = 0;
-            float totalDin = 0;
-            float totalBreTiM = 0;
-            float totalBreTiA = 0;
-            float totalBreTiN = 0;
-            for (int i = 0; i < foodTreatments.size(); i++) {
-                foodTreatment = foodTreatments.get(i);
-                unitOfFood = unitOfFoodRepo.findByFoodIdAndUnit(foodTreatment.getFood(), foodTreatment.getUnitName());
-                switch (foodTreatment.getNumberOfTime()){
-                    case 1: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        break;
-                    case 2: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        break;
-                    case 3: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        break;
-                    case 4: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalBreTiM = totalBreTiM + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        break;
-                    case 5: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalBreTiM = totalBreTiM + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalBreTiA = totalBreTiA + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        break;
-                    case 6: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalBreTiM = totalBreTiM + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalBreTiA = totalBreTiA + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        totalBreTiN = totalBreTiN + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                        break;
+            if (null != oldAppointment){
+                List<FoodTreatment> foodTreatments = foodTreatmentRepo.findFoodTreatmentByAppointmentId(oldAppointment.getId());
+                FoodTreatment foodTreatment;
+                UnitOfFood unitOfFood;
+                float totalBre = 0;
+                float totalLun = 0;
+                float totalDin = 0;
+                float totalBreTiM = 0;
+                float totalBreTiA = 0;
+                float totalBreTiN = 0;
+                for (int i = 0; i < foodTreatments.size(); i++) {
+                    foodTreatment = foodTreatments.get(i);
+                    unitOfFood = unitOfFoodRepo.findByFoodIdAndUnit(foodTreatment.getFood(), foodTreatment.getUnitName());
+                    switch (foodTreatment.getNumberOfTime()){
+                        case 1: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            break;
+                        case 2: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            break;
+                        case 3: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            break;
+                        case 4: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalBreTiM = totalBreTiM + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            break;
+                        case 5: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalBreTiM = totalBreTiM + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalBreTiA = totalBreTiA + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            break;
+                        case 6: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalBreTiM = totalBreTiM + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalBreTiA = totalBreTiA + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalBreTiN = totalBreTiN + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            break;
+                    }
                 }
+                foodIngredientModel.setBreakfast(String.valueOf(totalBre));
+                foodIngredientModel.setBreakTimeAfternoon(String.valueOf(totalBreTiA));
+                foodIngredientModel.setBreakTimeMorning(String.valueOf(totalBreTiM));
+                foodIngredientModel.setLunch(String.valueOf(totalLun));
+                foodIngredientModel.setDinner(String.valueOf(totalDin));
+                foodIngredientModel.setEatLateAtNight(String.valueOf(totalBreTiN));
             }
-            foodIngredientModel.setBreakfast(String.valueOf(totalBre));
-            foodIngredientModel.setBreakTimeAfternoon(String.valueOf(totalBreTiA));
-            foodIngredientModel.setBreakTimeMorning(String.valueOf(totalBreTiM));
-            foodIngredientModel.setLunch(String.valueOf(totalLun));
-            foodIngredientModel.setDinner(String.valueOf(totalDin));
-            foodIngredientModel.setEatLateAtNight(String.valueOf(totalBreTiN));
 
             return foodIngredientModel;
         }finally {

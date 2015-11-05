@@ -15,8 +15,8 @@ import java.util.List;
 @Repository
 public interface UnitOfFoodRepo extends JpaRepository<UnitOfFood, Integer> {
 
-    @Query("select u.unitName from UnitOfFood u where food.id = :foodId")
-    public List<String> findByFoodId(@Param("foodId") final int foodId);
+    @Query("select u from UnitOfFood u where food.id = :foodId")
+    public List<UnitOfFood> findByFoodId(@Param("foodId") final int foodId);
 
     @Query("select u from UnitOfFood u where food = :food and unitName = :unitName")
     public UnitOfFood findByFoodIdAndUnit(@Param("food") final Food food,@Param("unitName") final String unitName);

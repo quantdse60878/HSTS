@@ -1,6 +1,86 @@
 /**
  * Created by Aking on 9/28/2015.
  */
+
+// Validator
+var validator = $("#mainForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+    },
+    messages: {
+    },
+    errorPlacement: function(error, element){
+            error.appendTo( element.next() );
+    },
+    submitHandler: function(form) {
+        form.submit();
+    },
+    invalidHandler: function(e, validator) {
+        if (validator.errorList.length > 0) {
+            console.log("Change to first tab has error");
+            console.log(validator.errorList);
+            var targetTab = jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id');
+            changeTab('#' + targetTab, '#li_' + targetTab);
+            console.log("end change");
+        }
+    }
+});
+
+function changeTabb (a, li) {
+    console.log("a: " + a);
+    console.log("li: " + li);
+    $('.nav-tabs > li.active').removeClass('active');
+    $(li).addClass('active');
+    $('.tab-content > .tab-pane.active').removeClass('active');
+    $(a).addClass('active');
+};
+
+function validateAndChangeTab(targetTab, targetLi) {
+    var valid = true;
+    var $fields = $('.tab-pane.active').find('input');
+    console.log($fields);
+    $fields.each (function() {
+        if (!validator.element(this) && valid) {
+            valid = false;
+        }
+    });
+
+    $fields = $('.tab-pane.active').find('select');
+    $fields.each (function() {
+        if (!validator.element(this) && valid) {
+            valid = false;
+        }
+    });
+    console.log("Valid: " + valid);
+    if (valid) {
+        changeTabb(targetTab, targetLi);
+    }
+
+};
+
+function validateAndOpenModal(m) {
+    var valid = true;
+    var $fields = $('.tab-pane.active').find('input');
+    console.log($fields);
+    $fields.each (function() {
+        if (!validator.element(this) && valid) {
+            valid = false;
+        }
+    });
+
+    $fields = $('.tab-pane.active').find('select');
+    $fields.each (function() {
+        if (!validator.element(this) && valid) {
+            valid = false;
+        }
+    });
+    console.log("Valid: " + valid);
+    if (valid) {
+        $(m).modal('show')
+    }
+
+};
 function viewAutoCompleteP(input){
     //console.log(input);
     var id = input.getAttribute('id');
@@ -40,7 +120,6 @@ function fillInput(id,item,c){
     document.getElementById(id).value = c;
 }
 
-
 function findUnits(food) {
     var id = food.getAttribute('id');
     var preID = id.split('.')[0];
@@ -60,7 +139,7 @@ function findUnits(food) {
             for (var i = 0; i < json.length; i++){
                 var tmp = json[i];
                 //console.log(tmp);
-                options= options + '<option value="'+ tmp +'">'+ tmp +'</option>';
+                options= options + '<option value="'+ tmp.foodUnitId +'">'+ tmp.unitName +'</option>';
             }
             $(options).appendTo(unitID);
         }
@@ -113,6 +192,57 @@ function loadSelect(id) {
 //}
 
 
+
+function loadPopupAppointment(appoitmentID) {
+    $.ajax({
+        method: "GET",
+        url: "/inforOfAppointmentDate",
+        data: {
+            appoitmentID: appoitmentID
+        }
+    })
+        .done(function(data) {
+            console.log(data);
+            if(data != null) {
+                // Set data to html
+                var txtName = document.getElementById("txtName");
+                var value = data.account.fullName;
+                console.log(value);
+                txtName.innerHTML = value;
+
+                var txtBirthday = document.getElementById("txtBirthday");
+                value = data.account.birthday;
+                console.log(value);
+                txtBirthday.innerHTML = value;
+
+                var txtEmail = document.getElementById("txtEmail");
+                value = data.account.email;
+                console.log(value);
+                txtEmail.innerHTML = value;
+
+                // Set gender
+                var btnGender = document.getElementById("btnGender");
+                value = data.account.gender;
+                if(value == "MALE") {
+                    btnGender.setAttribute("class", "btn btn-info");
+                    btnGender.setAttribute("value", "MALE");
+                } else {
+                    btnGender.setAttribute("class", "btn btn-danger");
+                    btnGender.setAttribute("value", "FEMALE");
+                }
+
+                // Set href
+                var btnLink = document.getElementById("btnLink");
+                btnLink.setAttribute("href", "patient?patientID=" + data.id);
+
+                // Show pop-up
+                $('#hisAppointment').modal('show')
+            }
+
+        });
+};
+
+// Select2 for diagnostic
 $("#select2Box").select2({
     width: "200px",
     ajax: {
@@ -150,7 +280,6 @@ $("#select2Box").select2({
         };
     }
 });
-
 
 function deleteRowFood(t) {
     var row = t.parentNode.parentNode;
@@ -352,7 +481,7 @@ function reCounterRow(row) {
 
             this._on(this.input, {
                 autocompleteselect: function (event, ui) {
-                    window.location = ui.item.url;
+                    //window.location = ui.item.url;
                 },
 
                 autocompletechange: "_removeIfInvalid"
@@ -448,9 +577,7 @@ function reCounterRow(row) {
         }
     });
 })(jQuery);
-
 $("#infordate").comboboxx();
-
 /**
  * popup
  * @param div_id
@@ -561,7 +688,6 @@ function confirmBox(form) {
     //}
 }
 
-
 $('#Appointment').datepicker({
     format: 'dd-mm-yyyy'
 });
@@ -574,7 +700,6 @@ appointmentDate.setDate(appointmentDate.getDate() + nextAppointmentDate);
 $('#Appointment').datepicker("setDate", appointmentDate);
 
 var currentValue = "";
-
 function setMedicineUnit(ev) {
     var target = ev.target;
     var targetValue = target.options[target.selectedIndex].text;;
@@ -590,4 +715,9 @@ function setMedicineUnit(ev) {
             unitInput.value = b.unit;
         }
     }
+}
+
+function addValidate(element) {
+    validator.validate();
+    $(element).rules("add", "required");
 }

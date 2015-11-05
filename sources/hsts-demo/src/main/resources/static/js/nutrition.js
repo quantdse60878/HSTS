@@ -259,6 +259,14 @@ var validator = $("#mainForm").validate({
     },
     submitHandler: function(form) {
         form.submit();
+    },
+    invalidHandler: function(e, validator) {
+        if (validator.errorList.length > 0) {
+            console.log("Change to first tab has error");
+            var targetTab = jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id');
+            changeTab('#' + targetTab, '#li_' + targetTab);
+            console.log("end change");
+        }
     }
 });
 
@@ -290,6 +298,29 @@ function validateAndChangeTab(targetTab, targetLi) {
     console.log("Valid: " + valid);
     if (valid) {
         changeTab(targetTab, targetLi);
+    }
+
+};
+
+function validateAndOpenModal(m) {
+    var valid = true;
+    var $fields = $('.tab-pane.active').find('input');
+    console.log($fields);
+    $fields.each (function() {
+        if (!validator.element(this) && valid) {
+            valid = false;
+        }
+    });
+
+    $fields = $('.tab-pane.active').find('select');
+    $fields.each (function() {
+        if (!validator.element(this) && valid) {
+            valid = false;
+        }
+    });
+    console.log("Valid: " + valid);
+    if (valid) {
+        $(m).modal('show')
     }
 
 };

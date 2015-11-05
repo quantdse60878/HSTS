@@ -126,34 +126,32 @@
                         <!-- ./form -->
                         <!-- form start -->
                         <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}"
-                              data-toggle="validator" onsubmit="return confirmBox(this);">
+                              data-toggle="validator" onsubmit="return confirmBox(this);" id="mainForm">
                             <input type="hidden" name="diagnostic" id="diagnosticValue"
                                    th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name}"/>
-
+                            <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
                             <div class="box-body">
 
                                 <!-- Sidebar Menu -->
                                 <!-- START CUSTOM TABS -->
-                                <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
                                 <!-- Custom Tabs (Pulled to the left) -->
                                 <div class="nav-tabs-custom" style="box-shadow: none;">
-
                                     <ul class="nav nav-tabs">
-                                        <li class="active" th:if="${DIAGNOSTIC == null}">
+                                        <li class="active" th:if="${DIAGNOSTIC == null}" id="li_tab_4-4">
                                             <a href="#tab_4-4" data-toggle="tab">Infomation checking</a>
                                         </li>
-                                        <li th:if="${DIAGNOSTIC != null}">
+                                        <li th:if="${DIAGNOSTIC != null}" id="li_tab_4-4">
                                             <a href="#tab_4-4" data-toggle="tab">Infomation checking</a>
                                         </li>
-                                        <li class="active" th:if="${DIAGNOSTIC != null}">
+                                        <li class="active" th:if="${DIAGNOSTIC != null}" id="li_tab_1-1">
                                             <a href="#tab_1-1" data-toggle="tab">Medicine</a>
                                         </li>
-                                        <li th:if="${DIAGNOSTIC == null}">
+                                        <li th:if="${DIAGNOSTIC == null}" id="li_tab_1-1">
                                             <a href="#tab_1-1" data-toggle="tab">Medicine</a>
                                         </li>
-                                        <li><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
-                                        <li><a href="#tab_3-3" data-toggle="tab">Practices</a></li>
-                                        <li><a href="#tab_5-5" data-toggle="tab">Appointment</a></li>
+                                        <li id="li_tab_2-2"><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
+                                        <li id="li_tab_3-3"><a href="#tab_3-3" data-toggle="tab">Practices</a></li>
+                                        <li id="li_tab_5-5"><a href="#tab_5-5" data-toggle="tab">Appointment</a></li>
                                     </ul>
 
                                     <div class="tab-content">
@@ -163,7 +161,7 @@
                                             <!-- /.patient's Profile -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+                                                <a onclick="validateAndChangeTab('#tab_1-1', '#li_tab_1-1')" data-toggle="tab"
                                                    class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
@@ -174,7 +172,7 @@
                                             <!-- /.patient's Profile -->
                                             <!-- footer -->
                                             <div style="margin: 15px;">
-                                                <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+                                                <a onclick="validateAndChangeTab('#tab_1-1', '#li_tab_1-1')" data-toggle="tab"
                                                    class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
@@ -189,7 +187,7 @@
                                             <div style="margin: 15px;">
                                                 <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab"
                                                    class="btn btn-default">Previous</a>
-                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab"
+                                                <a onclick="validateAndChangeTab('#tab_2-2', '#li_tab_2-2')" data-toggle="tab"
                                                    class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
@@ -213,7 +211,7 @@
                                             <div style="margin: 15px;">
                                                 <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab"
                                                    class="btn btn-default">Previous</a>
-                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab"
+                                                <a onclick="validateAndChangeTab('#tab_2-2', '#li_tab_2-2')" data-toggle="tab"
                                                    class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
@@ -226,7 +224,7 @@
                                             <div style="margin: 15px;">
                                                 <a href="#tab_4-4" onclick="changeTab('#tab_4-4')" data-toggle="tab"
                                                    class="btn btn-default">Previous</a>
-                                                <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab"
+                                                <a onclick="validateAndChangeTab('#tab_2-2', '#li_tab_2-2')" data-toggle="tab"
                                                    class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
@@ -254,7 +252,7 @@
                                             <div style="margin: 15px;">
                                                 <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
                                                    class="btn btn-default">Previous</a>
-                                                <a href="#tab_3-3" onclick="changeTab('#tab_3-3')" data-toggle="tab"
+                                                <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
                                                    class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
@@ -283,7 +281,7 @@
                                             <div style="margin: 15px;">
                                                 <a href="#tab_2-2" onclick="changeTab('#tab_2-2')" data-toggle="tab"
                                                    class="btn btn-default">Previous</a>
-                                                <a href="#tab_5-5" onclick="changeTab('#tab_5-5')" data-toggle="tab"
+                                                <a onclick="validateAndChangeTab('#tab_5-5', '#li_tab_5-5')" data-toggle="tab"
                                                    class="btn btn-primary pull-right">Next</a>
                                             </div>
                                             <!-- /.footer -->
@@ -326,9 +324,9 @@
                                             <div style="margin: 15px;">
                                                 <a href="#tab_3-3" onclick="changeTab('#tab_3-3')" data-toggle="tab"
                                                    class="btn btn-default">Previous</a>
-                                                <button th:if="${TREATMENT == null}" type="button" data-toggle="modal" data-target="#myModal"
+                                                <a th:if="${TREATMENT == null}"  onclick="validateAndOpenModal('#myModal')"
                                                         class="btn btn-primary pull-right">Done
-                                                </button>
+                                                </a>
                                             </div>
                                             <!-- /.footer -->
                                         </div>
@@ -377,12 +375,35 @@
 
     <!--POPUP-->
     <div id="blanket" style="display:none;"></div>
+    <!--Nutrition Ass-->
     <div th:if="${FOODINGREDIENT != null}">
         <div layout:replace="_popupNutritional"></div>
     </div>
+    <!--Practice Data-->
     <div th:if="${DATAPRACS != null}">
         <div layout:replace="_practiceData"></div>
     </div>
+    <!--His Appointment Date-->
+    <!-- Modal -->
+    <div class="modal fade" id="hisAppointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Box</h4>
+                </div>
+                <div class="modal-body" id="appointmentInFo">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.Modal -->
+
     <!-- / POPUP-->
 
     <input th:value="*{PHASE != null}? 'check' : ''" id="phase" type="hidden"/>
@@ -398,20 +419,19 @@
     <!-- bootstrap-datepicker-->
     <link th:href="@{/static/bower/admin-lte/plugins/datepicker/datepicker3.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/datepicker/bootstrap-datepicker.js}"></script>
+    <!-- jquery validation -->
+    <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
     <!-- Bootstrap multiple tags -->
-    <link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>
-    <script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>
-
+    <!--<link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>-->
+    <!--<script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>-->
     <!-- ChartJS 1.0.1 -->
-    <script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>
+    <!--<script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>-->
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
-
     <!-- Bootstrap validator-->
-    <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
+    <!--<script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>-->
     <!--<script th:src="@{/static/js/bootstrap-validator-ext.js}"></script>-->
-
     <script th:inline="javascript">
         listMedicine = [[${MEDICINES}]];
         listPracticeName = [[${PRACTICENAMES}]];
@@ -419,8 +439,6 @@
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
     <script type="text/javascript">
-
-
         var countMedicine = $('#medics').val();
         var countM = countMedicine;
         function addRowMedicine(tableID) {
@@ -432,7 +450,7 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("style", "min-width: 155px;");
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModelsM' + countMedicine + '" onchange="setMedicineUnit(event)" data-error="Choose at least one" required="required">'
+            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModelsM' + countMedicine + '" onchange="setMedicineUnit(event)" data-rule-min="1" data-msg-min="Please select.">'
                     + '<option value="0" >Select</option>'
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
                     + '</select>'
@@ -440,7 +458,7 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("style", "min-width: 75px;");
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime" data-error="Choose at least one" required="required">'
+            newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime" data-rule-min="1" data-msg-min="Please select." >'
                     + '<option value="0" >Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>'
@@ -449,12 +467,12 @@
             newCell.setAttribute("class", "form-group");
             newCell.setAttribute("style", "width: 120px;");
             newCell.innerHTML =
-                    '<input type="text" value="1" class="form-control" style="text-align: right;" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quantity" data-remote="/validateData" required="required" data-error="Wrong input"/>'
+                    '<input type="text" value="1" class="form-control" style="text-align: right;" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quantity" data-rule-range="0,10" data-msg-range="Out of range 0-10"/>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.setAttribute("style", "width: 120px;");
-            newCell.innerHTML = '<input type="text" class="form-control" data-remote="/validateStr" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit" required="required" data-error="Wrong input"/>'
+            newCell.innerHTML = '<input type="text" class="form-control" data-remote="/validateStr" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit" data-rule-required="true" data-msg-required="Please input." onload="addValidate(this)"/>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
@@ -477,7 +495,7 @@
             newCell.innerHTML = ++countF;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" onchange="findUnits(this)" id="fPresModels' + countFoods + '.f" data-error="Choose at least one" required="required">'
+            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" onchange="findUnits(this)" id="fPresModels' + countFoods + '.f" data-msg-min="Please select." data-rule-min="1">'
                     + '<option value="0">Select</option>'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
                     + '</select>'
@@ -485,24 +503,24 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
-                    '<select class="form-control" name="fPresModels[' + countFoods + '].fTime" id="fPresModels' + countFoods + '.fTime" data-error="Choose at least one" required="required">'
+                    '<select class="form-control" name="fPresModels[' + countFoods + '].fTime" id="fPresModels' + countFoods + '.fTime" data-msg-min="Please select." data-rule-min="1">'
                     + '<option value="0">Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<input type="text" value="0" class="form-control" data-remote="/validateStr" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" required="required" data-error="Wrong input"/>'
+            newCell.innerHTML = '<input type="text" value="0" class="form-control" style="text-align: right;" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" data-rule-required="true" data-msg-required="Please input." data-rule-range="0,10" data-msg-range="Out of range 0-10"/>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].fUnit" id="fPresModels' + countFoods + 'fUnit" required="required" data-error="Choose at least one">'
+            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].fUnit" id="fPresModels' + countFoods + 'fUnit" data-msg-min="Please select." data-rule-min="2" onload="addValidate(this)">'
                     + '<option value="0">Select</option></select>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice"/>';
             newCell = newRow.insertCell(newRow.cells.length);
-            newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowFood(this)"></a>'
+            newCell.innerHTML = '<a class="btn btn-danger fa fa-remove" onclick="deleteRowFood(this)"></a>';
 
             countFoods++;
             return newRow;
@@ -519,13 +537,13 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModelsP' + countPractice + '" oninput="viewAutoCompleteP(this)"/>'
-                    +'<div id="pPresModelsP' + countPractice + 'item" class="form-control" style="visibility: hidden;height: 100%;"></div>'
-                    + '<div class="help-block with-errors"></div>';
+                    ' <input type="text" placeholder="Practice Name" class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModelsP' + countPractice + '" oninput="viewAutoCompleteP(this)" data-rule-required="true" data-msg-required="Please input." onload="addValidate(this)"/>'
+                    + '<div class="help-block with-errors"></div>'
+                    + '<div id="pPresModelsP' + countPractice + 'item" class="form-control" style="visibility: hidden;height: 100%;"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
-                    '<select class="form-control" name="pPresModels[' + countPractice + '].pTime" id="pPresModels' + countPractice + '.pTime" data-error="Choose at least one" required="required">'
+                    ' <select class="form-control" name="pPresModels[' + countPractice + '].pTime" id="pPresModels' + countPractice + '.pTime" data-rule-min="1" data-msg-min="Please select.">'
                     + '<option value="0">Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
                     + '</select>'
@@ -533,8 +551,8 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
-                    '<input type="text" class="form-control" required="required"  data-remote="/validateStr" placeholder="Quantity" name="pPresModels[' + countPractice + '].pIntensity" id="pPresModels' + countPractice + '.pIntensity" data-error="Wrong input"/>';
-            +'<div class="help-block with-errors"></div>';
+                    '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].pIntensity" data-rule-required="true" data-msg-required="Please input." placeholder="Quantity"/>'
+                    + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].pNote" id="pPresModels' + countPractice + '.pNote" placeholder="Advice"/>';

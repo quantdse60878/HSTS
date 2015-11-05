@@ -7,7 +7,7 @@
 <h4>Foods</h4>
 
 <label class="form-lable">Nutritional Assessment</label>
-<a class="btn btn-link" onclick="popup('Nutritional')" th:if="${FOODINGREDIENT != null}">View Detail</a>
+<a class="btn btn-link" data-toggle="modal" data-target="#myModalNutritional" th:if="${FOODINGREDIENT != null}">View Detail</a>
 
 <table class="table table-striped" id="Foods">
     <tr>

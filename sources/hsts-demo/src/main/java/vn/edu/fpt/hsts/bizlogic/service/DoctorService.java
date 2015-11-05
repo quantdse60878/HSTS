@@ -131,6 +131,9 @@ public class DoctorService extends AbstractService {
     @Autowired
     private PropertyRecordRepo propertyRecordRepo;
 
+    @Autowired
+    private UnitOfFoodRepo unitOfFoodRepo;
+
     @Value("${hsts.default.treatment.long}")
     private int treatmentLong;
 
@@ -265,15 +268,15 @@ public class DoctorService extends AbstractService {
                         }
                         if (medicineModel.isValid()) {
                             LOGGER.info("Medicine valid");
-                            Medicine medicine = medicineRepo.findOne(Integer.parseInt(medicineModel.getM()));
+                            Medicine medicine = medicineRepo.findOne(medicineModel.getM());
                             if (null == medicine) {
                                 LOGGER.info("Medicine with id[{}] is not found", null, medicineModel.getM());
                                 // Create new medicine
-                                medicine = new Medicine();
-                                medicine.setName(medicineModel.getM());
-                                medicine.setUnit(medicineModel.getmUnit());
-                                medicineRepo.saveAndFlush(medicine);
-                                LOGGER.info("Create new medicine", medicine.getName());
+//                                medicine = new Medicine();
+//                                medicine.setName(medicineModel.getM());
+//                                medicine.setUnit(medicineModel.getmUnit());
+//                                medicineRepo.saveAndFlush(medicine);
+//                                LOGGER.info("Create new medicine", medicine.getName());
                             }
                             LOGGER.info("Create MedicineTreatment");
                             MedicineTreatment medicineTreatment = new MedicineTreatment();
@@ -300,12 +303,17 @@ public class DoctorService extends AbstractService {
                                 LOGGER.info("Food with id[{}] is not found", null, foodModel.getF());
                                 return false;
                             }
+                            UnitOfFood unitOfFood = unitOfFoodRepo.findOne(foodModel.getfUnit());
+                            if (null == unitOfFood) {
+                                LOGGER.info("unitOfFood with id[{}] is not found", null, foodModel.getfUnit());
+                                return false;
+                            }
                             FoodTreatment foodTreatment = new FoodTreatment();
                             foodTreatment.setFood(food);
                             foodTreatment.setTreatment(newTreatment);
                             foodTreatment.setNumberOfTime(foodModel.getfTime());
                             foodTreatment.setQuantitative(foodModel.getfQuantity());
-                            foodTreatment.setUnitName(foodModel.getfUnit());
+                            foodTreatment.setUnitName(unitOfFood.getUnitName());
                             foodTreatment.setAdvice(foodModel.getfNote());
                             foodTreatmentRepo.save(foodTreatment);
                         }

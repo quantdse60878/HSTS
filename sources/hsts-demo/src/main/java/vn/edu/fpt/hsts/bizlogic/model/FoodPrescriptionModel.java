@@ -19,7 +19,7 @@ public class FoodPrescriptionModel {
     /**
      * Food Unit
      */
-    private String fUnit;
+    private int fUnit;
     /**
      * Food Note
      */
@@ -28,11 +28,11 @@ public class FoodPrescriptionModel {
     public FoodPrescriptionModel() {
     }
 
-    public String getfUnit() {
+    public int getfUnit() {
         return fUnit;
     }
 
-    public void setfUnit(String fUnit) {
+    public void setfUnit(int fUnit) {
         this.fUnit = fUnit;
     }
 
@@ -74,6 +74,8 @@ public class FoodPrescriptionModel {
         } else if (fTime <= 0){
             return false;
         } else if (fQuantity <= 0){
+            return false;
+        } else if (fUnit <= 0){
             return false;
         }
         return true;

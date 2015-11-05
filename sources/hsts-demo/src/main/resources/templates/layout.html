@@ -25,19 +25,25 @@
     <link rel="stylesheet" th:href="@{/static/bower/jquery-ui/themes/smoothness/jquery-ui.css}"/>
     <style>
         input.hsts{
-            text-align: right;
             border: none;
             border-bottom: 1px solid #286090;
             background-color: inherit !important;
             box-shadow: none;
         }
 
-        input.hsts:hover{
+        input.hsts-num{
             text-align: right;
+        }
+
+        input.hsts:hover{
             border: none;
             border-bottom: 2px solid #31b0d5;
             background-color: inherit !important;
             box-shadow: none;
+        }
+
+        .with-errors{
+            color: red;
         }
 
         .table-hsts>thead>tr>th,
