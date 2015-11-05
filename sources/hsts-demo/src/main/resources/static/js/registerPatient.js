@@ -511,7 +511,7 @@ function toggle(div_id) {
     }
 }
 
-$("#fileUploader").fileinput({
+var fileUploader = $("#fileUploader").fileinput({
     uploadUrl: "/uploadImage", // server upload action
     uploadAsync: true,
     maxFileCount: 5,
@@ -520,17 +520,17 @@ $("#fileUploader").fileinput({
     maxFileSize: 5170
 });
 
-$('#fileUploader').on('fileuploaded', function(event, data, previewId, index) {
+fileUploader.on('fileuploaded', function(event, data, previewId, index) {
     var form = data.form, files = data.files, extra = data.extra,
         response = data.response, reader = data.reader;
     console.log('File uploaded triggered: ' + response.result);
     console.log('File uploaded triggered: ' + response.fileName);
 });
 
-$('#fileUploader').on('filebatchpreupload', function(event, data, previewId, index) {
+fileUploader.on('filebatchuploadcomplete', function(event, data, previewId, index) {
     var form = data.form, files = data.files, extra = data.extra,
         response = data.response, reader = data.reader;
-    console.log('File batch pre upload');
-    $('#input-id').fileinput('clear');
+    console.log('File batch upload successfully');
+    fileUploader.fileinput('refresh');
     $('#uploadModal').modal('hide');
 });
