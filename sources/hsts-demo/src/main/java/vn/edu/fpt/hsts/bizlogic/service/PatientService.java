@@ -656,6 +656,15 @@ public class PatientService extends AbstractService {
                 if (prefix.contains(".")) {
                     prefix = prefix.replace(".", "_");
                 }
+                if (prefix.contains(",")) {
+                    prefix = prefix.replace(",", "_");
+                }
+                if (prefix.contains("/")) {
+                    prefix = prefix.replace("/", "_");
+                }
+                if (prefix.contains("\\")) {
+                    prefix = prefix.replace("\\", "_");
+                }
                 String postfix = fileName.substring(index);
                 fileName = String.format("%s_%s%s", prefix, surfix, postfix);
             } else {
