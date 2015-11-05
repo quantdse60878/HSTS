@@ -517,19 +517,16 @@ var fileUploader = $("#fileUploader").fileinput({
     maxFileCount: 5,
     allowedFileTypes: ['image'],
     allowedFileExtensions: ['jpg', 'gif', 'png'],
-    maxFileSize: 5170
+    maxFileSize: 5170 // 5 MB
 });
 
 fileUploader.on('fileuploaded', function(event, data, previewId, index) {
-    var form = data.form, files = data.files, extra = data.extra,
-        response = data.response, reader = data.reader;
+    var response = data.response;
     console.log('File uploaded triggered: ' + response.result);
     console.log('File uploaded triggered: ' + response.fileName);
 });
 
 fileUploader.on('filebatchuploadcomplete', function(event, data, previewId, index) {
-    var form = data.form, files = data.files, extra = data.extra,
-        response = data.response, reader = data.reader;
     console.log('File batch upload successfully');
     fileUploader.fileinput('refresh');
     $('#uploadModal').modal('hide');
