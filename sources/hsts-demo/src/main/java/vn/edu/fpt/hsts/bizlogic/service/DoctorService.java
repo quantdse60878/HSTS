@@ -131,6 +131,9 @@ public class DoctorService extends AbstractService {
     @Autowired
     private PropertyRecordRepo propertyRecordRepo;
 
+    @Autowired
+    private UnitOfFoodRepo unitOfFoodRepo;
+
     @Value("${hsts.default.treatment.long}")
     private int treatmentLong;
 
@@ -300,12 +303,17 @@ public class DoctorService extends AbstractService {
                                 LOGGER.info("Food with id[{}] is not found", null, foodModel.getF());
                                 return false;
                             }
+                            UnitOfFood unitOfFood = unitOfFoodRepo.findOne(foodModel.getfUnit());
+                            if (null == unitOfFood) {
+                                LOGGER.info("unitOfFood with id[{}] is not found", null, foodModel.getfUnit());
+                                return false;
+                            }
                             FoodTreatment foodTreatment = new FoodTreatment();
                             foodTreatment.setFood(food);
                             foodTreatment.setTreatment(newTreatment);
                             foodTreatment.setNumberOfTime(foodModel.getfTime());
                             foodTreatment.setQuantitative(foodModel.getfQuantity());
-                            foodTreatment.setUnitName(foodModel.getfUnit());
+                            foodTreatment.setUnitName(unitOfFood.getUnitName());
                             foodTreatment.setAdvice(foodModel.getfNote());
                             foodTreatmentRepo.save(foodTreatment);
                         }

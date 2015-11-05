@@ -18,12 +18,12 @@
     <tr>
         <td>1</td>
         <td style="min-width: 155px;" class="form-group">
-            <select class="form-control" name="mPresModels[0].m" id="mPresModelsM0" onchange="setMedicineUnit(event)">
+            <select class="form-control" name="mPresModels[0].m" id="mPresModelsM0" onchange="setMedicineUnit(event)" data-rule-min="1" data-msg-min="Please select.">
                 <option value="0">Select</option>
                 <option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"
                         th:text="${medicine.name}"></option>
             </select>
-            <div class="help-block with-errors" id="invalidmPresModelsM0"></div>
+            <div class="help-block with-errors"></div>
         </td>
         <td style="min-width: 120px;" class="form-group">
             <select class="form-control" th:field="*{mPresModels[0].mTime}" data-rule-min="1" data-msg-min="Please select.">
@@ -31,15 +31,18 @@
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
+            <div class="help-block with-errors"></div>
         </td>
         <td class="form-group" style="width: 120px;">
             <input type="text" class="form-control" th:field="*{mPresModels[0].mQuantity}" style="text-align: right;"
                    placeholder="Quantity" data-rule-range="0,10" data-msg-range="Out of range 0-10"/>
+            <div class="help-block with-errors"></div>
         </td>
         <td class="form-group" style="width: 120px;">
             <input type="text" class="form-control" data-rule-required="true" data-msg-required="Please input."
                    th:field="*{mPresModels[0].mUnit}"
                    placeholder="Unit"/>
+            <div class="help-block with-errors"></div>
         </td>
         <td>
             <input type="text" class="form-control"

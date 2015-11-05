@@ -27,19 +27,7 @@ var validator = $("#mainForm").validate({
     }
 });
 
-// dynamically change required message for both fields
-$('select[id^="mPresModelsM"]').each(function () {
-    var id = this.getAttribute('id');
-    $(this).rules('add', {
-        min: 1,
-        messages: {
-            min: "Please select."
-        }
-    });
-});
-
-
-function changeTab (a, li) {
+function changeTabb (a, li) {
     console.log("a: " + a);
     console.log("li: " + li);
     $('.nav-tabs > li.active').removeClass('active');
@@ -66,7 +54,7 @@ function validateAndChangeTab(targetTab, targetLi) {
     });
     console.log("Valid: " + valid);
     if (valid) {
-        changeTab(targetTab, targetLi);
+        changeTabb(targetTab, targetLi);
     }
 
 };
@@ -151,7 +139,7 @@ function findUnits(food) {
             for (var i = 0; i < json.length; i++){
                 var tmp = json[i];
                 //console.log(tmp);
-                options= options + '<option value="'+ tmp +'">'+ tmp +'</option>';
+                options= options + '<option value="'+ tmp.foodUnitId +'">'+ tmp.unitName +'</option>';
             }
             $(options).appendTo(unitID);
         }
@@ -203,6 +191,58 @@ function loadSelect(id) {
 //    loadSelect('#mPresModelsM'+i+'');
 //}
 
+
+
+function loadPopupAppointment(appoitmentID) {
+    $.ajax({
+        method: "GET",
+        url: "/inforOfAppointmentDate",
+        data: {
+            appoitmentID: appoitmentID
+        }
+    })
+        .done(function(data) {
+            console.log(data);
+            if(data != null) {
+                // Set data to html
+                var txtName = document.getElementById("txtName");
+                var value = data.account.fullName;
+                console.log(value);
+                txtName.innerHTML = value;
+
+                var txtBirthday = document.getElementById("txtBirthday");
+                value = data.account.birthday;
+                console.log(value);
+                txtBirthday.innerHTML = value;
+
+                var txtEmail = document.getElementById("txtEmail");
+                value = data.account.email;
+                console.log(value);
+                txtEmail.innerHTML = value;
+
+                // Set gender
+                var btnGender = document.getElementById("btnGender");
+                value = data.account.gender;
+                if(value == "MALE") {
+                    btnGender.setAttribute("class", "btn btn-info");
+                    btnGender.setAttribute("value", "MALE");
+                } else {
+                    btnGender.setAttribute("class", "btn btn-danger");
+                    btnGender.setAttribute("value", "FEMALE");
+                }
+
+                // Set href
+                var btnLink = document.getElementById("btnLink");
+                btnLink.setAttribute("href", "patient?patientID=" + data.id);
+
+                // Show pop-up
+                $('#hisAppointment').modal('show')
+            }
+
+        });
+};
+
+// Select2 for diagnostic
 $("#select2Box").select2({
     width: "200px",
     ajax: {
@@ -441,7 +481,7 @@ function reCounterRow(row) {
 
             this._on(this.input, {
                 autocompleteselect: function (event, ui) {
-                    window.location = ui.item.url;
+                    //window.location = ui.item.url;
                 },
 
                 autocompletechange: "_removeIfInvalid"
@@ -537,9 +577,7 @@ function reCounterRow(row) {
         }
     });
 })(jQuery);
-
 $("#infordate").comboboxx();
-
 /**
  * popup
  * @param div_id

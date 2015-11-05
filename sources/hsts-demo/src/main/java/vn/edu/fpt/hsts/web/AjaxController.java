@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import vn.edu.fpt.hsts.bizlogic.model.FoodUnitModel;
+import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicineService;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.UnitOfFood;
 
 import java.util.List;
@@ -33,6 +36,9 @@ public class AjaxController {
     @Autowired
     private FoodService foodService;
 
+    @Autowired
+    private AppointmentService appointmentService;
+
     @RequestMapping(value = "/medicineName/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<String> medicineList() {
@@ -46,7 +52,7 @@ public class AjaxController {
 
     @RequestMapping(value = "getFoodUnits", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<String> getFoodUnits(@RequestParam("foodId") final int foodId) {
+    public List<FoodUnitModel> getFoodUnits(@RequestParam("foodId") final int foodId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("foodId[{}]", foodId);
@@ -54,6 +60,22 @@ public class AjaxController {
                 return null;
             }
             return foodService.findUnitsByFoodId(foodId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "inforOfAppointmentDate", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Appointment inforOfAppointmentDate(@RequestParam("appoitmentID") final int appoitmentID) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appoitmentID[{}]", appoitmentID);
+            if (appoitmentID <= 0){
+                return null;
+            }
+
+            return appointmentService.findAppointmentByID(appoitmentID);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

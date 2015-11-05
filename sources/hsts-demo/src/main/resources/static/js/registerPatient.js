@@ -375,16 +375,6 @@ function validateAndChangeTab(targetTab, targetLi) {
 
 };
 
-$selectPatient.on("change", function (e) {
-    var val = $selectPatient.val();
-    var textData = $selectPatient.text().trim();
-    console.log("Value: " + val);
-    console.log("Text: " + textData);
-    if (val.indexOf("404") == 0) {
-        // Bind patient profile
-        //loadPatientProfile(val);
-    };
-});
 
 function loadPatientProfile(patientBarcode) {
     $.ajax({

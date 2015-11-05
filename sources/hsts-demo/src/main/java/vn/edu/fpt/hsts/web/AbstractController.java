@@ -49,9 +49,6 @@ public class AbstractController implements ControllerParam {
     private IllnessService illnessService;
 
     @Autowired
-    private PhaseService phaseService;
-
-    @Autowired
     private MedicineService medicineService;
 
     @Autowired

@@ -20,8 +20,9 @@
         <td th:text="${row.count}"></td>
         <td style="min-width: 155px;" class="form-group">
             <select class="form-control" th:name="mPresModels[__${row.index}__].m" th:id="mPresModelsM__${row.index}__"
-                    onchange="setMedicineUnit(event)" data-error="Choose at least one" required="required">
-                <option th:value="${medicalPhase.medicine.id}"
+                    onchange="setMedicineUnit(event)" data-rule-min="1" data-msg-min="Please select.">
+                <option value="0">Select</option>
+                <option th:value="${medicalPhase.medicine.id}" selected="selected"
                         th:text="${medicalPhase.medicine.name}"></option>
                 <option th:each="medicine : ${MEDICINES}"
                 th:value="${medicine.id}"
@@ -31,27 +32,23 @@
             <div class="help-block with-errors"></div>
         </td>
         <td style="min-width: 120px;" class="form-group">
-            <select class="form-control" th:field="*{mPresModels[__${row.index}__].mTime}" required="required"
-                    data-error="Choose at least one">
+            <select class="form-control" th:field="*{mPresModels[__${row.index}__].mTime}" data-rule-min="1" data-msg-min="Please select.">
                 <option value="0">Select</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
-
             <div class="help-block with-errors"></div>
         </td>
         <td class="form-group" style="width: 120px;">
             <input type="text" class="form-control" th:field="*{mPresModels[__${row.index}__].mQuantity}"
                    style="text-align: right;"
-                   placeholder="Quantity" data-remote="/validateData" required="required" data-error="Wrong input"/>
-
+                   placeholder="Quantity" data-rule-range="0,10" data-msg-range="Out of range 0-10"/>
             <div class="help-block with-errors"></div>
         </td>
         <td class="form-group" style="width: 120px;">
             <input type="text" th:value="${medicalPhase.medicine.unit}" th:name="mPresModels[__${row.index}__].mUnit"
-                   class="form-control" required="required" data-remote="/validateStr"
-                   placeholder="Unit" data-error="Wrong input"/>
-
+                   class="form-control" data-rule-required="true" data-msg-required="Please input."
+                   placeholder="Unit"/>
             <div class="help-block with-errors"></div>
         </td>
         <td>
