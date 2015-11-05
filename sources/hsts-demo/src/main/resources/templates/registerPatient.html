@@ -43,9 +43,6 @@
                                     <li id="li_tab_3">
                                         <a href="tab_3" data-toggle="tab" onclick="changeTab('#tab_3', '#li_tab_3')">Medical registration</a>
                                     </li>
-                                    <li id="li_upload">
-                                        <a href="#uploadModal" data-toggle="modal" data-target="#uploadModal">Modal testing</a>
-                                    </li>
                                 </ul>
                                 <!-- End tab header -->
 
@@ -264,28 +261,32 @@
                                             <label for="medicalHistory" class="col-sm-3 control-label">Medical
                                                 history</label>
 
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 <input th:type="text" class="form-control" placeholder="Medical history"
                                                        th:name="medicalHistory" id="medicalHistory" data-role="tagsinput"/>
+                                            </div>
+                                            <div class="col-sim-2">
+                                                <a href="#uploadModal" data-toggle="modal" data-target="#uploadModal" class="btn btn-info">Upload medical history image</a>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="symptoms" class="col-sm-3 control-label">Clinical
                                                 symptoms</label>
 
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 <input th:type="text" class="form-control"
                                                        placeholder="Clinical symptoms" th:name="symptoms" id = "symptoms"
                                                        data-role="tagsinput"/>
                                             </div>
                                             <div class="help-block with-errors" id="invalidSymptoms"></div>
+
                                         </div>
 
                                         <div class="form-group">
                                             <label for="medicineHistory" class="col-sm-3 control-label">Medicine
                                                 History</label>
 
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 <input th:type="text" class="form-control"
                                                        placeholder="Medicine history" th:name="medicineHistory" data-role="tagsinput"
                                                        id="medicineHistory" />
