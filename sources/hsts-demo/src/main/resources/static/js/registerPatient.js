@@ -28,7 +28,7 @@ function changeTab (a, li) {
 
 $("#doctorSelect").select2({
     theme: "bootstrap",
-    width: "inherit",
+    width: "400px",
     ajax: {
         url: "/doctor/list",
         dataType: 'json',

@@ -21,7 +21,7 @@ function changeTab (a, li) {
 };
 
 $("#doctorSelect").select2({
-    width: "100%",
+    width: "400px",
     ajax: {
         url: "/doctor/list",
         dataType: 'json',
