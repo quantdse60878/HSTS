@@ -27,8 +27,9 @@ function changeTab (a, li) {
 };
 
 $("#doctorSelect").select2({
+    placeholder: "Choose a doctor",
     theme: "bootstrap",
-    width: "inherit",
+    width: "400px",
     ajax: {
         url: "/doctor/list",
         dataType: 'json',
@@ -62,6 +63,7 @@ $("#doctorSelect").select2({
 });
 
 var $selectPatient = $("#patientName").select2({
+    placeholder: "Type patient name",
     theme: "bootstrap",
     width: "100%",
     allowClear: false,
@@ -509,3 +511,8 @@ function toggle(div_id) {
     }
 }
 
+$("#fileUploader").fileinput({
+    uploadUrl: "http://localhost/file-upload-single/1", // server upload action
+    uploadAsync: true,
+    maxFileCount: 5
+});

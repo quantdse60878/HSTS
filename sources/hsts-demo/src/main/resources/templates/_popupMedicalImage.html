@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div id="popupMedicalImage" style="display:none;">
+    <style>
+        .modal.modal-wide .modal-dialog {
+            width: 90%;
+        }
+        .modal-wide .modal-body {
+            overflow-y: auto;
+        }
+
+        /* irrelevant styling */
+        body { text-align: center; }
+        body p {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+    </style>
+    <div id="medicalHistoryModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>
+</body>
+</html>

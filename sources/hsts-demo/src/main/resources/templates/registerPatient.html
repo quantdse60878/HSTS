@@ -43,6 +43,9 @@
                                     <li id="li_tab_3">
                                         <a href="tab_3" data-toggle="tab" onclick="changeTab('#tab_3', '#li_tab_3')">Medical registration</a>
                                     </li>
+                                    <li id="li_upload">
+                                        <a href="#myModal" data-toggle="modal" data-target="#myModal">Modal testing</a>
+                                    </li>
                                 </ul>
                                 <!-- End tab header -->
 
@@ -55,7 +58,7 @@
 
                                             <div class="col-sm-4">
                                                 <select id="patientName" th:name="patientName">
-                                                    <option value="">Type patient name</option>
+                                                    <!--<option value="">Type patient name</option>-->
                                                 </select>
                                             </div>
                                             <div class="col-sm-3 help-block with-errors" id = "invalidPatientName">
@@ -101,122 +104,112 @@
                                         <table class="table table-bordered table-striped" id="tableMedicalCheck">
                                             <thead>
                                             <tr>
-                                                <th style="width: 200px; text-align: center">Measurement index</th>
-                                                <th style="width: 125px; text-align: center">Value</th>
-                                                <th style="width: 200px; text-align: center">Measurement index</th>
-                                                <th style="width: 125px; text-align: center" >Value</th>
+                                                <th style="width: 250px; text-align: center">Measurement index</th>
+                                                <th style="width: 75px; text-align: center">Value</th>
+                                                <th style="width: 250px; text-align: center">Measurement index</th>
+                                                <th style="width: 75px; text-align: center" >Value</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    <label for="Weight" class="control-label">Weight*</label>
+                                                    <label for="Weight" class="control-label">Weight* (Kg)</label>
                                                 </td>
                                                 <td class="form-group">
-                                                    <input type="number" th:name="weight" class="form-control" id="Weight"
-                                                           placeholder="Kg"/>
+                                                    <input type="number" th:name="weight" class="form-control" id="Weight"/>
 
                                                     <div class="help-block with-errors" id="invalidWeight">
                                                     </div>
                                                 </td>
 
                                                 <td>
-                                                    <label for="visceralFat" class="control-label">Visceral Fat*</label>
+                                                    <label for="visceralFat" class="control-label">Visceral Fat* (level)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="text" th:name="visceralFat" class="form-control"
-                                                           id="visceralFat"
-                                                           placeholder="level"/>
+                                                           id="visceralFat"/>
 
                                                     <div class="help-block with-errors" id="invalidVisceralFat"></div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="height" class="control-label">Height*</label>
+                                                    <label for="height" class="control-label">Height (cm)*</label>
                                                 </td>
                                                 <td class="form-group">
-                                                    <input type="number" th:name="height" class="form-control" id="height"
-                                                           placeholder="cm" />
+                                                    <input type="number" th:name="height" class="form-control" id="height"/>
 
                                                     <div class="help-block with-errors" id="invalidHeight"></div>
                                                 </td>
 
                                                 <td>
-                                                    <label for="muscleMass" class="control-label">Muscle Mass*</label>
+                                                    <label for="muscleMass" class="control-label">Muscle Mass* (%)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="text" th:name="muscleMass" class="form-control"
-                                                           id="muscleMass"
-                                                           placeholder="%"/>
+                                                           id="muscleMass"/>
 
                                                     <div class="help-block with-errors" id="invalidMuscleMass"></div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="heartBeat" class="control-label">Heart Beat*</label>
+                                                    <label for="heartBeat" class="control-label">Heart Beat* (times/min)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="heartBeat" class="form-control"
-                                                           id="heartBeat"
-                                                           placeholder="times/minute" />
+                                                           id="heartBeat"/>
 
                                                     <div class="help-block with-errors" id="invalidHeartBeat"></div>
                                                 </td>
 
                                                 <td>
-                                                    <label for="bodyWater" class="control-label">Body Water*</label>
+                                                    <label for="bodyWater" class="control-label">Body Water* (%)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="text" th:name="bodyWater" class="form-control"
-                                                           id="bodyWater"
-                                                           placeholder="%" />
+                                                           id="bodyWater"/>
 
                                                     <div class="help-block with-errors" id="invalidBodyWater"></div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="bloodPressure" class="control-label">Blood Pressure*</label>
+                                                    <label for="bloodPressure" class="control-label">Blood Pressure* (mmHg)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="bloodPressure" class="form-control"
-                                                           id="bloodPressure"
-                                                           placeholder="mmHg" />
+                                                           id="bloodPressure"/>
 
                                                     <div class="help-block with-errors" id = "invalidBloodPressure"></div>
                                                 </td>
 
                                                 <td>
-                                                    <label for="phaseAngle" class="control-label">Phase Angle*</label>
+                                                    <label for="phaseAngle" class="control-label">Phase Angle* (o)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="text" th:name="phaseAngle" class="form-control"
-                                                           id="phaseAngle"
-                                                           placeholder="o" />
+                                                           id="phaseAngle"/>
 
                                                     <div class="help-block with-errors" id = "invalidPhaseAngle"></div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="waists" class="control-label">Waists*</label>
+                                                    <label for="waists" class="control-label">Waists* (cm)</label>
                                                 </td>
                                                 <td class="form-group">
-                                                    <input type="number" th:name="waists" class="form-control" id="waists"
-                                                           placeholder="cm" />
+                                                    <input type="number" th:name="waists" class="form-control" id="waists" />
 
                                                     <div class="help-block with-errors" id = "invalidWaists"></div>
                                                 </td>
 
                                                 <td>
-                                                    <label for="impedance" class="control-label">Impedance*</label>
+                                                    <label for="impedance" class="control-label">Impedance* (Ohm)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="impedance" class="form-control"
-                                                           id="impedance"
-                                                           placeholder="Ohm" />
+                                                           id="impedance"/>
 
                                                     <div class="help-block with-errors" id = "invalidImpedance"></div>
                                                 </td>
@@ -224,24 +217,22 @@
 
                                             <tr>
                                                 <td>
-                                                    <label for="bodyFat" class="control-label">Body Fat*</label>
+                                                    <label for="bodyFat" class="control-label">Body Fat* (%)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="text" th:name="bodyFat" class="form-control"
-                                                           id="bodyFat"
-                                                           placeholder="%" />
+                                                           id="bodyFat" />
 
                                                     <div class="help-block with-errors" id = "invalidBodyFat"></div>
                                                 </td>
 
                                                 <td>
                                                     <label for="basalMetabolicRate" class="control-label">Basal
-                                                        Metabolic Rate*</label>
+                                                        Metabolic Rate* (Kcal)</label>
                                                 </td>
                                                 <td>
                                                     <input type="number" th:name="basalMetabolicRate" class="form-control"
-                                                           id="basalMetabolicRate"
-                                                           placeholder="Kcal"/>
+                                                           id="basalMetabolicRate"/>
 
                                                     <div class="help-block with-errors" id="invalidBasalMetabolicRate"></div>
                                                 </td>
@@ -322,7 +313,28 @@
                             <button type="reset" class="btn btn-default">Cancel</button>
                         </div>
                         <!-- /.box-footer -->
+                        <!-- Modal -->
+
                     </form>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Confirm Box</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <input id="fileUploader" name="fileupLoader" type="file" multiple="multiple" class="file-loading"/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.box -->
             </div>
@@ -337,6 +349,8 @@
     <div>
         <div layout:replace="_popupPatient"></div>
     </div>
+
+
     <!-- POPUP -->
     <!-- jQuery -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
@@ -364,14 +378,15 @@
     <link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>
 
-    <!-- Bootstrap validator-->
-    <!--<script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>-->
+    <!-- Bootstrap file input-->
+    <link th:href="@{/static/bower/bootstrap-fileinput/css/fileinput.min.css}" rel="stylesheet"/>
+    <script th:src="@{/static/bower/bootstrap-fileinput/js/fileinput.min.js}"/>
 
-    <!--&lt;!&ndash; script add &ndash;&gt;-->
-    <!--<script th:src="@{/static/js/bootstrap-validator-ext.js}"/>-->
+    <!-- external script-->
     <script th:src="@{/static/js/registerPatient.js}"/>
 
-    <!-- css add -->
+    <!-- external css-->
+
     <link th:href="@{/static/css/registerPatient.css}" rel="stylesheet"/>
 </div>
 <!-- /.content-wrapper -->

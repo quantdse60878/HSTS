@@ -53,7 +53,7 @@
                                     <!-- Tab content -->
                                     <div class="tab-content">
                                         <!-- Tab 1: Personal information-->
-                                        <div class="tab-pane" id="tab_1">
+                                        <div class="tab-pane face" id="tab_1">
                                             <div class="form-group">
                                                 <label for="patientName" class="col-sm-3 control-label">Name*</label>
 
@@ -83,7 +83,7 @@
 
                                                 <div class="btn-group col-sm-2" data-toggle="buttons">
                                                     <label th:class="(${PATIENT.account.gender == 1})?'btn btn-info active':'btn btn-danger active'">
-                                                        <input type="radio" th:text="${PATIENT.account.gender == 1}? 'Male' : 'Femail'"/>
+                                                        <input type="radio" th:text="${PATIENT.account.gender == 1}? 'MALE' : 'FEMALE'"/>
                                                     </label>
                                                 </div>
                                             </div>
@@ -102,122 +102,112 @@
                                             <table class="table table-bordered table-striped" id="tableMedicalCheck">
                                                 <thead>
                                                 <tr>
-                                                    <th style="width: 200px; text-align: center">Measurement index</th>
-                                                    <th style="width: 125px; text-align: center">Value</th>
-                                                    <th style="width: 200px; text-align: center">Measurement index</th>
-                                                    <th style="width: 125px; text-align: center" >Value</th>
+                                                    <th style="width: 250px; text-align: center">Measurement index</th>
+                                                    <th style="width: 75px; text-align: center">Value</th>
+                                                    <th style="width: 250px; text-align: center">Measurement index</th>
+                                                    <th style="width: 75px; text-align: center" >Value</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr>
                                                     <td>
-                                                        <label for="Weight" class="control-label">Weight*</label>
+                                                        <label for="Weight" class="control-label">Weight* (Kg)</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="number" th:name="weight" class="form-control" id="Weight"
-                                                               placeholder="Kg"/>
+                                                        <input type="number" th:name="weight" class="form-control" id="Weight"/>
 
                                                         <div class="help-block with-errors" id="invalidWeight">
                                                         </div>
                                                     </td>
 
                                                     <td>
-                                                        <label for="visceralFat" class="control-label">Visceral Fat*</label>
+                                                        <label for="visceralFat" class="control-label">Visceral Fat* (level)</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="text" th:name="visceralFat" class="form-control"
-                                                               id="visceralFat"
-                                                               placeholder="level"/>
+                                                               id="visceralFat"/>
 
                                                         <div class="help-block with-errors" id="invalidVisceralFat"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <label for="height" class="control-label">Height*</label>
+                                                        <label for="height" class="control-label">Height (cm)*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="number" th:name="height" class="form-control" id="height"
-                                                               placeholder="cm" />
+                                                        <input type="number" th:name="height" class="form-control" id="height"/>
 
                                                         <div class="help-block with-errors" id="invalidHeight"></div>
                                                     </td>
 
                                                     <td>
-                                                        <label for="muscleMass" class="control-label">Muscle Mass*</label>
+                                                        <label for="muscleMass" class="control-label">Muscle Mass* (%)</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="text" th:name="muscleMass" class="form-control"
-                                                               id="muscleMass"
-                                                               placeholder="%"/>
+                                                               id="muscleMass"/>
 
                                                         <div class="help-block with-errors" id="invalidMuscleMass"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <label for="heartBeat" class="control-label">Heart Beat*</label>
+                                                        <label for="heartBeat" class="control-label">Heart Beat* (times/min)</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="number" th:name="heartBeat" class="form-control"
-                                                               id="heartBeat"
-                                                               placeholder="times/minute" />
+                                                               id="heartBeat"/>
 
                                                         <div class="help-block with-errors" id="invalidHeartBeat"></div>
                                                     </td>
 
                                                     <td>
-                                                        <label for="bodyWater" class="control-label">Body Water*</label>
+                                                        <label for="bodyWater" class="control-label">Body Water* (%)</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="text" th:name="bodyWater" class="form-control"
-                                                               id="bodyWater"
-                                                               placeholder="%" />
+                                                               id="bodyWater"/>
 
                                                         <div class="help-block with-errors" id="invalidBodyWater"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <label for="bloodPressure" class="control-label">Blood Pressure*</label>
+                                                        <label for="bloodPressure" class="control-label">Blood Pressure* (mmHg)</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="number" th:name="bloodPressure" class="form-control"
-                                                               id="bloodPressure"
-                                                               placeholder="mmHg" />
+                                                               id="bloodPressure"/>
 
                                                         <div class="help-block with-errors" id = "invalidBloodPressure"></div>
                                                     </td>
 
                                                     <td>
-                                                        <label for="phaseAngle" class="control-label">Phase Angle*</label>
+                                                        <label for="phaseAngle" class="control-label">Phase Angle* (o)</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="text" th:name="phaseAngle" class="form-control"
-                                                               id="phaseAngle"
-                                                               placeholder="o" />
+                                                               id="phaseAngle"/>
 
                                                         <div class="help-block with-errors" id = "invalidPhaseAngle"></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <label for="waists" class="control-label">Waists*</label>
+                                                        <label for="waists" class="control-label">Waists* (cm)</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="number" th:name="waists" class="form-control" id="waists"
-                                                               placeholder="cm" />
+                                                        <input type="number" th:name="waists" class="form-control" id="waists" />
 
                                                         <div class="help-block with-errors" id = "invalidWaists"></div>
                                                     </td>
 
                                                     <td>
-                                                        <label for="impedance" class="control-label">Impedance*</label>
+                                                        <label for="impedance" class="control-label">Impedance* (Ohm)</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="number" th:name="impedance" class="form-control"
-                                                               id="impedance"
-                                                               placeholder="Ohm" />
+                                                               id="impedance"/>
 
                                                         <div class="help-block with-errors" id = "invalidImpedance"></div>
                                                     </td>
@@ -225,24 +215,22 @@
 
                                                 <tr>
                                                     <td>
-                                                        <label for="bodyFat" class="control-label">Body Fat*</label>
+                                                        <label for="bodyFat" class="control-label">Body Fat* (%)</label>
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="text" th:name="bodyFat" class="form-control"
-                                                               id="bodyFat"
-                                                               placeholder="%" />
+                                                               id="bodyFat" />
 
                                                         <div class="help-block with-errors" id = "invalidBodyFat"></div>
                                                     </td>
 
                                                     <td>
                                                         <label for="basalMetabolicRate" class="control-label">Basal
-                                                            Metabolic Rate*</label>
+                                                            Metabolic Rate* (Kcal)</label>
                                                     </td>
                                                     <td>
                                                         <input type="number" th:name="basalMetabolicRate" class="form-control"
-                                                               id="basalMetabolicRate"
-                                                               placeholder="Kcal"/>
+                                                               id="basalMetabolicRate"/>
 
                                                         <div class="help-block with-errors" id="invalidBasalMetabolicRate"></div>
                                                     </td>

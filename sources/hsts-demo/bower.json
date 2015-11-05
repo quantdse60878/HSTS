@@ -14,6 +14,7 @@
 	"bootstrap3-typeahead": null,
 	"bootstrap-validator": null,
 	"select2-bootstrap-theme": null,
-	"icheck": null
+	"icheck": null,
+	"bootstrap-fileinput": null
   }
 }
