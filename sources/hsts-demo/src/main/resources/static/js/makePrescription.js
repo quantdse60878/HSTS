@@ -67,6 +67,44 @@ $(function () {
     barChart.Bar(barChartData, barChartOptions);
 });
 
+
+
+$("#select2Box").select2({
+    width: "200px",
+    ajax: {
+        url: "/illnessName/list",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+            return {
+                searchString: params.term, // search term
+                page: params.page,
+            };
+        },
+        processResults: function (data, page) {
+            var names = data.map(function (name) {
+                return {
+                    id: name,
+                    text: name
+                }
+            });
+            return {results: names, more: false
+            };
+        },
+        cache: true
+    },
+    escapeMarkup: function (markup) { return markup; },
+    tags: true,
+    createTag: function (tag) {
+        return {
+            id: tag.term,
+            text: tag.term,
+            tag: true
+        };
+    }
+});
+
+
 function deleteRowFood(t){
     var row = t.parentNode.parentNode;
     var nextRow = row.nextElementSibling;
@@ -450,20 +488,27 @@ function changeTab(a) {
 ;
 var check = $('#phase').val();
 function confirmBox(form) {
-    if (check == '') {
-        alert('Please suggest diagnostic before make prescription!!!');
-        return false;
+    //if (check == '') {
+    //    alert('Please suggest diagnostic before make prescription!!!');
+    //    return false;
+    //} else {
+    //
+    //}
+    var r = confirm('Are you sure to make this prescription?');
+    if (r == true) {
+        // Hidden field for diagnostic
+        //Get
+        var bla = $('#select2Box').val();
+        console.log(bla);
+        //Set
+        $('#diagnostic').val(bla);
+        return true;
     } else {
-        var r = confirm('Are you sure to make this prescription?');
-        if (r == true) {
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 }
 
-$("#combobox").combobox();
+//$("#combobox").combobox();
 $("#infordate").comboboxx();
 $('#Appointment').datepicker({
     format: 'dd-mm-yyyy'

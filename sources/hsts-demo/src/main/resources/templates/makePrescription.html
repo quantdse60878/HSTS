@@ -119,19 +119,7 @@
                                         <input th:if="${TREATMENT != null}"
                                                th:value="${TREATMENT.appointment.medicalRecord.illness != null}? ${TREATMENT.appointment.medicalRecord.illness.name} : 'Unknown Disease'"
                                                readonly="readonly" class="form-control"/>
-                                        <select th:if="${TREATMENT == null}" id="combobox" th:name="diagnostic"
-                                                class="form-control">
-                                            <option th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"
-                                                    th:text="${DIAGNOSTIC != null}? ${DIAGNOSTIC.name} : ''">Select
-                                                one...
-                                            </option>
-
-                                            <option th:each="illness : ${ILLNESSES}" th:value="${illness.id}"
-                                                    th:text="${illness.name}"
-                                                    th:if="${DIAGNOSTIC != null and DIAGNOSTIC.id != illness.id}"></option>
-
-                                            <option th:each="illness : ${ILLNESSES}" th:value="${illness.id}"
-                                                    th:text="${illness.name}" th:if="${DIAGNOSTIC == null}"></option>
+                                        <select id="select2Box" th:name="diagnostic">
                                         </select>
                                     </div>
                                     <div class="col-sm-2 pull-right" th:if="${TREATMENT == null}">
@@ -146,9 +134,7 @@
                         <!-- form start -->
                         <form class="form-horizontal" th:action="prescription" method="get" th:object="${model}"
                               data-toggle="validator" onsubmit="return confirmBox(this);">
-                            <input type="hidden" name="diagnostic" id="diagnostic"
-                                   th:value="${DIAGNOSTIC != null}? ${DIAGNOSTIC.id}"/>
-
+                            <input type="hidden" name="diagnostic" id="diagnostic"/>
                             <div class="box-body">
 
                                 <!-- Sidebar Menu -->
@@ -396,10 +382,15 @@
     <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
     <!-- ChartJS 1.0.1 -->
     <script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>
+    <!-- select 2-->
+    <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
+    <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
     <!-- makePrescription -->
     <script th:src="@{/static/js/makePrescription.js}"></script>
 
     <script th:src="@{/static/js/bootstrap-validator-ext.js}"></script>
+
+
 
     <script type="text/javascript">
         var countMedicine = $('#medics').val();

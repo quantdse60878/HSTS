@@ -207,7 +207,13 @@ public class DoctorService extends AbstractService {
             final MedicalRecord medicalRecord = appointment.getMedicalRecord();
             final String dianostic = prescription.getDiagnostic();
             if (StringUtils.isNotEmpty(dianostic)) {
-                final Illness illness = illnessRepo.findOne(Integer.parseInt(dianostic));
+                Illness illness = illnessRepo.findByName(dianostic);
+                if (null == illness) {
+                    illness = new Illness();
+                    illness.setName(dianostic);
+                    illness.setDescription(dianostic);
+                    illnessRepo.saveAndFlush(illness);
+                }
                 medicalRecord.setIllness(illness);
             }
             medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.ON_TREATING);
@@ -220,6 +226,7 @@ public class DoctorService extends AbstractService {
             } else {
                 // Set to next 7 day
                 toDate = DateUtils.plusDateTime(new Date(), Calendar.DATE, treatmentLong);
+                toDate = DateUtils.roundDate(toDate, false);
             }
 
             // Create next appointment
@@ -418,7 +425,7 @@ public class DoctorService extends AbstractService {
             Appointment oldAppointment = appointmentRepo.findParentAppointment(appointment.getId());
 
             if (null != oldAppointment) {
-                Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(oldAppointment.getId());
+                Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(oldAppointment.getId()).get(0);
                 List<MedicalRecordData> medicalRecordDatas = medicalRecordDataRepo.findRecordDataByAppointment(oldAppointment, oldAppointment.getMeetingDate(), appointment.getMeetingDate());
                 LOGGER.info("medicalRecordDatas: " + medicalRecordDatas.size());
                 if (medicalRecordDatas.size() > 0) {

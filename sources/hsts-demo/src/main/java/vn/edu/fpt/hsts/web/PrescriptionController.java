@@ -219,7 +219,6 @@ public class PrescriptionController extends AbstractController{
             } else {
                 notify(mav, result, "Make Prescription", "Fail!!!");
             }
-
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

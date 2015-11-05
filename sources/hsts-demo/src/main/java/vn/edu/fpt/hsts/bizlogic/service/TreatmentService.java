@@ -152,7 +152,7 @@ public class TreatmentService {
 
     public Treatment findTreatmentByAppointmentID(final int appointmentId) {
         LOGGER.info("appointmentId[{}]", appointmentId);
-        return treatmentRepo.findLastTreatmenByAppointmentId(appointmentId);
+        return treatmentRepo.findLastTreatmenByAppointmentId(appointmentId).get(0);
     }
 
     public List<MedicineTreatment> getAllMedicineTreatmentFromTreatment(final Treatment treatment) {
