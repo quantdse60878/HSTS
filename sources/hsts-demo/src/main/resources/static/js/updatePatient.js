@@ -21,6 +21,7 @@ function changeTab (a, li) {
 };
 
 $("#doctorSelect").select2({
+    placeholder: "Choose a doctor",
     width: "400px",
     ajax: {
         url: "/doctor/list",

@@ -27,6 +27,7 @@ function changeTab (a, li) {
 };
 
 $("#doctorSelect").select2({
+    placeholder: "Choose a doctor",
     theme: "bootstrap",
     width: "400px",
     ajax: {
@@ -62,6 +63,7 @@ $("#doctorSelect").select2({
 });
 
 var $selectPatient = $("#patientName").select2({
+    placeholder: "Type patient name",
     theme: "bootstrap",
     width: "100%",
     allowClear: false,
