@@ -44,7 +44,7 @@
                                         <a href="tab_3" data-toggle="tab" onclick="changeTab('#tab_3', '#li_tab_3')">Medical registration</a>
                                     </li>
                                     <li id="li_upload">
-                                        <a href="#myModal" data-toggle="modal" data-target="#myModal">Modal testing</a>
+                                        <a href="#uploadModal" data-toggle="modal" data-target="#uploadModal">Modal testing</a>
                                     </li>
                                 </ul>
                                 <!-- End tab header -->
@@ -316,21 +316,20 @@
                         <!-- Modal -->
 
                     </form>
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Confirm Box</h4>
+                                    <h4 class="modal-title" id="uploadModalLabel">Upload medical history image</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div>
-                                        <input id="fileUploader" name="fileupLoader" type="file" multiple="multiple" class="file-loading"/>
+                                        <input id="fileUploader" name="fileUploader" type="file" multiple="multiple" class="file-loading"/>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Yes</button>
                                 </div>
                             </div>
                         </div>

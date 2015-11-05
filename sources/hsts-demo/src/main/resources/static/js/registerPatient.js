@@ -382,7 +382,7 @@ $selectPatient.on("change", function (e) {
     console.log("Text: " + textData);
     if (val.indexOf("404") == 0) {
         // Bind patient profile
-        //loadPatientProfile(val);
+        loadPatientProfile(val);
     };
 });
 
@@ -512,7 +512,25 @@ function toggle(div_id) {
 }
 
 $("#fileUploader").fileinput({
-    uploadUrl: "http://localhost/file-upload-single/1", // server upload action
+    uploadUrl: "/uploadImage", // server upload action
     uploadAsync: true,
-    maxFileCount: 5
+    maxFileCount: 5,
+    allowedFileTypes: ['image'],
+    allowedFileExtensions: ['jpg', 'gif', 'png'],
+    maxFileSize: 5170
+});
+
+$('#fileUploader').on('fileuploaded', function(event, data, previewId, index) {
+    var form = data.form, files = data.files, extra = data.extra,
+        response = data.response, reader = data.reader;
+    console.log('File uploaded triggered: ' + response.result);
+    console.log('File uploaded triggered: ' + response.fileName);
+});
+
+$('#fileUploader').on('filebatchpreupload', function(event, data, previewId, index) {
+    var form = data.form, files = data.files, extra = data.extra,
+        response = data.response, reader = data.reader;
+    console.log('File batch pre upload');
+    $('#input-id').fileinput('clear');
+    $('#uploadModal').modal('hide');
 });

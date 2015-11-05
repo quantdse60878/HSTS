@@ -13,11 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
@@ -32,6 +35,7 @@ import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -379,7 +383,21 @@ public class NurseController extends AbstractController {
             if (result) {
                 return OK_STATUS;
             }
-            return "ABC";
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/uploadImage", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public FileUploadModel upload(@RequestParam(value = "fileUploader", required = false) final MultipartFile multipartFile) throws IOException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            if (null != multipartFile && multipartFile.getBytes().length > 0) {
+                LOGGER.info("file name[{}]", multipartFile.getOriginalFilename());
+            }
+            return patientService.saveMedicalImage(multipartFile);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
