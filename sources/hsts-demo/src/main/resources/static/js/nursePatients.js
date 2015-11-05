@@ -102,7 +102,7 @@ function printPrescription(patientId) {
             console.log(data);
             // Check if the
             if (data == FAIL_STATUS) {
-                alert('No ON_TREATING prescription data!!!');
+                $('#messageModal').modal('show');
                 return;
             }
             var url = "/printPrescriptionPage?patientId=" + patientId;
