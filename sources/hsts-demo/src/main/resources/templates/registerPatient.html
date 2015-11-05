@@ -338,6 +338,52 @@
                         </div>
                     </div>
                     <!-- .upload file pop up-->
+
+                    <!-- patient profile modal -->
+                    <div class="modal fade" id="patientProfileModal" tabindex="-1" role="dialog" aria-labelledby="patientProfileLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="patientProfileLabel">Patient profile</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Name</label>
+
+                                        <div class="col-sm-5">
+                                            <label id = "txtName">Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Birthday</label>
+                                        <div class="col-sm-3">
+                                            <label id = "txtBirthday">Birthday</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Email</label>
+
+                                        <div class="col-sm-3">
+                                            <label id = "txtEmail">Birthday</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Gender</label>
+                                        <div class="btn-group col-sm-3" data-toggle="buttons">
+                                            <input type ="text" style="width: 90px" id = "btnGender"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <a href = "/test" class ="btn btn-info" id = "btnLink">This is old patient</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .patient profile modal -->
+
                 </div>
                 <!-- /.box -->
             </div>
@@ -348,10 +394,10 @@
     </section>
     <!-- /.content -->
     <!-- POPUP -->
-    <div id="blanket" style="display:none;"></div>
-    <div>
-        <div layout:replace="_popupPatient"></div>
-    </div>
+    <!--<div id="blanket" style="display:none;"></div>-->
+    <!--<div>-->
+        <!--<div layout:replace="_popupPatient"></div>-->
+    <!--</div>-->
 
 
     <!-- POPUP -->

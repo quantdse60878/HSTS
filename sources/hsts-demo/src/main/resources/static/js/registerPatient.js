@@ -429,7 +429,7 @@ function loadPatientProfile(patientBarcode) {
             btnLink.setAttribute("href", "patient?patientID=" + data.id);
 
             // Show pop-up
-            popup('popupPatient');
+            $('#patientProfileModal').modal('show');
         }
 
     });
