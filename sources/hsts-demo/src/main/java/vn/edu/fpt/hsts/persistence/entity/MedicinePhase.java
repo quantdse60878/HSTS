@@ -25,6 +25,8 @@ public class MedicinePhase extends AbstractKeyEntity {
     @JoinColumn(name = "medicineId", nullable = false)
     private Medicine medicine;
 
+    private String quantitative;
+
     public MedicinePhase() {
     }
 
@@ -42,5 +44,13 @@ public class MedicinePhase extends AbstractKeyEntity {
 
     public void setMedicine(final Medicine medicine) {
         this.medicine = medicine;
+    }
+
+    public String getQuantitative() {
+        return quantitative;
+    }
+
+    public void setQuantitative(final String quantitative) {
+        this.quantitative = quantitative;
     }
 }

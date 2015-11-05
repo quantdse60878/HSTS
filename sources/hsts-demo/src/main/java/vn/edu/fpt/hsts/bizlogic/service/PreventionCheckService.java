@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.App;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 import vn.edu.fpt.hsts.persistence.repo.AppointmentRepo;
@@ -54,10 +55,12 @@ public class PreventionCheckService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("patientId[{}]", patientId);
-            final List<Appointment> lastAppointments = appointmentRepo.findLastAppointmentByPatient(patientId, new PageRequest(0, 1));
+            final byte[] statuses = {IDbConsts.IAppointmentStatus.FINISHED, IDbConsts.IAppointmentStatus.WATTING};
+            final List<Appointment> lastAppointments = appointmentRepo.findLastAppointmentByPatient(patientId, statuses, new PageRequest(0, 1));
             if (null != lastAppointments && !lastAppointments.isEmpty()) {
                 final Appointment appointment = lastAppointments.get(0);
-                List<PreventionCheck> preventionCheckList = preventionCheckRepo.findPreventionCheckByAppointment(appointment.getId());
+                final int appId= appointment.getId();
+                List<PreventionCheck> preventionCheckList = preventionCheckRepo.findPreventionCheckByAppointment(appId);
                 if (null != preventionCheckList && !preventionCheckList.isEmpty()) {
                    return preventionCheckList.get(preventionCheckList.size() -1);
                 }
