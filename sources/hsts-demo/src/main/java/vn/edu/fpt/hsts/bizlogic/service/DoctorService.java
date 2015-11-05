@@ -268,15 +268,15 @@ public class DoctorService extends AbstractService {
                         }
                         if (medicineModel.isValid()) {
                             LOGGER.info("Medicine valid");
-                            Medicine medicine = medicineRepo.findOne(Integer.parseInt(medicineModel.getM()));
+                            Medicine medicine = medicineRepo.findOne(medicineModel.getM());
                             if (null == medicine) {
                                 LOGGER.info("Medicine with id[{}] is not found", null, medicineModel.getM());
                                 // Create new medicine
-                                medicine = new Medicine();
-                                medicine.setName(medicineModel.getM());
-                                medicine.setUnit(medicineModel.getmUnit());
-                                medicineRepo.saveAndFlush(medicine);
-                                LOGGER.info("Create new medicine", medicine.getName());
+//                                medicine = new Medicine();
+//                                medicine.setName(medicineModel.getM());
+//                                medicine.setUnit(medicineModel.getmUnit());
+//                                medicineRepo.saveAndFlush(medicine);
+//                                LOGGER.info("Create new medicine", medicine.getName());
                             }
                             LOGGER.info("Create MedicineTreatment");
                             MedicineTreatment medicineTreatment = new MedicineTreatment();

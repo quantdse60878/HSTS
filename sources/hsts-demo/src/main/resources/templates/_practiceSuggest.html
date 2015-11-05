@@ -65,7 +65,7 @@
     <label class="col-md-3 control-label">Kcal Estimate</label>
 
     <div class="col-md-2">
-        <input th:name="kcalRequire" data-rule-required="true" data-msg-required="Please input." th:value="${#numbers.formatDecimal(model.kcalRequire, 1, 'POINT', 1, 'COMMA')}" style="text-align: right;" type="text" class="form-control hsts"/>
+        <input th:name="kcalRequire" data-rule-required="true" data-msg-required="Please input." th:value="${#numbers.formatDecimal(model.kcalRequire, 1, 'POINT', 0, 'COMMA')}" style="text-align: right;" type="text" class="form-control hsts"/>
         <div class="help-block with-errors"></div>
     </div>
     <label class="col-md-1 control-label">Kcal/Day</label>
