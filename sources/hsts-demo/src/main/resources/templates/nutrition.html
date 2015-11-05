@@ -108,7 +108,7 @@
                                             </table>
                                         </div>
                                         <div class="">
-                                            <a href="#tab_2-2" onclick="changeTab('#tab_2-2', '#li_tab_2-2')" data-toggle="tab"
+                                            <a href="#tab_2-2" onclick="validateAndChangeTab('#tab_2-2', '#li_tab_2-2')" data-toggle="tab"
                                                class="btn btn-primary pull-right">Next</a>
                                         </div>
                                     </div>
@@ -256,7 +256,7 @@
                                         <div class="">
                                             <a href="#tab_1-1" onclick="changeTab('#tab_1-1', '#li_tab_1-1')" data-toggle="tab"
                                                class="btn btn-default">Previous</a>
-                                            <button class="btn btn-primary pull-right" type="button" data-toggle="modal" data-target="#myModal">Done</button>
+                                            <a class="btn btn-primary pull-right" onclick="validateAndOpenModal('#myModal')">Done</a>
                                         </div>
                                     </div>
                                     <!-- /.tab-pane -->
