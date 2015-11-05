@@ -26,7 +26,7 @@
             <!--th:text="${practice.name}"-->
             <!--th:if="${practicePhase.practice.id != practice.id}"></option>-->
             <!--</select>-->
-            <input type="text" class="form-control" th:name="pPresModels[__${row.index}__].p"
+            <input type="text" placeholder="Practice Name" class="form-control" th:name="pPresModels[__${row.index}__].p"
                    th:id="pPresModelsP__${row.index}__"
                    oninput="viewAutoCompleteP(this)"/>
             <div th:id="pPresModelsP__${row.index}__item" class="form-control"
@@ -69,7 +69,7 @@
     <label class="col-md-3 control-label">Kcal Estimate</label>
 
     <div class="col-md-2">
-        <input th:field="*{kcalRequire}" style="text-align: right;" type="text" class="form-control hsts"
+        <input th:name="kcalRequire" th:value="${#numbers.formatDecimal(model.kcalRequire, 1, 'POINT', 1, 'COMMA')}" style="text-align: right;" type="text" class="form-control hsts"
                data-remote="/validateData"
                required="required" data-error="Wrong input"/>
     </div>

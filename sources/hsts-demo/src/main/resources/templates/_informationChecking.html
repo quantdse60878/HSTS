@@ -32,7 +32,7 @@
         </td>
         <td>
             <input type="text"
-                   th:value="${PREVENTIONCHECK.bodyFat}" class="form-control hsts" readonly="readonly"/>
+                   th:value="${#numbers.formatDecimal(PREVENTIONCHECK.bodyFat, 1, 'POINT', 1, 'COMMA')}" class="form-control hsts" readonly="readonly"/>
         </td>
         <td>
             <label class="control-label"> %</label>
@@ -81,7 +81,7 @@
         </td>
         <td>
             <input type="text"
-                   th:value="${PREVENTIONCHECK.muscleMass}" class="form-control hsts" readonly="readonly"/>
+                   th:value="${#numbers.formatDecimal(PREVENTIONCHECK.muscleMass, 1, 'POINT', 1, 'COMMA')}" class="form-control hsts" readonly="readonly"/>
         </td>
         <td>
             <label class="control-label"> %</label>
@@ -105,7 +105,7 @@
         </td>
         <td>
             <input type="text"
-                   th:value="${PREVENTIONCHECK.bodyWater}" class="form-control hsts" readonly="readonly"/>
+                   th:value="${#numbers.formatDecimal(PREVENTIONCHECK.bodyWater, 1, 'POINT', 1, 'COMMA')}" class="form-control hsts" readonly="readonly"/>
         </td>
         <td>
             <label class="control-label"> %</label>
@@ -129,7 +129,7 @@
         </td>
         <td>
             <input type="text"
-                   th:value="${PREVENTIONCHECK.phaseAngle}" class="form-control hsts" readonly="readonly"/>
+                   th:value="${#numbers.formatDecimal(PREVENTIONCHECK.phaseAngle, 1, 'POINT', 1, 'COMMA')}" class="form-control hsts" readonly="readonly"/>
         </td>
         <td>
             <label class="control-label"> o</label>
@@ -161,7 +161,7 @@
         </td>
         <td>
             <input type="text"
-                   th:value="${PREVENTIONCHECK.basalMetabolicRate}" class="form-control hsts" readonly="readonly"/>
+                   th:value="${#numbers.formatDecimal(PREVENTIONCHECK.basalMetabolicRate, 1, 'POINT', 1, 'COMMA')}" class="form-control hsts" readonly="readonly"/>
         </td>
         <td>
             <label class="control-label"> Kcal</label>

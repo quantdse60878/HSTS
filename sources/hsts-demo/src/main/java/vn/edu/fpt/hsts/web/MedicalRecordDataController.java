@@ -32,5 +32,4 @@ public class MedicalRecordDataController {
 
         return "success";
     }
-
 }

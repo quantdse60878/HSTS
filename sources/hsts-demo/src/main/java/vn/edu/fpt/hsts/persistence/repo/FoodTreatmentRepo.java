@@ -25,4 +25,7 @@ public interface FoodTreatmentRepo extends JpaRepository<FoodTreatment, Integer>
 
     @Query("select distinct t from FoodTreatment t where treatment = :treatment")
     public List<FoodTreatment> getAllFoodTreatmentFromTreatment(@Param("treatment") final Treatment treatment);
+
+    @Query("select t from FoodTreatment t where treatment.appointment.id = :appointmentId")
+    public List<FoodTreatment> findFoodTreatmentByAppointmentId(@Param("appointmentId") final int appointmentId);
 }
