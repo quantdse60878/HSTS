@@ -375,6 +375,16 @@ function validateAndChangeTab(targetTab, targetLi) {
 
 };
 
+$selectPatient.on("change", function (e) {
+    var val = $selectPatient.val();
+    var textData = $selectPatient.text().trim();
+    console.log("Value: " + val);
+    console.log("Text: " + textData);
+    if (val.indexOf("404") == 0) {
+        // Bind patient profile
+        loadPatientProfile(val);
+    };
+});
 
 function loadPatientProfile(patientBarcode) {
     $.ajax({
@@ -501,8 +511,35 @@ function toggle(div_id) {
     }
 }
 
-$("#fileUploader").fileinput({
-    uploadUrl: "http://localhost/file-upload-single/1", // server upload action
+// Init tag input for medical history, medicine history and symtoms
+var medicalTagInput = $('#medicalHistory');
+var symptomsTagInput = $('#symptoms');
+var medicineHistoryTagInput = $('#medicineHistory');
+
+// Add tag for symptoms
+symptomsTagInput.tagsinput('add', 'NEW MEDICAL RECORD');
+
+
+// Upload file function
+var fileUploader = $("#fileUploader").fileinput({
+    uploadUrl: "/uploadImage", // server upload action
     uploadAsync: true,
-    maxFileCount: 5
+    maxFileCount: 5,
+    allowedFileTypes: ['image'],
+    allowedFileExtensions: ['jpg', 'gif', 'png'],
+    maxFileSize: 5170 // 5 MB
+});
+
+fileUploader.on('fileuploaded', function(event, data, previewId, index) {
+    var response = data.response;
+    console.log('File uploaded triggered: ' + response.result);
+    console.log('File uploaded triggered: ' + response.fileName);
+    // Add to tag input
+    medicalTagInput.tagsinput('add', response.fileName + "");
+});
+
+fileUploader.on('filebatchuploadcomplete', function(event, data, previewId, index) {
+    console.log('File batch upload successfully');
+    fileUploader.fileinput('refresh');
+    $('#uploadModal').modal('hide');
 });

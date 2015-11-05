@@ -7,6 +7,7 @@
  */
 package vn.edu.fpt.hsts.common.util;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vn.edu.fpt.hsts.common.IConsts;
@@ -94,5 +95,18 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             sb.setCharAt(i, removeAcients(sb.charAt(i)));
         }
         return sb.toString();
+    }
+
+    public static String randomString(final int lenght) {
+        LOGGER.debug(IConsts.BEGIN_METHOD);
+        try {
+            String random = RandomStringUtils.random(lenght, true, true);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug(random);
+            }
+            return random;
+        } finally {
+            LOGGER.debug(IConsts.END_METHOD);
+        }
     }
 }

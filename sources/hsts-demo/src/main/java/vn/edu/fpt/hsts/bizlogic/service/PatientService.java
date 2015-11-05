@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartFile;
+import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
@@ -27,6 +29,7 @@ import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
+import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
@@ -47,11 +50,16 @@ import vn.edu.fpt.hsts.persistence.repo.PreventionCheckRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by QUYHKSE61160 on 10/7/15.
@@ -631,6 +639,121 @@ public class PatientService extends AbstractService {
             PatientExtendedModel model = new PatientExtendedModel();
             model.fromEntity(patient);
             return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public FileUploadModel saveMedicalImage(final MultipartFile file){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        FileOutputStream os = null;
+        try {
+            LOGGER.info("fileName[{}]", file.getOriginalFilename());
+
+            // Format file name to prevent duplicate name
+            String fileName = file.getOriginalFilename();
+            final int index = fileName.lastIndexOf(".");
+            // Add random char
+            String surfix = StringUtils.randomString(6);
+            if (index > 0) {
+                String prefix = fileName.substring(0, index);
+                if (prefix.contains(".")) {
+                    prefix = prefix.replace(".", "_");
+                }
+                if (prefix.contains(",")) {
+                    prefix = prefix.replace(",", "_");
+                }
+                if (prefix.contains("/")) {
+                    prefix = prefix.replace("/", "_");
+                }
+                if (prefix.contains("\\")) {
+                    prefix = prefix.replace("\\", "_");
+                }
+                String postfix = fileName.substring(index);
+                fileName = String.format("%s_%s%s", prefix, surfix, postfix);
+            } else {
+                fileName = String.format("%s_%s", fileName, surfix);
+            }
+
+            // Save file to folder
+            final File folder = new File(getUploadDirectory());
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+            final String filePath = getUploadDirectory() + "/" + fileName;
+            final File newFile = new File(filePath);
+            if(!newFile.exists()) {
+                newFile.createNewFile();
+            }
+            os = new FileOutputStream(newFile);
+            os.write(file.getBytes());
+
+            final FileUploadModel model = new FileUploadModel();
+            model.setFileName(fileName);
+            model.setFilePath(filePath);
+            model.setResult(true);
+            return model;
+
+        } catch (Exception e) {
+            LOGGER.error("Error while uploading new file[{}]", file.getOriginalFilename());
+            return new FileUploadModel(false);
+        } finally {
+            try {
+                os.close();
+            } catch (Exception e) {
+                LOGGER.error("Error while uploading new file[{}]", file.getOriginalFilename());
+                return new FileUploadModel(false);
+            }
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public String getOldMedicalHistory(final int patientId){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final List<String> medicalHistories = medicalRecordRepo.findMedicalHistoryByPatientId(patientId);
+            if (!CollectionUtils.isEmpty(medicalHistories)) {
+                final Set<String> dataSet = new HashSet<String>();
+                for (String m: medicalHistories) {
+                    final List<String> spliters = Arrays.asList(m.split(","));
+                    dataSet.addAll(spliters);
+                }
+
+                // return
+                final StringBuilder sb = new StringBuilder();
+                for(String str: dataSet) {
+                    if (StringUtils.isNotEmpty(str)) {
+                       sb.append(str).append(",");
+                    }
+                }
+                return sb.toString();
+            }
+            return "";
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public String getOldSymtoms(final int patientId){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final PageRequest pageRequest = new PageRequest(0, 1);
+            final List<MedicalRecord> medicalRecordList = medicalRecordRepo.findByPatientId(patientId, pageRequest);
+            if (!CollectionUtils.isEmpty(medicalRecordList)) {
+                final Illness illness = medicalRecordList.get(0).getIllness();
+                if (null != illness) {
+                    String result = illness.getName();
+                    if (StringUtils.isNotEmpty(illness.getDescription())) {
+                        result = illness.getDescription();
+                    }
+                    return result;
+                }
+            }
+            return "";
+        } catch (Exception e) {
+            return "";
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
