@@ -511,6 +511,11 @@ function toggle(div_id) {
     }
 }
 
+// Init tag input for medical history, medicine history and symtoms
+var medicalTagInput = $('#medicalHistory');
+var symptomsTagInput = $('#symptoms');
+var medicineHistoryTagInput = $('#medicineHistory');
+
 var fileUploader = $("#fileUploader").fileinput({
     uploadUrl: "/uploadImage", // server upload action
     uploadAsync: true,
@@ -524,6 +529,8 @@ fileUploader.on('fileuploaded', function(event, data, previewId, index) {
     var response = data.response;
     console.log('File uploaded triggered: ' + response.result);
     console.log('File uploaded triggered: ' + response.fileName);
+    // Add to tag input
+    medicalTagInput.tagsinput('add', response.fileName + "");
 });
 
 fileUploader.on('filebatchuploadcomplete', function(event, data, previewId, index) {
