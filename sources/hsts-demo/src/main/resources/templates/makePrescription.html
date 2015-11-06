@@ -144,10 +144,10 @@
                                             <a href="#tab_4-4" data-toggle="tab">Infomation checking</a>
                                         </li>
                                         <li class="active" th:if="${DIAGNOSTIC != null}" id="li_tab_1-1">
-                                            <a href="#tab_1-1" data-toggle="tab">Medicine</a>
+                                            <a href="#tab_1-1" data-toggle="tab">Medicines</a>
                                         </li>
                                         <li th:if="${DIAGNOSTIC == null}" id="li_tab_1-1">
-                                            <a href="#tab_1-1" data-toggle="tab">Medicine</a>
+                                            <a href="#tab_1-1" data-toggle="tab">Medicines</a>
                                         </li>
                                         <li id="li_tab_2-2"><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
                                         <li id="li_tab_3-3"><a href="#tab_3-3" data-toggle="tab">Practices</a></li>
@@ -495,7 +495,7 @@
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<input type="text" value="0" class="form-control" style="text-align: right;" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" data-rule-required="true" data-msg-required="Please input." data-rule-range="0,10" data-msg-range="Out of range 0-10"/>'
+            newCell.innerHTML = '<input type="text" value="0" class="form-control" style="text-align: right;" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" data-rule-required="true" data-msg-required="Please input." data-rule-min="0" data-msg-min="Value must great than 0"/>'
                     + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");

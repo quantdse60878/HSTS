@@ -13,6 +13,7 @@ public class HisInforDateModel {
     private List<HisMedicine> hms;
     private List<HisFood> hfs;
     private List<HisPractice> hps;
+    private String dateInfor;
 
     public HisInforDateModel() {
     }
@@ -21,6 +22,14 @@ public class HisInforDateModel {
         this.hms = hms;
         this.hfs = hfs;
         this.hps = hps;
+    }
+
+    public String getDateInfor() {
+        return dateInfor;
+    }
+
+    public void setDateInfor(String dateInfor) {
+        this.dateInfor = dateInfor;
     }
 
     public List<HisMedicine> getHms() {

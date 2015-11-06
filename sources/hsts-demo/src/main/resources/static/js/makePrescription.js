@@ -204,6 +204,7 @@ function loadPopupAppointment(appointmentId) {
             console.log(data);
             if(data != null) {
                 // Set data to html
+                $('#inforDateHis').html(data.dateInfor);
 
                 hideWatting();
                 // Show pop-up
@@ -452,8 +453,8 @@ function reCounterRow(row) {
 
             this._on(this.input, {
                 autocompleteselect: function (event, ui) {
-                    window.location = ui.item.url;
-                    //loadPopupAppointment(ui.item.id);
+                    //window.location = ui.item.url;
+                    loadPopupAppointment(ui.item.id);
                 },
 
                 autocompletechange: "_removeIfInvalid"

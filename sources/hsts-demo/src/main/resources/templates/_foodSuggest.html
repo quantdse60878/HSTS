@@ -46,8 +46,8 @@
         </td>
         <td class="form-group">
             <input type="text" class="form-control" th:field="*{fPresModels[__${row.index}__].fQuantity}"
-                   style="text-align: right;"
-                   placeholder="Quantity" data-rule-range="0,10" data-msg-range="Out of range 0-10"/>
+                   style="text-align: right;" data-rule-required="true" data-msg-required="Please input."
+                   placeholder="Quantity" data-rule-min="0" data-msg-min="Value must great than 0"/>
             <div class="help-block with-errors"></div>
         </td>
         <td class="form-group">

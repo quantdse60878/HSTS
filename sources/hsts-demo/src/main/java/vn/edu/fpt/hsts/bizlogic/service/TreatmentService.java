@@ -15,6 +15,7 @@ import vn.edu.fpt.hsts.bizlogic.model.MedicineTreatmentModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticeTreatmentModel;
 import vn.edu.fpt.hsts.bizlogic.model.TreatmentModel;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.common.util.StringUtils;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
@@ -31,6 +32,7 @@ import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -238,6 +240,9 @@ public class TreatmentService {
             }
 
             HisInforDateModel hisInforDateModel = new HisInforDateModel(hisMedicines, hisFoods, hisPractices);
+            // Get date info
+            Date date = treatment.getAppointment().getMeetingDate();
+            hisInforDateModel.setDateInfor(DateUtils.formatDate(date, DateUtils.DATE_PATTERN_3));
 
             return hisInforDateModel;
         }finally {
