@@ -375,6 +375,10 @@
 
     <!--POPUP-->
     <div id="blanket" style="display:none;"></div>
+    <div id="waitting" class="modal fade" style="text-align: center;"
+         tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <img th:src="@{/static/image/ajax-loader.gif}" style="margin-top: 190px;"/>
+    </div>
     <!--Nutrition Ass-->
     <div th:if="${FOODINGREDIENT != null}">
         <div layout:replace="_popupNutritional"></div>
@@ -384,26 +388,7 @@
         <div layout:replace="_practiceData"></div>
     </div>
     <!--His Appointment Date-->
-    <!-- Modal -->
-    <div class="modal fade" id="hisAppointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Box</h4>
-                </div>
-                <div class="modal-body" id="appointmentInFo">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    <button type="submit" class="btn btn-primary">Yes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.Modal -->
-
+    <div layout:replace="_popupHisAppointmentDate"></div>
     <!-- / POPUP-->
 
     <input th:value="*{PHASE != null}? 'check' : ''" id="phase" type="hidden"/>

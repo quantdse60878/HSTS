@@ -191,9 +191,8 @@ function loadSelect(id) {
 //    loadSelect('#mPresModelsM'+i+'');
 //}
 
-
-
 function loadPopupAppointment(appointmentId) {
+    showWatting();
     $.ajax({
         method: "GET",
         url: "/inforOfAppointmentDate",
@@ -205,38 +204,10 @@ function loadPopupAppointment(appointmentId) {
             console.log(data);
             if(data != null) {
                 // Set data to html
-                var txtName = document.getElementById("txtName");
-                var value = data.account.fullName;
-                console.log(value);
-                txtName.innerHTML = value;
 
-                var txtBirthday = document.getElementById("txtBirthday");
-                value = data.account.birthday;
-                console.log(value);
-                txtBirthday.innerHTML = value;
-
-                var txtEmail = document.getElementById("txtEmail");
-                value = data.account.email;
-                console.log(value);
-                txtEmail.innerHTML = value;
-
-                // Set gender
-                var btnGender = document.getElementById("btnGender");
-                value = data.account.gender;
-                if(value == "MALE") {
-                    btnGender.setAttribute("class", "btn btn-info");
-                    btnGender.setAttribute("value", "MALE");
-                } else {
-                    btnGender.setAttribute("class", "btn btn-danger");
-                    btnGender.setAttribute("value", "FEMALE");
-                }
-
-                // Set href
-                var btnLink = document.getElementById("btnLink");
-                btnLink.setAttribute("href", "patient?patientID=" + data.id);
-
+                hideWatting();
                 // Show pop-up
-                $('#hisAppointment').modal('show')
+                $('#hisAppointment').modal('show');
             }
 
         });
@@ -482,6 +453,7 @@ function reCounterRow(row) {
             this._on(this.input, {
                 autocompleteselect: function (event, ui) {
                     window.location = ui.item.url;
+                    //loadPopupAppointment(ui.item.id);
                 },
 
                 autocompletechange: "_removeIfInvalid"
@@ -530,8 +502,9 @@ function reCounterRow(row) {
                 if (this.value && ( !request.term || matcher.test(text) ))
                     return {
                         label: text,
-                        value: id,
+                        value: text,
                         url: url,
+                        id: id,
                         option: this
                     };
             }));
@@ -721,4 +694,14 @@ function setMedicineUnit(ev) {
 function addValidate(element) {
     validator.validate();
     $(element).rules("add", "required");
+}
+
+function showWatting(){
+    // Show pop-up
+    $('#waitting').modal('show');
+}
+
+function hideWatting(){
+    // Hide pop-up
+    $('#waitting').modal('hide');
 }
