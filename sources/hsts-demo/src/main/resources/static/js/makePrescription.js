@@ -192,7 +192,7 @@ function loadSelect(id) {
 //}
 
 function loadPopupAppointment(appointmentId) {
-    showWatting();
+    //showWatting();
     $.ajax({
         method: "GET",
         url: "/inforOfAppointmentDate",
@@ -204,9 +204,82 @@ function loadPopupAppointment(appointmentId) {
             console.log(data);
             if(data != null) {
                 // Set data to html
+                // Set information Date History
                 $('#inforDateHis').html(data.dateInfor);
+                var table = [];
+                var row = [];
+                // infor table medicines
+                $('#hisMedicine').html('<tr><th style="width: 10px">#</th>'
+                    +'<th>Medicine</th>'
+                    +'<th>Times</th>'
+                    +'<th>Quantity</th>'
+                    +'<th>Unit</th>'
+                    +'<th>Note</th>'
+                    +'</tr>');
+                for(var i=0; i< data.hms.length;i++){
+                    var tmp = data.hms[i];
+                    row = "<tr>"
+                        +"<td>"+(i+1)+"</td>"
+                        +"<td>"+tmp.name+"</td>"
+                        +"<td>"+tmp.times+"</td>"
+                        +"<td>"+tmp.quantity+"</td>"
+                        +"<td>"+tmp.unit+"</td>"
+                        +"<td>"+tmp.note+"</td>"
+                        +"</tr>";
+                    table = table + row;
+                };
+                //console.log(table);
+                $( table ).appendTo( "#hisMedicine" );
 
-                hideWatting();
+                table = [];
+                row = [];
+                // infor table medicines
+                $('#hisFoods').html('<tr><th style="width: 10px">#</th>'
+                    +'<th>Menu</th>'
+                    +'<th>Times</th>'
+                    +'<th>Quantity</th>'
+                    +'<th>Unit</th>'
+                    +'<th>Note</th>'
+                    +'</tr>');
+                for(var i=0; i< data.hfs.length;i++){
+                    var tmp = data.hfs[i];
+                    row = "<tr>"
+                        +"<td>"+(i+1)+"</td>"
+                        +"<td>"+tmp.name+"</td>"
+                        +"<td>"+tmp.times+"</td>"
+                        +"<td>"+tmp.quantity+"</td>"
+                        +"<td>"+tmp.unit+"</td>"
+                        +"<td>"+tmp.note+"</td>"
+                        +"</tr>";
+                    table = table + row;
+                };
+                //console.log(table);
+                $( table ).appendTo( "#hisFoods" );
+
+                table = [];
+                row = [];
+                // infor table medicines
+                $('#hisPractice').html('<tr><th style="width: 10px">#</th>'
+                    +'<th>Name</th>'
+                    +'<th>Times</th>'
+                    +'<th>Quantity</th>'
+                    +'<th>Note</th>'
+                    +'</tr>');
+                for(var i=0; i< data.hfs.length;i++){
+                    var tmp = data.hfs[i];
+                    row = "<tr>"
+                        +"<td>"+(i+1)+"</td>"
+                        +"<td>"+tmp.name+"</td>"
+                        +"<td>"+tmp.times+"</td>"
+                        +"<td>"+tmp.quantity+"</td>"
+                        +"<td>"+tmp.note+"</td>"
+                        +"</tr>";
+                    table = table + row;
+                };
+                //console.log(table);
+                $( table ).appendTo( "#hisPractice" );
+
+                //hideWatting();
                 // Show pop-up
                 $('#hisAppointment').modal('show');
             }
