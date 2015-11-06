@@ -706,3 +706,13 @@ function hideWatting(){
     // Hide pop-up
     $('#waitting').modal('hide');
 }
+
+(function() {
+    // your page initialization code here
+    // the DOM will be available here
+    for(var i = 0; i < 1000; i++) {
+        var foodElement = document.getElementById("fPresModels" + i + ".f");
+        if(foodElement == null) return;
+        findUnits(foodElement);
+    }
+})();
