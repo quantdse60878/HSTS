@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.bizlogic.model.HisInforDateModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.persistence.IDbConsts;

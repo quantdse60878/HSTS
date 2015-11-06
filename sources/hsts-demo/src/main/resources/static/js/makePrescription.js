@@ -193,12 +193,12 @@ function loadSelect(id) {
 
 
 
-function loadPopupAppointment(appoitmentID) {
+function loadPopupAppointment(appointmentId) {
     $.ajax({
         method: "GET",
         url: "/inforOfAppointmentDate",
         data: {
-            appoitmentID: appoitmentID
+            appointmentId: appointmentId
         }
     })
         .done(function(data) {
@@ -481,7 +481,7 @@ function reCounterRow(row) {
 
             this._on(this.input, {
                 autocompleteselect: function (event, ui) {
-                    //window.location = ui.item.url;
+                    window.location = ui.item.url;
                 },
 
                 autocompletechange: "_removeIfInvalid"
@@ -526,10 +526,11 @@ function reCounterRow(row) {
             response(this.element.children("option").map(function () {
                 var text = $(this).text();
                 var url = this.getAttribute('value');
+                var id = this.getAttribute('id');
                 if (this.value && ( !request.term || matcher.test(text) ))
                     return {
                         label: text,
-                        value: text,
+                        value: id,
                         url: url,
                         option: this
                     };
