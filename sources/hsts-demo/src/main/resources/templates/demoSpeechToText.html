@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<input type="submit" value="Speech" onclick="recognizer()"/>
+<br/>
+<p id="result"></p><br/>
+<p id="finalResult"></p><br/>
+<p id="meal" style="color: blue;"></p><br/>
+<p id="foodValue" style="color: red;"></p>
+<script type="text/javascript">
+    listFood = "";
+    function escapeRegExp(string) {
+        return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    }
+    function replaceAll(string, find, replace) {
+        return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+    }
+    function recognizer(){
+        var recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.onresult = function(event) {
+            var transcript = "";
+            var final_transcript = "";
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                transcript += event.results[i][0].transcript;
+                if (event.results[i].isFinal) {
+                    final_transcript += event.results[i][0].transcript;
+                }
+            }
+            console.log(final_transcript);
+            document.getElementById("result").innerHTML = "--" + transcript;
+            document.getElementById("finalResult").innerHTML = final_transcript;
+            var listFinalString11 = document.getElementById("finalResult").textContent.split(" ");
+            var listFinalString = document.getElementById("finalResult").textContent;
+//            var a = "ăn cơm ăn cá ăn bún thịt nướng";
+//            var listFinalString11 = a.split(" ");
+            var meal = document.getElementById("meal");
+            var foodValue = document.getElementById("foodValue");
+            for(var i = 0; i < listFinalString11.length; i++) {
+                var item = listFinalString11[i];
+                console.log(item + "------0-----");
+                if(item == "buổi" || item == "bữa") {
+                    var nextItem = listFinalString11[i + 1];
+                    if(nextItem == "trưa" || nextItem == "sáng" || nextItem == "chiều" || nextItem == "tối" || nextItem == "khuya") {
+                        meal.textContent = "bữa " + nextItem;
+                        listFood = "";
+                        foodValue.textContent = "";
+                    }
+                } else if(item == "giữa" || item == "nữa" || item == "nếu") {
+                    var nextItem = listFinalString11[i + 1];
+                    console.log(nextItem + "------1-----");
+                    if(nextItem == "buổi" || nextItem == "bữa") {
+                        var nextNextItem = listFinalString11[i + 2];
+                        console.log(nextNextItem + "-----2------");
+                        console.log(item + nextItem + nextNextItem);
+                        meal.textContent = "giữa bữa " + nextNextItem;
+                        listFood = "";
+                        foodValue.textContent = "";
+                    }
+                    break;
+                }
+            }
+
+            if(listFinalString.split(" ")[1] == "ăn") {
+                listFinalString = listFinalString.replace(" ăn ", "");
+                listFinalString = replaceAll(listFinalString,'ăn ', ',');
+                var listFinal = listFinalString.split(",");
+                for(var i = 0; i < listFinal.length; i++) {
+                    listFood = listFood + "--" + listFinal[i];
+                }
+            }
+            foodValue.textContent = listFood;
+
+        }
+        recognition.lang = "vi-VN";
+        recognition.textIn;
+        recognition.start();
+    };
+</script>
+</body>
+</html>
