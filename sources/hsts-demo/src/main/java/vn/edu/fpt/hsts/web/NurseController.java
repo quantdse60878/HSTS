@@ -410,4 +410,17 @@ public class NurseController extends AbstractController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    //KhuongMH
+    @RequestMapping(value = "reviewNutrition", method = RequestMethod.GET)
+    public ModelAndView reviewNutrition() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("nurseReviewNutrition");
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

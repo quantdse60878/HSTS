@@ -1,7 +1,3 @@
-/**
- * Created by Man Huynh Khuong on 10/29/2015.
- */
-var listdevice;
 //$("#devices").select2({
 //    width: "200px",
 //    ajax: {
@@ -37,7 +33,16 @@ var listdevice;
 //        };
 //    }
 //});
-
+/**
+ * Created by Man Huynh Khuong on 10/29/2015.
+ */
+var listdevice;
+window.addEventListener('mouseup',function(event){
+    var item = document.getElementById("autoCompleteItem");
+    if(event.target != item){
+        item.style.visibility = "hidden";
+    }
+});
 $(document).ready(function(){
     $.ajax({
         method: "GET",
