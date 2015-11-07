@@ -14,16 +14,16 @@
 <table class="table table-striped" id="Foods">
     <tr>
         <th style="width: 10px">#</th>
-        <th>Menu</th>
-        <th>Times</th>
-        <th>Quantitative</th>
-        <th>Unit</th>
+        <th style="min-width: 155px;">Menu</th>
+        <th style="width: 110px;">Times</th>
+        <th style="width: 60px;">Quantity</th>
+        <th style="width: 110px;">Unit</th>
         <th>Note</th>
         <th>#</th>
     </tr>
     <tr th:each="foodPhase,row : ${PHASE.foodPhaseList}">
         <td th:text="${row.count}"></td>
-        <td style="min-width: 155px;" class="form-group">
+        <td class="form-group">
             <select class="form-control" onchange="findUnits(this)" th:field="*{fPresModels[__${row.index}__].f}"
                     data-msg-min="Please select." data-rule-min="1">
                 <option th:value="${foodPhase.food.id}" selected="selected"
@@ -35,7 +35,7 @@
             </select>
             <div class="help-block with-errors"></div>
         </td>
-        <td style="min-width: 120px;" class="form-group">
+        <td class="form-group">
             <select class="form-control" th:field="*{fPresModels[__${row.index}__].fTime}"
                     data-msg-min="Please select." data-rule-min="1">
                 <option value="0">Select</option>
