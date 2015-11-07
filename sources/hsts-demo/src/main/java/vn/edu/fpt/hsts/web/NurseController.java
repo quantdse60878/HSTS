@@ -22,10 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
-import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
-import vn.edu.fpt.hsts.bizlogic.service.PatientService;
-import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
-import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
+import vn.edu.fpt.hsts.bizlogic.model.UnitOfFoodModel;
+import vn.edu.fpt.hsts.bizlogic.service.*;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.criteria.CheckCriteria;
@@ -51,6 +49,13 @@ public class NurseController extends AbstractController {
      */
     @Autowired
     PatientService patientService;
+
+
+    /**
+     * The {@link AnalyticFood}.
+     */
+    @Autowired
+    AnalyticFood analyticFood;
 
     /**
      * The {@link DoctorService}.
@@ -418,6 +423,7 @@ public class NurseController extends AbstractController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("nurseReviewNutrition");
+            mav.addObject("listUnitOfFood", analyticFood.getAllDataOfFood());
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

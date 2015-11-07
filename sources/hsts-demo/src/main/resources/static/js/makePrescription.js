@@ -90,28 +90,26 @@ function viewAutoCompleteP(input){
 function viewAutoComplete(id,item){
     var val = document.getElementById(id).value;
     var it = document.getElementById(item);
-    if(val!=""){
-        it.style.visibility = "visible";
-        it.style.height = "auto";
+    it.style.visibility = "hidden";
+    it.style.height = "0px";
+    if(val!="") {
         it.innerHTML = "";
-        for(var i=0; i< listPracticeName.length; i++){
-            if(listPracticeName[i].toLowerCase().indexOf(val.toLowerCase()) > -1){
+        for (var i = 0; i < listPracticeName.length; i++) {
+            if (listPracticeName[i].toLowerCase().indexOf(val.toLowerCase()) > -1) {
+                it.style.visibility = "visible";
+                it.style.height = "auto";
                 var btn = document.createElement("p");
                 var t = document.createTextNode(listPracticeName[i]);
                 var att = document.createAttribute("onclick");
-                att.value = "fillInput('"+id+"','"+item+"','" + listPracticeName[i] + "')";
+                att.value = "fillInput('" + id + "','" + item + "','" + listPracticeName[i] + "')";
                 btn.appendChild(t);
-                btn.setAttribute("class","form-control");
-                btn.setAttribute("style","margin: 0px;border: 0px;box-shadow: none;");
+                btn.setAttribute("class", "form-control");
+                btn.setAttribute("style", "margin: 0px;border: 0px;box-shadow: none;");
                 btn.setAttributeNode(att);
                 it.appendChild(btn);
             }
         }
-    } else {
-        it.style.visibility = "hidden";
-        it.style.height = "0px";
     }
-
 }
 function fillInput(id,item,c){
     var it = document.getElementById(item);

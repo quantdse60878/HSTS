@@ -15,6 +15,7 @@ public class UnitOfFood extends AbstractKeyEntity {
     // EAGER ?oi
     @ManyToOne
     @JoinColumn(name = "foodId", nullable = false)
+
     private Food food;
 
     private String unitName;
