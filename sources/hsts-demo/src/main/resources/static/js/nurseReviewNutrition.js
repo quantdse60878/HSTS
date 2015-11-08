@@ -50,10 +50,10 @@ function recognizer(){
             }
         }
         console.log(final_transcript);
-        document.getElementById("result").innerHTML = "--" + transcript;
-        document.getElementById("finalResult").innerHTML = final_transcript;
-        var listFinalString11 = document.getElementById("finalResult").textContent.split(" ");
-        var listFinalString = document.getElementById("finalResult").textContent;
+        document.getElementById("result").value = "--" + transcript;
+        document.getElementById("finalResult").value = final_transcript;
+        var listFinalString11 = document.getElementById("finalResult").value.split(" ");
+        var listFinalString = document.getElementById("finalResult").value;
 //            var a = "ăn cơm ăn cá ăn bún thịt nướng";
 //            var listFinalString11 = a.split(" ");
         var meal = document.getElementById("meal");
@@ -63,9 +63,9 @@ function recognizer(){
             if(item == "buổi" || item == "bữa") {
                 var nextItem = listFinalString11[i + 1];
                 if(nextItem == "trưa" || nextItem == "sáng" || nextItem == "chiều" || nextItem == "tối" || nextItem == "khuya") {
-                    meal.textContent = "bữa " + nextItem;
+                    meal.value = "bữa " + nextItem;
                     listFood = "";
-                    foodValue.textContent = "";
+                    foodValue.value = "";
                     mealValue = "";
                     mealValue = "bữa " + nextItem;
                 }
@@ -74,9 +74,9 @@ function recognizer(){
                 if(nextItem == "buổi" || nextItem == "bữa") {
                     var nextNextItem = listFinalString11[i + 2];
                     console.log(item + nextItem + nextNextItem);
-                    meal.textContent = "giữa buổi " + nextNextItem;
+                    meal.value = "giữa buổi " + nextNextItem;
                     listFood = "";
-                    foodValue.textContent = "";
+                    foodValue.value = "";
                     mealValue = "";
                     mealValue = "giữa buổi " + nextNextItem;
 
@@ -135,19 +135,38 @@ function recognizer(){
                 }
             }
         }
-        foodValue.textContent = listFood;
+        foodValue.value = listFood;
+        var panel1 = document.getElementById("tab1");
+        var panel2 = document.getElementById("tab2");
+        var panel3 = document.getElementById("tab3");
+        var panel4 = document.getElementById("tab4");
+        var panel5 = document.getElementById("tab5");
+        var panel6 = document.getElementById("tab6");
+        console.log("Meal Value: " + mealValue);
         if(mealValue == "bữa sáng") {
-            breakfast = foodValue.textContent;
+            simulate(panel1,"click");
+            breakfast = foodValue.value;
+            document.getElementById("bf").value = breakfast;
         } else if(mealValue == "giữa buổi sáng") {
-            breaktimeMorning = foodValue.textContent;
+            simulate(panel2,"click");
+            breaktimeMorning = foodValue.value;
+            document.getElementById("break_time_morning").value = breaktimeMorning;
         } else if(mealValue == "bữa trưa") {
-            lunch = foodValue.textContent;
+            simulate(panel3,"click");
+            lunch = foodValue.value;
+            document.getElementById("lunch").value = lunch;
         } else if(mealValue == "giữa buổi chiều") {
-            breaktimeAfternoon = foodValue.textContent;
+            simulate(panel4,"click");
+            breaktimeAfternoon = foodValue.value;
+            document.getElementById("bta").value = breaktimeAfternoon;
         } else if(mealValue == "bữa tối") {
-            dinner = foodValue.textContent;
+            simulate(panel5,"click");
+            dinner = foodValue.value;
+            document.getElementById("dinner").value = dinner;
         } else if(mealValue == "bữa khuya") {
-            lateAtNight = foodValue.textContent;
+            simulate(panel6,"click");
+            lateAtNight = foodValue.value;
+            document.getElementById("en").value = lateAtNight;
         }
 
     }
@@ -169,6 +188,16 @@ function analytic() {
     analyticMeal(listBreaktimeAfternoon);
     analyticMeal(listDinner);
     analyticMeal(listLateAtNight);
+}
+
+function choosePanel(element){
+    document.getElementById("li_tab_1").class = "";
+    document.getElementById("li_tab_2").class = "";
+    document.getElementById("li_tab_3").class = "";
+    document.getElementById("li_tab_4").class = "";
+    document.getElementById("li_tab_5").class = "";
+    document.getElementById("li_tab_6").class = "";
+    element.class = "active";
 }
 
 function analyticMeal(listMeal) {
@@ -248,6 +277,23 @@ var foodingredient = {
     en_protein : "",
     en_fiber : ""
 };
+
+function changeValueOnFood(target){
+    var foodValueChange = target.value;
+    if(target.id == "bf") {
+        breakfast = foodValueChange;
+    }if(target.id == "break_time_morning") {
+        breaktimeMorning = foodValueChange;
+    }if(target.id == "lunch") {
+        lunch = foodValueChange;
+    }if(target.id == "bta") {
+        breaktimeAfternoon = foodValueChange;
+    }if(target.id == "dinner") {
+        dinner = foodValueChange;
+    }if(target.id == "en") {
+        lateAtNight = foodValueChange;
+    }
+}
 
 function validation1(){
     alert("OK");

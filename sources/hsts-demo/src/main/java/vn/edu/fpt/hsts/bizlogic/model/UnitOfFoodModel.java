@@ -4,6 +4,7 @@ package vn.edu.fpt.hsts.bizlogic.model;
 import vn.edu.fpt.hsts.persistence.entity.Food;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,27 +14,27 @@ public class UnitOfFoodModel implements Serializable  {
 
     private String foodName;
     private String foodUnit;
-    private float totalCalories;
-    private List<String> foodNutritionName;
-    private List<String> foodNutritionValue;
+    private float caloriesEstimate;
+    private List<String> foodNutritionName = new ArrayList<String>();
+    private List<String> foodNutritionValue = new ArrayList<String>();
 
     public UnitOfFoodModel() {
     }
 
-    public UnitOfFoodModel(String foodName, String foodUnit, float totalCalories, List<String> foodNutritionName, List<String> foodNutritionValue) {
+    public UnitOfFoodModel(String foodName, String foodUnit, float caloriesEstimate, List<String> foodNutritionName, List<String> foodNutritionValue) {
         this.foodName = foodName;
         this.foodUnit = foodUnit;
-        this.totalCalories = totalCalories;
+        this.caloriesEstimate = caloriesEstimate;
         this.foodNutritionName = foodNutritionName;
         this.foodNutritionValue = foodNutritionValue;
     }
 
-    public float getTotalCalories() {
-        return totalCalories;
+    public float getCaloriesEstimate() {
+        return caloriesEstimate;
     }
 
-    public void setTotalCalories(float totalCalories) {
-        this.totalCalories = totalCalories;
+    public void setCaloriesEstimate(float caloriesEstimate) {
+        this.caloriesEstimate = caloriesEstimate;
     }
 
     public String getFoodName() {
