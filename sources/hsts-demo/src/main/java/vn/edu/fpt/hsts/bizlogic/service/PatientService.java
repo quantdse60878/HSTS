@@ -466,6 +466,9 @@ public class PatientService extends AbstractService {
                LOGGER.debug("Nurse assign patient[{}] to new doctor[{}]", registrationCriteria.getDoctorId());
                 final Doctor doctor = doctorRepo.findOne(registrationCriteria.getDoctorId());
                 medicalRecord.setDoctor(doctor);
+                medicalRecord.setMedicalHistory(registrationCriteria.getMedicalHistory());
+                medicalRecord.setSymptoms(registrationCriteria.getSymptom());
+                medicalRecordRepo.save(medicalRecord);
             }
 
             // Create prevention checking
