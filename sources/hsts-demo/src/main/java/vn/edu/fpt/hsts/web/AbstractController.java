@@ -21,6 +21,7 @@ import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordDataService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicineService;
+import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.bizlogic.service.PracticeService;
 import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
@@ -67,7 +68,7 @@ public class AbstractController implements ControllerParam {
     private PreventionCheckService preventionCheckService;
 
     @Autowired
-    private MedicalRecordDataService medicalRecordDataService;
+    private PatientService patientService;
 
     @Autowired
     private FoodIngredientService foodIngredientService;
@@ -134,7 +135,13 @@ public class AbstractController implements ControllerParam {
             mav.addObject("DATAPRACS", practiceResultModel);
             LOGGER.info("practiceResultModel[{}]", practiceResultModel);
 
+            // Get Medicalhistory img
+            List<String> imgs = patientService.getPatientHistoryImage(appointment.getMedicalRecord().getMedicalHistory());
+            mav.addObject("MEDI_IMGS", imgs);
 
+            // Get Medicalhistory
+            String medicalHistory = patientService.getPatientHistory(appointment.getMedicalRecord().getMedicalHistory());
+            mav.addObject("MEDI_HIS", medicalHistory);
 
             // Add model
             mav.addObject("model", prescriptionModel);
