@@ -56,6 +56,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -690,8 +691,9 @@ public class PatientService extends AbstractService {
             os.write(file.getBytes());
 
             final FileUploadModel model = new FileUploadModel();
-            model.setFileName(fileName);
-            model.setFilePath(filePath);
+            final String formatFileName = String.format("{img}%s{img}", fileName);
+            model.setFileName(formatFileName);
+            model.setFilePath(formatFileName);
             model.setResult(true);
             return model;
 
@@ -761,17 +763,26 @@ public class PatientService extends AbstractService {
         }
     }
 
-    /**
-     * abc = {img}anh1{img},trieu chung 1, {img}anh2{img}
-     *
-     * String[] tmp = abc.s[plitBy(,);
-     * for(String s: tmp) {
-     *     if (s.startWith(img)
-     *     cat chuoi -> ten anh
-     *     duong dan : getUpadloer + Fie.separate + ten anh
-     *     add to list
-     *
-     * }
-     * return list
-     */
+    public List<String> getPatientHistoryImage(final String medicalHistory) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final String[] tmp = medicalHistory.split(",");
+            if (null != tmp && tmp.length > 0) {
+                final List<String> results = new ArrayList<String>();
+                for (String str: tmp) {
+                    if (str.startsWith("{img}")) {
+                        str = str.replace("{img}", "");
+                        if (LOGGER.isDebugEnabled()) {
+                            LOGGER.debug("original file name: {}", str);
+                        }
+                        results.add(str);
+                    }
+                }
+                return results;
+            }
+            return Collections.emptyList();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }
