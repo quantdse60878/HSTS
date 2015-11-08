@@ -55,6 +55,8 @@ public class Constant {
     public static String MEDICINE_FROM_JSON = "listMedicineTreatment";
     public static String PRACTICE_FROM_JSON = "listPracticeTreatment";
     public static String PATIENT_NAME = "Trần Đăng Quân";
+    public static List<String> TIMES = new ArrayList<>();
+
 
 
     public static List<Treatment> getItems() {

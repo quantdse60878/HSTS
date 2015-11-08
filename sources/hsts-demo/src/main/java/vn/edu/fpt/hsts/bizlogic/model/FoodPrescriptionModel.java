@@ -28,14 +28,6 @@ public class FoodPrescriptionModel {
     public FoodPrescriptionModel() {
     }
 
-    public int getfUnit() {
-        return fUnit;
-    }
-
-    public void setfUnit(int fUnit) {
-        this.fUnit = fUnit;
-    }
-
     public int getF() {
         return f;
     }
@@ -58,6 +50,14 @@ public class FoodPrescriptionModel {
 
     public void setfQuantity(int fQuantity) {
         this.fQuantity = fQuantity;
+    }
+
+    public int getfUnit() {
+        return fUnit;
+    }
+
+    public void setfUnit(int fUnit) {
+        this.fUnit = fUnit;
     }
 
     public String getfNote() {

@@ -20,4 +20,5 @@ public interface UnitOfFoodRepo extends JpaRepository<UnitOfFood, Integer> {
 
     @Query("select u from UnitOfFood u where food = :food and unitName = :unitName")
     public UnitOfFood findByFoodIdAndUnit(@Param("food") final Food food,@Param("unitName") final String unitName);
+
 }

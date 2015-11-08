@@ -32,14 +32,6 @@ public class MedicinePrescriptionModel {
     public MedicinePrescriptionModel() {
     }
 
-    public String getmUnit() {
-        return mUnit;
-    }
-
-    public void setmUnit(String mUnit) {
-        this.mUnit = mUnit;
-    }
-
     public int getM() {
         return m;
     }
@@ -62,6 +54,14 @@ public class MedicinePrescriptionModel {
 
     public void setmQuantity(int mQuantity) {
         this.mQuantity = mQuantity;
+    }
+
+    public String getmUnit() {
+        return mUnit;
+    }
+
+    public void setmUnit(String mUnit) {
+        this.mUnit = mUnit;
     }
 
     public String getmNote() {

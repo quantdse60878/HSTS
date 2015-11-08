@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.fpt.hsts.bizlogic.model.FoodUnitModel;
+import vn.edu.fpt.hsts.bizlogic.model.HisInforDateModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicineService;
+import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.UnitOfFood;
@@ -37,7 +39,7 @@ public class AjaxController {
     private FoodService foodService;
 
     @Autowired
-    private AppointmentService appointmentService;
+    private TreatmentService treatmentService;
 
     @RequestMapping(value = "/medicineName/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -67,15 +69,16 @@ public class AjaxController {
 
     @RequestMapping(value = "inforOfAppointmentDate", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Appointment inforOfAppointmentDate(@RequestParam("appoitmentID") final int appoitmentID) {
+    public HisInforDateModel inforOfAppointmentDate(@RequestParam("appointmentId") final int appointmentId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("appoitmentID[{}]", appoitmentID);
-            if (appoitmentID <= 0){
+            LOGGER.info("appoitmentID[{}]", appointmentId);
+            if (appointmentId <= 0){
                 return null;
             }
+            HisInforDateModel hisInforDateModel = treatmentService.findInforByAppoitmentID(appointmentId);
 
-            return appointmentService.findAppointmentByID(appoitmentID);
+            return hisInforDateModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

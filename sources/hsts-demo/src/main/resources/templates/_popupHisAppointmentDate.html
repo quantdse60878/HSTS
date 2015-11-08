@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<!-- Nutritional -->
+<!-- Modal -->
+<div class="modal fade" id="hisAppointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="inforDateHis">Confirm Box</h4>
+            </div>
+            <div class="modal-body" id="appointmentInFo">
+                <!-- Custom Tabs (Pulled to the left) -->
+                <div class="nav-tabs-custom" style="box-shadow: none;">
+                    <ul class="nav nav-tabs">
+                        <li class="active" id="li_tab_1">
+                            <a href="#tab_1" data-toggle="tab">Medicines</a>
+                        </li>
+                        <li id="li_tab_2-2"><a href="#tab_2" data-toggle="tab">Foods</a></li>
+                        <li id="li_tab_3-3"><a href="#tab_3" data-toggle="tab">Practices</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                            <h4>Medicines</h4>
+                            <!-- table medicines -->
+                            <table class="table table-striped" id="hisMedicine">
+                            </table>
+                            <!-- /.table medicines -->
+                        </div>
+                        <div class="tab-pane" id="tab_2">
+                            <h4>Foods</h4>
+                            <!-- table foods -->
+                            <table class="table table-striped" id="hisFoods">
+                            </table>
+                            <!-- /.table foods -->
+                        </div>
+                        <div class="tab-pane" id="tab_3">
+                            <h4>Practices</h4>
+
+                            <!--table practice-->
+                            <table class="table table-striped" id="hisPractice">
+                            </table>
+                            <!--/.table practice-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.modal-body-->
+        </div>
+    </div>
+</div>
+<!-- /.Modal -->
+</body>
+</html>

@@ -7,10 +7,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.bizlogic.model.FoodTreatmentModel;
+import vn.edu.fpt.hsts.bizlogic.model.HisFood;
+import vn.edu.fpt.hsts.bizlogic.model.HisInforDateModel;
+import vn.edu.fpt.hsts.bizlogic.model.HisMedicine;
+import vn.edu.fpt.hsts.bizlogic.model.HisPractice;
 import vn.edu.fpt.hsts.bizlogic.model.MedicineTreatmentModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticeTreatmentModel;
 import vn.edu.fpt.hsts.bizlogic.model.TreatmentModel;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.common.util.StringUtils;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
@@ -27,6 +32,7 @@ import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -191,6 +197,55 @@ public class TreatmentService {
             }
             return "";
         } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public HisInforDateModel findInforByAppoitmentID(final int appoitmentID) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appoitmentID[{}]", appoitmentID);
+            Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(appoitmentID).get(0);
+            List<HisMedicine> hisMedicines = new ArrayList<HisMedicine>();
+            List<HisFood> hisFoods = new ArrayList<HisFood>();
+            List<HisPractice> hisPractices = new ArrayList<HisPractice>();
+
+            // Create list hisMedicines
+            MedicineTreatment mt;
+            HisMedicine hm;
+            for (int i = 0; i < treatment.getMedicineTreatmentList().size(); i++) {
+                mt = treatment.getMedicineTreatmentList().get(i);
+                hm = new HisMedicine(mt.getMedicine().getName(),mt.getNumberOfTime(),
+                        mt.getQuantitative(),mt.getMedicine().getUnit(),mt.getAdvice());
+                hisMedicines.add(hm);
+            }
+
+            // Create list hisFoods
+            FoodTreatment ft;
+            HisFood hf;
+            for (int i = 0; i < treatment.getFoodTreatmentList().size(); i++) {
+                ft = treatment.getFoodTreatmentList().get(i);
+                hf = new HisFood(ft.getFood().getName(),ft.getNumberOfTime(),ft.getQuantitative(),
+                        ft.getUnitName(),ft.getAdvice());
+                hisFoods.add(hf);
+            }
+
+            // Create list hisPractices
+            PracticeTreatment pt;
+            HisPractice hp;
+            for (int i = 0; i < treatment.getPracticeTreatmentList().size(); i++) {
+                pt = treatment.getPracticeTreatmentList().get(i);
+                hp = new HisPractice(pt.getPractice().getName(),pt.getNumberOfTime(),pt.getTimeDuration(),pt.getAdvice());
+                hisPractices.add(hp);
+            }
+
+            HisInforDateModel hisInforDateModel = new HisInforDateModel(hisMedicines, hisFoods, hisPractices);
+            // Get date info
+            Date date = treatment.getAppointment().getMeetingDate();
+            hisInforDateModel.setDateInfor(DateUtils.formatDate(date, DateUtils.DATE_PATTERN_3));
+
+            return hisInforDateModel;
+        }finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }

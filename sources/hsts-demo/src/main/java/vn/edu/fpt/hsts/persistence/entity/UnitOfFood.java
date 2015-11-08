@@ -15,13 +15,34 @@ public class UnitOfFood extends AbstractKeyEntity {
     // EAGER ?oi
     @ManyToOne
     @JoinColumn(name = "foodId", nullable = false)
+
     private Food food;
 
     private String unitName;
 
     private float caloriesEstimate;
 
+    private String listElementNutritionName;
+
+    private String listElementNutritionValue;
+
     public UnitOfFood() {
+    }
+
+    public String getListElementNutritionName() {
+        return listElementNutritionName;
+    }
+
+    public void setListElementNutritionName(String listElementNutritionName) {
+        this.listElementNutritionName = listElementNutritionName;
+    }
+
+    public String getListElementNutritionValue() {
+        return listElementNutritionValue;
+    }
+
+    public void setListElementNutritionValue(String listElementNutritionValue) {
+        this.listElementNutritionValue = listElementNutritionValue;
     }
 
     public Food getFood() {

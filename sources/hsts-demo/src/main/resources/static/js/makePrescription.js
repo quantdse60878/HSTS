@@ -90,28 +90,26 @@ function viewAutoCompleteP(input){
 function viewAutoComplete(id,item){
     var val = document.getElementById(id).value;
     var it = document.getElementById(item);
-    if(val!=""){
-        it.style.visibility = "visible";
-        it.style.height = "auto";
+    it.style.visibility = "hidden";
+    it.style.height = "0px";
+    if(val!="") {
         it.innerHTML = "";
-        for(var i=0; i< listPracticeName.length; i++){
-            if(listPracticeName[i].toLowerCase().indexOf(val.toLowerCase()) > -1){
+        for (var i = 0; i < listPracticeName.length; i++) {
+            if (listPracticeName[i].toLowerCase().indexOf(val.toLowerCase()) > -1) {
+                it.style.visibility = "visible";
+                it.style.height = "auto";
                 var btn = document.createElement("p");
                 var t = document.createTextNode(listPracticeName[i]);
                 var att = document.createAttribute("onclick");
-                att.value = "fillInput('"+id+"','"+item+"','" + listPracticeName[i] + "')";
+                att.value = "fillInput('" + id + "','" + item + "','" + listPracticeName[i] + "')";
                 btn.appendChild(t);
-                btn.setAttribute("class","form-control");
-                btn.setAttribute("style","margin: 0px;border: 0px;box-shadow: none;");
+                btn.setAttribute("class", "form-control");
+                btn.setAttribute("style", "margin: 0px;border: 0px;box-shadow: none;");
                 btn.setAttributeNode(att);
                 it.appendChild(btn);
             }
         }
-    } else {
-        it.style.visibility = "hidden";
-        it.style.height = "0px";
     }
-
 }
 function fillInput(id,item,c){
     var it = document.getElementById(item);
@@ -191,52 +189,97 @@ function loadSelect(id) {
 //    loadSelect('#mPresModelsM'+i+'');
 //}
 
-
-
-function loadPopupAppointment(appoitmentID) {
+function loadPopupAppointment(appointmentId) {
+    //showWatting();
     $.ajax({
         method: "GET",
         url: "/inforOfAppointmentDate",
         data: {
-            appoitmentID: appoitmentID
+            appointmentId: appointmentId
         }
     })
         .done(function(data) {
             console.log(data);
             if(data != null) {
                 // Set data to html
-                var txtName = document.getElementById("txtName");
-                var value = data.account.fullName;
-                console.log(value);
-                txtName.innerHTML = value;
+                // Set information Date History
+                $('#inforDateHis').html(data.dateInfor);
+                var table = [];
+                var row = [];
+                // infor table medicines
+                $('#hisMedicine').html('<tr><th style="width: 10px">#</th>'
+                    +'<th>Medicine</th>'
+                    +'<th>Times</th>'
+                    +'<th>Quantity</th>'
+                    +'<th>Unit</th>'
+                    +'<th>Note</th>'
+                    +'</tr>');
+                for(var i=0; i< data.hms.length;i++){
+                    var tmp = data.hms[i];
+                    row = "<tr>"
+                        +"<td>"+(i+1)+"</td>"
+                        +"<td>"+tmp.name+"</td>"
+                        +"<td>"+tmp.times+"</td>"
+                        +"<td>"+tmp.quantity+"</td>"
+                        +"<td>"+tmp.unit+"</td>"
+                        +"<td>"+tmp.note+"</td>"
+                        +"</tr>";
+                    table = table + row;
+                };
+                //console.log(table);
+                $( table ).appendTo( "#hisMedicine" );
 
-                var txtBirthday = document.getElementById("txtBirthday");
-                value = data.account.birthday;
-                console.log(value);
-                txtBirthday.innerHTML = value;
+                table = [];
+                row = [];
+                // infor table medicines
+                $('#hisFoods').html('<tr><th style="width: 10px">#</th>'
+                    +'<th>Menu</th>'
+                    +'<th>Times</th>'
+                    +'<th>Quantity</th>'
+                    +'<th>Unit</th>'
+                    +'<th>Note</th>'
+                    +'</tr>');
+                for(var i=0; i< data.hfs.length;i++){
+                    var tmp = data.hfs[i];
+                    row = "<tr>"
+                        +"<td>"+(i+1)+"</td>"
+                        +"<td>"+tmp.name+"</td>"
+                        +"<td>"+tmp.times+"</td>"
+                        +"<td>"+tmp.quantity+"</td>"
+                        +"<td>"+tmp.unit+"</td>"
+                        +"<td>"+tmp.note+"</td>"
+                        +"</tr>";
+                    table = table + row;
+                };
+                //console.log(table);
+                $( table ).appendTo( "#hisFoods" );
 
-                var txtEmail = document.getElementById("txtEmail");
-                value = data.account.email;
-                console.log(value);
-                txtEmail.innerHTML = value;
+                table = [];
+                row = [];
+                // infor table medicines
+                $('#hisPractice').html('<tr><th style="width: 10px">#</th>'
+                    +'<th>Name</th>'
+                    +'<th>Times</th>'
+                    +'<th>Quantity</th>'
+                    +'<th>Note</th>'
+                    +'</tr>');
+                for(var i=0; i< data.hfs.length;i++){
+                    var tmp = data.hfs[i];
+                    row = "<tr>"
+                        +"<td>"+(i+1)+"</td>"
+                        +"<td>"+tmp.name+"</td>"
+                        +"<td>"+tmp.times+"</td>"
+                        +"<td>"+tmp.quantity+"</td>"
+                        +"<td>"+tmp.note+"</td>"
+                        +"</tr>";
+                    table = table + row;
+                };
+                //console.log(table);
+                $( table ).appendTo( "#hisPractice" );
 
-                // Set gender
-                var btnGender = document.getElementById("btnGender");
-                value = data.account.gender;
-                if(value == "MALE") {
-                    btnGender.setAttribute("class", "btn btn-info");
-                    btnGender.setAttribute("value", "MALE");
-                } else {
-                    btnGender.setAttribute("class", "btn btn-danger");
-                    btnGender.setAttribute("value", "FEMALE");
-                }
-
-                // Set href
-                var btnLink = document.getElementById("btnLink");
-                btnLink.setAttribute("href", "patient?patientID=" + data.id);
-
+                //hideWatting();
                 // Show pop-up
-                $('#hisAppointment').modal('show')
+                $('#hisAppointment').modal('show');
             }
 
         });
@@ -482,6 +525,7 @@ function reCounterRow(row) {
             this._on(this.input, {
                 autocompleteselect: function (event, ui) {
                     //window.location = ui.item.url;
+                    loadPopupAppointment(ui.item.id);
                 },
 
                 autocompletechange: "_removeIfInvalid"
@@ -526,11 +570,13 @@ function reCounterRow(row) {
             response(this.element.children("option").map(function () {
                 var text = $(this).text();
                 var url = this.getAttribute('value');
+                var id = this.getAttribute('id');
                 if (this.value && ( !request.term || matcher.test(text) ))
                     return {
                         label: text,
                         value: text,
                         url: url,
+                        id: id,
                         option: this
                     };
             }));
@@ -721,3 +767,23 @@ function addValidate(element) {
     validator.validate();
     $(element).rules("add", "required");
 }
+
+function showWatting(){
+    // Show pop-up
+    $('#waitting').modal('show');
+}
+
+function hideWatting(){
+    // Hide pop-up
+    $('#waitting').modal('hide');
+}
+
+(function() {
+    // your page initialization code here
+    // the DOM will be available here
+    for(var i = 0; i < 1000; i++) {
+        var foodElement = document.getElementById("fPresModels" + i + ".f");
+        if(foodElement == null) return;
+        findUnits(foodElement);
+    }
+})();
