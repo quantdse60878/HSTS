@@ -48,6 +48,7 @@ import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
 import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
+import com.example.quyhkse61160.hstsapp.Fragment.NoticeNextTab;
 import com.example.quyhkse61160.hstsapp.Fragment.NoticeTab;
 import com.example.quyhkse61160.hstsapp.Fragment.Tab4;
 import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
@@ -333,6 +334,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         // Notice
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
 
+        // Notice Next Time
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+
 
         // Recycle the typed array
         navMenuIcons.recycle();
@@ -351,6 +355,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 if (position == 1) {
                     updateView(position);
                     displayView(1);
+                }if (position == 2) {
+                    updateView(position);
+                    displayView(2);
                 }
             }
         });
@@ -377,7 +384,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-2
         if (savedInstanceState == null) {
             // on first time display view for first nav item
             if(hasNotify) displayView(1);
@@ -429,8 +435,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             case 1:
                 fragment = new NoticeTab();
                 break;
-//            case 2:
-//                fragment = new Tab2();
+            case 2:
+                fragment = new NoticeNextTab();
 //                break;
 //            case 3:
 //                fragment = new Tab3();

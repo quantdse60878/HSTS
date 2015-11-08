@@ -67,6 +67,12 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //KhuongMH
+        Constant.TIMES.add("07:00");
+        Constant.TIMES.add("09:00");
+        Constant.TIMES.add("12:00");
+        Constant.TIMES.add("15:00");
+        Constant.TIMES.add("18:00");
+        Constant.TIMES.add("21:00");
         Constant.DATA_FROM_SERVER = HSTSUtils.loadData(getAssets());
         //KhuongMH
         am = getAssets();
