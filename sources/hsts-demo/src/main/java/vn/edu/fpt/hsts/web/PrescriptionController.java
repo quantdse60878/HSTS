@@ -61,15 +61,6 @@ public class PrescriptionController extends AbstractController{
     @Autowired
     private TreatmentService treatmentService;
 
-    @Autowired
-    private FoodIngredientService foodIngredientService;
-
-    @Autowired
-    private PreventionCheckService preventionCheckService;
-
-    @Autowired
-    private MedicalRecordDataService medicalRecordDataService;
-
     /**
      * Create Prescription Page
      * @param patientID
