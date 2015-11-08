@@ -11,6 +11,8 @@ bower_components/
 /.classpath
 /.project
 
+### Upload files ###
+uploadFiles/
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm

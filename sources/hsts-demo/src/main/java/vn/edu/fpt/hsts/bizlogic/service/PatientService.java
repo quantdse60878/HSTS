@@ -50,12 +50,16 @@ import vn.edu.fpt.hsts.persistence.repo.PreventionCheckRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
 import javax.transaction.Transactional;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -680,7 +684,8 @@ public class PatientService extends AbstractService {
             if (!folder.exists()) {
                 folder.mkdir();
             }
-            final String filePath = getUploadDirectory() + "/" + fileName;
+            final String filePath = getUploadDirectory() + File.separator + fileName;
+            // {img}ten anh{img},sasas, {img}anh2{img}
             final File newFile = new File(filePath);
             if(!newFile.exists()) {
                 newFile.createNewFile();
@@ -689,13 +694,15 @@ public class PatientService extends AbstractService {
             os.write(file.getBytes());
 
             final FileUploadModel model = new FileUploadModel();
-            model.setFileName(fileName);
-            model.setFilePath(filePath);
+            final String formatFileName = String.format("{img}%s{img}", fileName);
+            model.setFileName(formatFileName);
+            model.setFilePath(formatFileName);
             model.setResult(true);
             return model;
 
         } catch (Exception e) {
-            LOGGER.error("Error while uploading new file[{}]", file.getOriginalFilename());
+            e.printStackTrace();
+//            LOGGER.error("Error while uploading new file[{}]", file.getOriginalFilename());
             return new FileUploadModel(false);
         } finally {
             try {
@@ -755,6 +762,57 @@ public class PatientService extends AbstractService {
         } catch (Exception e) {
             return "";
         } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public List<String> getPatientHistoryImage(final String medicalHistory) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final String[] tmp = medicalHistory.split(",");
+            if (null != tmp && tmp.length > 0) {
+                final List<String> results = new ArrayList<String>();
+                for (String str: tmp) {
+                    if (str.startsWith("{img}")) {
+                        str = str.replace("{img}", "");
+                        if (LOGGER.isDebugEnabled()) {
+                            LOGGER.debug("original file name: {}", str);
+                        }
+                        results.add(str);
+                    }
+                }
+                return results;
+            }
+            return Collections.emptyList();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public byte[] getUploadedHistoryImg(final String fileName){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        FileInputStream fis = null;
+        try {
+            LOGGER.info("fileName[{}]", fileName);
+            final File file = new File(getUploadDirectory() + File.separator + fileName);
+            if (null != file && file.exists() && file.canRead()) {
+                byte[] result = new byte[(int) file.length()];
+                fis = new FileInputStream(file);
+                fis.read(result);
+                return result;
+            }
+            return new byte[0];
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new byte[0];
+        } finally {
+            if (null != fis) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             LOGGER.info(IConsts.END_METHOD);
         }
     }

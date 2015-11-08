@@ -28,7 +28,7 @@
             <input type="text" placeholder="Practice Name" class="form-control" th:name="pPresModels[__${row.index}__].p" th:value="${practicePhase.practice.name}"
                    th:id="pPresModelsP__${row.index}__" data-rule-required="true" data-msg-required="Please input."
                    oninput="viewAutoCompleteP(this)"/>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
             <div th:id="pPresModelsP__${row.index}__item" class="form-control"
                  style="visibility: hidden;height: auto;"></div>
         </td>
@@ -38,12 +38,12 @@
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group">
             <input type="text" class="form-control" th:field="*{pPresModels[__${row.index}__].pIntensity}"
                    placeholder="Quantity" data-rule-required="true" data-msg-required="Please input."/>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td>
             <input type="text" class="form-control"
@@ -66,11 +66,9 @@
 
     <div class="col-md-2">
         <input th:name="kcalRequire" data-rule-required="true" data-msg-required="Please input." th:value="${#numbers.formatDecimal(model.kcalRequire, 1, 'POINT', 0, 'COMMA')}" style="text-align: right;" type="text" class="form-control hsts"/>
-        <div class="help-block with-errors"></div>
+        <!--<div class="help-block with-errors"></div>-->
     </div>
     <label class="col-md-1 control-label">Kcal/Day</label>
-
-    <div class="help-block with-errors"></div>
 </div>
 </body>
 </html>

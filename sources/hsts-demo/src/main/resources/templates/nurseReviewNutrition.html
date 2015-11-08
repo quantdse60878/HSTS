@@ -6,471 +6,478 @@
 <body>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper" layout:fragment="body">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            Review Nutrition
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Review Nutrition</li>
-        </ol>
-    </section>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Review Nutrition
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Review Nutrition</li>
+    </ol>
+</section>
 
-    <!-- Main content -->
-    <section class="content">
-            <div class="nav-tabs-custom" style="box-shadow: none;">
-                <ul class="nav nav-tabs">
-                    <li class="active" id="li_tab_1"><a href="#panel_1" data-toggle="tab">BreakFast</a></li>
-                    <li id="li_tab_2"><a href="#panel_2" data-toggle="tab">BreakTime Morning</a></li>
-                    <li id="li_tab_3"><a href="#panel_3" data-toggle="tab">Lunch</a></li>
-                    <li id="li_tab_4"><a href="#panel_4" data-toggle="tab">BreakTime Afternoon</a></li>
-                    <li id="li_tab_5"><a href="#panel_5" data-toggle="tab">Dinner</a></li>
-                    <li id="li_tab_6"><a href="#panel_6" data-toggle="tab">Eat Late At Night</a></li>
-                </ul>
-                <div class="tab-content">
+<!-- Main content -->
+<section class="content">
 
-                    <!-- PANEL 1111111111111111111111111111111-->
-                    <div class="tab-pane active" id="panel_1">
-                        <div class="microphone" style="width: 104px;
+
+<div class="row">
+<div class="col-xs-12">
+<div class="box">
+<div class="microphone" style="width: 104px;
                                                    margin: 0 auto;">
-                            <img id="bf_microphone" src="/static/image/microphone.png"/>
-                        </div>
-                        <div class="example" style="width: 372px;
+    <img onclick="recognizer()" src="/static/image/microphone.png"/>
+    <input type="hidden" id="result" />
+    <input type="hidden" id="finalResult" />
+    <input type="hidden" id="meal" />
+    <input type="hidden" id="foodValue" />
+</div>
+<div class="example" style="width: 326px;
                                                 margin: 0 auto;">
-                            <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
-                        </div>
-                        <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-                            <h3>Result : <input type="text" id="bf" name="bf"/></h3>
-                        </div>
-                        <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-                            <h3 style="display:inline">Tổng Calories : </h3><h3 style="display:inline" id="bf_result">0</h3>
-                        </div>
-                        <table class="table table-hsts">
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Starch</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="bf_starch" name="bf_starch" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Lipid</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="bf_lipid" name="bf_lipid" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Protein</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="bf_protein" name="bf_protein" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Fiber</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="bf_fiber" name="bf_fiber" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- footer -->
-                        <div style="margin: 15px;">
-                            <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-                               class="btn btn-default">Previous</a>
-                            <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
-                               class="btn btn-primary pull-right">Next</a>
-                        </div>
-                        <!-- /.footer -->
-                    </div>
-                    <div class="tab-pane" id="panel_2">
-                        <div class="microphone" style="width: 104px;
-                                                   margin: 0 auto;">
-                            <img src="/static/image/microphone.png"/>
-                        </div>
-                        <div class="example" style="width: 372px;
+    <h4>Talk : Bữa ... (Exp: Bữa Sáng, Bữa Tối)</h4>
+</div>
+<div class="example" style="width: 372px;margin: 0 auto;">
+    <button onclick="analytic()" class="btn btn-primary" style="margin-right: 10px">Analysis</button>
+    <button onclick="" class="btn btn-primary">Submit</button>
+</div>
+<div class="nav-tabs-custom" style="box-shadow: none;">
+<ul class="nav nav-tabs">
+    <li class="active" id="li_tab_1"><a id="tab1" href="#panel_1" data-toggle="tab">BreakFast</a></li>
+    <li id="li_tab_2"><a id="tab2" href="#panel_2" data-toggle="tab">BreakTime Morning</a></li>
+    <li id="li_tab_3"><a id="tab3" href="#panel_3" data-toggle="tab">Lunch</a></li>
+    <li id="li_tab_4"><a id="tab4" href="#panel_4" data-toggle="tab">BreakTime Afternoon</a></li>
+    <li id="li_tab_5"><a id="tab5" href="#panel_5" data-toggle="tab">Dinner</a></li>
+    <li id="li_tab_6"><a id="tab6" href="#panel_6" data-toggle="tab">Eat Late At Night</a></li>
+</ul>
+<div class="tab-content">
+
+<!-- PANEL 1111111111111111111111111111111-->
+<div class="tab-pane active" id="panel_1">
+    <div class="example" style="width: 372px;
                                                 margin: 0 auto;">
-                            <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
-                        </div>
-                        <div class="result" style="width: 385px;
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
-                            <h3>Result : <input type="text" id="break_time_morning" name="break_time_morning"/></h3>
-                        </div>
-                        <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-                            <h3 style="display:inline">Tổng Calories : </h3>
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="bf" name="bf"/></h3>
+    </div>
+    <div class="result" style="width: 385px; margin: 0 auto;">
+        <h3 style="display:inline">Tổng Calories : </h3>
 
-                            <h3 id="btm_result" style="display:inline">0</h3>
-                        </div>
-                        <table class="table table-hsts">
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Starch</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="btm_starch" name="btm_starch" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Lipid</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="btm_lipid" name="btm_lipid" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Protein</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="btm_protein" name="btm_protein" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Fiber</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="btm_fiber" name="btm_fiber" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- footer -->
-                        <div style="margin: 15px;">
-                            <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-                               class="btn btn-default">Previous</a>
-                            <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
-                               class="btn btn-primary pull-right">Next</a>
-                        </div>
-                        <!-- /.footer -->
-                    </div>
-                    <div class="tab-pane" id="panel_3">
-                        <div class="microphone" style="width: 104px;
-                                                   margin: 0 auto;">
-                            <img src="/static/image/microphone.png"/>
-                        </div>
-                        <div class="example" style="width: 372px;
+        <h3 style="display:inline" id="bf_result">0</h3>
+    </div>
+    <table class="table table-hsts">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Starch</h4>
+            </td>
+            <td>
+                <input type="text" id="bf_starch" name="bf_starch" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Lipid</h4>
+            </td>
+            <td>
+                <input type="text" id="bf_lipid" name="bf_lipid" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Protein</h4>
+            </td>
+            <td>
+                <input type="text" id="bf_protein" name="bf_protein" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Fiber</h4>
+            </td>
+            <td>
+                <input type="text" id="bf_fiber" name="bf_fiber" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+    </table>
+    <!-- footer -->
+    <div style="margin: 15px;">
+        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+           class="btn btn-default">Previous</a>
+        <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
+           class="btn btn-primary pull-right">Next</a>
+    </div>
+    <!-- /.footer -->
+</div>
+<div class="tab-pane" id="panel_2">
+    <div class="example" style="width: 372px;
                                                 margin: 0 auto;">
-                            <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
-                        </div>
-                        <div class="result" style="width: 385px;
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
-                            <h3>Result : <input type="text" id="lunch" name="lunch"/></h3>
-                        </div>
-                        <div class="result" style="width: 385px;
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="break_time_morning" name="break_time_morning"/></h3>
+    </div>
+    <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
-                            <h3 style="display:inline">Tổng Calories : </h3>
+        <h3 style="display:inline">Tổng Calories : </h3>
 
-                            <h3 id="l_result" style="display:inline">0</h3>
-                        </div>
-                        <table class="table table-hsts">
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Starch</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="l_starch" name="l_starch" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Lipid</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="l_lipid" name="l_lipid" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Protein</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="l_protein" name="l_protein" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Fiber</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="l_fiber" name="l_fiber" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- footer -->
-                        <div style="margin: 15px;">
-                            <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-                               class="btn btn-default">Previous</a>
-                            <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
-                               class="btn btn-primary pull-right">Next</a>
-                        </div>
-                        <!-- /.footer -->
-
-                    </div>
-                    <div class="tab-pane" id="panel_4">
-                        <div class="microphone" style="width: 104px;
-                                                   margin: 0 auto;">
-                            <img src="/static/image/microphone.png"/>
-                        </div>
-                        <div class="example" style="width: 372px;
+        <h3 id="btm_result" style="display:inline">0</h3>
+    </div>
+    <table class="table table-hsts">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Starch</h4>
+            </td>
+            <td>
+                <input type="text" id="btm_starch" name="btm_starch" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Lipid</h4>
+            </td>
+            <td>
+                <input type="text" id="btm_lipid" name="btm_lipid" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Protein</h4>
+            </td>
+            <td>
+                <input type="text" id="btm_protein" name="btm_protein" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Fiber</h4>
+            </td>
+            <td>
+                <input type="text" id="btm_fiber" name="btm_fiber" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+    </table>
+    <!-- footer -->
+    <div style="margin: 15px;">
+        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+           class="btn btn-default">Previous</a>
+        <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
+           class="btn btn-primary pull-right">Next</a>
+    </div>
+    <!-- /.footer -->
+</div>
+<div class="tab-pane" id="panel_3">
+    <div class="example" style="width: 372px;
                                                 margin: 0 auto;">
-                            <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
-                        </div>
-                        <div class="result" style="width: 385px;
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
-                            <h3>Result : <input type="text" id="bta" name="bta"/></h3>
-                        </div>
-                        <div class="result" style="width: 385px;
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="lunch" name="lunch"/></h3>
+    </div>
+    <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
-                            <h3 style="display:inline">Tổng Calories : </h3>
+        <h3 style="display:inline">Tổng Calories : </h3>
 
-                            <h3 id="bta_result" style="display:inline">0</h3>
-                        </div>
-                        <table class="table table-hsts">
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Starch</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="bta_starch" name="bta_starch" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Lipid</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="bta_lipid" name="bta_lipid" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Protein</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="bta_protein" name="bta_protein" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Fiber</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="bta_fiber" name="bta_fiber" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- footer -->
-                        <div style="margin: 15px;">
-                            <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-                               class="btn btn-default">Previous</a>
-                            <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
-                               class="btn btn-primary pull-right">Next</a>
-                        </div>
-                        <!-- /.footer -->
+        <h3 id="l_result" style="display:inline">0</h3>
+    </div>
+    <table class="table table-hsts">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Starch</h4>
+            </td>
+            <td>
+                <input type="text" id="l_starch" name="l_starch" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Lipid</h4>
+            </td>
+            <td>
+                <input type="text" id="l_lipid" name="l_lipid" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Protein</h4>
+            </td>
+            <td>
+                <input type="text" id="l_protein" name="l_protein" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Fiber</h4>
+            </td>
+            <td>
+                <input type="text" id="l_fiber" name="l_fiber" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+    </table>
+    <!-- footer -->
+    <div style="margin: 15px;">
+        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+           class="btn btn-default">Previous</a>
+        <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
+           class="btn btn-primary pull-right">Next</a>
+    </div>
+    <!-- /.footer -->
 
-                    </div>
-                    <div class="tab-pane" id="panel_5">
-                        <div class="microphone" style="width: 104px;
-                                                   margin: 0 auto;">
-                            <img src="/static/image/microphone.png"/>
-                        </div>
-                        <div class="example" style="width: 372px;
+</div>
+<div class="tab-pane" id="panel_4">
+    <div class="example" style="width: 372px;
                                                 margin: 0 auto;">
-                            <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
-                        </div>
-                        <div class="result" style="width: 385px;
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
-                            <h3>Result : <input type="text" id="dinner" name="dinner"/></h3>
-                        </div>
-                        <div class="result" style="width: 385px;
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="bta" name="bta"/></h3>
+    </div>
+    <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
-                            <h3 style="display:inline">Tổng Calories : </h3> <h3 style="display:inline" id="dinner_result">0</h3>
-                        </div>
-                        <table class="table table-hsts">
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Starch</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="dinner_starch" name="dinner_starch" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Lipid</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="dinner_lipid" name="dinner_lipid" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Protein</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="dinner_protein" name="dinner_protein" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Fiber</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="dinner_fiber" name="dinner_fiber" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- footer -->
-                        <div style="margin: 15px;">
-                            <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-                               class="btn btn-default">Previous</a>
-                            <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
-                               class="btn btn-primary pull-right">Next</a>
-                        </div>
-                        <!-- /.footer -->
+        <h3 style="display:inline">Tổng Calories : </h3>
 
-                    </div>
-                    <div class="tab-pane" id="panel_6">
-                        <div class="microphone" style="width: 104px;
-                                                   margin: 0 auto;">
-                            <img src="/static/image/microphone.png"/>
-                        </div>
-                        <div class="example" style="width: 372px;
+        <h3 id="bta_result" style="display:inline">0</h3>
+    </div>
+    <table class="table table-hsts">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Starch</h4>
+            </td>
+            <td>
+                <input type="text" id="bta_starch" name="bta_starch" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Lipid</h4>
+            </td>
+            <td>
+                <input type="text" id="bta_lipid" name="bta_lipid" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Protein</h4>
+            </td>
+            <td>
+                <input type="text" id="bta_protein" name="bta_protein" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Fiber</h4>
+            </td>
+            <td>
+                <input type="text" id="bta_fiber" name="bta_fiber" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+    </table>
+    <!-- footer -->
+    <div style="margin: 15px;">
+        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+           class="btn btn-default">Previous</a>
+        <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
+           class="btn btn-primary pull-right">Next</a>
+    </div>
+    <!-- /.footer -->
+
+</div>
+<div class="tab-pane" id="panel_5">
+    <div class="example" style="width: 372px;
                                                 margin: 0 auto;">
-                            <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
-                        </div>
-                        <div class="result" style="width: 385px;
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
-                            <h3>Result : <input type="text" id="en" name="en"/></h3>
-                        </div>
-                        <div class="result" style="width: 385px;
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="dinner" name="dinner"/></h3>
+    </div>
+    <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
-                            <h3 style="display:inline">Tổng Calories : </h3>
-                            <h3 id="en_result" style="display:inline">0</h3>
-                        </div>
-                        <table class="table table-hsts">
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Starch</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="en_starch" name="en_starch" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Lipid</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="en_lipid" name="en_lipid" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="float: right">
-                                    <h4>Protein</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="en_protein" name="en_protein" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                                <td style="float: right">
-                                    <h4>Fiber</h4>
-                                </td>
-                                <td>
-                                    <input type="text" id="en_fiber" name="en_fiber" value="0"
-                                           class="form-control hsts hsts-num"
-                                           readonly="readonly"/>
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- footer -->
-                        <div style="margin: 15px;">
-                            <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-                               class="btn btn-default">Previous</a>
-                            <button onclick="validation1()" class="btn btn-primary pull-right" value="Done">Done</button>
-                        </div>
-                        <!-- /.footer -->
-                    </div>
-                </div>
-            </div>
-    </section>
-    <!-- /.content -->
-    <script th:inline="javascript">
-        console.log("----------1111-------");
-        var listUnitOfFood = [[${listUnitOfFood}]];
-    </script>
-    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
-    <script th:src="@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
-    <script th:src="@{/static/js/nurseReviewNutrition.js}"></script>
+        <h3 style="display:inline">Tổng Calories : </h3>
+
+        <h3 style="display:inline" id="dinner_result">0</h3>
+    </div>
+    <table class="table table-hsts">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Starch</h4>
+            </td>
+            <td>
+                <input type="text" id="dinner_starch" name="dinner_starch" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Lipid</h4>
+            </td>
+            <td>
+                <input type="text" id="dinner_lipid" name="dinner_lipid" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Protein</h4>
+            </td>
+            <td>
+                <input type="text" id="dinner_protein" name="dinner_protein" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Fiber</h4>
+            </td>
+            <td>
+                <input type="text" id="dinner_fiber" name="dinner_fiber" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+    </table>
+    <!-- footer -->
+    <div style="margin: 15px;">
+        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+           class="btn btn-default">Previous</a>
+        <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
+           class="btn btn-primary pull-right">Next</a>
+    </div>
+    <!-- /.footer -->
+
+</div>
+<div class="tab-pane" id="panel_6">
+    <div class="example" style="width: 372px;
+                                                margin: 0 auto;">
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
+                                                   margin: 0 auto;">
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="en" name="en"/></h3>
+    </div>
+    <div class="result" style="width: 385px;
+                                                   margin: 0 auto;">
+        <h3 style="display:inline">Tổng Calories : </h3>
+
+        <h3 id="en_result" style="display:inline">0</h3>
+    </div>
+    <table class="table table-hsts">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Starch</h4>
+            </td>
+            <td>
+                <input type="text" id="en_starch" name="en_starch" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Lipid</h4>
+            </td>
+            <td>
+                <input type="text" id="en_lipid" name="en_lipid" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="float: right">
+                <h4>Protein</h4>
+            </td>
+            <td>
+                <input type="text" id="en_protein" name="en_protein" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+            <td style="float: right">
+                <h4>Fiber</h4>
+            </td>
+            <td>
+                <input type="text" id="en_fiber" name="en_fiber" value="0"
+                       class="form-control hsts hsts-num"
+                       readonly="readonly"/>
+            </td>
+        </tr>
+    </table>
+    <!-- footer -->
+    <div style="margin: 15px;">
+        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
+           class="btn btn-default">Previous</a>
+        <button onclick="validation1()" class="btn btn-primary pull-right" value="Done">Done</button>
+    </div>
+    <!-- /.footer -->
+</div>
+</div>
+</div>
+</div>
+<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+</section>
+<!-- /.content -->
+<script th:inline="javascript">
+    console.log("----------1111-------");
+    var listUnitOfFood = [[${listUnitOfFood}]];
+</script>
+<script th:src="@{/static/js/semulateMouseClick.js}"></script>
+<script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/static/js/nurseReviewNutrition.js}"></script>
 </div>
 <!-- /.content-wrapper -->
 </body>

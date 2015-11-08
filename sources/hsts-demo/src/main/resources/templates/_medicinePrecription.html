@@ -23,7 +23,7 @@
                 <option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"
                         th:text="${medicine.name}"></option>
             </select>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group">
             <select class="form-control" th:field="*{mPresModels[0].mTime}" data-rule-min="1" data-msg-min="Please select.">
@@ -31,18 +31,18 @@
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group">
             <input type="text" class="form-control" th:field="*{mPresModels[0].mQuantity}" style="text-align: right;"
-                   placeholder="Quantity" data-rule-range="0,10" data-msg-range="Out of range 0-10"/>
-            <div class="help-block with-errors"></div>
+                   placeholder="Quantity" data-rule-range="1,10" data-msg-range="Out of range 1-10"/>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group">
             <input type="text" class="form-control" data-rule-required="true" data-msg-required="Please input."
                    th:field="*{mPresModels[0].mUnit}"
                    placeholder="Unit"/>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td>
             <input type="text" class="form-control"

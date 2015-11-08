@@ -237,4 +237,16 @@ public class DoctorController extends AbstractController{
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    @RequestMapping(value = "/uploadedHistoryImg", method = RequestMethod.GET)
+    @ResponseBody
+    public byte[] getUploadedImage(@RequestParam(value = "filename") final String fileName) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("fileName[{}]", fileName);
+            return patientService.getUploadedHistoryImg(fileName);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }
