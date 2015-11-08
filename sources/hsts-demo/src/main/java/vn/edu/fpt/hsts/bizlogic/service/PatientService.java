@@ -467,6 +467,9 @@ public class PatientService extends AbstractService {
                 final Doctor doctor = doctorRepo.findOne(registrationCriteria.getDoctorId());
                 medicalRecord.setDoctor(doctor);
             }
+            medicalRecord.setMedicalHistory(registrationCriteria.getMedicalHistory());
+            medicalRecord.setSymptoms(registrationCriteria.getSymptom());
+            medicalRecordRepo.save(medicalRecord);
 
             // Create prevention checking
 
@@ -774,7 +777,7 @@ public class PatientService extends AbstractService {
                 final List<String> results = new ArrayList<String>();
                 for (String str: tmp) {
                     if (str.startsWith("{img}")) {
-                        str = str.replace("{img}", "");
+                        str = StringUtils.replace(str, "{img}", "");
                         if (LOGGER.isDebugEnabled()) {
                             LOGGER.debug("original file name: {}", str);
                         }
