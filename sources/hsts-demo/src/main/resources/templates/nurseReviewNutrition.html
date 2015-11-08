@@ -26,7 +26,7 @@
 <div class="box">
 <div class="microphone" style="width: 104px;
                                                    margin: 0 auto;">
-    <img onclick="recognizer()" src="/static/image/microphone.png"/>
+    <img onclick="recognizer()" id="microphone" src="/static/image/microphone_passive.png"/>
     <input type="hidden" id="result" />
     <input type="hidden" id="finalResult" />
     <input type="hidden" id="meal" />
@@ -36,23 +36,23 @@
                                                 margin: 0 auto;">
     <h4>Talk : Bữa ... (Exp: Bữa Sáng, Bữa Tối)</h4>
 </div>
-<div class="example" style="width: 372px;margin: 0 auto;">
-    <button onclick="analytic()" class="btn btn-primary" style="margin-right: 10px">Analysis</button>
-    <button onclick="" class="btn btn-primary">Submit</button>
+<div class="example" style="width: 72px;margin: 0 auto;">
+    <button onclick="createNutrition()" class="btn btn-primary">Suggest</button>
 </div>
 <div class="nav-tabs-custom" style="box-shadow: none;">
 <ul class="nav nav-tabs">
-    <li class="active" id="li_tab_1"><a id="tab1" href="#panel_1" data-toggle="tab">BreakFast</a></li>
-    <li id="li_tab_2"><a id="tab2" href="#panel_2" data-toggle="tab">BreakTime Morning</a></li>
-    <li id="li_tab_3"><a id="tab3" href="#panel_3" data-toggle="tab">Lunch</a></li>
-    <li id="li_tab_4"><a id="tab4" href="#panel_4" data-toggle="tab">BreakTime Afternoon</a></li>
-    <li id="li_tab_5"><a id="tab5" href="#panel_5" data-toggle="tab">Dinner</a></li>
-    <li id="li_tab_6"><a id="tab6" href="#panel_6" data-toggle="tab">Eat Late At Night</a></li>
+    <li id="li_tab_1"><a id="tab1" onclick="changeColorTab(this)" href="#panel_1" data-toggle="tab">
+        BreakFast</a></li>
+    <li id="li_tab_2"><a id="tab2" onclick="changeColorTab(this)" href="#panel_2" data-toggle="tab">BreakTime Morning</a></li>
+    <li id="li_tab_3"><a id="tab3" onclick="changeColorTab(this)" href="#panel_3" data-toggle="tab">Lunch</a></li>
+    <li id="li_tab_4"><a id="tab4" onclick="changeColorTab(this)" href="#panel_4" data-toggle="tab">BreakTime Afternoon</a></li>
+    <li id="li_tab_5"><a id="tab5" onclick="changeColorTab(this)" href="#panel_5" data-toggle="tab">Dinner</a></li>
+    <li id="li_tab_6"><a id="tab6" onclick="changeColorTab(this)" href="#panel_6" data-toggle="tab">Eat Late At Night</a></li>
 </ul>
 <div class="tab-content">
 
 <!-- PANEL 1111111111111111111111111111111-->
-<div class="tab-pane active" id="panel_1">
+<div class="tab-pane" id="panel_1">
     <div class="example" style="width: 372px;
                                                 margin: 0 auto;">
         <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
@@ -66,50 +66,6 @@
 
         <h3 style="display:inline" id="bf_result">0</h3>
     </div>
-    <table class="table table-hsts">
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Starch</h4>
-            </td>
-            <td>
-                <input type="text" id="bf_starch" name="bf_starch" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Lipid</h4>
-            </td>
-            <td>
-                <input type="text" id="bf_lipid" name="bf_lipid" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Protein</h4>
-            </td>
-            <td>
-                <input type="text" id="bf_protein" name="bf_protein" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Fiber</h4>
-            </td>
-            <td>
-                <input type="text" id="bf_fiber" name="bf_fiber" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-    </table>
     <!-- footer -->
     <div style="margin: 15px;">
         <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
@@ -134,50 +90,6 @@
 
         <h3 id="btm_result" style="display:inline">0</h3>
     </div>
-    <table class="table table-hsts">
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Starch</h4>
-            </td>
-            <td>
-                <input type="text" id="btm_starch" name="btm_starch" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Lipid</h4>
-            </td>
-            <td>
-                <input type="text" id="btm_lipid" name="btm_lipid" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Protein</h4>
-            </td>
-            <td>
-                <input type="text" id="btm_protein" name="btm_protein" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Fiber</h4>
-            </td>
-            <td>
-                <input type="text" id="btm_fiber" name="btm_fiber" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-    </table>
     <!-- footer -->
     <div style="margin: 15px;">
         <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
@@ -202,50 +114,6 @@
 
         <h3 id="l_result" style="display:inline">0</h3>
     </div>
-    <table class="table table-hsts">
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Starch</h4>
-            </td>
-            <td>
-                <input type="text" id="l_starch" name="l_starch" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Lipid</h4>
-            </td>
-            <td>
-                <input type="text" id="l_lipid" name="l_lipid" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Protein</h4>
-            </td>
-            <td>
-                <input type="text" id="l_protein" name="l_protein" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Fiber</h4>
-            </td>
-            <td>
-                <input type="text" id="l_fiber" name="l_fiber" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-    </table>
     <!-- footer -->
     <div style="margin: 15px;">
         <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
@@ -271,50 +139,6 @@
 
         <h3 id="bta_result" style="display:inline">0</h3>
     </div>
-    <table class="table table-hsts">
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Starch</h4>
-            </td>
-            <td>
-                <input type="text" id="bta_starch" name="bta_starch" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Lipid</h4>
-            </td>
-            <td>
-                <input type="text" id="bta_lipid" name="bta_lipid" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Protein</h4>
-            </td>
-            <td>
-                <input type="text" id="bta_protein" name="bta_protein" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Fiber</h4>
-            </td>
-            <td>
-                <input type="text" id="bta_fiber" name="bta_fiber" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-    </table>
     <!-- footer -->
     <div style="margin: 15px;">
         <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
@@ -340,50 +164,6 @@
 
         <h3 style="display:inline" id="dinner_result">0</h3>
     </div>
-    <table class="table table-hsts">
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Starch</h4>
-            </td>
-            <td>
-                <input type="text" id="dinner_starch" name="dinner_starch" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Lipid</h4>
-            </td>
-            <td>
-                <input type="text" id="dinner_lipid" name="dinner_lipid" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Protein</h4>
-            </td>
-            <td>
-                <input type="text" id="dinner_protein" name="dinner_protein" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Fiber</h4>
-            </td>
-            <td>
-                <input type="text" id="dinner_fiber" name="dinner_fiber" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-    </table>
     <!-- footer -->
     <div style="margin: 15px;">
         <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
@@ -409,50 +189,6 @@
 
         <h3 id="en_result" style="display:inline">0</h3>
     </div>
-    <table class="table table-hsts">
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Starch</h4>
-            </td>
-            <td>
-                <input type="text" id="en_starch" name="en_starch" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Lipid</h4>
-            </td>
-            <td>
-                <input type="text" id="en_lipid" name="en_lipid" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-        <tr>
-            <td style="float: right">
-                <h4>Protein</h4>
-            </td>
-            <td>
-                <input type="text" id="en_protein" name="en_protein" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-            <td style="float: right">
-                <h4>Fiber</h4>
-            </td>
-            <td>
-                <input type="text" id="en_fiber" name="en_fiber" value="0"
-                       class="form-control hsts hsts-num"
-                       readonly="readonly"/>
-            </td>
-        </tr>
-    </table>
     <!-- footer -->
     <div style="margin: 15px;">
         <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"

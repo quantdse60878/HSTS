@@ -38,6 +38,7 @@ function isInt(n){
 
 function recognizer(){
     var recognition = new webkitSpeechRecognition();
+    document.getElementById("microphone").src = "/static/image/microphone_active.png";
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.onresult = function(event) {
@@ -54,8 +55,6 @@ function recognizer(){
         document.getElementById("finalResult").value = final_transcript;
         var listFinalString11 = document.getElementById("finalResult").value.split(" ");
         var listFinalString = document.getElementById("finalResult").value;
-//            var a = "ăn cơm ăn cá ăn bún thịt nướng";
-//            var listFinalString11 = a.split(" ");
         var meal = document.getElementById("meal");
         var foodValue = document.getElementById("foodValue");
         for(var i = 0; i < listFinalString11.length; i++) {
@@ -168,27 +167,17 @@ function recognizer(){
             lateAtNight = foodValue.value;
             document.getElementById("en").value = lateAtNight;
         }
-
     }
+
     recognition.lang = "vi-VN";
     recognition.textIn;
     recognition.start();
 };
 
-function analytic() {
-    var listBreakfast = breakfast.split(",");
-    var listBreaktimeMorning = breaktimeMorning.split(",");
-    var listLunch = lunch.split(",");
-    var listBreaktimeAfternoon = breaktimeAfternoon.split(",");
-    var listDinner = dinner.split(",");
-    var listLateAtNight = lateAtNight.split(",");
-    analyticMeal(listBreakfast);
-    analyticMeal(listBreaktimeMorning);
-    analyticMeal(listLunch);
-    analyticMeal(listBreaktimeAfternoon);
-    analyticMeal(listDinner);
-    analyticMeal(listLateAtNight);
+function startRecognizer() {
+    recognizer();
 }
+
 
 function choosePanel(element){
     document.getElementById("li_tab_1").class = "";
@@ -209,9 +198,10 @@ function analyticMeal(listMeal) {
         var itemBreakfast = listMeal[i];
         var foodItemValue = new foodItemAnalytic();
         for(var j = 0; j < listFoodDatabase.length; j++) {
-            if(itemBreakfast.indexOf(listFoodDatabase[j].foodName) > -1) {
+            if(itemBreakfast.toLowerCase().indexOf(listFoodDatabase[j].foodName.toLowerCase()) > -1) {
                 foodItemValue.foodName = listFoodDatabase[j].foodName;
-                if(itemBreakfast.indexOf(listFoodDatabase[j].foodUnit) > -1) {
+                if(listFoodDatabase[j].foodUnit == null) continue;
+                if(itemBreakfast.toLowerCase().indexOf(listFoodDatabase[j].foodUnit.toLowerCase()) > -1) {
                     foodItemValue.foodUnit = listFoodDatabase[j].foodUnit;
                     var listNutritionNameDatabase = listFoodDatabase[j].foodNutritionName.split(",");
                     var listNutritionName = new Array();
@@ -246,36 +236,16 @@ function analyticMeal(listMeal) {
 
 
 var foodingredient = {
-    bf_result : "",
-    btm_result : "",
-    l_result : "",
-    bta_result : "",
-    dinner_result : "",
-    en_result : "",
-    bf_starch : "",
-    bf_lipid : "",
-    bf_protein : "",
-    bf_fiber : "",
-    btm_starch : "",
-    btm_lipid : "",
-    btm_protein : "",
-    btm_fiber : "",
-    l_starch : "",
-    l_lipid : "",
-    l_protein : "",
-    l_fiber : "",
-    bta_starch : "",
-    bta_lipid : "",
-    bta_protein : "",
-    bta_fiber : "",
-    d_starch : "",
-    d_lipid : "",
-    d_protein : "",
-    d_fiber : "",
-    en_starch : "",
-    en_lipid : "",
-    en_protein : "",
-    en_fiber : ""
+    bf_result : 0,
+    btm_result : 0,
+    l_result : 0,
+    bta_result : 0,
+    dinner_result : 0,
+    en_result : 0,
+    lipid:0,
+    starch:0,
+    protein:0,
+    fiber:0
 };
 
 function changeValueOnFood(target){
@@ -296,37 +266,12 @@ function changeValueOnFood(target){
 }
 
 function validation1(){
-    alert("OK");
     var bf_result = document.getElementById("bf_result").innerHTML;
     var btm_result = document.getElementById("btm_result").innerHTML;
     var l_result = document.getElementById("l_result").innerHTML;
     var bta_result = document.getElementById("bta_result").innerHTML;
     var dinner_result = document.getElementById("dinner_result").innerHTML;
     var en_result = document.getElementById("en_result").innerHTML;
-    var bf_starch = document.getElementById("bf_starch").value;
-    var bf_lipid = document.getElementById("bf_lipid").value;
-    var bf_protein = document.getElementById("bf_protein").value;
-    var bf_fiber = document.getElementById("bf_fiber").value;
-    var btm_starch = document.getElementById("btm_starch").value;
-    var btm_lipid = document.getElementById("btm_lipid").value;
-    var btm_protein = document.getElementById("btm_protein").value;
-    var btm_fiber = document.getElementById("btm_fiber").value;
-    var l_starch = document.getElementById("l_starch").value;
-    var l_lipid = document.getElementById("l_lipid").value;
-    var l_protein = document.getElementById("l_protein").value;
-    var l_fiber = document.getElementById("l_fiber").value;
-    var bta_starch = document.getElementById("bta_starch").value;
-    var bta_lipid = document.getElementById("bta_lipid").value;
-    var bta_protein = document.getElementById("bta_protein").value;
-    var bta_fiber = document.getElementById("bta_fiber").value;
-    var dinner_starch = document.getElementById("dinner_starch").value;
-    var dinner_lipid = document.getElementById("dinner_lipid").value;
-    var dinner_protein = document.getElementById("dinner_protein").value;
-    var dinner_fiber = document.getElementById("dinner_fiber").value;
-    var en_starch = document.getElementById("en_starch").value;
-    var en_lipid = document.getElementById("en_lipid").value;
-    var en_protein = document.getElementById("en_protein").value;
-    var en_fiber = document.getElementById("en_fiber").value;
     var json = JSON.stringify(foodingredient);
     $.ajax({
         method: "GET",
@@ -335,4 +280,81 @@ function validation1(){
     }).done(function (data) {
         alert("KHUONGGNGNGNGNG");
     });
+}
+
+function createNutrition(){
+
+    var listBreakfast = breakfast.split(",");
+    var listBreaktimeMorning = breaktimeMorning.split(",");
+    var listLunch = lunch.split(",");
+    var listBreaktimeAfternoon = breaktimeAfternoon.split(",");
+    var listDinner = dinner.split(",");
+    var listLateAtNight = lateAtNight.split(",");
+    var listBreakfastAnalytic = analyticMeal(listBreakfast);
+    var listBraktimeMorningAnalytic = analyticMeal(listBreaktimeMorning);
+    var listLunchAnalytic = analyticMeal(listLunch);
+    var listBreaktimeAfternoonAnalytic = analyticMeal(listBreaktimeAfternoon);
+    var listDinnerAnalytic = analyticMeal(listDinner);
+    var listLateAtNightAnalytic = analyticMeal(listLateAtNight);
+    var a = inputCaloriesEstimate(listBreakfastAnalytic,document.getElementById("bf_result"));
+    foodingredient.bf_result = a;
+    var b = inputCaloriesEstimate(listBraktimeMorningAnalytic,document.getElementById("btm_result"));
+    foodingredient.btm_result = b;
+    var c = inputCaloriesEstimate(listLunchAnalytic,document.getElementById("l_result"));
+    foodingredient.l_result = c;
+    var d = inputCaloriesEstimate(listBreaktimeAfternoonAnalytic,document.getElementById("bta_result"));
+    foodingredient.bta_result = d;
+    var e = inputCaloriesEstimate(listDinnerAnalytic,document.getElementById("dinner_result"));
+    foodingredient.dinner_result = e;
+    var f = inputCaloriesEstimate(listLateAtNightAnalytic,document.getElementById("en_result"));
+    foodingredient.en_result = f;
+
+}
+
+function inputCaloriesEstimate(list,element){
+    var totalCaloriesEstimate = 0;
+    if(list!= undefined){
+        for(var i=0;i<list.length;i++){
+            var item = list[i];
+            totalCaloriesEstimate += item.caloriesEstimate;
+            foodingredient.lipid += item.foodNutritionValue[0];
+            foodingredient.starch += item.foodNutritionValue[1];
+            foodingredient.protein += item.foodNutritionValue[2];
+            foodingredient.fiber += item.foodNutritionValue[3];
+        }
+        element.innerHTML = totalCaloriesEstimate;
+    } else {
+        element.innerHTML = "0";
+    }
+    return totalCaloriesEstimate;
+}
+
+function changeColorTab(target){
+    var panel1 = document.getElementById("tab1");
+    var panel2 = document.getElementById("tab2");
+    var panel3 = document.getElementById("tab3");
+    var panel4 = document.getElementById("tab4");
+    var panel5 = document.getElementById("tab5");
+    var panel6 = document.getElementById("tab6");
+    panel1.style.color = "";
+    panel1.style.fontSize = "";
+    panel1.style.fontWeight = "";
+    panel2.style.color = "";
+    panel2.style.fontSize = "";
+    panel2.style.fontWeight = "";
+    panel3.style.color = "";
+    panel3.style.fontSize = "";
+    panel3.style.fontWeight = "";
+    panel4.style.color = "";
+    panel4.style.fontSize = "";
+    panel4.style.fontWeight = "";
+    panel5.style.color = "";
+    panel5.style.fontSize = "";
+    panel5.style.fontWeight = "";
+    panel6.style.color = "";
+    panel6.style.fontSize = "";
+    panel6.style.fontWeight = "";
+    target.style.color = "green"
+    target.style.fontSize = "large";
+    target.style.fontWeight = "850";
 }

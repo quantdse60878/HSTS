@@ -40,8 +40,8 @@ public class AnalyticFood {
                 if(food.getId() == unitOfFood.getFood().getId()){
                     model.setFoodUnit(unitOfFood.getUnitName());
                     model.setCaloriesEstimate(unitOfFood.getCaloriesEstimate());
-                    model.getFoodNutritionName().add(unitOfFood.getListElementNutritionName());
-                    model.getFoodNutritionValue().add(unitOfFood.getListElementNutritionValue());
+                    model.setFoodNutritionName(unitOfFood.getListElementNutritionName());
+                    model.setFoodNutritionValue(unitOfFood.getListElementNutritionValue());
                 }
             }
             list.add(model);
