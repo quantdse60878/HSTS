@@ -184,6 +184,8 @@
 
     function analyticMeal(listMeal) {
         if(listMeal[0] == "") return;
+        var returnValue = new Array();
+        var countMeal = 0;
         console.log("--" + listMeal.length + "--");
         for(var i = 0; i < listMeal.length; i++) {
             var itemBreakfast = listMeal[i];
@@ -213,10 +215,13 @@
                     }
                 }
             }
+            returnValue[countMeal] = foodItemValue;
+            countMeal++;
             allFoodHadAnalytic[countFood] = foodItemValue;
             countFood++;
             console.log(foodItemValue);
         }
+        return returnValue;
     }
 
 </script>
