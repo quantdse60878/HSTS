@@ -769,6 +769,28 @@ public class PatientService extends AbstractService {
         }
     }
 
+    public String getPatientHistory(final String medicalHistory) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final String[] tmp = medicalHistory.split(",");
+            if (null != tmp && tmp.length > 0) {
+                String results = "";
+                for (String str: tmp) {
+                    if (!str.startsWith("{img}")) {
+                        if (LOGGER.isDebugEnabled()) {
+                            LOGGER.debug("original file name: {}", str);
+                        }
+                        results = results + ", " + str;
+                    }
+                }
+                return results;
+            }
+            return null;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
     public List<String> getPatientHistoryImage(final String medicalHistory) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
