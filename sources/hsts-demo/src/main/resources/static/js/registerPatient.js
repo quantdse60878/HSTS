@@ -63,7 +63,7 @@ $("#doctorSelect").select2({
 });
 
 var $selectPatient = $("#patientName").select2({
-    placeholder: "Type patient name",
+    //placeholder: "Type patient name",
     theme: "bootstrap",
     width: "100%",
     allowClear: false,
