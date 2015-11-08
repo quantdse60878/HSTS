@@ -137,21 +137,21 @@
                                 <!-- Custom Tabs (Pulled to the left) -->
                                 <div class="nav-tabs-custom" style="box-shadow: none;">
                                     <ul class="nav nav-tabs">
-                                        <li class="active" th:if="${DIAGNOSTIC == null}" id="li_tab_4-4">
+                                        <li class="active tab-title" th:if="${DIAGNOSTIC == null}" id="li_tab_4-4">
                                             <a href="#tab_4-4" data-toggle="tab">Infomation checking</a>
                                         </li>
-                                        <li th:if="${DIAGNOSTIC != null}" id="li_tab_4-4">
+                                        <li class=" tab-title" th:if="${DIAGNOSTIC != null}" id="li_tab_4-4">
                                             <a href="#tab_4-4" data-toggle="tab">Infomation checking</a>
                                         </li>
-                                        <li class="active" th:if="${DIAGNOSTIC != null}" id="li_tab_1-1">
+                                        <li class="active tab-title" th:if="${DIAGNOSTIC != null}" id="li_tab_1-1">
                                             <a href="#tab_1-1" data-toggle="tab">Medicines</a>
                                         </li>
-                                        <li th:if="${DIAGNOSTIC == null}" id="li_tab_1-1">
+                                        <li class="tab-title" th:if="${DIAGNOSTIC == null}" id="li_tab_1-1">
                                             <a href="#tab_1-1" data-toggle="tab">Medicines</a>
                                         </li>
-                                        <li id="li_tab_2-2"><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
-                                        <li id="li_tab_3-3"><a href="#tab_3-3" data-toggle="tab">Practices</a></li>
-                                        <li id="li_tab_5-5"><a href="#tab_5-5" data-toggle="tab">Appointment</a></li>
+                                        <li class="tab-title" id="li_tab_2-2"><a href="#tab_2-2" data-toggle="tab">Foods</a></li>
+                                        <li class="tab-title" id="li_tab_3-3"><a href="#tab_3-3" data-toggle="tab">Practices</a></li>
+                                        <li class="tab-title" id="li_tab_5-5"><a href="#tab_5-5" data-toggle="tab">Appointment</a></li>
                                     </ul>
 
                                     <div class="tab-content">
@@ -437,24 +437,20 @@
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].m" id="mPresModelsM' + countMedicine + '" onchange="setMedicineUnit(event)" data-rule-min="1" data-msg-min="Please select.">'
                     + '<option value="0" >Select</option>'
                     + '<option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}" th:text="${medicine.name}"></option>'
-                    + '</select>'
-                    + '<div class="help-block with-errors"></div>';
+                    + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime" data-rule-min="1" data-msg-min="Please select." >'
                     + '<option value="0" >Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
-                    + '</select>'
-                    + '<div class="help-block with-errors"></div>';
+                    + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
-                    '<input type="text" value="1" class="form-control" style="text-align: right;" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quantity" data-rule-range="0,10" data-msg-range="Out of range 0-10"/>'
-                    + '<div class="help-block with-errors"></div>';
+                    '<input type="text" value="1" class="form-control" style="text-align: right;" name="mPresModels[' + countMedicine + '].mQuantity" id="mPresModels' + countMedicine + '.mQuantity" placeholder="Quantity" data-rule-range="0,10" data-msg-range="Out of range 0-10"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<input type="text" class="form-control" data-remote="/validateStr" name="mPresModels[' + countMedicine + '].mUnit" id="mPresModels' + countMedicine + '.mUnit" placeholder="Unit" data-rule-required="true" data-msg-required="Please input." onload="addValidate(this)"/>'
-                    + '<div class="help-block with-errors"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" placeholder="Advice" id="mPresModels' + countMedicine + '.mNote" name="mPresModels[' + countMedicine + '].mNote"/>';
@@ -479,25 +475,21 @@
             newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" onchange="findUnits(this)" id="fPresModels' + countFoods + '.f" data-msg-min="Please select." data-rule-min="1">'
                     + '<option value="0">Select</option>'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
-                    + '</select>'
-                    + '<div class="help-block with-errors"></div>';
+                    + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
                     '<select class="form-control" name="fPresModels[' + countFoods + '].fTime" id="fPresModels' + countFoods + '.fTime" data-msg-min="Please select." data-rule-min="1">'
                     + '<option value="0">Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
-                    + '</select>'
-                    + '<div class="help-block with-errors"></div>';
+                    + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<input type="text" value="0" class="form-control" style="text-align: right;" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" data-rule-required="true" data-msg-required="Please input." data-rule-min="0" data-msg-min="Value must great than 0"/>'
-                    + '<div class="help-block with-errors"></div>';
+            newCell.innerHTML = '<input type="text" value="0" class="form-control" style="text-align: right;" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" data-rule-required="true" data-msg-required="Please input." data-rule-min="0" data-msg-min="Value must great than 0"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].fUnit" id="fPresModels' + countFoods + 'fUnit" data-msg-min="Please select." data-rule-min="2" onload="addValidate(this)">'
-                    + '<option value="0">Select</option></select>'
-                    + '<div class="help-block with-errors"></div>';
+                    + '<option value="0">Select</option></select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice"/>';
             newCell = newRow.insertCell(newRow.cells.length);
@@ -519,7 +511,6 @@
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
                     ' <input type="text" placeholder="Practice Name" class="form-control" name="pPresModels[' + countPractice + '].p" id="pPresModelsP' + countPractice + '" oninput="viewAutoCompleteP(this)" data-rule-required="true" data-msg-required="Please input." onload="addValidate(this)"/>'
-                    + '<div class="help-block with-errors"></div>'
                     + '<div id="pPresModelsP' + countPractice + 'item" class="form-control" style="visibility: hidden;height: 100%;"></div>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
@@ -527,13 +518,11 @@
                     ' <select class="form-control" name="pPresModels[' + countPractice + '].pTime" id="pPresModels' + countPractice + '.pTime" data-rule-min="1" data-msg-min="Please select.">'
                     + '<option value="0">Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
-                    + '</select>'
-                    + '<div class="help-block with-errors"></div>';
+                    + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML =
-                    '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].pIntensity" data-rule-required="true" data-msg-required="Please input." placeholder="Quantity"/>'
-                    + '<div class="help-block with-errors"></div>';
+                    '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].pIntensity" data-rule-required="true" data-msg-required="Please input." placeholder="Quantity"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML =
                     '<input type="text" class="form-control" name="pPresModels[' + countPractice + '].pNote" id="pPresModels' + countPractice + '.pNote" placeholder="Advice"/>';

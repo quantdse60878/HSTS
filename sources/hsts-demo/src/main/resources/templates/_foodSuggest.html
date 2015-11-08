@@ -33,7 +33,7 @@
                         th:text="${food.name}"
                         th:if="${foodPhase.food.id != food.id}"></option>
             </select>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group">
             <select class="form-control" th:field="*{fPresModels[__${row.index}__].fTime}"
@@ -42,20 +42,20 @@
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group">
             <input type="text" class="form-control" th:field="*{fPresModels[__${row.index}__].fQuantity}"
                    style="text-align: right;" data-rule-required="true" data-msg-required="Please input."
-                   placeholder="Quantity" data-rule-min="0" data-msg-min="Value must great than 0"/>
-            <div class="help-block with-errors"></div>
+                   placeholder="Quantity" data-rule-min="1" data-msg-min="Value must great than 1"/>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group">
             <select class="form-control" th:name="fPresModels[__${row.index}__].fUnit"
                     th:id="fPresModels__${row.index}__fUnit" data-msg-min="Please select." data-rule-min="1">
                 <option value="0">Select</option>
             </select>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td>
             <input type="text" class="form-control"

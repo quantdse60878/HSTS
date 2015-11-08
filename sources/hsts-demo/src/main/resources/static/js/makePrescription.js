@@ -6,17 +6,15 @@
 var validator = $("#mainForm").validate({
     ignore: [],
     debug: true,
-    rules: {
+    rules: {},
+    messages: {},
+    errorPlacement: function (error, element) {
+        error.appendTo(element.parent());
     },
-    messages: {
-    },
-    errorPlacement: function(error, element){
-            error.appendTo( element.next() );
-    },
-    submitHandler: function(form) {
+    submitHandler: function (form) {
         form.submit();
     },
-    invalidHandler: function(e, validator) {
+    invalidHandler: function (e, validator) {
         if (validator.errorList.length > 0) {
             console.log("Change to first tab has error");
             console.log(validator.errorList);
@@ -27,7 +25,7 @@ var validator = $("#mainForm").validate({
     }
 });
 
-function changeTabb (a, li) {
+function changeTabb(a, li) {
     console.log("a: " + a);
     console.log("li: " + li);
     $('.nav-tabs > li.active').removeClass('active');
@@ -40,14 +38,14 @@ function validateAndChangeTab(targetTab, targetLi) {
     var valid = true;
     var $fields = $('.tab-pane.active').find('input');
     console.log($fields);
-    $fields.each (function() {
+    $fields.each(function () {
         if (!validator.element(this) && valid) {
             valid = false;
         }
     });
 
     $fields = $('.tab-pane.active').find('select');
-    $fields.each (function() {
+    $fields.each(function () {
         if (!validator.element(this) && valid) {
             valid = false;
         }
@@ -59,18 +57,31 @@ function validateAndChangeTab(targetTab, targetLi) {
 
 };
 
+function validateAuto() {
+        var $fields = $('.error').find('lable');
+        if($fields.prevObject.length > 0){
+            console.log(this);
+            //$('<span class="error fa fa-exclamation-circle"></span>').appendTo(licheck);
+        }
+    $fields.prevObject.each(function () {
+        console.log(this);
+        var p = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+        //console.log(p);
+    });
+};
+//var isValidAuto = setInterval(validateAuto, 5000);
 function validateAndOpenModal(m) {
     var valid = true;
     var $fields = $('.tab-pane.active').find('input');
     console.log($fields);
-    $fields.each (function() {
+    $fields.each(function () {
         if (!validator.element(this) && valid) {
             valid = false;
         }
     });
 
     $fields = $('.tab-pane.active').find('select');
-    $fields.each (function() {
+    $fields.each(function () {
         if (!validator.element(this) && valid) {
             valid = false;
         }
@@ -81,18 +92,18 @@ function validateAndOpenModal(m) {
     }
 
 };
-function viewAutoCompleteP(input){
+function viewAutoCompleteP(input) {
     //console.log(input);
     var id = input.getAttribute('id');
     var item = id + "item";
-    viewAutoComplete(id,item);
+    viewAutoComplete(id, item);
 }
-function viewAutoComplete(id,item){
+function viewAutoComplete(id, item) {
     var val = document.getElementById(id).value;
     var it = document.getElementById(item);
     it.style.visibility = "hidden";
     it.style.height = "0px";
-    if(val!="") {
+    if (val != "") {
         it.innerHTML = "";
         for (var i = 0; i < listPracticeName.length; i++) {
             if (listPracticeName[i].toLowerCase().indexOf(val.toLowerCase()) > -1) {
@@ -111,7 +122,7 @@ function viewAutoComplete(id,item){
         }
     }
 }
-function fillInput(id,item,c){
+function fillInput(id, item, c) {
     var it = document.getElementById(item);
     it.style.visibility = "hidden";
     it.style.height = "0px";
@@ -122,7 +133,7 @@ function findUnits(food) {
     var id = food.getAttribute('id');
     var preID = id.split('.')[0];
     var unitIdN = preID + 'fUnit';
-    var unitID = "#"+preID + 'fUnit';
+    var unitID = "#" + preID + 'fUnit';
     var foodId = food.value;
     $.ajax({
         dataType: "json",
@@ -134,10 +145,10 @@ function findUnits(food) {
             //console.log("success");
             var options = '<option value="0">Select</option>';
             document.getElementById(unitIdN).innerHTML = "";
-            for (var i = 0; i < json.length; i++){
+            for (var i = 0; i < json.length; i++) {
                 var tmp = json[i];
                 //console.log(tmp);
-                options= options + '<option value="'+ tmp.foodUnitId +'">'+ tmp.unitName +'</option>';
+                options = options + '<option value="' + tmp.foodUnitId + '">' + tmp.unitName + '</option>';
             }
             $(options).appendTo(unitID);
         }
@@ -198,9 +209,9 @@ function loadPopupAppointment(appointmentId) {
             appointmentId: appointmentId
         }
     })
-        .done(function(data) {
+        .done(function (data) {
             console.log(data);
-            if(data != null) {
+            if (data != null) {
                 // Set data to html
                 // Set information Date History
                 $('#inforDateHis').html(data.dateInfor);
@@ -208,74 +219,77 @@ function loadPopupAppointment(appointmentId) {
                 var row = [];
                 // infor table medicines
                 $('#hisMedicine').html('<tr><th style="width: 10px">#</th>'
-                    +'<th>Medicine</th>'
-                    +'<th>Times</th>'
-                    +'<th>Quantity</th>'
-                    +'<th>Unit</th>'
-                    +'<th>Note</th>'
-                    +'</tr>');
-                for(var i=0; i< data.hms.length;i++){
+                    + '<th>Medicine</th>'
+                    + '<th>Times</th>'
+                    + '<th>Quantity</th>'
+                    + '<th>Unit</th>'
+                    + '<th>Note</th>'
+                    + '</tr>');
+                for (var i = 0; i < data.hms.length; i++) {
                     var tmp = data.hms[i];
                     row = "<tr>"
-                        +"<td>"+(i+1)+"</td>"
-                        +"<td>"+tmp.name+"</td>"
-                        +"<td>"+tmp.times+"</td>"
-                        +"<td>"+tmp.quantity+"</td>"
-                        +"<td>"+tmp.unit+"</td>"
-                        +"<td>"+tmp.note+"</td>"
-                        +"</tr>";
+                        + "<td>" + (i + 1) + "</td>"
+                        + "<td>" + tmp.name + "</td>"
+                        + "<td>" + tmp.times + "</td>"
+                        + "<td>" + tmp.quantity + "</td>"
+                        + "<td>" + tmp.unit + "</td>"
+                        + "<td>" + tmp.note + "</td>"
+                        + "</tr>";
                     table = table + row;
-                };
+                }
+                ;
                 //console.log(table);
-                $( table ).appendTo( "#hisMedicine" );
+                $(table).appendTo("#hisMedicine");
 
                 table = [];
                 row = [];
                 // infor table medicines
                 $('#hisFoods').html('<tr><th style="width: 10px">#</th>'
-                    +'<th>Menu</th>'
-                    +'<th>Times</th>'
-                    +'<th>Quantity</th>'
-                    +'<th>Unit</th>'
-                    +'<th>Note</th>'
-                    +'</tr>');
-                for(var i=0; i< data.hfs.length;i++){
+                    + '<th>Menu</th>'
+                    + '<th>Times</th>'
+                    + '<th>Quantity</th>'
+                    + '<th>Unit</th>'
+                    + '<th>Note</th>'
+                    + '</tr>');
+                for (var i = 0; i < data.hfs.length; i++) {
                     var tmp = data.hfs[i];
                     row = "<tr>"
-                        +"<td>"+(i+1)+"</td>"
-                        +"<td>"+tmp.name+"</td>"
-                        +"<td>"+tmp.times+"</td>"
-                        +"<td>"+tmp.quantity+"</td>"
-                        +"<td>"+tmp.unit+"</td>"
-                        +"<td>"+tmp.note+"</td>"
-                        +"</tr>";
+                        + "<td>" + (i + 1) + "</td>"
+                        + "<td>" + tmp.name + "</td>"
+                        + "<td>" + tmp.times + "</td>"
+                        + "<td>" + tmp.quantity + "</td>"
+                        + "<td>" + tmp.unit + "</td>"
+                        + "<td>" + tmp.note + "</td>"
+                        + "</tr>";
                     table = table + row;
-                };
+                }
+                ;
                 //console.log(table);
-                $( table ).appendTo( "#hisFoods" );
+                $(table).appendTo("#hisFoods");
 
                 table = [];
                 row = [];
                 // infor table medicines
                 $('#hisPractice').html('<tr><th style="width: 10px">#</th>'
-                    +'<th>Name</th>'
-                    +'<th>Times</th>'
-                    +'<th>Quantity</th>'
-                    +'<th>Note</th>'
-                    +'</tr>');
-                for(var i=0; i< data.hfs.length;i++){
+                    + '<th>Name</th>'
+                    + '<th>Times</th>'
+                    + '<th>Quantity</th>'
+                    + '<th>Note</th>'
+                    + '</tr>');
+                for (var i = 0; i < data.hfs.length; i++) {
                     var tmp = data.hfs[i];
                     row = "<tr>"
-                        +"<td>"+(i+1)+"</td>"
-                        +"<td>"+tmp.name+"</td>"
-                        +"<td>"+tmp.times+"</td>"
-                        +"<td>"+tmp.quantity+"</td>"
-                        +"<td>"+tmp.note+"</td>"
-                        +"</tr>";
+                        + "<td>" + (i + 1) + "</td>"
+                        + "<td>" + tmp.name + "</td>"
+                        + "<td>" + tmp.times + "</td>"
+                        + "<td>" + tmp.quantity + "</td>"
+                        + "<td>" + tmp.note + "</td>"
+                        + "</tr>";
                     table = table + row;
-                };
+                }
+                ;
                 //console.log(table);
-                $( table ).appendTo( "#hisPractice" );
+                $(table).appendTo("#hisPractice");
 
                 //hideWatting();
                 // Show pop-up
@@ -719,16 +733,16 @@ function confirmBox(form) {
     //}
     //var r = confirm('Are you sure to make this prescription?');
     //if (r == true) {
-        // Hidden field for diagnostic
-        //Get
-        var bla = $('#select2Box').val().trim();
-        console.log(bla);
-        if (bla != null) {
-            //Set
-            $('#diagnosticValue').val(bla);
-            console.log($('#diagnosticValue').val());
-        }
-        return true;
+    // Hidden field for diagnostic
+    //Get
+    var bla = $('#select2Box').val().trim();
+    console.log(bla);
+    if (bla != null) {
+        //Set
+        $('#diagnosticValue').val(bla);
+        console.log($('#diagnosticValue').val());
+    }
+    return true;
     //} else {
     //    return false;
     //}
@@ -748,12 +762,13 @@ $('#Appointment').datepicker("setDate", appointmentDate);
 var currentValue = "";
 function setMedicineUnit(ev) {
     var target = ev.target;
-    var targetValue = target.options[target.selectedIndex].text;;
-    for(var i =  0; listMedicine.length; i++) {
+    var targetValue = target.options[target.selectedIndex].text;
+    ;
+    for (var i = 0; listMedicine.length; i++) {
         var item = listMedicine[i];
         var a = JSON.stringify(item);
         var b = JSON.parse(a);
-        if(targetValue == b.name) {
+        if (targetValue == b.name) {
             currentValue = currentValue + targetValue;
             var tdTag = ev.target.parentElement;
             var unitTag = tdTag.nextElementSibling.nextElementSibling.nextElementSibling;
@@ -768,22 +783,22 @@ function addValidate(element) {
     $(element).rules("add", "required");
 }
 
-function showWatting(){
+function showWatting() {
     // Show pop-up
     $('#waitting').modal('show');
 }
 
-function hideWatting(){
+function hideWatting() {
     // Hide pop-up
     $('#waitting').modal('hide');
 }
 
-(function() {
+(function () {
     // your page initialization code here
     // the DOM will be available here
-    for(var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 1000; i++) {
         var foodElement = document.getElementById("fPresModels" + i + ".f");
-        if(foodElement == null) return;
+        if (foodElement == null) return;
         findUnits(foodElement);
     }
 })();

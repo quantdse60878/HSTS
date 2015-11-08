@@ -695,7 +695,8 @@ public class PatientService extends AbstractService {
             return model;
 
         } catch (Exception e) {
-            LOGGER.error("Error while uploading new file[{}]", file.getOriginalFilename());
+            e.printStackTrace();
+//            LOGGER.error("Error while uploading new file[{}]", file.getOriginalFilename());
             return new FileUploadModel(false);
         } finally {
             try {
