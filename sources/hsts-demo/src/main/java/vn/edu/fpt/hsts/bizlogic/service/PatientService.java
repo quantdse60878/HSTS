@@ -680,7 +680,8 @@ public class PatientService extends AbstractService {
             if (!folder.exists()) {
                 folder.mkdir();
             }
-            final String filePath = getUploadDirectory() + "/" + fileName;
+            final String filePath = getUploadDirectory() + File.separator + fileName;
+            // {img}ten anh{img},sasas, {img}anh2{img}
             final File newFile = new File(filePath);
             if(!newFile.exists()) {
                 newFile.createNewFile();
@@ -759,4 +760,18 @@ public class PatientService extends AbstractService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    /**
+     * abc = {img}anh1{img},trieu chung 1, {img}anh2{img}
+     *
+     * String[] tmp = abc.s[plitBy(,);
+     * for(String s: tmp) {
+     *     if (s.startWith(img)
+     *     cat chuoi -> ten anh
+     *     duong dan : getUpadloer + Fie.separate + ten anh
+     *     add to list
+     *
+     * }
+     * return list
+     */
 }

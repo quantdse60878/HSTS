@@ -56,7 +56,7 @@
                             <tr th:each="patient,rowStat : ${LISTPATIENTS}">
                                 <td th:text="${rowStat.count}">No.</td>
                                 <td><a th:href="@{/createNutrition(patientID=${patient.id})}" th:text="${patient.account.fullName}">Name</a></td>
-                                <td><a th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</a></td>
+                                <td th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</td>
 
                                 <td>
                                     <a th:href="@{/createPrescription(patientID=${patient.id})}" class="btn btn-info"

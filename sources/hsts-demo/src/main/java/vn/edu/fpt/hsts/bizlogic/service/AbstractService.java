@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.web.session.UserSession;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,9 +32,6 @@ public class AbstractService {
      */
     @SuppressWarnings("unused")
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractService.class);
-
-    @Value("${hsts.upload.directory}")
-    private String uploadDirectory;
 
     /**
      * The {@link UserSession}.
@@ -87,6 +85,6 @@ public class AbstractService {
     }
 
     protected String getUploadDirectory() {
-        return uploadDirectory;
+        return System.getProperty("user.dir") + File.separator + "uploadFiles";
     }
 }
