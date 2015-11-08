@@ -15,6 +15,7 @@
 	"bootstrap-validator": null,
 	"select2-bootstrap-theme": null,
 	"icheck": null,
-	"bootstrap-fileinput": null
+	"bootstrap-fileinput": null,
+	"bxslider-4": "4.2.5"
   }
 }
