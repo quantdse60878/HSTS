@@ -13,17 +13,27 @@ public class UnitOfFoodModel implements Serializable  {
 
     private String foodName;
     private String foodUnit;
+    private float totalCalories;
     private List<String> foodNutritionName;
     private List<String> foodNutritionValue;
 
     public UnitOfFoodModel() {
     }
 
-    public UnitOfFoodModel(String foodName, String foodUnit, List<String> foodNutritionName, List<String> foodNutritionValue) {
+    public UnitOfFoodModel(String foodName, String foodUnit, float totalCalories, List<String> foodNutritionName, List<String> foodNutritionValue) {
         this.foodName = foodName;
         this.foodUnit = foodUnit;
+        this.totalCalories = totalCalories;
         this.foodNutritionName = foodNutritionName;
         this.foodNutritionValue = foodNutritionValue;
+    }
+
+    public float getTotalCalories() {
+        return totalCalories;
+    }
+
+    public void setTotalCalories(float totalCalories) {
+        this.totalCalories = totalCalories;
     }
 
     public String getFoodName() {

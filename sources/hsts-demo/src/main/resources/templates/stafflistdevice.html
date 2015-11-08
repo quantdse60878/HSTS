@@ -28,29 +28,30 @@
                 <div class="box">
                     <div class="box-header" style="padding: 0px;">
                         <div class="form-group">
-                                <!-- search form (Optional) -->
-                                <form action="createNewDevice" method="GET" onsubmit="return WP()" class="sidebar-form" style="border: none">
-                                        <input type="hidden" id="uuid" name="uuid" value=""/>
-                                        <div id="autoComplete" style="float: left;width: 30%;">
-                                            <input type="text" id="device" autocomplete="off" name="device" oninput="checkExisted()" style="width: 100%;
-                                                                                                                                            padding-left: 5px"/>
-                                            <div id="autoCompleteItem" style="background-color: #E0E0E0;
+                            <!-- search form (Optional) -->
+                            <form action="createNewDevice" method="GET" onsubmit="return WP()"
+                                  style="border: none;margin-top: 10px;margin-left: 10px;">
+                                <input type="hidden" id="uuid" name="uuid" value=""/>
+
+                                <div id="autoComplete" style="float: left;width: 30%;">
+                                    <input type="text" id="device" autocomplete="off" name="device"
+                                           oninput="checkExisted()" class="form-control"/>
+
+                                    <div id="autoCompleteItem" style="background-color: #E0E0E0;
                                                                               word-wrap: break-word;
                                                                               width: 30%;
                                                                               padding-top: 10px;
                                                                               z-index: 1;
                                                                               position: absolute;
                                                                               visibility: hidden">
-                                            </div>
-                                        </div>
-                                        <input type="submit" id="create" name="search" value="Create New Device" style=" display: none;
-                                                                                                                 float:left;
-                                                                                                                 background-color: #00a65a;
-                                                                                                                 color: white;
-                                                                                                                 border-radius: 5px;"/>
+                                    </div>
+                                </div>
+                                <input type="submit" id="create" name="search" value="Create New Device"
+                                       class="btn btn-default"
+                                       style="display: none;margin-left: 10px"/>
 
-                                </form>
-                                <!-- /.search form -->
+                            </form>
+                            <!-- /.search form -->
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -78,7 +79,10 @@
                         </table>
                     </div>
                     <div>
-                        <button>Create New Measurement</button>
+                        <form action="createNewMeasurement">
+                            <input type="submit" id="createNewMeasurement=" class="btn btn-default"
+                                   style="display:none; margin-left: 10px;margin-bottom: 10px" value="Create New Measurement"/>
+                        </form>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -89,6 +93,7 @@
         <!-- /.row -->
 
     </section>
+
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/bootstrap.file-input.js}">
     </script>

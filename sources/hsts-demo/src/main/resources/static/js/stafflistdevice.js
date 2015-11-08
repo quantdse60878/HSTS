@@ -56,6 +56,7 @@ $(document).ready(function(){
 function checkExisted(){
     var val = document.getElementById("device").value;
     document.getElementById("create").style.display = 'none';
+    document.getElementById("createNewMeasurement").style.display = 'none';
     var item = document.getElementById("autoCompleteItem");
     item.style.visibility = "hidden";
     item.innerHTML = "";
@@ -74,8 +75,14 @@ function checkExisted(){
                 }
             }
             var found = $.inArray(val, listdevice) > -1;
-            if(found) document.getElementById("create").style.display = 'none';
-            else document.getElementById("create").style.display = 'inline-table';
+            if(found) {
+                document.getElementById("create").style.display = 'none';
+                document.getElementById("createNewMeasurement").style.display = 'none';
+            }
+            else {
+                document.getElementById("create").style.display = 'inline-table';
+                document.getElementById("createNewMeasurement").style.display = 'inline-table';
+            }
         }
     }
 }
@@ -83,6 +90,7 @@ function checkExisted(){
 function fillInput(c){
     document.getElementById("autoCompleteItem").style.visibility = "hidden";
     document.getElementById("create").style.display = 'none';
+    document.getElementById("createNewMeasurement").style.display = 'none';
     document.getElementById("device").value = c;
     $.ajax({
         method: "GET",

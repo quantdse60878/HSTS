@@ -39,6 +39,7 @@ public class AnalyticFood {
             for(UnitOfFood unitOfFood : unitOfFoods){
                 if(food.getId() == unitOfFood.getFood().getId()){
                     model.setFoodUnit(unitOfFood.getUnitName());
+                    model.setTotalCalories(unitOfFood.getCaloriesEstimate());
                     model.getFoodNutritionName().add(unitOfFood.getListElementNutritionName());
                     model.getFoodNutritionValue().add(unitOfFood.getListElementNutritionValue());
                 }
