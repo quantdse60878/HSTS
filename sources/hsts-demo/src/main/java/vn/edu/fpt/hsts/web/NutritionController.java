@@ -81,6 +81,14 @@ public class NutritionController extends AbstractController{
             PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
             mav.addObject("PREVENTIONCHECK", preventionCheck);
 
+            // Get Medicalhistory img
+            List<String> imgs = patientService.getPatientHistoryImage(appointment.getMedicalRecord().getMedicalHistory());
+            mav.addObject("MEDI_IMGS", imgs);
+
+            // Get Medicalhistory
+            String medicalHistory = patientService.getPatientHistory(appointment.getMedicalRecord().getMedicalHistory());
+            mav.addObject("MEDI_HIS", medicalHistory);
+
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
@@ -98,6 +106,11 @@ public class NutritionController extends AbstractController{
             Appointment appointment = appointmentService.findAppointmentByID(appointmentId);
             mav.addObject("APPOINTMENT", appointment);
             mav.addObject("model", foodIngredientModel);
+
+            // Get Medicalhistory
+            String medicalHistory = patientService.getPatientHistory(appointment.getMedicalRecord().getMedicalHistory());
+            mav.addObject("MEDI_HIS", medicalHistory);
+
             LOGGER.info(foodIngredientModel.toString());
             boolean result = foodIngredientService.insertNewFoodIngredient(appointment,foodIngredientModel);
             if (result){
