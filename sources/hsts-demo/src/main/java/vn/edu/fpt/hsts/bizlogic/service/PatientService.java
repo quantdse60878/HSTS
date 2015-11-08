@@ -50,7 +50,10 @@ import vn.edu.fpt.hsts.persistence.repo.PreventionCheckRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
 import javax.transaction.Transactional;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -782,6 +785,34 @@ public class PatientService extends AbstractService {
             }
             return Collections.emptyList();
         } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public byte[] getUploadedHistoryImg(final String fileName){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        FileInputStream fis = null;
+        try {
+            LOGGER.info("fileName[{}]", fileName);
+            final File file = new File(getUploadDirectory() + File.separator + fileName);
+            if (null != file && file.exists() && file.canRead()) {
+                byte[] result = new byte[(int) file.length()];
+                fis = new FileInputStream(file);
+                fis.read(result);
+                return result;
+            }
+            return new byte[0];
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new byte[0];
+        } finally {
+            if (null != fis) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             LOGGER.info(IConsts.END_METHOD);
         }
     }
