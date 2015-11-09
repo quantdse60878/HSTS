@@ -563,17 +563,7 @@ fileUploader.on('filebatchuploadcomplete', function(event, data, previewId, inde
 
 // Reset form
 $("#btnNextPatient").click(function() {
-    //$( "#mainForm").reset();
     console.log("begin clear");
-    //document.getElementById("mainForm").reset();
-    //// Clear special field: hidden input, hidden select
-    ////$("#patientName").val("");
-    //medicalTagInput.tagsinput('removeAll');
-    //symptomsTagInput.tagsinput('removeAll');
-    //medicineHistoryTagInput.tagsinput('removeAll');
-    //// end clear
-    //changeTab('#tab_1', '#li_tab_1');
-    //$('#patientRegistrationModal').modal('hide');
-
+    window.location.href = "registerPatient";
     console.log("end clear");
 });

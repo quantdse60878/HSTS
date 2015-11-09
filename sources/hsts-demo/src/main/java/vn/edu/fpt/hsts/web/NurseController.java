@@ -90,16 +90,6 @@ public class NurseController extends AbstractController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
-
-            /**
-             * Set reference data
-             */
-//            final List<DoctorModel> doctors = doctorService.findAll();
-//            mav.addObject("DOCTORS", doctors);
-            /**
-             *
-             */
-
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
