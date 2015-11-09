@@ -58,7 +58,7 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    return '<a href="/phase?id='+ data.id +  '" class="btn btn-danger">Update</a>';
+                    return '<a href="/detailPhase?id='+ data +  '" class="btn btn-danger">Update</a>';
                 },
                 "width": "20%"
             }
