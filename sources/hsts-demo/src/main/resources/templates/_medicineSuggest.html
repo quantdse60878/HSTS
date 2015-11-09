@@ -21,7 +21,6 @@
         <td class="form-group">
             <select class="form-control" th:name="mPresModels[__${row.index}__].m" th:id="mPresModelsM__${row.index}__"
                     onchange="setMedicineUnit(event)" data-rule-min="1" data-msg-min="Please select.">
-                <option value="0">Select</option>
                 <option th:value="${medicalPhase.medicine.id}" selected="selected"
                         th:text="${medicalPhase.medicine.name}"></option>
                 <option th:each="medicine : ${MEDICINES}"
@@ -33,15 +32,17 @@
         </td>
         <td class="form-group">
             <select class="form-control" th:field="*{mPresModels[__${row.index}__].mTime}" data-rule-min="1" data-msg-min="Please select.">
-                <option value="0">Select</option>
-                <option th:each="time : ${TIMES}" th:value="${time}"
-                        th:text="${time}"></option>
+                <option selected="selected" th:value="${medicalPhase.numberOfTime}" th:text="${medicalPhase.numberOfTime}">Select</option>
+                <option th:each="time : ${TIMES}"
+                        th:value="${time}"
+                        th:text="${time}"
+                        th:unless="${medicalPhase.numberOfTime == time}"></option>
             </select>
             <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group" style="width: 120px;">
-            <input type="text" class="form-control" th:field="*{mPresModels[__${row.index}__].mQuantity}"
-                   style="text-align: right;"
+            <input type="text" class="form-control" th:name="mPresModels[__${row.index}__].mQuantity"
+                   style="text-align: right;" th:value="${medicalPhase.quantitative}"
                    placeholder="Quantity" data-rule-range="1,10" data-msg-range="Out of range 1-10"/>
             <!--<div class="help-block with-errors"></div>-->
         </td>
@@ -52,8 +53,8 @@
             <!--<div class="help-block with-errors"></div>-->
         </td>
         <td>
-            <input type="text" class="form-control"
-                   th:field="*{mPresModels[__${row.index}__].mNote}" placeholder="Advice"/>
+            <input type="text" class="form-control" th:value="${medicalPhase.advice}"
+                   th:name="mPresModels[__${row.index}__].mNote" placeholder="Advice"/>
         </td>
         <td>
             <a class="btn btn-danger fa fa-remove" onclick="deleteRowMedicine(this)"></a>
