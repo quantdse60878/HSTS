@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
+import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrescriptionWrapperModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrintingMedicineModel;
@@ -50,10 +51,8 @@ import vn.edu.fpt.hsts.persistence.repo.PreventionCheckRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
 import javax.transaction.Transactional;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -193,7 +192,7 @@ public class PatientService extends AbstractService {
 
 
     @Transactional(rollbackOn = BizlogicException.class)
-    public Patient register(final int patientId, final SearchCriteria ... criterias) throws BizlogicException {
+    public PatientRegistrationModel register(final int patientId, final SearchCriteria ... criterias) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             /**
@@ -204,6 +203,9 @@ public class PatientService extends AbstractService {
             } else {
                 LOGGER.info("Criteria size = {}", criterias.length);
             }
+
+
+
             Date currentDate = new Date();
             currentDate = DateUtils.roundDate(currentDate, false);
             // Identity patient
@@ -230,6 +232,7 @@ public class PatientService extends AbstractService {
             }
             MedicalRecord medicalRecord = new MedicalRecord();
             String medicineHistories = null;
+            Doctor doctor = null;
             for (SearchCriteria criteria : criterias) {
                 if (criteria instanceof PatientCriteria) {
                     // TODO
@@ -253,17 +256,18 @@ public class PatientService extends AbstractService {
                     //  send email with creditial information to patient
                     mailService.pushMail(newAccount);
 
+
                 } else if (criteria instanceof RegistrationCriteria) {
                     final RegistrationCriteria rCriteria = (RegistrationCriteria) criteria;
 
                     medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);
-                    Doctor doctor = doctorRepo.findOne(rCriteria.getDoctorId());
+                    doctor = doctorRepo.findOne(rCriteria.getDoctorId());
                     if (null == doctor) {
                         throw new BizlogicException("Doctor with username[{}] is not found", null, rCriteria.getDoctorId());
                     }
                     medicalRecord.setDoctor(doctor);
                     medicalRecord.setPatient(patient);
-                    medicalRecord.setSymptoms(rCriteria.getSymptom());
+                    medicalRecord.setSymptoms(rCriteria.getSymptoms());
                     medicalRecord.setStartTime(currentDate);
 
                     medicalRecord.setMedicalHistory(rCriteria.getMedicalHistory());
@@ -337,7 +341,20 @@ public class PatientService extends AbstractService {
             notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
             notify.setMessage(String.valueOf(patient.getId()));
             notifyRepo.saveAndFlush(notify);
-            return patient;
+
+
+            // Build response
+            // Response
+            final PatientRegistrationModel model = new PatientRegistrationModel();
+            model.fromEntity(patient);
+
+            // Set doctor
+            model.setDoctor(doctor.getAccount().getFullName());
+            // Set meeting date
+            model.setDate(DateUtils.formatDate(currentDate, DateUtils.DATE_PATTERN_3));
+            // Set order number
+            model.setOrderNumber(987654);
+            return model;
         } catch (BizlogicException be) {
             throw be;
         } catch (Exception e) {
@@ -468,7 +485,7 @@ public class PatientService extends AbstractService {
                 medicalRecord.setDoctor(doctor);
             }
             medicalRecord.setMedicalHistory(registrationCriteria.getMedicalHistory());
-            medicalRecord.setSymptoms(registrationCriteria.getSymptom());
+            medicalRecord.setSymptoms(registrationCriteria.getSymptoms());
             medicalRecordRepo.save(medicalRecord);
 
             // Create prevention checking

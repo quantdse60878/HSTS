@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,8 +22,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
-import vn.edu.fpt.hsts.bizlogic.model.UnitOfFoodModel;
-import vn.edu.fpt.hsts.bizlogic.service.*;
+import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationModel;
+import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationRequest;
+import vn.edu.fpt.hsts.bizlogic.service.AnalyticFood;
+import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
+import vn.edu.fpt.hsts.bizlogic.service.PatientService;
+import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
+import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.criteria.CheckCriteria;
@@ -33,7 +38,6 @@ import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -86,16 +90,6 @@ public class NurseController extends AbstractController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
-
-            /**
-             * Set reference data
-             */
-//            final List<DoctorModel> doctors = doctorService.findAll();
-//            mav.addObject("DOCTORS", doctors);
-            /**
-             *
-             */
-
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
@@ -103,6 +97,7 @@ public class NurseController extends AbstractController {
     }
 
     @RequestMapping(value = "registerNew", method = RequestMethod.POST)
+    @Deprecated
     public ModelAndView registerPatient(
             // Tab 1 param
             @RequestParam("patientName") final String patientName,
@@ -142,9 +137,6 @@ public class NurseController extends AbstractController {
                 LOGGER.debug("gender[{}]", gender);
             }
             pCriteria.setGender(gender);
-            pCriteria.setDoctorId(doctorId);
-            pCriteria.setMedicalHistory(medicalHistory);
-            pCriteria.setSymptom(symptoms);
 
             // Tab 2_3 criteria
             final CheckCriteria checkCriteria = new CheckCriteria();
@@ -168,7 +160,7 @@ public class NurseController extends AbstractController {
             RegistrationCriteria rCriteria = new RegistrationCriteria();
             rCriteria.setDoctorId(doctorId);
             rCriteria.setMedicalHistory(medicalHistory);
-            rCriteria.setSymptom(symptoms);
+            rCriteria.setSymptoms(symptoms);
             rCriteria.setMedicineHistory(medicineHistory);
 
             /**
@@ -233,6 +225,7 @@ public class NurseController extends AbstractController {
     }
 
     @RequestMapping(value = "updatePatient", method = RequestMethod.POST)
+    @SuppressWarnings("unchecked")
     public ModelAndView registerPatient(@RequestParam("patientId") final int patientId,
                                         // Tab 2 param
                                         @RequestParam("weight") final int weight,
@@ -285,7 +278,7 @@ public class NurseController extends AbstractController {
             RegistrationCriteria rCriteria = new RegistrationCriteria();
             rCriteria.setDoctorId(doctorId);
             rCriteria.setMedicalHistory(medicalHistory);
-            rCriteria.setSymptom(symptoms);
+            rCriteria.setSymptoms(symptoms);
             rCriteria.setMedicineHistory(medicineHistory);
 
             /**
@@ -298,19 +291,48 @@ public class NurseController extends AbstractController {
                  * The wrong order of criteria array may cause the program fail
                  * The criteria array should be order by: patient info {null for update case}-> registration -> check condition
                  */
-                patient = patientService.register(patientId, rCriteria, checkCriteria);
+//                patient = patientService.register(patientId, rCriteria, checkCriteria);
             } else {
                 patient = patientService.updatePatient(patientId, rCriteria, checkCriteria);
             }
 
             ModelAndView mav = new ModelAndView();
             mav.setViewName("updatePatient");
-            mav.addObject("PATIENT", patient);
+//            mav.addObject("PATIENT", patient);
 
             //create notify
             notify(mav, true, "Update Patient's Profile", "Success");
 
             return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/registerPatient", method = RequestMethod.POST,
+                        consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public PatientRegistrationModel registerAjax(@RequestBody final PatientRegistrationRequest request) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            // Tab 1
+            final PatientCriteria pCriteria = request.getPatient();
+            // Tab 2
+            final CheckCriteria cCriteria = request.getCheck();
+            float tmp =  ((float)cCriteria.getHeight()/100) * ((float)cCriteria.getHeight()/100);
+            tmp = cCriteria.getWeight()/tmp;
+            cCriteria.setBmi(tmp);
+            // Tab 3
+            final RegistrationCriteria rCriteria = request.getRegistration();
+
+            /**
+             * The wrong order of criteria array may cause the program fail
+             * The criteria array should be order by: patient info -> registration -> check condition
+             */
+            return patientService.register(0, pCriteria, rCriteria, cCriteria);
+        } catch (Exception e) {
+            // error showing
+            return new PatientRegistrationModel(false);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

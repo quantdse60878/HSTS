@@ -8,28 +8,6 @@
 var OK_STATUS = "{\"status\":\"ok\"}";
 var FAIL_STATUS = "{\"status\":\"fail\"}";
 $(document).ready(function(){
-            //$.ajax({
-            //    method: "GET",
-            //    url: "/patientList",
-            //    data: {}
-            //})
-            //.done(function(data) {
-            //    console.log(data);
-            //    $("#table-body").html("");
-            //    var bodyContent = "";
-            //    if(data.dataList != null) {
-            //
-            //        $.each( data.dataList , function( key, element ) {
-            //            bodyContent += "<tr><td>" + (key + 1) + "</td>" +
-            //                    "<td>" + element.account.fullName + "</td>" +
-            //                    "<td>" + element.account.birthday + "</td>" +
-            //                    "<td>" + element.account.gender + "</td>" +
-            //                    "<td></td></tr>";
-            //
-            //        });
-            //    }
-            //    $("#table-body").html(bodyContent);
-            //});
 
     var count = 1;
     var table = $('#dataContent').dataTable( {

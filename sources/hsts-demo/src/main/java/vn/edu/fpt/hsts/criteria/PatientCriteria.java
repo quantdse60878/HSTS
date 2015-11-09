@@ -26,20 +26,6 @@ public class PatientCriteria extends SearchCriteria {
      */
     private byte gender;
 
-    /**
-     *
-     */
-    private int doctorId;
-
-    /**
-     *
-     */
-    private String medicalHistory;
-
-    /**
-     *
-     */
-    private String symptom;
 
     /**
      *
@@ -73,30 +59,6 @@ public class PatientCriteria extends SearchCriteria {
         this.gender = gender;
     }
 
-    public int getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(final int doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    public String getMedicalHistory() {
-        return medicalHistory;
-    }
-
-    public void setMedicalHistory(final String medicalHistory) {
-        this.medicalHistory = medicalHistory;
-    }
-
-    public String getSymptom() {
-        return symptom;
-    }
-
-    public void setSymptom(final String symptom) {
-        this.symptom = symptom;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -112,8 +74,6 @@ public class PatientCriteria extends SearchCriteria {
         sb.append(", patientName= ").append(patientName);
         sb.append(", birthday= ").append(birthday);
         sb.append(", gender= ").append(gender);
-        sb.append(", medicalHistory= ").append(medicalHistory);
-        sb.append(", symptom= ").append(symptom);
         sb.append(", email=").append(email);
         return sb.toString();
     }
