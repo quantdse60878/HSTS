@@ -254,6 +254,10 @@ public class NurseController extends AbstractController {
             final String oldSymptom = patientService.getOldSymtoms(patientId);
             mav.addObject("OLDSYMPTOMS", oldSymptom);
 
+            // Find old doctor
+            final DoctorModel doctor = appointmentService.findLastDoctorWithPatientId(patientId);
+            mav.addObject("OLDDOCTOR", doctor);
+
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
