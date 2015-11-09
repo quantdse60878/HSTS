@@ -233,8 +233,100 @@ var validator = $("#mainForm").validate({
             error.appendTo( element.parent().next() );
         }
     },
-    submitHandler: function(form) {
-        form.submit();
+    submitHandler: function() {
+        console.log("--- begin ---");
+        // Gender checked
+        var isNewMedicalRecord = false;
+        if ($("#isNewMedicalRecord").prop('checked')==true){
+            //do something
+            isNewMedicalRecord = true;
+        };
+        // Begin JSON data
+        var data = {
+            patientId: $("#patientId").val(),
+            patient: null,
+            isNewMedicalRecord: isNewMedicalRecord,
+            check: {
+                height: $("#height").val(),
+                weight: $("#weight").val(),
+                heartBeat: $("#heartBeat").val(),
+                bloodPressure: $("#bloodPressure").val(),
+                waists: $("#waists").val(),
+                bodyFat: $("#bodyFat").val(),
+                visceralFat: $("#visceralFat").val(),
+                muscleMass: $("#muscleMass").val(),
+                bodyWater: $("#bodyWater").val(),
+                phaseAngle: $("#phaseAngle").val(),
+                impedance: $("#impedance").val(),
+                basalMetabolicRate: $("#basalMetabolicRate").val()
+            },
+            registration: {
+                doctorId: $("#doctorSelect").val(),
+                medicalHistory: $("#medicalHistory").val(),
+                symptoms: $("#symptoms").val(),
+                medicineHistory: $("#medicineHistory").val()
+            }
+        };
+        // End JSON data
+        $.ajax({
+            method: "POST",
+            url: "/updatePatient",
+            contentType: "application/json",
+            data: JSON.stringify(data)
+        })
+            .done(function(data) {
+                console.log(data);
+                // Begin process registration modal
+                if (data.result == false) {
+                    // Show error modal
+                    $('#registrationErrorModal').modal('show');
+                } else {
+                    // Set data to html label
+                    var txtName = document.getElementById("rName");
+                    txtName.innerHTML = data.patientName;
+
+                    var txtBirthday = document.getElementById("rBirthday");
+                    txtBirthday.innerHTML = data.birthday;
+
+                    var btnGender = document.getElementById("rGender");
+                    if(data.gender == "MALE") {
+                        btnGender.setAttribute("class", "btn btn-info btn-sm");
+                        btnGender.setAttribute("value", "MALE");
+                    } else {
+                        btnGender.setAttribute("class", "btn btn-danger btn-sm");
+                        btnGender.setAttribute("value", "FEMALE");
+                    }
+
+                    var txtEmail = document.getElementById("rEmail");
+                    txtEmail.innerHTML = data.email;
+
+                    var txtBarcode = document.getElementById("rBarcode");
+                    txtBarcode.innerHTML = data.barcode;
+
+                    var txtDate = document.getElementById("rDate");
+                    txtDate.innerHTML = data.date;
+
+                    var c = document.getElementById("myCanvas");
+                    var ctx = c.getContext("2d");
+                    ctx.textAlign = "center";
+                    ctx.font = "50px Arial";
+                    ctx.fillText("#" + data.orderNumber ,100,50);
+
+
+                    var txtDoctor = document.getElementById("rDoctor");
+                    txtDoctor.innerHTML = data.doctor;
+
+
+                    // Show modal
+                    $('#patientRegistrationModal').modal('show');
+                }
+
+
+
+                // End process
+            });
+        console.log("--- end ---");
+        return false; // required to block normal submit since you used ajax
     },
     invalidHandler: function(e, validator) {
         if (validator.errorList.length > 0) {

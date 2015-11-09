@@ -18,6 +18,7 @@ import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrescriptionWrapperModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrintingMedicineModel;
+import vn.edu.fpt.hsts.bizlogic.service.processor.MedicalOrderNumberProcessor;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -96,13 +97,11 @@ public class PatientService extends AbstractService {
     @Autowired
     private MedicalRecordDataRepo medicalRecordDataRepo;
 
-
     /**
      * The {@link DoctorRepo}.
      */
     @Autowired
     private DoctorRepo doctorRepo;
-
 
     /**
      * The {@link AppointmentRepo}.
@@ -158,6 +157,13 @@ public class PatientService extends AbstractService {
     @Autowired
     private BarcodeService barcodeService;
 
+
+    /**
+     * The {@link MedicalOrderNumberProcessor}.
+     */
+    @Autowired
+    private MedicalOrderNumberProcessor medicalOrderNumberProcessor;
+
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         Patient patient = new Patient();
@@ -199,12 +205,10 @@ public class PatientService extends AbstractService {
              * TODO reinput log, process for old medicine
              */
             if (null == criterias) {
-                return null;
+                throw new BizlogicException("No registration criteria for process");
             } else {
                 LOGGER.info("Criteria size = {}", criterias.length);
             }
-
-
 
             Date currentDate = new Date();
             currentDate = DateUtils.roundDate(currentDate, false);
@@ -235,7 +239,6 @@ public class PatientService extends AbstractService {
             Doctor doctor = null;
             for (SearchCriteria criteria : criterias) {
                 if (criteria instanceof PatientCriteria) {
-                    // TODO
                     // casting
                     final PatientCriteria patientCriteria = (PatientCriteria) criteria;
                     final Account newAccount = accountService.initPatientAccount(patientCriteria, currentDate);
@@ -344,7 +347,6 @@ public class PatientService extends AbstractService {
 
 
             // Build response
-            // Response
             final PatientRegistrationModel model = new PatientRegistrationModel();
             model.fromEntity(patient);
 
@@ -353,7 +355,7 @@ public class PatientService extends AbstractService {
             // Set meeting date
             model.setDate(DateUtils.formatDate(currentDate, DateUtils.DATE_PATTERN_3));
             // Set order number
-            model.setOrderNumber(987654);
+            model.setOrderNumber(medicalOrderNumberProcessor.nextOrderNumber());
             return model;
         } catch (BizlogicException be) {
             throw be;
@@ -384,6 +386,7 @@ public class PatientService extends AbstractService {
     }
 
     @Transactional(rollbackOn = BizlogicException.class)
+    @SuppressWarnings("unused")
     public void makeAppointment(final int medicalRecordId, final String nextAppointmentDate) throws BizlogicException {
         //TODO parse INT recordID.
         //TODO find appointmentDate from recordID with appointmentDateChild = null
@@ -446,12 +449,13 @@ public class PatientService extends AbstractService {
     }
 
     @Transactional(rollbackOn = BizlogicException.class)
-    public Patient updatePatient(final int patientId, final RegistrationCriteria registrationCriteria, final CheckCriteria checkCriteria) throws BizlogicException {
+    public PatientRegistrationModel updatePatient(final int patientId, final RegistrationCriteria registrationCriteria, final CheckCriteria checkCriteria) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             Date currentDate = new Date();
             currentDate = DateUtils.roundDate(currentDate, false);
             final Patient patient = patientRepo.findOne(patientId);
+            Doctor doctor = null;
             if (null == patient) {
                 throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
             }
@@ -464,10 +468,10 @@ public class PatientService extends AbstractService {
                     statuses);
             if(null == entryAppointmentList || entryAppointmentList.isEmpty()) {
                 /*
-                *   TODO Throw ex, but should check business logic at higher level before
+                *   Return to function create new medical registration
                 *   Make sure that only 1 appointment has status ENTRY at a time
                 */
-                return null;
+                return register(patientId, registrationCriteria, checkCriteria);
             } else {
                 for (Appointment appointment: entryAppointmentList) {
                     appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
@@ -480,10 +484,11 @@ public class PatientService extends AbstractService {
 
             final MedicalRecord medicalRecord = appointment.getMedicalRecord();
             if (medicalRecord.getDoctor().getId() != registrationCriteria.getDoctorId()) {
-               LOGGER.debug("Nurse assign patient[{}] to new doctor[{}]", registrationCriteria.getDoctorId());
-                final Doctor doctor = doctorRepo.findOne(registrationCriteria.getDoctorId());
+                LOGGER.debug("Nurse assign patient[{}] to new doctor[{}]", registrationCriteria.getDoctorId());
+                doctor = doctorRepo.findOne(registrationCriteria.getDoctorId());
                 medicalRecord.setDoctor(doctor);
             }
+            doctor = medicalRecord.getDoctor();
             medicalRecord.setMedicalHistory(registrationCriteria.getMedicalHistory());
             medicalRecord.setSymptoms(registrationCriteria.getSymptoms());
             medicalRecordRepo.save(medicalRecord);
@@ -520,7 +525,17 @@ public class PatientService extends AbstractService {
             notify.setMessage(String.valueOf(patientId));
             notifyRepo.saveAndFlush(notify);
 
-            return patient;
+            // Build response
+            final PatientRegistrationModel model = new PatientRegistrationModel();
+            model.fromEntity(patient);
+
+            // Set doctor
+            model.setDoctor(doctor.getAccount().getFullName());
+            // Set meeting date
+            model.setDate(DateUtils.formatDate(currentDate, DateUtils.DATE_PATTERN_3));
+            // Set order number
+            model.setOrderNumber(medicalOrderNumberProcessor.nextOrderNumber());
+            return model;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

@@ -158,15 +158,18 @@ public class MailService extends JavaMailSenderImpl {
                  *      | Poll element, If fail: re-add  -> should use for avoiding redundant mail account
                  */
                 final Account account = mailProcessor.poll();
-                boolean result = this.sendMail(account.getEmail(), MailService.SUBJECT_MAIL,
-                        "Username : " + account.getUsername() + "<br/>" +
-                        "Password : " + account.getPassword());
-                if (!result) {
-                    mailProcessor.offer(account);
+                if (null != account) {
+                    boolean result = this.sendMail(account.getEmail(), MailService.SUBJECT_MAIL,
+                            "Username : " + account.getUsername() + "<br/>" +
+                                    "Password : " + account.getPassword());
+                    if (!result) {
+                        mailProcessor.offer(account);
+                    }
+                    count++;
+                    // Sleepy time
+                    Thread.sleep(sleepyTime);
                 }
-                count++;
-                // Sleepy time
-                Thread.sleep(sleepyTime);
+
             }
         } catch (InterruptedException e) {
             LOGGER.error("InterruptedException at: {}", e.getMessage());
