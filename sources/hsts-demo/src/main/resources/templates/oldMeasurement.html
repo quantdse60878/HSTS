@@ -28,9 +28,9 @@
 
                     <div class="box box-info">
                         <!-- form start -->
-                        <form class="form-horizontal" method="POST" th:action="updatePatient" id="mainForm">
+                        <form class="form-horizontal" id="mainForm">
                             <input type="hidden" th:name="patientId" class="form-control"
-                                   th:value="${PATIENT.id}"/>
+                                   th:value="${PATIENT.id}" id = "patientId"/>
                             <!-- New design-->
 
                             <div class="box-body">
@@ -311,7 +311,7 @@
 
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="reset" class="btn btn-default">Cancel</button>
+                                <a th:href="@{registerPatient}" class="btn btn-default">Reset</a>
                                 <a th:href="@{/bindingOld(patientId=${PATIENT.id})}" class="btn btn-primary">Use old measurement index</a>
                             </div>
                             <!-- /.box-footer -->
@@ -337,6 +337,97 @@
                             </div>
                         </div>
                         <!-- . upload file pop up-->
+
+                        <!-- patient registration info modal -->
+
+                        <div class="modal fade" id="patientRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="patientRegistrationLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="patientRegistrationLabel">Patient registration</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row" style="margin: 15px; text-align: center;">
+                                            <canvas id="myCanvas" width="200" height="100"/>
+                                        </div>
+
+                                        <div class="row" style="margin: 15px">
+                                            <label class="col-sm-3 control-label">Name:</label>
+
+                                            <div class="col-sm-5">
+                                                <label id = "rName">Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin: 15px">
+                                            <label class="col-sm-3 control-label">Birthday:</label>
+                                            <div class="col-sm-3">
+                                                <label id = "rBirthday">Birthday</label>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin: 15px">
+                                            <label class="col-sm-3 control-label">Gender:</label>
+                                            <div class="btn-group col-sm-3" data-toggle="buttons">
+                                                <input type ="text" style="width: 90px" id = "rGender"/>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin: 15px">
+                                            <label class="col-sm-3 control-label">Email:</label>
+
+                                            <div class="col-sm-3">
+                                                <label id = "rEmail">Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin: 15px">
+                                            <label class="col-sm-3 control-label">Barcode:</label>
+
+                                            <div class="col-sm-3">
+                                                <label id = "rBarcode">Barcode</label>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin: 15px">
+                                            <label class="col-sm-3 control-label">Date:</label>
+
+                                            <div class="col-sm-3">
+                                                <label id = "rDate">Date</label>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin: 15px">
+                                            <label class="col-sm-3 control-label">Doctor:</label>
+
+                                            <div class="col-sm-3">
+                                                <label id = "rDoctor">Doctor</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a th:href="@{registerPatient}" class="btn btn-info">Register next patient</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- .patient registration info modal -->
+
+                        <!-- registration error modal -->
+                        <div class="modal fade" id="registrationErrorModal" tabindex="-1" role="dialog" aria-labelledby="registrationErrorMessage">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="registrationErrorMessage">Messsage</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4 class="modal-title">Error while register patient, please check</h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .registration error modal -->
+
                     </div>
                     <!-- /.box -->
                 </div>
