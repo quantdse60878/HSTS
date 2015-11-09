@@ -309,6 +309,22 @@ function createNutrition(){
     var f = inputCaloriesEstimate(listLateAtNightAnalytic,document.getElementById("en_result"));
     foodingredient.en_result = f;
 
+    var accept = document.getElementById("accept");
+    accept.href = "createNutritionWithVoice?" +
+                  "patientID=" + document.getElementById("patientId").value +
+                  "&bf=" + foodingredient.bf_result +
+                  "&btm=" + foodingredient.btm_result +
+                  "&lunch=" + foodingredient.l_result +
+                  "&bta=" + foodingredient.bta_result +
+                  "&dinner=" + foodingredient.dinner_result +
+                  "&en=" + foodingredient.en_result +
+                  "&lipid=" + foodingredient.lipid +
+                  "&starch=" + foodingredient.starch +
+                  "&protein=" + foodingredient.protein +
+                  "&fiber=" + foodingredient.fiber;
+
+    document.getElementById("example9").style.width = "182px";
+    accept.style.visibility = "visible";
 }
 
 function inputCaloriesEstimate(list,element){
@@ -357,4 +373,8 @@ function changeColorTab(target){
     target.style.color = "green"
     target.style.fontSize = "large";
     target.style.fontWeight = "850";
+}
+
+function accepted(){
+
 }

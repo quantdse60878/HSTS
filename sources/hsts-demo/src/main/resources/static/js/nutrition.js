@@ -324,3 +324,18 @@ function validateAndOpenModal(m) {
     }
 
 };
+
+(function(){
+    if(voiceModel != undefined){
+        document.getElementById("breakfast").value = voiceModel.breakfast;
+        document.getElementById("breakTimeMorning").value = voiceModel.breakTimeMorning;
+        document.getElementById("lunch").value = voiceModel.lunch;
+        document.getElementById("breakTimeAfternoon").value = voiceModel.breakTimeAfternoon;
+        document.getElementById("dinner").value = voiceModel.dinner;
+        document.getElementById("eatLateAtNight").value = voiceModel.eatLateAtNight;
+        document.getElementById("starch").value = voiceModel.starch;
+        document.getElementById("protein").value = voiceModel.protein;
+        document.getElementById("fat").value = voiceModel.fat;
+        document.getElementById("fiber").value = voiceModel.fiber;
+    }
+})();
