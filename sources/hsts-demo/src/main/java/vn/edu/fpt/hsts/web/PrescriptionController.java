@@ -28,6 +28,7 @@ import vn.edu.fpt.hsts.persistence.entity.Phase;
 import vn.edu.fpt.hsts.persistence.entity.PracticeTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -128,11 +129,23 @@ public class PrescriptionController extends AbstractController{
 
             // Find illness form diagnostic
             Illness illness = illnessService.findByName(diagnostic);
+
             if(illness == null) {
                 illness = illnessService.createNewIllness(diagnostic);
             } else {
                 // Find phase for diagnostic
-                final Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
+                Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
+                // illness != null, da kham va chua benh
+                if (null != appointment.getMedicalRecord().getIllness()){
+                    // neu khac nhau la bac si da doi benh an . sugest voi date moi
+                    if (illness.getId() != appointment.getMedicalRecord().getIllness().getId()){
+                        Date date = new Date();
+                        // Find phase for diagnostic
+                        phase = illnessService.getPhaseSugest(date, illness);
+                    }
+                }
+
+
                 if (phase == null) {
                     notify(mav, false, "Fail!!! ", "No regimen for suggest treatment");
                 } else {

@@ -193,24 +193,27 @@ public class DoctorService extends AbstractService {
                     illness.setDescription(dianostic);
                     illnessRepo.saveAndFlush(illness);
                 }
-                if (medicalRecord.getIllness().getId() != illness.getId()){
-                    // Close medicalrecord
-                    Doctor doctor = medicalRecord.getDoctor();
-                    Patient patient = medicalRecord.getPatient();
-                    String symptoms = medicalRecord.getSymptoms();
-                    String medicalHistory = medicalRecord.getMedicalHistory();
-                    Date curDate = new Date();
-                    medicalRecord.setEndTime(curDate);
-                    medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
-                    medicalRecordRepo.saveAndFlush(medicalRecord);
-                    // Create new medicalrecord
-                    medicalRecord = new MedicalRecord();
-                    medicalRecord.setStartTime(curDate);
-                    medicalRecord.setDoctor(doctor);
-                    medicalRecord.setPatient(patient);
-                    medicalRecord.setSymptoms(symptoms);
-                    medicalRecord.setMedicalHistory(medicalHistory);
+                if (null != medicalRecord.getIllness()){
+                    if (medicalRecord.getIllness().getId() != illness.getId()){
+                        // Close medicalrecord
+                        Doctor doctor = medicalRecord.getDoctor();
+                        Patient patient = medicalRecord.getPatient();
+                        String symptoms = medicalRecord.getSymptoms();
+                        String medicalHistory = medicalRecord.getMedicalHistory();
+                        Date curDate = new Date();
+                        medicalRecord.setEndTime(curDate);
+                        medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
+                        medicalRecordRepo.saveAndFlush(medicalRecord);
+                        // Create new medicalrecord
+                        medicalRecord = new MedicalRecord();
+                        medicalRecord.setStartTime(curDate);
+                        medicalRecord.setDoctor(doctor);
+                        medicalRecord.setPatient(patient);
+                        medicalRecord.setSymptoms(symptoms);
+                        medicalRecord.setMedicalHistory(medicalHistory);
+                    }
                 }
+
                 medicalRecord.setIllness(illness);
             }
             medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.ON_TREATING);
