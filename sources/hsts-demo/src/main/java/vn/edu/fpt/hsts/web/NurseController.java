@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationRequest;
 import vn.edu.fpt.hsts.bizlogic.service.AnalyticFood;
+import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
@@ -78,6 +80,12 @@ public class NurseController extends AbstractController {
      */
     @Autowired
     private TreatmentService treatmentService;
+
+    /**
+     * The {@link AppointmentService}.
+     */
+    @Autowired
+    private AppointmentService appointmentService;
 
     /**
      * The register patient page mapping
@@ -312,6 +320,18 @@ public class NurseController extends AbstractController {
             }
             return patientService.saveMedicalImage(multipartFile);
         } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/lastDoctor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public DoctorModel findLastDoctor(@RequestParam("patientId") final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            return appointmentService.findLastDoctorWithPatientId(patientId);
+        }finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
