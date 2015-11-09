@@ -9,7 +9,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Review Nutrition
+        Review Nutrition -
+        <small style="color: green; font-size:15.5px" th:text="${APPOINTMENT.medicalRecord.patient.account.fullName}">Patient</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -37,7 +38,7 @@
 </div>
 <div id="example9" style="width: 72px;margin: 0 auto; margin-bottom: 10px">
     <button onclick="createNutrition()" class="btn btn-primary">Suggest</button>
-    <a id="accept" class="btn btn-primary" style="visibility: hidden;">Accept This</a>
+    <a id="accept" class="btn btn-primary" style="visibility: hidden;"></a>
 </div>
 <div class="nav-tabs-custom" style="box-shadow: none;">
 <ul class="nav nav-tabs">
@@ -61,11 +62,6 @@
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="bf" name="bf"/></h3>
     </div>
-    <div class="result" style="width: 385px; margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 style="display:inline" id="bf_result">0</h3>
-    </div>
 </div>
 <div class="tab-pane" id="panel_2">
     <div class="example" style="width: 372px;
@@ -75,12 +71,6 @@
     <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="break_time_morning" name="break_time_morning"/></h3>
-    </div>
-    <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 id="btm_result" style="display:inline">0</h3>
     </div>
 </div>
 <div class="tab-pane" id="panel_3">
@@ -92,12 +82,6 @@
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="lunch" name="lunch"/></h3>
     </div>
-    <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 id="l_result" style="display:inline">0</h3>
-    </div>
 </div>
 <div class="tab-pane" id="panel_4">
     <div class="example" style="width: 372px;
@@ -107,12 +91,6 @@
     <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="bta" name="bta"/></h3>
-    </div>
-    <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 id="bta_result" style="display:inline">0</h3>
     </div>
 </div>
 <div class="tab-pane" id="panel_5">
@@ -124,12 +102,6 @@
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="dinner" name="dinner"/></h3>
     </div>
-    <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 style="display:inline" id="dinner_result">0</h3>
-    </div>
 </div>
 <div class="tab-pane" id="panel_6">
     <div class="example" style="width: 372px;
@@ -139,12 +111,6 @@
     <div class="result" style="width: 385px;
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="en" name="en"/></h3>
-    </div>
-    <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 id="en_result" style="display:inline">0</h3>
     </div>
 </div>
 </div>
