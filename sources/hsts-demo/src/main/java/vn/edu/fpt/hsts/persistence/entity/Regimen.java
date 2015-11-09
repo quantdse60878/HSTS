@@ -21,7 +21,7 @@ public class Regimen extends AbstractKeyEntity {
     /**
      * The illness name.
      */
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "illnessId", nullable = false)
     private Illness illness;
 
