@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.bizlogic.model.AppointmentPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.HisInforDateModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -72,6 +75,25 @@ public class AppointmentService {
         try {
             LOGGER.info("appointment[{}]", appointment);
             return appointmentRepo.findParentAppointment(appointment.getId());
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public AppointmentPageModel findAppointmentByPatientId(final int patientId, final int page, final int pageSize) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}], page[{}], pageSize[{}]", patientId, page, pageSize);
+            final PageRequest pageRequest = new PageRequest(page, pageSize);
+            final Page<Appointment> appointmentPage = appointmentRepo.findHistoryByPatientId(IDbConsts.IAppointmentStatus.FINISHED, patientId,
+                    pageRequest);
+            if (appointmentPage.hasContent()) {
+               if (LOGGER.isDebugEnabled()) {
+                   LOGGER.debug("Got {} records", appointmentPage.getNumberOfElements());
+               }
+            }
+            final AppointmentPageModel pageModel = new AppointmentPageModel(appointmentPage);
+            return pageModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

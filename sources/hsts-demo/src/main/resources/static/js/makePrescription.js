@@ -636,7 +636,55 @@ function reCounterRow(row) {
         }
     });
 })(jQuery);
-$("#infordate").comboboxx();
+//$("#infordate").comboboxx();
+var $selectDate = $("#infordate").select2({
+    placeholder: "Choose a Date",
+    width: "200px",
+
+    ajax: {
+        url: "appointmentListByPatientId",
+        dataType: 'json',
+        delay: 250,
+        data: function (params, page) {
+            return {
+                patientID: $('#patientID').val(), // search term
+                page: params.page,
+            };
+        },
+        processResults: function (data, params) {
+            params.page = params.page || 0;
+            var names = data.dataList.map(function (appointment) {
+                return {
+                    id: appointment.id,
+                    text: appointment.meetingDate
+                }
+            });
+            return {results: names,
+                pagination: {
+                    more: false
+                }
+            };
+        },
+        cache: false
+    },
+    escapeMarkup: function (markup) {
+        return markup; // let our custom formatter work
+    }
+});
+
+//$(".bigdrop .select2-results").css("max-height","300px");
+
+$selectDate.on("change", function (e) {
+    var val = $selectDate.val();
+    var textData = $selectDate.text().trim();
+    console.log("Value: " + val);
+    console.log("Text: " + textData);
+    if (val != null) {
+            // Bind History Medical
+            loadPopupAppointment(val);
+    }
+
+});
 /**
  * popup
  * @param div_id

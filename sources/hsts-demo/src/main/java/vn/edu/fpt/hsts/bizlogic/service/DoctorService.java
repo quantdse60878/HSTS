@@ -482,8 +482,11 @@ public class DoctorService extends AbstractService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("nameSearch[{}], page[{}], pageSize[{}]", nameSearch, page, pageSize);
+            // page 0, page size 5
             final PageRequest pageRequest = new PageRequest(page, pageSize);
             final String searchCond = "%" + nameSearch + "%";
+
+            // 10 element, content = 5, total result: 10, total page : 2
             Page<Doctor> doctors = doctorRepo.findByNameLike(searchCond, IDbConsts.IAccountStatus.ACTIVE, pageRequest);
             final DoctorPageModel pageModel = new DoctorPageModel(doctors);
             return pageModel;
