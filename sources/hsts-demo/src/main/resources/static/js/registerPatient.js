@@ -5,7 +5,6 @@
  * Author: dangquantran.
  * Date: 10/28/2015.
  */
-
 $("#gender").iCheck({
     checkboxClass: 'icheckbox_flat-blue',
     radioClass: 'iradio_flat-blue'
@@ -16,15 +15,6 @@ $("#birthday").datepicker({
     startDate: '1950-01-01',
     endDate: 'today'
 });
-
-function changeTab (a, li) {
-    console.log("a: " + a);
-    console.log("li: " + li);
-    $('.nav-tabs > li.active').removeClass('active');
-    $(li).addClass('active');
-    $('.tab-content > .tab-pane.active').removeClass('active');
-    $(a).addClass('active');
-};
 
 $("#doctorSelect").select2({
     placeholder: "Choose a doctor",
@@ -62,12 +52,24 @@ $("#doctorSelect").select2({
     }
 });
 
+function changeTab (a, li) {
+    console.log("a: " + a);
+    console.log("li: " + li);
+    $('.nav-tabs > li.active').removeClass('active');
+    $(li).addClass('active');
+    $('.tab-content > .tab-pane.active').removeClass('active');
+    $(a).addClass('active');
+};
+
+
+
+
+
+
 var $selectPatient = $("#patientName").select2({
-    //placeholder: "Type patient name",
     theme: "bootstrap",
     width: "100%",
     allowClear: false,
-    //placeholder: "Select a patient or input new",
     ajax: {
         url: "/patient/list",
         dataType: 'json',
@@ -338,8 +340,99 @@ var validator = $("#mainForm").validate({
             error.appendTo( element.parent().next() );
         }
     },
-    submitHandler: function(form) {
-    form.submit();
+    submitHandler: function () {
+        console.log("--- begin ---");
+        // Gender checked
+        var gender = 2;
+        if ($("#gender").prop('checked')==true){
+            //do something
+            gender = 1;
+        };
+        // Begin JSON data
+        var data = {
+            patient: {
+                patientName: $("#patientName").val(),
+                birthday: $("#birthday").val(),
+                email: $("#email").val(),
+                gender: gender
+            },
+            check: {
+                height: $("#height").val(),
+                weight: $("#weight").val(),
+                heartBeat: $("#heartBeat").val(),
+                bloodPressure: $("#bloodPressure").val(),
+                waists: $("#waists").val(),
+                bodyFat: $("#bodyFat").val(),
+                visceralFat: $("#visceralFat").val(),
+                muscleMass: $("#muscleMass").val(),
+                bodyWater: $("#bodyWater").val(),
+                phaseAngle: $("#phaseAngle").val(),
+                impedance: $("#impedance").val(),
+                basalMetabolicRate: $("#basalMetabolicRate").val()
+            },
+            registration: {
+                doctorId: $("#doctorSelect").val(),
+                medicalHistory: $("#medicalHistory").val(),
+                symptoms: $("#symptoms").val(),
+                medicineHistory: $("#medicineHistory").val()
+            }
+        };
+        // End JSON data
+        $.ajax({
+            method: "POST",
+            url: "/registerPatient",
+            contentType: "application/json",
+            data: JSON.stringify(data)
+        })
+            .done(function(data) {
+                console.log(data);
+                // Begin process registration modal
+                if (data.result == false) {
+                    // Show error modal
+                    $('#registrationErrorModal').modal('show');
+                } else {
+                    // Set data to html label
+                    var txtName = document.getElementById("rName");
+                    txtName.innerHTML = data.patientName;
+
+                    var txtBirthday = document.getElementById("rBirthday");
+                    txtBirthday.innerHTML = data.birthday;
+
+                    var btnGender = document.getElementById("rGender");
+                    if(data.gender == "MALE") {
+                        btnGender.setAttribute("class", "btn btn-info");
+                        btnGender.setAttribute("value", "MALE");
+                    } else {
+                        btnGender.setAttribute("class", "btn btn-danger");
+                        btnGender.setAttribute("value", "FEMALE");
+                    }
+
+                    var txtEmail = document.getElementById("rEmail");
+                    txtEmail.innerHTML = data.email;
+
+                    var txtBarcode = document.getElementById("rBarcode");
+                    txtBarcode.innerHTML = data.barcode;
+
+                    var txtDate = document.getElementById("rDate");
+                    txtDate.innerHTML = data.date;
+
+                    var txtOrderNumber = document.getElementById("rOrderNumber");
+                    txtOrderNumber.innerHTML = data.orderNumber;
+
+                    var txtDoctor = document.getElementById("rDoctor");
+                    txtDoctor.innerHTML = data.doctor;
+
+
+                    // Show modal
+                    $('#patientRegistrationModal').modal('show');
+                }
+
+
+
+                // End process
+            });
+        console.log("--- end ---");
+        return false; // required to block normal submit since you used ajax
     },
     invalidHandler: function(e, validator) {
         if (validator.errorList.length > 0) {
@@ -435,82 +528,6 @@ function loadPatientProfile(patientBarcode) {
     });
 };
 
-function popup(windowname) {
-    blanket_size(windowname);
-    window_pos(windowname);
-    toggle('blanket');
-    toggle(windowname);
-};
-
-function blanket_size(popUpDivVar) {
-    if (typeof window.innerWidth != 'undefined') {
-        viewportheight = window.innerHeight;
-    } else {
-        viewportheight = document.documentElement.clientHeight;
-    }
-    if (viewportheight > document.body.parentNode.scrollHeight) {
-        if (viewportheight > document.body.parentNode.clientHeight) {
-            blanket_height = viewportheight;
-        } else {
-            if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
-                blanket_height = document.body.parentNode.clientHeight;
-            } else {
-                blanket_height = document.body.parentNode.scrollHeight;
-            }
-        }
-    } else {
-        if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
-            blanket_height = document.body.parentNode.clientHeight;
-        } else {
-            blanket_height = document.body.parentNode.scrollHeight;
-        }
-    }
-    var blanket = document.getElementById('blanket');
-    blanket.style.height = blanket_height + 'px';
-    var popUpDiv = document.getElementById(popUpDivVar);
-    popUpDiv_height = blanket_height / 2 - 300;//150 is half popup's height
-    popUpDiv.style.top = popUpDiv_height + 'px';
-}
-;
-function window_pos(popUpDivVar) {
-    if (typeof window.innerWidth != 'undefined') {
-        viewportwidth = window.innerHeight;
-    } else {
-        viewportwidth = document.documentElement.clientHeight;
-    }
-    if (viewportwidth > document.body.parentNode.scrollWidth) {
-        if (viewportwidth > document.body.parentNode.clientWidth) {
-            window_width = viewportwidth;
-        } else {
-            if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
-                window_width = document.body.parentNode.clientWidth;
-            } else {
-                window_width = document.body.parentNode.scrollWidth;
-            }
-        }
-    } else {
-        if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
-            window_width = document.body.parentNode.clientWidth;
-        } else {
-            window_width = document.body.parentNode.scrollWidth;
-        }
-    }
-    var popUpDiv = document.getElementById(popUpDivVar);
-    window_width = window_width / 2 - 300;//200 is half popup's width
-    popUpDiv.style.left = window_width + 'px';
-}
-;
-
-function toggle(div_id) {
-    var el = document.getElementById(div_id);
-    if (el.style.display == 'none') {
-        el.style.display = 'block';
-    }
-    else {
-        el.style.display = 'none';
-    }
-}
-
 // Init tag input for medical history, medicine history and symtoms
 var medicalTagInput = $('#medicalHistory');
 var symptomsTagInput = $('#symptoms');
@@ -542,4 +559,21 @@ fileUploader.on('filebatchuploadcomplete', function(event, data, previewId, inde
     console.log('File batch upload successfully');
     fileUploader.fileinput('refresh');
     $('#uploadModal').modal('hide');
+});
+
+// Reset form
+$("#btnNextPatient").click(function() {
+    //$( "#mainForm").reset();
+    console.log("begin clear");
+    //document.getElementById("mainForm").reset();
+    //// Clear special field: hidden input, hidden select
+    ////$("#patientName").val("");
+    //medicalTagInput.tagsinput('removeAll');
+    //symptomsTagInput.tagsinput('removeAll');
+    //medicineHistoryTagInput.tagsinput('removeAll');
+    //// end clear
+    //changeTab('#tab_1', '#li_tab_1');
+    //$('#patientRegistrationModal').modal('hide');
+
+    console.log("end clear");
 });
