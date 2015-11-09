@@ -31,6 +31,36 @@ public class PracticePhase extends AbstractKeyEntity {
     @JoinColumn(name = "practiceId", nullable = false)
     private Practice practice;
 
+    private String timeDuration;
+
+    private int numberOfTime;
+
+    private String advice;
+
+    public String getTimeDuration() {
+        return timeDuration;
+    }
+
+    public void setTimeDuration(String timeDuration) {
+        this.timeDuration = timeDuration;
+    }
+
+    public int getNumberOfTime() {
+        return numberOfTime;
+    }
+
+    public void setNumberOfTime(int numberOfTime) {
+        this.numberOfTime = numberOfTime;
+    }
+
+    public String getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(String advice) {
+        this.advice = advice;
+    }
+
     public PracticePhase() {
     }
 

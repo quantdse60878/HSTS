@@ -31,7 +31,37 @@ public class FoodPhase extends AbstractKeyEntity {
     @JoinColumn(name = "foodId", nullable = false)
     private Food food;
 
+    private int numberOfTime;
+
+    private String advice;
+
+    private String unitName;
+
     public FoodPhase() {
+    }
+
+    public int getNumberOfTime() {
+        return numberOfTime;
+    }
+
+    public void setNumberOfTime(int numberOfTime) {
+        this.numberOfTime = numberOfTime;
+    }
+
+    public String getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(String advice) {
+        this.advice = advice;
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
     }
 
     public Phase getPhase() {
