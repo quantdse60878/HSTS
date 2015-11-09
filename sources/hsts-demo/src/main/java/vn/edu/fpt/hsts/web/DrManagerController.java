@@ -15,6 +15,7 @@ import vn.edu.fpt.hsts.bizlogic.model.regimen.RegimenModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.RegimenPageModel;
 import vn.edu.fpt.hsts.bizlogic.service.RegimenService;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.expception.BizlogicException;
 
 /**
  * Created by Aking on 10/28/2015.
@@ -102,6 +103,21 @@ public class DrManagerController extends AbstractController {
             // Set info data
 
             return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/regimen/delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteRegimen(@RequestParam("regimenId") final int regimenId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("regimenId[{}]", regimenId);
+            regimenService.deleteRegimen(regimenId);
+            return OK_STATUS;
+        } catch (BizlogicException e) {
+            return FAIL_STATUS;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

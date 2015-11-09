@@ -13,13 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.PhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.PhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.RegimenModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.RegimenPageModel;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.StringUtils;
+import vn.edu.fpt.hsts.persistence.entity.FoodPhase;
+import vn.edu.fpt.hsts.persistence.entity.MedicinePhase;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
+import vn.edu.fpt.hsts.persistence.entity.PracticePhase;
 import vn.edu.fpt.hsts.persistence.entity.Regimen;
 import vn.edu.fpt.hsts.persistence.repo.FoodPhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.IllnessRepo;
@@ -27,6 +32,9 @@ import vn.edu.fpt.hsts.persistence.repo.MedicinePhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.PhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.PracticePhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.RegimenRepo;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class RegimenService extends AbstractService {
@@ -124,6 +132,53 @@ public class RegimenService extends AbstractService {
                 model.fromEntity(regimen);
             }
             return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void deleteRegimen(final int regimenId) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("regimenId[{}]", regimenId);
+            final Regimen regimen = regimenRepo.findOne(regimenId);
+            if (null == regimen) {
+                throw new BizlogicException("Regimen is not found");
+            }
+            // Delete reference data: phase, phase food, phase medicine, phase practice
+            List<FoodPhase> foodPhases = foodPhaseRepo.findByRegimenId(regimenId);
+            if (!CollectionUtils.isEmpty(foodPhases)) {
+                foodPhaseRepo.delete(foodPhases);
+            }
+            List<MedicinePhase> medicinePhases = medicinePhaseRepo.findByRegimenId(regimenId);
+            if (!CollectionUtils.isEmpty(medicinePhases)) {
+                medicinePhaseRepo.delete(medicinePhases);
+            }
+            List<PracticePhase> practicePhases = practicePhaseRepo.findByRegimenId(regimenId);
+            if (!CollectionUtils.isEmpty(practicePhases)) {
+                practicePhaseRepo.delete(practicePhases);
+            }
+            // Delete phase list
+            List<Phase> phases = phaseRepo.findByRegimenId(regimenId);
+            if (!CollectionUtils.isEmpty(phases)) {
+                phaseRepo.delete(phases);
+            }
+            // Delete regimen self
+            regimenRepo.delete(regimen);
+
+            // Flush all
+            foodPhaseRepo.flush();
+            medicinePhaseRepo.flush();
+            practicePhaseRepo.flush();
+            phaseRepo.flush();
+            regimenRepo.flush();
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Delete regimen[{}] succesfully", regimenId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

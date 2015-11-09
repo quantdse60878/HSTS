@@ -10,10 +10,13 @@ package vn.edu.fpt.hsts.persistence.repo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
+
+import java.util.List;
 
 @Repository
 public interface PhaseRepo extends JpaRepository<Phase, Integer> {
@@ -26,4 +29,7 @@ public interface PhaseRepo extends JpaRepository<Phase, Integer> {
 
     @Query("select p from Phase p where regimen.id = :regimenId")
     public Page<Phase> findByRegimenId(@Param("regimenId") final int regimenId, final Pageable pageable);
+
+    @Query("select p from Phase p where regimen.id = :regimenId")
+    public List<Phase> findByRegimenId(@Param("regimenId") final int regimenId);
 }

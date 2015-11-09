@@ -5,6 +5,9 @@
  * Author: dangquantran.
  * Date: 11/9/2015.
  */
+var currentRegimen = 0;
+var OK_STATUS = "{\"status\":\"ok\"}";
+var FAIL_STATUS = "{\"status\":\"fail\"}";
 $(document).ready(function(){
     console.log("-- begin --");
     var count = 1;
@@ -60,11 +63,41 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    return '<a href="/deleteRegimen?id='+ data.id +  '" class="btn btn-danger">Delete</a>';
+                    var updateBtn = '<a href="/updateRegimen?id='+ data.id +  '" class="btn btn-success">Update</a>';
+                    var deleteBtn = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>'
+                    return updateBtn + deleteBtn;
                 },
                 "width": "20%"
             }
         ]
     } );
     console.log("-- end --");
+});
+
+function deleteDialog(regimenId) {
+    console.log("-- begin --");
+    currentRegimen = regimenId;
+    $("#confirmDeleteModal").modal('show');
+    console.log("-- end --");
+}
+
+$("#btnDelete").click(function() {
+    console.log("begin delete");
+    $.ajax({
+        method: "POST",
+        url: "/regimen/delete",
+        data: {
+            regimenId: currentRegimen
+        }
+    }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data == FAIL_STATUS) {
+                txtMessage.innerHTML = "Error while delete regimen data";
+            } else {
+                txtMessage.innerHTML = "Delete regimen data successfully";
+            }
+            $("#messageModal").modal('show');
+        });
+    console.log("end delete");
 });
