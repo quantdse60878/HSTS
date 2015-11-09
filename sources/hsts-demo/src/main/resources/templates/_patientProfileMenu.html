@@ -36,9 +36,13 @@
 
 
     <label for="Medicalhistory" class="control-label">Medical history:</label>
+    <div th:if="${MEDI_IMGS != null}">
+        <a class="fa fa-image" data-toggle="modal" data-target="#medi_img"></a>
+    </div>
 
     <textarea class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-              th:text="${APPOINTMENT.medicalRecord.medicalHistory}"></textarea>
+              th:text="${MEDI_HIS}"></textarea>
+
     <label for="clinicalSymptoms" class="control-label">Symptoms:</label>
 
     <textarea class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"

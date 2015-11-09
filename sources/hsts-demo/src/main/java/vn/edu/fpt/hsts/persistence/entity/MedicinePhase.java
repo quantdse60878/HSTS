@@ -27,7 +27,27 @@ public class MedicinePhase extends AbstractKeyEntity {
 
     private String quantitative;
 
+    private int numberOfTime;
+
+    private String advice;
+
     public MedicinePhase() {
+    }
+
+    public int getNumberOfTime() {
+        return numberOfTime;
+    }
+
+    public void setNumberOfTime(int numberOfTime) {
+        this.numberOfTime = numberOfTime;
+    }
+
+    public String getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(String advice) {
+        this.advice = advice;
     }
 
     public Phase getPhase() {

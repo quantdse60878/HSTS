@@ -15,17 +15,17 @@ public class UnitOfFoodModel implements Serializable  {
     private String foodName;
     private String foodUnit;
     private float caloriesEstimate;
-    private List<String> foodNutritionName = new ArrayList<String>();
-    private List<String> foodNutritionValue = new ArrayList<String>();
+    private String foodNutritionName;
+    private String foodNutritionValue;
 
     public UnitOfFoodModel() {
     }
 
-    public UnitOfFoodModel(String foodName, String foodUnit, float caloriesEstimate, List<String> foodNutritionName, List<String> foodNutritionValue) {
-        this.foodName = foodName;
-        this.foodUnit = foodUnit;
-        this.caloriesEstimate = caloriesEstimate;
+    public void setFoodNutritionName(String foodNutritionName) {
         this.foodNutritionName = foodNutritionName;
+    }
+
+    public void setFoodNutritionValue(String foodNutritionValue) {
         this.foodNutritionValue = foodNutritionValue;
     }
 
@@ -53,19 +53,11 @@ public class UnitOfFoodModel implements Serializable  {
         this.foodUnit = foodUnit;
     }
 
-    public List<String> getFoodNutritionName() {
+    public String getFoodNutritionName() {
         return foodNutritionName;
     }
 
-    public void setFoodNutritionName(List<String> foodNutritionName) {
-        this.foodNutritionName = foodNutritionName;
-    }
-
-    public List<String> getFoodNutritionValue() {
+    public String getFoodNutritionValue() {
         return foodNutritionValue;
-    }
-
-    public void setFoodNutritionValue(List<String> foodNutritionValue) {
-        this.foodNutritionValue = foodNutritionValue;
     }
 }

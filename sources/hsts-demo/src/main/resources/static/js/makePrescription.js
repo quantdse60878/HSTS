@@ -1,7 +1,6 @@
 /**
  * Created by Aking on 9/28/2015.
  */
-
 // Validator
 var validator = $("#mainForm").validate({
     ignore: [],
