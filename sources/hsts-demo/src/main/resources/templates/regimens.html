@@ -15,14 +15,50 @@
 
         <!-- Main content -->
         <section class="content" style="text-align: center;">
-
-            <!-- Your Page Content Here -->
-            <a href="home"><h1><span class="fa fa-medkit"></span></h1></a>
-            <h1 style="margin: auto;">Health Support Tracking System</h1>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="dataContent" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Illness Name</th>
+                                    <th>Description</th>
+                                    <th>Number of phase</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <!--<tbody id="table-body"></tbody>-->
+                                <tfoot>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Illness Name</th>
+                                    <th>Description</th>
+                                    <th>Number of phase</th>
+                                    <th>Action</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
 
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
 
+    <!-- library -->
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+
+    <!-- external javascript -->
+    <script th:src = "@{/static/js/regimens.js}"></script>
+    <!-- external css -->
+    <link th:href="@{/static/css/regimens.css}" rel="stylesheet"/>
 </body>
 </html>
