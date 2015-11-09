@@ -9,7 +9,8 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Review Nutrition
+        Review Nutrition -
+        <small style="color: green; font-size:15.5px" th:text="${APPOINTMENT.medicalRecord.patient.account.fullName}">Patient</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -19,8 +20,7 @@
 
 <!-- Main content -->
 <section class="content">
-
-
+<input type="hidden" id="patientId" th:value="${PATIENT.id}"/>
 <div class="row">
 <div class="col-xs-12">
 <div class="box">
@@ -36,8 +36,9 @@
                                                 margin: 0 auto;">
     <h4>Talk : Bữa ... (Exp: Bữa Sáng, Bữa Tối)</h4>
 </div>
-<div class="example" style="width: 72px;margin: 0 auto;">
+<div id="example9" style="width: 72px;margin: 0 auto; margin-bottom: 10px">
     <button onclick="createNutrition()" class="btn btn-primary">Suggest</button>
+    <a id="accept" class="btn btn-primary" style="visibility: hidden;"></a>
 </div>
 <div class="nav-tabs-custom" style="box-shadow: none;">
 <ul class="nav nav-tabs">
@@ -61,19 +62,6 @@
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="bf" name="bf"/></h3>
     </div>
-    <div class="result" style="width: 385px; margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 style="display:inline" id="bf_result">0</h3>
-    </div>
-    <!-- footer -->
-    <div style="margin: 15px;">
-        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-           class="btn btn-default">Previous</a>
-        <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
-           class="btn btn-primary pull-right">Next</a>
-    </div>
-    <!-- /.footer -->
 </div>
 <div class="tab-pane" id="panel_2">
     <div class="example" style="width: 372px;
@@ -84,20 +72,6 @@
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="break_time_morning" name="break_time_morning"/></h3>
     </div>
-    <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 id="btm_result" style="display:inline">0</h3>
-    </div>
-    <!-- footer -->
-    <div style="margin: 15px;">
-        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-           class="btn btn-default">Previous</a>
-        <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
-           class="btn btn-primary pull-right">Next</a>
-    </div>
-    <!-- /.footer -->
 </div>
 <div class="tab-pane" id="panel_3">
     <div class="example" style="width: 372px;
@@ -108,21 +82,6 @@
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="lunch" name="lunch"/></h3>
     </div>
-    <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 id="l_result" style="display:inline">0</h3>
-    </div>
-    <!-- footer -->
-    <div style="margin: 15px;">
-        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-           class="btn btn-default">Previous</a>
-        <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
-           class="btn btn-primary pull-right">Next</a>
-    </div>
-    <!-- /.footer -->
-
 </div>
 <div class="tab-pane" id="panel_4">
     <div class="example" style="width: 372px;
@@ -133,21 +92,6 @@
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="bta" name="bta"/></h3>
     </div>
-    <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 id="bta_result" style="display:inline">0</h3>
-    </div>
-    <!-- footer -->
-    <div style="margin: 15px;">
-        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-           class="btn btn-default">Previous</a>
-        <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
-           class="btn btn-primary pull-right">Next</a>
-    </div>
-    <!-- /.footer -->
-
 </div>
 <div class="tab-pane" id="panel_5">
     <div class="example" style="width: 372px;
@@ -158,21 +102,6 @@
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="dinner" name="dinner"/></h3>
     </div>
-    <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 style="display:inline" id="dinner_result">0</h3>
-    </div>
-    <!-- footer -->
-    <div style="margin: 15px;">
-        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-           class="btn btn-default">Previous</a>
-        <a onclick="validateAndChangeTab('#tab_3-3', '#li_tab_3-3')" data-toggle="tab"
-           class="btn btn-primary pull-right">Next</a>
-    </div>
-    <!-- /.footer -->
-
 </div>
 <div class="tab-pane" id="panel_6">
     <div class="example" style="width: 372px;
@@ -183,19 +112,6 @@
                                                    margin: 0 auto;">
         <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="en" name="en"/></h3>
     </div>
-    <div class="result" style="width: 385px;
-                                                   margin: 0 auto;">
-        <h3 style="display:inline">Tổng Calories : </h3>
-
-        <h3 id="en_result" style="display:inline">0</h3>
-    </div>
-    <!-- footer -->
-    <div style="margin: 15px;">
-        <a href="#tab_1-1" onclick="changeTab('#tab_1-1')" data-toggle="tab"
-           class="btn btn-default">Previous</a>
-        <button onclick="validation1()" class="btn btn-primary pull-right" value="Done">Done</button>
-    </div>
-    <!-- /.footer -->
 </div>
 </div>
 </div>

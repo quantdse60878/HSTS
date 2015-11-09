@@ -296,22 +296,36 @@ function createNutrition(){
     var listBreaktimeAfternoonAnalytic = analyticMeal(listBreaktimeAfternoon);
     var listDinnerAnalytic = analyticMeal(listDinner);
     var listLateAtNightAnalytic = analyticMeal(listLateAtNight);
-    var a = inputCaloriesEstimate(listBreakfastAnalytic,document.getElementById("bf_result"));
+    var a = inputCaloriesEstimate(listBreakfastAnalytic);
     foodingredient.bf_result = a;
-    var b = inputCaloriesEstimate(listBraktimeMorningAnalytic,document.getElementById("btm_result"));
+    var b = inputCaloriesEstimate(listBraktimeMorningAnalytic);
     foodingredient.btm_result = b;
-    var c = inputCaloriesEstimate(listLunchAnalytic,document.getElementById("l_result"));
+    var c = inputCaloriesEstimate(listLunchAnalytic);
     foodingredient.l_result = c;
-    var d = inputCaloriesEstimate(listBreaktimeAfternoonAnalytic,document.getElementById("bta_result"));
+    var d = inputCaloriesEstimate(listBreaktimeAfternoonAnalytic);
     foodingredient.bta_result = d;
-    var e = inputCaloriesEstimate(listDinnerAnalytic,document.getElementById("dinner_result"));
+    var e = inputCaloriesEstimate(listDinnerAnalytic);
     foodingredient.dinner_result = e;
-    var f = inputCaloriesEstimate(listLateAtNightAnalytic,document.getElementById("en_result"));
+    var f = inputCaloriesEstimate(listLateAtNightAnalytic);
     foodingredient.en_result = f;
 
+    var accept = document.getElementById("accept");
+    accept.href = "createNutritionWithVoice?" +
+                  "patientID=" + document.getElementById("patientId").value +
+                  "&bf=" + foodingredient.bf_result +
+                  "&btm=" + foodingredient.btm_result +
+                  "&lunch=" + foodingredient.l_result +
+                  "&bta=" + foodingredient.bta_result +
+                  "&dinner=" + foodingredient.dinner_result +
+                  "&en=" + foodingredient.en_result +
+                  "&lipid=" + foodingredient.lipid +
+                  "&starch=" + foodingredient.starch +
+                  "&protein=" + foodingredient.protein +
+                  "&fiber=" + foodingredient.fiber;
+    simulate(accept,"click");
 }
 
-function inputCaloriesEstimate(list,element){
+function inputCaloriesEstimate(list){
     var totalCaloriesEstimate = 0;
     if(list!= undefined){
         for(var i=0;i<list.length;i++){
@@ -322,9 +336,6 @@ function inputCaloriesEstimate(list,element){
             foodingredient.protein += item.foodNutritionValue[2];
             foodingredient.fiber += item.foodNutritionValue[3];
         }
-        element.innerHTML = totalCaloriesEstimate;
-    } else {
-        element.innerHTML = "0";
     }
     return totalCaloriesEstimate;
 }
@@ -357,4 +368,8 @@ function changeColorTab(target){
     target.style.color = "green"
     target.style.fontSize = "large";
     target.style.fontWeight = "850";
+}
+
+function accepted(){
+
 }

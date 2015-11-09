@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import vn.edu.fpt.hsts.bizlogic.model.AppointmentPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodUnitModel;
 import vn.edu.fpt.hsts.bizlogic.model.HisInforDateModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
@@ -25,7 +26,7 @@ import java.util.List;
  * Created by Aking on 11/1/2015.
  */
 @Controller
-public class AjaxController {
+public class AjaxController extends AbstractController {
 
     /**
      * The logger.
@@ -40,6 +41,9 @@ public class AjaxController {
 
     @Autowired
     private TreatmentService treatmentService;
+
+    @Autowired
+    private AppointmentService appointmentService;
 
     @RequestMapping(value = "/medicineName/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -83,4 +87,19 @@ public class AjaxController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+
+    @RequestMapping(value = "appointmentListByPatientId", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public AppointmentPageModel appointmentList(@RequestParam("patientID") final int patientId,
+                                                @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
+                                                @RequestParam(value = "pageSize", required = false, defaultValue = UNLIMIT_PAGE_SIZE) final int pageSize) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return appointmentService.findAppointmentByPatientId(patientId, page, pageSize);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
 }

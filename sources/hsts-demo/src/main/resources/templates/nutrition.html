@@ -9,8 +9,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Nutrition
-            <small th:text="${APPOINTMENT.medicalRecord.patient.account.fullName}">Patient</small>
+            Nutrition -
+            <small style="color: green; font-size:15.5px" th:text="${APPOINTMENT.medicalRecord.patient.account.fullName}">Patient</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -55,8 +55,9 @@
                                                         <label class="control-label">Breakfast*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input th:field="*{breakfast}" type="text" class="form-control hsts hsts-num"
-                                                               placeholder="Breakfast"/>
+
+                                                        <input id="breakfast" th:field="*{breakfast}" type="text"
+                                                               class="form-control hsts hsts-num" placeholder="Breakfast"/>
                                                         <div class="help-block with-errors" id="invalidbreakfast"></div>
                                                     </td>
                                                 </tr>
@@ -65,7 +66,7 @@
                                                         <label class="control-label">BreakTime Morning*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input th:field="*{breakTimeMorning}" type="text"
+                                                        <input id="breakTimeMorning" th:field="*{breakTimeMorning}" type="text"
                                                                class="form-control hsts hsts-num" placeholder="BreakTime Morning"/>
                                                         <div class="help-block with-errors" id="invalidbreakTimeMorning"></div>
                                                     </td>
@@ -75,7 +76,7 @@
                                                         <label class="control-label">Lunch*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input th:field="*{lunch}" type="text" class="form-control hsts hsts-num"
+                                                        <input id="lunch" th:field="*{lunch}" type="text" class="form-control hsts hsts-num"
                                                                placeholder="Lunch"/>
                                                         <div class="help-block with-errors" id="invalidlunch"></div>
                                                     </td>
@@ -83,7 +84,7 @@
                                                 <tr>
                                                     <td><label class="control-label">BreakTime Afternoon*</label></td>
                                                     <td class="form-group">
-                                                        <input th:field="*{breakTimeAfternoon}" type="text"
+                                                        <input id="breakTimeAfternoon" th:field="*{breakTimeAfternoon}" type="text"
                                                                class="form-control hsts hsts-num" placeholder="BreakTime Afternoon"/>
                                                         <div class="help-block with-errors" id="invalidbreakTimeAfternoon"></div>
                                                     </td>
@@ -91,7 +92,7 @@
                                                 <tr>
                                                     <td><label class="control-label">Dinner*</label></td>
                                                     <td class="form-group">
-                                                        <input th:field="*{dinner}" type="text" class="form-control hsts hsts-num"
+                                                        <input id="dinner" th:field="*{dinner}" type="text" class="form-control hsts hsts-num"
                                                                placeholder="Dinner"/>
                                                         <div class="help-block with-errors" id="invaliddinner"></div>
                                                     </td>
@@ -99,7 +100,7 @@
                                                 <tr>
                                                     <td><label class="control-label">Eat Late At Night*</label></td>
                                                     <td class="form-group">
-                                                        <input th:field="*{eatLateAtNight}" type="text"
+                                                        <input id="eatLateAtNight" th:field="*{eatLateAtNight}" type="text"
                                                                class="form-control hsts hsts-num" placeholder="Eat Late At Night"/>
                                                         <div class="help-block with-errors" id="invalideatLateAtNight"></div>
                                                     </td>
@@ -132,7 +133,7 @@
                                                         <label class="control-label">Starch* (g)</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input th:field="*{starch}" type="text" class="form-control hsts hsts-num"
+                                                        <input id="starch" th:field="*{starch}" type="text" class="form-control hsts hsts-num"
                                                                placeholder="Starch"/>
                                                         <div class="help-block with-errors" id="invalidstarch"></div>
                                                     </td>
@@ -149,7 +150,7 @@
                                                         <label class="control-label">Protein* (g)</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input th:field="*{protein}" type="text" class="form-control hsts hsts-num"
+                                                        <input id="protein" th:field="*{protein}" type="text" class="form-control hsts hsts-num"
                                                                placeholder="Protein" data-remote="/validateData" data-error="Wrong input"/>
                                                         <div class="help-block with-errors" id="invalidprotein"></div>
                                                     </td>
@@ -168,7 +169,7 @@
                                                         <label class="control-label">Fat* (g)</label>
                                                     </td>
                                                     <td>
-                                                        <input th:field="*{fat}" type="text" class="form-control hsts hsts-num"
+                                                        <input id="fat" th:field="*{fat}" type="text" class="form-control hsts hsts-num"
                                                                placeholder="Fat"/>
                                                         <div class="help-block with-errors" id="invalidfat"></div>
                                                     </td>
@@ -245,7 +246,7 @@
 
                                                     <td><label class="control-label">Fiber* (g)</label></td>
                                                     <td>
-                                                        <input th:field="*{fiber}" type="text" class="form-control hsts hsts-num"
+                                                        <input id="fiber" th:field="*{fiber}" type="text" class="form-control hsts hsts-num"
                                                                placeholder="Fiber" data-remote="/validateData" data-error="Wrong input"/>
                                                         <div class="help-block with-errors" id="invalidfiber"></div>
                                                     </td>
@@ -297,6 +298,9 @@
     </section>
     <!-- /.content -->
     <!-- jQuery -->
+    <script th:inline="javascript">
+        var voiceModel = [[${voiceModel}]];
+    </script>
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
     <!-- jquery validation -->
     <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>

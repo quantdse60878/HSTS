@@ -37,7 +37,17 @@ public class FoodPhase extends AbstractKeyEntity {
 
     private String unitName;
 
+    private int quantitative;
+
     public FoodPhase() {
+    }
+
+    public int getQuantitative() {
+        return quantitative;
+    }
+
+    public void setQuantitative(int quantitative) {
+        this.quantitative = quantitative;
     }
 
     public int getNumberOfTime() {
