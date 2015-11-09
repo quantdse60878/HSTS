@@ -3,7 +3,7 @@
  * Program: HSTS.
  * Program manager: Kieu Trong Khanh.
  * Author: dangquantran.
- * Date: 11/9/2015.
+ * Date: 11/10/2015.
  */
 $(document).ready(function(){
     console.log("-- begin --");
@@ -17,13 +17,16 @@ $(document).ready(function(){
         "info": true,
 
         "ajax": {
-            "url": "/regimenList",
+            "url": "/phase/list",
             "dataSrc": "dataList",
             "page": "pageNumber",
             "pages": "pageSize",
             "recordsTotal": "totalElements",
             "recordsFiltered": "numberOfElements",
-            "type": "GET"
+            "type": "GET",
+            "data": {
+                regimenId: $("#regimenId").val()
+            }
         },
 
         "columns": [
@@ -37,30 +40,25 @@ $(document).ready(function(){
                 "width": "10%"
             },
             // col 2
-            { "data": {
-                "illness.name": "illness.name",
-                "id": "id"
-            },
-                "render": function ( data, type, full, meta ) {
-                    return '<a href="/detailRegimen?id='+ data.id +  '" >' + data.illness.name + '</a>';
-                },
-                "width": "30%"
+            {
+                "data": "fromDate",
+                "width": "20%"
             },
             // col 3
             {
-              "data": "illness.description",
-                "width": "30%"
+                "data": "toDate",
+                "width": "20%"
             },
             // col 4
             {
-              "data": "numberOfPhase",
-                "width": "10%"
+                "data": "updateTime",
+                "width": "30%"
             },
             // col 5
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    return '<a href="/deleteRegimen?id='+ data.id +  '" class="btn btn-danger">Delete</a>';
+                    return '<a href="/phase?id='+ data.id +  '" class="btn btn-danger">Update</a>';
                 },
                 "width": "20%"
             }

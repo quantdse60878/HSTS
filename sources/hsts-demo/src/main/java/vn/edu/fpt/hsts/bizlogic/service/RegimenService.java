@@ -13,9 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.bizlogic.model.regimen.PhaseModel;
+import vn.edu.fpt.hsts.bizlogic.model.regimen.PhasePageModel;
+import vn.edu.fpt.hsts.bizlogic.model.regimen.RegimenModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.RegimenPageModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.util.StringUtils;
+import vn.edu.fpt.hsts.persistence.entity.Phase;
 import vn.edu.fpt.hsts.persistence.entity.Regimen;
 import vn.edu.fpt.hsts.persistence.repo.FoodPhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.IllnessRepo;
@@ -87,6 +91,39 @@ public class RegimenService extends AbstractService {
             }
             final RegimenPageModel pageModel = new RegimenPageModel(pageEntities);
             return pageModel;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public PhasePageModel phases(final int regimenId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("regimenId[{}]", regimenId);
+            final PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
+            final Page<Phase> pageEntities = phaseRepo.findByRegimenId(regimenId, pageRequest);
+            if (pageEntities.hasContent()) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Got {} records ", pageEntities.getNumberOfElements());
+                }
+            }
+            final PhasePageModel pageModel = new PhasePageModel(pageEntities);
+            return pageModel;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public RegimenModel regimenInfo(final int regimenId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("regimenId[{}]", regimenId);
+            final Regimen regimen = regimenRepo.findOne(regimenId);
+            final RegimenModel model = new RegimenModel();
+            if (null != regimen) {
+                model.fromEntity(regimen);
+            }
+            return model;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
