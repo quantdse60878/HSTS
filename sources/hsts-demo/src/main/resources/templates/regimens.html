@@ -49,16 +49,14 @@
             </div>
 
         </section><!-- /.content -->
+        <!-- library -->
+        <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+        <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+
+        <!-- external javascript -->
+        <script th:src = "@{/static/js/regimens.js}"></script>
+        <!-- external css -->
+        <link th:href="@{/static/css/regimens.css}" rel="stylesheet"/>
     </div><!-- /.content-wrapper -->
-
-
-    <!-- library -->
-    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
-    <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
-
-    <!-- external javascript -->
-    <script th:src = "@{/static/js/regimens.js}"></script>
-    <!-- external css -->
-    <link th:href="@{/static/css/regimens.css}" rel="stylesheet"/>
 </body>
 </html>

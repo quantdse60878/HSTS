@@ -30,6 +30,11 @@ public class RegimenModel extends AbstractKeyModel<Regimen> {
      */
     private String updateTime;
 
+    /**
+     *
+     */
+    private int numberOfPhase;
+
     public IllnessModel getIllness() {
         return illness;
     }
@@ -56,5 +61,14 @@ public class RegimenModel extends AbstractKeyModel<Regimen> {
             final String date = DateUtils.formatDate(updateTime, DateUtils.DATE_PATTERN_3);
             this.updateTime = date;
         }
+        numberOfPhase = entity.getPhaseList().size();
+    }
+
+    public int getNumberOfPhase() {
+        return numberOfPhase;
+    }
+
+    public void setNumberOfPhase(final int numberOfPhase) {
+        this.numberOfPhase = numberOfPhase;
     }
 }

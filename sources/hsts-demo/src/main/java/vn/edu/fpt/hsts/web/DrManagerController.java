@@ -45,7 +45,7 @@ public class DrManagerController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "/regimen/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/regimenList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public RegimenPageModel getRegimens(
             @RequestParam(value = "name", required = false, defaultValue = EMPTY) final String name,

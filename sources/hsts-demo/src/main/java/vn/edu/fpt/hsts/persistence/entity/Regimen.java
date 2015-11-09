@@ -12,8 +12,10 @@ import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Regimen extends AbstractKeyEntity {
@@ -29,6 +31,13 @@ public class Regimen extends AbstractKeyEntity {
      * The update time.
      */
     private Date updateTime;
+
+    /**
+     *
+     */
+    @OneToMany(mappedBy = "regimen", fetch = FetchType.LAZY)
+    private List<Phase> phaseList;
+
 
     public Regimen() {
     }
@@ -47,5 +56,13 @@ public class Regimen extends AbstractKeyEntity {
 
     public void setIllness(final Illness illness) {
         this.illness = illness;
+    }
+
+    public List<Phase> getPhaseList() {
+        return phaseList;
+    }
+
+    public void setPhaseList(final List<Phase> phaseList) {
+        this.phaseList = phaseList;
     }
 }
