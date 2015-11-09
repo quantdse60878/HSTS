@@ -258,6 +258,8 @@
 
                                                 <div class="col-sm-5">
                                                     <select id="doctorSelect" th:name="doctorId" >
+                                                        <option th:if="${OLDDOCTOR != null}" th:value="${OLDDOCTOR.id}"
+                                                                th:text="${OLDDOCTOR.account.fullName}" th:selected="selected"></option>
                                                     </select>
                                                 </div>
                                                 <div class="help-block with-errors" id="invalidDoctorId"></div>
