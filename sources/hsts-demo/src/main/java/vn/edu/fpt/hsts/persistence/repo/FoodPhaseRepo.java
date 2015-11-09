@@ -3,14 +3,14 @@
  * Program: HSTS.
  * Program manager: Kieu Trong Khanh.
  * Author: dangquantran.
- * Date: 9/25/2015.
+ * Date: 11/10/2015.
  */
 package vn.edu.fpt.hsts.persistence.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import vn.edu.fpt.hsts.persistence.entity.Regimen;
+import vn.edu.fpt.hsts.persistence.entity.FoodPhase;
 
 @Repository
-public interface StandardRegimenRepo extends JpaRepository<Regimen, Integer> {
+public interface FoodPhaseRepo extends JpaRepository<FoodPhase, Integer> {
 }
