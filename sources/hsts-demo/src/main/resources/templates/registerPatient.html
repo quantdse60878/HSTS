@@ -311,7 +311,8 @@
 
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="reset" class="btn btn-default">Cancel</button>
+                            <!--<button type="reset" class="btn btn-default" >Cancel</button>-->
+                            <a th:href="@{registerPatient}" class="btn btn-default">Reset</a>
                         </div>
                         <!-- /.box-footer -->
                         <!-- Modal -->
@@ -394,6 +395,10 @@
                                     <h4 class="modal-title" id="patientRegistrationLabel">Patient registration</h4>
                                 </div>
                                 <div class="modal-body">
+                                    <div class="row" style="margin: 15px; text-align: center;">
+                                        <canvas id="myCanvas" width="200" height="100"/>
+                                    </div>
+
                                     <div class="row" style="margin: 15px">
                                         <label class="col-sm-3 control-label">Name:</label>
 
@@ -434,13 +439,13 @@
                                             <label id = "rDate">Date</label>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin: 15px">
-                                        <label class="col-sm-3 control-label">Order number:</label>
+                                    <!--<div class="row" style="margin: 15px">-->
+                                        <!--<label class="col-sm-3 control-label">Order number:</label>-->
 
-                                        <div class="col-sm-3">
-                                            <label id = "rOrderNumber">Order Number</label>
-                                        </div>
-                                    </div>
+                                        <!--<div class="col-sm-3">-->
+                                        <!--<label id = "rOrderNumber">Order Number</label>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
                                     <div class="row" style="margin: 15px">
                                         <label class="col-sm-3 control-label">Doctor:</label>
 

@@ -400,10 +400,10 @@ var validator = $("#mainForm").validate({
 
                     var btnGender = document.getElementById("rGender");
                     if(data.gender == "MALE") {
-                        btnGender.setAttribute("class", "btn btn-info");
+                        btnGender.setAttribute("class", "btn btn-info btn-sm");
                         btnGender.setAttribute("value", "MALE");
                     } else {
-                        btnGender.setAttribute("class", "btn btn-danger");
+                        btnGender.setAttribute("class", "btn btn-danger btn-sm");
                         btnGender.setAttribute("value", "FEMALE");
                     }
 
@@ -416,8 +416,13 @@ var validator = $("#mainForm").validate({
                     var txtDate = document.getElementById("rDate");
                     txtDate.innerHTML = data.date;
 
-                    var txtOrderNumber = document.getElementById("rOrderNumber");
-                    txtOrderNumber.innerHTML = data.orderNumber;
+                    //var txtOrderNumber = document.getElementById("rOrderNumber");
+                    //txtOrderNumber.innerHTML = data.orderNumber;
+
+                    var c = document.getElementById("myCanvas");
+                    var ctx = c.getContext("2d");
+                    ctx.font = "40px Arial";
+                    ctx.fillText(data.orderNumber ,10,50);
 
                     var txtDoctor = document.getElementById("rDoctor");
                     txtDoctor.innerHTML = data.doctor;
