@@ -38,7 +38,8 @@ public class AnalyticFood {
             model.setFoodName(food.getName());
             for(UnitOfFood unitOfFood : unitOfFoods){
                 if(food.getId() == unitOfFood.getFood().getId()){
-                    model.setFoodUnit(unitOfFood.getUnitName());
+                    if(unitOfFood.getUnitName().equals("gam")) model.setFoodUnit("g");
+                    else model.setFoodUnit(unitOfFood.getUnitName());
                     model.setCaloriesEstimate(unitOfFood.getCaloriesEstimate());
                     model.setFoodNutritionName(unitOfFood.getListElementNutritionName());
                     model.setFoodNutritionValue(unitOfFood.getListElementNutritionValue());

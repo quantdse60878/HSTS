@@ -142,7 +142,7 @@ public class AnalyticDataTask {
                 e.printStackTrace();
             }
             System.out.println("1");
-            if (distance > 0 && calories > 0) {
+            if (distance >= 0 && calories >= 0) {
 
                 ParamMeasurement paramDistance = paramMeasurementRepo.findParamMeasurementByMeasurementName("Distance");
                 ParamMeasurement paramCalories = paramMeasurementRepo.findParamMeasurementByMeasurementName("Calories");

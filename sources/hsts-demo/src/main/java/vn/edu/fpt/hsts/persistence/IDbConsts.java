@@ -186,7 +186,7 @@ public interface IDbConsts {
         /**
          *
          */
-        int NUTRITION = 6;
+        int NUTRITION = 7;
 
     }
 }

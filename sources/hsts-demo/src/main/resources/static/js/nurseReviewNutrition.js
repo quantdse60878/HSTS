@@ -84,10 +84,13 @@ function recognizer(){
             }
         }
 
-        if(listFinalString.split(" ")[1] == "ăn") {
+        if((listFinalString.split(" ")[1] == "ăn") || (listFinalString.split(" ")[0] == "ăn")) {
             listFinalString = listFinalString.replace(" ăn ", "");
+            listFinalString = listFinalString.replace("ăn ", "");
             listFinalString = replaceAll(listFinalString,' ăn ', ',');
+            listFinalString = replaceAll(listFinalString,'ăn ', ',');
             listFinalString = replaceAll(listFinalString,' anh ', ',');
+            listFinalString = replaceAll(listFinalString,'anh ', ',');
             var listFinal = listFinalString.split(",");
             for(var i = 0; i < listFinal.length; i++) {
                 for(var j = 0; j < listNumberWord.length; j++) {
@@ -101,10 +104,12 @@ function recognizer(){
                 }
             }
         }
-        if(listFinalString.split(" ")[1] == "anh") {
+        if((listFinalString.split(" ")[1] == "anh") || (listFinalString.split(" ")[0] == "anh")) {
             listFinalString = listFinalString.replace(" anh ", "");
+            listFinalString = listFinalString.replace("anh ", "");
             listFinalString = replaceAll(listFinalString,' ăn ', ',');
             listFinalString = replaceAll(listFinalString,' anh ', ',');
+            listFinalString = replaceAll(listFinalString,'anh ', ',');
             var listFinal = listFinalString.split(",");
             for(var i = 0; i < listFinal.length; i++) {
                 for(var j = 0; j < listNumberWord.length; j++) {
@@ -118,9 +123,10 @@ function recognizer(){
                 }
             }
         }
-        if(listFinalString.split(" ")[1] == "uống") {
+        if((listFinalString.split(" ")[1] == "uống") || (listFinalString.split(" ")[0] == "uống")) {
             listFinalString = listFinalString.replace(" uống ", "");
             listFinalString = replaceAll(listFinalString,' uống ', ',');
+            listFinalString = replaceAll(listFinalString,'uống ', ',');
             var listFinal = listFinalString.split(",");
             for(var i = 0; i < listFinal.length; i++) {
                 for(var j = 0; j < listNumberWord.length; j++) {
@@ -213,6 +219,7 @@ function analyticMeal(listMeal) {
                     itemBreakfast = replaceAll(itemBreakfast, foodItemValue.foodUnit, "");
                     var numberOfQuantity = itemBreakfast.match(/\d/g);
                     numberOfQuantity = parseInt(numberOfQuantity.join(""));
+                    numberOfQuantity = numberOfQuantity / 100;
                     foodItemValue.caloriesEstimate = numberOfQuantity * listFoodDatabase[j].caloriesEstimate;
                     var listNutritionValueDatabase = listFoodDatabase[j].foodNutritionValue.split(",");
                     var listNutritionValue = new Array();
@@ -252,16 +259,22 @@ function changeValueOnFood(target){
     var foodValueChange = target.value;
     if(target.id == "bf") {
         breakfast = foodValueChange;
+        listFood = breakfast;
     }if(target.id == "break_time_morning") {
         breaktimeMorning = foodValueChange;
+        listFood = breaktimeMorning;
     }if(target.id == "lunch") {
         lunch = foodValueChange;
+        listFood = lunch;
     }if(target.id == "bta") {
         breaktimeAfternoon = foodValueChange;
+        listFood = breaktimeAfternoon;
     }if(target.id == "dinner") {
         dinner = foodValueChange;
+        listFood = dinner;
     }if(target.id == "en") {
         lateAtNight = foodValueChange;
+        listFood = lateAtNight;
     }
 }
 
