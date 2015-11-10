@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
+
 <p style="border-top: 1px solid #d2d6de;padding: 15px 0px 0px 15px;"><i class="fa fa-user"></i> Patient's Profile</p>
 <!-- box-body -->
 <div class="box-body" th:with="ACC=${PATIENT.account}">
@@ -36,17 +37,17 @@
 
 
     <label for="Medicalhistory" class="control-label">Medical history:</label>
-    <div th:if="${MEDI_IMGS != null}">
-        <a class="fa fa-image" data-toggle="modal" data-target="#medi_img"></a>
+    <div th:if="!${#lists.isEmpty(MEDI_IMGS)}" style="text-align: right;">
+        <a style="color: #337ab7;" data-toggle="modal" data-target="#medi_img"><span class="fa fa-image"></span> Image</a>
     </div>
 
-    <textarea class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-              th:text="${MEDI_HIS}"></textarea>
+    <p class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+              th:text="${MEDI_HIS}"></p>
 
     <label for="clinicalSymptoms" class="control-label">Symptoms:</label>
 
-    <textarea class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-              th:text="${APPOINTMENT.medicalRecord.symptoms}"></textarea>
+    <p class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+              th:text="${APPOINTMENT.medicalRecord.symptoms}"></p>
 
 </div>
 <!-- /.box-body -->

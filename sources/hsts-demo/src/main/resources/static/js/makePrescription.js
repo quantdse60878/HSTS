@@ -142,7 +142,7 @@ function findUnits(food) {
         },
         success: function (json) {
             //console.log("success");
-            var options = '<option value="0">Select</option>';
+            var options = '';
             document.getElementById(unitIdN).innerHTML = "";
             for (var i = 0; i < json.length; i++) {
                 var tmp = json[i];
