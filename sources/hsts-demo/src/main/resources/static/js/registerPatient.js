@@ -76,7 +76,7 @@ var $selectPatient = $("#patientName").select2({
         delay: 250,
         data: function (params) {
             return {
-                searchString: params.term, // search term
+                keyword: params.term, // search term
                 page: params.page
             };
         },
