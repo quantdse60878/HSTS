@@ -92,7 +92,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public static List<String> dateSaveStep = new ArrayList<>();
     public static BluetoothGattCharacteristic characteristicStep = null;
     public static BluetoothGattCharacteristic characteristicManufacturer = null;
-//    private Timer timer = new Timer();
+    private Timer timer = new Timer();
     protected final IntentFilter mIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
     protected final NetworkChangeReceiver mConnectionDetector = new NetworkChangeReceiver();
     private Intent checkNotifyIntent;
@@ -190,7 +190,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
 //        txtNumberOfStep.setText(numberOfStep);
 
-        /*timer.schedule(new TimerTask() {
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 // Your logic here...
@@ -201,11 +201,11 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     @Override
                     public void run() {
                         // This code will always run on the UI thread, therefore is safe to modify UI elements.
-
+                        readData();
                     }
                 });
             }
-        }, 10000, 10000);*/
+        }, 10000, 10000);
 
 
     }
@@ -402,18 +402,18 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         amountTime = amountTime();
 
 
-//        final Intent intent = getIntent();
-//        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-//        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-//
-//        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-//        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-//        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-//        if (mBluetoothLeService != null) {
-//            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
-//            Log.d(TAG, "Connect request result=" + result);
-//        }
-//
+        final Intent intent = getIntent();
+        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+
+        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        if (mBluetoothLeService != null) {
+            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+            Log.d(TAG, "Connect request result=" + result);
+        }
+
 //        Context context = getApplicationContext();
 //        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
 //        context.startService(notifyIntent);

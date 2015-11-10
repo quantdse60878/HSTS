@@ -106,8 +106,8 @@ public class LoginActivity extends ActionBarActivity {
                 public void onClick(View v) {
 
                     if(txtUsername.getText().toString().equals("258456") && txtPassword.getText().toString().equals("258456")) {
-//                        Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
-                        Intent continueIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                        Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+//                        Intent continueIntent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(continueIntent);
                         finish();
                     } else if (txtUsername.getText().length() > 0 && txtPassword.getText().length() > 0) {

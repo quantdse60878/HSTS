@@ -183,5 +183,10 @@ public interface IDbConsts {
          */
         int ADMIN = 6;
 
+        /**
+         *
+         */
+        int NUTRITION = 6;
+
     }
 }

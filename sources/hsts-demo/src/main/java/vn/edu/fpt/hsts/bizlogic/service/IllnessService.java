@@ -126,6 +126,18 @@ public class IllnessService {
             // Find the different between 2 day
             Date startDate = medicalRecord.getStartTime();
 
+            return getPhaseSugest(startDate, illness);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public Phase getPhaseSugest(final Date startDate, final Illness illness) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info(" startDate[{}], dianostic[{}]", startDate, illness);
+
+            // Find the different between 2 day
             Date today = new Date();
             today = DateUtils.roundDate(today, false);
 
