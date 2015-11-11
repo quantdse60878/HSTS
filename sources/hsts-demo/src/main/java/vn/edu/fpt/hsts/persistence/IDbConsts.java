@@ -189,4 +189,14 @@ public interface IDbConsts {
         int NUTRITION = 7;
 
     }
+
+    public interface IParamMeasurementType {
+        /**
+         *
+         */
+        int COLLECT_FROM_WRISTBAND = 1;
+
+        int CALCULATE = 0;
+
+    }
 }
