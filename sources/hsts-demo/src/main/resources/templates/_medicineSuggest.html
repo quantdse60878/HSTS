@@ -10,8 +10,8 @@
     <tr>
         <th style="width: 10px;">#</th>
         <th style="min-width: 155px;">Medicine</th>
-        <th style="width: 110px;">Times</th>
-        <th style="width: 60px;">Quantity</th>
+        <th style="width: 80px;">Times</th>
+        <th style="width: 40px;">Quantity</th>
         <th style="width: 110px;">Unit</th>
         <th>Note</th>
         <th>#</th>
@@ -21,26 +21,27 @@
         <td class="form-group">
             <select class="form-control" th:name="mPresModels[__${row.index}__].m" th:id="mPresModelsM__${row.index}__"
                     onchange="setMedicineUnit(event)" data-rule-min="1" data-msg-min="Please select.">
-                <option th:value="${medicalPhase.medicine.id}" selected="selected"
-                        th:text="${medicalPhase.medicine.name}"></option>
+                <!--<option th:value="${medicalPhase.medicine.id}" selected="selected"-->
+                        <!--th:text="${medicalPhase.medicine.name}"></option>-->
                 <option th:each="medicine : ${MEDICINES}"
                 th:value="${medicine.id}"
                 th:text="${medicine.name}"
-                th:if="${medicalPhase.medicine.id != medicine.id}"></option>
+                th:selected="${medicalPhase.medicine.id == medicine.id}"></option>
             </select>
             <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group">
-            <select class="form-control" th:field="*{mPresModels[__${row.index}__].mTime}" data-rule-min="1" data-msg-min="Please select.">
+            <select class="form-control" th:name="mPresModels[__${row.index}__].mTime" th:id="mPresModelsmTime__${row.index}__"
+                    data-rule-min="1" data-msg-min="Please select.">
                 <option selected="selected" th:value="${medicalPhase.numberOfTime}" th:text="${medicalPhase.numberOfTime}">Select</option>
                 <option th:each="time : ${TIMES}"
                         th:value="${time}"
                         th:text="${time}"
-                        th:unless="${medicalPhase.numberOfTime == time}"></option>
+                        th:if="${time == medicalPhase.numberOfTime}"></option>
             </select>
             <!--<div class="help-block with-errors"></div>-->
         </td>
-        <td class="form-group" style="width: 120px;">
+        <td class="form-group">
             <input type="text" class="form-control" th:name="mPresModels[__${row.index}__].mQuantity"
                    style="text-align: right;" th:value="${medicalPhase.quantitative}"
                    placeholder="Quantity" data-rule-range="1,10" data-msg-range="Out of range 1-10"/>
