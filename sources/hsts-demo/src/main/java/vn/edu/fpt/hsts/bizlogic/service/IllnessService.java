@@ -151,7 +151,9 @@ public class IllnessService {
                 numberOfDay = Math.abs(numberOfDay);
             }
             // Select suitable phase
-            return phaseRepo.findSuitablePhase(illness.getId(), numberOfDay);
+//            return phaseRepo.findSuitablePhase(illness.getId(), numberOfDay);
+            // TODO phase suggestion implementation here by new db
+            return phaseRepo.findOne(1);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

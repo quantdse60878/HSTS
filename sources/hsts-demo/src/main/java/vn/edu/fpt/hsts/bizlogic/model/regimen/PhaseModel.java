@@ -74,8 +74,9 @@ public class PhaseModel extends AbstractKeyModel<Phase> {
         super.fromEntity(entity);
         regimen = new RegimenModel();
         setShortModel(entity.getRegimen(), regimen);
-        fromDate = entity.getFromDate();
-        toDate = entity.getToDate();
+        // TODO
+        fromDate = 1;
+        toDate = 100;
         if (null != entity.getUpdateTime()) {
             updateTime = DateUtils.formatDate(entity.getUpdateTime(), DateUtils.DATE_PATTERN_3);
         }
