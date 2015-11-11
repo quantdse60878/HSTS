@@ -49,7 +49,7 @@ public class Phase extends AbstractKeyEntity {
     /**
      *
      */
-    private int order;
+    private int phaseOrder;
 
     /**
      *
@@ -103,12 +103,12 @@ public class Phase extends AbstractKeyEntity {
         this.updateTime = updateTime;
     }
 
-    public int getOrder() {
-        return order;
+    public int getPhaseOrder() {
+        return phaseOrder;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setPhaseOrder(int phaseOrder) {
+        this.phaseOrder = phaseOrder;
     }
 
     public int getNumberOfDay() {
