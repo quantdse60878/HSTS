@@ -5,10 +5,22 @@
 var validator = $("#mainForm").validate({
     ignore: [],
     debug: true,
-    rules: {},
-    messages: {},
+    rules: {
+        diagnostic: {
+            required: true
+        }
+    },
+    messages: {
+        diagnostic: {
+            required: "Please choose diagnostic."
+        }
+    },
     errorPlacement: function (error, element) {
-        error.appendTo(element.parent());
+        if(element.attr("name") == "diagnostic"){
+            error.appendTo($('#invalidDiagnostic'));
+        } else {
+            error.appendTo(element.parent());
+        }
     },
     submitHandler: function (form) {
         form.submit();

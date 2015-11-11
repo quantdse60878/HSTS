@@ -115,6 +115,7 @@
                                             <option th:if="${DIAGNOSTIC != null}" th:value="${DIAGNOSTIC.name}"
                                                     th:text="${DIAGNOSTIC.name}"></option>
                                         </select>
+                                        <div class="help-block with-errors" id="invalidDiagnostic"></div>
                                     </div>
                                     <div class="col-sm-2 pull-right" th:if="${TREATMENT == null}">
                                         <button type="submit" class="btn btn-primary">Suggest</button>
