@@ -237,7 +237,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             hadRegisterReceiver = true;
             registerReceiver(mConnectionDetector, mIntentFilter);
         }
-//        SendBrandAsyncTask sendBrandAsyncTask = new SendBrandAsyncTask();
+        SendBrandAsyncTask sendBrandAsyncTask = new SendBrandAsyncTask();
 //        sendBrandAsyncTask.execute();
         Constant.TREATMENTS = Constant.getItems();
 
@@ -268,7 +268,16 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
             }
-            if (bundle.getBoolean("notFinished")) {
+            if (bundle.getBoolean("nextAppointment")) {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Nhắc Nhở").setMessage("Hôm nay là ngày tái khám. Hãy cố gắng thu xếp thời gian để đến với chúng tôi. Hân hạnh đươc đón tiếp Quý Khách!");
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.show();
+            }if (bundle.getBoolean("notFinished")) {
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
                 r.play();
@@ -277,7 +286,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
-            }if (bundle.getBoolean("noConnection")) {
+            }
+            if (bundle.getBoolean("noConnection")) {
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
                 r.play();
@@ -402,17 +412,17 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         amountTime = amountTime();
 
 
-        final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-        if (mBluetoothLeService != null) {
-            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
-            Log.d(TAG, "Connect request result=" + result);
-        }
+//        final Intent intent = getIntent();
+//        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+//        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+//
+//        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+//        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+//        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+//        if (mBluetoothLeService != null) {
+//            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+//            Log.d(TAG, "Connect request result=" + result);
+//        }
 
 //        Context context = getApplicationContext();
 //        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
