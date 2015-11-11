@@ -237,7 +237,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             hadRegisterReceiver = true;
             registerReceiver(mConnectionDetector, mIntentFilter);
         }
-        SendBrandAsyncTask sendBrandAsyncTask = new SendBrandAsyncTask();
+//        SendBrandAsyncTask sendBrandAsyncTask = new SendBrandAsyncTask();
 //        sendBrandAsyncTask.execute();
         Constant.TREATMENTS = Constant.getItems();
 
