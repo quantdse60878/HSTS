@@ -42,6 +42,13 @@ public class DataValidationService extends AbstractService {
             if (null != maxVals) {
                 this.configMaxValue();
             }
+
+            /**
+             * Integer type param names
+             */
+            if(null != intParams) {
+                this.configIntParamNames();
+            }
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
@@ -59,9 +66,24 @@ public class DataValidationService extends AbstractService {
             final Enumeration<String> params = request.getParameterNames();
             while (params.hasMoreElements()) {
                 String paramName = params.nextElement();
-                final float paramValue = Float.parseFloat(request.getParameter(paramName));
+                // For case Integer parsing value wrong
+                Object vals = null;
+                Float paramValue = null;
+                if (isIntParam(paramName)) {
+                    vals = Integer.parseInt(request.getParameter(paramName));
+                } else {
+                    vals = Float.parseFloat(request.getParameter(paramName));
+                }
+                if (null == vals) {
+                    return false;
+                }
+                if (vals instanceof Float) {
+                    paramValue = (Float) vals;
+                } else {
+                    paramValue = Float.parseFloat(vals.toString());
+                }
 
-                // For case validate model attribute with list index, ex: mPresModel[2].mQuantity
+                // Select model attribute name with list index, ex: mPresModel[2].mQuantity
                 if (paramName.contains(".")) {
                     // Get the lastest string to use as paramName
                     final int index = paramName.lastIndexOf(".");
@@ -86,6 +108,10 @@ public class DataValidationService extends AbstractService {
                 }
             }
             return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        } catch (Exception e) {
+            return false;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
@@ -115,7 +141,7 @@ public class DataValidationService extends AbstractService {
         }
     }
 
-    public void configureMinValue() {
+    private void configureMinValue() {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
             // Nurse register
@@ -143,7 +169,7 @@ public class DataValidationService extends AbstractService {
         }
     }
 
-    public void configMaxValue() {
+    private void configMaxValue() {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
             // Nurse register
@@ -171,6 +197,26 @@ public class DataValidationService extends AbstractService {
         }
     }
 
+    private void configIntParamNames() {
+        LOGGER.debug(IConsts.BEGIN_METHOD);
+        try {
+            // Nurse register
+            intParams.add("weight");
+            intParams.add("height");
+            intParams.add("impedance");
+            intParams.add("basalMetabolicRate");
+            intParams.add("bloodPressure");
+            intParams.add("heartbeat");
+            intParams.add("waists");
+
+            // Prescription Model attribute
+
+            // Nutrition model attribute
+        } finally {
+            LOGGER.debug(IConsts.END_METHOD);
+        }
+    }
+
     public boolean validateString(final String paramName, final String paramValue){
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
@@ -188,5 +234,18 @@ public class DataValidationService extends AbstractService {
         } finally {
             LOGGER.debug(IConsts.END_METHOD);
         }
+    }
+
+    private boolean isIntParam(final String paramName) {
+        LOGGER.debug(IConsts.BEGIN_METHOD);
+        try {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("paramName[{}]", paramName);
+            }
+            return intParams.contains(paramName);
+        } finally {
+            LOGGER.debug(IConsts.END_METHOD);
+        }
+
     }
 }

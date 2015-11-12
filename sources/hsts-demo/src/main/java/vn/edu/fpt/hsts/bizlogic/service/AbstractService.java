@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.web.session.UserSession;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,9 +43,14 @@ public class AbstractService {
     protected static Map<String, Float> minVals = new HashMap<String, Float>();
 
     /**
-     *
+     * The max value map.
      */
     protected static Map<String, Float> maxVals = new HashMap<String, Float>();
+
+    /**
+     * The string list contains all name of parameter will be convert to int.
+     */
+    protected static List<String> intParams = new ArrayList<String>();
 
     /**
      * Get the userSession attribute.

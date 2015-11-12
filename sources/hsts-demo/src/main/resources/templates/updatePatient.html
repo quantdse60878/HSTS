@@ -118,7 +118,7 @@
                                                         <label for="Weight" class="control-label">Weight*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="weight" class="form-control" id="Weight"
+                                                        <input type="number" th:name="weight" class="form-control" id="Weight"
                                                                placeholder="Kg" data-remote="/validateData"
                                                                required="required" data-error="Wrong input"/>
 
@@ -142,7 +142,7 @@
                                                         <label for="Height" class="control-label">Height*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="height" class="form-control" id="Height"
+                                                        <input type="number" th:name="height" class="form-control" id="Height"
                                                                placeholder="cm" data-remote="/validateData"
                                                                required="required" data-error="Wrong input"/>
 
@@ -166,7 +166,7 @@
                                                         <label for="heartBeat" class="control-label">Heart Beat*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="heartBeat" class="form-control"
+                                                        <input type="number" th:name="heartBeat" class="form-control"
                                                                id="heartBeat"
                                                                placeholder="times/minute" data-remote="/validateData"
                                                                required="required" data-error="Wrong input"/>
@@ -191,7 +191,7 @@
                                                         <label for="bloodPressure" class="control-label">Blood Pressure*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="bloodPressure" class="form-control"
+                                                        <input type="number" th:name="bloodPressure" class="form-control"
                                                                id="bloodPressure"
                                                                placeholder="mmHg" data-remote="/validateData"
                                                                required="required" data-error="Wrong input"/>
@@ -216,7 +216,7 @@
                                                         <label for="waists" class="control-label">Waists*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="waists" class="form-control" id="waists"
+                                                        <input type="number" th:name="waists" class="form-control" id="waists"
                                                                placeholder="cm" data-remote="/validateData"
                                                                required="required" data-error="Wrong input"/>
 
@@ -227,7 +227,7 @@
                                                         <label for="impedance" class="control-label">Impedance*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="impedance" class="form-control"
+                                                        <input type="number" th:name="impedance" class="form-control"
                                                                id="impedance"
                                                                placeholder="Ohm" data-remote="/validateData"
                                                                required="required" data-error="Wrong input"/>
@@ -254,7 +254,7 @@
                                                             Metabolic Rate*</label>
                                                     </td>
                                                     <td>
-                                                        <input type="text" th:name="basalMetabolicRate" class="form-control"
+                                                        <input type="number" th:name="basalMetabolicRate" class="form-control"
                                                                id="basalMetabolicRate"
                                                                placeholder="Kcal"
                                                                data-remote="/validateData" required="required"
@@ -286,9 +286,22 @@
                                                         <!--<option th:each="doctor : ${session.DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.fullName}"></option>-->
                                                     </select>
                                                 </div>
+                                                <!--<label for="newRecord" class="col-sm-3 control-label">-->
+                                                    <!--<input style="width: 15px;height: 15px;" type="checkbox" th:name="isNewMedicalRecord"/>New Medical Record</label>-->
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="isNewMedicalRecord" class="col-sm-3 control-label">New Medical Record</label>
+                                                <div class="btn-group col-sm-3" data-toggle="buttons">
+                                                    <label class="btn btn-info">
+                                                        <input type="radio" name="isNewMedicalRecord" value="true" required="required"
+                                                               data-error="Choose at least one gender"/>Yes
+                                                    </label>
 
-                                                <label for="newRecord" class="col-sm-3 control-label">
-                                                    <input style="width: 15px;height: 15px;" type="checkbox" th:name="isNewMedicalRecord"/>New Medical Record</label>
+                                                    <label class="btn btn-info active">
+                                                        <input type="radio" name="isNewMedicalRecord" checked= "" value="false"/>No
+                                                    </label>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="Medicalhistory" class="col-sm-3 control-label">Medical history</label>

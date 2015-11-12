@@ -117,9 +117,9 @@
                                                         <label for="Weight" class="control-label">Weight*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="weight" class="form-control" id="Weight"
+                                                        <input type="number" th:name="weight" class="form-control" id="Weight"
                                                                placeholder="Kg" data-remote="/validateData"
-                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.weight != null})?*{PC.weight}:0"/>
+                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.weight != null})?${#numbers.formatInteger(PC.weight, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -141,9 +141,9 @@
                                                         <label for="Height" class="control-label">Height*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="height" class="form-control" id="Height"
+                                                        <input type="number" th:name="height" class="form-control" id="Height"
                                                                placeholder="cm" data-remote="/validateData"
-                                                               required="required" data-error="Wrong input" th:value="(*{PC} != null and *{PC.height != null})?*{PC.height}:0"/>
+                                                               required="required" data-error="Wrong input" th:value="(*{PC} != null and *{PC.height != null})?${#numbers.formatInteger(PC.height, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -165,10 +165,10 @@
                                                         <label for="heartBeat" class="control-label">Heart Beat*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="heartBeat" class="form-control"
+                                                        <input type="number" th:name="heartBeat" class="form-control"
                                                                id="heartBeat"
                                                                placeholder="times/minute" data-remote="/validateData"
-                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.heartBeat != null})?*{PC.appointment.heartBeat}:0"/>
+                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.heartBeat != null})?${#numbers.formatInteger(PC.appointment.heartBeat, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -190,10 +190,10 @@
                                                         <label for="bloodPressure" class="control-label">Blood Pressure*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="bloodPressure" class="form-control"
+                                                        <input type="number" th:name="bloodPressure" class="form-control"
                                                                id="bloodPressure"
                                                                placeholder="mmHg" data-remote="/validateData"
-                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.bloodPressure != null})?*{PC.appointment.bloodPressure}:0"/>
+                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.bloodPressure != null})?${#numbers.formatInteger(PC.appointment.bloodPressure, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -215,9 +215,9 @@
                                                         <label for="waists" class="control-label">Waists*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="waists" class="form-control" id="waists"
+                                                        <input type="number" th:name="waists" class="form-control" id="waists"
                                                                placeholder="cm" data-remote="/validateData"
-                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.waists != null})?*{PC.appointment.waists}:0"/>
+                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.waists != null})?${#numbers.formatInteger(PC.appointment.waists, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -226,10 +226,10 @@
                                                         <label for="impedance" class="control-label">Impedance*</label>
                                                     </td>
                                                     <td class="form-group">
-                                                        <input type="text" th:name="impedance" class="form-control"
+                                                        <input type="number" th:name="impedance" class="form-control"
                                                                id="impedance"
                                                                placeholder="Ohm" data-remote="/validateData"
-                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.impedance != null})?*{PC.impedance}:0"/>
+                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.impedance != null})?${#numbers.formatInteger(PC.appointment.waists, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -253,11 +253,11 @@
                                                             Metabolic Rate*</label>
                                                     </td>
                                                     <td>
-                                                        <input type="text" th:name="basalMetabolicRate" class="form-control"
+                                                        <input type="number" th:name="basalMetabolicRate" class="form-control"
                                                                id="basalMetabolicRate"
                                                                placeholder="Kcal"
                                                                data-remote="/validateData" required="required"
-                                                               data-error="Wrong input" th:value="(*{PC}!= null and *{PC.basalMetabolicRate != null})?*{PC.basalMetabolicRate}:0"/>
+                                                               data-error="Wrong input" th:value="(*{PC}!= null and *{PC.basalMetabolicRate != null})?${#numbers.formatInteger(PC.appointment.waists, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -280,14 +280,28 @@
                                                 <label class="col-sm-3 control-label">Doctor*</label>
 
                                                 <div class="col-sm-5">
-                                                    <select id="doctorSelect" th:name="doctorId">
+                                                    <select id="doctorSelect" th:name="doctorId" required="required" data-error="Choose at least one doctor">
                                                         <!--<option value = "" th:disabled="disable">Select one...</option>-->
                                                         <!--<option th:each="doctor : ${session.DOCTORS}" th:value="${doctor.id}" th:text="${doctor.account.fullName}"></option>-->
                                                     </select>
+                                                    <div class="help-block with-errors"></div>
                                                 </div>
+                                                <!--<label for="newRecord" class="col-sm-3 control-label">-->
+                                                    <!--<input style="width: 15px;height: 15px;" type="checkbox" th:name="isNewMedicalRecord"/>New Medical Record</label>-->
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="isNewMedicalRecord" class="col-sm-3 control-label">New Medical Record</label>
+                                                <div class="btn-group col-sm-3" data-toggle="buttons">
+                                                    <label class="btn btn-info">
+                                                        <input type="radio" name="isNewMedicalRecord" value="true" required="required"
+                                                               data-error="Choose at least one gender"/>Yes
+                                                    </label>
 
-                                                <label for="newRecord" class="col-sm-3 control-label">
-                                                    <input style="width: 15px;height: 15px;" type="checkbox" th:name="isNewMedicalRecord"/>New Medical Record</label>
+                                                    <label class="btn btn-info active">
+                                                        <input type="radio" name="isNewMedicalRecord" checked= "" value="false"/>No
+                                                    </label>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="Medicalhistory" class="col-sm-3 control-label">Medical history</label>
