@@ -38,7 +38,7 @@ $("#doctorSelect").select2({
         delay: 250,
         data: function (params, page) {
             return {
-                searchString: params.term, // search term
+                name: params.term, // search term
                 page: params.page,
                 pageSize: 5
             };
