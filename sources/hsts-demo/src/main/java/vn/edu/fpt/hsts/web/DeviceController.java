@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.fpt.hsts.bizlogic.service.DeviceService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -31,7 +31,6 @@ import vn.edu.fpt.hsts.criteria.RegistrationCriteria;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
