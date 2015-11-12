@@ -44,10 +44,8 @@ import vn.edu.fpt.hsts.persistence.repo.PatientRepo;
 import vn.edu.fpt.hsts.persistence.repo.PreventionCheckRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -503,9 +501,8 @@ public class PatientService extends AbstractService {
         }
     }
 
-    public void print(final int patientId, final HttpServletResponse response) throws BizlogicException, IOException, JRException {
+    public byte[] print(final int patientId) throws BizlogicException, IOException, JRException {
         LOGGER.info(IConsts.BEGIN_METHOD);
-        OutputStream out = null;
         try {
             // Find last prescription with patient id
             Patient patient = patientRepo.findOne(patientId);
@@ -562,10 +559,8 @@ public class PatientService extends AbstractService {
             prescription.setDoctorName(lastTreatment.getAppointment().getMedicalRecord().getDoctor().getAccount().getFullName());
             prescription.setTableData(wraper);
 
-            out = response.getOutputStream();
-            prescription.toPdf(out);
+            return prescription.toPdf();
         } finally {
-            out.close();
             LOGGER.info(IConsts.END_METHOD);
         }
     }
@@ -575,6 +570,32 @@ public class PatientService extends AbstractService {
         try {
             LOGGER.info("patientId[{}]", patientId);
             return patientRepo.findOne(patientId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public boolean checkPrescription(final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            // Find last prescription with patient id
+            Patient patient = patientRepo.findOne(patientId);
+            if (null == patient) {
+                return false;
+            }
+
+            final Treatment lastTreatment = treatmentRepo.findLastTreatmenByPatientId(patientId, IDbConsts.ITreatmentStatus.ON_TREATING);
+            if(null == lastTreatment) {
+                return false;
+            }
+            final long countMedicines = medicineTreatmentRepo.countByTreatmentId(lastTreatment.getId());
+            if (0 >= countMedicines) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            // All error -> false
+            return false;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

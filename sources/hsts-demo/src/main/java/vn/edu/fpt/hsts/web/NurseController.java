@@ -336,8 +336,7 @@ public class NurseController extends AbstractController {
 
     @RequestMapping(value = "/print", method = RequestMethod.GET)
     @ResponseBody
-    public void printPrescription(@RequestParam("patientId") final int patientId,
-            final HttpServletResponse response) throws IOException, BizlogicException, JRException {
+    public byte[] print(@RequestParam("patientId") final int patientId) throws IOException, BizlogicException, JRException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("patientId", patientId);
@@ -345,9 +344,40 @@ public class NurseController extends AbstractController {
             if(null == patient) {
                 throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
             }
-            response.setHeader("Content-disposition", "attachment; filename="
-                    + "Don-thuoc" + patient.getAccount().getFullName() + ".docx");
-            patientService.print(patientId, response);
+            return patientService.print(patientId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+
+
+    @RequestMapping(value = "/printPrescriptionPage", method = RequestMethod.GET)
+    public ModelAndView printPrescription(@RequestParam("patientId") final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("viewer");
+            final String pdfOutputLink = "/print?patientId=" + patientId;
+            modelAndView.addObject("PDF_DIRECT_LINK", pdfOutputLink);
+            return modelAndView;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/checkPrescription", method = RequestMethod.GET)
+    @ResponseBody
+    public String checkPrescription(@RequestParam("patientId") final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final boolean result = patientService.checkPrescription(patientId);
+            if (result) {
+                return OK_STATUS;
+            }
+            return "ABC";
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

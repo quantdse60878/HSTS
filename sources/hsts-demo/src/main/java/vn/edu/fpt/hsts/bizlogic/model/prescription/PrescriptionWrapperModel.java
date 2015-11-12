@@ -13,7 +13,7 @@ import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -21,9 +21,9 @@ import vn.edu.fpt.hsts.common.IConsts;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -175,7 +175,7 @@ public class PrescriptionWrapperModel {
         this.doctorName = doctorName;
     }
 
-    public void toPdf(OutputStream out) throws JRException, IOException {
+    public byte[] toPdf() throws JRException, IOException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -198,12 +198,14 @@ public class PrescriptionWrapperModel {
             /**
              * TODO
              * Export to *.docx = OK
-             * Export to *.pdf = ??? encoding
+             * Export to *.pdf = ??? encoding, font
              */
-            JRExporter exporter = new JRDocxExporter();
+            final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JRExporter exporter = new JRPdfExporter();
             exporter.setParameter(JRExporterParameter.JASPER_PRINT, report);
-            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
             exporter.exportReport();
+            return outputStream.toByteArray();
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

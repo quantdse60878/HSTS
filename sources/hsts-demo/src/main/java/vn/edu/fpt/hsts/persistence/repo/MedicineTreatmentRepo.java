@@ -27,4 +27,7 @@ public interface MedicineTreatmentRepo extends JpaRepository<MedicineTreatment, 
 
     @Query("select m from MedicineTreatment m where treatmentId = :treatmentId")
     public List<MedicineTreatment> getMedicineTreatmentById(@Param("treatment") final Treatment treatment);
+
+    @Query("select count(m) from MedicineTreatment m where treatmentId = :treatmentId")
+    public long countByTreatmentId(@Param("treatmentId") final int treatment);
 }
