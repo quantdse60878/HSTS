@@ -133,13 +133,6 @@ public class BroadcastService extends Service {
                         context.startActivity(in);
                     }
 
-                    if(BroadcastService.flag3 &&(c.getTime().getHours() != 7 && c.getTime().getMinutes() != 0) &&(
-                            c.getTime().getDay() >= Constant.PATIENT_APPOINTMENT.getDay() ||
-                            c.getTime().getMonth() >= Constant.PATIENT_APPOINTMENT.getMonth() ||
-                            c.getTime().getYear() >= Constant.PATIENT_APPOINTMENT.getYear())){
-                        BroadcastService.flag3 = false;
-                    }
-
                     if (c.getTime().equals(c1.getTime())) {
 //                    if (true) {
                         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
