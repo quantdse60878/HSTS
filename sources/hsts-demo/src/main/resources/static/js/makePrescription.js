@@ -67,11 +67,7 @@ $(function () {
     barChart.Bar(barChartData, barChartOptions);
 });
 
-// TEST
-$("select").select2({
-    width: "200px",
-    placeholder: "Select a food"
-});
+
 
 $("#select2Box").select2({
     width: "200px",
@@ -527,4 +523,3 @@ nextAppointmentDate--;
 var appointmentDate = new Date();
 appointmentDate.setDate(appointmentDate.getDate() + nextAppointmentDate);
 $('#Appointment').datepicker("setDate", appointmentDate);
-
