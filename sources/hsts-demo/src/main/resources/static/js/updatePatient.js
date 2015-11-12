@@ -5,6 +5,15 @@
  * Author: dangquantran.
  * Date: 10/28/2015.
  */
+$("#pGender").iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue'
+
+});
+var $rGender = $("#rGender").iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue'
+});
 
 var newMRCheck = $("#isNewMedicalRecord").iCheck({
     checkboxClass: 'icheckbox_flat-blue',
@@ -288,13 +297,8 @@ var validator = $("#mainForm").validate({
                     var txtBirthday = document.getElementById("rBirthday");
                     txtBirthday.innerHTML = data.birthday;
 
-                    var btnGender = document.getElementById("rGender");
                     if(data.gender == "MALE") {
-                        btnGender.setAttribute("class", "btn btn-info btn-sm");
-                        btnGender.setAttribute("value", "MALE");
-                    } else {
-                        btnGender.setAttribute("class", "btn btn-danger btn-sm");
-                        btnGender.setAttribute("value", "FEMALE");
+                        $rGender.iCheck('check');
                     }
 
                     var txtEmail = document.getElementById("rEmail");
@@ -410,3 +414,7 @@ newMRCheck.on('ifUnchecked', function(event){
     symptomsTagInput.tagsinput('remove', 'NEW MEDICAL RECORD');
 
 });
+
+$('#patientRegistrationModal').on('hidde.bs.modal', function () {
+    window.location.href = "registerPatient";
+})

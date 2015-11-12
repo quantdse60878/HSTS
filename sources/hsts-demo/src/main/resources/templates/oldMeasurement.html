@@ -52,9 +52,9 @@
                                     <!-- Tab content -->
                                     <div class="tab-content">
                                         <!-- Tab 1: Personal information-->
-                                        <div class="tab-pane" id="tab_1">
+                                        <div class="tab-pane face" id="tab_1">
                                             <div class="form-group">
-                                                <label for="patientName" class="col-sm-3 control-label">Name*</label>
+                                                <label for="patientName" class="col-sm-3 control-label">Name:</label>
 
                                                 <div class="col-sm-5">
                                                     <input type="text" th:name="patientName" class="form-control" id = "patientName"
@@ -62,7 +62,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="birthday" class="col-sm-3 control-label">Birthday*</label>
+                                                <label for="birthday" class="col-sm-3 control-label">Birthday:</label>
 
                                                 <div class="col-sm-3">
                                                     <input type="text" class="form-control" readonly="readonly" id="birthday"
@@ -70,7 +70,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="email" class="col-sm-3 control-label">Email*</label>
+                                                <label for="email" class="col-sm-3 control-label">Email:</label>
 
                                                 <div class="col-sm-5">
                                                     <input type="text" th:name="email" class="form-control" id = "email"
@@ -78,12 +78,15 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label">Gender*</label>
+                                                <label class="col-sm-3 control-label">Gender:</label>
 
-                                                <div class="btn-group col-sm-2" data-toggle="buttons">
-                                                    <label th:class="(${PATIENT.account.gender == 1})?'btn btn-info active':'btn btn-danger active'">
-                                                        <input type="radio" th:text="${PATIENT.account.gender == 1}? 'MALE' : 'FEMALE'"/>
-                                                    </label>
+                                                <!--<div class="btn-group col-sm-2" data-toggle="buttons">-->
+                                                <!--<label th:class="(${PATIENT.account.gender == 1})?'btn btn-info active':'btn btn-danger active'">-->
+                                                <!--<input type="radio" th:text="${PATIENT.account.gender == 1}? 'MALE' : 'FEMALE'"/>-->
+                                                <!--</label>-->
+                                                <!--</div>-->
+                                                <div class="btn-group col-sm-1">
+                                                    <input type="checkbox"  id="pGender" th:checked="${PATIENT.account.gender == 1}" disabled="disabled"/>
                                                 </div>
                                             </div>
 
@@ -320,7 +323,7 @@
                         </form>
 
                         <!-- upload file pop up-->
-                        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
+                        <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" data-backdrop="static" data-keyboard="false">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -342,11 +345,11 @@
 
                         <!-- patient registration info modal -->
 
-                        <div class="modal fade" id="patientRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="patientRegistrationLabel">
+                        <div class="modal fade" id="patientRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="patientRegistrationLabel" data-backdrop="static" data-keyboard="false">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
                                         <h4 class="modal-title" id="patientRegistrationLabel">Patient registration</h4>
                                     </div>
                                     <div class="modal-body">
@@ -368,9 +371,12 @@
                                             </div>
                                         </div>
                                         <div class="row" style="margin: 15px">
-                                            <label class="col-sm-3 control-label">Gender:</label>
+                                            <label class="col-sm-3 control-label">Male:</label>
                                             <div class="btn-group col-sm-3" data-toggle="buttons">
-                                                <input type ="text" style="width: 90px" id = "rGender"/>
+                                                <!--<input type ="text" style="width: 90px" id = "rGender"/>-->
+                                                <div class="btn-group col-sm-1">
+                                                    <input type="checkbox" name="gender" id="rGender" disabled="disabled"/>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row" style="margin: 15px">
@@ -412,11 +418,11 @@
                         <!-- .patient registration info modal -->
 
                         <!-- registration error modal -->
-                        <div class="modal fade" id="registrationErrorModal" tabindex="-1" role="dialog" aria-labelledby="registrationErrorMessage">
+                        <div class="modal fade" id="registrationErrorModal" tabindex="-1" role="dialog" aria-labelledby="registrationErrorMessage" data-backdrop="static" data-keyboard="false">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
                                         <h4 class="modal-title" id="registrationErrorMessage">Messsage</h4>
                                     </div>
                                     <div class="modal-body">

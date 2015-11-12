@@ -320,7 +320,8 @@
                     </form>
 
                     <!-- upload file pop up-->
-                    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
+                    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" data-backdrop="static"
+                         data-keyboard="false">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -341,7 +342,8 @@
                     <!-- .upload file pop up-->
 
                     <!-- patient profile modal -->
-                    <div class="modal fade" id="patientProfileModal" tabindex="-1" role="dialog" aria-labelledby="patientProfileLabel">
+                    <div class="modal fade" id="patientProfileModal" tabindex="-1" role="dialog" aria-labelledby="patientProfileLabel"  data-backdrop="static"
+                         data-keyboard="false">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -350,30 +352,31 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row" style="margin: 15px">
-                                        <label class="col-sm-3 control-label">Name</label>
+                                        <label class="col-sm-3 control-label">Name:</label>
 
                                         <div class="col-sm-5">
                                             <label id = "txtName">Name</label>
                                         </div>
                                     </div>
                                     <div class="row" style="margin: 15px">
-                                        <label class="col-sm-3 control-label">Birthday</label>
+                                        <label class="col-sm-3 control-label">Birthday:</label>
                                         <div class="col-sm-3">
                                             <label id = "txtBirthday">Birthday</label>
                                         </div>
                                     </div>
                                     <div class="row" style="margin: 15px">
-                                        <label class="col-sm-3 control-label">Email</label>
+                                        <label class="col-sm-3 control-label">Email:</label>
 
                                         <div class="col-sm-3">
                                             <label id = "txtEmail">Birthday</label>
                                         </div>
                                     </div>
                                     <div class="row" style="margin: 15px">
-                                        <label class="col-sm-3 control-label">Gender</label>
-                                        <div class="btn-group col-sm-3" data-toggle="buttons">
-                                            <input type ="text" style="width: 90px" id = "btnGender"/>
+                                        <label class="col-sm-3 control-label">Gender:</label>
+                                        <div class="btn-group col-sm-1">
+                                            <input type="checkbox"  id="pGender" disabled="disabled"/>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -387,11 +390,12 @@
 
                     <!-- patient registration info modal -->
 
-                    <div class="modal fade" id="patientRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="patientRegistrationLabel">
+                    <div class="modal fade" id="patientRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="patientRegistrationLabel"
+                         data-backdrop="static" data-keyboard="false">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
                                     <h4 class="modal-title" id="patientRegistrationLabel">Patient registration</h4>
                                 </div>
                                 <div class="modal-body">
@@ -402,7 +406,7 @@
                                     <div class="row" style="margin: 15px">
                                         <label class="col-sm-3 control-label">Name:</label>
 
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-5" >
                                             <label id = "rName">Name</label>
                                         </div>
                                     </div>
@@ -413,9 +417,12 @@
                                         </div>
                                     </div>
                                     <div class="row" style="margin: 15px">
-                                        <label class="col-sm-3 control-label">Gender:</label>
+                                        <label class="col-sm-3 control-label">Male:</label>
                                         <div class="btn-group col-sm-3" data-toggle="buttons">
-                                            <input type ="text" style="width: 90px" id = "rGender"/>
+                                            <!--<input type ="text" style="width: 90px" id = "rGender"/>-->
+                                            <div class="btn-group col-sm-1">
+                                                <input type="checkbox" name="gender" id="rGender" disabled="disabled"/>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row" style="margin: 15px">
@@ -464,11 +471,12 @@
                     <!-- .patient registration info modal -->
 
                     <!-- registration error modal -->
-                    <div class="modal fade" id="registrationErrorModal" tabindex="-1" role="dialog" aria-labelledby="registrationErrorMessage">
+                    <div class="modal fade" id="registrationErrorModal" tabindex="-1"
+                         role="dialog" aria-labelledby="registrationErrorMessage" data-backdrop="static" data-keyboard="false">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
                                     <h4 class="modal-title" id="registrationErrorMessage">Messsage</h4>
                                 </div>
                                 <div class="modal-body">
@@ -528,6 +536,9 @@
     <!-- Bootstrap file input-->
     <link th:href="@{/static/bower/bootstrap-fileinput/css/fileinput.min.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/bootstrap-fileinput/js/fileinput.min.js}"/>
+
+    <!-- block ui -->
+    <script th:src="@{/static/bower/blockui/jquery.blockUI.js}"/>
 
     <!-- external script-->
     <script th:src="@{/static/js/registerPatient.js}"/>
