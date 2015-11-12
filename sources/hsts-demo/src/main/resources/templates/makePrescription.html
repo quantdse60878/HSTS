@@ -120,6 +120,7 @@
                                                th:value="${TREATMENT.appointment.medicalRecord.illness != null}? ${TREATMENT.appointment.medicalRecord.illness.name} : 'Unknown Disease'"
                                                readonly="readonly" class="form-control"/>
                                         <select id="select2Box" th:name="diagnostic" th:if="${TREATMENT == null}">
+                                            <option th:if="${DIAGNOSTIC != null}" th:value = "${DIAGNOSTIC.id}" th:text="${DIAGNOSTIC.name}" selected="selected"></option>
                                         </select>
                                     </div>
                                     <div class="col-sm-2 pull-right" th:if="${TREATMENT == null}">

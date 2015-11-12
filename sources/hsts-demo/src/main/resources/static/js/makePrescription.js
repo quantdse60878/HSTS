@@ -91,7 +91,7 @@ $("#select2Box").select2({
             return {results: names, more: false
             };
         },
-        cache: true
+        cache: false
     },
     escapeMarkup: function (markup) { return markup; },
     tags: true,
