@@ -115,6 +115,7 @@
                                             <option th:if="${DIAGNOSTIC != null}" th:value="${DIAGNOSTIC.name}"
                                                     th:text="${DIAGNOSTIC.name}"></option>
                                         </select>
+                                        <div class="help-block with-errors" id="invalidDiagnostic"></div>
                                     </div>
                                     <div class="col-sm-2 pull-right" th:if="${TREATMENT == null}">
                                         <button type="submit" class="btn btn-primary">Suggest</button>
@@ -384,10 +385,10 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Medical history</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="height: 550px;overflow: auto;">
                     <img th:each="imgMe : ${MEDI_IMGS}"
                          th:src="@{/uploadedHistoryImg(filename=${imgMe})}"
-                         style="width: 565px;"/>
+                         style="width: 559px;"/>
                 </div>
             </div>
         </div>

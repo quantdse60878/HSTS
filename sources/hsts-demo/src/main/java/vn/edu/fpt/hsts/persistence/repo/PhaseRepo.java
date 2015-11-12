@@ -24,8 +24,8 @@ public interface PhaseRepo extends JpaRepository<Phase, Integer> {
     @Query(value = "select p from Phase p where regimen.illness.id = :illnessID")
     public Phase findPhaseByIllnessID(@Param(value = "illnessID") final int illnessID);
 
-    @Query("select p from Phase p where regimen.illness.id = :illnessId and fromDate <= :date AND :date <= toDate")
-    public Phase findSuitablePhase(@Param("illnessId") final int illnessId, @Param("date") final int date);
+//    @Query("select p from Phase p where regimen.illness.id = :illnessId and fromDate <= :date AND :date <= toDate")
+//    public Phase findSuitablePhase(@Param("illnessId") final int illnessId, @Param("date") final int date);
 
     @Query("select p from Phase p where regimen.id = :regimenId")
     public Page<Phase> findByRegimenId(@Param("regimenId") final int regimenId, final Pageable pageable);

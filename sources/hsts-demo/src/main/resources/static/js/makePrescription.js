@@ -5,10 +5,22 @@
 var validator = $("#mainForm").validate({
     ignore: [],
     debug: true,
-    rules: {},
-    messages: {},
+    rules: {
+        diagnostic: {
+            required: true
+        }
+    },
+    messages: {
+        diagnostic: {
+            required: "Please choose diagnostic."
+        }
+    },
     errorPlacement: function (error, element) {
-        error.appendTo(element.parent());
+        if(element.attr("name") == "diagnostic"){
+            error.appendTo($('#invalidDiagnostic'));
+        } else {
+            error.appendTo(element.parent());
+        }
     },
     submitHandler: function (form) {
         form.submit();
@@ -142,7 +154,7 @@ function findUnits(food) {
         },
         success: function (json) {
             //console.log("success");
-            var options = '<option value="0">Select</option>';
+            var options = '';
             document.getElementById(unitIdN).innerHTML = "";
             for (var i = 0; i < json.length; i++) {
                 var tmp = json[i];
