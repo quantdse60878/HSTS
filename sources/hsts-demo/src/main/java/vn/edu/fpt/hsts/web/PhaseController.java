@@ -44,12 +44,12 @@ public class PhaseController extends AbstractController {
 
 
     @RequestMapping(value = "/detailPhase", method = RequestMethod.GET)
-    public ModelAndView phaseDetail(@RequestParam("phaseId") final int phaseId) {
+    public ModelAndView phaseDetail(@RequestParam("id") final int phaseId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("phaseId[{}]", phaseId);
             ModelAndView mav = new ModelAndView();
-            mav.setViewName("phaseDetail");
+            mav.setViewName("detailPhase");
 
             // Set info data
             return mav;
