@@ -20,4 +20,7 @@ public interface MedicinePhaseRepo extends JpaRepository<MedicinePhase, Integer>
 
     @Query("select m from MedicinePhase m where phase.regimen.id = :regimenId")
     public List<MedicinePhase> findByRegimenId(@Param("regimenId") final int regimenId);
+
+    @Query("select m from MedicinePhase m where phase.id = :phaseId")
+    public List<MedicinePhase> findByPhaseId(@Param("phaseId") final int phaseId);
 }

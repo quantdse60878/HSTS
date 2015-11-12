@@ -5,6 +5,7 @@
  * Author: dangquantran.
  * Date: 11/10/2015.
  */
+var currentPhase = 0;
 $(document).ready(function(){
     console.log("-- begin --");
     var count = 1;
@@ -58,7 +59,7 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    return '<a href="/phase/delete?id='+ data +  '" class="btn btn-danger">Delete</a>';
+                    return '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>';
                 },
                 "width": "20%"
             }
@@ -119,4 +120,35 @@ var validator = $("#createForm").validate({
         console.log("--- end ---");
         return false; // required to block normal submit since you used ajax
     }
+});
+
+function deleteDialog(phaseId) {
+    console.log("-- begin --");
+    currentPhase = phaseId;
+    $("#confirmDeleteModal").modal('show');
+    console.log("-- end --");
+}
+
+$("#btnDelete").click(function() {
+    console.log("begin delete");
+    $.ajax({
+        method: "POST",
+        url: "/phase/delete",
+        data: {
+            id: currentPhase,
+            regimenId: $("#regimenId").val()
+        }
+    }).done(function(data) {
+        console.log(data);
+        var txtMessage = document.getElementById("messageLabel");
+        if (data.status == "fail") {
+            // Show error modal
+            var resultText = document.getElementById("messageLabel");
+            resultText.innerHTML = "Error while create new phase";
+            $('#messageModal').modal('show');
+        } else {
+            window.location.href = "/detailRegimen?id=" + $("#regimenId").val();
+        }
+    });
+    console.log("end delete");
 });

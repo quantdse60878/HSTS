@@ -88,11 +88,13 @@ public class PhaseController extends AbstractController {
 
     @RequestMapping(value = "/phase/delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String createPhase(@RequestParam("phaseId") final int phaseId) {
+    public String deletePhase(@RequestParam("id") final int phaseId,
+                              @RequestParam("regimenId") final int regimenId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("phaseId[{}]", phaseId);
-            //TODO
+            LOGGER.info("phaseId[{}], regimenId[{}] ", phaseId, regimenId);
+            phaseService.deletePhase(phaseId);
+            phaseService.reorderingPhase(regimenId);
             return OK_STATUS;
         } catch (Exception e) {
             return FAIL_STATUS;

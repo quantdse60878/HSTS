@@ -21,4 +21,7 @@ public interface FoodPhaseRepo extends JpaRepository<FoodPhase, Integer> {
 
     @Query(value = "select f from FoodPhase f where phase.regimen.id = :regimenId")
     public List<FoodPhase> findByRegimenId(@Param("regimenId") final int regimenId);
+
+    @Query(value = "select f from FoodPhase f where phase.id = :phaseId")
+    public List<FoodPhase> findByPhaseId(@Param("phaseId") final int phaseId);
 }
