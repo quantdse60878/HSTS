@@ -22,15 +22,7 @@ public class PhaseModel extends AbstractKeyModel<Phase> {
      */
     private RegimenModel regimen;
 
-    /**
-     *
-     */
-    private int fromDate;
-
-    /**
-     *
-     */
-    private int toDate;
+    private int numberOfDay;
 
     /**
      *
@@ -45,20 +37,12 @@ public class PhaseModel extends AbstractKeyModel<Phase> {
         this.regimen = regimen;
     }
 
-    public int getFromDate() {
-        return fromDate;
+    public int getNumberOfDay() {
+        return numberOfDay;
     }
 
-    public void setFromDate(final int fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    public int getToDate() {
-        return toDate;
-    }
-
-    public void setToDate(final int toDate) {
-        this.toDate = toDate;
+    public void setNumberOfDay(final int numberOfDay) {
+        this.numberOfDay = numberOfDay;
     }
 
     public String getUpdateTime() {
@@ -74,9 +58,7 @@ public class PhaseModel extends AbstractKeyModel<Phase> {
         super.fromEntity(entity);
         regimen = new RegimenModel();
         setShortModel(entity.getRegimen(), regimen);
-        // TODO
-        fromDate = 1;
-        toDate = 100;
+        numberOfDay = entity.getNumberOfDay();
         if (null != entity.getUpdateTime()) {
             updateTime = DateUtils.formatDate(entity.getUpdateTime(), DateUtils.DATE_PATTERN_3);
         }

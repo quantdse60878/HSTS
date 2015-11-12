@@ -21,4 +21,7 @@ public interface PracticePhaseRepo extends JpaRepository<PracticePhase, Integer>
 
     @Query("select p from PracticePhase p where phase.regimen.id = :regimenId")
     public List<PracticePhase> findByRegimenId(@Param("regimenId") final int regimenId);
+
+    @Query("select p from PracticePhase p where phase.id = :phaseId")
+    public List<PracticePhase> findByPhaseId(@Param("phaseId") final int phaseId);
 }

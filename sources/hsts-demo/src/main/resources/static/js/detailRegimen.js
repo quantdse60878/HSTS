@@ -5,6 +5,7 @@
  * Author: dangquantran.
  * Date: 11/10/2015.
  */
+var currentPhase = 0;
 $(document).ready(function(){
     console.log("-- begin --");
     var count = 1;
@@ -37,32 +38,117 @@ $(document).ready(function(){
                 "render": function (data, type, full, meta) {
                     return count++;
                 },
-                "width": "10%"
+                "width": "15%"
             },
-            // col 2
             {
-                "data": "fromDate",
-                "width": "20%"
+                "data": {
+                    "numberOfDay": "numberOfDay",
+                    "id" : "id"
+                },
+                "render": function ( data, type, full, meta ) {
+                    return '<a href="/phase?id='+ data.id +  '">' + data.numberOfDay + '</a>';
+                },
+                "width": "25%"
             },
             // col 3
             {
-                "data": "toDate",
-                "width": "20%"
+                "data": "updateTime",
+                "width": "40%"
             },
             // col 4
             {
-                "data": "updateTime",
-                "width": "30%"
-            },
-            // col 5
-            {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    return '<a href="/detailPhase?id='+ data +  '" class="btn btn-danger">Update</a>';
+                    return '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>';
                 },
                 "width": "20%"
             }
         ]
     } );
     console.log("-- end --");
+});
+
+// Insert regimen validator
+// Validator
+var validator = $("#createForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        numberDay: {
+            required: true,
+            min: 1,
+            max: 30
+        }
+    },
+    messages: {
+        numberDay: {
+            required: "Please input valid illness name"
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "numberDay"){
+            error.appendTo($('#invalidNumberDay'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("--- begin ---");
+        $.ajax({
+            method: "POST",
+            url: "/phase/create",
+            data: {
+                regimenId: $("#regimenId").val(),
+                numberDay: $("#numberDay").val()
+            }
+        })
+            .done(function(data) {
+                console.log(data);
+                if (data.status != "ok") {
+                    // Show error modal
+                    var resultText = document.getElementById("messageLabel");
+                    resultText.innerHTML = "Error while create new phase";
+                    $('#messageModal').modal('show');
+                } else {
+                    console.log("-- reload page --");
+                    window.location.href = "/detailRegimen?id=" + $("#regimenId").val();
+                }
+            });
+        console.log("--- end ---");
+        return false; // required to block normal submit since you used ajax
+    }
+});
+
+function deleteDialog(phaseId) {
+    console.log("-- begin --");
+    currentPhase = phaseId;
+    $("#confirmDeleteModal").modal('show');
+    console.log("-- end --");
+}
+
+$("#btnDelete").click(function() {
+    console.log("begin delete");
+    $.ajax({
+        method: "POST",
+        url: "/phase/delete",
+        data: {
+            id: currentPhase,
+            regimenId: $("#regimenId").val()
+        }
+    }).done(function(data) {
+        console.log(data);
+        var txtMessage = document.getElementById("messageLabel");
+        if (data.status == "fail") {
+            // Show error modal
+            var resultText = document.getElementById("messageLabel");
+            resultText.innerHTML = "Error while create new phase";
+            $('#messageModal').modal('show');
+        } else {
+            window.location.href = "/detailRegimen?id=" + $("#regimenId").val();
+        }
+    });
+    console.log("end delete");
 });
