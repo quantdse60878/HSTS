@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -151,9 +152,20 @@ public class IllnessService {
                 numberOfDay = Math.abs(numberOfDay);
             }
             // Select suitable phase
-//            return phaseRepo.findSuitablePhase(illness.getId(), numberOfDay);
-            // TODO phase suggestion implementation here by new db
-            return phaseRepo.findOne(1);
+            final List<Phase> phaseList = phaseRepo.findByIllnessId(illness.getId());
+            if (!CollectionUtils.isEmpty(phaseList)) {
+                int countDay = 0;
+                for (Phase phase: phaseList) {
+                    countDay += phase.getNumberOfDay();
+                    if (countDay >= numberOfDay) {
+                        // Match
+                        return phase;
+                    }
+                }
+                // Get last
+                return phaseList.get(phaseList.size() - 1 );
+            }
+            return null;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
