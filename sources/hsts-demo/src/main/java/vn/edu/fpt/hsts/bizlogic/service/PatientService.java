@@ -224,12 +224,10 @@ public class PatientService extends AbstractService {
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Create new patient[{}] successfully", newAccount.getUsername());
                     }
-                    // TODO send email with creditial information to patient
-                    mailService.sendMail(patientCriteria.getEmail(), MailService.SUBJECT_MAIL, "Username : " + newAccount.getUsername() + "<br/>" +
-                            "Password : " + newAccount.getPassword());
+                    //  send email with creditial information to patient
+                    mailService.pushMail(newAccount);
 
                 } else if (criteria instanceof RegistrationCriteria) {
-                    // TODO
                     final RegistrationCriteria rCriteria = (RegistrationCriteria) criteria;
 
                     medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);

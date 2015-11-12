@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.bizlogic.service.processor.MailProcessor;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.persistence.entity.Account;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -56,6 +58,18 @@ public class MailService extends JavaMailSenderImpl {
     @Value("${hsts.mail.smtp.starttls.enable}")
     private String enableStartTls;
 
+    @Value("${hsts.mail.number.mail}")
+    private int maxMailPerCron;
+
+    @Value("${hsts.mail.sleepy.time}")
+    private int sleepyTime;
+
+    /**
+     * The {@link MailProcessor}.
+     */
+    @Autowired
+    private MailProcessor mailProcessor;
+
     /**
      * <p>
      * Initialize properties.
@@ -94,9 +108,8 @@ public class MailService extends JavaMailSenderImpl {
      * @throws MessagingException me
      * @throws UnsupportedEncodingException ue
      */
-    public void sendMail(final String recipientMail, final String subject,
-                         final String content) throws MessagingException,
-            UnsupportedEncodingException {
+    public boolean sendMail(final String recipientMail, final String subject,
+                         final String content){
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             MimeMessage mimeMessage = this.createMimeMessage();
@@ -112,9 +125,69 @@ public class MailService extends JavaMailSenderImpl {
             if(LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Send mail successfully!");
             }
-        } finally {
+            LOGGER.info("Send mail successfully!");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        finally {
             LOGGER.info(IConsts.END_METHOD);
         }
 
+    }
+
+
+    /**
+     * Read an synchroize queue of mail need to sending
+     * Try to send.
+     * If do not success -> re push to queue
+     */
+    public void mailingScheduler() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            boolean canContinue = true;
+            int count = 0;
+            while (canContinue && (count < maxMailPerCron)) {
+                if (mailProcessor.isEmpty()) {
+                    canContinue = false;
+                    continue;
+                }
+                /**
+                 * 2 ways:
+                 *      | Peek element first, If success: remove
+                 *      | Poll element, If fail: re-add  -> should use for avoiding redundant mail account
+                 */
+                final Account account = mailProcessor.poll();
+                boolean result = this.sendMail(account.getEmail(), MailService.SUBJECT_MAIL,
+                        "Username : " + account.getUsername() + "<br/>" +
+                        "Password : " + account.getPassword());
+                if (!result) {
+                    mailProcessor.offer(account);
+                }
+                count++;
+                // Sleepy time
+                Thread.sleep(sleepyTime);
+            }
+        } catch (InterruptedException e) {
+            LOGGER.error("InterruptedException at: {}", e.getMessage());
+            return;
+        } catch (Exception e) {
+            LOGGER.error("Exception at: {}", e.getMessage());
+            return;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public void pushMail(final Account account) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("account[{}]", account.getUsername());
+            }
+            mailProcessor.offer(account);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
     }
 }

@@ -13,13 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import vn.edu.fpt.hsts.common.util.AnalyticDataTask;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 @SpringBootApplication
-//@EnableScheduling
+@EnableScheduling
 @EnableAutoConfiguration
 @EnableJpaRepositories
 @ComponentScan
