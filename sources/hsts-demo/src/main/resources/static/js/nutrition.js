@@ -326,6 +326,20 @@ function validateAndOpenModal(m) {
 };
 
 (function(){
+    document.getElementById("iron").value = "0.0";
+    document.getElementById("zinc").value = "0.0";
+    document.getElementById("vitaminB1").value = "0.0";
+    document.getElementById("animalProtein").value = "0.0";
+    document.getElementById("vitaminC").value = "0.0";
+    document.getElementById("animalFat").value = "0.0";
+    document.getElementById("vitaminB2").value = "0.0";
+    document.getElementById("calcium").value = "0.0";
+    document.getElementById("vitaminPP").value = "0.0";
+    document.getElementById("sodium").value = "0.0";
+    document.getElementById("starch").value = "0.0";
+    document.getElementById("protein").value = "0.0";
+    document.getElementById("fat").value = "0.0";
+    document.getElementById("fiber").value = "0.0";
     if(voiceModel != undefined){
         document.getElementById("breakfast").value = voiceModel.breakfast;
         document.getElementById("breakTimeMorning").value = voiceModel.breakTimeMorning;

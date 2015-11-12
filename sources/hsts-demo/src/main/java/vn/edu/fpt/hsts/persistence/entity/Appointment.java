@@ -56,9 +56,19 @@ public class Appointment extends AbstractKeyEntity {
      */
     private byte status;
 
+    private String appointmentMessage;
 
 
     public Appointment() {
+    }
+
+
+    public String getAppointmentMessage() {
+        return appointmentMessage;
+    }
+
+    public void setAppointmentMessage(String appointmentMessage) {
+        this.appointmentMessage = appointmentMessage;
     }
 
     public Date getMeetingDate() {

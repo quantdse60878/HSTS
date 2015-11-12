@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -176,6 +177,11 @@ public class PrescriptionController extends AbstractController{
     public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel,
                                          @RequestParam("appointmentId") final int appointmentId,
                                          @RequestParam(value = "appointmentDate", required = true) final String appointmentDate) throws BizlogicException {
+//        , BindingResult br
+//        for(int i = 0; i < br.getAllErrors().size(); i++) {
+//            System.out.println(br.getAllErrors().get(i).getObjectName() + "--++FUCK++--");
+//        }
+
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("appointmentId[{}], appointmentDate[{}]", appointmentId, appointmentDate);
