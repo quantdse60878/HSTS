@@ -9,6 +9,16 @@ $("#gender").iCheck({
     checkboxClass: 'icheckbox_flat-blue',
     radioClass: 'iradio_flat-blue'
 });
+var $rGender = $("#rGender").iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue'
+});
+
+var $pGender = $("#pGender").iCheck({
+    checkboxClass: 'icheckbox_flat-blue',
+    radioClass: 'iradio_flat-blue',
+    disabledClass: 'disabled'
+});
 
 $("#birthday").datepicker({
     format: 'dd-mm-yyyy',
@@ -398,14 +408,11 @@ var validator = $("#mainForm").validate({
                     var txtBirthday = document.getElementById("rBirthday");
                     txtBirthday.innerHTML = data.birthday;
 
-                    var btnGender = document.getElementById("rGender");
+
                     if(data.gender == "MALE") {
-                        btnGender.setAttribute("class", "btn btn-info btn-sm");
-                        btnGender.setAttribute("value", "MALE");
-                    } else {
-                        btnGender.setAttribute("class", "btn btn-danger btn-sm");
-                        btnGender.setAttribute("value", "FEMALE");
+                        $rGender.iCheck('check');
                     }
+                    //$rGender.iCheck('disable');
 
                     var txtEmail = document.getElementById("rEmail");
                     txtEmail.innerHTML = data.email;
@@ -514,15 +521,11 @@ function loadPatientProfile(patientBarcode) {
             txtEmail.innerHTML = value;
 
             // Set gender
-            var btnGender = document.getElementById("btnGender");
             value = data.account.gender;
             if(value == "MALE") {
-                btnGender.setAttribute("class", "btn btn-info");
-                btnGender.setAttribute("value", "MALE");
-            } else {
-                btnGender.setAttribute("class", "btn btn-danger");
-                btnGender.setAttribute("value", "FEMALE");
+                $pGender.iCheck('check');
             }
+            //$pGender.iCheck('disable');
 
             // Set href
             var btnLink = document.getElementById("btnLink");
