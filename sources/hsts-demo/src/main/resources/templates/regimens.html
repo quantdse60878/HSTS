@@ -4,96 +4,105 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <body>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" layout:fragment="body">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <ol class="breadcrumb">
-                <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
-            </ol>
-        </section>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Search Patients
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Regimen list</li>
+        </ol>
+    </section>
 
-        <!-- Main content -->
-        <section class="content" style="text-align: center;">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="box">
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <table id="dataContent" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Illness Name</th>
-                                    <th>Description</th>
-                                    <th>Number of phase</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <!--<tbody id="table-body"></tbody>-->
-                                <tfoot>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Illness Name</th>
-                                    <th>Description</th>
-                                    <th>Number of phase</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                        <!-- /.box-body -->
+    <!-- Main content -->
+    <section class="content">
 
-                        <!-- confirm delete modal -->
-                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="deteteRegimen">Delete regimen</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h4 class="modal-title">Are you wish to delete this regimen?</h4>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        <a class ="btn btn-danger" id = "btnDelete" data-dismiss="modal">OK</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- .confirm delete modal -->
-
-                        <!-- message modal-->
-                        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Result</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h4 class="modal-title" id = "messageLabel">Test</h4>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a class ="btn btn-info"  data-dismiss="modal">OK</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- .message modal-->
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="dataContent" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Illness Name</th>
+                                <th>Description</th>
+                                <th>Number of phase</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <!--<tbody id="table-body"></tbody>-->
+                            <tfoot>
+                            <tr>
+                                <th>No.</th>
+                                <th>Illness Name</th>
+                                <th>Description</th>
+                                <th>Number of phase</th>
+                                <th>Action</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
-                    <!-- /.box -->
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+
+        <!-- confirm delete modal -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="deteteRegimen">Delete regimen</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title">Are you wish to delete this regimen?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <a class ="btn btn-danger" id = "btnDelete" data-dismiss="modal">OK</a>
+                    </div>
                 </div>
             </div>
+        </div>
+        <!-- .confirm delete modal -->
 
-        </section><!-- /.content -->
-        <!-- library -->
-        <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
-        <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+        <!-- message modal-->
+        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Result</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title" id = "messageLabel">Test</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <a class ="btn btn-info"  data-dismiss="modal">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .message modal-->
 
-        <!-- external javascript -->
-        <script th:src = "@{/static/js/regimens.js}"></script>
-        <!-- external css -->
-        <link th:href="@{/static/css/regimens.css}" rel="stylesheet"/>
-    </div><!-- /.content-wrapper -->
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+
+    <script th:src = "@{/static/js/regimens.js}"></script>
+
+    <!-- css add -->
+    <link th:href="@{/static/css/regimens.css}" rel="stylesheet"/>
+</div>
+<!-- /.content-wrapper -->
 </body>
 </html>
