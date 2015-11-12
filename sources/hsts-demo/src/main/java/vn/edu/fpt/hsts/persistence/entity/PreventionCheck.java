@@ -74,6 +74,21 @@ public class PreventionCheck extends AbstractKeyEntity {
     private int basalMetabolicRate;
 
 
+    /**
+     *
+     */
+    private int bloodPressure;
+
+    /**
+     *
+     */
+    private int heartBeat;
+
+    /**
+     *
+     */
+    private int waists;
+
     public PreventionCheck() {
     }
 
@@ -163,5 +178,29 @@ public class PreventionCheck extends AbstractKeyEntity {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public int getBloodPressure() {
+        return bloodPressure;
+    }
+
+    public void setBloodPressure(final int bloodPressure) {
+        this.bloodPressure = bloodPressure;
+    }
+
+    public int getHeartBeat() {
+        return heartBeat;
+    }
+
+    public void setHeartBeat(final int heartBeat) {
+        this.heartBeat = heartBeat;
+    }
+
+    public int getWaists() {
+        return waists;
+    }
+
+    public void setWaists(final int waists) {
+        this.waists = waists;
     }
 }

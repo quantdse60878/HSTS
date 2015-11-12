@@ -168,7 +168,7 @@
                                                         <input type="number" th:name="heartBeat" class="form-control"
                                                                id="heartBeat"
                                                                placeholder="times/minute" data-remote="/validateData"
-                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.heartBeat != null})?${#numbers.formatInteger(PC.appointment.heartBeat, 2)}:0"/>
+                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.heartBeat != null})?${#numbers.formatInteger(PC.heartBeat, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -193,7 +193,7 @@
                                                         <input type="number" th:name="bloodPressure" class="form-control"
                                                                id="bloodPressure"
                                                                placeholder="mmHg" data-remote="/validateData"
-                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.bloodPressure != null})?${#numbers.formatInteger(PC.appointment.bloodPressure, 2)}:0"/>
+                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.bloodPressure != null})?${#numbers.formatInteger(PC.bloodPressure, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -217,7 +217,7 @@
                                                     <td class="form-group">
                                                         <input type="number" th:name="waists" class="form-control" id="waists"
                                                                placeholder="cm" data-remote="/validateData"
-                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.appointment} != null and *{PC.appointment.waists != null})?${#numbers.formatInteger(PC.appointment.waists, 2)}:0"/>
+                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.waists != null})?${#numbers.formatInteger(PC.waists, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -229,7 +229,7 @@
                                                         <input type="number" th:name="impedance" class="form-control"
                                                                id="impedance"
                                                                placeholder="Ohm" data-remote="/validateData"
-                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.impedance != null})?${#numbers.formatInteger(PC.appointment.waists, 2)}:0"/>
+                                                               required="required" data-error="Wrong input" th:value="(*{PC}!= null and *{PC.impedance != null})?${#numbers.formatInteger(PC.impedance, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>
@@ -257,7 +257,7 @@
                                                                id="basalMetabolicRate"
                                                                placeholder="Kcal"
                                                                data-remote="/validateData" required="required"
-                                                               data-error="Wrong input" th:value="(*{PC}!= null and *{PC.basalMetabolicRate != null})?${#numbers.formatInteger(PC.appointment.waists, 2)}:0"/>
+                                                               data-error="Wrong input" th:value="(*{PC}!= null and *{PC.basalMetabolicRate != null})?${#numbers.formatInteger(PC.basalMetabolicRate, 2)}:0"/>
 
                                                         <div class="help-block with-errors"></div>
                                                     </td>

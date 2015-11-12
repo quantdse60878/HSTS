@@ -257,9 +257,7 @@ public class PatientService extends AbstractService {
                     appointment.setMedicalRecord(medicalRecord);
                     appointment.setStatus(IDbConsts.IAppointmentStatus.WATTING);
                     appointment.setMeetingDate(currentDate);
-                    appointment.setBloodPressure(pcCriteria.getBloodPressure());
-                    appointment.setHeartBeat(pcCriteria.getHeartBeat());
-                    appointment.setWaists(pcCriteria.getWaists());
+
                     appointmentRepo.saveAndFlush(appointment);
 
                     // Create prevention checking
@@ -276,6 +274,9 @@ public class PatientService extends AbstractService {
                     preventionCheck.setMuscleMass(pcCriteria.getMuscleMass());
                     preventionCheck.setVisceralFat(pcCriteria.getVisceralFat());
                     preventionCheck.setImpedance(pcCriteria.getImpedance());
+                    preventionCheck.setBloodPressure(pcCriteria.getBloodPressure());
+                    preventionCheck.setHeartBeat(pcCriteria.getHeartBeat());
+                    preventionCheck.setWaists(pcCriteria.getWaists());
                     preventionCheckRepo.saveAndFlush(preventionCheck);
 
                     // Process medicine history
@@ -435,9 +436,6 @@ public class PatientService extends AbstractService {
                 }
             }
             Appointment appointment = entryAppointmentList.get(0);
-            appointment.setHeartBeat(checkCriteria.getHeartBeat());
-            appointment.setWaists(checkCriteria.getWaists());
-            appointment.setBloodPressure(checkCriteria.getBloodPressure());
             appointment.setStatus(IDbConsts.IAppointmentStatus.WATTING);
             appointment.setMeetingDate(currentDate);
 
@@ -462,6 +460,9 @@ public class PatientService extends AbstractService {
             preventionCheck.setMuscleMass(checkCriteria.getMuscleMass());
             preventionCheck.setVisceralFat(checkCriteria.getVisceralFat());
             preventionCheck.setImpedance(checkCriteria.getImpedance());
+            preventionCheck.setHeartBeat(checkCriteria.getHeartBeat());
+            preventionCheck.setWaists(checkCriteria.getWaists());
+            preventionCheck.setBloodPressure(checkCriteria.getBloodPressure());
             preventionCheckRepo.saveAndFlush(preventionCheck);
 
             appointmentRepo.saveAndFlush(appointment);

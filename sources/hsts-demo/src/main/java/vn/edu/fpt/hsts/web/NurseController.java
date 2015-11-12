@@ -28,7 +28,6 @@ import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.criteria.CheckCriteria;
 import vn.edu.fpt.hsts.criteria.PatientCriteria;
 import vn.edu.fpt.hsts.criteria.RegistrationCriteria;
-import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 
@@ -150,7 +149,9 @@ public class NurseController extends AbstractController {
             checkCriteria.setHeartBeat(heartBeat);
             checkCriteria.setBloodPressure(bloodPressure);
             checkCriteria.setWaists(waists);
-            checkCriteria.setBmi(weight / ((height/100) * (height/100)));
+            float tmp =  ((float)height/100) * ((float)height/100);
+            tmp = weight/tmp;
+            checkCriteria.setBmi(tmp);
 
             // Tab 4 criteria
             RegistrationCriteria rCriteria = new RegistrationCriteria();
@@ -265,7 +266,9 @@ public class NurseController extends AbstractController {
             checkCriteria.setHeartBeat(heartBeat);
             checkCriteria.setBloodPressure(bloodPressure);
             checkCriteria.setWaists(waists);
-            checkCriteria.setBmi(weight/(height * height));
+            float tmp =  ((float)height/100) * ((float)height/100);
+            tmp = weight/tmp;
+            checkCriteria.setBmi(tmp);
 
             // Tab 4 criteria
             RegistrationCriteria rCriteria = new RegistrationCriteria();
