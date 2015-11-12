@@ -109,7 +109,7 @@ var validator = $("#createForm").validate({
                 if (data.status != "ok") {
                     // Show error modal
                     var resultText = document.getElementById("messageLabel");
-                    resultText.innerHTML = "Error while create new regimen";
+                    resultText.innerHTML = "Error while create new phase";
                     $('#messageModal').modal('show');
                 } else {
                     console.log("-- reload page --");
