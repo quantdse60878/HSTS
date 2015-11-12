@@ -99,10 +99,20 @@ public class NutritionController extends AbstractController{
                                                  @RequestParam("bta") final String breaktimeAfternoon,
                                                  @RequestParam("dinner") final String dinner,
                                                  @RequestParam("en") final String eatLateAtNight,
+                                                 @RequestParam("animalFat") final float animalFat,
+                                                 @RequestParam("animalProtein") final float animalProtein,
+                                                 @RequestParam("calcium") final float calcium,
                                                  @RequestParam("lipid") final float lipid,
                                                  @RequestParam("starch") final float starch,
                                                  @RequestParam("protein") final float protein,
-                                                 @RequestParam("fiber") final float fiber) {
+                                                 @RequestParam("fiber") final float fiber,
+                                                 @RequestParam("iron") final float iron,
+                                                 @RequestParam("sodium") final float sodium,
+                                                 @RequestParam("vitaminB1") final float vitaminB1,
+                                                 @RequestParam("vitaminB2") final float vitaminB2,
+                                                 @RequestParam("vitaminC") final float vitaminC,
+                                                 @RequestParam("vitaminPP") final float vitaminPP,
+                                                 @RequestParam("zinc") final float zinc) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
@@ -136,6 +146,16 @@ public class NutritionController extends AbstractController{
             voiceModel.setStarch(starch + "");
             voiceModel.setProtein(protein + "");
             voiceModel.setFiber(fiber + "");
+            voiceModel.setAnimalFat(animalFat + "");
+            voiceModel.setAnimalProtein(animalProtein + "");
+            voiceModel.setCalcium(calcium + "");
+            voiceModel.setIron(iron + "");
+            voiceModel.setSodium(sodium + "");
+            voiceModel.setVitaminB1(vitaminB1 + "");
+            voiceModel.setVitaminB2(vitaminB2 + "");
+            voiceModel.setVitaminC(vitaminC + "");
+            voiceModel.setVitaminPP(vitaminPP + "");
+            voiceModel.setZinc(zinc + "");
             mav.addObject("voiceModel", voiceModel);
             return mav;
         } finally {

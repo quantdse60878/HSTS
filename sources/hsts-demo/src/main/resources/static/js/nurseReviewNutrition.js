@@ -219,7 +219,9 @@ function analyticMeal(listMeal) {
                     itemBreakfast = replaceAll(itemBreakfast, foodItemValue.foodUnit, "");
                     var numberOfQuantity = itemBreakfast.match(/\d/g);
                     numberOfQuantity = parseInt(numberOfQuantity.join(""));
-                    numberOfQuantity = numberOfQuantity / 100;
+                    if(listFoodDatabase[j].foodUnit == "g") {
+                        numberOfQuantity = numberOfQuantity / 100;
+                    }
                     foodItemValue.caloriesEstimate = numberOfQuantity * listFoodDatabase[j].caloriesEstimate;
                     var listNutritionValueDatabase = listFoodDatabase[j].foodNutritionValue.split(",");
                     var listNutritionValue = new Array();
@@ -249,10 +251,20 @@ var foodingredient = {
     bta_result : 0,
     dinner_result : 0,
     en_result : 0,
-    lipid:0,
-    starch:0,
-    protein:0,
-    fiber:0
+    animalFat:0.0,
+    animalProtein:0.0,
+    calcium:0.0,
+    lipid:0.0,
+    starch:0.0,
+    protein:0.0,
+    fiber:0.0,
+    iron:0.0,
+    sodium:0.0,
+    vitaminB1:0.0,
+    vitaminB2:0.0,
+    vitaminC:0.0,
+    vitaminPP:0.0,
+    zinc:0.0
 };
 
 function changeValueOnFood(target){
@@ -331,10 +343,20 @@ function createNutrition(){
                   "&bta=" + foodingredient.bta_result +
                   "&dinner=" + foodingredient.dinner_result +
                   "&en=" + foodingredient.en_result +
+                  "&animalFat=" + foodingredient.animalFat +
+                  "&animalProtein=" + foodingredient.animalFat +
+                  "&calcium=" + foodingredient.calcium +
                   "&lipid=" + foodingredient.lipid +
                   "&starch=" + foodingredient.starch +
                   "&protein=" + foodingredient.protein +
-                  "&fiber=" + foodingredient.fiber;
+                  "&fiber=" + foodingredient.fiber +
+                  "&iron=" + foodingredient.iron +
+                  "&sodium=" + foodingredient.sodium +
+                  "&vitaminB1=" + foodingredient.vitaminB1 +
+                  "&vitaminB2=" + foodingredient.vitaminB2 +
+                  "&vitaminC=" + foodingredient.vitaminC +
+                  "&vitaminPP=" + foodingredient.vitaminPP +
+                  "&zinc=" + foodingredient.zinc;
     simulate(accept,"click");
 }
 
@@ -343,11 +365,23 @@ function inputCaloriesEstimate(list){
     if(list!= undefined){
         for(var i=0;i<list.length;i++){
             var item = list[i];
-            totalCaloriesEstimate += item.caloriesEstimate;
-            foodingredient.lipid += item.foodNutritionValue[0];
-            foodingredient.starch += item.foodNutritionValue[1];
-            foodingredient.protein += item.foodNutritionValue[2];
-            foodingredient.fiber += item.foodNutritionValue[3];
+            if(item.foodNutritionValue != undefined){
+                totalCaloriesEstimate += item.caloriesEstimate;
+                foodingredient.animalFat += item.foodNutritionValue[0];
+                foodingredient.animalProtein += item.foodNutritionValue[1];
+                foodingredient.calcium += item.foodNutritionValue[2];
+                foodingredient.lipid += item.foodNutritionValue[3];
+                foodingredient.starch += item.foodNutritionValue[4];
+                foodingredient.protein += item.foodNutritionValue[5];
+                foodingredient.fiber += item.foodNutritionValue[6];
+                foodingredient.iron += item.foodNutritionValue[7];
+                foodingredient.sodium += item.foodNutritionValue[8];
+                foodingredient.vitaminB1 += item.foodNutritionValue[9];
+                foodingredient.vitaminB2 += item.foodNutritionValue[10];
+                foodingredient.vitaminC += item.foodNutritionValue[11];
+                foodingredient.vitaminPP += item.foodNutritionValue[12];
+                foodingredient.zinc += item.foodNutritionValue[13];
+            }
         }
     }
     return totalCaloriesEstimate;
