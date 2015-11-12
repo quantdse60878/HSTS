@@ -22,6 +22,7 @@ import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.StringUtils;
 import vn.edu.fpt.hsts.persistence.entity.FoodPhase;
+import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.MedicinePhase;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
 import vn.edu.fpt.hsts.persistence.entity.PracticePhase;
@@ -33,7 +34,10 @@ import vn.edu.fpt.hsts.persistence.repo.PhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.PracticePhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.RegimenRepo;
 
+import javax.swing.*;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -180,6 +184,49 @@ public class RegimenService extends AbstractService {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void createNew(final String name, final String description, final int numberPhase) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("name[{}], description[{}], numberPhase[{}]", name, description, numberPhase);
+
+            // Illness
+            final Illness illness = new Illness();
+            illness.setName(name);
+            illness.setDescription(description);
+
+            illnessRepo.saveAndFlush(illness);
+
+            // Regimen
+            final Regimen regimen = new Regimen();
+            regimen.setIllness(illness);
+            regimen.setUpdateTime(new Date());
+            regimenRepo.saveAndFlush(regimen);
+
+            if (0 < numberPhase) {
+                final List<Phase> phases = new ArrayList<Phase>();
+                for (int i = 0; i< numberPhase; i++) {
+                    Phase phase = new Phase();
+                    phase.setRegimen(regimen);
+                    phase.setPhaseOrder(i + 1);
+                    phase.setUpdateTime(new Date());
+                    // Default is 1
+                    phase.setNumberOfDay(1);
+                    phases.add(phase);
+                }
+                phaseRepo.save(phases);
+            }
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Create regimen for illness[{}] success", illness);
+            }
+        } catch (Exception e) {
+            throw new BizlogicException("Error");
+        }
+        finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }

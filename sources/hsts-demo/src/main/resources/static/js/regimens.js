@@ -101,3 +101,82 @@ $("#btnDelete").click(function() {
         });
     console.log("end delete");
 });
+
+// Insert regimen validator
+// Validator
+var validator = $("#createForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        name: {
+            required: true,
+            minlength: 5,
+            maxlength: 30
+        },
+        description: {
+            required: true,
+            minlength: 5,
+            maxlength: 50
+        },
+        numberPhase: {
+            required: true,
+            min: 1,
+            max: 20
+        }
+    },
+    messages: {
+        //patientName: {
+        //    maxlenght: "Name is too long, please modify it"
+        //},
+        name: {
+            required: "Please input valid illness name"
+        },
+        description: {
+            required: "Please input valid description"
+        },
+        numberPhase: {
+            required: "Please input valid number of phase"
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "name"){
+            error.appendTo($('#invalidName'));
+        }  else if (element.attr("name") == "description") {
+            error.appendTo($('#invalidDescription'));
+        } else if (element.attr("name") == "numberPhase") {
+            error.appendTo($('#invalidNumberPhase'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("--- begin ---");
+        $.ajax({
+            method: "POST",
+            url: "/regimen/create",
+            data: {
+                name: $("#name").val(),
+                description: $("#description").val(),
+                numberPhase: $("#numberPhase").val()
+            }
+        })
+            .done(function(data) {
+                console.log(data);
+                if (data.status != "ok") {
+                    // Show error modal
+                    var resultText = document.getElementById("messageLabel");
+                    resultText.innerHTML = "Error while create new regimen";
+                    $('#messageModal').modal('show');
+                } else {
+                    console.log("-- reload page --");
+                    window.location.href = "regimens";
+                }
+            });
+        console.log("--- end ---");
+        return false; // required to block normal submit since you used ajax
+    }
+});
