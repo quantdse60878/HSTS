@@ -7,6 +7,8 @@
  */
 package vn.edu.fpt.hsts.persistence.repo;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,6 +23,9 @@ public interface MedicinePhaseRepo extends JpaRepository<MedicinePhase, Integer>
     @Query("select m from MedicinePhase m where phase.regimen.id = :regimenId")
     public List<MedicinePhase> findByRegimenId(@Param("regimenId") final int regimenId);
 
-    @Query("select m from MedicinePhase m where phase.id = :phaseId")
+    @Query("select m from MedicinePhase m where m.phase.id = :phaseId")
+    public Page<MedicinePhase> findByPhaseId(@Param("phaseId") final int phaseId, final Pageable pageable);
+
+    @Query("select m from MedicinePhase m where m.phase.id = :phaseId")
     public List<MedicinePhase> findByPhaseId(@Param("phaseId") final int phaseId);
 }

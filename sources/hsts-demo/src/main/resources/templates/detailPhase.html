@@ -8,21 +8,211 @@
 <div class="content-wrapper" layout:fragment="body">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+        <h1>
+            Phase info
+        </h1>
         <ol class="breadcrumb">
             <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Phase info</li>
         </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content" style="text-align: center;">
+    <section class="content">
 
-        <!-- Your Page Content Here -->
-        <a href="home"><h1><span class="fa fa-medkit"></span></h1></a>
-        <h1 style="margin: auto;">Health Support Tracking System</h1>
+        <!-- content -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <!-- hidden data-->
+                    <input type="hidden" id="phaseId" th:value="${PHASE.id}"/>
+                    <!-- -->
+                    <form class="form-horizontal" id = "mainForm">
+                        <div class="box-body">
+                            <div class="nav-tabs-custom" style="box-shadow: none;">
+
+                                <!-- tab header -->
+                                <ul class="nav nav-tabs">
+                                    <li class="active" id="li_tab_1">
+                                        <a href="#tab_1" data-toggle="tab" onclick="changeTab('#tab_1', '#li_tab_1')">Medicine</a>
+                                    </li>
+                                    <li id="li_tab_2">
+                                        <a href="#tab_2" data-toggle="tab" onclick="changeTab('#tab_2', '#li_tab_2')">Food</a>
+                                    </li>
+                                    <li id="li_tab_3">
+                                        <a href="tab_3" data-toggle="tab" onclick="changeTab('#tab_3', '#li_tab_3')">Practice</a>
+                                    </li>
+                                </ul>
+                                <!-- .tab header -->
+
+                                <!-- tab body -->
+                                <div class="tab-content">
+                                    <!-- tab 1: medicine -->
+                                    <div class="tab-pane active" id="tab_1">
+                                        <table id="medicineContent" class="table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Medicine</th>
+                                                <th>Times</th>
+                                                <th>Quantitative</th>
+                                                <th>Unit</th>
+                                                <th>Advice</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <!--<tbody id="table-body"></tbody>-->
+                                            <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Medicine</th>
+                                                <th>Times</th>
+                                                <th>Quantitative</th>
+                                                <th>Unit</th>
+                                                <th>Advice</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- end tab 1 -->
+
+                                    <!-- tab 2: food-->
+                                    <div class="tab-pane" id="tab_2">
+                                    </div>
+                                    <!-- end tab 2-->
+
+                                    <!-- tab 2: food-->
+                                    <div class="tab-pane" id="tab_3">
+                                    </div>
+                                    <!-- end tab 2-->
+                                </div>
+                                <!-- tab body -->
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-default">Cancel</button>
+                            <button type="button" class="btn btn-info">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- diaglog -->
+
+        <!-- confirm delete modal -->
+        <div class="modal fade" id="deleteMedicineDialog" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="deteteRegimen">Delete message</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title" id="confirmMessageLabel">Are you wish to delete this regimen?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <a class ="btn btn-danger" id = "btnDeleteMedicine" data-dismiss="modal">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .confirm delete modal -->
+
+
+        <!-- update medicine diaglog -->
+        <div class="modal fade" id="updateMedicineDialog" tabindex="-1" role="dialog" aria-labelledby="updateMedicine" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "updateForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="updateMedicine">Update</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Medicine name*: </label>
+
+                                <div class="col-sm-3">
+                                    <label class="col-sm-2 control-label" id="updateMedicineName"></label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Times*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="updateTimes" class="form-control" id="updateTimes"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateTimes">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Quantitative*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="updateQuantitative" class="form-control" id="updateQuantitative"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateQuantitative">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Note*: </label>
+
+                                <div class="col-sm-4">
+                                    <textarea id="updateNote"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!-- .update medicine diaglog -->
+
+        <!-- message modal-->
+        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Result</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title" id = "messageLabel">Test</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <a class ="btn btn-info"  data-dismiss="modal">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .message modal-->
 
     </section><!-- /.content -->
+
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <!-- jquery validation -->
+    <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
+
+    <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+
+    <!-- select 2-->
+    <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
+    <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
+
+
+    <script th:src = "@{/static/js/detailPhase.js}"></script>
+
+    <!-- css add -->
+    <link th:href="@{/static/css/detailPhase.css}" rel="stylesheet"/>
+
 </div><!-- /.content-wrapper -->
-
-
 </body>
 </html>

@@ -46,7 +46,7 @@ $(document).ready(function(){
                     "id" : "id"
                 },
                 "render": function ( data, type, full, meta ) {
-                    return '<a href="/phase?id='+ data.id +  '">' + data.numberOfDay + '</a>';
+                    return '<a href="/detailPhase?id='+ data.id +  '">' + data.numberOfDay + '</a>';
                 },
                 "width": "25%"
             },

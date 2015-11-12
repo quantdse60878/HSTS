@@ -68,11 +68,6 @@ function changeTab (a, li) {
     $(a).addClass('active');
 };
 
-
-
-
-
-
 var $selectPatient = $("#patientName").select2({
     theme: "bootstrap",
     width: "100%",

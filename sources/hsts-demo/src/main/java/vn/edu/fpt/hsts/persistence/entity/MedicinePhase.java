@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class MedicinePhase extends AbstractKeyEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "phaseId", nullable = false)
     private Phase phase;
 
@@ -25,7 +25,7 @@ public class MedicinePhase extends AbstractKeyEntity {
     @JoinColumn(name = "medicineId", nullable = false)
     private Medicine medicine;
 
-    private String quantitative;
+    private int quantitative;
 
     private int numberOfTime;
 
@@ -66,11 +66,11 @@ public class MedicinePhase extends AbstractKeyEntity {
         this.medicine = medicine;
     }
 
-    public String getQuantitative() {
+    public int getQuantitative() {
         return quantitative;
     }
 
-    public void setQuantitative(final String quantitative) {
+    public void setQuantitative(final int quantitative) {
         this.quantitative = quantitative;
     }
 }

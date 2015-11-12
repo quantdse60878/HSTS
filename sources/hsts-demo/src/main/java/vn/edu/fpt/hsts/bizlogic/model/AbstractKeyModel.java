@@ -71,4 +71,11 @@ public abstract class AbstractKeyModel<E extends AbstractKeyEntity> implements S
             }
         }
     }
+
+    public E toEntity() throws InstantiationException, IllegalAccessException {
+        final Class<E> clazz = getEntityClass();
+        final E entity = clazz.newInstance();
+        entity.setId(this.id);
+        return entity;
+    }
 }
