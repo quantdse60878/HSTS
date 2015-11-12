@@ -40,7 +40,13 @@ $(document).ready(function(){
                 "width": "15%"
             },
             {
-                "data": "numberOfDay",
+                "data": {
+                    "numberOfDay": "numberOfDay",
+                    "id" : "id"
+                },
+                "render": function ( data, type, full, meta ) {
+                    return '<a href="/phase?id='+ data.id +  '">' + data.numberOfDay + '</a>';
+                },
                 "width": "25%"
             },
             // col 3
@@ -52,11 +58,65 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    return '<a href="/detailPhase?id='+ data +  '" class="btn btn-danger">Update</a>';
+                    return '<a href="/phase/delete?id='+ data +  '" class="btn btn-danger">Delete</a>';
                 },
                 "width": "20%"
             }
         ]
     } );
     console.log("-- end --");
+});
+
+// Insert regimen validator
+// Validator
+var validator = $("#createForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        numberDay: {
+            required: true,
+            min: 1,
+            max: 30
+        }
+    },
+    messages: {
+        numberDay: {
+            required: "Please input valid illness name"
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "numberDay"){
+            error.appendTo($('#invalidNumberDay'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("--- begin ---");
+        $.ajax({
+            method: "POST",
+            url: "/phase/create",
+            data: {
+                regimenId: $("#regimenId").val(),
+                numberDay: $("#numberDay").val()
+            }
+        })
+            .done(function(data) {
+                console.log(data);
+                if (data.status != "ok") {
+                    // Show error modal
+                    var resultText = document.getElementById("messageLabel");
+                    resultText.innerHTML = "Error while create new regimen";
+                    $('#messageModal').modal('show');
+                } else {
+                    console.log("-- reload page --");
+                    window.location.href = "/detailRegimen?id=" + $("#regimenId").val();
+                }
+            });
+        console.log("--- end ---");
+        return false; // required to block normal submit since you used ajax
+    }
 });
