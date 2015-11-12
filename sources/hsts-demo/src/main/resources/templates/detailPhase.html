@@ -8,17 +8,50 @@
 <div class="content-wrapper" layout:fragment="body">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+        <h1>
+            Phase info
+        </h1>
         <ol class="breadcrumb">
             <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Phase info</li>
         </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content" style="text-align: center;">
+    <section class="content">
 
-        <!-- Your Page Content Here -->
-        <a href="home"><h1><span class="fa fa-medkit"></span></h1></a>
-        <h1 style="margin: auto;">Health Support Tracking System</h1>
+        <!-- content -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <form class="form-horizontal" id = "mainForm">
+                        <div class="box-body">
+                            <div class="nav-tabs-custom" style="box-shadow: none;">
+
+                                <!-- tab header -->
+                                <ul class="nav nav-tabs">
+                                    <li class="active" id="li_tab_1">
+                                        <a href="#tab_1" data-toggle="tab" onclick="changeTab('#tab_1', '#li_tab_1')">Medicine</a>
+                                    </li>
+                                    <li id="li_tab_2">
+                                        <a href="#tab_2" data-toggle="tab" onclick="changeTab('#tab_2', '#li_tab_2')">Food</a>
+                                    </li>
+                                    <li id="li_tab_3">
+                                        <a href="tab_3" data-toggle="tab" onclick="changeTab('#tab_3', '#li_tab_3')">Practice</a>
+                                    </li>
+                                </ul>
+                                <!-- .tab header -->
+
+                                <!-- tab body -->
+                                <!-- tab body -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- diaglog -->
 
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
