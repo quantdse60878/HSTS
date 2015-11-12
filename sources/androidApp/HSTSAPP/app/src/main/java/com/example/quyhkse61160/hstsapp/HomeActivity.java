@@ -344,8 +344,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         // Notice
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
 
-        // Notice Next Time
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+//        // Notice Next Time
+//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
 
 
         // Recycle the typed array
@@ -365,10 +365,11 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 if (position == 1) {
                     updateView(position);
                     displayView(1);
-                }if (position == 2) {
-                    updateView(position);
-                    displayView(2);
                 }
+//                if (position == 2) {
+//                    updateView(position);
+//                    displayView(2);
+//                }
             }
         });
 
@@ -445,8 +446,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             case 1:
                 fragment = new NoticeTab();
                 break;
-            case 2:
-                fragment = new NoticeNextTab();
+//            case 2:
+//                fragment = new NoticeNextTab();
 //                break;
 //            case 3:
 //                fragment = new Tab3();
