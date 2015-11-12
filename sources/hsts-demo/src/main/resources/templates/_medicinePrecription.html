@@ -27,8 +27,8 @@
         </td>
         <td class="form-group">
             <select class="form-control" th:name="mPresModels[0].mTime" th:id="mPresModelsmTime0" data-rule-min="1" data-msg-min="Please select.">
-                <option th:each="time : ${TIMES}" th:value="${time}"
-                        th:text="${time}"></option>
+                <option th:each="time : ${TIMES}" th:value="${time.numOfTime}"
+                        th:text="${time.numOfTime}"></option>
             </select>
             <!--<div class="help-block with-errors"></div>-->
         </td>

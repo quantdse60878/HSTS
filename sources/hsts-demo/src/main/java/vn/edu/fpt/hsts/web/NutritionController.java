@@ -81,10 +81,6 @@ public class NutritionController extends AbstractController{
             PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
             mav.addObject("PREVENTIONCHECK", preventionCheck);
 
-            // Get Medicalhistory img
-            List<String> imgs = patientService.getPatientHistoryImage(appointment.getMedicalRecord().getMedicalHistory());
-            mav.addObject("MEDI_IMGS", imgs);
-
             // Get Medicalhistory
             String medicalHistory = patientService.getPatientHistory(appointment.getMedicalRecord().getMedicalHistory());
             mav.addObject("MEDI_HIS", medicalHistory);
@@ -124,10 +120,6 @@ public class NutritionController extends AbstractController{
             // Find PreventionCheck
             PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
             mav.addObject("PREVENTIONCHECK", preventionCheck);
-
-            // Get Medicalhistory img
-            List<String> imgs = patientService.getPatientHistoryImage(appointment.getMedicalRecord().getMedicalHistory());
-            mav.addObject("MEDI_IMGS", imgs);
 
             // Get Medicalhistory
             String medicalHistory = patientService.getPatientHistory(appointment.getMedicalRecord().getMedicalHistory());
@@ -170,10 +162,6 @@ public class NutritionController extends AbstractController{
             // Find PreventionCheck
             PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
             mav.addObject("PREVENTIONCHECK", preventionCheck);
-
-            // Get Medicalhistory img
-            List<String> imgs = patientService.getPatientHistoryImage(appointment.getMedicalRecord().getMedicalHistory());
-            mav.addObject("MEDI_IMGS", imgs);
 
             // Get Medicalhistory
             String medicalHistory = patientService.getPatientHistory(appointment.getMedicalRecord().getMedicalHistory());

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.NutritionModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticeResultModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
+import vn.edu.fpt.hsts.bizlogic.model.TimesModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodIngredientService;
@@ -86,7 +87,7 @@ public class AbstractController implements ControllerParam {
             mav.addObject("NEXTAPPOINTMENTDATE", doctorService.getTreatmentLong());
 
             // Get config time
-            final String[] timeArr = treatmentService.getMedicineTimeConfig();
+            final List<TimesModel> timeArr = treatmentService.getMedicineTimeConfig();
             mav.addObject("TIMES", timeArr);
 
             // get illnessList

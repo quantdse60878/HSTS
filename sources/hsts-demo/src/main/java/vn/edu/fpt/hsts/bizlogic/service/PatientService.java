@@ -50,6 +50,7 @@ import vn.edu.fpt.hsts.persistence.repo.NotifyRepo;
 import vn.edu.fpt.hsts.persistence.repo.PatientRepo;
 import vn.edu.fpt.hsts.persistence.repo.PreventionCheckRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
+import vn.edu.fpt.hsts.web.session.UserSession;
 
 import javax.transaction.Transactional;
 import java.io.File;
@@ -377,6 +378,27 @@ public class PatientService extends AbstractService {
             if (null != patients && patients.isEmpty()) {
                 if (LOGGER.isDebugEnabled()) {
                    LOGGER.debug("Got {} records", patients.size());
+                }
+            }
+            return patients;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public List<Patient> getPatientByApponitmentDateOfDoctor(final int accountId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("accountId[{}]", accountId);
+            Date currentDate = new Date();
+            UserSession userSession = new UserSession();
+            LOGGER.info(userSession.getUsername());
+            currentDate = DateUtils.roundDate(currentDate, false);
+            LOGGER.info("currentDate[{}]", currentDate);
+            final List<Patient> patients = patientRepo.findByAppoinmentDateAndAcc(currentDate, accountId);
+            if (null != patients && patients.isEmpty()) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Got {} records", patients.size());
                 }
             }
             return patients;

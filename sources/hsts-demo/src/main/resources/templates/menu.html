@@ -46,9 +46,9 @@
             <li class="active treeview" th:if="${session.USER.role.name == 'Nutrition'}">
                 <ul class="treeview-menu">
                     <li><a href="nutriPatients"><i class="fa fa-users"></i> Patients</a></li>
-                    <li th:if="${PATIENT != null}"><a th:href="@{/createNutritionByVoice(patientID=${PATIENT.id})}"><i class="fa fa-users"></i> Review By Voice</a>
+                    <li th:if="${PATIENT != null}"><a th:href="@{/createNutritionByVoice(patientID=${PATIENT.id})}"><i class="fa fa-microphone"></i> Review By Voice</a>
                     </li>
-                    <li th:if="${PATIENT != null}"><a th:href="@{/createNutrition(patientID=${PATIENT.id})}"><i class="fa fa-users"></i>Nutrition</a></li>
+                    <li th:if="${PATIENT != null}"><a th:href="@{/createNutrition(patientID=${PATIENT.id})}"><i class="fa fa-area-chart"></i> Nutrition</a></li>
                 </ul>
                 <div th:if="${PATIENT != null}">
                     <!-- patient's Profile -->
