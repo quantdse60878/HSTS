@@ -32,4 +32,7 @@ public interface PhaseRepo extends JpaRepository<Phase, Integer> {
 
     @Query("select p from Phase p where regimen.id = :regimenId")
     public List<Phase> findByRegimenId(@Param("regimenId") final int regimenId);
+
+    @Query("select p from Phase p where regimen.illness.id = :illnessId order by phaseOrder asc")
+    public List<Phase> findByIllnessId(@Param("illnessId") final int illnessId);
 }
