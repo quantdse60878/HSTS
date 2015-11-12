@@ -6,18 +6,15 @@
  * Date: 10/28/2015.
  */
 $("#pGender").iCheck({
-    checkboxClass: 'icheckbox_flat-blue',
-    radioClass: 'iradio_flat-blue'
+    checkboxClass: 'icheckbox_polaris'
 
 });
 var $rGender = $("#rGender").iCheck({
-    checkboxClass: 'icheckbox_flat-blue',
-    radioClass: 'iradio_flat-blue'
+    checkboxClass: 'icheckbox_polaris'
 });
 
 var newMRCheck = $("#isNewMedicalRecord").iCheck({
-    checkboxClass: 'icheckbox_flat-blue',
-    radioClass: 'iradio_flat-blue'
+    checkboxClass: 'icheckbox_polaris'
 });
 
 function changeTab (a, li) {

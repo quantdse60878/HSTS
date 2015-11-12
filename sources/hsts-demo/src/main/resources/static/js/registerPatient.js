@@ -6,17 +6,14 @@
  * Date: 10/28/2015.
  */
 $("#gender").iCheck({
-    checkboxClass: 'icheckbox_flat-blue',
-    radioClass: 'iradio_flat-blue'
+    checkboxClass: 'icheckbox_polaris'
 });
 var $rGender = $("#rGender").iCheck({
-    checkboxClass: 'icheckbox_flat-blue',
-    radioClass: 'iradio_flat-blue'
+    checkboxClass: 'icheckbox_polaris'
 });
 
 var $pGender = $("#pGender").iCheck({
-    checkboxClass: 'icheckbox_flat-blue',
-    radioClass: 'iradio_flat-blue',
+    checkboxClass: 'icheckbox_polaris',
     disabledClass: 'disabled'
 });
 
