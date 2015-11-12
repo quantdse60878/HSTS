@@ -31,7 +31,7 @@ public class MailScheduler {
      *
      */
     @Value("${hsts.mail.scheduler.cron}")
-    private final String config = "0 0/3 * 1/1 * ?";
+    private final String config = "0 0/5 * 1/1 * ?";
 
 
     /**
