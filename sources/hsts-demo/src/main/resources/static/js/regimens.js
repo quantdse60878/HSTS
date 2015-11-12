@@ -63,9 +63,9 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    var updateBtn = '<a href="/updateRegimen?id='+ data.id +  '" class="btn btn-success">Update</a>';
+                    //var updateBtn = '<a href="/updateRegimen?id='+ data.id +  '" class="btn btn-success">Update</a>';
                     var deleteBtn = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>'
-                    return updateBtn + deleteBtn;
+                    return deleteBtn;
                 },
                 "width": "20%"
             }
