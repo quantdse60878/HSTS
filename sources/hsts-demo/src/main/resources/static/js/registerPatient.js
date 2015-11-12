@@ -5,9 +5,10 @@
  * Author: dangquantran.
  * Date: 10/28/2015.
  */
-//$("#doctorSelect").select2();
 $("#Birthday").datepicker({
-    format: 'dd-mm-yyyy'
+    format: 'dd-mm-yyyy',
+    startDate: '1950-01-01',
+    endDate: 'today'
 });
 function changeTab (a) {
     console.log(a);
