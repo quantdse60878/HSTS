@@ -37,16 +37,16 @@ $(document).ready(function(){
                 "render": function (data, type, full, meta) {
                     return count++;
                 },
-                "width": "10%"
+                "width": "15%"
             },
             {
                 "data": "numberOfDay",
-                "width": "20%"
+                "width": "25%"
             },
             // col 3
             {
                 "data": "updateTime",
-                "width": "30%"
+                "width": "40%"
             },
             // col 4
             {
@@ -54,7 +54,7 @@ $(document).ready(function(){
                 "render": function ( data, type, full, meta ) {
                     return '<a href="/detailPhase?id='+ data +  '" class="btn btn-danger">Update</a>';
                 },
-                "width": "40%"
+                "width": "20%"
             }
         ]
     } );

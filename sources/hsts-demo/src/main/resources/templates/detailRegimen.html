@@ -8,24 +8,142 @@
 <div class="content-wrapper" layout:fragment="body">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+        <h1>
+            Regimen search
+        </h1>
         <ol class="breadcrumb">
-            <li><a href="home"><i class="fa fa-dashboard"></i> Detail regimen</a></li>
+            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Regimen detail</li>
         </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content" style="text-align: center;">
+    <section class="content">
+        <!-- Your Page Content Here -->
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
+
                     <div class="box-header">
-                        <h4 class="col-md-3" style="margin-top: 4px;"><i class="fa fa-th"></i> Regimen</h4>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <a href="#insertModal" data-toggle="modal" data-target="#insertModal" class="btn btn-info">Create new phase</a>
+                            </div>
+                        </div>
 
                     </div>
 
                     <!-- /.box-header -->
                     <div class="box-body">
-                            <!-- info -->
+                        <!-- info -->
+                        <div class="row">
+                            <input th:type="hidden" id = "regimenId" th:value="${REGIMEN.id}"/>
+                            <label for="illnessName" class="col-sm-3 control-label">Illness name: </label>
+
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control hsts" id = "illnessName"
+                                       th:value="${REGIMEN.illness.name}" readonly="readonly" />
+                            </div>
+                            <div class = "col-sm-4">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="description" class="col-sm-3 control-label">Description: </label>
+
+                            <div class="col-sm-5">
+                                <input type="text"  class="form-control hsts" id = "description"
+                                       th:value="${REGIMEN.illness.description}" readonly="readonly"/>
+                            </div>
+                            <div class = "col-sm-4">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="updateTime" class="col-sm-3 control-label">Last updated time: </label>
+
+                            <div class="col-sm-5">
+                                <input type="text"  class="form-control hsts" id = "updateTime"
+                                       th:value="${REGIMEN.updateTime}" readonly="readonly"/>
+                            </div>
+                            <div class = "col-sm-4">
+
+                            </div>
+                        </div>
+                        <table id="dataContent" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Phase No.</th>
+                                <th>Number of day</th>
+                                <th>Last Updated Time</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <!--<tbody id="table-body"></tbody>-->
+                            <tfoot>
+                            <tr>
+                                <th>Phase No.</th>
+                                <th>Number of day</th>
+                                <th>Last Updated Time</th>
+                                <th>Action</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+
+        <!-- confirm delete modal -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="deteteRegimen">Delete phase</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title">Are you wish to delete this phase?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <a class ="btn btn-danger" id = "btnDelete" data-dismiss="modal">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .confirm delete modal -->
+
+        <!-- message modal-->
+        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Result</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title" id = "messageLabel">Test</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <a class ="btn btn-info"  data-dismiss="modal">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .message modal-->
+
+        <!-- insert new modal -->
+        <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="insertModalLabel" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "createForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="insertModalLabel">Create new phase</h4>
                             <div class="row">
                                 <input th:type="hidden" id = "regimenId" th:value="${REGIMEN.id}"/>
                                 <label for="illnessName" class="col-sm-3 control-label">Illness name: </label>
@@ -60,51 +178,64 @@
 
                                 </div>
                             </div>
-                        <div class="row">
-
+                            <!-- .info-->
                         </div>
-                            <!-- end info-->
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Illness name*:</label>
 
-                        <div class="box-body">
-                            <table id="dataContent" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Phase No.</th>
-                                    <th>Number of day</th>
-                                    <th>Last Updated Time</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <!--<tbody id="table-body"></tbody>-->
-                                <tfoot>
-                                <tr>
-                                    <th>Phase No.</th>
-                                    <th>Number of day</th>
-                                    <th>Last Updated Time</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
-                            </table>
+                                <div class="col-sm-5">
+                                    <input type="text" th:name="name" class="form-control" id="name"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Illness Description*: </label>
+
+                                <div class="col-sm-5">
+                                    <textarea th:name="description" class="form-control" id="description"></textarea>
+                                    <!--<input type="text" />-->
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidDescription">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Number of phase*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="numberPhase" class="form-control" id="numberPhase"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidNumberPhase">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-default" >Reset</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                     </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
+                </form>
+
             </div>
         </div>
+        <!-- .insert new modal -->
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
 
-
-    </section><!-- /.content -->
-    <!-- library -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
     <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
 
-    <!-- external javascript -->
+    <!-- jquery validation -->
+    <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
+
     <script th:src = "@{/static/js/detailRegimen.js}"></script>
-    <!-- external css -->
+
+    <!-- css add -->
     <link th:href="@{/static/css/detailRegimen.css}" rel="stylesheet"/>
-</div><!-- /.content-wrapper -->
-
-
+</div>
+<!-- /.content-wrapper -->
 </body>
 </html>
