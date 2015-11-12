@@ -30,14 +30,12 @@
         <!--<item>Thuốc</item>-->
         <!--<item>Bài Tập</item>-->
         <item>Nhắc Nhở</item>
-        <item>Lần Tiếp Theo</item>
     </string-array>
     <array name="nav_drawer_icons">
         <item>@android:drawable/ic_dialog_info</item>
         <!--<item>@drawable/food_icon_v1</item>-->
         <!--<item>@drawable/medicine_icon_v1</item>-->
         <!--<item>@drawable/walk_icon_v1</item>-->
-        <item>@android:drawable/ic_dialog_info</item>
         <item>@android:drawable/ic_dialog_info</item>
     </array>
 

@@ -99,7 +99,7 @@ public class LoginController {
 
                 if (user.getRole().getId() == IDbConsts.IRoleType.DOCTOR) {
                     mav.setViewName("doctorPatients");
-                    List<Patient> patientList = patientService.getPatientByApponitmentDate();
+                    List<Patient> patientList = patientService.getPatientByApponitmentDateOfDoctor(user.getId());
                     LOGGER.info("listpatiens: " + patientList.size());
                     mav.addObject("LISTPATIENTS", patientList);
                 } else if (user.getRole().getId() == IDbConsts.IRoleType.NURSE) {

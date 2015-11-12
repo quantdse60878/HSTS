@@ -13,6 +13,7 @@ import vn.edu.fpt.hsts.bizlogic.model.HisMedicine;
 import vn.edu.fpt.hsts.bizlogic.model.HisPractice;
 import vn.edu.fpt.hsts.bizlogic.model.MedicineTreatmentModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticeTreatmentModel;
+import vn.edu.fpt.hsts.bizlogic.model.TimesModel;
 import vn.edu.fpt.hsts.bizlogic.model.TreatmentModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -141,14 +142,21 @@ public class TreatmentService {
     }
 
 
-    public String[] getMedicineTimeConfig() {
+    public List<TimesModel> getMedicineTimeConfig() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             if (LOGGER.isDebugEnabled()) {
                LOGGER.debug("medicineTimes[{}]", medicineTimes);
             }
+            List<TimesModel> timesModels = new ArrayList<TimesModel>();
             if (StringUtils.isNotEmpty(medicineTimes)) {
-               return medicineTimes.split(",");
+                String[] list = medicineTimes.split(",");
+                TimesModel timesModel;
+                for (int i = 0; i < list.length; i++) {
+                    timesModel = new TimesModel(Integer.parseInt(list[i]));
+                    timesModels.add(timesModel);
+                }
+                return timesModels;
             }
             return null;
         } finally {

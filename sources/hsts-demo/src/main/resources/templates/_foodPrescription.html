@@ -14,7 +14,7 @@
     <tr>
         <th style="width: 10px">#</th>
         <th style="min-width: 155px;">Name</th>
-        <th style="width: 110px;">Times</th>
+        <th style="width: 80px;">Times</th>
         <th style="width: 60px;">Quantity</th>
         <th style="width: 110px;">Unit</th>
         <th>Note</th>
@@ -23,7 +23,7 @@
     <tr>
         <td>1</td>
         <td class="form-group">
-            <select class="form-control" th:field="*{fPresModels[0].f}" onchange="findUnits(this)"
+            <select class="form-control" th:name="fPresModels[0].f" th:id="fPresModels0.f" onchange="findUnits(this)"
                     data-msg-min="Please select." data-rule-min="1">
                 <option value="0">Select</option>
                 <option th:each="food : ${FOODS}" th:value="${food.id}"
@@ -32,11 +32,10 @@
             <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group">
-            <select class="form-control" th:field="*{fPresModels[0].fTime}"
+            <select class="form-control" th:name="fPresModels[0].fTime"
                     data-msg-min="Please select." data-rule-min="1">
-                <option value="0">Select</option>
-                <option th:each="time : ${TIMES}" th:value="${time}"
-                        th:text="${time}"></option>
+                <option th:each="time : ${TIMES}" th:value="${time.numOfTime}"
+                        th:text="${time.numOfTime}"></option>
             </select>
             <!--<div class="help-block with-errors"></div>-->
         </td>

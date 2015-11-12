@@ -445,7 +445,8 @@ public class DoctorService extends AbstractService {
 
             if (null != oldAppointment) {
                 Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(oldAppointment.getId()).get(0);
-                List<MedicalRecordData> medicalRecordDatas = medicalRecordDataRepo.findRecordDataByAppointment(oldAppointment, oldAppointment.getMeetingDate(), appointment.getMeetingDate());
+                List<MedicalRecordData> medicalRecordDatas = medicalRecordDataRepo.findRecordDataByAppointment(oldAppointment,
+                        oldAppointment.getMeetingDate(), appointment.getMeetingDate());
                 LOGGER.info("medicalRecordDatas: " + medicalRecordDatas.size());
                 if (medicalRecordDatas.size() > 0) {
                     int kcalEstimate = treatment.getCaloriesBurnEveryday();

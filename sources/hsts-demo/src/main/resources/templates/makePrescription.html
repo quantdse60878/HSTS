@@ -462,7 +462,7 @@
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime" data-rule-min="1" data-msg-min="Please select." >'
                     + '<option value="0" >Select</option>'
-                    + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
+                    + '<option th:each="time : ${TIMES}" th:value="${time.numOfTime}" th:text="${time.numOfTime}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
@@ -501,7 +501,7 @@
             newCell.innerHTML =
                     '<select class="form-control" name="fPresModels[' + countFoods + '].fTime" id="fPresModels' + countFoods + '.fTime" data-msg-min="Please select." data-rule-min="1">'
                     + '<option value="0">Select</option>'
-                    + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
+                    + '<option th:each="time : ${TIMES}" th:value="${time.numOfTime}" th:text="${time.numOfTime}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
@@ -537,7 +537,7 @@
             newCell.innerHTML =
                     ' <select class="form-control" name="pPresModels[' + countPractice + '].pTime" id="pPresModels' + countPractice + '.pTime" data-rule-min="1" data-msg-min="Please select.">'
                     + '<option value="0">Select</option>'
-                    + '<option th:each="time : ${TIMES}" th:value="${time}" th:text="${time}"></option>'
+                    + '<option th:each="time : ${TIMES}" th:value="${time.numOfTime}" th:text="${time.numOfTime}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
