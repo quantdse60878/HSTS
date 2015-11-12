@@ -39,28 +39,22 @@ $(document).ready(function(){
                 },
                 "width": "10%"
             },
-            // col 2
             {
-                "data": "fromDate",
+                "data": "numberOfDay",
                 "width": "20%"
             },
             // col 3
             {
-                "data": "toDate",
-                "width": "20%"
-            },
-            // col 4
-            {
                 "data": "updateTime",
                 "width": "30%"
             },
-            // col 5
+            // col 4
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
                     return '<a href="/detailPhase?id='+ data +  '" class="btn btn-danger">Update</a>';
                 },
-                "width": "20%"
+                "width": "40%"
             }
         ]
     } );

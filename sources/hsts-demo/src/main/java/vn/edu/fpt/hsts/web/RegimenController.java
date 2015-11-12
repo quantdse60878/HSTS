@@ -37,23 +37,6 @@ public class RegimenController extends AbstractController {
     @Autowired
     private RegimenService regimenService;
 
-    @RequestMapping(value = "/regimenList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public RegimenPageModel getRegimens(
-            @RequestParam(value = "name", required = false, defaultValue = EMPTY) final String name,
-            @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
-            @RequestParam(value = "pageSize", required = false, defaultValue = UNLIMIT_PAGE_SIZE) final int pageSize) {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            LOGGER.info("name[{}], page[{}], pageSize[{}]", name, page, pageSize);
-            return regimenService.regimens(name, page, pageSize);
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
-
-
-
     @RequestMapping(value = "/detailRegimen", method = RequestMethod.GET)
     public ModelAndView detailRegimen(@RequestParam("id") final int id) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -66,6 +49,21 @@ public class RegimenController extends AbstractController {
             final RegimenModel regimenModel = regimenService.regimenInfo(id);
             mav.addObject("REGIMEN", regimenModel);
             return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/regimenList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public RegimenPageModel getRegimens(
+            @RequestParam(value = "name", required = false, defaultValue = EMPTY) final String name,
+            @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
+            @RequestParam(value = "pageSize", required = false, defaultValue = UNLIMIT_PAGE_SIZE) final int pageSize) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("name[{}], page[{}], pageSize[{}]", name, page, pageSize);
+            return regimenService.regimens(name, page, pageSize);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

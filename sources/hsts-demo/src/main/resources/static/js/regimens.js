@@ -47,19 +47,15 @@ $(document).ready(function(){
                 "render": function ( data, type, full, meta ) {
                     return '<a href="/detailRegimen?id='+ data.id +  '" >' + data.illness.name + '</a>';
                 },
-                "width": "30%"
+                "width": "20%"
             },
             // col 3
             {
               "data": "illness.description",
-                "width": "30%"
+                "width": "50%"
             },
             // col 4
-            {
-              "data": "numberOfPhase",
-                "width": "10%"
-            },
-            // col 5
+
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {

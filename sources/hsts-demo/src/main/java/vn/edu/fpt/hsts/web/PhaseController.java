@@ -35,6 +35,21 @@ public class PhaseController extends AbstractController {
     @Autowired
     private RegimenService regimenService;
 
+    @RequestMapping(value = "/detailPhase", method = RequestMethod.GET)
+    public ModelAndView phaseDetail(@RequestParam("phaseId") final int phaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}]", phaseId);
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("phaseDetail");
+
+            // Set info data
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
     @RequestMapping(value = "/phase/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public PhasePageModel phaseInfo(@RequestParam("regimenId") final int regimenId) {
@@ -47,19 +62,5 @@ public class PhaseController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "/detailPhase", method = RequestMethod.GET)
-    public ModelAndView phaseDetail(@RequestParam("phaseId") final int phaseId) {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            LOGGER.info("phaseId[{}]", phaseId);
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("phaseDetail");
 
-            // Set info data
-
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
 }
