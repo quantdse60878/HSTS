@@ -488,16 +488,21 @@ public class DoctorService extends AbstractService {
         }
     }
 
-    public DoctorPageModel getDoctors(final String nameSearch, final int page, final int pageSize) {
+    public DoctorPageModel getDoctors(final String nameSearch, final int roleId, final int page, final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("nameSearch[{}], page[{}], pageSize[{}]", nameSearch, page, pageSize);
+            LOGGER.info("nameSearch[{}], roleId[{}], page[{}], pageSize[{}]", nameSearch, roleId, page, pageSize);
             // page 0, page size 5
             final PageRequest pageRequest = new PageRequest(page, pageSize);
             final String searchCond = "%" + nameSearch + "%";
 
-            // 10 element, content = 5, total result: 10, total page : 2
-            Page<Doctor> doctors = doctorRepo.findByNameLike(searchCond, IDbConsts.IAccountStatus.ACTIVE, pageRequest);
+            Page<Doctor> doctors = null;
+            if (roleId > 0) {
+                doctors = doctorRepo.findByRoleAndNameLike(searchCond, IDbConsts.IAccountStatus.ACTIVE, roleId, pageRequest);
+            } else {
+                doctors = doctorRepo.findByNameLike(searchCond, IDbConsts.IAccountStatus.ACTIVE, pageRequest);
+            }
+
             final DoctorPageModel pageModel = new DoctorPageModel(doctors);
             return pageModel;
         } finally {
