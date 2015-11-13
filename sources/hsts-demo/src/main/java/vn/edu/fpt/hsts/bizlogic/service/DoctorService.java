@@ -460,7 +460,7 @@ public class DoctorService extends AbstractService {
                         LOGGER.info("propertyRecords: " + propertyRecords.size());
                         for (int j = 0; j < propertyRecords.size(); j++) {
                             PropertyRecord propertyRecord = propertyRecords.get(j);
-                            kcalConsumed += Integer.parseInt(propertyRecord.getParamMeasurementValue());
+                            kcalConsumed += Float.parseFloat(propertyRecord.getParamMeasurementValue());
                         }
 
                     }
