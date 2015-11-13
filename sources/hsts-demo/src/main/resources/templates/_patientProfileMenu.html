@@ -41,13 +41,13 @@
         <a style="color: #337ab7;" data-toggle="modal" data-target="#medi_img"><span class="fa fa-image"></span> Image</a>
     </div>
 
-    <p class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-              th:text="${MEDI_HIS}"></p>
+    <textarea class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+              th:text="${MEDI_HIS}"></textarea>
 
     <label for="clinicalSymptoms" class="control-label">Symptoms:</label>
 
-    <p class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
-              th:text="${APPOINTMENT.medicalRecord.symptoms}"></p>
+    <textarea class="form-control" readonly="readonly" style="text-align: right;border: none;background-color: inherit;box-shadow: none;"
+              th:text="${APPOINTMENT.medicalRecord.symptoms}"></textarea>
 
 </div>
 <!-- /.box-body -->
