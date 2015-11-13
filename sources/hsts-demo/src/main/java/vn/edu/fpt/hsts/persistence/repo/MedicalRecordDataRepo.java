@@ -28,4 +28,7 @@ public interface MedicalRecordDataRepo extends JpaRepository<MedicalRecordData, 
     public List<MedicalRecordData> findRecordDataByAppointment(@Param(value = "oldAppointment") final Appointment oldAppointment,
                                                                @Param(value = "oldMeetingDate") final Date oldMeetingDate,
                                                                @Param(value = "meetingDate") final Date meetingDate);
+
+    @Query(value = "SELECT * medicalrecorddata WHERE appointmentId = ?1", nativeQuery = true)
+    public List<MedicalRecordData> findRecordDataByAppointmentId(int appointmentId);
 }

@@ -27,9 +27,9 @@
         <td class="form-group">
             <select class="form-control" th:name="pPresModels[__${row.index}__].pTime" data-rule-min="1" data-msg-min="Please select.">
                 <option th:each="time : ${TIMES}"
-                        th:selected="${practicePhase.numberOfTime != time.numOfTime}"
                         th:value="${time.numOfTime}"
-                        th:text="${time.numOfTime}"></option>
+                        th:text="${time.numOfTime}"
+                        th:selected="${practicePhase.numberOfTime == time.numOfTime}"></option>
             </select>
         </td>
         <td class="form-group">
