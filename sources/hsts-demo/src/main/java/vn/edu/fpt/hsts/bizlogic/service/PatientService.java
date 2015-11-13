@@ -895,4 +895,14 @@ public class PatientService extends AbstractService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public int findPatientByAppointmentId(final int appointmentId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final Appointment appointment = appointmentRepo.findOne(appointmentId);
+            return appointment.getMedicalRecord().getPatient().getId();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

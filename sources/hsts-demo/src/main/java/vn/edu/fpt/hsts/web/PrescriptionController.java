@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import vn.edu.fpt.hsts.bizlogic.service.FoodIngredientService;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordDataService;
 import vn.edu.fpt.hsts.bizlogic.service.NotifyService;
+import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
@@ -62,6 +64,12 @@ public class PrescriptionController extends AbstractController{
 
     @Autowired
     private TreatmentService treatmentService;
+
+    /**
+     * The {@link PatientService}.
+     */
+    @Autowired
+    private PatientService patientService;
 
     /**
      * Create Prescription Page
@@ -174,9 +182,10 @@ public class PrescriptionController extends AbstractController{
      * @return
      */
     @RequestMapping(value="prescription", method=RequestMethod.GET)
-    public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel,
-                                         @RequestParam("appointmentId") final int appointmentId,
-                                         @RequestParam(value = "appointmentDate", required = true) final String appointmentDate) throws BizlogicException {
+    public ModelAndView makePrescription(@RequestParam("appointmentId") final int appointmentId,
+                                         @RequestParam(value = "appointmentDate", required = true) final String appointmentDate,
+            @ModelAttribute PrescriptionModel prescriptionModel, BindingResult br
+                                         ) throws BizlogicException {
 //        , BindingResult br
 //        for(int i = 0; i < br.getAllErrors().size(); i++) {
 //            System.out.println(br.getAllErrors().get(i).getObjectName() + "--++FUCK++--");
@@ -184,6 +193,19 @@ public class PrescriptionController extends AbstractController{
 
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+            if (br.hasErrors()){
+                LOGGER.error("Error while make prescrition");
+                for (FieldError fieldError: br.getFieldErrors()) {
+                    LOGGER.error("error[{}], data[{}]", fieldError.getField(), fieldError.getRejectedValue());
+                }
+                // Find patientid
+                final int patientId = patientService.findPatientByAppointmentId(appointmentId);
+                if (0 < patientId) {
+                    String url = "redirect:createPrescription?patientID=" + patientId;
+                    return new ModelAndView(url);
+                }
+            }
+
             LOGGER.info("appointmentId[{}], appointmentDate[{}]", appointmentId, appointmentDate);
             ModelAndView mav = new ModelAndView();
             mav.setViewName("makePrescription");

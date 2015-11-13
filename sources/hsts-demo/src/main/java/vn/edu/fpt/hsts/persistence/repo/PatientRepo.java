@@ -39,5 +39,4 @@ public interface PatientRepo extends JpaRepository<Patient, Integer> {
 
     @Query(value = "select patient.* from Patient patient join MedicalRecord mr on patient.id = mr.patientId join Appointment a on mr.id = a.medicalRecordId join Doctor d on mr.doctorId = d.id join Account acc on d.accountId = acc.id where a.appointmentDateTime = :appointmentDateTime and a.status = 3 and mr.status in (1,3) and acc.id = :accountId", nativeQuery = true)
     List<Patient> findByAppoinmentDateAndAcc(@Param(value = "appointmentDateTime") final Date currentDate, @Param(value = "accountId") final int accountId);
-
 }
