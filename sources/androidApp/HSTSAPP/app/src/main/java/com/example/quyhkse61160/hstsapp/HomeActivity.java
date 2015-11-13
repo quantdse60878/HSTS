@@ -554,9 +554,13 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 break;
             }
             case R.id.action_logout:{
-                Constant.accountId = "";
-                Constant.PATIENT_NAME = "";
-                Constant.patientId = "";
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
+                if(!sharedPreferences.getString(Constant.PREF_HADSELECTDEVICE, "").equals("")){
+                    sharedPreferences.edit().remove(Constant.PREF_HADSELECTDEVICE).commit();
+                }
+                if(!sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")){
+                    sharedPreferences.edit().remove(Constant.PREF_ACCOUNTID_HADLOGIN).commit();
+                }
                 Intent logout = new Intent(getApplication(),LoginActivity.class);
                 startActivity(logout);
                 break;
