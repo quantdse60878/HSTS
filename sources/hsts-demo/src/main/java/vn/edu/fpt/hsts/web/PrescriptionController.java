@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,7 @@ import vn.edu.fpt.hsts.persistence.entity.Phase;
 import vn.edu.fpt.hsts.persistence.entity.PracticeTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,15 +62,6 @@ public class PrescriptionController extends AbstractController{
 
     @Autowired
     private TreatmentService treatmentService;
-
-    @Autowired
-    private FoodIngredientService foodIngredientService;
-
-    @Autowired
-    private PreventionCheckService preventionCheckService;
-
-    @Autowired
-    private MedicalRecordDataService medicalRecordDataService;
 
     /**
      * Create Prescription Page
@@ -137,11 +130,23 @@ public class PrescriptionController extends AbstractController{
 
             // Find illness form diagnostic
             Illness illness = illnessService.findByName(diagnostic);
+
             if(illness == null) {
                 illness = illnessService.createNewIllness(diagnostic);
             } else {
                 // Find phase for diagnostic
-                final Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
+                Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
+                // illness != null, da kham va chua benh
+                if (null != appointment.getMedicalRecord().getIllness()){
+                    // neu khac nhau la bac si da doi benh an . sugest voi date moi
+                    if (illness.getId() != appointment.getMedicalRecord().getIllness().getId()){
+                        Date date = new Date();
+                        // Find phase for diagnostic
+                        phase = illnessService.getPhaseSugest(date, illness);
+                    }
+                }
+
+
                 if (phase == null) {
                     notify(mav, false, "Fail!!! ", "No regimen for suggest treatment");
                 } else {
@@ -172,6 +177,11 @@ public class PrescriptionController extends AbstractController{
     public ModelAndView makePrescription(@ModelAttribute PrescriptionModel prescriptionModel,
                                          @RequestParam("appointmentId") final int appointmentId,
                                          @RequestParam(value = "appointmentDate", required = true) final String appointmentDate) throws BizlogicException {
+//        , BindingResult br
+//        for(int i = 0; i < br.getAllErrors().size(); i++) {
+//            System.out.println(br.getAllErrors().get(i).getObjectName() + "--++FUCK++--");
+//        }
+
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("appointmentId[{}], appointmentDate[{}]", appointmentId, appointmentDate);

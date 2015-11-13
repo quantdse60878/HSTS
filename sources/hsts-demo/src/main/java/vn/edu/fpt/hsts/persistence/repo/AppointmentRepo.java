@@ -7,6 +7,7 @@
  */
 package vn.edu.fpt.hsts.persistence.repo;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -48,4 +49,7 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
     @Query("select a from Appointment a where meetingDate = :date and medicalRecord.patient.id = :patientId")
     public Appointment findAppointmentByDate(@Param("date") final Date date, @Param("patientId") final int patientId);
 
+
+    @Query("select a from Appointment a where status  = :status and medicalRecord.patient.id = :patientId ORDER BY id DESC")
+    public Page<Appointment> findHistoryByPatientId(@Param("status") final byte status, @Param("patientId") final int patientId, final Pageable pageable);
 }

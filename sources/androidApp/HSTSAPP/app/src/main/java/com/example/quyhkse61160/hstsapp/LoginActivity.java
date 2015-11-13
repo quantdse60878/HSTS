@@ -59,8 +59,6 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
 public class LoginActivity extends ActionBarActivity {
 
     public static AssetManager am;
-    public static boolean hadRegisterReceiver = false;
-    protected final NetworkChangeReceiver mConnectionDetector = new NetworkChangeReceiver();
     protected final IntentFilter mIntentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
     public SharedPreferences sharedPreferences;
 
@@ -68,8 +66,13 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //KhuongMH
+        Constant.TIMES.add("07:00");
+        Constant.TIMES.add("09:00");
+        Constant.TIMES.add("12:00");
+        Constant.TIMES.add("15:00");
+        Constant.TIMES.add("18:00");
+        Constant.TIMES.add("21:00");
         Constant.DATA_FROM_SERVER = HSTSUtils.loadData(getAssets());
         //KhuongMH
         am = getAssets();
@@ -85,18 +88,13 @@ public class LoginActivity extends ActionBarActivity {
                 Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
                 LoginActivity.this.startActivity(myIntent);
             } else {
-                Intent myIntent = new Intent(LoginActivity.this, SelectDeviceActivity.class);
-                LoginActivity.this.startActivity(myIntent);
+//                Intent myIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+//                LoginActivity.this.startActivity(myIntent);
             }
         } else {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
             actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#4ABC02")));
-
-            if (!hadRegisterReceiver) {
-                hadRegisterReceiver = true;
-                registerReceiver(mConnectionDetector, mIntentFilter);
-            }
 
 
             setContentView(R.layout.activity_main);
@@ -108,11 +106,11 @@ public class LoginActivity extends ActionBarActivity {
                 public void onClick(View v) {
 
                     if(txtUsername.getText().toString().equals("258456") && txtPassword.getText().toString().equals("258456")) {
-                        Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+//                        Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+                        Intent continueIntent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(continueIntent);
-                    }
-
-                    if (txtUsername.getText().length() > 0 && txtPassword.getText().length() > 0) {
+                        finish();
+                    } else if (txtUsername.getText().length() > 0 && txtPassword.getText().length() > 0) {
 
                         LoginAsyncTask login = new LoginAsyncTask();
                         login.execute(txtUsername.getText().toString(), txtPassword.getText().toString());
@@ -268,6 +266,7 @@ public class LoginActivity extends ActionBarActivity {
                 editor.putString(Constant.PREF_PATIENTID_HADLOGIN,Constant.patientId);
                 editor.putString(Constant.PREF_PATIENT_NAME,Constant.PATIENT_NAME);
                 editor.commit();
+
                 Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
                 startActivity(continueIntent);
             }

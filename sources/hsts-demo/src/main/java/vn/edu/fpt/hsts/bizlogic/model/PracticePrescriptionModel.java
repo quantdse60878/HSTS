@@ -1,13 +1,15 @@
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Aking on 10/11/2015.
  */
-public class PracticePrescriptionModel {
+public class PracticePrescriptionModel implements Serializable{
     /**
      * Practice
      */
-    private int p;
+    private String p;
     /**
      * Practice Time
      */
@@ -24,18 +26,18 @@ public class PracticePrescriptionModel {
     public PracticePrescriptionModel() {
     }
 
-    public PracticePrescriptionModel(int p, int pTime, String pIntensity, String pNote) {
+    public PracticePrescriptionModel(String p, int pTime, String pIntensity, String pNote) {
         this.p = p;
         this.pTime = pTime;
         this.pIntensity = pIntensity;
         this.pNote = pNote;
     }
 
-    public int getP() {
+    public String getP() {
         return p;
     }
 
-    public void setP(int p) {
+    public void setP(String p) {
         this.p = p;
     }
 
@@ -64,20 +66,21 @@ public class PracticePrescriptionModel {
     }
 
     public boolean isValid(){
-        if (p <= 0){
+        if (null == p || p.isEmpty()){
             return false;
         } else if (pTime <= 0){
             return false;
-        } else if (null == pIntensity && pIntensity.isEmpty()){
+        } else if (null == pIntensity || pIntensity.isEmpty()){
             return false;
         }
         return true;
     }
+
     @Override
     public String toString() {
         return "PracticePrescriptionModel{" +
                 "p='" + p + '\'' +
-                ", pTime='" + pTime + '\'' +
+                ", pTime=" + pTime +
                 ", pIntensity='" + pIntensity + '\'' +
                 ", pNote='" + pNote + '\'' +
                 '}';

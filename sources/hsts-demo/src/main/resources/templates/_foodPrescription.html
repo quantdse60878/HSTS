@@ -6,41 +6,50 @@
 <h4>Foods</h4>
 
 <label class="form-lable">Nutritional Assessment</label>
-<a class="btn btn-link" onclick="popup('Nutritional')" th:if="${FOODINGREDIENT != null}">View Detail</a>
+<a class="btn btn-link" data-toggle="modal" data-target="#myModalNutritional" th:if="${FOODINGREDIENT != null}">View Detail</a>
 <small th:if="${FOODINGREDIENT != null}"> or</small>
 <a class="btn btn-link" th:href="@{/createNutrition(patientID=${PATIENT.id})}">Create New</a>
 
 <table class="table table-striped" id="Foods">
     <tr>
         <th style="width: 10px">#</th>
-        <th>Name</th>
-        <th>Times</th>
-        <th>Quantitative</th>
-        <th>Note</th>
+        <th style="min-width: 155px;">Name</th>
+        <th style="width: 80px;">Times</th>
+        <th style="width: 60px;">Quantity</th>
+        <th style="width: 110px;">Unit</th>
+        <th>Advice</th>
         <th>#</th>
     </tr>
     <tr>
-        <td>1</td>
-        <td style="min-width: 155px;" class="form-group">
-            <select class="form-control" th:field="*{fPresModels[0].f}" required="required" data-error="Choose at least one">
-                <option value="0" disabled="disabled">Select</option>
+        <td>1 </td>
+        <td class="form-group">
+            <select class="form-control" th:name="fPresModels[0].f" th:id="fPresModels0.f" onchange="findUnits(this)"
+                    data-msg-min="Please select." data-rule-min="1">
+                <option value="0">Select</option>
                 <option th:each="food : ${FOODS}" th:value="${food.id}"
                         th:text="${food.name}"></option>
             </select>
-            <div class="help-block with-errors"></div>
-        </td>
-        <td style="min-width: 120px;" class="form-group">
-            <select class="form-control" th:field="*{fPresModels[0].fTime}" required="required" data-error="Choose at least one">
-                <option value="0" disabled="disabled">Select</option>
-                <option th:each="time : ${TIMES}" th:value="${time}"
-                        th:text="${time}"></option>
-            </select>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td class="form-group">
-            <input type="text" class="form-control" th:field="*{fPresModels[0].fQuantity}"
-                   placeholder="Quantity" required="required" data-remote="/validateStr" data-error="Wrong input"/>
-            <div class="help-block with-errors"></div>
+            <select class="form-control" th:name="fPresModels[0].fTime"
+                    data-msg-min="Please select." data-rule-min="1">
+                <option th:each="time : ${TIMES}" th:value="${time.numOfTime}"
+                        th:text="${time.numOfTime}"></option>
+            </select>
+            <!--<div class="help-block with-errors"></div>-->
+        </td>
+        <td class="form-group">
+            <input type="text" class="form-control" th:field="*{fPresModels[0].fQuantity}" style="text-align: right;"
+                   placeholder="Quantity" data-rule-min="1" data-msg-min="Value must great than 1" data-rule-required="true" data-msg-required="Please input."/>
+            <!--<div class="help-block with-errors"></div>-->
+        </td>
+        <td class="form-group">
+            <select class="form-control" name="fPresModels[0].fUnit" id="fPresModels0fUnit"
+                    data-msg-min="Please select." data-rule-min="1">
+                <option value="0">Select</option>
+            </select>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td>
             <input type="text" class="form-control"

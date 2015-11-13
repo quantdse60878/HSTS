@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
 
-<h4>Medicine</h4>
+<h4>Medicines</h4>
 <!-- table medicine -->
 <table class="table table-striped" id="medicine">
     <tr>
@@ -13,7 +13,7 @@
         <th>Times</th>
         <th>Quantity</th>
         <th>Unit</th>
-        <th>Note</th>
+        <th>Advice</th>
     </tr>
     <tr th:each="medicalTreatment,row : ${TREATMENT.medicineTreatmentList}">
         <td th:text="${row.count}"></td>

@@ -7,34 +7,27 @@
 <table class="table table-striped" id="Practice">
     <tr>
         <th style="width: 10px">#</th>
-        <th>Name</th>
-        <th>Times</th>
-        <th>Quantitative</th>
-        <th>Note</th>
+        <th style="width: 160px;">Name</th>
+        <th style="width: 80px;">Times</th>
+        <th style="width: 100px;">Quantitative</th>
+        <th>Advice</th>
         <th>#</th>
     </tr>
     <tr>
         <td>1</td>
-        <td style="min-width: 155px;" class="form-group">
-            <select class="form-control" th:field="*{pPresModels[0].p}" required="required" data-error="Choose at least one">
-                <option value="0" disabled="disabled">Select</option>
-                <option th:each="practice : ${PRACTICES}" th:value="${practice.id}"
-                        th:text="${practice.name}"></option>
-            </select>
-            <div class="help-block with-errors"></div>
-        </td>
-        <td style="min-width: 120px;" class="form-group">
-            <select class="form-control" th:field="*{pPresModels[0].pTime}" data-error="Choose at least one">
-                <option value="0" disabled="disabled">Select</option>
-                <option th:each="time : ${TIMES}" th:value="${time}"
-                        th:text="${time}"></option>
-            </select>
-            <div class="help-block with-errors"></div>
+        <td class="form-group">
+            <input type="text" placeholder="Practice Name" data-rule-required="true" data-msg-required="Please input." class="form-control" name="pPresModels[0].p" id="pPresModelsP0" oninput="viewAutoComplete('pPresModelsP0','pPresModelsP0item')"/>
+            <div id="pPresModelsP0item" class="form-control" style="visibility: hidden;height: auto;"></div>
         </td>
         <td class="form-group">
-            <input type="text" class="form-control" th:field="*{pPresModels[0].pIntensity}"
-                   placeholder="Quantity" required="required" data-remote="/validateStr" data-error="Wrong input"/>
-            <div class="help-block with-errors"></div>
+            <select class="form-control" th:name="pPresModels[0].pTime" data-rule-min="1" data-msg-min="Please select.">
+                <option th:each="time : ${TIMES}" th:value="${time.numOfTime}"
+                        th:text="${time.numOfTime}"></option>
+            </select>
+        </td>
+        <td class="form-group">
+            <input type="text" class="form-control" th:field="*{pPresModels[0].pIntensity}" data-rule-required="true" data-msg-required="Please input."
+                   placeholder="Quantity"/>
         </td>
         <td>
             <input type="text" class="form-control"
@@ -50,15 +43,15 @@
 
 <div class="form-group" style="margin-top: 15px;" th:if="${DATAPRACS != null}">
     <label class="control-label col-md-3">Practice Data</label>
-    <a class="btn btn-link" onclick="popup('praticeResult')">View Detail</a>
+    <a class="btn btn-link" data-toggle="modal" data-target="#practiceResult">View Detail</a>
 </div>
 <div class="form-group">
     <label class="col-md-3 control-label">Kcal Estimate</label>
     <div class="col-md-2">
-        <input th:field="*{kcalRequire}" style="text-align: right;" type="text" class="form-control hsts" data-remote="/validateData" required="required" data-error="Wrong input"/>
+        <input th:name="kcalRequire" data-rule-required="true" data-msg-required="Please input." th:value="${#numbers.formatDecimal(model.kcalRequire, 1, 'POINT', 0, 'COMMA')}" style="text-align: right;" type="text" class="form-control hsts"/>
+        <!--<div class="help-block with-errors"></div>-->
     </div>
     <label class="col-md-1 control-label">Kcal/Day</label>
-    <div class="help-block with-errors"></div>
 </div>
 </body>
 </html>

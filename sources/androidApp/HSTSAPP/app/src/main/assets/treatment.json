@@ -1,10 +1,10 @@
 [
   {
     "illnessName": "Béo phì",
-    "nextAppointment": "2015-10-07 00:00:00.0",
+    "nextAppointment": "2015-11-13 00:00:00.0",
     "appointmentId": 2,
-    "fromDate": "2015-10-01 00:00:00.0",
-    "toDate": "2015-10-07 00:00:00.0",
+    "fromDate": "2015-11-13 00:00:00.0",
+    "toDate": "2015-10-013 00:00:00.0",
     "caloriesBurnEveryday": "800",
     "listFoodTreatment": [
       {
@@ -29,13 +29,13 @@
         "name": "Cá",
         "quantitative": "nhiều",
         "advice": "a",
-        "numberOfTime": 3
+        "numberOfTime": 6
       },
       {
         "name": "Hoa quả",
         "quantitative": "nhiều",
         "advice": "ăn sau khi ăn cơm",
-        "numberOfTime": 2
+        "numberOfTime": 6
       }
     ],
     "listMedicineTreatment": [
@@ -44,7 +44,7 @@
         "quantitative": "1",
         "unit": "viên",
         "advice": "uống trước khi ăn",
-        "numberOfTime": 3
+        "numberOfTime": 6
       },
       {
         "name": "Orlistat",
@@ -58,7 +58,7 @@
         "quantitative": "1",
         "unit": "gói",
         "advice": "uống trước khi ăn",
-        "numberOfTime": 3
+        "numberOfTime": 6
       }
     ],
     "listPracticeTreatment": [
@@ -72,13 +72,13 @@
         "name": "Chạy bộ",
         "quantitative": "20 phút",
         "advice": "chạy liên tục",
-        "numberOfTime": 2
+        "numberOfTime": 6
       },
       {
         "name": "Đạp xe đạp",
         "quantitative": "30 phút",
         "advice": "đi xe đạp nhẹ nhàng",
-        "numberOfTime": 2
+        "numberOfTime": 6
       }
     ]
   }

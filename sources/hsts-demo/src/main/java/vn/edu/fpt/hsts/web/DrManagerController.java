@@ -12,7 +12,11 @@ import vn.edu.fpt.hsts.common.IConsts;
  * Created by Aking on 10/28/2015.
  */
 @Controller
-public class DrManagerController {
+public class DrManagerController extends AbstractController {
+
+    /**
+     * The logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(DrManagerController.class);
 
     @RequestMapping(value = "regimens", method = RequestMethod.GET)
@@ -27,4 +31,6 @@ public class DrManagerController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+
 }

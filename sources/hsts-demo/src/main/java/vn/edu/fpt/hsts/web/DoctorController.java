@@ -28,12 +28,14 @@ import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
+import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
+import vn.edu.fpt.hsts.web.session.UserSession;
 
 import java.util.List;
 
@@ -77,10 +79,8 @@ public class DoctorController extends AbstractController{
     private TreatmentService treatmentService;
 
     @Autowired
-    private FoodIngredientService foodIngredientService;
+    private UserSession userSession;
 
-    @Autowired
-    private PreventionCheckService preventionCheckService;
 
     /**
      * The doctor patients page mapping
@@ -94,7 +94,7 @@ public class DoctorController extends AbstractController{
             mav.setViewName("doctorPatients");
 
             // Get list patients
-            List<Patient> patientList = patientService.getPatientByApponitmentDate();
+            List<Patient> patientList = patientService.getPatientByApponitmentDateOfDoctor(userSession.getId());
             LOGGER.info("listpatiens: " + patientList.size());
             mav.addObject("LISTPATIENTS", patientList);
 
@@ -233,6 +233,18 @@ public class DoctorController extends AbstractController{
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             return doctorService.getDoctors(name, page, pageSize);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/uploadedHistoryImg", method = RequestMethod.GET)
+    @ResponseBody
+    public byte[] getUploadedImage(@RequestParam(value = "filename") final String fileName) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("fileName[{}]", fileName);
+            return patientService.getUploadedHistoryImg(fileName);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

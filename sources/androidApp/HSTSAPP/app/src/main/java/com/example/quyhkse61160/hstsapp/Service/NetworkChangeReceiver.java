@@ -26,13 +26,13 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 
                 //A function with many code overhere
                 Constant.haveInternet = true;
-                context.startService(notifyIntent);
+//                context.startService(notifyIntent);
 
 
             } else {
                 Log.i("QUYYYYYY INTERNET", "not connected " + isConnected);
-                Constant.haveInternet = false;
-                context.stopService(notifyIntent);
+//                Constant.haveInternet = false;
+//                context.stopService(notifyIntent);
             }
         }
 

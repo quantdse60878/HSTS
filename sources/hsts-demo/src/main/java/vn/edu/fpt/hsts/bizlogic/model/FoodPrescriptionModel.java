@@ -1,9 +1,11 @@
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Aking on 10/11/2015.
  */
-public class FoodPrescriptionModel {
+public class FoodPrescriptionModel implements Serializable{
     /**
      * Food
      */
@@ -15,20 +17,17 @@ public class FoodPrescriptionModel {
     /**
      * Food Quantity
      */
-    private String fQuantity;
+    private int fQuantity;
+    /**
+     * Food Unit
+     */
+    private int fUnit;
     /**
      * Food Note
      */
     private String fNote;
 
     public FoodPrescriptionModel() {
-    }
-
-    public FoodPrescriptionModel(int f, int fTime, String fQuantity, String fNote) {
-        this.f = f;
-        this.fTime = fTime;
-        this.fQuantity = fQuantity;
-        this.fNote = fNote;
     }
 
     public int getF() {
@@ -47,12 +46,20 @@ public class FoodPrescriptionModel {
         this.fTime = fTime;
     }
 
-    public String getfQuantity() {
+    public int getfQuantity() {
         return fQuantity;
     }
 
-    public void setfQuantity(String fQuantity) {
+    public void setfQuantity(int fQuantity) {
         this.fQuantity = fQuantity;
+    }
+
+    public int getfUnit() {
+        return fUnit;
+    }
+
+    public void setfUnit(int fUnit) {
+        this.fUnit = fUnit;
     }
 
     public String getfNote() {
@@ -68,17 +75,21 @@ public class FoodPrescriptionModel {
             return false;
         } else if (fTime <= 0){
             return false;
-        } else if (null == fQuantity && fQuantity.isEmpty()){
+        } else if (fQuantity <= 0){
+            return false;
+        } else if (fUnit <= 0){
             return false;
         }
         return true;
     }
+
     @Override
     public String toString() {
         return "FoodPrescriptionModel{" +
-                "f='" + f + '\'' +
-                ", fTime='" + fTime + '\'' +
+                "f=" + f +
+                ", fTime=" + fTime +
                 ", fQuantity='" + fQuantity + '\'' +
+                ", fUnit=" + fUnit +
                 ", fNote='" + fNote + '\'' +
                 '}';
     }

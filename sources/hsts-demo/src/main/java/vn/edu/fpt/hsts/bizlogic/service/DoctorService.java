@@ -131,6 +131,9 @@ public class DoctorService extends AbstractService {
     @Autowired
     private PropertyRecordRepo propertyRecordRepo;
 
+    @Autowired
+    private UnitOfFoodRepo unitOfFoodRepo;
+
     @Value("${hsts.default.treatment.long}")
     private int treatmentLong;
 
@@ -151,7 +154,7 @@ public class DoctorService extends AbstractService {
                     LOGGER.debug("Got {} records", doctors.size());
                 }
                 final List<DoctorModel> modelList = new ArrayList<DoctorModel>();
-                for (Doctor doctor: doctors) {
+                for (Doctor doctor : doctors) {
                     DoctorModel model = new DoctorModel();
                     model.fromEntity(doctor);
                     modelList.add(model);
@@ -166,8 +169,8 @@ public class DoctorService extends AbstractService {
 
     @Transactional(rollbackOn = BizlogicException.class)
     public boolean makePrescription(final PrescriptionModel prescription,
-                                 final int appointmentId,
-                                 final String appointmentDate) {
+                                    final int appointmentId,
+                                    final String appointmentDate) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("prescription[{}], appointmentId[{}], appointmentDate[{}]", prescription, appointmentId, appointmentDate);
@@ -180,7 +183,7 @@ public class DoctorService extends AbstractService {
             appointment.setMeetingDate(new Date());
             appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
             Date toDate = null;
-            final MedicalRecord medicalRecord = appointment.getMedicalRecord();
+            MedicalRecord medicalRecord = appointment.getMedicalRecord();
             final String dianostic = prescription.getDiagnostic();
             if (StringUtils.isNotEmpty(dianostic)) {
                 Illness illness = illnessRepo.findByName(dianostic);
@@ -190,6 +193,27 @@ public class DoctorService extends AbstractService {
                     illness.setDescription(dianostic);
                     illnessRepo.saveAndFlush(illness);
                 }
+                if (null != medicalRecord.getIllness()){
+                    if (medicalRecord.getIllness().getId() != illness.getId()){
+                        // Close medicalrecord
+                        Doctor doctor = medicalRecord.getDoctor();
+                        Patient patient = medicalRecord.getPatient();
+                        String symptoms = medicalRecord.getSymptoms();
+                        String medicalHistory = medicalRecord.getMedicalHistory();
+                        Date curDate = new Date();
+                        medicalRecord.setEndTime(curDate);
+                        medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
+                        medicalRecordRepo.saveAndFlush(medicalRecord);
+                        // Create new medicalrecord
+                        medicalRecord = new MedicalRecord();
+                        medicalRecord.setStartTime(curDate);
+                        medicalRecord.setDoctor(doctor);
+                        medicalRecord.setPatient(patient);
+                        medicalRecord.setSymptoms(symptoms);
+                        medicalRecord.setMedicalHistory(medicalHistory);
+                    }
+                }
+
                 medicalRecord.setIllness(illness);
             }
             medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.ON_TREATING);
@@ -228,10 +252,10 @@ public class DoctorService extends AbstractService {
             // Find old nearest parent appointment
             LOGGER.info("Find old nearest parent appointment : Start");
             final Appointment oldAppointment = appointmentRepo.findParentAppointment(appointmentId);
-            if(null != oldAppointment) {
+            if (null != oldAppointment) {
                 final List<Treatment> lastTreatments = oldAppointment.getTreatmentList();
                 if (null != lastTreatments && !lastTreatments.isEmpty()) {
-                    for(Treatment treatment: lastTreatments) {
+                    for (Treatment treatment : lastTreatments) {
                         treatment.setStatus(IDbConsts.ITreatmentStatus.FINISHED);
                         treatment.setToDate(new Date());
                         treatmentRepo.save(treatment);
@@ -249,6 +273,7 @@ public class DoctorService extends AbstractService {
                 newTreatment.setFromDate(new Date());
                 newTreatment.setCaloriesBurnEveryday(prescription.getKcalRequire());
                 newTreatment.setToDate(toDate);
+                newTreatment.setNote(prescription.getNote());
                 treatmentRepo.save(newTreatment);
                 LOGGER.info("Create new treatment : End");
                 // TODO implement for medicine, food, practice and multiple row, validate data
@@ -259,24 +284,31 @@ public class DoctorService extends AbstractService {
                 final List<MedicinePrescriptionModel> mPresModels = prescription.getmPresModels();
                 if (null != mPresModels && !mPresModels.isEmpty()) {
 
-                    for(MedicinePrescriptionModel medicineModel: mPresModels) {
+                    for (MedicinePrescriptionModel medicineModel : mPresModels) {
                         if (LOGGER.isDebugEnabled()) {
                             LOGGER.debug(medicineModel.toString());
                         }
                         if (medicineModel.isValid()) {
-                        Medicine medicine = medicineRepo.findOne(medicineModel.getM());
-                        if (null == medicine) {
-                            LOGGER.info("Medicine with id[{}] is not found", null, medicineModel.getM());
-                            return false;
+                            LOGGER.info("Medicine valid");
+                            Medicine medicine = medicineRepo.findOne(medicineModel.getM());
+                            if (null == medicine) {
+                                LOGGER.info("Medicine with id[{}] is not found", null, medicineModel.getM());
+                                // Create new medicine
+//                                medicine = new Medicine();
+//                                medicine.setName(medicineModel.getM());
+//                                medicine.setUnit(medicineModel.getmUnit());
+//                                medicineRepo.saveAndFlush(medicine);
+//                                LOGGER.info("Create new medicine", medicine.getName());
+                            }
+                            LOGGER.info("Create MedicineTreatment");
+                            MedicineTreatment medicineTreatment = new MedicineTreatment();
+                            medicineTreatment.setMedicine(medicine);
+                            medicineTreatment.setNumberOfTime(medicineModel.getmTime());
+                            medicineTreatment.setQuantitative(medicineModel.getmQuantity());
+                            medicineTreatment.setAdvice(medicineModel.getmNote());
+                            medicineTreatment.setTreatment(newTreatment);
+                            medicineTreatmentRepo.save(medicineTreatment);
                         }
-                        MedicineTreatment medicineTreatment = new MedicineTreatment();
-                        medicineTreatment.setMedicine(medicine);
-                        medicineTreatment.setNumberOfTime(medicineModel.getmTime());
-                        medicineTreatment.setQuantitative(medicineModel.getmQuantity());
-                        medicineTreatment.setAdvice(medicineModel.getmNote());
-                        medicineTreatment.setTreatment(newTreatment);
-                        medicineTreatmentRepo.save(medicineTreatment);
-                    }
                     }
 
                 }
@@ -285,22 +317,28 @@ public class DoctorService extends AbstractService {
                 // Food
                 LOGGER.info("Create new FoodTreatment : Start");
                 final List<FoodPrescriptionModel> fPresModels = prescription.getfPresModels();
-                if(null != fPresModels && !fPresModels.isEmpty()) {
-                    for (FoodPrescriptionModel foodModel: fPresModels) {
+                if (null != fPresModels && !fPresModels.isEmpty()) {
+                    for (FoodPrescriptionModel foodModel : fPresModels) {
                         if (foodModel.isValid()) {
-                        Food food = foodRepo.findOne(foodModel.getF());
-                        if (null == food) {
-                            LOGGER.info("Food with id[{}] is not found", null, foodModel.getF());
-                            return false;
+                            Food food = foodRepo.findOne(foodModel.getF());
+                            if (null == food) {
+                                LOGGER.info("Food with id[{}] is not found", null, foodModel.getF());
+                                return false;
+                            }
+                            UnitOfFood unitOfFood = unitOfFoodRepo.findOne(foodModel.getfUnit());
+                            if (null == unitOfFood) {
+                                LOGGER.info("unitOfFood with id[{}] is not found", null, foodModel.getfUnit());
+                                return false;
+                            }
+                            FoodTreatment foodTreatment = new FoodTreatment();
+                            foodTreatment.setFood(food);
+                            foodTreatment.setTreatment(newTreatment);
+                            foodTreatment.setNumberOfTime(foodModel.getfTime());
+                            foodTreatment.setQuantitative(foodModel.getfQuantity());
+                            foodTreatment.setUnitName(unitOfFood.getUnitName());
+                            foodTreatment.setAdvice(foodModel.getfNote());
+                            foodTreatmentRepo.save(foodTreatment);
                         }
-                        FoodTreatment foodTreatment = new FoodTreatment();
-                        foodTreatment.setFood(food);
-                        foodTreatment.setTreatment(newTreatment);
-                        foodTreatment.setNumberOfTime(foodModel.getfTime());
-                        foodTreatment.setQuantitative(foodModel.getfQuantity());
-                        foodTreatment.setAdvice(foodModel.getfNote());
-                        foodTreatmentRepo.save(foodTreatment);
-                    }
                     }
 
                 }
@@ -311,21 +349,25 @@ public class DoctorService extends AbstractService {
                 final List<PracticePrescriptionModel> pPresModels = prescription.getpPresModels();
                 if (null != pPresModels && !pPresModels.isEmpty()) {
 
-                    for(PracticePrescriptionModel practiceModel: pPresModels) {
+                    for (PracticePrescriptionModel practiceModel : pPresModels) {
                         if (practiceModel.isValid()) {
-                        final Practice practice = practiceRepo.findOne(practiceModel.getP());
-                        if (null == practice) {
-                            LOGGER.info("Practice with name[{}] is not found", null, practiceModel.getP());
-                            return false;
+                            Practice practice = practiceRepo.findByName(practiceModel.getP());
+                            if (null == practice) {
+                                LOGGER.info("Practice with name[{}] is not found", null, practiceModel.getP());
+                                // Create new practice
+                                practice = new Practice();
+                                practice.setName(practiceModel.getP());
+                                practiceRepo.saveAndFlush(practice);
+                                LOGGER.info("Create new practice", practice.getName());
+                            }
+                            PracticeTreatment practiceTreatment = new PracticeTreatment();
+                            practiceTreatment.setTreatment(newTreatment);
+                            practiceTreatment.setNumberOfTime(practiceModel.getpTime());
+                            practiceTreatment.setPractice(practice);
+                            practiceTreatment.setAdvice(practiceModel.getpNote());
+                            practiceTreatment.setTimeDuration(practiceModel.getpIntensity());
+                            practiceTreatmentRepo.save(practiceTreatment);
                         }
-                        PracticeTreatment practiceTreatment = new PracticeTreatment();
-                        practiceTreatment.setTreatment(newTreatment);
-                        practiceTreatment.setNumberOfTime(practiceModel.getpTime());
-                        practiceTreatment.setPractice(practice);
-                        practiceTreatment.setAdvice(practiceModel.getpNote());
-                        practiceTreatment.setTimeDuration(practiceModel.getpIntensity());
-                        practiceTreatmentRepo.save(practiceTreatment);
-                    }
                     }
                 }
                 LOGGER.info("Create new PracticeTreatment : End");
@@ -344,7 +386,7 @@ public class DoctorService extends AbstractService {
             notify.setMessage(String.valueOf(patientId));
             notifyRepo.saveAndFlush(notify);
             LOGGER.info("Create notify to patient : End");
-            
+
             // flush all change to db
             LOGGER.info("Flush all change to db");
             appointmentRepo.flush();
@@ -360,7 +402,7 @@ public class DoctorService extends AbstractService {
         } catch (Exception e) {
             LOGGER.info("Error while making new prescription: {}", e.getMessage());
             return false;
-        }finally {
+        } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
@@ -373,16 +415,16 @@ public class DoctorService extends AbstractService {
 
             // Find phase for diagnostic
             final Phase phase = illnessService.getPhaseSugestion(appointmentId, illness);
-            if(null == phase) {
+            if (null == phase) {
                 return Collections.emptyList();
             }
             final List<MedicinePhase> medicinePhases = phase.getMedicinePhaseList();
-            if(null != medicinePhases && !medicinePhases.isEmpty()) {
-                if (LOGGER.isDebugEnabled()){
-                   LOGGER.debug("Got {} records", medicinePhases.size());
+            if (null != medicinePhases && !medicinePhases.isEmpty()) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Got {} records", medicinePhases.size());
                 }
                 final List<MedicinePhaseModel> listData = new ArrayList<MedicinePhaseModel>();
-                for (MedicinePhase medicinePhase: medicinePhases) {
+                for (MedicinePhase medicinePhase : medicinePhases) {
                     MedicinePhaseModel model = new MedicinePhaseModel();
                     model.fromEntity(medicinePhase);
                     listData.add(model);
@@ -404,7 +446,8 @@ public class DoctorService extends AbstractService {
 
             if (null != oldAppointment) {
                 Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(oldAppointment.getId()).get(0);
-                List<MedicalRecordData> medicalRecordDatas = medicalRecordDataRepo.findRecordDataByAppointment(oldAppointment, oldAppointment.getMeetingDate(), appointment.getMeetingDate());
+                List<MedicalRecordData> medicalRecordDatas = medicalRecordDataRepo.findRecordDataByAppointment(oldAppointment,
+                        oldAppointment.getMeetingDate(), appointment.getMeetingDate());
                 LOGGER.info("medicalRecordDatas: " + medicalRecordDatas.size());
                 if (medicalRecordDatas.size() > 0) {
                     int kcalEstimate = treatment.getCaloriesBurnEveryday();
@@ -413,8 +456,13 @@ public class DoctorService extends AbstractService {
                     int count = medicalRecordDatas.size();
                     for (int i = 0; i < count; i++) {
 
-                        PropertyRecord propertyRecord = propertyRecordRepo.findPropertyRecordByMrdAndpm(medicalRecordDatas.get(i).getId(), 2);
-                        kcalConsumed += Integer.parseInt(propertyRecord.getParamMeasurementValue());
+                        List<PropertyRecord> propertyRecords = propertyRecordRepo.findAllPropertyRecordByMrdAndpm(medicalRecordDatas.get(i).getId(), 2);
+                        LOGGER.info("propertyRecords: " + propertyRecords.size());
+                        for (int j = 0; j < propertyRecords.size(); j++) {
+                            PropertyRecord propertyRecord = propertyRecords.get(j);
+                            kcalConsumed += Float.parseFloat(propertyRecord.getParamMeasurementValue());
+                        }
+
                     }
                     kcalConsumed = kcalConsumed / count;
                     resultModel.setAvgKcalConsumed(kcalConsumed);
@@ -432,7 +480,7 @@ public class DoctorService extends AbstractService {
                 }
             }
             return null;
-        } catch (Exception e){
+        } catch (Exception e) {
             LOGGER.info("Exception: " + e.getMessage());
             return null;
         } finally {
@@ -444,8 +492,11 @@ public class DoctorService extends AbstractService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("nameSearch[{}], page[{}], pageSize[{}]", nameSearch, page, pageSize);
+            // page 0, page size 5
             final PageRequest pageRequest = new PageRequest(page, pageSize);
             final String searchCond = "%" + nameSearch + "%";
+
+            // 10 element, content = 5, total result: 10, total page : 2
             Page<Doctor> doctors = doctorRepo.findByNameLike(searchCond, IDbConsts.IAccountStatus.ACTIVE, pageRequest);
             final DoctorPageModel pageModel = new DoctorPageModel(doctors);
             return pageModel;

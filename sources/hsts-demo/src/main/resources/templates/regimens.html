@@ -4,25 +4,207 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <body>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" layout:fragment="body">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <ol class="breadcrumb">
-                <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
-            </ol>
-        </section>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Regimen search
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Regimen list</li>
+        </ol>
+    </section>
 
-        <!-- Main content -->
-        <section class="content" style="text-align: center;">
+    <!-- Main content -->
+    <section class="content">
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
 
-            <!-- Your Page Content Here -->
-            <a href="home"><h1><span class="fa fa-medkit"></span></h1></a>
-            <h1 style="margin: auto;">Health Support Tracking System</h1>
+                    <div class="box-header">
+                        <div class="col-sm-2">
+                            <a href="#insertModal" data-toggle="modal" data-target="#insertModal" class="btn btn-info">Create new regimen</a>
+                        </div>
+                    </div>
 
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="dataContent" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Illness Name</th>
+                                <th>Description</th>
+                                <!--<th>Number of phase</th>-->
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <!--<tbody id="table-body"></tbody>-->
+                            <tfoot>
+                            <tr>
+                                <th>No.</th>
+                                <th>Illness Name</th>
+                                <th>Description</th>
+                                <!--<th>Number of phase</th>-->
+                                <th>Action</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
 
+        <!-- confirm delete modal -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="deteteRegimen">Delete regimen</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title">Are you wish to delete this regimen?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <a class ="btn btn-danger" id = "btnDelete" data-dismiss="modal">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .confirm delete modal -->
 
+        <!-- message modal-->
+        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Result</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title" id = "messageLabel">Test</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <a class ="btn btn-info"  data-dismiss="modal">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .message modal-->
+
+        <!-- insert new modal -->
+        <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="insertModalLabel" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "createForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="insertModalLabel">Create new regimen</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Illness name*:</label>
+
+                                <div class="col-sm-5">
+                                    <input type="text" th:name="name" class="form-control" id="name"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Illness Description*: </label>
+
+                                <div class="col-sm-5">
+                                    <textarea th:name="description" class="form-control" id="description"></textarea>
+                                    <!--<input type="text" />-->
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidDescription">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Number of phase*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="numberPhase" class="form-control" id="numberPhase"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidNumberPhase">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-default" >Reset</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!-- .insert new modal -->
+
+        <!-- update modal -->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="insertModalLabel" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "updateForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="updateModalLabel">Update regimen</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Illness name*:</label>
+
+                                <div class="col-sm-5">
+                                    <input type="text" th:name="updateName" class="form-control" id="updateName"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Illness Description*: </label>
+
+                                <div class="col-sm-5">
+                                    <textarea th:name="updateDescription" class="form-control" id="updateDescription"></textarea>
+                                    <!--<input type="text" />-->
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateDescription">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- update modal-->
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+
+    <!-- jquery validation -->
+    <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
+
+    <script th:src = "@{/static/js/regimens.js}"></script>
+
+    <!-- css add -->
+    <link th:href="@{/static/css/regimens.css}" rel="stylesheet"/>
+</div>
+<!-- /.content-wrapper -->
 </body>
 </html>

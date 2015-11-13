@@ -94,7 +94,9 @@ public class DeviceScanActivity extends ListActivity {
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
             mScanning = false;
         }
+
         startActivity(intent);
+
     }
 
     @Override

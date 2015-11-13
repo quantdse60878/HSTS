@@ -11,12 +11,18 @@ import vn.edu.fpt.hsts.common.jpa.AbstractKeyEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Food extends AbstractKeyEntity {
 
     @Column(name = "foodName")
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "food")
+    private List<UnitOfFood> unitOfFoodList;
 
     public Food() {
     }
@@ -29,4 +35,11 @@ public class Food extends AbstractKeyEntity {
         this.name = name;
     }
 
+    public List<UnitOfFood> getUnitOfFoodList() {
+        return unitOfFoodList;
+    }
+
+    public void setUnitOfFoodList(List<UnitOfFood> unitOfFoodList) {
+        this.unitOfFoodList = unitOfFoodList;
+    }
 }

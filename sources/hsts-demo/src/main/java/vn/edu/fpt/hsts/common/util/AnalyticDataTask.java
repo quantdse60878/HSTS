@@ -81,6 +81,8 @@ public class AnalyticDataTask {
 //                AnalyticDataTask.variable = new ArrayList<>();
 //                AnalyticDataTask.valueVariable = new ArrayList<>();
                 String tmp = "";
+                AnalyticDataTask.valueVariable = new ArrayList<String>();
+                AnalyticDataTask.variable = new ArrayList<String>();
                 while ((tmp = br.readLine()) != null) {
                     String[] listData = tmp.split(",");
                     AnalyticDataTask.variable.add(listData[0]);
@@ -140,7 +142,7 @@ public class AnalyticDataTask {
                 e.printStackTrace();
             }
             System.out.println("1");
-            if (distance > 0 && calories > 0) {
+            if (distance >= 0 && calories >= 0) {
 
                 ParamMeasurement paramDistance = paramMeasurementRepo.findParamMeasurementByMeasurementName("Distance");
                 ParamMeasurement paramCalories = paramMeasurementRepo.findParamMeasurementByMeasurementName("Calories");

@@ -16,6 +16,5 @@ public interface ParamMeasurementRepo extends JpaRepository<ParamMeasurement, In
 
     @Query(value = "SELECT * FROM parammeasurement WHERE deviceId = ?1 AND type = 1", nativeQuery = true)
     public List<ParamMeasurement> findParamMeasurementByDeviceId(int deviceId);
-
 }
 

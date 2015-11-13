@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.NutritionModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticeResultModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
+import vn.edu.fpt.hsts.bizlogic.model.TimesModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodIngredientService;
@@ -21,11 +22,13 @@ import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicalRecordDataService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicineService;
+import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.bizlogic.service.PracticeService;
 import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Food;
 import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
@@ -35,6 +38,8 @@ import vn.edu.fpt.hsts.persistence.entity.Practice;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 import vn.edu.fpt.hsts.web.config.ControllerParam;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AbstractController implements ControllerParam {
@@ -47,9 +52,6 @@ public class AbstractController implements ControllerParam {
 
     @Autowired
     private IllnessService illnessService;
-
-    @Autowired
-    private PhaseService phaseService;
 
     @Autowired
     private MedicineService medicineService;
@@ -70,7 +72,7 @@ public class AbstractController implements ControllerParam {
     private PreventionCheckService preventionCheckService;
 
     @Autowired
-    private MedicalRecordDataService medicalRecordDataService;
+    private PatientService patientService;
 
     @Autowired
     private FoodIngredientService foodIngredientService;
@@ -80,15 +82,24 @@ public class AbstractController implements ControllerParam {
         try {
             LOGGER.info("mav[{}], appointment[{}], prescriptionModel[{}]", mav, appointment, prescriptionModel);
 
-            mav.addObject("MEDICS",  1);
+            mav.addObject("MEDICS", 1);
             mav.addObject("FOS", 1);
             mav.addObject("PRACS", 1);
 
             // Set next appointent date
-            mav.addObject("NEXTAPPOINTMENTDATE", doctorService.getTreatmentLong());
+            // Set to next 7 day
+            Date toDate = null;
+            try {
+                toDate = DateUtils.plusDateTime(new Date(), Calendar.DATE, doctorService.getTreatmentLong());
+            } catch (Exception e) {
+                LOGGER.debug("Exception when parse date: " + e.getMessage());
+            }
+            toDate = DateUtils.roundDate(toDate, false);
+            String nextAppointmentDate = DateUtils.formatDate(toDate, DateUtils.DATE_PATTERN_3);
+            mav.addObject("NEXTAPPOINTMENTDATE", nextAppointmentDate);
 
             // Get config time
-            final String[] timeArr = treatmentService.getMedicineTimeConfig();
+            final List<TimesModel> timeArr = treatmentService.getMedicineTimeConfig();
             mav.addObject("TIMES", timeArr);
 
             // get illnessList
@@ -106,6 +117,10 @@ public class AbstractController implements ControllerParam {
             //get practiceList
             List<Practice> practiceList = practiceService.getAllPractice();
             mav.addObject("PRACTICES", practiceList);
+
+            // Get practice name list
+            List<String> practiceNameList = practiceService.getAllPracticeName();
+            mav.addObject("PRACTICENAMES", practiceNameList);
 
             // Find PreventionCheck
             PreventionCheck preventionCheck = preventionCheckService.findLastPreventionCheckFromAppointment(appointment);
@@ -133,7 +148,13 @@ public class AbstractController implements ControllerParam {
             mav.addObject("DATAPRACS", practiceResultModel);
             LOGGER.info("practiceResultModel[{}]", practiceResultModel);
 
+            // Get Medicalhistory img
+            List<String> imgs = patientService.getPatientHistoryImage(appointment.getMedicalRecord().getMedicalHistory());
+            mav.addObject("MEDI_IMGS", imgs);
 
+            // Get Medicalhistory
+            String medicalHistory = patientService.getPatientHistory(appointment.getMedicalRecord().getMedicalHistory());
+            mav.addObject("MEDI_HIS", medicalHistory);
 
             // Add model
             mav.addObject("model", prescriptionModel);

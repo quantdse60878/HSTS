@@ -3,82 +3,77 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
-<div id="praticeResult" style="display: none;">
-    <!-- box -->
-    <div class="box box-success box-solid">
-        <div class="box-header with-border">
-            <h3 class="box-title">Practice Result</h3>
-
-            <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" onclick="popup('praticeResult')">
-                    <i class="fa fa-times"></i></button>
-            </div>
-            <!-- /.box-tools -->
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body" th:object="${DATAPRACS}" style="overflow: auto;">
-            <h4>Practice Result</h4>
-            <div class="box-body" style="text-align: center;">
-                <img th:src="@{/static/image/star.png}" th:if="*{ratioCompletePractice >= 0}" style="width: 70px;"/>
-                <img th:src="@{/static/image/star.png}" th:if="*{ratioCompletePractice >= 50}" style="width: 70px;"/>
-                <img th:src="@{/static/image/star.png}" th:if="*{ratioCompletePractice >= 85}" style="width: 70px;"/>
-            </div>
-            <div style="margin: auto;">
-                <table id="practiceData" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th style="width: 200px;">Result</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <label class="control-label">AVG Kcal Consumed/ Kcal Estimate</label>
-                        </td>
-                        <td style="text-align: center;">
-                            <i th:text="*{avgKcalConsumed}" class="text-orange"></i>kcal / <i th:text="*{kcalEstimate}"
-                                                                                          class="text-green"></i>kcal
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Status</label>
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" readonly="readonly"
-                                   style="text-align: center;background-color: #f0ad4e;color: white;" th:if="*{status == 3}"
-                                   value="Under Required"/>
-                            <input type="text" class="form-control" readonly="readonly"
-                                   style="text-align: center;background-color: #5bc0de;color: white;" th:if="*{status == 2}"
-                                   value="Completed"/>
-                            <input type="text" class="form-control" readonly="readonly"
-                                   style="text-align: center;background-color: #d9534f;color: white;" th:if="*{status == 1}"
-                                   value="Excessived"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="control-label">Complete Practice Percent</label>
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" readonly="readonly"
-                                   style="text-align: center;background-color: #f0ad4e;color: white;" th:if="*{status == 3}"
-                                   th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>
-                            <input type="text" class="form-control" readonly="readonly"
-                                   style="text-align: center;background-color: #5bc0de;color: white;" th:if="*{status == 2}"
-                                   th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>
-                            <input type="text" class="form-control" readonly="readonly"
-                                   style="text-align: center;background-color: #d9534f;color: white;" th:if="*{status == 1}"
-                                   th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+    <!-- Modal -->
+    <div class="modal fade" id="practiceResult" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Practice Result</h4>
+                </div>
+                <div class="modal-body" th:object="${DATAPRACS}">
+                    <div class="box-body" style="text-align: center;">
+                        <img th:src="@{/static/image/star.png}" th:if="*{ratioCompletePractice >= 0}" style="width: 70px;"/>
+                        <img th:src="@{/static/image/star.png}" th:if="*{ratioCompletePractice >= 50}" style="width: 70px;"/>
+                        <img th:src="@{/static/image/star.png}" th:if="*{ratioCompletePractice >= 85}" style="width: 70px;"/>
+                    </div>
+                    <div style="margin: auto;">
+                        <table id="practiceData" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th style="width: 200px;">Result</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <label class="control-label">AVG Kcal Consumed/ Kcal Estimate</label>
+                                </td>
+                                <td style="text-align: center;">
+                                    <i th:text="*{avgKcalConsumed}" class="text-orange"></i>kcal / <i th:text="*{kcalEstimate}"
+                                                                                                      class="text-green"></i>kcal
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Status</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" readonly="readonly"
+                                           style="text-align: center;background-color: #f0ad4e;color: white;" th:if="*{status == 1}"
+                                           value="Under Required"/>
+                                    <input type="text" class="form-control" readonly="readonly"
+                                           style="text-align: center;background-color: #5bc0de;color: white;" th:if="*{status == 2}"
+                                           value="Completed"/>
+                                    <input type="text" class="form-control" readonly="readonly"
+                                           style="text-align: center;background-color: #d9534f;color: white;" th:if="*{status == 3}"
+                                           value="Excessive"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label">Complete Practice Percent</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" readonly="readonly"
+                                           style="text-align: center;background-color: #f0ad4e;color: white;" th:if="*{status == 3}"
+                                           th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>
+                                    <input type="text" class="form-control" readonly="readonly"
+                                           style="text-align: center;background-color: #5bc0de;color: white;" th:if="*{status == 2}"
+                                           th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>
+                                    <input type="text" class="form-control" readonly="readonly"
+                                           style="text-align: center;background-color: #d9534f;color: white;" th:if="*{status == 1}"
+                                           th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- /.box -->
-</div>
+    <!-- /.Modal -->
 </body>
 </html>

@@ -29,20 +29,20 @@
                         <table id="dataContent" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th>No.</th>
                                 <th>Name</th>
                                 <th>Birthday</th>
-                                <th>Gender</th>
+                                <th>Male</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <!--<tbody id="table-body"></tbody>-->
                             <tfoot>
                             <tr>
-                                <th>#</th>
+                                <th>No.</th>
                                 <th>Name</th>
                                 <th>Birthday</th>
-                                <th>Gender</th>
+                                <th>Male</th>
                                 <th>#</th>
                             </tr>
                             </tfoot>
@@ -54,10 +54,37 @@
             </div>
             <!-- /.col -->
         </div>
+
+        <!-- message modal-->
+        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="messageLabel1">Message</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <h4 class="modal-title" id="messageLabel2">No available prescription for this patient</h4>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .message modal-->
+
         <!-- /.row -->
     </section>
     <!-- /.content -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+
+    <!-- iCheck -->
+    <script th:src="@{/static/bower/icheck/icheck.min.js}"/>
+    <link th:href="@{/static/bower/icheck/skins/all.css}" rel="stylesheet"/>
+
     <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
 
     <script th:src = "@{/static/js/nursePatients.js}"></script>

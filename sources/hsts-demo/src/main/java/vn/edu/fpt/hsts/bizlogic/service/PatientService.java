@@ -9,11 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartFile;
+import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
+import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrescriptionWrapperModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrintingMedicineModel;
+import vn.edu.fpt.hsts.bizlogic.service.processor.MedicalOrderNumberProcessor;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -26,6 +31,7 @@ import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
+import vn.edu.fpt.hsts.persistence.entity.Illness;
 import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
 import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
@@ -44,13 +50,21 @@ import vn.edu.fpt.hsts.persistence.repo.NotifyRepo;
 import vn.edu.fpt.hsts.persistence.repo.PatientRepo;
 import vn.edu.fpt.hsts.persistence.repo.PreventionCheckRepo;
 import vn.edu.fpt.hsts.persistence.repo.TreatmentRepo;
+import vn.edu.fpt.hsts.web.session.UserSession;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by QUYHKSE61160 on 10/7/15.
@@ -84,13 +98,11 @@ public class PatientService extends AbstractService {
     @Autowired
     private MedicalRecordDataRepo medicalRecordDataRepo;
 
-
     /**
      * The {@link DoctorRepo}.
      */
     @Autowired
     private DoctorRepo doctorRepo;
-
 
     /**
      * The {@link AppointmentRepo}.
@@ -146,6 +158,13 @@ public class PatientService extends AbstractService {
     @Autowired
     private BarcodeService barcodeService;
 
+
+    /**
+     * The {@link MedicalOrderNumberProcessor}.
+     */
+    @Autowired
+    private MedicalOrderNumberProcessor medicalOrderNumberProcessor;
+
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         Patient patient = new Patient();
@@ -180,17 +199,18 @@ public class PatientService extends AbstractService {
 
 
     @Transactional(rollbackOn = BizlogicException.class)
-    public Patient register(final int patientId, final SearchCriteria ... criterias) throws BizlogicException {
+    public PatientRegistrationModel register(final int patientId, final SearchCriteria ... criterias) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             /**
              * TODO reinput log, process for old medicine
              */
             if (null == criterias) {
-                return null;
+                throw new BizlogicException("No registration criteria for process");
             } else {
                 LOGGER.info("Criteria size = {}", criterias.length);
             }
+
             Date currentDate = new Date();
             currentDate = DateUtils.roundDate(currentDate, false);
             // Identity patient
@@ -217,9 +237,9 @@ public class PatientService extends AbstractService {
             }
             MedicalRecord medicalRecord = new MedicalRecord();
             String medicineHistories = null;
+            Doctor doctor = null;
             for (SearchCriteria criteria : criterias) {
                 if (criteria instanceof PatientCriteria) {
-                    // TODO
                     // casting
                     final PatientCriteria patientCriteria = (PatientCriteria) criteria;
                     final Account newAccount = accountService.initPatientAccount(patientCriteria, currentDate);
@@ -231,7 +251,8 @@ public class PatientService extends AbstractService {
 
                     // Generate new barcode for patient
                     final String barcode = barcodeService.getPatientBarcode(patient.getId());
-
+                    patient.setBarcode(barcode);
+                    patientRepo.save(patient);
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Create new patient[{}] successfully", newAccount.getUsername());
                     }
@@ -239,17 +260,18 @@ public class PatientService extends AbstractService {
                     //  send email with creditial information to patient
                     mailService.pushMail(newAccount);
 
+
                 } else if (criteria instanceof RegistrationCriteria) {
                     final RegistrationCriteria rCriteria = (RegistrationCriteria) criteria;
 
                     medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.WAITING_FOR_EXAMINATION);
-                    Doctor doctor = doctorRepo.findOne(rCriteria.getDoctorId());
+                    doctor = doctorRepo.findOne(rCriteria.getDoctorId());
                     if (null == doctor) {
                         throw new BizlogicException("Doctor with username[{}] is not found", null, rCriteria.getDoctorId());
                     }
                     medicalRecord.setDoctor(doctor);
                     medicalRecord.setPatient(patient);
-                    medicalRecord.setSymptoms(rCriteria.getSymptom());
+                    medicalRecord.setSymptoms(rCriteria.getSymptoms());
                     medicalRecord.setStartTime(currentDate);
 
                     medicalRecord.setMedicalHistory(rCriteria.getMedicalHistory());
@@ -323,7 +345,19 @@ public class PatientService extends AbstractService {
             notify.setStatus(IDbConsts.INotifyStatus.UNCOMPLETED);
             notify.setMessage(String.valueOf(patient.getId()));
             notifyRepo.saveAndFlush(notify);
-            return patient;
+
+
+            // Build response
+            final PatientRegistrationModel model = new PatientRegistrationModel();
+            model.fromEntity(patient);
+
+            // Set doctor
+            model.setDoctor(doctor.getAccount().getFullName());
+            // Set meeting date
+            model.setDate(DateUtils.formatDate(currentDate, DateUtils.DATE_PATTERN_3));
+            // Set order number
+            model.setOrderNumber(medicalOrderNumberProcessor.nextOrderNumber());
+            return model;
         } catch (BizlogicException be) {
             throw be;
         } catch (Exception e) {
@@ -352,7 +386,29 @@ public class PatientService extends AbstractService {
         }
     }
 
+    public List<Patient> getPatientByApponitmentDateOfDoctor(final int accountId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("accountId[{}]", accountId);
+            Date currentDate = new Date();
+            UserSession userSession = new UserSession();
+            LOGGER.info(userSession.getUsername());
+            currentDate = DateUtils.roundDate(currentDate, false);
+            LOGGER.info("currentDate[{}]", currentDate);
+            final List<Patient> patients = patientRepo.findByAppoinmentDateAndAcc(currentDate, accountId);
+            if (null != patients && patients.isEmpty()) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Got {} records", patients.size());
+                }
+            }
+            return patients;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
     @Transactional(rollbackOn = BizlogicException.class)
+    @SuppressWarnings("unused")
     public void makeAppointment(final int medicalRecordId, final String nextAppointmentDate) throws BizlogicException {
         //TODO parse INT recordID.
         //TODO find appointmentDate from recordID with appointmentDateChild = null
@@ -415,12 +471,13 @@ public class PatientService extends AbstractService {
     }
 
     @Transactional(rollbackOn = BizlogicException.class)
-    public Patient updatePatient(final int patientId, final RegistrationCriteria registrationCriteria, final CheckCriteria checkCriteria) throws BizlogicException {
+    public PatientRegistrationModel updatePatient(final int patientId, final RegistrationCriteria registrationCriteria, final CheckCriteria checkCriteria) throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             Date currentDate = new Date();
             currentDate = DateUtils.roundDate(currentDate, false);
             final Patient patient = patientRepo.findOne(patientId);
+            Doctor doctor = null;
             if (null == patient) {
                 throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
             }
@@ -433,10 +490,10 @@ public class PatientService extends AbstractService {
                     statuses);
             if(null == entryAppointmentList || entryAppointmentList.isEmpty()) {
                 /*
-                *   TODO Throw ex, but should check business logic at higher level before
+                *   Return to function create new medical registration
                 *   Make sure that only 1 appointment has status ENTRY at a time
                 */
-                return null;
+                return register(patientId, registrationCriteria, checkCriteria);
             } else {
                 for (Appointment appointment: entryAppointmentList) {
                     appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
@@ -449,10 +506,14 @@ public class PatientService extends AbstractService {
 
             final MedicalRecord medicalRecord = appointment.getMedicalRecord();
             if (medicalRecord.getDoctor().getId() != registrationCriteria.getDoctorId()) {
-               LOGGER.debug("Nurse assign patient[{}] to new doctor[{}]", registrationCriteria.getDoctorId());
-                final Doctor doctor = doctorRepo.findOne(registrationCriteria.getDoctorId());
+                LOGGER.debug("Nurse assign patient[{}] to new doctor[{}]", registrationCriteria.getDoctorId());
+                doctor = doctorRepo.findOne(registrationCriteria.getDoctorId());
                 medicalRecord.setDoctor(doctor);
             }
+            doctor = medicalRecord.getDoctor();
+            medicalRecord.setMedicalHistory(registrationCriteria.getMedicalHistory());
+            medicalRecord.setSymptoms(registrationCriteria.getSymptoms());
+            medicalRecordRepo.save(medicalRecord);
 
             // Create prevention checking
 
@@ -486,7 +547,17 @@ public class PatientService extends AbstractService {
             notify.setMessage(String.valueOf(patientId));
             notifyRepo.saveAndFlush(notify);
 
-            return patient;
+            // Build response
+            final PatientRegistrationModel model = new PatientRegistrationModel();
+            model.fromEntity(patient);
+
+            // Set doctor
+            model.setDoctor(doctor.getAccount().getFullName());
+            // Set meeting date
+            model.setDate(DateUtils.formatDate(currentDate, DateUtils.DATE_PATTERN_3));
+            // Set order number
+            model.setOrderNumber(medicalOrderNumberProcessor.nextOrderNumber());
+            return model;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
@@ -520,10 +591,11 @@ public class PatientService extends AbstractService {
                 throw new BizlogicException("Patient with id[{}] is not found", null, patientId);
             }
 
-            final Treatment lastTreatment = treatmentRepo.findLastTreatmenByPatientId(patientId, IDbConsts.ITreatmentStatus.ON_TREATING);
-            if(null == lastTreatment) {
-                throw new BizlogicException("Last treatment with patientId[{}] is not found", null, patientId);
+            final List<Treatment> lastTreatmentList = treatmentRepo.findLastTreatmenByPatientId(patientId, IDbConsts.ITreatmentStatus.ON_TREATING);
+            if(CollectionUtils.isEmpty(lastTreatmentList)) {
+                return null;
             }
+            final Treatment lastTreatment = lastTreatmentList.get(0);
             final List<MedicineTreatment> medicineTreatments = lastTreatment.getMedicineTreatmentList();
             List<PrintingMedicineModel> listMedicine = new ArrayList<PrintingMedicineModel>();
 
@@ -531,6 +603,7 @@ public class PatientService extends AbstractService {
             DateTime dt2 = new DateTime(lastTreatment.getToDate());
 
             int numberOfDay = Days.daysBetween(dt1, dt2).getDays();
+            String advice = "";
             if (null != medicineTreatments) {
                 int count = 1;
                 for (MedicineTreatment mt: medicineTreatments) {
@@ -539,10 +612,13 @@ public class PatientService extends AbstractService {
                     model.setMedicineName(mt.getMedicine().getName());
                     int qty = numberOfDay * mt.getNumberOfTime() * mt.getQuantitative();
                     model.setQty(String.valueOf(qty));
-                    model.setUnit(mt.getUnit());
-                    String usage = "Ngày uống " + mt.getNumberOfTime() + " lần, mỗi lần " + mt.getQuantitative() + " " + mt.getUnit();
+                    model.setUnit(mt.getMedicine().getUnit()) ;
+                    String usage = "Ngày uống " + mt.getNumberOfTime() + " lần, mỗi lần " + mt.getQuantitative() + " " + mt.getMedicine().getUnit();
                     model.setUsage(usage);
                     listMedicine.add(model);
+
+                    // Set advice
+                    advice += "- " + model.getMedicineName() + ": " + mt.getAdvice() + "\n";
                 }
             }
             LOGGER.info("Size: " + listMedicine.size());
@@ -553,13 +629,15 @@ public class PatientService extends AbstractService {
             prescription.setPatientName(patient.getAccount().getFullName());
             prescription.setBirthday(DateUtils.formatDate(patient.getAccount().getDateOfBirth(), DateUtils.DATE_PATTERN_3));
             String diagnose = lastTreatment.getAppointment().getMedicalRecord().getIllness().getDescription();
+            if (StringUtils.isEmpty(diagnose)) {
+                diagnose = lastTreatment.getAppointment().getMedicalRecord().getIllness().getName();
+            }
             prescription.setDiagnose(diagnose);
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             final String address = "TP. Hồ Chí Minh ngày " + calendar.get(Calendar.DATE) + " tháng " + calendar.get(Calendar.MONTH) + " năm " + calendar.get(Calendar.YEAR);
             prescription.setAddress(address);
-            String advice = lastTreatment.getAdviseMedicine();
             if (StringUtils.isEmpty(advice)) {
                 advice = "N/A";
             }
@@ -594,11 +672,11 @@ public class PatientService extends AbstractService {
                 return false;
             }
 
-            final Treatment lastTreatment = treatmentRepo.findLastTreatmenByPatientId(patientId, IDbConsts.ITreatmentStatus.ON_TREATING);
-            if(null == lastTreatment) {
+            final List<Treatment> lastTreatment = treatmentRepo.findLastTreatmenByPatientId(patientId, IDbConsts.ITreatmentStatus.ON_TREATING);
+            if(CollectionUtils.isEmpty(lastTreatment)) {
                 return false;
             }
-            final long countMedicines = medicineTreatmentRepo.countByTreatmentId(lastTreatment.getId());
+            final long countMedicines = medicineTreatmentRepo.countByTreatmentId(lastTreatment.get(0).getId());
             if (0 >= countMedicines) {
                 return false;
             }
@@ -623,6 +701,197 @@ public class PatientService extends AbstractService {
             model.fromEntity(patient);
             return model;
         } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public FileUploadModel saveMedicalImage(final MultipartFile file){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        FileOutputStream os = null;
+        try {
+            LOGGER.info("fileName[{}]", file.getOriginalFilename());
+
+            // Format file name to prevent duplicate name
+            String fileName = file.getOriginalFilename();
+            final int index = fileName.lastIndexOf(".");
+            // Add random char
+            String surfix = StringUtils.randomString(6);
+            if (index > 0) {
+                String prefix = fileName.substring(0, index);
+                if (prefix.contains(".")) {
+                    prefix = prefix.replace(".", "_");
+                }
+                if (prefix.contains(",")) {
+                    prefix = prefix.replace(",", "_");
+                }
+                if (prefix.contains("/")) {
+                    prefix = prefix.replace("/", "_");
+                }
+                if (prefix.contains("\\")) {
+                    prefix = prefix.replace("\\", "_");
+                }
+                String postfix = fileName.substring(index);
+                fileName = String.format("%s_%s%s", prefix, surfix, postfix);
+            } else {
+                fileName = String.format("%s_%s", fileName, surfix);
+            }
+
+            // Save file to folder
+            final File folder = new File(getUploadDirectory());
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+            final String filePath = getUploadDirectory() + File.separator + fileName;
+            // {img}ten anh{img},sasas, {img}anh2{img}
+            final File newFile = new File(filePath);
+            if(!newFile.exists()) {
+                newFile.createNewFile();
+            }
+            os = new FileOutputStream(newFile);
+            os.write(file.getBytes());
+
+            final FileUploadModel model = new FileUploadModel();
+            final String formatFileName = String.format("{img}%s{img}", fileName);
+            model.setFileName(formatFileName);
+            model.setFilePath(formatFileName);
+            model.setResult(true);
+            return model;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+//            LOGGER.error("Error while uploading new file[{}]", file.getOriginalFilename());
+            return new FileUploadModel(false);
+        } finally {
+            try {
+                os.close();
+            } catch (Exception e) {
+                LOGGER.error("Error while uploading new file[{}]", file.getOriginalFilename());
+                return new FileUploadModel(false);
+            }
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public String getOldMedicalHistory(final int patientId){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final List<String> medicalHistories = medicalRecordRepo.findMedicalHistoryByPatientId(patientId);
+            if (!CollectionUtils.isEmpty(medicalHistories)) {
+                final Set<String> dataSet = new HashSet<String>();
+                for (String m: medicalHistories) {
+                    final List<String> spliters = Arrays.asList(m.split(","));
+                    dataSet.addAll(spliters);
+                }
+
+                // return
+                final StringBuilder sb = new StringBuilder();
+                for(String str: dataSet) {
+                    if (StringUtils.isNotEmpty(str)) {
+                       sb.append(str).append(",");
+                    }
+                }
+                return sb.toString();
+            }
+            return "";
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public String getOldSymtoms(final int patientId){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final PageRequest pageRequest = new PageRequest(0, 1);
+            final List<MedicalRecord> medicalRecordList = medicalRecordRepo.findByPatientId(patientId, pageRequest);
+            if (!CollectionUtils.isEmpty(medicalRecordList)) {
+                final Illness illness = medicalRecordList.get(0).getIllness();
+                if (null != illness) {
+                    String result = illness.getName();
+                    if (StringUtils.isNotEmpty(illness.getDescription())) {
+                        result = illness.getDescription();
+                    }
+                    return result;
+                }
+            }
+            return "";
+        } catch (Exception e) {
+            return "";
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public String getPatientHistory(final String medicalHistory) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final String[] tmp = medicalHistory.split(",");
+            if (null != tmp && tmp.length > 0) {
+                String results = "";
+                for (String str: tmp) {
+                    if (!str.startsWith("{img}")) {
+                        if (LOGGER.isDebugEnabled()) {
+                            LOGGER.debug("original file name: {}", str);
+                        }
+                        results = results + ", " + str;
+                    }
+                }
+                return results;
+            }
+            return null;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public List<String> getPatientHistoryImage(final String medicalHistory) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final String[] tmp = medicalHistory.split(",");
+            if (null != tmp && tmp.length > 0) {
+                final List<String> results = new ArrayList<String>();
+                for (String str: tmp) {
+                    if (str.startsWith("{img}")) {
+                        str = StringUtils.replace(str, "{img}", "");
+                        if (LOGGER.isDebugEnabled()) {
+                            LOGGER.debug("original file name: {}", str);
+                        }
+                        results.add(str);
+                    }
+                }
+                return results;
+            }
+            return Collections.emptyList();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public byte[] getUploadedHistoryImg(final String fileName){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        FileInputStream fis = null;
+        try {
+            LOGGER.info("fileName[{}]", fileName);
+            final File file = new File(getUploadDirectory() + File.separator + fileName);
+            if (null != file && file.exists() && file.canRead()) {
+                byte[] result = new byte[(int) file.length()];
+                fis = new FileInputStream(file);
+                fis.read(result);
+                return result;
+            }
+            return new byte[0];
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new byte[0];
+        } finally {
+            if (null != fis) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             LOGGER.info(IConsts.END_METHOD);
         }
     }

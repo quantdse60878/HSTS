@@ -27,8 +27,8 @@ public interface TreatmentRepo extends JpaRepository<Treatment, Integer>{
     @Query("select distinct t from Treatment t where appointment.id = :appointmentId ORDER BY fromDate DESC, id DESC")
     List<Treatment> findLastTreatmenByAppointmentId(@Param("appointmentId") final int appointmentId);
 
-    @Query("select distinct t from Treatment t where appointment.medicalRecord.patient.id = :patientId and status = :status")
-    public Treatment findLastTreatmenByPatientId(@Param("patientId") final int patientId, @Param("status") final byte status);
+    @Query("select distinct t from Treatment t where appointment.medicalRecord.patient.id = :patientId and status = :status ORDER BY id DESC")
+    public List<Treatment> findLastTreatmenByPatientId(@Param("patientId") final int patientId, @Param("status") final byte status);
 
     @Query("select distinct t from Treatment t where appointment.medicalRecord.patient.id = :patientId ORDER BY id DESC")
     public List<Treatment> findLastTreatmenByPatientId(@Param("patientId") final int patientId, final Pageable pageable);

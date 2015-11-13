@@ -13,12 +13,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
+import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
+import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationModel;
+import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationRequest;
+import vn.edu.fpt.hsts.bizlogic.service.AnalyticFood;
+import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
@@ -48,6 +56,13 @@ public class NurseController extends AbstractController {
     @Autowired
     PatientService patientService;
 
+
+    /**
+     * The {@link AnalyticFood}.
+     */
+    @Autowired
+    AnalyticFood analyticFood;
+
     /**
      * The {@link DoctorService}.
      */
@@ -67,6 +82,12 @@ public class NurseController extends AbstractController {
     private TreatmentService treatmentService;
 
     /**
+     * The {@link AppointmentService}.
+     */
+    @Autowired
+    private AppointmentService appointmentService;
+
+    /**
      * The register patient page mapping
      *
      * @return
@@ -77,100 +98,6 @@ public class NurseController extends AbstractController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("registerPatient");
-
-            /**
-             * Set reference data
-             */
-//            final List<DoctorModel> doctors = doctorService.findAll();
-//            mav.addObject("DOCTORS", doctors);
-            /**
-             *
-             */
-
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
-    }
-
-    @RequestMapping(value = "registerNew", method = RequestMethod.POST)
-    public ModelAndView registerPatient(
-            // Tab 1 param
-            @RequestParam("patientName") final String patientName,
-            @RequestParam("email") final String email,
-            @RequestParam("birthday") final String birthday,
-            @RequestParam("gender") final byte gender,
-            // Tab 2 param
-            @RequestParam("weight") final int weight,
-            @RequestParam("height") final int height,
-            @RequestParam("heartBeat") final int heartBeat,
-            @RequestParam("bloodPressure") final int bloodPressure,
-            @RequestParam("waists") final int waists,
-            // Tab 3 param
-            @RequestParam("bodyFat") final float bodyFat,
-            @RequestParam("visceralFat") final byte visceralFat,
-            @RequestParam("muscleMass") final float muscleMass,
-            @RequestParam("bodyWater") final float bodyWater,
-            @RequestParam("phaseAngle") final float phaseAngle,
-            @RequestParam("impedance") final int impedance,
-            @RequestParam("basalMetabolicRate") final int basalMetabolicRate,
-            // Tab 4 param
-            @RequestParam("doctorId") final int doctorId,
-            @RequestParam(value = "medicalHistory") final String medicalHistory,
-            @RequestParam(value = "symptoms") final String symptoms,
-            @RequestParam("medicineHistory") final String medicineHistory)
-            throws BizlogicException {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            // TODO reg input log
-
-            // Tab 1 criteria
-            final PatientCriteria pCriteria = new PatientCriteria();
-            pCriteria.setPatientName(patientName);
-            pCriteria.setEmail(email);
-            pCriteria.setBirthday(birthday);
-            pCriteria.setGender(gender);
-            pCriteria.setDoctorId(doctorId);
-            pCriteria.setMedicalHistory(medicalHistory);
-            pCriteria.setSymptom(symptoms);
-
-            // Tab 2_3 criteria
-            final CheckCriteria checkCriteria = new CheckCriteria();
-            checkCriteria.setBodyFat(bodyFat);
-            checkCriteria.setVisceralFat(visceralFat);
-            checkCriteria.setMuscleMass(muscleMass);
-            checkCriteria.setBodyWater(bodyWater);
-            checkCriteria.setPhaseAngle(phaseAngle);
-            checkCriteria.setImpedance(impedance);
-            checkCriteria.setBasalMetabolicRate(basalMetabolicRate);
-            checkCriteria.setWeight(weight);
-            checkCriteria.setHeight(height);
-            checkCriteria.setHeartBeat(heartBeat);
-            checkCriteria.setBloodPressure(bloodPressure);
-            checkCriteria.setWaists(waists);
-            float tmp =  ((float)height/100) * ((float)height/100);
-            tmp = weight/tmp;
-            checkCriteria.setBmi(tmp);
-
-            // Tab 4 criteria
-            RegistrationCriteria rCriteria = new RegistrationCriteria();
-            rCriteria.setDoctorId(doctorId);
-            rCriteria.setMedicalHistory(medicalHistory);
-            rCriteria.setSymptom(symptoms);
-            rCriteria.setMedicineHistory(medicineHistory);
-
-            /**
-             * The wrong order of criteria array may cause the program fail
-             * The criteria array should be order by: patient info -> registration -> check condition
-             */
-            patientService.register(0, pCriteria, rCriteria, checkCriteria);
-
-            // Response view
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("registerPatient");
-            //create notify
-            notify(mav, true, "Register Patient", "Success");
-
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
@@ -220,89 +147,82 @@ public class NurseController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "updatePatient", method = RequestMethod.POST)
-    public ModelAndView registerPatient(@RequestParam("patientId") final int patientId,
-                                        // Tab 2 param
-                                        @RequestParam("weight") final int weight,
-                                        @RequestParam("height") final int height,
-                                        @RequestParam("heartBeat") final int heartBeat,
-                                        @RequestParam("bloodPressure") final int bloodPressure,
-                                        @RequestParam("waists") final int waists,
-                                        // Tab 3 param
-                                        @RequestParam("bodyFat") final float bodyFat,
-                                        @RequestParam("visceralFat") final byte visceralFat,
-                                        @RequestParam("muscleMass") final float muscleMass,
-                                        @RequestParam("bodyWater") final float bodyWater,
-                                        @RequestParam("phaseAngle") final float phaseAngle,
-                                        @RequestParam("impedance") final int impedance,
-                                        @RequestParam("basalMetabolicRate") final int basalMetabolicRate,
-                                        // Tab 4 param
-                                        @RequestParam("doctorId") final int doctorId,
-                                        @RequestParam(value = "medicalHistory") final String medicalHistory,
-                                        @RequestParam(value = "symptoms") final String symptoms,
-                                        @RequestParam("medicineHistory") final String medicineHistory,
-                                        @RequestParam(value = "isNewMedicalRecord", required = false, defaultValue = "false")
-                                        final boolean isNewMedicalRecord) throws BizlogicException {
+
+    /**
+     * This method to register new patient via AJAX request.
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/registerPatient", method = RequestMethod.POST,
+                        consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public PatientRegistrationModel registerPatient(@RequestBody final PatientRegistrationRequest request) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-
-            // TODO re-input log
-            LOGGER.info("weight[{}], height[{}], doctorId[{}], medicalHistory[{}], symptoms[{}], isNewMedicalRecord[{}]",
-                    weight, height, doctorId, medicalHistory, symptoms, isNewMedicalRecord);
-
-            // Init criteria
-            // Tab 2_3 criteria
-            final CheckCriteria checkCriteria = new CheckCriteria();
-            checkCriteria.setBodyFat(bodyFat);
-            checkCriteria.setVisceralFat(visceralFat);
-            checkCriteria.setMuscleMass(muscleMass);
-            checkCriteria.setBodyWater(bodyWater);
-            checkCriteria.setPhaseAngle(phaseAngle);
-            checkCriteria.setImpedance(impedance);
-            checkCriteria.setBasalMetabolicRate(basalMetabolicRate);
-            checkCriteria.setWeight(weight);
-            checkCriteria.setHeight(height);
-            checkCriteria.setHeartBeat(heartBeat);
-            checkCriteria.setBloodPressure(bloodPressure);
-            checkCriteria.setWaists(waists);
-            float tmp =  ((float)height/100) * ((float)height/100);
-            tmp = weight/tmp;
-            checkCriteria.setBmi(tmp);
-
-            // Tab 4 criteria
-            RegistrationCriteria rCriteria = new RegistrationCriteria();
-            rCriteria.setDoctorId(doctorId);
-            rCriteria.setMedicalHistory(medicalHistory);
-            rCriteria.setSymptom(symptoms);
-            rCriteria.setMedicineHistory(medicineHistory);
+            // Tab 1
+            final PatientCriteria pCriteria = request.getPatient();
+            // Tab 2
+            final CheckCriteria cCriteria = request.getCheck();
+            float tmp =  ((float)cCriteria.getHeight()/100) * ((float)cCriteria.getHeight()/100);
+            tmp = cCriteria.getWeight()/tmp;
+            cCriteria.setBmi(tmp);
+            // Tab 3
+            final RegistrationCriteria rCriteria = request.getRegistration();
 
             /**
-             * If new medical record
+             * The wrong order of criteria array may cause the program fail
+             * The criteria array should be order by: patient info -> registration -> check condition
              */
-            // TODO
-            Patient patient;
-            if (isNewMedicalRecord) {
-                /**
-                 * The wrong order of criteria array may cause the program fail
-                 * The criteria array should be order by: patient info {null for update case}-> registration -> check condition
-                 */
-                patient = patientService.register(patientId, rCriteria, checkCriteria);
-            } else {
-                patient = patientService.updatePatient(patientId, rCriteria, checkCriteria);
-            }
-
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("updatePatient");
-            mav.addObject("PATIENT", patient);
-
-            //create notify
-            notify(mav, true, "Update Patient's Profile", "Success");
-
-            return mav;
+            return patientService.register(0, pCriteria, rCriteria, cCriteria);
+        } catch (Exception e) {
+            // error showing
+            return new PatientRegistrationModel(false);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+
+    /**
+     * This method to update patient medical registration via AJAX request.
+     * Include case that new medical record
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/updatePatient", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public PatientRegistrationModel updatePatient(@RequestBody final PatientRegistrationRequest request) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            // Tab 1: OLD DATA, not use
+
+            // Tab 2
+            final CheckCriteria cCriteria = request.getCheck();
+            float tmp =  ((float)cCriteria.getHeight()/100) * ((float) cCriteria.getHeight()/100);
+            tmp = cCriteria.getWeight()/tmp;
+            cCriteria.setBmi(tmp);
+            // Tab 3
+            final RegistrationCriteria rCriteria = request.getRegistration();
+
+            boolean newMedicalRecord = request.isNewMedicalRecord();
+            if (newMedicalRecord) {
+                /**
+                 * The wrong order of criteria array may cause the program fail
+                 * The criteria array should be order by: patient info -> registration -> check condition
+                 */
+                return patientService.register(request.getPatientId(), rCriteria, cCriteria);
+            } else {
+                return patientService.updatePatient(request.getPatientId(), rCriteria, cCriteria);
+            }
+        } catch (Exception e) {
+            // error showing
+            return new PatientRegistrationModel(false);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
 
     @RequestMapping(value = "bindingOld", method = RequestMethod.GET)
     public ModelAndView bindingOld(@RequestParam("patientId") final int patientId) {
@@ -325,6 +245,18 @@ public class NurseController extends AbstractController {
             final String oldMedicine = treatmentService.findLastMedicines(patientId);
             LOGGER.info("OLD: {}", oldMedicine);
             mav.addObject("OLDMEDICINE", oldMedicine);
+
+            // Find old medical history
+            final String oldMedical = patientService.getOldMedicalHistory(patientId);
+            mav.addObject("OLDMEDICAL", oldMedical);
+
+            // Find old symptom
+            final String oldSymptom = patientService.getOldSymtoms(patientId);
+            mav.addObject("OLDSYMPTOMS", oldSymptom);
+
+            // Find old doctor
+            final DoctorModel doctor = appointmentService.findLastDoctorWithPatientId(patientId);
+            mav.addObject("OLDDOCTOR", doctor);
 
             return mav;
         } finally {
@@ -376,8 +308,34 @@ public class NurseController extends AbstractController {
             if (result) {
                 return OK_STATUS;
             }
-            return "ABC";
+            return FAIL_STATUS;
         } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/uploadImage", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public FileUploadModel upload(@RequestParam(value = "fileUploader", required = false) final MultipartFile multipartFile) throws IOException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            if (null != multipartFile && multipartFile.getBytes().length > 0) {
+                LOGGER.info("file name[{}]", multipartFile.getOriginalFilename());
+            }
+            return patientService.saveMedicalImage(multipartFile);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/lastDoctor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public DoctorModel findLastDoctor(@RequestParam("patientId") final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            return appointmentService.findLastDoctorWithPatientId(patientId);
+        }finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }

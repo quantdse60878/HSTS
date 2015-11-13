@@ -48,22 +48,6 @@ public class Treatment extends AbstractKeyEntity {
      */
     private Date toDate;
 
-
-    /**
-     *
-     */
-    private String adviseFood;
-
-    /**
-     *
-     */
-    private String adviseMedicine;
-
-    /**
-     *
-     */
-    private String advisePractice;
-
     /**
      *
      */
@@ -72,7 +56,17 @@ public class Treatment extends AbstractKeyEntity {
 
     private int caloriesBurnEveryday;
 
+    private String note;
+
     public Treatment() {
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public int getCaloriesBurnEveryday() {
@@ -113,30 +107,6 @@ public class Treatment extends AbstractKeyEntity {
 
     public void setStatus(final byte status) {
         this.status = status;
-    }
-
-    public String getAdviseFood() {
-        return adviseFood;
-    }
-
-    public void setAdviseFood(final String adviseFood) {
-        this.adviseFood = adviseFood;
-    }
-
-    public String getAdviseMedicine() {
-        return adviseMedicine;
-    }
-
-    public void setAdviseMedicine(final String adviseMedicine) {
-        this.adviseMedicine = adviseMedicine;
-    }
-
-    public String getAdvisePractice() {
-        return advisePractice;
-    }
-
-    public void setAdvisePractice(final String advisePractice) {
-        this.advisePractice = advisePractice;
     }
 
     public List<MedicineTreatment> getMedicineTreatmentList() {

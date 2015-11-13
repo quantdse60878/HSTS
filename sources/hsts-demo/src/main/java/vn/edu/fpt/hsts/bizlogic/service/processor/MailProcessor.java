@@ -33,8 +33,10 @@ public class MailProcessor extends AbstractLockProcessor {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
             lockWrite();
+            lockRead();
             queue.offer(account);
         } finally {
+            unlockRead();
             unlockWrite();
             LOGGER.debug(IConsts.END_METHOD);
         }
@@ -66,8 +68,10 @@ public class MailProcessor extends AbstractLockProcessor {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
             lockWrite();
+            lockRead();
             queue.remove(account);
         } finally {
+            unlockRead();
             unlockWrite();
             LOGGER.debug(IConsts.END_METHOD);
         }

@@ -7,11 +7,12 @@ release.properties
 
 ### Bower ###
 bower_components/
-src/main/resources/static/bower/
 .bower/
 /.classpath
 /.project
 
+### Upload files ###
+uploadFiles/
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm

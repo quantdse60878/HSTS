@@ -33,4 +33,11 @@ public abstract class AbstractNamedDescModel<E extends AbstractNamedDescEntity> 
         super.fromEntity(entity);
         this.description = entity.getDescription();
     }
+
+    @Override
+    public E toEntity() throws InstantiationException, IllegalAccessException {
+        E entity =  super.toEntity();
+        entity.setDescription(this.description);
+        return entity;
+    }
 }

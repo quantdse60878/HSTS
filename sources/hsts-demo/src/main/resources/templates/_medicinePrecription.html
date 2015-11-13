@@ -3,44 +3,45 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
-<h4>Medicine</h4>
+<h4>Medicines</h4>
 <!-- table medicine -->
 <table class="table table-striped" id="medicine">
     <tr>
-        <th style="width: 10px">#</th>
-        <th>Medicine</th>
-        <th>Times</th>
-        <th>Quantity</th>
-        <th>Unit</th>
-        <th>Note</th>
+        <th style="width: 10px;">#</th>
+        <th style="min-width: 155px;">Medicine</th>
+        <th style="width: 80px;">Times</th>
+        <th style="width: 40px;">Quantity</th>
+        <th style="width: 110px;">Unit</th>
+        <th>Advice</th>
         <th>#</th>
     </tr>
     <tr>
         <td>1</td>
-        <td style="min-width: 155px;" class="form-group">
-            <select class="form-control" name="mPresModels[0].m" id="mPresModelsM0" data-error="Choose at least one" required="required">
+        <td class="form-group">
+            <select class="form-control" name="mPresModels[0].m" id="mPresModelsM0" onchange="setMedicineUnit(event)" data-rule-min="1" data-msg-min="Please select.">
+                <option value="0">Select</option>
                 <option th:each="medicine : ${MEDICINES}" th:value="${medicine.id}"
                         th:text="${medicine.name}"></option>
             </select>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
-        <td style="min-width: 120px;" class="form-group">
-            <select class="form-control" th:field="*{mPresModels[0].mTime}" data-error="Choose at least one" required="required">
-                <option value="0">Select</option>
-                <option th:each="time : ${TIMES}" th:value="${time}"
-                        th:text="${time}"></option>
+        <td class="form-group">
+            <select class="form-control" th:name="mPresModels[0].mTime" th:id="mPresModelsmTime0" data-rule-min="1" data-msg-min="Please select.">
+                <option th:each="time : ${TIMES}" th:value="${time.numOfTime}"
+                        th:text="${time.numOfTime}"></option>
             </select>
-            <div class="help-block with-errors"></div>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
-        <td class="form-group" style="width: 120px;">
+        <td class="form-group">
             <input type="text" class="form-control" th:field="*{mPresModels[0].mQuantity}" style="text-align: right;"
-                   placeholder="Quantity" data-remote="/validateData" required="required" data-error="Wrong input"/>
-            <div class="help-block with-errors"></div>
+                   placeholder="Quantity" data-rule-range="1,10" data-msg-range="Out of range 1-10"/>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
-        <td class="form-group" style="width: 120px;">
-            <input type="text" class="form-control" required="required" data-remote="/validateStr"
-                   placeholder="Unit" data-error="Wrong input"/>
-            <div class="help-block with-errors"></div>
+        <td class="form-group">
+            <input type="text" class="form-control" data-rule-required="true" data-msg-required="Please input."
+                   th:field="*{mPresModels[0].mUnit}"
+                   placeholder="Unit"/>
+            <!--<div class="help-block with-errors"></div>-->
         </td>
         <td>
             <input type="text" class="form-control"

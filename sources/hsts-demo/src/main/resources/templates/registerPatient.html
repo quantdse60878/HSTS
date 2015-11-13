@@ -26,7 +26,7 @@
                 <div class="box box-info">
 
                     <!-- form start -->
-                    <form class="form-horizontal" method="POST" th:action="registerNew" data-toggle="validator">
+                    <form class="form-horizontal" id = "mainForm">
 
                         <!-- New design-->
 
@@ -34,14 +34,14 @@
                             <div class="nav-tabs-custom" style="box-shadow: none;">
                                 <!-- Tab header -->
                                 <ul class="nav nav-tabs">
-                                    <li class="active">
-                                        <a href="#tab_1" data-toggle="tab">Patient's Profile</a>
+                                    <li class="active" id="li_tab_1">
+                                        <a href="#tab_1" data-toggle="tab" onclick="changeTab('#tab_1', '#li_tab_1')">Patient's Profile</a>
                                     </li>
-                                    <li>
-                                        <a href="#tab_2" data-toggle="tab">Medical Checking</a>
+                                    <li id="li_tab_2">
+                                        <a href="#tab_2" data-toggle="tab" onclick="changeTab('#tab_2', '#li_tab_2')">Medical Checking</a>
                                     </li>
-                                    <li>
-                                        <a href="#tab_3" data-toggle="tab">Medical registration</a>
+                                    <li id="li_tab_3">
+                                        <a href="tab_3" data-toggle="tab" onclick="changeTab('#tab_3', '#li_tab_3')">Medical registration</a>
                                     </li>
                                 </ul>
                                 <!-- End tab header -->
@@ -53,61 +53,43 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Name*</label>
 
-                                            <div class="col-sm-5">
-                                                <select id="patientName" th:name="patientName" th:width="0">
+                                            <div class="col-sm-4">
+                                                <select id="patientName" th:name="patientName">
+                                                    <option value="">Type patient name</option>
                                                 </select>
+                                            </div>
+                                            <div class="col-sm-3 help-block with-errors" id = "invalidPatientName">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="Birthday" class="col-sm-3 control-label">Birthday*</label>
+                                            <label for="birthday" class="col-sm-3 control-label">Birthday*</label>
 
                                             <div class="col-sm-3">
-                                                <input type="text" th:name="birthday" class="form-control" id="Birthday"
-                                                       required="required" data-error="Please choose patient's birthday"/>
-                                                <div class="help-block with-errors"></div>
+                                                <input type="text" th:name="birthday" class="form-control" id="birthday"/>
+                                            </div>
+                                            <div class="col-sm-3 help-block with-errors" id = "invalidBirthday">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="email" class="col-sm-3 control-label">Email*</label>
 
                                             <div class="col-sm-5">
-                                                <input type="email" id="email" th:name="email" class="form-control"
-                                                       data-remote="/validateEmail"
-                                                       data-error="That email is invalid, or already use" required="required"/>
+                                                <input type="text" id="email" th:name="email" class="form-control"/>
                                             </div>
-                                            <div class="help-block with-errors"></div>
+                                            <div class="help-block with-errors" id = "invalidEmail"></div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">Gender*</label>
-
-                                            <!--<div class="radio col-sm-5">-->
-                                            <!--<label>-->
-                                            <!--<input type="radio" th:name="gender" id="optionsRadios1" value="1"-->
-                                            <!--checked="checked"/>-->
-                                            <!--Male-->
-                                            <!--</label>-->
-                                            <!--<label>-->
-                                            <!--<input type="radio" th:name="gender" id="optionsRadios2" value="2"/>-->
-                                            <!--Female-->
-                                            <!--</label>-->
-                                            <!--</div>-->
-                                            <div class="btn-group col-sm-3" data-toggle="buttons">
-                                                <label class="btn btn-default active">
-                                                    <input type="radio" name="gender" value="1" checked="" required="required"
-                                                           data-error="Choose at least one gender"/>Male
-                                                </label>
-
-                                                <label class="btn btn-default">
-                                                    <input type="radio" name="gender" value="2"/>Female
-                                                </label>
-                                                <div class="help-block with-errors"></div>
+                                            <label class="col-sm-3 control-label">Male*</label>
+                                            <div class="btn-group col-sm-1">
+                                            <input type="checkbox" name="gender" value="1" checked="checked" id="gender"/>
                                             </div>
+
                                         </div>
 
 
                                         <!-- footer -->
                                         <div style="margin: 15px;">
-                                            <a href="#tab_2" onclick="changeTab('#tab_2')" data-toggle="tab"
+                                            <a data-toggle="tab" onclick="validateAndChangeTab('#tab_2', '#li_tab_2')"
                                                class="btn btn-primary pull-right">Next</a>
                                         </div>
                                         <!-- /.footer -->
@@ -119,169 +101,145 @@
                                         <table class="table table-bordered table-striped" id="tableMedicalCheck">
                                             <thead>
                                             <tr>
-                                                <th style="width: 200px; text-align: center">Measurement index</th>
-                                                <th style="width: 125px; text-align: center">Value</th>
-                                                <th style="width: 200px; text-align: center">Measurement index</th>
-                                                <th style="width: 125px; text-align: center" >Value</th>
+                                                <th style="width: 250px; text-align: center">Measurement index</th>
+                                                <th style="width: 75px; text-align: center">Value</th>
+                                                <th style="width: 250px; text-align: center">Measurement index</th>
+                                                <th style="width: 75px; text-align: center" >Value</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    <label for="Weight" class="control-label">Weight*</label>
+                                                    <label for="weight" class="control-label">Weight* (Kg)</label>
                                                 </td>
                                                 <td class="form-group">
-                                                    <input type="number" th:name="weight" class="form-control" id="Weight"
-                                                           placeholder="Kg" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                    <input type="number" th:name="weight" class="form-control" id="weight"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidWeight">
+                                                    </div>
                                                 </td>
 
                                                 <td>
-                                                    <label for="visceralFat" class="control-label">Visceral Fat*</label>
+                                                    <label for="visceralFat" class="control-label">Visceral Fat* (level)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="text" th:name="visceralFat" class="form-control"
-                                                           id="visceralFat"
-                                                           placeholder="level" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           id="visceralFat"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidVisceralFat"></div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="Height" class="control-label">Height*</label>
+                                                    <label for="height" class="control-label">Height (cm)*</label>
                                                 </td>
                                                 <td class="form-group">
-                                                    <input type="number" th:name="height" class="form-control" id="Height"
-                                                           placeholder="cm" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                    <input type="number" th:name="height" class="form-control" id="height"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidHeight"></div>
                                                 </td>
 
                                                 <td>
-                                                    <label for="muscleMass" class="control-label">Muscle Mass*</label>
+                                                    <label for="muscleMass" class="control-label">Muscle Mass* (%)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="text" th:name="muscleMass" class="form-control"
-                                                           id="muscleMass"
-                                                           placeholder="%" data-remote="/validateData"
-                                                           required="required"/>
+                                                           id="muscleMass"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidMuscleMass"></div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="heartBeat" class="control-label">Heart Beat*</label>
+                                                    <label for="heartBeat" class="control-label">Heart Beat* (times/min)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="heartBeat" class="form-control"
-                                                           id="heartBeat"
-                                                           placeholder="times/minute" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           id="heartBeat"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidHeartBeat"></div>
                                                 </td>
 
                                                 <td>
-                                                    <label for="bodyWater" class="control-label">Body Water*</label>
+                                                    <label for="bodyWater" class="control-label">Body Water* (%)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="text" th:name="bodyWater" class="form-control"
-                                                           id="bodyWater"
-                                                           placeholder="%" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           id="bodyWater"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidBodyWater"></div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="bloodPressure" class="control-label">Blood Pressure*</label>
+                                                    <label for="bloodPressure" class="control-label">Blood Pressure* (mmHg)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="bloodPressure" class="form-control"
-                                                           id="bloodPressure"
-                                                           placeholder="mmHg" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           id="bloodPressure"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id = "invalidBloodPressure"></div>
                                                 </td>
 
                                                 <td>
-                                                    <label for="phaseAngle" class="control-label">Phase Angle*</label>
+                                                    <label for="phaseAngle" class="control-label">Phase Angle* (o)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="text" th:name="phaseAngle" class="form-control"
-                                                           id="phaseAngle"
-                                                           placeholder="o" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           id="phaseAngle"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id = "invalidPhaseAngle"></div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="waists" class="control-label">Waists*</label>
+                                                    <label for="waists" class="control-label">Waists* (cm)</label>
                                                 </td>
                                                 <td class="form-group">
-                                                    <input type="number" th:name="waists" class="form-control" id="waists"
-                                                           placeholder="cm" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                    <input type="number" th:name="waists" class="form-control" id="waists" />
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id = "invalidWaists"></div>
                                                 </td>
 
                                                 <td>
-                                                    <label for="impedance" class="control-label">Impedance*</label>
+                                                    <label for="impedance" class="control-label">Impedance* (Ohm)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="number" th:name="impedance" class="form-control"
-                                                           id="impedance"
-                                                           placeholder="Ohm" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           id="impedance"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id = "invalidImpedance"></div>
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td>
-                                                    <label for="bodyFat" class="control-label">Body Fat*</label>
+                                                    <label for="bodyFat" class="control-label">Body Fat* (%)</label>
                                                 </td>
                                                 <td class="form-group">
                                                     <input type="text" th:name="bodyFat" class="form-control"
-                                                           id="bodyFat"
-                                                           placeholder="%" data-remote="/validateData"
-                                                           required="required" data-error="Wrong input"/>
+                                                           id="bodyFat" />
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id = "invalidBodyFat"></div>
                                                 </td>
 
                                                 <td>
                                                     <label for="basalMetabolicRate" class="control-label">Basal
-                                                        Metabolic Rate*</label>
+                                                        Metabolic Rate* (Kcal)</label>
                                                 </td>
                                                 <td>
                                                     <input type="number" th:name="basalMetabolicRate" class="form-control"
-                                                           id="basalMetabolicRate"
-                                                           placeholder="Kcal"
-                                                           data-remote="/validateData" required="required"
-                                                           data-error="Wrong input"/>
+                                                           id="basalMetabolicRate"/>
 
-                                                    <div class="help-block with-errors"></div>
+                                                    <div class="help-block with-errors" id="invalidBasalMetabolicRate"></div>
                                                 </td>
                                             </tr>
                                             </tbody>
                                         </table>
                                         <div style="margin: 15px;">
-                                            <a href="#tab_1" onclick="changeTab('#tab_1')" data-toggle="tab"
+                                            <a  data-toggle="tab" onclick="changeTab('#tab_1', '#li_tab_1')"
                                                class="btn btn-default">Previous</a>
-                                            <a href="#tab_3" onclick="changeTab('#tab_3')" data-toggle="tab"
+                                            <a onclick="validateAndChangeTab('#tab_3', '#li_tab_3')" data-toggle="tab"
                                                class="btn btn-primary pull-right">Next</a>
                                         </div>
                                     </div>
@@ -293,48 +251,51 @@
                                             <label class="col-sm-3 control-label">Doctor*</label>
 
                                             <div class="col-sm-5">
-                                                <select id="doctorSelect" th:name="doctorId" th:width="0px">
-                                                    <!--<option value="" th:disabled="disable">Select one...</option>-->
-                                                    <!--<option th:each="doctor : ${session.DOCTORS}"-->
-                                                            <!--th:value="${doctor.id}"-->
-                                                            <!--th:text="${doctor.account.fullName}"></option>-->
+                                                <select id="doctorSelect" th:name="doctorId">
                                                 </select>
+
                                             </div>
+                                            <div class="help-block with-errors" id="invalidDoctorId"></div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="Medicalhistory" class="col-sm-3 control-label">Medical
+                                            <label for="medicalHistory" class="col-sm-3 control-label">Medical
                                                 history</label>
 
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 <input th:type="text" class="form-control" placeholder="Medical history"
-                                                       name="medicalHistory" data-role="tagsinput" required="required"/>
+                                                       name="medicalHistory" id="medicalHistory" data-role="tagsinput"/>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <a href="#uploadModal" data-toggle="modal" data-target="#uploadModal" class="btn btn-info">Upload images</a>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="clinicalSymptoms" class="col-sm-3 control-label">Clinical
+                                            <label for="symptoms" class="col-sm-3 control-label">Clinical
                                                 symptoms</label>
 
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 <input th:type="text" class="form-control"
-                                                       placeholder="Clinical symptoms" name="symptoms"
-                                                       data-role="tagsinput" required="required"/>
+                                                       placeholder="Clinical symptoms" name="symptoms" id = "symptoms"
+                                                       data-role="tagsinput"/>
                                             </div>
+                                            <div class="help-block with-errors" id="invalidSymptoms"></div>
+
                                         </div>
 
                                         <div class="form-group">
                                             <label for="medicineHistory" class="col-sm-3 control-label">Medicine
                                                 History</label>
 
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-5">
                                                 <input th:type="text" class="form-control"
-                                                       placeholder="Medicine history" name="medicineHistory"
-                                                       data-role="tagsinput" id="medicineHistory"/>
+                                                       placeholder="Medicine history" name="medicineHistory" data-role="tagsinput"
+                                                       id="medicineHistory" />
                                             </div>
                                         </div>
 
                                         <!-- footer -->
                                         <div style="margin: 15px;">
-                                            <a href="#tab_2" onclick="changeTab('#tab_2')" data-toggle="tab"
+                                            <a data-toggle="tab" onclick="changeTab('#tab_2', '#li_tab_2')"
                                                class="btn btn-default">Previous</a>
                                             <button type="submit" class="btn btn-primary pull-right">Register</button>
                                         </div>
@@ -350,10 +311,186 @@
 
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="reset" class="btn btn-default">Cancel</button>
+                            <!--<button type="reset" class="btn btn-default" >Cancel</button>-->
+                            <a th:href="@{registerPatient}" class="btn btn-default">Reset</a>
                         </div>
                         <!-- /.box-footer -->
+                        <!-- Modal -->
+
                     </form>
+
+                    <!-- upload file pop up-->
+                    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" data-backdrop="static"
+                         data-keyboard="false">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="uploadModalLabel">Upload images</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <input id="fileUploader" name="fileUploader" type="file" multiple="multiple" class="file-loading"/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .upload file pop up-->
+
+                    <!-- patient profile modal -->
+                    <div class="modal fade" id="patientProfileModal" tabindex="-1" role="dialog" aria-labelledby="patientProfileLabel"  data-backdrop="static"
+                         data-keyboard="false">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                                    <h4 class="modal-title" id="patientProfileLabel">Patient profile</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Name:</label>
+
+                                        <div class="col-sm-5">
+                                            <label id = "txtName">Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Birthday:</label>
+                                        <div class="col-sm-3">
+                                            <label id = "txtBirthday">Birthday</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Email:</label>
+
+                                        <div class="col-sm-3">
+                                            <label id = "txtEmail">Birthday</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Gender:</label>
+                                        <div class="btn-group col-sm-1">
+                                            <input type="checkbox"  id="pGender" disabled="disabled"/>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href = "registerPatient" class ="btn default">Cancel</a>
+                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>-->
+                                    <a href = "/test" class ="btn btn-info" id = "btnLink">This is old patient</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .patient profile modal -->
+
+                    <!-- patient registration info modal -->
+
+                    <div class="modal fade" id="patientRegistrationModal" tabindex="-1" role="dialog" aria-labelledby="patientRegistrationLabel"
+                         data-backdrop="static" data-keyboard="false">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                                    <h4 class="modal-title" id="patientRegistrationLabel">Patient registration</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row" style="margin: 15px; text-align: center;">
+                                        <canvas id="myCanvas" width="200" height="100"/>
+                                    </div>
+
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Name:</label>
+
+                                        <div class="col-sm-5" >
+                                            <label id = "rName">Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Birthday:</label>
+                                        <div class="col-sm-3">
+                                            <label id = "rBirthday">Birthday</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Male:</label>
+                                        <div class="btn-group col-sm-3" data-toggle="buttons">
+                                            <!--<input type ="text" style="width: 90px" id = "rGender"/>-->
+                                            <div class="btn-group col-sm-1">
+                                                <input type="checkbox" name="gender" id="rGender" disabled="disabled"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Email:</label>
+
+                                        <div class="col-sm-3">
+                                            <label id = "rEmail">Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Barcode:</label>
+
+                                        <div class="col-sm-3">
+                                            <label id = "rBarcode">Barcode</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Date:</label>
+
+                                        <div class="col-sm-3">
+                                            <label id = "rDate">Date</label>
+                                        </div>
+                                    </div>
+                                    <!--<div class="row" style="margin: 15px">-->
+                                        <!--<label class="col-sm-3 control-label">Order number:</label>-->
+
+                                        <!--<div class="col-sm-3">-->
+                                        <!--<label id = "rOrderNumber">Order Number</label>-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <div class="row" style="margin: 15px">
+                                        <label class="col-sm-3 control-label">Doctor:</label>
+
+                                        <div class="col-sm-3">
+                                            <label id = "rDoctor">Doctor</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a class ="btn btn-info" id = "btnNextPatient">Next patient</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- .patient registration info modal -->
+
+                    <!-- registration error modal -->
+                    <div class="modal fade" id="registrationErrorModal" tabindex="-1"
+                         role="dialog" aria-labelledby="registrationErrorMessage" data-backdrop="static" data-keyboard="false">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                                    <h4 class="modal-title" id="registrationErrorMessage">Messsage</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <h4 class="modal-title">Error while register patient, please check</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .registration error modal -->
+
                 </div>
                 <!-- /.box -->
             </div>
@@ -364,34 +501,48 @@
     </section>
     <!-- /.content -->
     <!-- POPUP -->
-    <div id="blanket" style="display:none;"></div>
-    <div>
-        <div layout:replace="_popupPatient"></div>
-    </div>
+    <!--<div id="blanket" style="display:none;"></div>-->
+    <!--<div>-->
+        <!--<div layout:replace="_popupPatient"></div>-->
+    <!--</div>-->
+
+
     <!-- POPUP -->
-    <!-- jQueryUI -->
+    <!-- jQuery -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
 
+    <!-- jquery validation -->
+    <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
+
+    <script type="text/javascript"
+            th:src="@{/static/bower/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js}"></script>
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
+
+    <link th:href="@{/static/bower/select2-bootstrap-theme/dist/select2-bootstrap.css}" rel="stylesheet"/>
 
     <!-- bootstrap-datepicker-->
     <link th:href="@{/static/bower/admin-lte/plugins/datepicker/datepicker3.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/datepicker/bootstrap-datepicker.js}"></script>
 
+    <!-- iCheck -->
+    <script th:src="@{/static/bower/icheck/icheck.min.js}"/>
+    <link th:href="@{/static/bower/icheck/skins/all.css}" rel="stylesheet"/>
+
     <!-- Bootstrap multiple tags -->
     <link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>
 
-    <!-- Bootstrap validator-->
-    <script th:src="@{/static/bower/bootstrap-validator/dist/validator.min.js}"/>
+    <!-- Bootstrap file input-->
+    <link th:href="@{/static/bower/bootstrap-fileinput/css/fileinput.min.css}" rel="stylesheet"/>
+    <script th:src="@{/static/bower/bootstrap-fileinput/js/fileinput.min.js}"/>
 
-    <!-- script add -->
-    <script th:src="@{/static/js/bootstrap-validator-ext.js}"/>
+    <!-- external script-->
     <script th:src="@{/static/js/registerPatient.js}"/>
 
-    <!-- css add -->
+    <!-- external css-->
+
     <link th:href="@{/static/css/registerPatient.css}" rel="stylesheet"/>
 </div>
 <!-- /.content-wrapper -->

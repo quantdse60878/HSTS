@@ -22,7 +22,7 @@ public class RegistrationCriteria extends SearchCriteria {
     /**
      *
      */
-    private String symptom;
+    private String symptoms;
 
     /**
      *
@@ -45,12 +45,12 @@ public class RegistrationCriteria extends SearchCriteria {
         this.medicalHistory = medicalHistory;
     }
 
-    public String getSymptom() {
-        return symptom;
+    public String getSymptoms() {
+        return symptoms;
     }
 
-    public void setSymptom(final String symptom) {
-        this.symptom = symptom;
+    public void setSymptoms(final String symptoms) {
+        this.symptoms = symptoms;
     }
 
     public String getMedicineHistory() {

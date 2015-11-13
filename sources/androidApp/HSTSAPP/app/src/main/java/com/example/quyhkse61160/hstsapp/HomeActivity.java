@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -47,10 +48,12 @@ import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
 import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;
 import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
+import com.example.quyhkse61160.hstsapp.Fragment.NoticeNextTab;
 import com.example.quyhkse61160.hstsapp.Fragment.NoticeTab;
 import com.example.quyhkse61160.hstsapp.Fragment.Tab4;
 import com.example.quyhkse61160.hstsapp.Service.BluetoothLeService;
 import com.example.quyhkse61160.hstsapp.Service.BroadcastService;
+import com.example.quyhkse61160.hstsapp.Service.GetWristbandDataService;
 import com.example.quyhkse61160.hstsapp.Service.NetworkChangeReceiver;
 
 import org.json.JSONArray;
@@ -81,7 +84,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     private final static String TAG = HomeActivity.class.getSimpleName();
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
-    private BluetoothLeService mBluetoothLeService;
+    public static BluetoothLeService mBluetoothLeService;
     private String mDeviceName;
     private String mDeviceAddress;
     public static int appointmentId = 2;
@@ -101,6 +104,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public static String timeAlert;
     private AlarmManagerBroadcastReceiver alarm;
     public static boolean hadRegisterReceiver = false;
+    public static boolean hadHadCharacteristic = false;
     private final Handler handlerThread = new Handler();
 
 
@@ -115,6 +119,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter dadapter;
     public static boolean hasNotify = false;
+    public static boolean hasRunBroadcastService = false;
 
     // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -177,6 +182,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     Log.d("-------", "--" + gattService.getUuid().toString() + "--");
                     characteristicStep = gattService.getCharacteristic(Constant.numberOfStep_UUID);
                     characteristicManufacturer = gattService.getCharacteristic(Constant.manufacturer_UUID);
+                    hadHadCharacteristic = true;
                     mBluetoothLeService.readCharacteristic(characteristicManufacturer);
                 }
             }
@@ -195,16 +201,20 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                     @Override
                     public void run() {
                         // This code will always run on the UI thread, therefore is safe to modify UI elements.
-                        if (Constant.numberOfStep_potition != -1) {
-                            mBluetoothLeService.readCharacteristic(characteristicStep);
-                            Log.d("QUYYY1111111", "Manufacturer: " + Constant.manufacturer + "------" + "Number of step: " + Constant.numberOfStep);
-                        }
+                        readData();
                     }
                 });
             }
         }, 10000, 10000);
 
 
+    }
+
+    public static void readData(){
+        if (Constant.numberOfStep_potition != -1) {
+            mBluetoothLeService.readCharacteristic(characteristicStep);
+            Log.d("QUYYY1111111", "Manufacturer: " + Constant.manufacturer + "------" + "Number of step: " + Constant.numberOfStep);
+        }
     }
 
     private void updateView(int index){
@@ -222,12 +232,13 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home2);
+        Log.e("QUYYY11", "00HomeActivity - RegisterReceiver: " + hadRegisterReceiver);
         if(!hadRegisterReceiver) {
             hadRegisterReceiver = true;
             registerReceiver(mConnectionDetector, mIntentFilter);
         }
         SendBrandAsyncTask sendBrandAsyncTask = new SendBrandAsyncTask();
-        sendBrandAsyncTask.execute();
+//        sendBrandAsyncTask.execute();
         Constant.TREATMENTS = Constant.getItems();
 
 
@@ -257,12 +268,43 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
             }
-            if (bundle.getBoolean("notFinished")) {
+            if (bundle.getBoolean("nextAppointment")) {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Nhắc Nhở").setMessage("Hôm nay là ngày tái khám. Hãy cố gắng thu xếp thời gian để đến với chúng tôi. Hân hạnh đươc đón tiếp Quý Khách!");
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.show();
+            }if (bundle.getBoolean("notFinished")) {
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
                 r.play();
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Nhắc Nhở").setMessage("Hôm qua bạn chưa hoàn thành chế độ điều trị, hãy cố gắng thực hiện để việc điều trị được tốt hơn.");
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+                dialog.show();
+            }
+            if (bundle.getBoolean("noConnection")) {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setTitle("Nhắc Nhở").setMessage("HSTS App không tìm thấy kết nối mạng để đồng bộ dữ liệu. Bạn có muốn mở mạng không ?")
+                        .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                            }
+                        })
+                        .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
@@ -278,17 +320,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 dialog.show();
             }
         }
-
-
-
-
-
-
-
-
-
-
-
 
         mTitle = mDrawerTitle = getTitle();
 
@@ -313,6 +344,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         // Notice
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
 
+//        // Notice Next Time
+//        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+
 
         // Recycle the typed array
         navMenuIcons.recycle();
@@ -325,17 +359,17 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-//                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-//                    item.setNotify(false);
                     updateView(position);
                     displayView(0);
                 }
                 if (position == 1) {
-//                    NavDrawerItem item = (NavDrawerItem) parent.getItemAtPosition(position);
-//                    item.setNotify(false);
                     updateView(position);
                     displayView(1);
                 }
+//                if (position == 2) {
+//                    updateView(position);
+//                    displayView(2);
+//                }
             }
         });
 
@@ -343,10 +377,6 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         actionBar = getSupportActionBar();
 
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3ea000")));
-//        if(hasFood || hasMedicine || hasPractice) actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer_red);
-//        else {
-//            actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
-//        }
         actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -358,48 +388,31 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         ){
             public void onDrawerClosed(View view) {
                 actionBar.setTitle(mTitle);
-                // calling onPrepareOptionsMenu() to show action bar icons
-//                invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
                 actionBar.setTitle(mDrawerTitle);
-                // calling onPrepareOptionsMenu() to hide action bar icons
-//                invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
         if (savedInstanceState == null) {
             // on first time display view for first nav item
             if(hasNotify) displayView(1);
             else displayView(0);
         }
 
-        checkNotifyIntent = new Intent(this, BroadcastService.class);
+        if(!hasRunBroadcastService){
+            hasRunBroadcastService = true;
+            checkNotifyIntent = new Intent(this, BroadcastService.class);
+            startService(checkNotifyIntent);
+        }
         //KhuongMH
 
-
-
-//        startService(checkNotifyIntent);
-//        registerReceiver(notifyReceiver, new IntentFilter(BroadcastService.BROADCAST_ACTION));
-        final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-        if (mBluetoothLeService != null) {
-            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
-            Log.d(TAG, "Connect request result=" + result);
-        }
 
         //Set Alarm
         amountTime = amountTime();
 
-//        startService(checkNotifyIntent);
-//        position = Integer.parseInt(Constant.NUMBEROFSTEP_POSITION);
+
 //        final Intent intent = getIntent();
 //        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
 //        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
@@ -412,7 +425,9 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 //            Log.d(TAG, "Connect request result=" + result);
 //        }
 
-
+//        Context context = getApplicationContext();
+//        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
+//        context.startService(notifyIntent);
     }
 
     @Override
@@ -432,7 +447,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 fragment = new NoticeTab();
                 break;
 //            case 2:
-//                fragment = new Tab2();
+//                fragment = new NoticeNextTab();
 //                break;
 //            case 3:
 //                fragment = new Tab3();
@@ -639,6 +654,4 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
             e.printStackTrace();
         }
     }
-
-
 }

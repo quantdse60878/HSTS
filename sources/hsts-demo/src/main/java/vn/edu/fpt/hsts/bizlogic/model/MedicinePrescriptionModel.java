@@ -1,9 +1,11 @@
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Aking on 10/11/2015.
  */
-public class MedicinePrescriptionModel {
+public class MedicinePrescriptionModel implements Serializable{
     /**
      * Medicine
      */
@@ -18,20 +20,18 @@ public class MedicinePrescriptionModel {
      * Medicine Quantity
      */
     private int mQuantity = 1;
+
+    /**
+     * Medicine Unit
+     */
+    private String mUnit;
+
     /**
      * Medicine Note
      */
     private String mNote;
 
     public MedicinePrescriptionModel() {
-    }
-
-    public MedicinePrescriptionModel(int m, int mTime, int mQuantity, String mNote) {
-        this.m = m;
-        this.mTime = mTime;
-
-        this.mQuantity = mQuantity;
-        this.mNote = mNote;
     }
 
     public int getM() {
@@ -58,6 +58,14 @@ public class MedicinePrescriptionModel {
         this.mQuantity = mQuantity;
     }
 
+    public String getmUnit() {
+        return mUnit;
+    }
+
+    public void setmUnit(String mUnit) {
+        this.mUnit = mUnit;
+    }
+
     public String getmNote() {
         return mNote;
     }
@@ -71,7 +79,9 @@ public class MedicinePrescriptionModel {
             return false;
         } else if (mTime <= 0){
             return false;
-        } else if (mQuantity <= 0 && mQuantity > 15){
+        } else if (mQuantity <= 0 && mQuantity > 10){
+            return false;
+        } else if (mUnit.isEmpty() || null == mUnit){
             return false;
         }
         return true;

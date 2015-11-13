@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -126,6 +127,18 @@ public class IllnessService {
             // Find the different between 2 day
             Date startDate = medicalRecord.getStartTime();
 
+            return getPhaseSugest(startDate, illness);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public Phase getPhaseSugest(final Date startDate, final Illness illness) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info(" startDate[{}], dianostic[{}]", startDate, illness);
+
+            // Find the different between 2 day
             Date today = new Date();
             today = DateUtils.roundDate(today, false);
 
@@ -139,7 +152,20 @@ public class IllnessService {
                 numberOfDay = Math.abs(numberOfDay);
             }
             // Select suitable phase
-            return phaseRepo.findSuitablePhase(illness.getId(), numberOfDay);
+            final List<Phase> phaseList = phaseRepo.findByIllnessId(illness.getId());
+            if (!CollectionUtils.isEmpty(phaseList)) {
+                int countDay = 0;
+                for (Phase phase: phaseList) {
+                    countDay += phase.getNumberOfDay();
+                    if (countDay >= numberOfDay) {
+                        // Match
+                        return phase;
+                    }
+                }
+                // Get last
+                return phaseList.get(phaseList.size() - 1 );
+            }
+            return null;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

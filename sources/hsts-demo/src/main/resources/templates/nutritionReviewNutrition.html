@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Review Nutrition -
+        <small style="color: green; font-size:15.5px" th:text="${APPOINTMENT.medicalRecord.patient.account.fullName}">Patient</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Review Nutrition</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+<input type="hidden" id="patientId" th:value="${PATIENT.id}"/>
+<div class="row">
+<div class="col-xs-12">
+<div class="box">
+<div class="microphone" style="width: 104px;
+                                                   margin: 0 auto;">
+    <img onclick="recognizer()" id="microphone" src="/static/image/microphone_passive.png"/>
+    <input type="hidden" id="result" />
+    <input type="hidden" id="finalResult" />
+    <input type="hidden" id="meal" />
+    <input type="hidden" id="foodValue" />
+</div>
+<div class="example" style="width: 326px;
+                                                margin: 0 auto;">
+    <h4>Talk : Bữa ... (Exp: Bữa Sáng, Bữa Tối)</h4>
+</div>
+<div id="example9" style="width: 72px;margin: 0 auto; margin-bottom: 10px">
+    <button onclick="createNutrition()" class="btn btn-primary">Suggest</button>
+    <a id="accept" class="btn btn-primary" style="visibility: hidden;"></a>
+</div>
+<div class="nav-tabs-custom" style="box-shadow: none;">
+<ul class="nav nav-tabs">
+    <li id="li_tab_1"><a id="tab1" onclick="changeColorTab(this)" href="#panel_1" data-toggle="tab">
+        BreakFast</a></li>
+    <li id="li_tab_2"><a id="tab2" onclick="changeColorTab(this)" href="#panel_2" data-toggle="tab">BreakTime Morning</a></li>
+    <li id="li_tab_3"><a id="tab3" onclick="changeColorTab(this)" href="#panel_3" data-toggle="tab">Lunch</a></li>
+    <li id="li_tab_4"><a id="tab4" onclick="changeColorTab(this)" href="#panel_4" data-toggle="tab">BreakTime Afternoon</a></li>
+    <li id="li_tab_5"><a id="tab5" onclick="changeColorTab(this)" href="#panel_5" data-toggle="tab">Dinner</a></li>
+    <li id="li_tab_6"><a id="tab6" onclick="changeColorTab(this)" href="#panel_6" data-toggle="tab">Eat Late At Night</a></li>
+</ul>
+<div class="tab-content">
+
+<!-- PANEL 1111111111111111111111111111111-->
+<div class="tab-pane" id="panel_1">
+    <div class="example" style="width: 372px;
+                                                margin: 0 auto;">
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
+                                                   margin: 0 auto;">
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="bf" name="bf"/></h3>
+    </div>
+</div>
+<div class="tab-pane" id="panel_2">
+    <div class="example" style="width: 372px;
+                                                margin: 0 auto;">
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
+                                                   margin: 0 auto;">
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="break_time_morning" name="break_time_morning"/></h3>
+    </div>
+</div>
+<div class="tab-pane" id="panel_3">
+    <div class="example" style="width: 372px;
+                                                margin: 0 auto;">
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
+                                                   margin: 0 auto;">
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="lunch" name="lunch"/></h3>
+    </div>
+</div>
+<div class="tab-pane" id="panel_4">
+    <div class="example" style="width: 372px;
+                                                margin: 0 auto;">
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
+                                                   margin: 0 auto;">
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="bta" name="bta"/></h3>
+    </div>
+</div>
+<div class="tab-pane" id="panel_5">
+    <div class="example" style="width: 372px;
+                                                margin: 0 auto;">
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
+                                                   margin: 0 auto;">
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="dinner" name="dinner"/></h3>
+    </div>
+</div>
+<div class="tab-pane" id="panel_6">
+    <div class="example" style="width: 372px;
+                                                margin: 0 auto;">
+        <h3>Talk : Ăn ... (Exp: Ăn Bún, Ăn Phở)</h3>
+    </div>
+    <div class="result" style="width: 385px;
+                                                   margin: 0 auto;">
+        <h3>Result : <input type="text" onchange="changeValueOnFood(this)" id="en" name="en"/></h3>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+</section>
+<!-- /.content -->
+<script th:inline="javascript">
+    console.log("----------1111-------");
+    var listUnitOfFood = [[${listUnitOfFood}]];
+</script>
+<script th:src="@{/static/js/semulateMouseClick.js}"></script>
+<script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/static/js/nurseReviewNutrition.js}"></script>
+</div>
+<!-- /.content-wrapper -->
+</body>
+</html>

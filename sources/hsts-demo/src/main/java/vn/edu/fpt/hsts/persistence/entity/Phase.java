@@ -24,7 +24,7 @@ public class Phase extends AbstractKeyEntity {
      *
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "regimenId", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "regimenId", nullable = false)
     private Regimen regimen;
 
     /**
@@ -49,12 +49,12 @@ public class Phase extends AbstractKeyEntity {
     /**
      *
      */
-    private int fromDate;
+    private int phaseOrder;
 
     /**
      *
      */
-    private int toDate;
+    private int numberOfDay;
 
 
     /**
@@ -103,19 +103,19 @@ public class Phase extends AbstractKeyEntity {
         this.updateTime = updateTime;
     }
 
-    public int getFromDate() {
-        return fromDate;
+    public int getPhaseOrder() {
+        return phaseOrder;
     }
 
-    public void setFromDate(final int fromDate) {
-        this.fromDate = fromDate;
+    public void setPhaseOrder(int phaseOrder) {
+        this.phaseOrder = phaseOrder;
     }
 
-    public int getToDate() {
-        return toDate;
+    public int getNumberOfDay() {
+        return numberOfDay;
     }
 
-    public void setToDate(final int toDate) {
-        this.toDate = toDate;
+    public void setNumberOfDay(int numberOfDay) {
+        this.numberOfDay = numberOfDay;
     }
 }

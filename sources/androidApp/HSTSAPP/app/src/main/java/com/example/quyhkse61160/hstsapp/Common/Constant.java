@@ -7,13 +7,16 @@ import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 public class Constant {
     //All constant of call api
-    public static String hostURL = "http://192.168.7.106:8080";
+    public static String hostURL = "http://192.168.20.130:8080";
     public static final String loginMethod = "/loginMobile";
     public static final String checkNotifyMethod = "/notify";
     public static final String getTreatment = "/getTreatment";
@@ -31,8 +34,8 @@ public class Constant {
     public static final String PREF_DATA = "HSTSAPPDATA";
     public static final String PREF_PATIENT_NAME = "HSTSAPPPREFPATIENTNAME";
 
-    public static String accountId = "0";
-    public static String patientId = "0";
+    public static String accountId = "13";
+    public static String patientId = "9";
     public static String username = "";
     public static String numberOfStep = "2000";
     public static int position = -1;
@@ -54,7 +57,10 @@ public class Constant {
     public static String FOOD_FROM_JSON = "listFoodTreatment";
     public static String MEDICINE_FROM_JSON = "listMedicineTreatment";
     public static String PRACTICE_FROM_JSON = "listPracticeTreatment";
-    public static String PATIENT_NAME = "";
+    public static String PATIENT_NAME = "Trần Đăng Quân";
+    public static Date PATIENT_APPOINTMENT = new Date();
+    public static List<String> TIMES = new ArrayList<>();
+
 
 
     public static List<Treatment> getItems() {
@@ -65,6 +71,7 @@ public class Constant {
                 Treatment treatment = new Treatment();
                 treatment.setIllnessName(jsonArray.getJSONObject(i).getString("illnessName"));
                 treatment.setNextAppointment(jsonArray.getJSONObject(i).getString("nextAppointment"));
+                PATIENT_APPOINTMENT = new SimpleDateFormat("yyyy-MM-dd").parse(jsonArray.getJSONObject(i).getString("nextAppointment").split(" ")[0]);
                 treatment.setFromDate(jsonArray.getJSONObject(i).getString("fromDate"));
                 treatment.setToDate(jsonArray.getJSONObject(i).getString("toDate"));
                 treatment.setCaloriesBurnEveryday(jsonArray.getJSONObject(i).getString("caloriesBurnEveryday"));

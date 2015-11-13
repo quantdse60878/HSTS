@@ -40,4 +40,11 @@ public abstract class AbstractNamedModel<E extends AbstractNamedEntity> extends 
         super.fromEntity(entity);
         this.name = entity.getName();
     }
+
+    @Override
+    public E toEntity() throws InstantiationException, IllegalAccessException {
+        E entity =  super.toEntity();
+        entity.setName(this.name);
+        return entity;
+    }
 }

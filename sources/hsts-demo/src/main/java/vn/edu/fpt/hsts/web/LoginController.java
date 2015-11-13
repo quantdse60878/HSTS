@@ -18,6 +18,7 @@ import vn.edu.fpt.hsts.bizlogic.model.PatientModel;
 import vn.edu.fpt.hsts.bizlogic.service.*;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.util.AnalyticDataTask;
+import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 
@@ -96,50 +97,58 @@ public class LoginController {
                 session.setAttribute("USER", user);
                 mav.setViewName("home");
 
-                if (user.getRole().getName().equals("Doctor")) {
+                if (user.getRole().getId() == IDbConsts.IRoleType.DOCTOR) {
                     mav.setViewName("doctorPatients");
-                    List<Patient> patientList = patientService.getPatientByApponitmentDate();
+                    List<Patient> patientList = patientService.getPatientByApponitmentDateOfDoctor(user.getId());
                     LOGGER.info("listpatiens: " + patientList.size());
                     mav.addObject("LISTPATIENTS", patientList);
-                } else if (user.getRole().getName().equals("Nurse")) {
+                } else if (user.getRole().getId() == IDbConsts.IRoleType.NURSE) {
                     mav.setViewName("registerPatient");
-                } else if (user.getRole().getName().equals("Staff")) {
-                    mav.setViewName("staffFormula");
-                    List<String> listPrevention1 = formulaService.getListFieldOfPreventionCheck();
-                    List<String> listPrevention = new ArrayList<String>();
-                    List<String> listMedicalRecordData1 = formulaService.getListFieldOfMedicalRecordData();
-                    List<String> listMedicalRecordData = new ArrayList<String>();
-                    for (String p : listPrevention1) {
-                        if(!p.equals("appointment")) {
-                            listPrevention.add(p.substring(0, 1).toUpperCase() + p.substring(1));
-                        }
-                    }
-                    for (String m : listMedicalRecordData1) {
-                        if(!m.equals("appointment")) {
-                            listMedicalRecordData.add(m.substring(0, 1).toUpperCase() + m.substring(1));
-                        }
-                    }
-                    List<Variable> listVariables = new ArrayList<Variable>();
-                    for(int i = 0; i < AnalyticDataTask.variable.size(); i++) {
-                        listVariables.add(new Variable(AnalyticDataTask.variable.get(i), AnalyticDataTask.valueVariable.get(i).split(",")[1]));
-                    }
-                    mav.addObject("DISTANCEFORMULA", AnalyticDataTask.FORMULA_CALCULATE_DISTANCE);
-                    mav.addObject("CALORIESFORMULA", AnalyticDataTask.FORMULA_CALCULATE_CALORIES);
-                    mav.addObject("LISTVARIABLE", listVariables);
-                    mav.addObject("LISTPREVENTION", listPrevention);
-                    mav.addObject("LISTMEDICALRECORDDATA", listMedicalRecordData);
+                } else if (user.getRole().getId() == IDbConsts.IRoleType.STAFF) {
+                    mav.setViewName("stafflistdevice");
+                    List<String> temp = new ArrayList<String>();
+                    temp.add("111");
+                    temp.add("222");
+                    temp.add("333");
+                    temp.add("444");
+                    mav.addObject("temp",temp);
+//                    List<String> listPrevention1 = formulaService.getListFieldOfPreventionCheck();
+//                    List<String> listPrevention = new ArrayList<String>();
+//                    List<String> listMedicalRecordData1 = formulaService.getListFieldOfMedicalRecordData();
+//                    List<String> listMedicalRecordData = new ArrayList<String>();
+//                    for (String p : listPrevention1) {
+//                        if(!p.equals("appointment")) {
+//                            listPrevention.add(p.substring(0, 1).toUpperCase() + p.substring(1));
+//                        }
+//                    }
+//                    for (String m : listMedicalRecordData1) {
+//                        if(!m.equals("appointment")) {
+//                            listMedicalRecordData.add(m.substring(0, 1).toUpperCase() + m.substring(1));
+//                        }
+//                    }
+//                    List<Variable> listVariables = new ArrayList<Variable>();
+//                    for(int i = 0; i < AnalyticDataTask.variable.size(); i++) {
+//                        listVariables.add(new Variable(AnalyticDataTask.variable.get(i), AnalyticDataTask.valueVariable.get(i).split(",")[1]));
+//                    }
+//                    mav.addObject("DISTANCEFORMULA", AnalyticDataTask.FORMULA_CALCULATE_DISTANCE);
+//                    mav.addObject("CALORIESFORMULA", AnalyticDataTask.FORMULA_CALCULATE_CALORIES);
+//                    mav.addObject("LISTVARIABLE", listVariables);
+//                    mav.addObject("LISTPREVENTION", listPrevention);
+//                    mav.addObject("LISTMEDICALRECORDDATA", listMedicalRecordData);
 
-                } else if (user.getRole().getName().equals("Admin")){
+                } else if (user.getRole().getId() == IDbConsts.IRoleType.ADMIN){
                     mav.setViewName("adminlistuser");
-				} else if (user.getRole().getName().equals("Nutrition")){
+				} else if (user.getRole().getId() == IDbConsts.IRoleType.NUTRITION){
                     mav.setViewName("nutriPatients");
                     List<Patient> patientList = patientService.getPatientByApponitmentDate();
                     LOGGER.info("listpatiens: " + patientList.size());
                     mav.addObject("LISTPATIENTS", patientList);
-                } else if (user.getRole().getName().equalsIgnoreCase("Doctor Manager")) {
+                } else if (user.getRole().getId() == IDbConsts.IRoleType.DOCTOR_MANAGER) {
                     mav.setViewName("regimens");
                 }
-
+//                else if (user.getRole().getName().equals("Staff")){
+//                    mav.setViewName("stafflistdevice");
+//                }
                 return mav;
             }
             mav.setViewName("login");
