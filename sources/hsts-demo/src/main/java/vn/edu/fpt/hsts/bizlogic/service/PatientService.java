@@ -18,6 +18,7 @@ import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.MedicineListWraper;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrescriptionWrapperModel;
 import vn.edu.fpt.hsts.bizlogic.model.prescription.PrintingMedicineModel;
+import vn.edu.fpt.hsts.bizlogic.service.processor.MedicalOrderNumberProcessor;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -157,6 +158,13 @@ public class PatientService extends AbstractService {
      */
     @Autowired
     private BarcodeService barcodeService;
+
+
+    /**
+     * The {@link MedicalOrderNumberProcessor}.
+     */
+    @Autowired
+    private MedicalOrderNumberProcessor medicalOrderNumberProcessor;
 
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -353,7 +361,7 @@ public class PatientService extends AbstractService {
             // Set meeting date
             model.setDate(DateUtils.formatDate(currentDate, DateUtils.DATE_PATTERN_3));
             // Set order number
-            model.setOrderNumber(987654);
+            model.setOrderNumber(medicalOrderNumberProcessor.nextOrderNumber());
             return model;
         } catch (BizlogicException be) {
             throw be;

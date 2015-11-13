@@ -421,8 +421,10 @@ var validator = $("#mainForm").validate({
 
                     var c = document.getElementById("myCanvas");
                     var ctx = c.getContext("2d");
-                    ctx.font = "40px Arial";
-                    ctx.fillText(data.orderNumber ,10,50);
+                    ctx.textAlign = "center";
+                    ctx.font = "50px Arial";
+                    ctx.fillText("#" + data.orderNumber ,100,50);
+
 
                     var txtDoctor = document.getElementById("rDoctor");
                     txtDoctor.innerHTML = data.doctor;
