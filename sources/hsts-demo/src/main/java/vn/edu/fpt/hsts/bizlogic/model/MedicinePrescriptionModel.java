@@ -1,9 +1,11 @@
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Aking on 10/11/2015.
  */
-public class MedicinePrescriptionModel {
+public class MedicinePrescriptionModel implements Serializable{
     /**
      * Medicine
      */

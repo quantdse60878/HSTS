@@ -1,11 +1,12 @@
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Aking on 10/1/2015.
  */
-public class PrescriptionModel {
+public class PrescriptionModel implements Serializable{
     private String diagnostic;
     private int kcalRequire;
     private String note;
