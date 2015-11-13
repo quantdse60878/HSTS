@@ -37,5 +37,5 @@ public interface DoctorRepo extends JpaRepository<Doctor, Integer> {
     public Page<Doctor> findByNameLike(@Param("criteria")final String searchCriteria, @Param("status") final byte status, final Pageable pageable);
 
     @Query("select d from Doctor d where lower(account.fullName) like lower(:criteria) and account.status = :status and account.role.id = :roleId order by account.fullName")
-    public Page<Doctor> findByRoleAndNameLike(@Param("criteria") final String searchCriteria, @Param("status") final byte status, @Param("roleId") final byte roleId, final Pageable pageable);
+    public Page<Doctor> findByRoleAndNameLike(@Param("criteria") final String searchCriteria, @Param("status") final byte status, @Param("roleId") final int roleId, final Pageable pageable);
 }

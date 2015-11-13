@@ -488,7 +488,7 @@ public class DoctorService extends AbstractService {
         }
     }
 
-    public DoctorPageModel getDoctors(final String nameSearch, final byte roleId, final int page, final int pageSize) {
+    public DoctorPageModel getDoctors(final String nameSearch, final int roleId, final int page, final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("nameSearch[{}], roleId[{}], page[{}], pageSize[{}]", nameSearch, roleId, page, pageSize);
