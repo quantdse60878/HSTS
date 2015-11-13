@@ -22,8 +22,8 @@
     </tr>
     <tr th:each="foodPhase,row : ${PHASE.foodPhaseList}">
         <td th:text="${row.count}"></td>
-        <td style="min-width: 155px;">
-            <select class="form-control" th:field="*{fPresModels[__${row.index}__].f}">
+        <td style="min-width: 155px;" class="form-group">
+            <select class="form-control" th:field="*{fPresModels[__${row.index}__].f}" required="required" data-error="Choose at least one">
                 <option th:value="${foodPhase.food.id}"
                         th:text="${foodPhase.food.name}"></option>
                 <option th:each="food : ${FOODS}"
@@ -31,17 +31,20 @@
                         th:text="${food.name}"
                         th:if="${foodPhase.food.id != food.id}"></option>
             </select>
+            <div class="help-block with-errors"></div>
         </td>
-        <td style="min-width: 75px;">
-            <select class="form-control" th:field="*{fPresModels[__${row.index}__].fTime}">
-                <option value="0">Select</option>
+        <td style="min-width: 75px;" class="form-group">
+            <select class="form-control" th:field="*{fPresModels[__${row.index}__].fTime}" required="required" data-error="Choose at least one">
+                <option value="0" disabled="disabled">Select</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
+            <div class="help-block with-errors"></div>
         </td>
         <td class="form-group">
             <input type="text" class="form-control" th:field="*{fPresModels[__${row.index}__].fQuantity}"
-                   placeholder="Quantity" required="required" data-remote="/validateStr"/>
+                   placeholder="Quantity" required="required" data-remote="/validateStr" data-error="Wrong input"/>
+            <div class="help-block with-errors"></div>
         </td>
         <td>
             <input type="text" class="form-control"

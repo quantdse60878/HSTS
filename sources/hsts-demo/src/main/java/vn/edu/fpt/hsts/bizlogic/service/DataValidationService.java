@@ -106,6 +106,11 @@ public class DataValidationService extends AbstractService {
                         return false;
                     }
                 }
+
+                // TODO Huge value for testing, remove later
+                if (paramValue >= 9999) {
+                    return false;
+                }
             }
             return true;
         } catch (NumberFormatException nfe) {

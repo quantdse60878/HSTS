@@ -17,8 +17,8 @@
     <tr th:each="practicePhase,row : ${PHASE.practicePhaseList}">
         <td th:text="${row.count}"></td>
 
-        <td style="min-width: 155px;">
-            <select class="form-control" th:field="*{pPresModels[__${row.index}__].p}">
+        <td style="min-width: 155px;" class="form-group">
+            <select class="form-control" th:field="*{pPresModels[__${row.index}__].p}" required="required" data-error="Choose at least one">
                 <option th:value="${practicePhase.practice.id}"
                         th:text="${practicePhase.practice.name}"></option>
                 <option th:each="practice : ${PRACTICES}"
@@ -26,17 +26,20 @@
                         th:text="${practice.name}"
                         th:if="${practicePhase.practice.id != practice.id}"></option>
             </select>
+            <div class="help-block with-errors"></div>
         </td>
-        <td style="min-width: 75px;">
-            <select class="form-control" th:field="*{pPresModels[__${row.index}__].pTime}">
-                <option value="0">Select</option>
+        <td style="min-width: 75px;" class="form-group">
+            <select class="form-control" th:field="*{pPresModels[__${row.index}__].pTime}" required="required" data-error="Choose at least one">
+                <option value="0" disabled="disabled">Select</option>
                 <option th:each="time : ${TIMES}" th:value="${time}"
                         th:text="${time}"></option>
             </select>
+            <div class="help-block with-errors"></div>
         </td>
         <td class="form-group">
             <input type="text" class="form-control" th:field="*{pPresModels[__${row.index}__].pIntensity}"
-                   placeholder="Quantity" required="required" data-remote="/validateStr"/>
+                   placeholder="Quantity" required="required" data-remote="/validateStr" data-error="Wrong input"/>
+            <div class="help-block with-errors"></div>
         </td>
         <td>
             <input type="text" class="form-control"
@@ -58,9 +61,10 @@
 
     <div class="col-md-4">
         <input th:field="*{kcalRequire}" style="text-align: right;" type="text" class="form-control" data-remote="/validateData"
-                />
+                required="required" data-error="Wrong input"/>
     </div>
     <label class="col-md-1 control-label">Kcal/Day</label>
+    <div class="help-block with-errors"></div>
 </div>
 </body>
 </html>
