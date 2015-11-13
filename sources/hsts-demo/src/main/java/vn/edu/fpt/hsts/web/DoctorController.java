@@ -229,10 +229,11 @@ public class DoctorController extends AbstractController{
     @ResponseBody
     public DoctorPageModel getDoctors(@RequestParam(value = "name", required = false, defaultValue = EMPTY) final String name,
                                       @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
-                                      @RequestParam(value = "pageSize", required = false, defaultValue = "5") final int pageSize) {
+                                      @RequestParam(value = "pageSize", required = false, defaultValue = "5") final int pageSize,
+                                      @RequestParam(value = "roleId", required = false, defaultValue = ZERO) final byte roleId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            return doctorService.getDoctors(name, page, pageSize);
+            return doctorService.getDoctors(name, roleId, page, pageSize);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
