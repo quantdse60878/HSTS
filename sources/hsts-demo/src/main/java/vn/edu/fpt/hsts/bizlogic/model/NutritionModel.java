@@ -2,10 +2,12 @@ package vn.edu.fpt.hsts.bizlogic.model;
 
 import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
 
+import java.io.Serializable;
+
 /**
  * Created by Aking on 10/22/2015.
  */
-public class NutritionModel {
+public class NutritionModel implements Serializable{
     private FoodIngredient fi;
     private Float totalEnergy;
     private Double energy;
