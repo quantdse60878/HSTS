@@ -273,6 +273,7 @@ public class DoctorService extends AbstractService {
                 newTreatment.setFromDate(new Date());
                 newTreatment.setCaloriesBurnEveryday(prescription.getKcalRequire());
                 newTreatment.setToDate(toDate);
+                newTreatment.setNote(prescription.getNote());
                 treatmentRepo.save(newTreatment);
                 LOGGER.info("Create new treatment : End");
                 // TODO implement for medicine, food, practice and multiple row, validate data
@@ -455,8 +456,13 @@ public class DoctorService extends AbstractService {
                     int count = medicalRecordDatas.size();
                     for (int i = 0; i < count; i++) {
 
-                        PropertyRecord propertyRecord = propertyRecordRepo.findPropertyRecordByMrdAndpm(medicalRecordDatas.get(i).getId(), 2);
-                        kcalConsumed += Integer.parseInt(propertyRecord.getParamMeasurementValue());
+                        List<PropertyRecord> propertyRecords = propertyRecordRepo.findAllPropertyRecordByMrdAndpm(medicalRecordDatas.get(i).getId(), 2);
+                        LOGGER.info("propertyRecords: " + propertyRecords.size());
+                        for (int j = 0; j < propertyRecords.size(); j++) {
+                            PropertyRecord propertyRecord = propertyRecords.get(j);
+                            kcalConsumed += Integer.parseInt(propertyRecord.getParamMeasurementValue());
+                        }
+
                     }
                     kcalConsumed = kcalConsumed / count;
                     resultModel.setAvgKcalConsumed(kcalConsumed);

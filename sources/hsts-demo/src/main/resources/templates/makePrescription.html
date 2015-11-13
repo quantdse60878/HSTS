@@ -301,12 +301,7 @@
                                                 <div class="col-sm-4">
                                                     <div th:if="${TREATMENT == null}" class="input-group">
                                                         <input class="form-control hsts" type="text" name="appointmentDate"
-                                                               id="Appointment" data-provide="Appointment"/>
-
-                                                        <div class="input-group-btn">
-
-                                                        </div>
-                                                        <!-- /btn-group -->
+                                                             th:value="${NEXTAPPOINTMENTDATE}"  id="Appointment" data-provide="Appointment"/>
                                                     </div>
 
                                                     <div th:if="${TREATMENT != null}"
@@ -321,6 +316,18 @@
                                                     </div>
                                                 </div>
 
+                                            </div>
+                                            <div class="form-group box-body">
+                                                <label for="Note" class="col-sm-3 control-label">Note
+                                                    </label>
+                                                <div class="col-sm-5">
+                                                    <div th:if="${TREATMENT == null}">
+                                                        <textarea class="form-control" rows="4" placeholder="Note" th:field="*{note}"></textarea>
+                                                    </div>
+                                                    <div th:if="${TREATMENT != null}">
+                                                        <textarea class="form-control" rows="4" readonly="readonly" th:field="*{note}"></textarea>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <!-- footer -->
                                             <div style="margin: 15px;">
@@ -414,7 +421,7 @@
     <input th:value="${MEDICS}" id="medics" type="hidden"/>
     <input th:value="${FOS}" id="fos" type="hidden"/>
     <input th:value="${PRACS}" id="pracs" type="hidden"/>
-    <input th:value="${NEXTAPPOINTMENTDATE}" id="nextApDate" type="hidden"/>
+    <!--<input th:value="${NEXTAPPOINTMENTDATE}" id="nextApDate" type="hidden"/>-->
     <!-- REQUIRED JS SCRIPTS -->
     <!-- jQuery 2.1.4 -->
     <script th:src="@{/static/bower/admin-lte/plugins/jQuery/jQuery-2.1.4.min.js}"></script>

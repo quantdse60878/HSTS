@@ -11,7 +11,7 @@
         <th style="width: 160px;">Name</th>
         <th style="width: 80px;">Times</th>
         <th style="width: 100px;">Quantitative</th>
-        <th>Note</th>
+        <th>Advice</th>
         <th>#</th>
     </tr>
     <tr th:each="practicePhase,row : ${PHASE.practicePhaseList}">
@@ -51,7 +51,7 @@
 
 <div class="form-group" style="margin-top: 15px;" th:if="${DATAPRACS != null}">
     <label class="col-md-3 control-label">Practice Data</label>
-    <a class="btn btn-link" onclick="popup('praticeResult')">View Detail</a>
+    <a class="btn btn-link" data-toggle="modal" data-target="#practiceResult">View Detail</a>
 </div>
 <div class="form-group">
     <label class="col-md-3 control-label">Kcal Estimate</label>

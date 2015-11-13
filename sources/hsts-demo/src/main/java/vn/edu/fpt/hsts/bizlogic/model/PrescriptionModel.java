@@ -8,6 +8,7 @@ import java.util.List;
 public class PrescriptionModel {
     private String diagnostic;
     private int kcalRequire;
+    private String note;
     private List<MedicinePrescriptionModel> mPresModels;
     private List<FoodPrescriptionModel> fPresModels;
     private List<PracticePrescriptionModel> pPresModels;
@@ -66,6 +67,14 @@ public class PrescriptionModel {
 
     public void setpPresModels(List<PracticePrescriptionModel> pPresModels) {
         this.pPresModels = pPresModels;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override
