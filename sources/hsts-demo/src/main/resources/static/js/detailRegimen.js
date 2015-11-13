@@ -59,7 +59,9 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    return '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>';
+                    var updateBtn = '<a onclick="updateDialog('+ data +')" class="btn btn-success">Update</a>';
+                    var deleteBtn = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>'
+                    return updateBtn + deleteBtn;
                 },
                 "width": "20%"
             }
@@ -122,6 +124,25 @@ var validator = $("#createForm").validate({
     }
 });
 
+function updateDialog(element) {
+    $.ajax({
+        method: "GET",
+        url: "/phase/info",
+        data: {
+            phaseId: element
+        }
+    }).done(function(data) {
+        console.log(data);
+        if (data != null) {
+            currentPhase = data.id;
+            var txtNumberDay = document.getElementById("updateNumberDay");
+            txtNumberDay.value =  data.numberOfDay;
+            // Show diaglog
+            $("#updateModal").modal('show');
+        }
+    });
+}
+
 function deleteDialog(phaseId) {
     console.log("-- begin --");
     currentPhase = phaseId;
@@ -151,4 +172,56 @@ $("#btnDelete").click(function() {
         }
     });
     console.log("end delete");
+});
+
+var updateValidator = $("#updateForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        updateNumberDay: {
+            required: true,
+            min: 1,
+            max: 30
+        }
+    },
+    updateNumberDay: {
+        numberDay: {
+            required: "Please input valid illness name"
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "updateNumberDay"){
+            error.appendTo($('#invalidUpdateNumberDay'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("--- begin ---");
+        $.ajax({
+            method: "POST",
+            url: "/phase/update",
+            data: {
+                phaseId: currentPhase,
+                numberDay: $("#updateNumberDay").val()
+            }
+        })
+            .done(function(data) {
+                console.log(data);
+                if (data.status != "ok") {
+                    // Show error modal
+                    var resultText = document.getElementById("messageLabel");
+                    resultText.innerHTML = "Error while create new phase";
+                    $('#messageModal').modal('show');
+                } else {
+                    console.log("-- reload page --");
+                    window.location.href = "/detailRegimen?id=" + $("#regimenId").val();
+                }
+            });
+        console.log("--- end ---");
+        return false; // required to block normal submit since you used ajax
+    }
 });

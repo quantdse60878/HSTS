@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import vn.edu.fpt.hsts.bizlogic.model.regimen.PhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.PhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.RegimenModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.RegimenPageModel;
@@ -34,7 +33,6 @@ import vn.edu.fpt.hsts.persistence.repo.PhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.PracticePhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.RegimenRepo;
 
-import javax.swing.*;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
@@ -83,6 +81,19 @@ public class RegimenService extends AbstractService {
      */
     @Autowired
     private PracticePhaseRepo practicePhaseRepo;
+
+    public RegimenModel findRegimen(final int regimenId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("regimenId[{}]", regimenId);
+            final Regimen regimen = regimenRepo.findOne(regimenId);
+            final RegimenModel model = new RegimenModel();
+            model.fromEntity(regimen);
+            return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 
     public RegimenPageModel regimens(final String name, final int page, final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -227,6 +238,20 @@ public class RegimenService extends AbstractService {
             throw new BizlogicException("Error");
         }
         finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void update(final int id, final String name, final String description) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final Regimen regimen = regimenRepo.findOne(id);
+            regimen.getIllness().setName(name);
+            regimen.getIllness().setDescription(description);
+        } catch (Exception e) {
+          throw new BizlogicException("error");
+        } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }

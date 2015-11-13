@@ -10,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhasePageModel;
+import vn.edu.fpt.hsts.bizlogic.model.regimen.PhaseModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.entity.FoodPhase;
@@ -249,6 +250,32 @@ public class PhaseService {
             final MedicinePhaseModel model = new MedicinePhaseModel();
             model.fromEntity(entity);
             return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public PhaseModel findPhase(final int phaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            Phase phase = phaseRepo.findOne(phaseId);
+            PhaseModel model = new PhaseModel();
+            model.fromEntity(phase);
+            return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void updatePhase(final int phaseId, final int numberDay) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}], numberDay[{}]", phaseId, numberDay);
+
+            final Phase phase = phaseRepo.findOne(phaseId);
+            phase.setNumberOfDay(numberDay);
+            phaseRepo.saveAndFlush(phase);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
