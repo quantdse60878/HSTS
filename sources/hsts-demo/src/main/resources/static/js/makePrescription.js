@@ -234,7 +234,7 @@ function loadPopupAppointment(appointmentId) {
                     + '<th>Times</th>'
                     + '<th>Quantity</th>'
                     + '<th>Unit</th>'
-                    + '<th>Note</th>'
+                    + '<th>Advice</th>'
                     + '</tr>');
                 for (var i = 0; i < data.hms.length; i++) {
                     var tmp = data.hms[i];
@@ -260,7 +260,7 @@ function loadPopupAppointment(appointmentId) {
                     + '<th>Times</th>'
                     + '<th>Quantity</th>'
                     + '<th>Unit</th>'
-                    + '<th>Note</th>'
+                    + '<th>Advice</th>'
                     + '</tr>');
                 for (var i = 0; i < data.hfs.length; i++) {
                     var tmp = data.hfs[i];
@@ -285,7 +285,7 @@ function loadPopupAppointment(appointmentId) {
                     + '<th>Name</th>'
                     + '<th>Times</th>'
                     + '<th>Quantity</th>'
-                    + '<th>Note</th>'
+                    + '<th>Advice</th>'
                     + '</tr>');
                 for (var i = 0; i < data.hfs.length; i++) {
                     var tmp = data.hfs[i];
@@ -811,12 +811,12 @@ $('#Appointment').datepicker({
     format: 'dd-mm-yyyy'
 });
 
-var nextAppointmentDate = $('#nextApDate').val();
-nextAppointmentDate++;
-nextAppointmentDate--;
-var appointmentDate = new Date();
-appointmentDate.setDate(appointmentDate.getDate() + nextAppointmentDate);
-$('#Appointment').datepicker("setDate", appointmentDate);
+//var nextAppointmentDate = $('#nextApDate').val();
+//nextAppointmentDate++;
+//nextAppointmentDate--;
+//var appointmentDate = new Date();
+//appointmentDate.setDate(appointmentDate.getDate() + nextAppointmentDate);
+//$('#Appointment').datepicker("setDate", appointmentDate);
 
 var currentValue = "";
 function setMedicineUnit(ev) {

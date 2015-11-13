@@ -273,6 +273,7 @@ public class DoctorService extends AbstractService {
                 newTreatment.setFromDate(new Date());
                 newTreatment.setCaloriesBurnEveryday(prescription.getKcalRequire());
                 newTreatment.setToDate(toDate);
+                newTreatment.setNote(prescription.getNote());
                 treatmentRepo.save(newTreatment);
                 LOGGER.info("Create new treatment : End");
                 // TODO implement for medicine, food, practice and multiple row, validate data

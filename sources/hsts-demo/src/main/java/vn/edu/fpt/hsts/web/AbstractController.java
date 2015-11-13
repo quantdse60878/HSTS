@@ -28,6 +28,7 @@ import vn.edu.fpt.hsts.bizlogic.service.PracticeService;
 import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
 import vn.edu.fpt.hsts.persistence.entity.Food;
 import vn.edu.fpt.hsts.persistence.entity.FoodIngredient;
@@ -37,6 +38,8 @@ import vn.edu.fpt.hsts.persistence.entity.Practice;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 import vn.edu.fpt.hsts.web.config.ControllerParam;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AbstractController implements ControllerParam {
@@ -84,7 +87,16 @@ public class AbstractController implements ControllerParam {
             mav.addObject("PRACS", 1);
 
             // Set next appointent date
-            mav.addObject("NEXTAPPOINTMENTDATE", doctorService.getTreatmentLong());
+            // Set to next 7 day
+            Date toDate = null;
+            try {
+                toDate = DateUtils.plusDateTime(new Date(), Calendar.DATE, doctorService.getTreatmentLong());
+            } catch (Exception e) {
+                LOGGER.debug("Exception when parse date: " + e.getMessage());
+            }
+            toDate = DateUtils.roundDate(toDate, false);
+            String nextAppointmentDate = DateUtils.formatDate(toDate, DateUtils.DATE_PATTERN_3);
+            mav.addObject("NEXTAPPOINTMENTDATE", nextAppointmentDate);
 
             // Get config time
             final List<TimesModel> timeArr = treatmentService.getMedicineTimeConfig();

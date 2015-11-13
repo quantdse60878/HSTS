@@ -56,7 +56,17 @@ public class Treatment extends AbstractKeyEntity {
 
     private int caloriesBurnEveryday;
 
+    private String note;
+
     public Treatment() {
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public int getCaloriesBurnEveryday() {
