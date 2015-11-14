@@ -7,7 +7,10 @@
  */
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import vn.edu.fpt.hsts.bizlogic.model.regimen.PhaseModel;
+import vn.edu.fpt.hsts.persistence.entity.Medicine;
 import vn.edu.fpt.hsts.persistence.entity.MedicinePhase;
+import vn.edu.fpt.hsts.persistence.entity.Phase;
 
 public class MedicinePhaseModel extends AbstractKeyModel<MedicinePhase> {
     @Override
@@ -15,13 +18,37 @@ public class MedicinePhaseModel extends AbstractKeyModel<MedicinePhase> {
         return MedicinePhase.class;
     }
 
+    /**
+     *
+     */
+    private PhaseModel phase;
+
+    /**
+     *
+     */
     private MedicineModel medicine;
 
-    //TODO
-    private int numberOfTime = 4;
+    /**
+     *
+     */
+    private int quantitative;
 
-    //TODO
-    private int quantityPerTime = 3;
+    /**
+     *
+     */
+    private int numberOfTime;
+
+    /**
+     *
+     */
+    private String advice;
+
+    /**
+     * 0: Add new
+     * 1: Exists in db
+     * 2: Should be delete
+     */
+    private byte status;
 
     public MedicineModel getMedicine() {
         return medicine;
@@ -35,22 +62,66 @@ public class MedicinePhaseModel extends AbstractKeyModel<MedicinePhase> {
         return numberOfTime;
     }
 
-    public void setNumberOfTime(final int numberOfTime) {
-        this.numberOfTime = numberOfTime;
-    }
-
-    public int getQuantityPerTime() {
-        return quantityPerTime;
-    }
-
-    public void setQuantityPerTime(final int quantityPerTime) {
-        this.quantityPerTime = quantityPerTime;
-    }
-
     @Override
     public void fromEntity(MedicinePhase entity) {
         super.fromEntity(entity);
+        status = 1;
         medicine = new MedicineModel();
-        medicine.fromEntity(entity.getMedicine());
+        setShortModel(entity.getMedicine(), medicine);
+        medicine.setUnit(entity.getMedicine().getUnit());
+        phase = new PhaseModel();
+        setShortModel(entity.getPhase(), phase);
+        numberOfTime = entity.getNumberOfTime();
+        quantitative = entity.getQuantitative();
+        advice = entity.getAdvice();
+    }
+
+    @Override
+    public MedicinePhase toEntity() throws InstantiationException, IllegalAccessException {
+        MedicinePhase entity  = super.toEntity();
+        Phase phase = this.phase.toEntity();
+        entity.setPhase(phase);
+        Medicine medicine = this.medicine.toEntity();
+        entity.setMedicine(medicine);
+        entity.setNumberOfTime(numberOfTime);
+        entity.setQuantitative(quantitative);
+        entity.setAdvice(advice);
+        return entity;
+    }
+
+    public PhaseModel getPhase() {
+        return phase;
+    }
+
+    public void setPhase(PhaseModel phase) {
+        this.phase = phase;
+    }
+
+    public int getQuantitative() {
+        return quantitative;
+    }
+
+    public void setQuantitative(int quantitative) {
+        this.quantitative = quantitative;
+    }
+
+    public void setNumberOfTime(int numberOfTime) {
+        this.numberOfTime = numberOfTime;
+    }
+
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
+    }
+
+    public String getAdvice() {
+        return advice;
+    }
+
+    public void setAdvice(String advice) {
+        this.advice = advice;
     }
 }

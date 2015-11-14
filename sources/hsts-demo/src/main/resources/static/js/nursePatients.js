@@ -10,7 +10,7 @@ var FAIL_STATUS = "{\"status\":\"fail\"}";
 $(document).ready(function(){
 
     var count = 1;
-    var table = $('#dataContent').dataTable( {
+    var table = $('#medicineContent').dataTable( {
         "processing": true,
         "pagingType": "full",
         "paging": true,

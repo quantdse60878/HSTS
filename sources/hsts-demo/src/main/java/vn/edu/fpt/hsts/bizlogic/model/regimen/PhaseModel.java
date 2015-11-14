@@ -22,6 +22,9 @@ public class PhaseModel extends AbstractKeyModel<Phase> {
      */
     private RegimenModel regimen;
 
+    /**
+     *
+     */
     private int numberOfDay;
 
     /**
@@ -63,4 +66,6 @@ public class PhaseModel extends AbstractKeyModel<Phase> {
             updateTime = DateUtils.formatDate(entity.getUpdateTime(), DateUtils.DATE_PATTERN_3);
         }
     }
+
+
 }

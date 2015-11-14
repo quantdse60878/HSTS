@@ -24,7 +24,7 @@ public class Phase extends AbstractKeyEntity {
      *
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "regimenId", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "regimenId", nullable = false)
     private Regimen regimen;
 
     /**

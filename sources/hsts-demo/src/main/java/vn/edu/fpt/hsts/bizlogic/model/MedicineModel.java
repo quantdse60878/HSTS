@@ -15,7 +15,15 @@ public class MedicineModel extends AbstractKeyModel<Medicine> {
         return Medicine.class;
     }
 
+    /**
+     *
+     */
     private String name;
+
+    /**
+     *
+     */
+    private String unit;
 
     public String getName() {
         return name;
@@ -25,9 +33,26 @@ public class MedicineModel extends AbstractKeyModel<Medicine> {
         this.name = name;
     }
 
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(final String unit) {
+        this.unit = unit;
+    }
+
     @Override
     public void fromEntity(Medicine entity) {
         super.fromEntity(entity);
         this.name = entity.getName();
+        this.unit = entity.getUnit();
+    }
+
+    @Override
+    public Medicine toEntity() throws InstantiationException, IllegalAccessException {
+        Medicine medicine = super.toEntity();
+        medicine.setName(this.name);
+        medicine.setUnit(this.unit);
+        return medicine;
     }
 }

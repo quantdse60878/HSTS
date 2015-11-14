@@ -24,6 +24,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-info">
+                    <!-- hidden data-->
+                    <input type="hidden" id="phaseId" th:value="${PHASE.id}"/>
+                    <!-- -->
                     <form class="form-horizontal" id = "mainForm">
                         <div class="box-body">
                             <div class="nav-tabs-custom" style="box-shadow: none;">
@@ -46,7 +49,32 @@
                                 <div class="tab-content">
                                     <!-- tab 1: medicine -->
                                     <div class="tab-pane active" id="tab_1">
-                                        </div>
+                                        <table id="medicineContent" class="table table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Medicine</th>
+                                                <th>Times</th>
+                                                <th>Quantitative</th>
+                                                <th>Unit</th>
+                                                <th>Advice</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <!--<tbody id="table-body"></tbody>-->
+                                            <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Medicine</th>
+                                                <th>Times</th>
+                                                <th>Quantitative</th>
+                                                <th>Unit</th>
+                                                <th>Advice</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                     <!-- end tab 1 -->
 
                                     <!-- tab 2: food-->
@@ -74,8 +102,23 @@
         <!-- diaglog -->
 
     </section><!-- /.content -->
+
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <!-- jQueryUI -->
+    <!--<script th:src="@{/static/bower/jquery-ui/jquery-ui.js}"></script>-->
+
+    <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+
+    <!-- select 2-->
+    <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
+    <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
+
+
+    <script th:src = "@{/static/js/detailPhase.js}"></script>
+
+    <!-- css add -->
+    <link th:href="@{/static/css/detailPhase.css}" rel="stylesheet"/>
+
 </div><!-- /.content-wrapper -->
-
-
 </body>
 </html>

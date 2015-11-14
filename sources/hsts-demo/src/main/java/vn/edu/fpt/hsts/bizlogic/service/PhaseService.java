@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import vn.edu.fpt.hsts.bizlogic.model.MedicinePhasePageModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.entity.FoodPhase;
@@ -65,12 +66,13 @@ public class PhaseService {
     @Autowired
     private PracticePhaseRepo practicePhaseRepo;
 
+
     public Phase findPhaseByIllnessID(final int illnessID){
         return phaseRepo.findPhaseByIllnessID(illnessID);
     }
 
     public Phase findByID(final int phaseID){
-        return phaseRepo.getOne(phaseID);
+        return phaseRepo.findOne(phaseID);
     }
 
     @Transactional(rollbackOn = BizlogicException.class)
@@ -112,6 +114,7 @@ public class PhaseService {
             if (!CollectionUtils.isEmpty(foodPhases)) {
                 foodPhaseRepo.delete(foodPhases);
             }
+            final PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
             List<MedicinePhase> medicinePhases = medicinePhaseRepo.findByPhaseId(phaseId);
             if (!CollectionUtils.isEmpty(medicinePhases)) {
                 medicinePhaseRepo.delete(medicinePhases);
@@ -150,6 +153,19 @@ public class PhaseService {
         } catch (Exception e) {
             throw new BizlogicException("Error");
         }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public MedicinePhasePageModel getMedicinesByPhase(final int phaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}]", phaseId);
+            final PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
+            final Page<MedicinePhase> medicinePhases = medicinePhaseRepo.findByPhaseId(phaseId, pageRequest);
+            final MedicinePhasePageModel pageModel = new MedicinePhasePageModel(medicinePhases);
+            return pageModel;
+        } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
