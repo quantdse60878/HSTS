@@ -23,6 +23,7 @@ import vn.edu.fpt.hsts.bizlogic.model.PracticePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.bizlogic.service.PracticeService;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.expception.BizlogicException;
 
 @Controller
 public class PracticeController extends AbstractController {
@@ -69,4 +70,43 @@ public class PracticeController extends AbstractController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    @RequestMapping(value = "/phase/practice/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String addPracticeToPhase(@RequestParam("phaseId") final int phaseId,
+                                     @RequestParam("practiceId") final int practiceId,
+                                     @RequestParam("numberOfTime") final int numberOfTime,
+                                     @RequestParam("timeDuration") final String timeDuration,
+                                     @RequestParam(value = "advice", required = false, defaultValue = EMPTY) final String advice) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            phaseService.addPracticeToPhase(phaseId, practiceId, timeDuration, numberOfTime, advice);
+            return OK_STATUS;
+        } catch (BizlogicException e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/phase/practice/delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deletePracticeToPhase(@RequestParam("id") final int praticePhaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            phaseService.deletePracticeToPhase(praticePhaseId);
+            return OK_STATUS;
+        } catch (BizlogicException e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+//    @RequestMapping(value = "/phase/medicine/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+//    public String updatePracticeToPhase(@RequestParam("id") final int id,
+//                                        @RequestParam("timeDuration") final String timeDuration,
+//                                        @RequestParam("numberOfTime") final int numberOfTime,
+//                                        @RequestParam("advice"))
 }
