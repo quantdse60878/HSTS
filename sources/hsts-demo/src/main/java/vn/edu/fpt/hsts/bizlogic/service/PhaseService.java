@@ -182,7 +182,7 @@ public class PhaseService {
     }
 
     @Transactional(rollbackOn = BizlogicException.class)
-    public void addMedicineToPhase(final int phaseId, final String medicineName, final String unit,
+    public void addMedicineToPhase(final int phaseId, final int medicineId,
                                    final int numberOfTime, final int quantitative, final String advice)
             throws BizlogicException {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -191,13 +191,7 @@ public class PhaseService {
             if (null == phase) {
                 throw new BizlogicException("Null");
             }
-            Medicine medicine = medicineRepo.findByName(medicineName);
-            if (null == medicine) {
-                medicine = new Medicine();
-                medicine.setName(medicineName);
-                medicine.setUnit(unit);
-                medicineRepo.saveAndFlush(medicine);
-            }
+            Medicine medicine = medicineRepo.findOne(medicineId);
             final MedicinePhase medicinePhase = new MedicinePhase();
             medicinePhase.setAdvice(advice);
             medicinePhase.setMedicine(medicine);

@@ -196,16 +196,17 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Medicine name*:</label>
 
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <select id ="medicineSelect" th:name="insertMedicine"></select>
                                 </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertMedicine"/>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Times*: </label>
 
                                 <div class="col-sm-2">
-                                    <input type="number" th:name="updateTimes" class="form-control" id="insertTimes"/>
+                                    <input type="number" th:name="insertTimes" class="form-control" id="insertTimes"/>
                                 </div>
                                 <div class="col-sm-3 help-block with-errors" id = "invalidInsertTimes">
                                 </div>
@@ -214,7 +215,7 @@
                                 <label class="col-sm-3 control-label">Quantitative*: </label>
 
                                 <div class="col-sm-2">
-                                    <input type="number" th:name="updateQuantitative" class="form-control" id="insertQuantitative"/>
+                                    <input type="number" th:name="insertQuantitative" class="form-control" id="insertQuantitative"/>
                                 </div>
                                 <div class="col-sm-3 help-block with-errors" id = "invalidInsertQuantitative">
                                 </div>
@@ -222,8 +223,8 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Note*: </label>
 
-                                <div class="col-sm-4">
-                                    <textarea id="insertNote"></textarea>
+                                <div class="col-sm-6">
+                                    <textarea id="insertNote" th:name = "insertNote" th:width="300px"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -232,7 +233,9 @@
                             <button type="submit" class="btn btn-primary">Add</button>
                         </div>
                     </div>
+
                 </form>
+
             </div>
         </div>
         <!-- .insert medicine diaglog -->

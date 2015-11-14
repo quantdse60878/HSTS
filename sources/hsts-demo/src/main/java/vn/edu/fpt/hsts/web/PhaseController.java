@@ -161,14 +161,13 @@ public class PhaseController extends AbstractController {
     @RequestMapping(value = "/phase/medicine/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String addMedicineToPhase(@RequestParam("phaseId") final int phaseId,
-                                     @RequestParam("name") final String medicineName,
-                                     @RequestParam(value = "unit", required = false, defaultValue = EMPTY) final String unit,
+                                     @RequestParam("medicineId") final int medicineId,
                                      @RequestParam("numberOfTime") final int numberOfTime,
                                      @RequestParam("quantitative") final int quantitative,
                                      @RequestParam(value = "advice", required = false, defaultValue = EMPTY) final String advice) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            phaseService.addMedicineToPhase(phaseId, medicineName, unit, numberOfTime, quantitative, advice);
+            phaseService.addMedicineToPhase(phaseId, medicineId, numberOfTime, quantitative, advice);
             return OK_STATUS;
         } catch (BizlogicException e) {
             return FAIL_STATUS;
