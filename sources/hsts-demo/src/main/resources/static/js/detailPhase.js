@@ -134,93 +134,7 @@ function deleteMedicineDialog(element) {
     $("#deleteMedicineDialog").modal('show');
 }
 
-$( "#btnDeleteMedicine" ).click(function() {
-    console.log("begin delete");
-    $.ajax({
-        method: "POST",
-        url: "/phase/medicine/delete",
-        data: {
-            id: curMedicinePhase
-        }
-    }).done(function(data) {
-        console.log(data);
-        var txtMessage = document.getElementById("messageLabel");
-        if (data.status == "fail") {
-            txtMessage.innerHTML = "Error while delete regimen data";
-        } else {
-            console.log("-- reload page --");
-            window.location.href = "/detailPhase?id=" + $("#phaseId").val();
-        }
-    });
-    console.log("end delete");
-});
-
-// update medicine validator
-$("#updateMedicineForm").validate({
-    ignore: [],
-    debug: true,
-    rules: {
-        // simple rule, converted to {required:true}
-        updateTimes: {
-            required: true,
-            min: 1,
-            max: 7
-        },
-        updateQuantitative: {
-            required: true,
-            min: 1,
-            max: 5
-        }
-    },
-    messages: {
-        //patientName: {
-        //    maxlenght: "Name is too long, please modify it"
-        //},
-        updateTimes: {
-            required: "Please input valid illness name",
-        },
-        updateQuantitative: {
-            required: "Please input valid description"
-        }
-    },
-    errorPlacement: function(error, element){
-        if(element.attr("name") == "updateTimes"){
-            error.appendTo($('#invalidUpdateTimes'));
-        }  else if (element.attr("name") == "updateQuantitative") {
-            error.appendTo($('#invalidUpdateQuantitative'));
-        }
-
-        // Default
-        else {
-            error.appendTo( element.parent().next() );
-        }
-    },
-    submitHandler: function () {
-        console.log("begin update");
-        $.ajax({
-            method: "POST",
-            url: "/phase/medicine/update",
-            data: {
-                id: curMedicinePhase,
-                numberOfTime: $("#updateTimes").val(),
-                quantitative: $("#updateQuantitative").val(),
-                advice: $("#updateNote").val()
-            }
-        }).done(function(data) {
-            console.log(data);
-            var txtMessage = document.getElementById("messageLabel");
-            if (data.status == "fail") {
-                txtMessage.innerHTML = "Error while update regimen data";
-            } else {
-                console.log("-- reload page --");
-                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
-            }
-        });
-        console.log("end update");
-        return false; // required to block normal submit since you used ajax
-    }
-});
-
+// medicine select
 $("#medicineSelect").select2({
     placeholder: "Choose a medicine",
     theme: "classic",
@@ -333,3 +247,90 @@ $("#insertMedicineForm").validate({
     }
 });
 
+// update medicine validator
+$("#updateMedicineForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        updateTimes: {
+            required: true,
+            min: 1,
+            max: 7
+        },
+        updateQuantitative: {
+            required: true,
+            min: 1,
+            max: 5
+        }
+    },
+    messages: {
+        //patientName: {
+        //    maxlenght: "Name is too long, please modify it"
+        //},
+        updateTimes: {
+            required: "Please input valid illness name",
+        },
+        updateQuantitative: {
+            required: "Please input valid description"
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "updateTimes"){
+            error.appendTo($('#invalidUpdateTimes'));
+        }  else if (element.attr("name") == "updateQuantitative") {
+            error.appendTo($('#invalidUpdateQuantitative'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("begin update");
+        $.ajax({
+            method: "POST",
+            url: "/phase/medicine/update",
+            data: {
+                id: curMedicinePhase,
+                numberOfTime: $("#updateTimes").val(),
+                quantitative: $("#updateQuantitative").val(),
+                advice: $("#updateNote").val()
+            }
+        }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data.status == "fail") {
+                txtMessage.innerHTML = "Error while update regimen data";
+            } else {
+                console.log("-- reload page --");
+                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+            }
+        });
+        console.log("end update");
+        return false; // required to block normal submit since you used ajax
+    }
+});
+
+// delete medicine
+$( "#btnDeleteMedicine" ).click(function() {
+    console.log("begin delete");
+    $.ajax({
+        method: "POST",
+        url: "/phase/medicine/delete",
+        data: {
+            id: curMedicinePhase
+        }
+    }).done(function(data) {
+        console.log(data);
+        var txtMessage = document.getElementById("messageLabel");
+        if (data.status == "fail") {
+            txtMessage.innerHTML = "Error while delete regimen data";
+        } else {
+            console.log("-- reload page --");
+            window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+        }
+    });
+    console.log("end delete");
+});
