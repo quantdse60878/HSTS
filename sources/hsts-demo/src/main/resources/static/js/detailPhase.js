@@ -73,10 +73,23 @@ $(document).ready(function(){
                 "width": "20%"
             },
             {
-                "data": "advice",
+                "data": "id",
+                "render": function (data, type, full, meta) {
+                    var btnUpdate = '<a onclick="updateDiaglog('+ data +')" class="btn btn-warning">Update</a>';
+                    var btnDelete = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Update</a>';
+                    return btnUpdate + btnDelete;
+                },
                 "width": "20%"
             }
         ]
     } );
     console.log("-- end --");
 });
+
+function updateDiaglog(element) {
+
+}
+
+function deleteDialog(element) {
+
+}
