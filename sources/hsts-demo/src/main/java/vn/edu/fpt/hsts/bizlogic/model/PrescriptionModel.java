@@ -6,13 +6,18 @@ import java.util.List;
 /**
  * Created by Aking on 10/1/2015.
  */
-public class PrescriptionModel implements Serializable{
+public class PrescriptionModel implements Serializable {
+
+    private int appointmentId;
+    private String appointmentDate;
     private String diagnostic;
     private int kcalRequire;
     private String note;
     private List<MedicinePrescriptionModel> mPresModels;
     private List<FoodPrescriptionModel> fPresModels;
     private List<PracticePrescriptionModel> pPresModels;
+
+
 
 
     public PrescriptionModel() {
@@ -78,11 +83,32 @@ public class PrescriptionModel implements Serializable{
         this.note = note;
     }
 
+
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
+    }
+
+    public String getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(String appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+
     @Override
     public String toString() {
         return "PrescriptionModel{" +
-                "diagnostic='" + diagnostic + '\'' +
-                ", kcalRequire='" + kcalRequire + '\'' +
+                "appointmentId=" + appointmentId +
+                ", appointmentDate='" + appointmentDate + '\'' +
+                ", diagnostic='" + diagnostic + '\'' +
+                ", kcalRequire=" + kcalRequire +
+                ", note='" + note + '\'' +
                 ", mPresModels=" + mPresModels +
                 ", fPresModels=" + fPresModels +
                 ", pPresModels=" + pPresModels +
