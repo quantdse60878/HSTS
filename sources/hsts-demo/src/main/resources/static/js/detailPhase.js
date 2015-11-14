@@ -19,7 +19,8 @@ var curMedicinePhase = 0;
 $(document).ready(function(){
     console.log("-- begin --");
     var count = 1;
-    var table = $('#medicineContent').dataTable( {
+    // medicine
+    $('#medicineContent').dataTable( {
         "processing": true,
         "pagingType": "full",
         "paging": true,
@@ -77,18 +78,28 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function (data, type, full, meta) {
-                    var btnUpdate = '<a onclick="updateDiaglog('+ data +')" class="btn btn-warning">Update</a>';
-                    var btnDelete = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>';
+                    var btnUpdate = '<a onclick="updateMedicineDialog('+ data +')" class="btn btn-warning">Update</a>';
+                    var btnDelete = '<a onclick="deleteMedicineDialog('+ data +')" class="btn btn-danger">Delete</a>';
                     return btnUpdate + btnDelete;
                 },
                 "width": "20%"
             }
         ]
     } );
+    // end medicine
+
+    // food
+
+    // food
+
+    // practice
+
+    // practice
+
     console.log("-- end --");
 });
 
-function updateDiaglog(element) {
+function updateMedicineDialog(element) {
     $.ajax({
         method: "GET",
         url: "/phase/medicine/detail",
@@ -117,7 +128,7 @@ function updateDiaglog(element) {
     });
 }
 
-function deleteDialog(element) {
+function deleteMedicineDialog(element) {
     curMedicinePhase = element;
     confirmMessageLabel.innerHTML = "Are you wish to delete this medicine?";
     $("#deleteMedicineDialog").modal('show');
@@ -144,8 +155,8 @@ $( "#btnDeleteMedicine" ).click(function() {
     console.log("end delete");
 });
 
-// Validator
-var validator = $("#updateForm").validate({
+// update medicine validator
+$("#updateMedicineForm").validate({
     ignore: [],
     debug: true,
     rules: {
@@ -247,6 +258,7 @@ $("#medicineSelect").select2({
     tag: true
 });
 
+// insert medicine validator
 $("#insertMedicineForm").validate({
     ignore: [],
     debug: true,
@@ -320,3 +332,4 @@ $("#insertMedicineForm").validate({
         return false; // required to block normal submit since you used ajax
     }
 });
+
