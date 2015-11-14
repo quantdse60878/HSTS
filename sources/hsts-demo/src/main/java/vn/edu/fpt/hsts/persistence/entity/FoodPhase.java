@@ -20,14 +20,14 @@ public class FoodPhase extends AbstractKeyEntity {
     /**
      * The phase.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "phaseId", nullable = false)
     private Phase phase;
 
     /**
      *
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "foodId", nullable = false)
     private Food food;
 

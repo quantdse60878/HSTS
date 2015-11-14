@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.PracticePhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.PhaseModel;
@@ -159,4 +160,15 @@ public class PhaseController extends AbstractController {
     }
 
 
+    @RequestMapping(value = "/phase/practices", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public PracticePhasePageModel findPracticesByPhaseId(@RequestParam("phaseId") final int phaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}]", phaseId);
+            return phaseService.getPracticesByPhase(phaseId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

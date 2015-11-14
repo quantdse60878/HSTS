@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import vn.edu.fpt.hsts.bizlogic.PracticePhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhasePageModel;
@@ -180,6 +181,20 @@ public class PhaseService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public PracticePhasePageModel getPracticesByPhase(final int phaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}]", phaseId);
+            final PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
+            final Page<PracticePhase> phasePage = practicePhaseRepo.findByPhaseId(phaseId, pageRequest);
+            final PracticePhasePageModel pageModel = new PracticePhasePageModel(phasePage);
+            return pageModel;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
 
     @Transactional(rollbackOn = BizlogicException.class)
     public void addMedicineToPhase(final int phaseId, final int medicineId,

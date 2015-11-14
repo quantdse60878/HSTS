@@ -18,6 +18,4 @@ public class FoodController extends AbstractController {
      * The logger.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(FoodController.class);
-
-
 }
