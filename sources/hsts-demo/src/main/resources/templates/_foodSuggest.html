@@ -21,7 +21,7 @@
         <th>Advice</th>
         <th>#</th>
     </tr>
-    <tr th:each="foodPhase,row : ${PHASE.foodPhaseList}">
+    <tr th:each="foodPhase,row : ${PHASE.foodPhaseList}" class="rowFood">
         <td th:text="${row.count}"></td>
         <td class="form-group">
             <select class="form-control" onchange="findUnits(this)" th:name="fPresModels[__${row.index}__].f" th:id="fPresModels__${row.index}__.f"

@@ -16,7 +16,7 @@
         <th>Advice</th>
         <th>#</th>
     </tr>
-    <tr th:each="medicalPhase,row : ${PHASE.medicinePhaseList}">
+    <tr th:each="medicalPhase,row : ${PHASE.medicinePhaseList}" class="rowMedi">
         <td th:text="${row.count}"></td>
         <td class="form-group">
             <select class="form-control" th:name="mPresModels[__${row.index}__].m" th:id="mPresModelsM__${row.index}__"

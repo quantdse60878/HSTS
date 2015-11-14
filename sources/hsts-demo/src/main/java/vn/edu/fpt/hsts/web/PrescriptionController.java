@@ -3,14 +3,19 @@ package vn.edu.fpt.hsts.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedModel;
+import vn.edu.fpt.hsts.bizlogic.model.PatientModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
@@ -190,7 +195,6 @@ public class PrescriptionController extends AbstractController{
 //        for(int i = 0; i < br.getAllErrors().size(); i++) {
 //            System.out.println(br.getAllErrors().get(i).getObjectName() + "--++FUCK++--");
 //        }
-
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             if (br.hasErrors()){
@@ -241,6 +245,22 @@ public class PrescriptionController extends AbstractController{
                 notify(mav, result, "Make Prescription", "Fail!!!");
             }
             return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/makePrescription2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public PatientExtendedModel make(@RequestBody PrescriptionModel prescriptionModel) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info(prescriptionModel.toString());
+            doctorService.makePrescription(prescriptionModel, prescriptionModel.getAppointmentId(),
+                    prescriptionModel.getAppointmentDate());
+
+            return patientService.findPatientByAppointment(prescriptionModel.getAppointmentId());
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
