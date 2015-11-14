@@ -104,7 +104,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Diagnostic</label>
-                                    <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId"/>
+                                    <input type="hidden" th:value="${APPOINTMENT.id}" name="appointmentId" id = "appointmentId"/>
                                     <div class="col-sm-4 ui-widget">
                                         <input th:if="${TREATMENT != null}"
                                                th:value="${TREATMENT.appointment.medicalRecord.illness != null}? ${TREATMENT.appointment.medicalRecord.illness.name} : 'Unknown Disease'"
@@ -415,6 +415,8 @@
     </div>
     <!--His Appointment Date-->
     <div layout:replace="_popupHisAppointmentDate"></div>
+    <!-- Result Precription -->
+    <div layout:replace="_popupResultPrecription"></div>
     <!-- / POPUP-->
 
     <input th:value="*{PHASE != null}? 'check' : ''" id="phase" type="hidden"/>
@@ -456,6 +458,7 @@
         function addRowMedicine(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
+            newRow.setAttribute("class","rowMedi");
             var newCell;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = ++countM;
@@ -468,7 +471,6 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="mPresModels[' + countMedicine + '].mTime" id="mPresModels' + countMedicine + '.mTime" data-rule-min="1" data-msg-min="Please select." >'
-                    + '<option value="0" >Select</option>'
                     + '<option th:each="time : ${TIMES}" th:value="${time.numOfTime}" th:text="${time.numOfTime}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
@@ -494,6 +496,7 @@
         function addRowFoods(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
+            newRow.setAttribute("class","rowFood");
             var newCell;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = ++countF;
@@ -529,6 +532,7 @@
         function addRowPractice(tableID) {
             var tableElement = document.getElementById(tableID);
             var newRow = tableElement.insertRow(tableElement.rows.length);
+            newRow.setAttribute("class","rowPrac");
             var newCell;
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = ++countP;

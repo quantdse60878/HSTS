@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<!-- Nutritional -->
+<!-- Modal -->
+<div class="modal fade" id="resultPre" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+     data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="resultDate">Confirm Box</h4>
+            </div>
+            <div class="modal-body" id="appointmentInFo">
+                <!-- Custom Tabs (Pulled to the left) -->
+                <div class="nav-tabs-custom" style="box-shadow: none;">
+                    <ul class="nav nav-tabs">
+                        <li class="active" id="li_tabRe_1">
+                            <a href="#tabRe_1" data-toggle="tab">Medicines</a>
+                        </li>
+                        <li id="li_tabRe_2-2"><a href="#tabRe_2" data-toggle="tab">Foods</a></li>
+                        <li id="li_tabRe_3-3"><a href="#tabRe_3" data-toggle="tab">Practices</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabRe_1">
+                            <h4>Medicines</h4>
+                            <!-- table medicines -->
+                            <table class="table table-striped" id="resultMedicine">
+                            </table>
+                            <!-- /.table medicines -->
+                        </div>
+                        <div class="tab-pane" id="tabRe_2">
+                            <h4>Foods</h4>
+                            <!-- table foods -->
+                            <table class="table table-striped" id="resultFoods">
+                            </table>
+                            <!-- /.table foods -->
+                        </div>
+                        <div class="tab-pane" id="tabRe_3">
+                            <h4>Practices</h4>
+
+                            <!--table practice-->
+                            <table class="table table-striped" id="resultPractice">
+                            </table>
+                            <!--/.table practice-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.modal-body-->
+            <div class="modal-footer">
+                <a href="doctorPatients" class="btn btn-primary">Next Patient</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.Modal -->
+</body>
+</html>
