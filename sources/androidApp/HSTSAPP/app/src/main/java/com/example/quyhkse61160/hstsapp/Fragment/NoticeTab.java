@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.example.quyhkse61160.hstsapp.Adapter.FoodAdapter;
 import com.example.quyhkse61160.hstsapp.Adapter.MedicineAdapter;
 import com.example.quyhkse61160.hstsapp.Adapter.PracticeAdapter;
-import com.example.quyhkse61160.hstsapp.Classes.OnSwipeTouchListener;
 import com.example.quyhkse61160.hstsapp.Classes.ToDoTime;
 import com.example.quyhkse61160.hstsapp.Classes.Treatment;
 import com.example.quyhkse61160.hstsapp.Common.Constant;

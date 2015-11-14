@@ -35,7 +35,8 @@ $("#doctorSelect").select2({
             return {
                 name: params.term, // search term
                 page: params.page,
-                pageSize: 5
+                pageSize: 5,
+                roleId: 1
             };
         },
         processResults: function (data, params) {

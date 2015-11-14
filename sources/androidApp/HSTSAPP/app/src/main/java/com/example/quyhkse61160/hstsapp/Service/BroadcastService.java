@@ -87,6 +87,12 @@ public class BroadcastService extends Service {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
+                    if(sharedPreferences.getString(Constant.PREF_HADSELECTDEVICE, "").equals("") ||
+                            sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")){
+                        return;
+                    }
+
                     final Context context = getApplicationContext();
                     BroadcastService.flag = true;
                     BroadcastService.flag2 = true;
@@ -120,17 +126,6 @@ public class BroadcastService extends Service {
                             }
                         }
 
-                    }
-
-                    if(c.getTime().getHours() == 7 && c.getTime().getMinutes()== 0 &&
-                            c.getTime().getDay() == Constant.PATIENT_APPOINTMENT.getDay() &&
-                            c.getTime().getMonth() == Constant.PATIENT_APPOINTMENT.getMonth() &&
-                            c.getTime().getYear() == Constant.PATIENT_APPOINTMENT.getYear()){
-                        BroadcastService.flag3 = false;
-                        Intent in = new Intent(context, HomeActivity.class);
-                        in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        in.putExtra("nextAppointment", Boolean.TRUE);
-                        context.startActivity(in);
                     }
 
                     if (c.getTime().equals(c1.getTime())) {
@@ -192,6 +187,15 @@ public class BroadcastService extends Service {
 
                         if (c3.getTime().getHours() == c.getTime().getHours()
                                 && c3.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
+                            if(BroadcastService.flag3 && c.getTime().getDate() >= Constant.PATIENT_APPOINTMENT.getDate() &&
+                                    c.getTime().getMonth() >= Constant.PATIENT_APPOINTMENT.getMonth() &&
+                                    c.getTime().getYear() >= Constant.PATIENT_APPOINTMENT.getYear()){
+                                BroadcastService.flag3 = false;
+                                Intent in = new Intent(context, HomeActivity.class);
+                                in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                in.putExtra("nextAppointment", Boolean.TRUE);
+                                context.startActivity(in);
+                            }
 
                             if (BroadcastService.flag && BroadcastService.flag3) {
                                 Log.d("KhuongMH", "FLAG1 FALSEEEEEEEEEEE");

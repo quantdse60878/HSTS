@@ -78,8 +78,7 @@ public class LoginActivity extends ActionBarActivity {
         am = getAssets();
         sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
         Log.d("KhuongMHH -----11111  ", sharedPreferences.getString(Constant.PREF_DATA, ""));
-        if (!sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")
-                && !sharedPreferences.getString(Constant.PREF_DATA, "").equals("")) {
+        if (!sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")) {
             Constant.accountId = sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "");
             Constant.PATIENT_NAME = sharedPreferences.getString(Constant.PREF_PATIENT_NAME, "");
             Constant.patientId = sharedPreferences.getString(Constant.PREF_PATIENTID_HADLOGIN, "");
