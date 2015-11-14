@@ -8,10 +8,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import vn.edu.fpt.hsts.bizlogic.PracticePhasePageModel;
+import vn.edu.fpt.hsts.bizlogic.model.FoodPhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhasePageModel;
+import vn.edu.fpt.hsts.bizlogic.model.PracticePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.PhaseModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
@@ -266,7 +268,7 @@ public class PhaseService {
         }
     }
 
-    public MedicinePhaseModel find(final int medicinePhaseId) {
+    public MedicinePhaseModel findMedicinePhase(final int medicinePhaseId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             MedicinePhase entity = medicinePhaseRepo.findOne(medicinePhaseId);
@@ -277,6 +279,31 @@ public class PhaseService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public FoodPhaseModel findFoodPhase(final int foodPhaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            FoodPhase entity = foodPhaseRepo.findOne(foodPhaseId);
+            final FoodPhaseModel model = new FoodPhaseModel();
+            model.fromEntity(entity);
+            return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public PracticePhaseModel findPracticePhase(final int practicePhaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            PracticePhase entity = practicePhaseRepo.findOne(practicePhaseId);
+            final PracticePhaseModel model = new PracticePhaseModel();
+            model.fromEntity(entity);
+            return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
 
     public PhaseModel findPhase(final int phaseId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
