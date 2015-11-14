@@ -44,7 +44,7 @@ public class PrescriptionWrapperModel {
     /**
      * Logo.
      */
-    private static final String LOGO = "static/image/FPT_Logo.gif";
+    private static final String LOGO = "static/image/FPT_Logo.png";
 
     /**
      *
