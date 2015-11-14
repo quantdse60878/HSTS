@@ -334,3 +334,9 @@ $( "#btnDeleteMedicine" ).click(function() {
     });
     console.log("end delete");
 });
+
+// insert practice validator
+
+// update practice validator
+
+// delete practice validator

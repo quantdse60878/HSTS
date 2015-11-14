@@ -113,7 +113,8 @@ public class MedicineController extends AbstractController {
     public MedicinePhaseModel find(@RequestParam("id") final int medicinePhaseId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            return phaseService.find(medicinePhaseId);
+            LOGGER.info("medicinePhaseId[{}]", medicinePhaseId);
+            return phaseService.findMedicinePhase(medicinePhaseId);
         }finally {
             LOGGER.info(IConsts.END_METHOD);
         }

@@ -7,6 +7,8 @@
  */
 package vn.edu.fpt.hsts.persistence.repo;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +19,7 @@ public interface FoodRepo extends JpaRepository<Food, Integer> {
 
     @Query("select f from Food f where lower(name) = lower(:name)")
     public Food findByName(@Param("name") final String name);
+
+    @Query("select f from Food f where lower(name) like lower(:name)")
+    public Page<Food> findByNameLike(@Param("name") final String name, final Pageable pageable);
 }

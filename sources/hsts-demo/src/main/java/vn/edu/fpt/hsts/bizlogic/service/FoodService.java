@@ -3,7 +3,10 @@ package vn.edu.fpt.hsts.bizlogic.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import vn.edu.fpt.hsts.bizlogic.model.FoodPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodUnitModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.entity.Food;
@@ -48,6 +51,20 @@ public class FoodService {
                 foodUnitModels.add(fum);
             }
             return foodUnitModels;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public FoodPageModel findFoods(final String name, final int page, final int pageSize) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("name[{}], page[{}], pageSize[{}]", name, page, pageSize);
+            final String formatName = "%" + name + "%";
+            final PageRequest pageRequest = new PageRequest(page, pageSize);
+            final Page<Food> foodPage = foodRepo.findByNameLike(name, pageRequest);
+            final FoodPageModel pageModel = new FoodPageModel(foodPage);
+            return pageModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
