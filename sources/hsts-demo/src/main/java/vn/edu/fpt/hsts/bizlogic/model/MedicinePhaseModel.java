@@ -43,12 +43,6 @@ public class MedicinePhaseModel extends AbstractKeyModel<MedicinePhase> {
      */
     private String advice;
 
-    /**
-     * 0: Add new
-     * 1: Exists in db
-     * 2: Should be delete
-     */
-    private byte status;
 
     public MedicineModel getMedicine() {
         return medicine;
@@ -65,7 +59,6 @@ public class MedicinePhaseModel extends AbstractKeyModel<MedicinePhase> {
     @Override
     public void fromEntity(MedicinePhase entity) {
         super.fromEntity(entity);
-        status = 1;
         medicine = new MedicineModel();
         setShortModel(entity.getMedicine(), medicine);
         medicine.setUnit(entity.getMedicine().getUnit());
@@ -107,14 +100,6 @@ public class MedicinePhaseModel extends AbstractKeyModel<MedicinePhase> {
 
     public void setNumberOfTime(int numberOfTime) {
         this.numberOfTime = numberOfTime;
-    }
-
-    public byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(byte status) {
-        this.status = status;
     }
 
     public String getAdvice() {

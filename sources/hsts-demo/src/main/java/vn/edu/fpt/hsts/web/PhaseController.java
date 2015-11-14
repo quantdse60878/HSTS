@@ -24,6 +24,7 @@ import vn.edu.fpt.hsts.bizlogic.model.regimen.PhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.bizlogic.service.RegimenService;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
 
 import java.util.List;
@@ -114,7 +115,7 @@ public class PhaseController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "/phase/medicine", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/phase/medicines", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public MedicinePhasePageModel findMedicinesByPhaseId(@RequestParam("phaseId") final int phaseId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -122,6 +123,67 @@ public class PhaseController extends AbstractController {
             LOGGER.info("phaseId[{}]", phaseId);
             return phaseService.getMedicinesByPhase(phaseId);
         } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/phase/medicine/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String addMedicineToPhase(@RequestParam("phaseId") final int phaseId,
+                                     @RequestParam("name") final String medicineName,
+                                     @RequestParam(value = "unit", required = false, defaultValue = EMPTY) final String unit,
+                                     @RequestParam("numberOfTime") final int numberOfTime,
+                                     @RequestParam("quantitative") final int quantitative,
+                                     @RequestParam(value = "advice", required = false, defaultValue = EMPTY) final String advice) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            phaseService.addMedicineToPhase(phaseId, medicineName, unit, numberOfTime, quantitative, advice);
+            return OK_STATUS;
+        } catch (BizlogicException e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/phase/medicine/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String updateMedicineToPhase(@RequestParam("id") final int id,
+                                     @RequestParam("numberOfTime") final int numberOfTime,
+                                     @RequestParam("quantitative") final int quantitative,
+                                     @RequestParam(value = "advice", required = false, defaultValue = EMPTY) final String advice) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            phaseService.updateMedicineToPhase(id, numberOfTime, quantitative, advice);
+            return OK_STATUS;
+        } catch (BizlogicException e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/phase/medicine/delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteMedicineToPhase(@RequestParam("id") final int medicinePhaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            phaseService.deleteMedicineToPhase(medicinePhaseId);
+            return OK_STATUS;
+        } catch (BizlogicException e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/phase/medicine/detail", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public MedicinePhaseModel find(@RequestParam("id") final int medicinePhaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return phaseService.find(medicinePhaseId);
+        }finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
