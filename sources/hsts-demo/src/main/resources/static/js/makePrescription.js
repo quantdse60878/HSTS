@@ -41,11 +41,21 @@ var validator = $("#mainForm").validate({
     rules: {
         diagnostic: {
             required: true
+        },
+        kcalRequire: {
+            required: true,
+            remote: {
+                url: "/validateData",
+                type: "POST"
+            }
         }
     },
     messages: {
         diagnostic: {
             required: "Please choose diagnostic."
+        },
+        kcalRequire: {
+            remote: "Wrong input"
         }
     },
     errorPlacement: function (error, element) {
