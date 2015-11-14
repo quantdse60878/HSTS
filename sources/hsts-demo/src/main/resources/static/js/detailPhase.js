@@ -19,7 +19,8 @@ var curMedicinePhase = 0;
 $(document).ready(function(){
     console.log("-- begin --");
     var count = 1;
-    var table = $('#medicineContent').dataTable( {
+    // medicine
+    $('#medicineContent').dataTable( {
         "processing": true,
         "pagingType": "full",
         "paging": true,
@@ -77,18 +78,28 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function (data, type, full, meta) {
-                    var btnUpdate = '<a onclick="updateDiaglog('+ data +')" class="btn btn-warning">Update</a>';
-                    var btnDelete = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Update</a>';
+                    var btnUpdate = '<a onclick="updateMedicineDialog('+ data +')" class="btn btn-warning">Update</a>';
+                    var btnDelete = '<a onclick="deleteMedicineDialog('+ data +')" class="btn btn-danger">Delete</a>';
                     return btnUpdate + btnDelete;
                 },
                 "width": "20%"
             }
         ]
     } );
+    // end medicine
+
+    // food
+
+    // food
+
+    // practice
+
+    // practice
+
     console.log("-- end --");
 });
 
-function updateDiaglog(element) {
+function updateMedicineDialog(element) {
     $.ajax({
         method: "GET",
         url: "/phase/medicine/detail",
@@ -117,35 +128,127 @@ function updateDiaglog(element) {
     });
 }
 
-function deleteDialog(element) {
+function deleteMedicineDialog(element) {
     curMedicinePhase = element;
     confirmMessageLabel.innerHTML = "Are you wish to delete this medicine?";
     $("#deleteMedicineDialog").modal('show');
 }
 
-$( "#btnDeleteMedicine" ).click(function() {
-    console.log("begin delete");
-    $.ajax({
-        method: "POST",
-        url: "/phase/medicine/delete",
-        data: {
-            id: curMedicinePhase
-        }
-    }).done(function(data) {
-        console.log(data);
-        var txtMessage = document.getElementById("messageLabel");
-        if (data.status == "fail") {
-            txtMessage.innerHTML = "Error while delete regimen data";
-        } else {
-            console.log("-- reload page --");
-            window.location.href = "/detailPhase?id=" + $("#phaseId").val();
-        }
-    });
-    console.log("end delete");
+// medicine select
+$("#medicineSelect").select2({
+    placeholder: "Choose a medicine",
+    theme: "classic",
+    width: "100%",
+    ajax: {
+        url: "/medicine/list",
+        dataType: 'json',
+        delay: 250,
+        data: function (params, page) {
+            return {
+                name: params.term, // search term
+                page: params.page,
+                pageSize: 5
+            };
+        },
+        processResults: function (data, params) {
+            params.page = params.page || 0;
+            var names = data.dataList.map(function (obj) {
+                return {
+                    id: obj.id,
+                    text: obj.name
+                }
+            });
+            return {results: names,
+                pagination: {
+                    more: ( (data.pageNumber + 1)  * 5) < data.totalElements
+                }
+            };
+        },
+        cache: false
+    },
+    escapeMarkup: function (markup) {
+        return markup; // let our custom formatter work
+    },
+    tag: true
 });
 
-// Validator
-var validator = $("#updateForm").validate({
+// insert medicine validator
+$("#insertMedicineForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        insertMedicine: {
+            required: true
+        },
+        insertTimes: {
+            required: true,
+            min: 1,
+            max: 7
+        },
+        insertQuantitative: {
+            required: true,
+            min: 1,
+            max: 5
+        }
+    },
+    messages: {
+        //patientName: {
+        //    maxlenght: "Name is too long, please modify it"
+        //},
+        insertMedicine: {
+            required: "Please choose a medicine"
+        },
+        insertTimes: {
+            required: "Please input valid illness name",
+        },
+        insertQuantitative: {
+            required: "Please input valid description"
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "insertMedicine"){
+            error.appendTo($('#invalidInsertMedicine'));
+        }  else if (element.attr("name") == "insertTimes") {
+            error.appendTo($('#invalidInsertTimes'));
+        } else if (element.attr("name") == "insertQuantitative") {
+            error.appendTo($('#invalidInsertQuantitative'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("begin insert");
+        $.ajax({
+            method: "POST",
+            url: "/phase/medicine/add",
+            data: {
+                phaseId: $("#phaseId").val(),
+                medicineId: $("#medicineSelect").val(),
+                numberOfTime: $("#insertTimes").val(),
+                quantitative: $("#insertQuantitative").val(),
+                advice: $("#insertNote").val()
+            }
+        }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data.status == "fail") {
+                txtMessage.innerHTML = "Error while insert data";
+            } else {
+                console.log("-- reload page --");
+                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+            }
+        });
+        console.log("end insert");
+        return false; // required to block normal submit since you used ajax
+    }
+});
+
+// update medicine validator
+$("#updateMedicineForm").validate({
     ignore: [],
     debug: true,
     rules: {
@@ -208,4 +311,26 @@ var validator = $("#updateForm").validate({
         console.log("end update");
         return false; // required to block normal submit since you used ajax
     }
+});
+
+// delete medicine
+$( "#btnDeleteMedicine" ).click(function() {
+    console.log("begin delete");
+    $.ajax({
+        method: "POST",
+        url: "/phase/medicine/delete",
+        data: {
+            id: curMedicinePhase
+        }
+    }).done(function(data) {
+        console.log(data);
+        var txtMessage = document.getElementById("messageLabel");
+        if (data.status == "fail") {
+            txtMessage.innerHTML = "Error while delete regimen data";
+        } else {
+            console.log("-- reload page --");
+            window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+        }
+    });
+    console.log("end delete");
 });
