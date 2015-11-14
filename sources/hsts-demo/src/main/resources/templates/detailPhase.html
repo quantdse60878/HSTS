@@ -49,6 +49,12 @@
                                 <div class="tab-content">
                                     <!-- tab 1: medicine -->
                                     <div class="tab-pane active" id="tab_1">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <a data-toggle="modal" data-target="#insertMedicineDialog" class="btn btn-info">Add new medicine</a>
+                                            </div>
+                                        </div>
+
                                         <table id="medicineContent" class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
@@ -120,12 +126,11 @@
         </div>
         <!-- .confirm delete modal -->
 
-
-        <!-- update medicine diaglog -->
+        <!-- update medicine modal -->
         <div class="modal fade" id="updateMedicineDialog" tabindex="-1" role="dialog" aria-labelledby="updateMedicine" data-backdrop="static"
              data-keyboard="false">
             <div class="modal-dialog" role="document">
-                <form id = "updateForm" class="form-horizontal">
+                <form id = "updateMedicineForm" class="form-horizontal">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -175,7 +180,71 @@
 
             </div>
         </div>
-        <!-- .update medicine diaglog -->
+        <!-- .update medicine modal -->
+
+        <!-- insert medicine modal -->
+        <div class="modal fade" id="insertMedicineDialog" role="dialog" aria-labelledby="addMedicine" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "insertMedicineForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                            <h4 class="modal-title" id="addMedicine">Insert</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Medicine name*:</label>
+
+                                <div class="col-sm-4">
+                                    <select id ="medicineSelect" th:name="insertMedicine"></select>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertMedicine"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Times*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="insertTimes" class="form-control" id="insertTimes"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertTimes">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Quantitative*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="insertQuantitative" class="form-control" id="insertQuantitative"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertQuantitative">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Note*: </label>
+
+                                <div class="col-sm-6">
+                                    <textarea id="insertNote" th:name = "insertNote" th:width="300px"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+        <!-- .insert medicine modal -->
+
+        <!-- update practice modal-->
+        <!-- .update practice modal -->
+
+        <!-- insert practice modal -->
+        <!-- .insert practice modal-->
 
         <!-- message modal-->
         <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel">
