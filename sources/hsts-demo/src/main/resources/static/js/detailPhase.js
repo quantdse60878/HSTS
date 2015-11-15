@@ -81,7 +81,7 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function (data, type, full, meta) {
-                    var btnUpdate = '<a onclick="updateMedicineDialog('+ data +')" class="btn btn-warning">Update</a>';
+                    var btnUpdate = '<a onclick="updateMedicineDialog('+ data +')" class="btn btn-success" style="margin-right: 20px">Update</a>';
                     var btnDelete = '<a onclick="deleteMedicineDialog('+ data +')" class="btn btn-danger">Delete</a>';
                     return btnUpdate + btnDelete;
                 },
@@ -150,7 +150,7 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function (data, type, full, meta) {
-                    var btnUpdate = '<a onclick="updateFoodDialog('+ data +')" class="btn btn-warning">Update</a>';
+                    var btnUpdate = '<a onclick="updateFoodDialog('+ data +')" class="btn btn-success" style="margin-right: 20px">Update</a>';
                     var btnDelete = '<a onclick="deleteFoodDialog('+ data +')" class="btn btn-danger">Delete</a>';
                     return btnUpdate + btnDelete;
                 },
@@ -219,7 +219,7 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function (data, type, full, meta) {
-                    var btnUpdate = '<a onclick="updatePracticeDialog('+ data +')" class="btn btn-warning">Update</a>';
+                    var btnUpdate = '<a onclick="updatePracticeDialog('+ data +')" class="btn btn-success" style="margin-right: 20px">Update</a>';
                     var btnDelete = '<a onclick="deletePracticeDialog('+ data +')" class="btn btn-danger">Delete</a>';
                     return btnUpdate + btnDelete;
                 },

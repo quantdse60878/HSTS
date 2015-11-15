@@ -59,7 +59,7 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    var updateBtn = '<a onclick="updateDialog('+ data +')" class="btn btn-success">Update</a>';
+                    var updateBtn = '<a onclick="updateDialog('+ data +')" class="btn btn-success" style="margin-right: 20px">Update</a>';
                     var deleteBtn = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>'
                     return updateBtn + deleteBtn;
                 },
