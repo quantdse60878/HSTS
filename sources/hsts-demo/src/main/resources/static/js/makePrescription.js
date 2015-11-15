@@ -43,7 +43,6 @@ var validator = $("#mainForm").validate({
             required: true
         },
         kcalRequire: {
-            required: true,
             remote: {
                 url: "/validateData",
                 type: "POST"
@@ -228,7 +227,7 @@ var validator = $("#mainForm").validate({
             console.log("Change to first tab has error");
             console.log(validator.errorList);
             var targetTab = jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id');
-            changeTab('#' + targetTab, '#li_' + targetTab);
+            changeTabb('#' + targetTab, '#li_' + targetTab);
             console.log("end change");
         }
     }
