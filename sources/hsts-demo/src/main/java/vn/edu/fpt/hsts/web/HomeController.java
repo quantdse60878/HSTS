@@ -24,6 +24,8 @@ import vn.edu.fpt.hsts.common.util.StringUtils;
 import vn.edu.fpt.hsts.web.session.UserSession;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  * Home controller, for processing common mapping, redirect, etc.
@@ -114,6 +116,18 @@ public class HomeController {
         try {
             final boolean result = dataValidationService.validateRequestString(request);
             return result;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/currentUTCTime", method = RequestMethod.GET)
+    @ResponseBody
+    public Long currentUTCTime() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+            return cal.getTimeInMillis();
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

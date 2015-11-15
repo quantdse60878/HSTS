@@ -210,7 +210,9 @@ public class LoginController {
     public ModelAndView logout(HttpSession session) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            session.invalidate();
+            if (null != session) {
+                session.invalidate();
+            }
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("login");
             return modelAndView;
