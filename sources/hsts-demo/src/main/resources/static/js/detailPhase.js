@@ -16,81 +16,7 @@ function changeTab (a, li) {
 
 var curMedicinePhase = 0;
 var curFoodPhase = 0;
-
-// insert medicine validator
-$("#insertMedicineForm").validate({
-    ignore: [],
-    debug: true,
-    rules: {
-        // simple rule, converted to {required:true}
-        insertMedicine: {
-            required: true
-        },
-        insertTimes: {
-            required: true,
-            min: 1,
-            max: 7
-        },
-        insertQuantitative: {
-            required: true,
-            min: 1,
-            max: 5
-        }
-    },
-    messages: {
-        //patientName: {
-        //    maxlenght: "Name is too long, please modify it"
-        //},
-        insertMedicine: {
-            required: "Please choose a medicine"
-        },
-        insertTimes: {
-            required: "Please input valid times"
-        },
-        insertQuantitative: {
-            required: "Please input valid quantitative"
-        }
-    },
-    errorPlacement: function(error, element){
-        if(element.attr("name") == "insertMedicine"){
-            error.appendTo($('#invalidInsertMedicine'));
-        }  else if (element.attr("name") == "insertTimes") {
-            error.appendTo($('#invalidInsertTimes'));
-        } else if (element.attr("name") == "insertQuantitative") {
-            error.appendTo($('#invalidInsertQuantitative'));
-        }
-
-        // Default
-        else {
-            error.appendTo( element.parent().next() );
-        }
-    },
-    submitHandler: function () {
-        console.log("begin insert");
-        $.ajax({
-            method: "POST",
-            url: "/phase/medicine/add",
-            data: {
-                phaseId: $("#phaseId").val(),
-                medicineId: $("#insertMedicine").val(),
-                numberOfTime: $("#insertTimes").val(),
-                quantitative: $("#insertQuantitative").val(),
-                advice: $("#insertNote").val()
-            }
-        }).done(function(data) {
-            console.log(data);
-            var txtMessage = document.getElementById("messageLabel");
-            if (data.status == "fail") {
-                txtMessage.innerHTML = "Error while insert data";
-            } else {
-                console.log("-- reload page --");
-                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
-            }
-        });
-        console.log("end insert");
-        return false; // required to block normal submit since you used ajax
-    }
-});
+var curPracticePhase = 0;
 
 
 $(document).ready(function(){
@@ -455,6 +381,86 @@ function deleteFoodDialog(element) {
     $("#deleteFoodDialog").modal('show');
 }
 
+function deletePracticeDialog(element) {
+    curPracticePhase = element;
+    $("#deletePracticeDialog").modal('show');
+}
+
+// insert medicine validator
+$("#insertMedicineForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        insertMedicine: {
+            required: true
+        },
+        insertTimes: {
+            required: true,
+            min: 1,
+            max: 7
+        },
+        insertQuantitative: {
+            required: true,
+            min: 1,
+            max: 5
+        }
+    },
+    messages: {
+        //patientName: {
+        //    maxlenght: "Name is too long, please modify it"
+        //},
+        insertMedicine: {
+            required: "Please choose a medicine"
+        },
+        insertTimes: {
+            required: "Please input valid times"
+        },
+        insertQuantitative: {
+            required: "Please input valid quantitative"
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "insertMedicine"){
+            error.appendTo($('#invalidInsertMedicine'));
+        }  else if (element.attr("name") == "insertTimes") {
+            error.appendTo($('#invalidInsertTimes'));
+        } else if (element.attr("name") == "insertQuantitative") {
+            error.appendTo($('#invalidInsertQuantitative'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("begin insert");
+        $.ajax({
+            method: "POST",
+            url: "/phase/medicine/add",
+            data: {
+                phaseId: $("#phaseId").val(),
+                medicineId: $("#insertMedicine").val(),
+                numberOfTime: $("#insertTimes").val(),
+                quantitative: $("#insertQuantitative").val(),
+                advice: $("#insertNote").val()
+            }
+        }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data.status == "fail") {
+                txtMessage.innerHTML = "Error while insert data";
+            } else {
+                console.log("-- reload page --");
+                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+            }
+        });
+        console.log("end insert");
+        return false; // required to block normal submit since you used ajax
+    }
+});
+
 // update medicine validator
 $("#updateMedicineForm").validate({
     ignore: [],
@@ -548,7 +554,26 @@ $( "#btnDeleteMedicine" ).click(function() {
 // update practice validator
 
 // delete practice validator
-
+$( "#btnDeletePractice" ).click(function() {
+    console.log("begin delete");
+    $.ajax({
+        method: "POST",
+        url: "/phase/practice/delete",
+        data: {
+            id: curPracticePhase
+        }
+    }).done(function(data) {
+        console.log(data);
+        var txtMessage = document.getElementById("messageLabel");
+        if (data.status == "fail") {
+            txtMessage.innerHTML = "Error while delete practice phase data";
+        } else {
+            console.log("-- reload page --");
+            window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+        }
+    });
+    console.log("end delete");
+});
 
 // insert food validator
 $("#insertFoodForm").validate({
