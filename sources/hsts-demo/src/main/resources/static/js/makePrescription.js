@@ -66,6 +66,7 @@ var validator = $("#mainForm").validate({
         }
     },
     submitHandler: function (form) {
+        //form.submit();
         // get val of table medicine
         var rows = document.getElementsByClassName('rowMedi');
         var mPresModels = [];
@@ -129,15 +130,95 @@ var validator = $("#mainForm").validate({
             contentType: "application/json",
             data: JSON.stringify(postData)
         })
-            .done(function(data) {
+            .done(function (data) {
                 console.log(data);
+                if (data != null) {
+                    // Set data to html
+                    // Set information Date History
+                    $('#resultDate').html(data.dateInfor);
+                    var table = [];
+                    var row = [];
+                    // infor table medicines
+                    $('#resultMedicine').html('<tr><th style="width: 10px">#</th>'
+                        + '<th>Medicine</th>'
+                        + '<th>Times</th>'
+                        + '<th>Quantity</th>'
+                        + '<th>Unit</th>'
+                        + '<th>Advice</th>'
+                        + '</tr>');
+                    for (var i = 0; i < data.hms.length; i++) {
+                        var tmp = data.hms[i];
+                        row = "<tr>"
+                            + "<td>" + (i + 1) + "</td>"
+                            + "<td>" + tmp.name + "</td>"
+                            + "<td>" + tmp.times + "</td>"
+                            + "<td>" + tmp.quantity + "</td>"
+                            + "<td>" + tmp.unit + "</td>"
+                            + "<td>" + tmp.note + "</td>"
+                            + "</tr>";
+                        table = table + row;
+                    }
+                    ;
+                    //console.log(table);
+                    $(table).appendTo("#resultMedicine");
 
-                // End process
-                // Hide pop-up confirm
-                //$('#myModal').modal('hide');
+                    table = [];
+                    row = [];
+                    // infor table food
+                    $('#resultFoods').html('<tr><th style="width: 10px">#</th>'
+                        + '<th>Menu</th>'
+                        + '<th>Times</th>'
+                        + '<th>Quantity</th>'
+                        + '<th>Unit</th>'
+                        + '<th>Advice</th>'
+                        + '</tr>');
+                    for (var i = 0; i < data.hfs.length; i++) {
+                        var tmp = data.hfs[i];
+                        row = "<tr>"
+                            + "<td>" + (i + 1) + "</td>"
+                            + "<td>" + tmp.name + "</td>"
+                            + "<td>" + tmp.times + "</td>"
+                            + "<td>" + tmp.quantity + "</td>"
+                            + "<td>" + tmp.unit + "</td>"
+                            + "<td>" + tmp.note + "</td>"
+                            + "</tr>";
+                        table = table + row;
+                    }
+                    ;
+                    //console.log(table);
+                    $(table).appendTo("#resultFoods");
 
-                loadPopupResult($("#appointmentId").val());
-                changeTab("#tabRe_1", "#li_tabRe_1");
+                    table = [];
+                    row = [];
+                    // infor table medicines
+                    $('#resultPractice').html('<tr><th style="width: 10px">#</th>'
+                        + '<th>Name</th>'
+                        + '<th>Times</th>'
+                        + '<th>Quantity</th>'
+                        + '<th>Advice</th>'
+                        + '</tr>');
+                    for (var i = 0; i < data.hps.length; i++) {
+                        var tmp = data.hps[i];
+                        row = "<tr>"
+                            + "<td>" + (i + 1) + "</td>"
+                            + "<td>" + tmp.name + "</td>"
+                            + "<td>" + tmp.times + "</td>"
+                            + "<td>" + tmp.quantity + "</td>"
+                            + "<td>" + tmp.note + "</td>"
+                            + "</tr>";
+                        table = table + row;
+                    }
+                    ;
+                    //console.log(table);
+                    $(table).appendTo("#resultPractice");
+
+                    // Hide pop-up
+                    $('#myModal').modal('hide');
+                    // Show pop-up
+                    $('#resultPre').modal('show');
+                    changeTabb("#tabRe_1", "#li_tabRe_1");
+                }
+
             });
 
         return false;

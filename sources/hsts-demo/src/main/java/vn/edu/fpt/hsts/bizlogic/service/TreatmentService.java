@@ -214,6 +214,11 @@ public class TreatmentService {
         try {
             LOGGER.info("appoitmentID[{}]", appoitmentID);
             Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(appoitmentID).get(0);
+            // Find treatment form appointment
+            List<MedicineTreatment> medicineTreatments = medicineTreatmentRepo.getAllMedicineTreatmentFromTreatment(treatment);
+            List<FoodTreatment> foodTreatments = foodTreatmentRepo.getAllFoodTreatmentFromTreatment(treatment);
+            List<PracticeTreatment> practiceTreatments = practiceTreatmentRepo.getAllPracticeTreatmentFromTreatment(treatment);
+
             List<HisMedicine> hisMedicines = new ArrayList<HisMedicine>();
             List<HisFood> hisFoods = new ArrayList<HisFood>();
             List<HisPractice> hisPractices = new ArrayList<HisPractice>();
@@ -221,8 +226,8 @@ public class TreatmentService {
             // Create list hisMedicines
             MedicineTreatment mt;
             HisMedicine hm;
-            for (int i = 0; i < treatment.getMedicineTreatmentList().size(); i++) {
-                mt = treatment.getMedicineTreatmentList().get(i);
+            for (int i = 0; i < medicineTreatments.size(); i++) {
+                mt = medicineTreatments.get(i);
                 hm = new HisMedicine(mt.getMedicine().getName(),mt.getNumberOfTime(),
                         mt.getQuantitative(),mt.getMedicine().getUnit(),mt.getAdvice());
                 hisMedicines.add(hm);
@@ -231,8 +236,8 @@ public class TreatmentService {
             // Create list hisFoods
             FoodTreatment ft;
             HisFood hf;
-            for (int i = 0; i < treatment.getFoodTreatmentList().size(); i++) {
-                ft = treatment.getFoodTreatmentList().get(i);
+            for (int i = 0; i < foodTreatments.size(); i++) {
+                ft = foodTreatments.get(i);
                 hf = new HisFood(ft.getFood().getName(),ft.getNumberOfTime(),ft.getQuantitative(),
                         ft.getUnitName(),ft.getAdvice());
                 hisFoods.add(hf);
@@ -241,8 +246,8 @@ public class TreatmentService {
             // Create list hisPractices
             PracticeTreatment pt;
             HisPractice hp;
-            for (int i = 0; i < treatment.getPracticeTreatmentList().size(); i++) {
-                pt = treatment.getPracticeTreatmentList().get(i);
+            for (int i = 0; i < practiceTreatments.size(); i++) {
+                pt = practiceTreatments.get(i);
                 hp = new HisPractice(pt.getPractice().getName(),pt.getNumberOfTime(),pt.getTimeDuration(),pt.getAdvice());
                 hisPractices.add(hp);
             }
