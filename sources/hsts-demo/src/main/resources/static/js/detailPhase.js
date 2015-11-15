@@ -93,7 +93,72 @@ $(document).ready(function(){
     // food
 
     // practice
+    $('#practiceContent').dataTable( {
+        "processing": true,
+        "pagingType": "full",
+        "paging": true,
+        "lengthChange": false,
+        "ordering": true,
+        "info": true,
 
+        "ajax": {
+            "url": "/phase/practices",
+            "dataSrc": "dataList",
+            "page": "pageNumber",
+            "pages": "pageSize",
+            "recordsTotal": "totalElements",
+            "recordsFiltered": "numberOfElements",
+            "type": "GET",
+            "data": {
+                phaseId: $("#phaseId").val()
+            }
+        },
+
+        "columns": [
+            // col 1
+            {
+
+                "data": "null",
+                "render": function (data, type, full, meta) {
+                    return count++;
+                },
+                "width": "5%"
+            },
+            // col 2
+            {
+                "data": "practice.name",
+                "width": "25%"
+            },
+            // col 3
+            {
+                "data": "practice.intensity",
+                "width": "5%"
+            },
+            // col 4
+            {
+                "data": "timeDuration",
+                "width": "15%"
+            },
+            // col 5
+            {
+                "data": "numberOfTime",
+                "width": "5%"
+            },
+            {
+                "data": "advice",
+                "width": "20%"
+            },
+            {
+                "data": "id",
+                "render": function (data, type, full, meta) {
+                    var btnUpdate = '<a onclick="updatePracticeDialog('+ data +')" class="btn btn-warning">Update</a>';
+                    var btnDelete = '<a onclick="deletePracticeDialog('+ data +')" class="btn btn-danger">Delete</a>';
+                    return btnUpdate + btnDelete;
+                },
+                "width": "20%"
+            }
+        ]
+    } );
     // practice
 
     console.log("-- end --");
