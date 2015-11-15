@@ -144,7 +144,6 @@ public class PhaseService {
             if (!CollectionUtils.isEmpty(foodPhases)) {
                 foodPhaseRepo.delete(foodPhases);
             }
-            final PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
             List<MedicinePhase> medicinePhases = medicinePhaseRepo.findByPhaseId(phaseId);
             if (!CollectionUtils.isEmpty(medicinePhases)) {
                 medicinePhaseRepo.delete(medicinePhases);
