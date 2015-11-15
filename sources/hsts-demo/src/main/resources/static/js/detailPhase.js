@@ -89,7 +89,72 @@ $(document).ready(function(){
     // end medicine
 
     // food
+    $('#foodContent').dataTable( {
+        "processing": true,
+        "pagingType": "full",
+        "paging": true,
+        "lengthChange": false,
+        "ordering": true,
+        "info": true,
 
+        "ajax": {
+            "url": "/phase/foods",
+            "dataSrc": "dataList",
+            "page": "pageNumber",
+            "pages": "pageSize",
+            "recordsTotal": "totalElements",
+            "recordsFiltered": "numberOfElements",
+            "type": "GET",
+            "data": {
+                phaseId: $("#phaseId").val()
+            }
+        },
+
+        "columns": [
+            // col 1
+            {
+
+                "data": "null",
+                "render": function (data, type, full, meta) {
+                    return count++;
+                },
+                "width": "5%"
+            },
+            // col 2
+            {
+                "data": "food.name",
+                "width": "25%"
+            },
+            // col 3
+            {
+                "data": "numberOfTime",
+                "width": "10%"
+            },
+            // col 4
+            {
+                "data": "quantitative",
+                "width": "10%"
+            },
+            // col 5
+            {
+                "data": "unitName",
+                "width": "10%"
+            },
+            {
+                "data": "advice",
+                "width": "20%"
+            },
+            {
+                "data": "id",
+                "render": function (data, type, full, meta) {
+                    var btnUpdate = '<a onclick="updateFoodDialog('+ data +')" class="btn btn-warning">Update</a>';
+                    var btnDelete = '<a onclick="deleteFoodDialog('+ data +')" class="btn btn-danger">Delete</a>';
+                    return btnUpdate + btnDelete;
+                },
+                "width": "20%"
+            }
+        ]
+    } );
     // food
 
     // practice
