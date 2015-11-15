@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.HisInforDateModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;
@@ -253,14 +254,20 @@ public class PrescriptionController extends AbstractController{
     @RequestMapping(value = "/makePrescription2", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
     produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public PatientExtendedModel make(@RequestBody PrescriptionModel prescriptionModel) {
+    public HisInforDateModel make(@RequestBody PrescriptionModel prescriptionModel) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info(prescriptionModel.toString());
-            doctorService.makePrescription(prescriptionModel, prescriptionModel.getAppointmentId(),
+            boolean result = doctorService.makePrescription(prescriptionModel, prescriptionModel.getAppointmentId(),
                     prescriptionModel.getAppointmentDate());
 
-            return patientService.findPatientByAppointment(prescriptionModel.getAppointmentId());
+            HisInforDateModel hisInforDateModel = null;
+            if (result){
+                hisInforDateModel = treatmentService.findInforByAppoitmentID(prescriptionModel.getAppointmentId());
+            }
+
+
+            return hisInforDateModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

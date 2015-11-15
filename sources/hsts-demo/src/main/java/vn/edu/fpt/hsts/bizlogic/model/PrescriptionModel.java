@@ -17,9 +17,6 @@ public class PrescriptionModel implements Serializable {
     private List<FoodPrescriptionModel> fPresModels;
     private List<PracticePrescriptionModel> pPresModels;
 
-
-
-
     public PrescriptionModel() {
     }
 
