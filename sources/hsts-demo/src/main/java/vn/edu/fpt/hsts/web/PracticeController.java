@@ -101,7 +101,7 @@ public class PracticeController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "/phase/medicine/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/phase/practice/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String updatePracticeToPhase(@RequestParam("id") final int id,
                                         @RequestParam("timeDuration") final String timeDuration,
