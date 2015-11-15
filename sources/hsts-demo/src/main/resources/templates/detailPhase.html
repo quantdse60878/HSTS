@@ -315,7 +315,6 @@
                 <form id = "insertFoodForm" class="form-horizontal">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
                             <h4 class="modal-title" id="addFood">Insert</h4>
                         </div>
                         <div class="modal-body">
@@ -324,7 +323,6 @@
 
                                 <div class="col-sm-4">
                                     <select id ="insertFood" th:name="insertFood" class="form-control">
-
                                     </select>
                                 </div>
                                 <div class="col-sm-3 help-block with-errors" id = "invalidInsertFood"/>
@@ -335,7 +333,6 @@
 
                                 <div class="col-sm-4">
                                     <select id ="insertFoodUnitName" th:name="insertFoodUnitName" class="form-control">
-                                        <!--<option value="" disabled="disabled">Choose a food</option>-->
                                     </select>
                                 </div>
                                 <div class="col-sm-3 help-block with-errors" id = "invalidInsertFoodUnitName">
@@ -365,7 +362,7 @@
                                 <label class="col-sm-3 control-label">Advice*: </label>
 
                                 <div class="col-sm-6">
-                                    <textarea id="insertFoodAdivce" th:name = "insertFoodAdivce" th:width="300px"></textarea>
+                                    <textarea id="insertFoodAdvice" th:name = "insertFoodAdvice" th:width="300px"></textarea>
                                 </div>
                             </div>
                         </div>

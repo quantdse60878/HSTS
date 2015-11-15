@@ -46,14 +46,15 @@ public class UserAuthInterceptor extends HandlerInterceptorAdapter {
             .asList(new String[]{"/bower/**",
                     "/js/**",
                     "/css/**",
-                    "/img/**",
+                    "/image/**",
                     "/pages/**",
                     "/sign-up/**",
                     "text!/",
+                    "/plugins/**",
+                    "/fonts/**",
                     "/",
                     //* Error path
                     "/error/**",
-                    //* Need solve error by use path /path haven't got menu right
                     "/path/**"});
 
 

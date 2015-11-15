@@ -455,11 +455,6 @@ function deleteFoodDialog(element) {
     $("#deleteFoodDialog").modal('show');
 }
 
-
-
-
-
-
 // update medicine validator
 $("#updateMedicineForm").validate({
     ignore: [],
@@ -556,6 +551,75 @@ $( "#btnDeleteMedicine" ).click(function() {
 
 
 // insert food validator
+$("#insertFoodForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        insertFood: {
+            required: true
+        },
+        insertFoodUnitName: {
+            required: true,
+        },
+        insertFoodTime: {
+            required: true,
+            min: 1,
+            max: 7
+        },
+        insertFoodQuantitative: {
+            required: true,
+            min: 1,
+            max: 5
+        },
+        insertFoodAdvice: {
+            required: true
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "insertFood"){
+            error.appendTo($('#invalidInsertFood'));
+        }  else if (element.attr("name") == "insertFoodUnitName") {
+            error.appendTo($('#invalidInsertFoodUnitName'));
+        } else if (element.attr("name") == "insertFoodTime") {
+            error.appendTo($('#invalidInsertFoodTime'));
+        } else if (element.attr("name") == "insertFoodQuantitative") {
+            error.appendTo($('#invalidInsertFoodQuantitative'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("begin insert");
+        $.ajax({
+            method: "POST",
+            url: "/phase/food/add",
+            data: {
+                phaseId: $("#phaseId").val(),
+                foodId: $("#insertFood").val(),
+                numberOfTime: $("#insertFoodTime").val(),
+                quantitative: $("#insertFoodQuantitative").val(),
+                unitName: $("#insertFoodUnitName").val(),
+                advice: $("#insertFoodAdvice").val()
+            }
+        }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data.status == "fail") {
+                txtMessage.innerHTML = "Error while insert regimen data";
+            } else {
+                console.log("-- reload page --");
+                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+            }
+        });
+        console.log("end update");
+        return false; // required to block normal submit since you used ajax
+    }
+});
+
 
 // update food validator
 $("#updateFoodForm").validate({
@@ -631,6 +695,7 @@ $("#updateFoodForm").validate({
         return false; // required to block normal submit since you used ajax
     }
 });
+
 // delete food validator
 $( "#btnDeleteFood" ).click(function() {
     console.log("begin delete");
