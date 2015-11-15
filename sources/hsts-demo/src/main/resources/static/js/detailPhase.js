@@ -16,6 +16,83 @@ function changeTab (a, li) {
 
 var curMedicinePhase = 0;
 var curFoodPhase = 0;
+
+// insert medicine validator
+$("#insertMedicineForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        insertMedicine: {
+            required: true
+        },
+        insertTimes: {
+            required: true,
+            min: 1,
+            max: 7
+        },
+        insertQuantitative: {
+            required: true,
+            min: 1,
+            max: 5
+        }
+    },
+    messages: {
+        //patientName: {
+        //    maxlenght: "Name is too long, please modify it"
+        //},
+        insertMedicine: {
+            required: "Please choose a medicine"
+        },
+        insertTimes: {
+            required: "Please input valid times"
+        },
+        insertQuantitative: {
+            required: "Please input valid quantitative"
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "insertMedicine"){
+            error.appendTo($('#invalidInsertMedicine'));
+        }  else if (element.attr("name") == "insertTimes") {
+            error.appendTo($('#invalidInsertTimes'));
+        } else if (element.attr("name") == "insertQuantitative") {
+            error.appendTo($('#invalidInsertQuantitative'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("begin insert");
+        $.ajax({
+            method: "POST",
+            url: "/phase/medicine/add",
+            data: {
+                phaseId: $("#phaseId").val(),
+                medicineId: $("#insertMedicine").val(),
+                numberOfTime: $("#insertTimes").val(),
+                quantitative: $("#insertQuantitative").val(),
+                advice: $("#insertNote").val()
+            }
+        }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data.status == "fail") {
+                txtMessage.innerHTML = "Error while insert data";
+            } else {
+                console.log("-- reload page --");
+                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+            }
+        });
+        console.log("end insert");
+        return false; // required to block normal submit since you used ajax
+    }
+});
+
+
 $(document).ready(function(){
     console.log("-- begin --");
     var count = 1;
@@ -226,6 +303,62 @@ $(document).ready(function(){
     } );
     // practice
 
+    // Load medicine list content
+    $.ajax({
+        method: "GET",
+        url: "/medicine/list",
+        data: {
+            pageSize: 2147483647 // unlimited
+        }
+    }).done(function(data) {
+        var html = '<option disable="disable" value="">Select a medicine</option>';
+        $.each(data.dataList, function (key, element) {
+            html += '<option value="' + element.id + '">' + element.name + '</option>';
+        })
+        var $medicineSelect = $("#insertMedicine");
+        $medicineSelect.append(html);
+    })
+    // End load
+
+    // Load food list content
+    $.ajax({
+        method: "GET",
+        url: "/food/list",
+        data: {
+            pageSize: 2147483647 // unlimited
+        }
+    }).done(function(data) {
+        var html = '<option disable="disable" value="">Select a food</option>';
+        $.each(data.dataList, function (key, element) {
+            html += '<option value="' + element.id + '">' + element.name + '</option>';
+        })
+        var $medicineSelect = $("#insertFood");
+        $medicineSelect.append(html);
+    })
+    // end load
+
+    // dynamic load food unit
+    $('#insertFood').on("change", function (e) {
+        var foodId = $('#insertFood').val();
+        $.ajax({
+            method: "GET",
+            url: "/foodUnit",
+            data: {
+                foodId: foodId
+            }
+        }).done(function(data) {
+            var html = '<option value="" disabled="disabled">Select a food</option>';
+            $.each(data, function (key, element) {
+                html += '<option value="' + element + '">' + element + '</option>';
+            })
+            var $unitSelect = $("#insertFoodUnitName");
+            $unitSelect.html('');
+            $unitSelect.append(html);
+        })
+    });
+
+    // end load
+
     console.log("-- end --");
 });
 
@@ -322,156 +455,10 @@ function deleteFoodDialog(element) {
     $("#deleteFoodDialog").modal('show');
 }
 
-// medicine select
-$("#medicineSelect").select2({
-    placeholder: "Choose a medicine",
-    theme: "classic",
-    width: "100%",
-    ajax: {
-        url: "/medicine/list",
-        dataType: 'json',
-        delay: 250,
-        data: function (params, page) {
-            return {
-                name: params.term, // search term
-                page: params.page,
-                pageSize: 5
-            };
-        },
-        processResults: function (data, params) {
-            params.page = params.page || 0;
-            var names = data.dataList.map(function (obj) {
-                return {
-                    id: obj.id,
-                    text: obj.name
-                }
-            });
-            return {results: names,
-                pagination: {
-                    more: ( (data.pageNumber + 1)  * 5) < data.totalElements
-                }
-            };
-        },
-        cache: false
-    },
-    escapeMarkup: function (markup) {
-        return markup; // let our custom formatter work
-    },
-    tag: true
-});
 
-// food select
-$("#foodSelect").select2({
-    placeholder: "Choose a food",
-    theme: "classic",
-    width: "100%",
-    ajax: {
-        url: "/medicine/list",
-        dataType: 'json',
-        delay: 250,
-        data: function (params, page) {
-            return {
-                name: params.term, // search term
-                page: params.page,
-                pageSize: 5
-            };
-        },
-        processResults: function (data, params) {
-            params.page = params.page || 0;
-            var names = data.dataList.map(function (obj) {
-                return {
-                    id: obj.id,
-                    text: obj.name
-                }
-            });
-            return {results: names,
-                pagination: {
-                    more: ( (data.pageNumber + 1)  * 5) < data.totalElements
-                }
-            };
-        },
-        cache: false
-    },
-    escapeMarkup: function (markup) {
-        return markup; // let our custom formatter work
-    },
-    tag: true
-});
 
-// insert medicine validator
-$("#insertMedicineForm").validate({
-    ignore: [],
-    debug: true,
-    rules: {
-        // simple rule, converted to {required:true}
-        insertMedicine: {
-            required: true
-        },
-        insertTimes: {
-            required: true,
-            min: 1,
-            max: 7
-        },
-        insertQuantitative: {
-            required: true,
-            min: 1,
-            max: 5
-        }
-    },
-    messages: {
-        //patientName: {
-        //    maxlenght: "Name is too long, please modify it"
-        //},
-        insertMedicine: {
-            required: "Please choose a medicine"
-        },
-        insertTimes: {
-            required: "Please input valid illness name",
-        },
-        insertQuantitative: {
-            required: "Please input valid description"
-        }
-    },
-    errorPlacement: function(error, element){
-        if(element.attr("name") == "insertMedicine"){
-            error.appendTo($('#invalidInsertMedicine'));
-        }  else if (element.attr("name") == "insertTimes") {
-            error.appendTo($('#invalidInsertTimes'));
-        } else if (element.attr("name") == "insertQuantitative") {
-            error.appendTo($('#invalidInsertQuantitative'));
-        }
 
-        // Default
-        else {
-            error.appendTo( element.parent().next() );
-        }
-    },
-    submitHandler: function () {
-        console.log("begin insert");
-        $.ajax({
-            method: "POST",
-            url: "/phase/medicine/add",
-            data: {
-                phaseId: $("#phaseId").val(),
-                medicineId: $("#medicineSelect").val(),
-                numberOfTime: $("#insertTimes").val(),
-                quantitative: $("#insertQuantitative").val(),
-                advice: $("#insertNote").val()
-            }
-        }).done(function(data) {
-            console.log(data);
-            var txtMessage = document.getElementById("messageLabel");
-            if (data.status == "fail") {
-                txtMessage.innerHTML = "Error while insert data";
-            } else {
-                console.log("-- reload page --");
-                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
-            }
-        });
-        console.log("end insert");
-        return false; // required to block normal submit since you used ajax
-    }
-});
+
 
 // update medicine validator
 $("#updateMedicineForm").validate({

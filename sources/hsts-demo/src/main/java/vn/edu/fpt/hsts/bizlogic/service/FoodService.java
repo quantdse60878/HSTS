@@ -62,7 +62,7 @@ public class FoodService {
             LOGGER.info("name[{}], page[{}], pageSize[{}]", name, page, pageSize);
             final String formatName = "%" + name + "%";
             final PageRequest pageRequest = new PageRequest(page, pageSize);
-            final Page<Food> foodPage = foodRepo.findByNameLike(name, pageRequest);
+            final Page<Food> foodPage = foodRepo.findByNameLike(formatName, pageRequest);
             final FoodPageModel pageModel = new FoodPageModel(foodPage);
             return pageModel;
         } finally {
