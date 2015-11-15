@@ -360,6 +360,44 @@ $("#medicineSelect").select2({
     tag: true
 });
 
+// food select
+$("#foodSelect").select2({
+    placeholder: "Choose a food",
+    theme: "classic",
+    width: "100%",
+    ajax: {
+        url: "/medicine/list",
+        dataType: 'json',
+        delay: 250,
+        data: function (params, page) {
+            return {
+                name: params.term, // search term
+                page: params.page,
+                pageSize: 5
+            };
+        },
+        processResults: function (data, params) {
+            params.page = params.page || 0;
+            var names = data.dataList.map(function (obj) {
+                return {
+                    id: obj.id,
+                    text: obj.name
+                }
+            });
+            return {results: names,
+                pagination: {
+                    more: ( (data.pageNumber + 1)  * 5) < data.totalElements
+                }
+            };
+        },
+        cache: false
+    },
+    escapeMarkup: function (markup) {
+        return markup; // let our custom formatter work
+    },
+    tag: true
+});
+
 // insert medicine validator
 $("#insertMedicineForm").validate({
     ignore: [],
