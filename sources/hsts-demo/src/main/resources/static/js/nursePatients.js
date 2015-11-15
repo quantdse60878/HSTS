@@ -10,7 +10,7 @@ var FAIL_STATUS = "{\"status\":\"fail\"}";
 $(document).ready(function(){
 
     var count = 1;
-    var table = $('#medicineContent').dataTable( {
+    var table = $('#dataContent').dataTable( {
         "processing": true,
         "pagingType": "full",
         "paging": true,
@@ -64,6 +64,7 @@ $(document).ready(function(){
                 "width": "20%"
             }
         ]
+
     } );
 });
 
