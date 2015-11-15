@@ -85,6 +85,11 @@
 
                                     <!-- tab 2: food-->
                                     <div class="tab-pane" id="tab_2">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <a data-toggle="modal" data-target="#insertMedicineDialog" class="btn btn-info">Add new food</a>
+                                            </div>
+                                        </div>
                                         <table id="foodContent" class="table table-bordered table-striped">
                                             <thead>
                                             <tr>
@@ -117,7 +122,7 @@
                                     <div class="tab-pane" id="tab_3">
                                         <div class="row">
                                             <div class="col-sm-2">
-                                                <a data-toggle="modal" data-target="#insertMedicineDialog" class="btn btn-info">Add new medicine</a>
+                                                <a data-toggle="modal" data-target="#insertMedicineDialog" class="btn btn-info">Add new practice</a>
                                             </div>
                                         </div>
 
@@ -171,7 +176,7 @@
                         <h4 class="modal-title" id="deteteRegimen">Delete message</h4>
                     </div>
                     <div class="modal-body">
-                        <h4 class="modal-title" id="confirmMessageLabel">Are you wish to delete this regimen?</h4>
+                        <h4 class="modal-title" id="confirmMessageLabel">Are you wish to delete this medicine?</h4>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -296,11 +301,100 @@
         </div>
         <!-- .insert medicine modal -->
 
-        <!-- update practice modal-->
+        <!-- TODO update practice modal-->
         <!-- .update practice modal -->
 
-        <!-- insert practice modal -->
+        <!-- TODO insert practice modal -->
         <!-- .insert practice modal-->
+
+        <!-- update food dialog-->
+        <div class="modal fade" id="updateFoodDialog" role="dialog" aria-labelledby="updateMedicine" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "updateFoodForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="updateFood">Update</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Food name*: </label>
+
+                                <div class="col-sm-3">
+                                    <label class="col-sm-2 control-label" id="updateFoodName"></label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Times*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="updateFoodTimes" class="form-control" id="updateFoodTime"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateFoodTime">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Quantitative*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="updateFoodQuantitative" class="form-control" id="updateFoodQuantitative"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateFoodQuantitative">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Unit name*: </label>
+
+                                <div class="col-sm-3">
+                                    <select class="form-control" id = "updatefoodUnitSelect" name="updateFoodUnit">
+                                        <option value="" disabled="disabled">Choose an unit</option>
+                                        </select>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateFoodUnit">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Note*: </label>
+
+                                <div class="col-sm-4">
+                                    <textarea id="updateFoodAdvice"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!-- .update food dialog-->
+
+        <!-- delete food dialog-->
+        <!-- confirm delete modal -->
+        <div class="modal fade" id="deleteFoodDialog" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="deleteFood">Delete message</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title" id="confirmMessage2">Are you wish to delete this food?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <a class ="btn btn-danger" id = "btnDeleteFood" data-dismiss="modal">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .confirm delete modal -->
+        <!-- .delete food dialog-->
+
 
         <!-- message modal-->
         <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel">
@@ -323,6 +417,9 @@
     </section><!-- /.content -->
 
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <!-- jQueryUI -->
+    <script th:src="@{/static/bower/jquery-ui/jquery-ui.js}"></script>
+
     <!-- jquery validation -->
     <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
 
@@ -331,7 +428,6 @@
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
-
 
     <script th:src = "@{/static/js/detailPhase.js}"></script>
 

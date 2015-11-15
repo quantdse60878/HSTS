@@ -23,6 +23,8 @@ import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 
+import java.util.List;
+
 @Controller
 public class FoodController extends AbstractController {
 
@@ -114,6 +116,17 @@ public class FoodController extends AbstractController {
             return OK_STATUS;
         } catch (BizlogicException e) {
             return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/foodUnit", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<String> findUnitByFoodName(@RequestParam("foodId") final int foodId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return foodService.findUnitName(foodId);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
