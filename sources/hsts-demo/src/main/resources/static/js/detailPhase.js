@@ -370,6 +370,36 @@ function updateFoodDialog(element) {
     });
 }
 
+function updatePracticeDialog(element) {
+    curPracticePhase = element;
+    $.ajax({
+        method: "GET",
+        url: "/phase/practice/detail",
+        data: {
+            id: element
+        }
+    }).done(function(data) {
+        console.log(data);
+        if (data != null) {
+
+            var txtName = document.getElementById("updatePracticeName");
+            txtName.innerHTML = data.practice.name;
+
+            var txtDuration = document.getElementById("updatePracticeTimeDuration");
+            txtDuration.value =  data.timeDuration;
+
+            var txtTimes = document.getElementById("updatePracticeNumberOfTime");
+            txtTimes.value = data.numberOfTime;
+
+            var txtAdvice = document.getElementById("updatePracticeAdvice");
+            txtAdvice.value = data.advice;
+
+            // Show diaglog
+            $("#updatePracticeDialog").modal('show');
+        }
+    });
+}
+
 function deleteMedicineDialog(element) {
     curMedicinePhase = element;
     //confirmMessageLabel.innerHTML = "Are you wish to delete this medicine?";
@@ -552,6 +582,57 @@ $( "#btnDeleteMedicine" ).click(function() {
 // insert practice validator
 
 // update practice validator
+$("#updatePracticeForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        updatePracticeTimeDuration: {
+            required: true
+        },
+        updatePracticeNumberOfTime: {
+            required: true,
+            min: 1,
+            max: 5
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "updatePracticeTimeDuration"){
+            error.appendTo($('#invalidTimeDuration'));
+        }  else if (element.attr("name") == "updatePracticeNumberOfTime") {
+            error.appendTo($('#invalidUpdatePracticeNumberOfTime'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("begin update");
+        $.ajax({
+            method: "POST",
+            url: "/phase/practice/update",
+            data: {
+                id: curPracticePhase,
+                timeDuration: $("#updatePracticeTimeDuration").val(),
+                numberOfTime: $("#updatePracticeNumberOfTime").val(),
+                advice: $("#updatePracticeAdvice").val()
+            }
+        }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data.status == "fail") {
+                txtMessage.innerHTML = "Error while update regimen data";
+            } else {
+                console.log("-- reload page --");
+                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+            }
+        });
+        console.log("end update");
+        return false; // required to block normal submit since you used ajax
+    }
+});
 
 // delete practice validator
 $( "#btnDeletePractice" ).click(function() {

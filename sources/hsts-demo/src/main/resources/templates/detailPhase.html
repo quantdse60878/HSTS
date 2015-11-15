@@ -302,12 +302,65 @@
         <!-- .insert medicine modal -->
 
         <!-- TODO update practice modal-->
+        <div class="modal fade" id="updatePracticeDialog" tabindex="-1" role="dialog" aria-labelledby="updateMedicine" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "updatePracticeForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="updatePractice">Update</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Practice name*: </label>
+
+                                <div class="col-sm-4">
+                                    <label class="col-sm-4 control-label" id="updatePracticeName"></label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Times Duration*: </label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" th:name="updatePracticeTimeDuration" class="form-control" id="updatePracticeTimeDuration"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidTimeDuration">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Number of times*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="updatePracticeNumberOfTime" class="form-control" id="updatePracticeNumberOfTime"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdatePracticeNumberOfTime">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Advice*: </label>
+
+                                <div class="col-sm-4">
+                                    <textarea id="updatePracticeAdvice"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
         <!-- .update practice modal -->
 
         <!-- TODO insert practice modal -->
         <!-- .insert practice modal-->
 
-        <!-- TODO delete practice modal-->
+        <!-- delete practice modal-->
         <div class="modal fade" id="deletePracticeDialog" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
