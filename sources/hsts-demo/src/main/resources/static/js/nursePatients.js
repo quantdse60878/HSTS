@@ -48,11 +48,11 @@ $(document).ready(function(){
                 "width": "20%"},
             { "data": "account.gender",
                 "render": function (data, type, full, meta) {
-                    var className = "btn btn-info";
+                    var checkbox = '<input type="checkbox" checked="checked" class="checkB" disabled="disabled"/>';
                     if(data == "FEMALE") {
-                        className = "btn btn-danger";
+                       checkbox = '<input type="checkbox" class="checkB" disabled="disabled"/>';
                     }
-                    return '<input type ="text" class="'+ className +'" value="' + data + '" style="width: 90px"/>';
+                    return checkbox;
                 },
                 "width": "20%"
             },
@@ -67,6 +67,7 @@ $(document).ready(function(){
 
     } );
 });
+
 
 function printPrescription(patientId) {
     console.log(patientId);
