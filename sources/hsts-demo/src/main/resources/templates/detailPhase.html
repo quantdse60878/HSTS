@@ -122,7 +122,7 @@
                                     <div class="tab-pane" id="tab_3">
                                         <div class="row">
                                             <div class="col-sm-2">
-                                                <a data-toggle="modal" data-target="#insertMedicineDialog" class="btn btn-info">Add new practice</a>
+                                                <a data-toggle="modal" data-target="#insertPracticeDialog" class="btn btn-info">Add new practice</a>
                                             </div>
                                         </div>
 
@@ -250,7 +250,6 @@
                 <form id = "insertMedicineForm" class="form-horizontal">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
                             <h4 class="modal-title" id="addMedicine">Insert</h4>
                         </div>
                         <div class="modal-body">
@@ -358,6 +357,59 @@
         <!-- .update practice modal -->
 
         <!-- TODO insert practice modal -->
+        <div class="modal fade" id="insertPracticeDialog" role="dialog" aria-labelledby="addMedicine" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "insertPracticeForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="addPractice">Insert</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Practice name*:</label>
+
+                                <div class="col-sm-4">
+                                    <select class="form-control" id ="insertPractice" th:name="insertPractice" ></select>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertPractice"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Time Duration*: </label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" th:name="insertPracticeTimeDuration" class="form-control" id="insertPracticeTimeDuration"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertTimeDuration">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Number of time*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="insertPracticeNumberOfTime" class="form-control" id="insertPracticeNumberOfTime"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertPracticeNumberOfTime">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Advice*: </label>
+
+                                <div class="col-sm-6">
+                                    <textarea id="insertPracticeAdvice" th:name = "insertPracticeAdvice" th:width="300px"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
         <!-- .insert practice modal-->
 
         <!-- delete practice modal-->

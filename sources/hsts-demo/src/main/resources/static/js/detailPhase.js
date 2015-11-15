@@ -285,6 +285,23 @@ $(document).ready(function(){
 
     // end load
 
+    // load practice list content
+    $.ajax({
+        method: "GET",
+        url: "/practice/list",
+        data: {
+            pageSize: 2147483647 // unlimited
+        }
+    }).done(function(data) {
+        var html = '<option disable="disable" value="">Select a practice</option>';
+        $.each(data.dataList, function (key, element) {
+            html += '<option value="' + element.id + '">' + element.name + '</option>';
+        })
+        var $medicineSelect = $("#insertPractice");
+        $medicineSelect.append(html);
+    })
+    // end load
+
     console.log("-- end --");
 });
 
@@ -580,6 +597,63 @@ $( "#btnDeleteMedicine" ).click(function() {
 });
 
 // insert practice validator
+$("#insertPracticeForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        insertPractice: {
+            required: true
+        },
+        insertPracticeTimeDuration: {
+            required: true
+        },
+        insertPracticeNumberOfTime: {
+            required: true,
+            min: 1,
+            max: 5
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "insertPractice"){
+            error.appendTo($('#invalidInsertPractice'));
+        }  else if (element.attr("name") == "insertPracticeTimeDuration") {
+            error.appendTo($('#invalidInsertTimeDuration'));
+        } else if (element.attr("name") == "insertPracticeNumberOfTime") {
+            error.appendTo($('#invalidInsertPracticeNumberOfTime'));
+        }
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("begin update");
+        $.ajax({
+            method: "POST",
+            url: "/phase/practice/add",
+            data: {
+                phaseId: $("#phaseId").val(),
+                practiceId: $("#insertPractice").val(),
+                timeDuration: $("#insertPracticeTimeDuration").val(),
+                numberOfTime: $("#insertPracticeNumberOfTime").val(),
+                advice: $("#insertPracticeAdvice").val()
+            }
+        }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data.status == "fail") {
+                txtMessage.innerHTML = "Error while update regimen data";
+            } else {
+                console.log("-- reload page --");
+                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+            }
+        });
+        console.log("end update");
+        return false; // required to block normal submit since you used ajax
+    }
+});
+
 
 // update practice validator
 $("#updatePracticeForm").validate({
