@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import vn.edu.fpt.hsts.bizlogic.model.FoodPageModel;
-import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
@@ -103,10 +101,20 @@ public class PracticeController extends AbstractController {
         }
     }
 
-//    @RequestMapping(value = "/phase/medicine/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    public String updatePracticeToPhase(@RequestParam("id") final int id,
-//                                        @RequestParam("timeDuration") final String timeDuration,
-//                                        @RequestParam("numberOfTime") final int numberOfTime,
-//                                        @RequestParam("advice"))
+    @RequestMapping(value = "/phase/medicine/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String updatePracticeToPhase(@RequestParam("id") final int id,
+                                        @RequestParam("timeDuration") final String timeDuration,
+                                        @RequestParam("numberOfTime") final int numberOfTime,
+                                        @RequestParam(value = "advice", required = false, defaultValue = EMPTY) final String advice) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            phaseService.updatePracticeToPhase(id, timeDuration, numberOfTime, advice);
+            return OK_STATUS;
+        } catch (BizlogicException e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

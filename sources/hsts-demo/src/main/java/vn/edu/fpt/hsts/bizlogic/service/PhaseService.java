@@ -422,6 +422,7 @@ public class PhaseService {
             foodPhase.setAdvice(advice);
             foodPhase.setFood(food);
             foodPhase.setPhase(phase);
+            foodPhase.setQuantitative(quantitative);
             foodPhase.setNumberOfTime(numberOfTime);
             foodPhase.setUnitName(unitName);
             foodPhaseRepo.saveAndFlush(foodPhase);

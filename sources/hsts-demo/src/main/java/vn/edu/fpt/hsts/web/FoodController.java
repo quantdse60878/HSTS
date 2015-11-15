@@ -21,6 +21,7 @@ import vn.edu.fpt.hsts.bizlogic.model.FoodPhaseModel;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.expception.BizlogicException;
 
 @Controller
 public class FoodController extends AbstractController {
@@ -63,6 +64,57 @@ public class FoodController extends AbstractController {
             LOGGER.info("foodPhaseId[{}]", foodPhaseId);
             return phaseService.findFoodPhase(foodPhaseId);
         }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/phase/food/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String addFoodToPhase(@RequestParam("phaseId") final int phaseId,
+                                 @RequestParam("foodId") final int foodId,
+                                 @RequestParam("numberOfTime") final int numberOfTime,
+                                 @RequestParam("quantitative") final int quantitative,
+                                 @RequestParam(value = "advice", required = false, defaultValue = EMPTY) final String advice,
+                                 @RequestParam("unitName") final String unitName) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            phaseService.addFoodToPhase(phaseId, foodId, numberOfTime, quantitative, advice, unitName);
+            return OK_STATUS;
+        } catch (BizlogicException e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "phase/food/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String updateFoodToPhase(@RequestParam("id") final int id,
+                                    @RequestParam("numberOfTime") final int numberOfTime,
+                                    @RequestParam("quantitative") final int quantitative,
+                                    @RequestParam(value = "advice", required = false, defaultValue = EMPTY) final String advice,
+                                    @RequestParam("unitName") final String unitName) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            phaseService.updateFoodToPhase(id, numberOfTime, quantitative, advice, unitName);
+            return OK_STATUS;
+        } catch (BizlogicException e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "phase/food/delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteFoodToPhase(@RequestParam("id") final int id) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            phaseService.deleteFoodToPhase(id);
+            return OK_STATUS;
+        } catch (BizlogicException e) {
+            return FAIL_STATUS;
+        } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
