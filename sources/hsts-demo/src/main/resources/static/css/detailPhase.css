@@ -1,7 +1,23 @@
-#dataContent th {
+#medicineContent th {
     text-align: center;
 }
 
-#dataContent td {
+#medicineContent td {
+    text-align: center;
+}
+
+#foodContent th {
+     text-align: center;
+ }
+
+#foodContent td {
+    text-align: center;
+}
+
+#practiceContent th {
+     text-align: center;
+ }
+
+#practiceContent td {
     text-align: center;
 }
