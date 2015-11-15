@@ -93,25 +93,26 @@ public class LoginController {
             ModelAndView mav = new ModelAndView();
             LOGGER.info("username[{}], password[{}]", username, password);
             Account user = accountService.checkLogin(username, password);
-            if (user != null) {
+            if (user != null && user.getStatus() != IDbConsts.IAccountStatus.BLOCKED) {
                 session.setAttribute("USER", user);
                 mav.setViewName("home");
 
-                if (user.getRole().getId() == IDbConsts.IRoleType.DOCTOR) {
-                    mav.setViewName("doctorPatients");
-                    List<Patient> patientList = patientService.getPatientByApponitmentDateOfDoctor(user.getId());
-                    LOGGER.info("listpatiens: " + patientList.size());
-                    mav.addObject("LISTPATIENTS", patientList);
-                } else if (user.getRole().getId() == IDbConsts.IRoleType.NURSE) {
-                    mav.setViewName("registerPatient");
-                } else if (user.getRole().getId() == IDbConsts.IRoleType.STAFF) {
-                    mav.setViewName("stafflistdevice");
-                    List<String> temp = new ArrayList<String>();
-                    temp.add("111");
-                    temp.add("222");
-                    temp.add("333");
-                    temp.add("444");
-                    mav.addObject("temp",temp);
+                if (user.getStatus() == IDbConsts.IAccountStatus.ACTIVE){
+                    if (user.getRole().getId() == IDbConsts.IRoleType.DOCTOR) {
+                        mav.setViewName("doctorPatients");
+                        List<Patient> patientList = patientService.getPatientByApponitmentDateOfDoctor(user.getId());
+                        LOGGER.info("listpatiens: " + patientList.size());
+                        mav.addObject("LISTPATIENTS", patientList);
+                    } else if (user.getRole().getId() == IDbConsts.IRoleType.NURSE) {
+                        mav.setViewName("registerPatient");
+                    } else if (user.getRole().getId() == IDbConsts.IRoleType.STAFF) {
+                        mav.setViewName("stafflistdevice");
+                        List<String> temp = new ArrayList<String>();
+                        temp.add("111");
+                        temp.add("222");
+                        temp.add("333");
+                        temp.add("444");
+                        mav.addObject("temp",temp);
 //                    List<String> listPrevention1 = formulaService.getListFieldOfPreventionCheck();
 //                    List<String> listPrevention = new ArrayList<String>();
 //                    List<String> listMedicalRecordData1 = formulaService.getListFieldOfMedicalRecordData();
@@ -136,19 +137,25 @@ public class LoginController {
 //                    mav.addObject("LISTPREVENTION", listPrevention);
 //                    mav.addObject("LISTMEDICALRECORDDATA", listMedicalRecordData);
 
-                } else if (user.getRole().getId() == IDbConsts.IRoleType.ADMIN){
-                    mav.setViewName("adminlistuser");
-				} else if (user.getRole().getId() == IDbConsts.IRoleType.NUTRITION){
-                    mav.setViewName("nutriPatients");
-                    List<Patient> patientList = patientService.getPatientByApponitmentDate();
-                    LOGGER.info("listpatiens: " + patientList.size());
-                    mav.addObject("LISTPATIENTS", patientList);
-                } else if (user.getRole().getId() == IDbConsts.IRoleType.DOCTOR_MANAGER) {
-                    mav.setViewName("regimens");
-                }
+                    } else if (user.getRole().getId() == IDbConsts.IRoleType.ADMIN){
+                        mav.setViewName("adminlistuser");
+                    } else if (user.getRole().getId() == IDbConsts.IRoleType.NUTRITION){
+                        mav.setViewName("nutriPatients");
+                        List<Patient> patientList = patientService.getPatientByApponitmentDate();
+                        LOGGER.info("listpatiens: " + patientList.size());
+                        mav.addObject("LISTPATIENTS", patientList);
+                    } else if (user.getRole().getId() == IDbConsts.IRoleType.DOCTOR_MANAGER) {
+                        mav.setViewName("regimens");
+                    }
 //                else if (user.getRole().getName().equals("Staff")){
 //                    mav.setViewName("stafflistdevice");
 //                }
+                } else if (user.getStatus() == IDbConsts.IAccountStatus.IN_ACTIVE){
+//                    session.invalidate();
+                    mav.setViewName("newPassword");
+                    mav.addObject("USER", user);
+                }
+
                 return mav;
             }
             mav.setViewName("login");
@@ -209,6 +216,28 @@ public class LoginController {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("login");
             return modelAndView;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "createNewPassword", method = RequestMethod.POST)
+    public ModelAndView createNewPassword(@RequestParam("username") final String username,
+                                          @RequestParam("oldPassword") final String oldPassword,
+                                          @RequestParam("newPassword") final String newPassword,
+                                          HttpSession session) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("username[{}],oldPassword[{}],newPassword[{}]", username, oldPassword, newPassword);
+            Account account = accountService.changePassword(username, oldPassword, newPassword);
+            if (null != account){
+                account.setStatus(IDbConsts.IAccountStatus.ACTIVE);
+                accountService.updateAccount(account);
+            }
+            session.invalidate();
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("login");
+            return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

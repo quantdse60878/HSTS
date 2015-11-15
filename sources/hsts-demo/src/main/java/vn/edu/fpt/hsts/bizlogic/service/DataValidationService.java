@@ -215,8 +215,9 @@ public class DataValidationService extends AbstractService {
             intParams.add("waists");
 
             // Prescription Model attribute
-
+            intParams.add("kcalRequire");
             // Nutrition model attribute
+
         } finally {
             LOGGER.debug(IConsts.END_METHOD);
         }
