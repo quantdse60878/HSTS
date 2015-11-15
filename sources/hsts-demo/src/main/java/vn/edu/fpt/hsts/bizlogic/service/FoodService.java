@@ -69,4 +69,14 @@ public class FoodService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public List<String> findUnitName(final int foodId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("foodId[{}]", foodId);
+            return unitOfFoodRepo.findByFood(foodId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

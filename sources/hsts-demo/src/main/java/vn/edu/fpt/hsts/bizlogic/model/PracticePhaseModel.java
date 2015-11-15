@@ -89,9 +89,9 @@ public class PracticePhaseModel extends AbstractKeyModel<PracticePhase> {
         setShortModel(entity.getPhase(), phase);
         practice = new PracticeModel();
         setShortModel(entity.getPractice(), practice);
+        practice.setIntensity(entity.getPractice().getIntensity());
         timeDuration = entity.getTimeDuration();
         numberOfTime = entity.getNumberOfTime();
         advice = entity.getAdvice();
-
     }
 }

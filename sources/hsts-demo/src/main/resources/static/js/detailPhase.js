@@ -15,7 +15,7 @@ function changeTab (a, li) {
 };
 
 var curMedicinePhase = 0;
-
+var curFoodPhase = 0;
 $(document).ready(function(){
     console.log("-- begin --");
     var count = 1;
@@ -89,11 +89,141 @@ $(document).ready(function(){
     // end medicine
 
     // food
+    $('#foodContent').dataTable( {
+        "processing": true,
+        "pagingType": "full",
+        "paging": true,
+        "lengthChange": false,
+        "ordering": true,
+        "info": true,
 
+        "ajax": {
+            "url": "/phase/foods",
+            "dataSrc": "dataList",
+            "page": "pageNumber",
+            "pages": "pageSize",
+            "recordsTotal": "totalElements",
+            "recordsFiltered": "numberOfElements",
+            "type": "GET",
+            "data": {
+                phaseId: $("#phaseId").val()
+            }
+        },
+
+        "columns": [
+            // col 1
+            {
+
+                "data": "null",
+                "render": function (data, type, full, meta) {
+                    return count++;
+                },
+                "width": "5%"
+            },
+            // col 2
+            {
+                "data": "food.name",
+                "width": "25%"
+            },
+            // col 3
+            {
+                "data": "numberOfTime",
+                "width": "10%"
+            },
+            // col 4
+            {
+                "data": "quantitative",
+                "width": "10%"
+            },
+            // col 5
+            {
+                "data": "unitName",
+                "width": "10%"
+            },
+            {
+                "data": "advice",
+                "width": "20%"
+            },
+            {
+                "data": "id",
+                "render": function (data, type, full, meta) {
+                    var btnUpdate = '<a onclick="updateFoodDialog('+ data +')" class="btn btn-warning">Update</a>';
+                    var btnDelete = '<a onclick="deleteFoodDialog('+ data +')" class="btn btn-danger">Delete</a>';
+                    return btnUpdate + btnDelete;
+                },
+                "width": "20%"
+            }
+        ]
+    } );
     // food
 
     // practice
+    $('#practiceContent').dataTable( {
+        "processing": true,
+        "pagingType": "full",
+        "paging": true,
+        "lengthChange": false,
+        "ordering": true,
+        "info": true,
 
+        "ajax": {
+            "url": "/phase/practices",
+            "dataSrc": "dataList",
+            "page": "pageNumber",
+            "pages": "pageSize",
+            "recordsTotal": "totalElements",
+            "recordsFiltered": "numberOfElements",
+            "type": "GET",
+            "data": {
+                phaseId: $("#phaseId").val()
+            }
+        },
+
+        "columns": [
+            // col 1
+            {
+
+                "data": "null",
+                "render": function (data, type, full, meta) {
+                    return count++;
+                },
+                "width": "5%"
+            },
+            // col 2
+            {
+                "data": "practice.name",
+                "width": "25%"
+            },
+            // col 3
+            {
+                "data": "practice.intensity",
+                "width": "5%"
+            },
+            // col 4
+            {
+                "data": "timeDuration",
+                "width": "15%"
+            },
+            // col 5
+            {
+                "data": "numberOfTime",
+                "width": "5%"
+            },
+            {
+                "data": "advice",
+                "width": "20%"
+            },
+            {
+                "data": "id",
+                "render": function (data, type, full, meta) {
+                    var btnUpdate = '<a onclick="updatePracticeDialog('+ data +')" class="btn btn-warning">Update</a>';
+                    var btnDelete = '<a onclick="deletePracticeDialog('+ data +')" class="btn btn-danger">Delete</a>';
+                    return btnUpdate + btnDelete;
+                },
+                "width": "20%"
+            }
+        ]
+    } );
     // practice
 
     console.log("-- end --");
@@ -128,10 +258,67 @@ function updateMedicineDialog(element) {
     });
 }
 
+function updateFoodDialog(element) {
+    $.ajax({
+        method: "GET",
+        url: "/phase/food/detail",
+        data: {
+            id: element
+        }
+    }).done(function(data) {
+        console.log(data);
+        if (data != null) {
+
+            var txtName = document.getElementById("updateFoodName");
+            txtName.innerHTML = data.food.name;
+
+            var txtTimes = document.getElementById("updateFoodTime");
+            txtTimes.value =  data.numberOfTime;
+
+            var txtQuantitative = document.getElementById("updateFoodQuantitative");
+            txtQuantitative.value = data.quantitative;
+
+            var txtAdvice = document.getElementById("updateFoodAdvice");
+            txtAdvice.value = data.advice;
+
+            var foodId = data.food.id;
+            var unitName = data.unitName;
+            // Unit select
+            $.ajax({
+                method: "GET",
+                url: "/foodUnit",
+                data: {
+                    foodId: foodId
+                }
+            }).done(function(data) {
+                var html = '';
+                $.each(data, function (key, element) {
+                    if (element == unitName) {
+                        html += '<option selected="selected" value=">' + element + '">' + element + '</option>';
+                    } else {
+                        html += '<option value=">' + element + '">' + element + '</option>';
+                    }
+                })
+                var $unitSelect = $("#updatefoodUnitSelect");
+                $unitSelect.append(html);
+                $unitSelect.combobox();
+            })
+            // Unit select
+            // Show diaglog
+            $("#updateFoodDialog").modal('show');
+        }
+    });
+}
+
 function deleteMedicineDialog(element) {
     curMedicinePhase = element;
-    confirmMessageLabel.innerHTML = "Are you wish to delete this medicine?";
+    //confirmMessageLabel.innerHTML = "Are you wish to delete this medicine?";
     $("#deleteMedicineDialog").modal('show');
+}
+
+function deleteFoodDialog(element) {
+    curFoodPhase = element;
+    $("#deleteFoodDialog").modal('show');
 }
 
 // medicine select
@@ -340,3 +527,30 @@ $( "#btnDeleteMedicine" ).click(function() {
 // update practice validator
 
 // delete practice validator
+
+
+// insert food validator
+
+// update food validator
+
+// delete food validator
+$( "#btnDeleteFood" ).click(function() {
+    console.log("begin delete");
+    $.ajax({
+        method: "POST",
+        url: "/phase/food/delete",
+        data: {
+            id: curFoodPhase
+        }
+    }).done(function(data) {
+        console.log(data);
+        var txtMessage = document.getElementById("messageLabel");
+        if (data.status == "fail") {
+            txtMessage.innerHTML = "Error while delete food phase data";
+        } else {
+            console.log("-- reload page --");
+            window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+        }
+    });
+    console.log("end delete");
+});
