@@ -259,6 +259,7 @@ function updateMedicineDialog(element) {
 }
 
 function updateFoodDialog(element) {
+    curFoodPhase = element;
     $.ajax({
         method: "GET",
         url: "/phase/food/detail",
@@ -294,12 +295,12 @@ function updateFoodDialog(element) {
                 var html = '';
                 $.each(data, function (key, element) {
                     if (element == unitName) {
-                        html += '<option selected="selected" value=">' + element + '">' + element + '</option>';
+                        html += '<option selected="selected" value="' + element + '">' + element + '</option>';
                     } else {
-                        html += '<option value=">' + element + '">' + element + '</option>';
+                        html += '<option value="' + element + '">' + element + '</option>';
                     }
                 })
-                var $unitSelect = $("#updatefoodUnitSelect");
+                var $unitSelect = $("#updateFoodUnit");
                 $unitSelect.append(html);
                 $unitSelect.combobox();
             })
@@ -532,7 +533,79 @@ $( "#btnDeleteMedicine" ).click(function() {
 // insert food validator
 
 // update food validator
+$("#updateFoodForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        updateFoodTime: {
+            required: true,
+            min: 1,
+            max: 7
+        },
+        updateFoodQuantitative: {
+            required: true,
+            min: 1,
+            max: 5
+        },
+        updateFoodUnit: {
+            required: true
+        }
+    },
+    messages: {
+        //patientName: {
+        //    maxlenght: "Name is too long, please modify it"
+        //},
+        updateFoodTime: {
+            required: "Please input valid illness name",
+        },
+        updateFoodQuantitative: {
+            required: "Please input valid description"
+        },
+        updateFoodUnit: {
+            required: "Please choose an unit"
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "updateFoodTime"){
+            error.appendTo($('#invalidUpdateFoodTime'));
+        }  else if (element.attr("name") == "updateFoodQuantitative") {
+            error.appendTo($('#invalidUpdateFoodQuantitative'));
+        } else if (element.attr("name") == "updateFoodUnit") {
+            error.appendTo($('#invalidUpdateFoodUnit'));
+        }
 
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("begin update");
+        $.ajax({
+            method: "POST",
+            url: "/phase/food/update",
+            data: {
+                id: curFoodPhase,
+                numberOfTime: $("#updateFoodTime").val(),
+                quantitative: $("#updateFoodQuantitative").val(),
+                unitName: $("#updateFoodUnit").val(),
+                advice: $("#updateFoodAdvice").val()
+            }
+        }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data.status == "fail") {
+                txtMessage.innerHTML = "Error while update regimen data";
+            } else {
+                console.log("-- reload page --");
+                window.location.href = "/detailPhase?id=" + $("#phaseId").val();
+            }
+        });
+        console.log("end update");
+        return false; // required to block normal submit since you used ajax
+    }
+});
 // delete food validator
 $( "#btnDeleteFood" ).click(function() {
     console.log("begin delete");
