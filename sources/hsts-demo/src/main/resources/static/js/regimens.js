@@ -52,7 +52,7 @@ $(document).ready(function(){
             // col 3
             {
               "data": "illness.description",
-                "width": "50%"
+                "width": "40%"
             },
             // col 4
 
@@ -63,7 +63,7 @@ $(document).ready(function(){
                     var deleteBtn = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>'
                     return updateBtn + deleteBtn;
                 },
-                "width": "20%"
+                "width": "30%"
             }
         ]
     } );

@@ -86,6 +86,27 @@
     <!-- footer -->
     <div layout:replace="footer"></div>
     <!-- /.footer -->
+
+    <!-- message modal-->
+    <div class="modal fade" id="checkTimeModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel" data-backdrop="static"
+         data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title" id = "messageLabel">Giờ máy tính của bạn đang sai so với giờ hệ thống,
+                    vui lòng điều chỉnh và đăng nhập lại.</h4>
+                </div>
+                <div class="modal-footer">
+                    <a class ="btn btn-info"  href="logout">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .message modal-->
+
 </div>
 <!-- ./wrapper -->
 <input id="METHOD" th:value="${METHOD}" th:type="hidden"/>
@@ -150,6 +171,32 @@
         })
     };
     $(document).ready(function () {
+        // Check local time
+        console.log("begin check time");
+        $.ajax({
+            method: "GET",
+            url: "/currentUTCTime"
+        }).done(function(data) {
+            console.log(data);
+
+            var d = new Date();
+//            var offSet = d.getTimezoneOffset() * 60 * 1000;
+//            console.log("offset: " + offSet);
+            var utcTime = d.getTime();
+            var sessionTimeOut = 30 * 60 * 1000;
+            var result = Math.abs(data - utcTime);
+            console.log("Result data: " +  result);
+            if (result > sessionTimeOut) {
+                console.log("time zone not ok");
+                $("#checkTimeModal").modal('show');
+            } else {
+                console.log("time zone ok");
+            }
+        })
+        console.log("end check time");
+        // End check
+
+
         var notifyInit = setTimeout(notifyScheduler, 10);
         var notify = setInterval(notifyScheduler, 10000);
         var method = $('#METHOD').val();

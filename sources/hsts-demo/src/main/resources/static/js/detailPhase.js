@@ -21,7 +21,9 @@ var curPracticePhase = 0;
 
 $(document).ready(function(){
     console.log("-- begin --");
-    var count = 1;
+    var countMedicine = 1;
+    var countFood = 1;
+    var countPractice = 1;
     // medicine
     $('#medicineContent').dataTable( {
         "processing": true,
@@ -50,14 +52,14 @@ $(document).ready(function(){
 
                 "data": "null",
                 "render": function (data, type, full, meta) {
-                    return count++;
+                    return countMedicine++;
                 },
                 "width": "5%"
             },
             // col 2
             {
                 "data": "medicine.name",
-                "width": "20%"
+                "width": "15%"
             },
             // col 3
             {
@@ -85,7 +87,7 @@ $(document).ready(function(){
                     var btnDelete = '<a onclick="deleteMedicineDialog('+ data +')" class="btn btn-danger">Delete</a>';
                     return btnUpdate + btnDelete;
                 },
-                "width": "20%"
+                "width": "25%"
             }
         ]
     } );
@@ -119,7 +121,7 @@ $(document).ready(function(){
 
                 "data": "null",
                 "render": function (data, type, full, meta) {
-                    return count++;
+                    return countFood++;
                 },
                 "width": "5%"
             },
@@ -131,7 +133,7 @@ $(document).ready(function(){
             // col 3
             {
                 "data": "numberOfTime",
-                "width": "10%"
+                "width": "5%"
             },
             // col 4
             {
@@ -154,7 +156,7 @@ $(document).ready(function(){
                     var btnDelete = '<a onclick="deleteFoodDialog('+ data +')" class="btn btn-danger">Delete</a>';
                     return btnUpdate + btnDelete;
                 },
-                "width": "20%"
+                "width": "25%"
             }
         ]
     } );
@@ -188,7 +190,7 @@ $(document).ready(function(){
 
                 "data": "null",
                 "render": function (data, type, full, meta) {
-                    return count++;
+                    return countPractice++;
                 },
                 "width": "5%"
             },
@@ -199,15 +201,10 @@ $(document).ready(function(){
             },
             // col 3
             {
-                "data": "practice.intensity",
-                "width": "5%"
-            },
-            // col 4
-            {
                 "data": "timeDuration",
                 "width": "15%"
             },
-            // col 5
+            // col 4
             {
                 "data": "numberOfTime",
                 "width": "5%"
@@ -216,6 +213,7 @@ $(document).ready(function(){
                 "data": "advice",
                 "width": "20%"
             },
+            // col 5
             {
                 "data": "id",
                 "render": function (data, type, full, meta) {
@@ -223,7 +221,7 @@ $(document).ready(function(){
                     var btnDelete = '<a onclick="deletePracticeDialog('+ data +')" class="btn btn-danger">Delete</a>';
                     return btnUpdate + btnDelete;
                 },
-                "width": "20%"
+                "width": "25%"
             }
         ]
     } );
