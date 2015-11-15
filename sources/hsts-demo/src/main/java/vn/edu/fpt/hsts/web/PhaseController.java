@@ -17,17 +17,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
+import vn.edu.fpt.hsts.bizlogic.PracticePhasePageModel;
+import vn.edu.fpt.hsts.bizlogic.model.FoodPhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.PhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.PhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.bizlogic.service.RegimenService;
 import vn.edu.fpt.hsts.common.IConsts;
-import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
-
-import java.util.List;
 
 @Controller
 public class PhaseController extends AbstractController {
@@ -159,4 +157,27 @@ public class PhaseController extends AbstractController {
     }
 
 
+    @RequestMapping(value = "/phase/practices", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public PracticePhasePageModel findPracticesByPhaseId(@RequestParam("phaseId") final int phaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}]", phaseId);
+            return phaseService.getPracticesByPhase(phaseId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/phase/foods", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public FoodPhasePageModel findFoodsByPhaseId(@RequestParam("phaseId") final int phaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}]", phaseId);
+            return phaseService.getFoodsByPhase(phaseId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

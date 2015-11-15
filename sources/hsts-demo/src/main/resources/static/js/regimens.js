@@ -52,18 +52,18 @@ $(document).ready(function(){
             // col 3
             {
               "data": "illness.description",
-                "width": "50%"
+                "width": "40%"
             },
             // col 4
 
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    var updateBtn = '<a onclick="updateDialog('+ data +')" class="btn btn-success">Update</a>';
+                    var updateBtn = '<a onclick="updateDialog('+ data +')" class="btn btn-success" style="margin-right: 20px">Update</a>';
                     var deleteBtn = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>'
                     return updateBtn + deleteBtn;
                 },
-                "width": "20%"
+                "width": "30%"
             }
         ]
     } );

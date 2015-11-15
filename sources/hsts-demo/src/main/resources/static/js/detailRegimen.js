@@ -38,7 +38,7 @@ $(document).ready(function(){
                 "render": function (data, type, full, meta) {
                     return count++;
                 },
-                "width": "15%"
+                "width": "10%"
             },
             {
                 "data": {
@@ -48,7 +48,7 @@ $(document).ready(function(){
                 "render": function ( data, type, full, meta ) {
                     return '<a href="/detailPhase?id='+ data.id +  '">' + data.numberOfDay + '</a>';
                 },
-                "width": "25%"
+                "width": "20%"
             },
             // col 3
             {
@@ -59,11 +59,11 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    var updateBtn = '<a onclick="updateDialog('+ data +')" class="btn btn-success">Update</a>';
+                    var updateBtn = '<a onclick="updateDialog('+ data +')" class="btn btn-success" style="margin-right: 20px">Update</a>';
                     var deleteBtn = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>'
                     return updateBtn + deleteBtn;
                 },
-                "width": "20%"
+                "width": "30%"
             }
         ]
     } );

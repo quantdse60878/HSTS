@@ -7,23 +7,30 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import vn.edu.fpt.hsts.bizlogic.model.MedicinePageModel;
+import vn.edu.fpt.hsts.bizlogic.PracticePhasePageModel;
+import vn.edu.fpt.hsts.bizlogic.model.FoodPhaseModel;
+import vn.edu.fpt.hsts.bizlogic.model.FoodPhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhasePageModel;
+import vn.edu.fpt.hsts.bizlogic.model.PracticePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.PhaseModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
+import vn.edu.fpt.hsts.persistence.entity.Food;
 import vn.edu.fpt.hsts.persistence.entity.FoodPhase;
 import vn.edu.fpt.hsts.persistence.entity.Medicine;
 import vn.edu.fpt.hsts.persistence.entity.MedicinePhase;
 import vn.edu.fpt.hsts.persistence.entity.Phase;
+import vn.edu.fpt.hsts.persistence.entity.Practice;
 import vn.edu.fpt.hsts.persistence.entity.PracticePhase;
 import vn.edu.fpt.hsts.persistence.entity.Regimen;
 import vn.edu.fpt.hsts.persistence.repo.FoodPhaseRepo;
+import vn.edu.fpt.hsts.persistence.repo.FoodRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicinePhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.MedicineRepo;
 import vn.edu.fpt.hsts.persistence.repo.PhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.PracticePhaseRepo;
+import vn.edu.fpt.hsts.persistence.repo.PracticeRepo;
 import vn.edu.fpt.hsts.persistence.repo.RegimenRepo;
 
 import javax.transaction.Transactional;
@@ -77,6 +84,18 @@ public class PhaseService {
     @Autowired
     private MedicineRepo medicineRepo;
 
+    /**
+     * The {@link PracticeRepo}.
+     */
+    @Autowired
+    private PracticeRepo practiceRepo;
+
+    /**
+     * The {@link FoodRepo}.
+     */
+    @Autowired
+    private FoodRepo foodRepo;
+
 
     public Phase findPhaseByIllnessID(final int illnessID){
         return phaseRepo.findPhaseByIllnessID(illnessID);
@@ -125,7 +144,6 @@ public class PhaseService {
             if (!CollectionUtils.isEmpty(foodPhases)) {
                 foodPhaseRepo.delete(foodPhases);
             }
-            final PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
             List<MedicinePhase> medicinePhases = medicinePhaseRepo.findByPhaseId(phaseId);
             if (!CollectionUtils.isEmpty(medicinePhases)) {
                 medicinePhaseRepo.delete(medicinePhases);
@@ -180,6 +198,33 @@ public class PhaseService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public PracticePhasePageModel getPracticesByPhase(final int phaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}]", phaseId);
+            final PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
+            final Page<PracticePhase> phasePage = practicePhaseRepo.findByPhaseId(phaseId, pageRequest);
+            final PracticePhasePageModel pageModel = new PracticePhasePageModel(phasePage);
+            return pageModel;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public FoodPhasePageModel getFoodsByPhase(final int phaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}]", phaseId);
+            final PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
+            final Page<FoodPhase> phasePage = foodPhaseRepo.findByPhaseId(phaseId, pageRequest);
+            final FoodPhasePageModel pageModel = new FoodPhasePageModel(phasePage);
+            return pageModel;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
 
     @Transactional(rollbackOn = BizlogicException.class)
     public void addMedicineToPhase(final int phaseId, final int medicineId,
@@ -237,7 +282,7 @@ public class PhaseService {
         }
     }
 
-    public MedicinePhaseModel find(final int medicinePhaseId) {
+    public MedicinePhaseModel findMedicinePhase(final int medicinePhaseId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             MedicinePhase entity = medicinePhaseRepo.findOne(medicinePhaseId);
@@ -248,6 +293,31 @@ public class PhaseService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public FoodPhaseModel findFoodPhase(final int foodPhaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            FoodPhase entity = foodPhaseRepo.findOne(foodPhaseId);
+            final FoodPhaseModel model = new FoodPhaseModel();
+            model.fromEntity(entity);
+            return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public PracticePhaseModel findPracticePhase(final int practicePhaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            PracticePhase entity = practicePhaseRepo.findOne(practicePhaseId);
+            final PracticePhaseModel model = new PracticePhaseModel();
+            model.fromEntity(entity);
+            return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
 
     public PhaseModel findPhase(final int phaseId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
@@ -270,6 +340,122 @@ public class PhaseService {
             final Phase phase = phaseRepo.findOne(phaseId);
             phase.setNumberOfDay(numberDay);
             phaseRepo.saveAndFlush(phase);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void addPracticeToPhase(final int phaseId, final int practiceId, final String timeDuration,
+                                   final int numberOfTime, final String advice) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final Phase phase = phaseRepo.findOne(phaseId);
+            if (null == phase) {
+                throw new BizlogicException("Null");
+            }
+            final Practice practice = practiceRepo.findOne(practiceId);
+            if (null == practice) {
+                throw new BizlogicException("Null");
+            }
+            final PracticePhase practicePhase = new PracticePhase();
+            practicePhase.setAdvice(advice);
+            practicePhase.setPractice(practice);
+            practicePhase.setPhase(phase);
+            practicePhase.setNumberOfTime(numberOfTime);
+            practicePhase.setTimeDuration(timeDuration);
+            practicePhaseRepo.saveAndFlush(practicePhase);
+        } catch (Exception e) {
+            throw new BizlogicException("Error");
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void updatePracticeToPhase(final int id, final String timeDuration,
+                                      final int numberOfTime, final String advice) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("id[{}]", id);
+            final PracticePhase practicePhase = practicePhaseRepo.findOne(id);
+            practicePhase.setAdvice(advice);
+            practicePhase.setNumberOfTime(numberOfTime);
+            practicePhase.setTimeDuration(timeDuration);
+            practicePhaseRepo.saveAndFlush(practicePhase);
+        } catch (Exception e) {
+            throw new BizlogicException("Error");
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void deletePracticeToPhase(final int id) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("id[{}]", id);
+            practicePhaseRepo.delete(id);
+        } catch (Exception e) {
+            throw new BizlogicException("Error");
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void addFoodToPhase(final int phaseId, final int foodId, final int numberOfTime,
+                               final int quantitative, final String advice, final String unitName) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final Food food = foodRepo.findOne(foodId);
+            if (null == food) {
+                throw new BizlogicException("Null");
+            }
+            final Phase phase = phaseRepo.findOne(phaseId);
+            if (null == phase) {
+                throw new BizlogicException("Null");
+            }
+            final FoodPhase foodPhase = new FoodPhase();
+            foodPhase.setPhase(phase);
+            foodPhase.setAdvice(advice);
+            foodPhase.setFood(food);
+            foodPhase.setPhase(phase);
+            foodPhase.setQuantitative(quantitative);
+            foodPhase.setNumberOfTime(numberOfTime);
+            foodPhase.setUnitName(unitName);
+            foodPhaseRepo.saveAndFlush(foodPhase);
+        } catch (Exception e) {
+            throw new BizlogicException("Error");
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void updateFoodToPhase(final int id, final int numberOfTime,
+                                  final int quantitative, final String advice, final String unitName) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final FoodPhase foodPhase = foodPhaseRepo.findOne(id);
+            foodPhase.setNumberOfTime(numberOfTime);
+            foodPhase.setQuantitative(quantitative);
+            foodPhase.setAdvice(advice);
+            foodPhase.setUnitName(unitName);
+        } catch (Exception e) {
+            throw new BizlogicException("error");
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public void deleteFoodToPhase(final int id) throws BizlogicException {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("id[{}]", id);
+            foodPhaseRepo.delete(id);
+        } catch (Exception e) {
+            throw new BizlogicException("Error");
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
