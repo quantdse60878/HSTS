@@ -19,8 +19,8 @@ var $pGender = $("#pGender").iCheck({
 
 $("#birthday").datepicker({
     format: 'dd-mm-yyyy',
-    startDate: '1950-01-01',
-    endDate: '2000-01-01'
+    startDate: '01-01-1950',
+    endDate: '01-01-2000'
 });
 
 $("#doctorSelect").select2({
