@@ -227,6 +227,7 @@ var validator = $("#mainForm").validate({
     },
     invalidHandler: function (e, validator) {
         if (validator.errorList.length > 0) {
+            $(".modal").modal('hide');
             console.log("Change to first tab has error");
             console.log(validator.errorList);
             var targetTab = jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id');
