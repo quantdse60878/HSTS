@@ -151,7 +151,7 @@ public class DataValidationService extends AbstractService {
         try {
             // Nurse register
             minVals.put("weight", (float) 20);
-            minVals.put("height", (float) 110);
+            minVals.put("height", (float) 100);
             minVals.put("hearthBeat", (float) 20);
             minVals.put("bloodPressure", (float) 10);
             minVals.put("waists", (float) 50);
@@ -178,7 +178,7 @@ public class DataValidationService extends AbstractService {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
             // Nurse register
-            maxVals.put("weight", (float) 200);
+            maxVals.put("weight", (float) 300);
             maxVals.put("height", (float) 250);
             maxVals.put("hearthBeat", (float) 200);
             maxVals.put("bloodPressure", (float) 200);
