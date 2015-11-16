@@ -378,7 +378,7 @@ var fileUploader = $("#fileUploader").fileinput({
     maxFileCount: 5,
     allowedFileTypes: ['image'],
     allowedFileExtensions: ['jpg', 'gif', 'png'],
-    maxFileSize: 1024 // 1 MB
+    maxFileSize: 5170 // 5 MB
 });
 
 fileUploader.on('fileuploaded', function(event, data, previewId, index) {
