@@ -20,7 +20,6 @@ import vn.edu.fpt.hsts.bizlogic.model.DoctorPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePrescriptionModel;
-import vn.edu.fpt.hsts.bizlogic.model.PracticeDataOfPatient;
 import vn.edu.fpt.hsts.bizlogic.model.PracticePrescriptionModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticeResultModel;
 import vn.edu.fpt.hsts.bizlogic.model.PrescriptionModel;

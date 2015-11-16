@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.fpt.hsts.bizlogic.model.AppointmentPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodUnitModel;
 import vn.edu.fpt.hsts.bizlogic.model.HisInforDateModel;
-import vn.edu.fpt.hsts.bizlogic.model.PracticeDataOfPatient;
 import vn.edu.fpt.hsts.bizlogic.model.PracticeResultModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
