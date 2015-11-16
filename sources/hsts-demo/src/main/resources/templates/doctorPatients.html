@@ -58,9 +58,9 @@
                                 <td style="text-align: center;"><a th:href="@{/createPrescription(patientID=${patient.id})}" th:text="${patient.account.fullName}">Name</a></td>
                                 <td style="text-align: center;" th:text="${#dates.format(patient.account.dateOfBirth, 'dd-MM-yyyy')}">Birthday</td>
                                 <td style="text-align: center;">
-                                    <a th:href="@{/createPrescription(patientID=${patient.id})}" class="btn btn-info"
+                                    <a style="width: 82px;" class="btn btn-info"
                                        th:if="${patient.account.gender == 1}">MALE</a>
-                                    <a th:href="@{/createPrescription(patientID=${patient.id})}" class="btn btn-danger"
+                                    <a style="width: 82px;" class="btn btn-danger"
                                        th:unless="${patient.account.gender == 1}">FEMALE</a>
                                 </td>
                             </tr>
