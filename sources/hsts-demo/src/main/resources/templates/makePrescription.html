@@ -65,6 +65,7 @@
         <h1>
             Diagnostic
             <small th:text="${PATIENT.account.fullName}">Patient Name</small>
+
         </h1>
         <ol class="breadcrumb">
             <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -81,7 +82,6 @@
                     <div class="box-body">
                         <div class="box-header">
                             <h4 class="col-md-3" style="margin-top: 4px;"><i class="fa fa-th"></i> Prescriptions</h4>
-
                             <!-- input-group -->
                             <div class="input-group col-md-2 pull-right" style="margin-right: 20px;">
                                 <input type="hidden" th:value="${PATIENT.id}" id="patientID"/>
@@ -401,6 +401,7 @@
         </div>
     </div>
     <!-- /.Modal -->
+
     <div id="waitting" class="modal fade" style="text-align: center;"
          tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <img th:src="@{/static/image/ajax-loader.gif}" style="margin-top: 190px;"/>
@@ -439,7 +440,7 @@
     <!--<link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>-->
     <!--<script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>-->
     <!-- ChartJS 1.0.1 -->
-    <!--<script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>-->
+    <script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>

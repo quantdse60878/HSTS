@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.fpt.hsts.bizlogic.model.AppointmentPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodUnitModel;
 import vn.edu.fpt.hsts.bizlogic.model.HisInforDateModel;
+import vn.edu.fpt.hsts.bizlogic.model.PracticeDataOfPatient;
+import vn.edu.fpt.hsts.bizlogic.model.PracticeResultModel;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
+import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.MedicineService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
@@ -44,6 +47,9 @@ public class AjaxController extends AbstractController {
 
     @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    private DoctorService doctorService;
 
     @RequestMapping(value = "/medicineName/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -102,4 +108,15 @@ public class AjaxController extends AbstractController {
         }
     }
 
+    @RequestMapping(value = "/practiceDataByAppointment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public PracticeResultModel practiceDataByAppointment(@RequestParam("appointmentId") final int appointmentId){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointmentId[{}]", appointmentId);
+            return doctorService.getInfoPracticeDataOfPatientByAppointment(appointmentId);
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }
