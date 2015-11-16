@@ -74,4 +74,8 @@ public class DeviceService {
         }
         return list;
     }
+
+    public void deleteDevice(Device device) {
+        deviceRepo.delete(device);
+    }
 }

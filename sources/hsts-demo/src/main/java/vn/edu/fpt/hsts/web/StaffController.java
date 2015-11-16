@@ -55,12 +55,12 @@ public class StaffController extends AbstractController {
         List<String> listMedicalRecordData1 = formulaService.getListFieldOfMedicalRecordData();
         List<String> listMedicalRecordData = new ArrayList<String>();
         for (String p : listPrevention1) {
-            if(!p.equals("appointment")) {
+            if (!p.equals("appointment")) {
                 listPrevention.add(p.substring(0, 1).toUpperCase() + p.substring(1));
             }
         }
         for (String m : listMedicalRecordData1) {
-            if(!m.equals("appointment")) {
+            if (!m.equals("appointment")) {
                 listMedicalRecordData.add(m.substring(0, 1).toUpperCase() + m.substring(1));
             }
         }
@@ -69,16 +69,16 @@ public class StaffController extends AbstractController {
         AnalyticDataTask.FORMULA_CALCULATE_DISTANCE = newDistanceFormula;
         AnalyticDataTask.variable = new ArrayList<String>();
         AnalyticDataTask.valueVariable = new ArrayList<String>();
-        for(int i = 0; i < listVariable.length; i++) {
+        for (int i = 0; i < listVariable.length; i++) {
             AnalyticDataTask.variable.add(listVariable[i]);
-            for(int j = 0; j < listPrevention.size(); j++) {
-                if(listValue[i].equals(listPrevention.get(j))) {
+            for (int j = 0; j < listPrevention.size(); j++) {
+                if (listValue[i].equals(listPrevention.get(j))) {
                     AnalyticDataTask.valueVariable.add("1," + listValue[i]);
                     break;
                 }
             }
-            for(int j = 0; j < listMedicalRecordData.size(); j++) {
-                if(listValue[i].equals(listMedicalRecordData.get(j))) {
+            for (int j = 0; j < listMedicalRecordData.size(); j++) {
+                if (listValue[i].equals(listMedicalRecordData.get(j))) {
                     AnalyticDataTask.valueVariable.add("2," + listValue[i]);
                     break;
                 }
@@ -86,7 +86,7 @@ public class StaffController extends AbstractController {
         }
         mav.setViewName("staffFormula");
         List<Variable> listVariables = new ArrayList<Variable>();
-        for(int i = 0; i < AnalyticDataTask.variable.size(); i++) {
+        for (int i = 0; i < AnalyticDataTask.variable.size(); i++) {
             listVariables.add(new Variable(AnalyticDataTask.variable.get(i), AnalyticDataTask.valueVariable.get(i).split(",")[1]));
         }
         formulaService.saveNewFormula();
@@ -108,17 +108,17 @@ public class StaffController extends AbstractController {
         List<String> listMedicalRecordData1 = formulaService.getListFieldOfMedicalRecordData();
         List<String> listMedicalRecordData = new ArrayList<String>();
         for (String p : listPrevention1) {
-            if(!p.equals("appointment")) {
+            if (!p.equals("appointment")) {
                 listPrevention.add(p.substring(0, 1).toUpperCase() + p.substring(1));
             }
         }
         for (String m : listMedicalRecordData1) {
-            if(!m.equals("appointment")) {
+            if (!m.equals("appointment")) {
                 listMedicalRecordData.add(m.substring(0, 1).toUpperCase() + m.substring(1));
             }
         }
         List<Variable> listVariables = new ArrayList<Variable>();
-        for(int i = 0; i < AnalyticDataTask.variable.size(); i++) {
+        for (int i = 0; i < AnalyticDataTask.variable.size(); i++) {
             listVariables.add(new Variable(AnalyticDataTask.variable.get(i), AnalyticDataTask.valueVariable.get(i).split(",")[1]));
         }
         mav.addObject("DISTANCEFORMULA", AnalyticDataTask.FORMULA_CALCULATE_DISTANCE);
@@ -132,8 +132,8 @@ public class StaffController extends AbstractController {
     @RequestMapping(value = "/deviceName/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<String> deviceList(@RequestParam(value = "searchString", required = false, defaultValue = EMPTY) final String searchString,
-                                    @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
-                                    @RequestParam(value = "pageSize", required = false, defaultValue = UNLIMIT_PAGE_SIZE) final int pageSize) {
+                                   @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
+                                   @RequestParam(value = "pageSize", required = false, defaultValue = UNLIMIT_PAGE_SIZE) final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             return deviceService.findAllIllnessName(searchString, page, pageSize);
@@ -170,14 +170,14 @@ public class StaffController extends AbstractController {
 
     @RequestMapping(value = "deviceName/listdevice", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<ParamMeasurementModel> findAccounts(@RequestParam(value = "brandName") final String brandName){
+    public List<ParamMeasurementModel> findAccounts(@RequestParam(value = "brandName") final String brandName) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             Device device = deviceService.findDeviceByBrandName(brandName);
             List<ParamMeasurement> list = paramMeasurementService.findParamMeasurementByDevice(device);
             if (null != list && !list.isEmpty()) {
                 List<ParamMeasurementModel> listModel = new ArrayList<ParamMeasurementModel>();
-                for (ParamMeasurement a: list) {
+                for (ParamMeasurement a : list) {
                     final ParamMeasurementModel model = new ParamMeasurementModel();
                     model.fromEntity(a);
                     listModel.add(model);
@@ -192,7 +192,7 @@ public class StaffController extends AbstractController {
 
     @RequestMapping(value = "deviceName/listnamedevice", method = RequestMethod.GET)
     @ResponseBody
-    public List<String> findNames(){
+    public List<String> findNames() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             List<String> list = deviceService.getListNameOfDevice();
@@ -202,27 +202,54 @@ public class StaffController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "createNewDevice", method = RequestMethod.POST)
-    public ModelAndView openFormula(@RequestParam(value = "devices") final String devices,
-                                    @RequestParam(value = "uuid") final String uuid) {
+    @RequestMapping(value = "rapeDevice", method = RequestMethod.POST)
+    public ModelAndView rapeDevice(@RequestParam(value = "brandName") final String brandName,
+                                   @RequestParam(value = "brandUUID") final String brandUUID,
+                                   @RequestParam(value = "action") final String action) {
         ModelAndView mav = new ModelAndView();
-        Device device = new Device();
-        device.setBrandName(devices);
-        device.setBrandUuid(uuid);
-        deviceService.createNewDevice(device);
+        if(action.equalsIgnoreCase("Create New Device")){
+            Device device = new Device();
+            device.setBrandName(brandName);
+            device.setBrandUuid(brandUUID);
+            deviceService.createNewDevice(device);
+        }
         mav.setViewName("stafflistdevice");
         return mav;
     }
 
     @RequestMapping(value = "viewDevices", method = RequestMethod.GET)
     public ModelAndView staffDevicesPage() {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("stafflistdevice");
-            return mav;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("stafflistdevice");
+        return mav;
+    }
+
+    @RequestMapping(value = "createNewMeasure", method = RequestMethod.GET)
+    @ResponseBody
+    public String createNewMeasure(@RequestParam(value = "brandName") final String brandName,
+                                   @RequestParam(value = "measureName") final String measureName,
+                                   @RequestParam(value = "measureType") final String measureType,
+                                   @RequestParam(value = "measurePosition") final String measurePosition,
+                                   @RequestParam(value = "measureUUID") final String measureUUID) {
+        ParamMeasurement paramMeasurement = new ParamMeasurement();
+        paramMeasurement.setDevice(deviceService.findDeviceByBrandName(brandName));
+        paramMeasurement.setMeasurementMaxRange(-1);
+        paramMeasurement.setMeasurementMinRange(-1);
+        paramMeasurement.setMeasurementName(measureName);
+        paramMeasurement.setMeasurementType(measureType);
+        paramMeasurement.setPositionHaveValue(Integer.parseInt(measurePosition));
+        paramMeasurement.setUuid(measureUUID);
+        paramMeasurement.setType((byte) 1);
+        paramMeasurementService.createNewMeasure(paramMeasurement);
+        return "200";
+    }
+
+    @RequestMapping(value = "deleteMeasurement", method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteMeasurement(@RequestParam(value = "brandName") final String brandName,
+                                    @RequestParam(value = "measurementUUID") final String measurementUUID){
+        Device device = deviceService.findDeviceByBrandName(brandName);
+        paramMeasurementService.deleteMeasurement(device,measurementUUID);
+        return "200";
     }
 }
