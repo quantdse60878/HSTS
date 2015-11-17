@@ -504,6 +504,7 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" onchange="findUnits(this)" id="fPresModels' + countFoods + '.f" data-msg-min="Please select." data-rule-min="1">'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
@@ -514,10 +515,10 @@
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<input type="text" value="0" class="form-control" style="text-align: right;" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" data-rule-required="true" data-msg-required="Please input." data-rule-min="0" data-msg-min="Value must great than 0"/>';
+            newCell.innerHTML = '<input type="text" value="0" class="form-control" style="text-align: right;" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" data-rule-required="true" data-msg-required="Please input." data-rule-min="1" data-msg-min="Value must great than 0"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].fUnit" id="fPresModels' + countFoods + 'fUnit" data-msg-min="Please select." data-rule-min="2" onload="addValidate(this)">'
+            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].fUnit" id="fPresModels' + countFoods + 'fUnit" data-rule-min="1" data-msg-min="Please select." onload="addValidate(this)">'
                     + '<option value="0">Select</option></select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice"/>';
