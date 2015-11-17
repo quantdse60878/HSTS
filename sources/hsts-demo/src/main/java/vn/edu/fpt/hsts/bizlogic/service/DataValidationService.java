@@ -166,7 +166,7 @@ public class DataValidationService extends AbstractService {
 
             // Prescription model attribute
             minVals.put("mQuantity", (float) 1);
-            minVals.put("kcalRequire", (float) 100);
+            minVals.put("kcalRequire", (float) 0);
 
             // Nutrition model attribute
         } finally {
@@ -194,7 +194,7 @@ public class DataValidationService extends AbstractService {
 
             // Prescription Model attribute
             maxVals.put("mQuantity", (float) 10);
-            maxVals.put("kcalRequire", (float) 10000);
+            maxVals.put("kcalRequire", (float) 1000);
 
             // Nutrition model attribute
         } finally {
@@ -215,7 +215,6 @@ public class DataValidationService extends AbstractService {
             intParams.add("waists");
 
             // Prescription Model attribute
-            intParams.add("kcalRequire");
             // Nutrition model attribute
 
         } finally {

@@ -133,7 +133,7 @@ public class AbstractController implements ControllerParam {
                 mav.addObject("FOODINGREDIENT", nutritionModel);
                 LOGGER.info("nutritionModel[{}]", nutritionModel);
                 int kcalEstimate = (int) (nutritionModel.getTotalEnergy() - preventionCheck.getBasalMetabolicRate());
-                prescriptionModel.setKcalRequire(kcalEstimate);
+                prescriptionModel.setKcalRequire(String.valueOf(kcalEstimate));
             }
 
             // Set entry patient

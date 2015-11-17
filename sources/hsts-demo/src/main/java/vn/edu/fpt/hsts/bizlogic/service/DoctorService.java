@@ -271,7 +271,9 @@ public class DoctorService extends AbstractService {
                 newTreatment.setStatus(IDbConsts.ITreatmentStatus.ON_TREATING);
                 newTreatment.setAppointment(appointment);
                 newTreatment.setFromDate(new Date());
-                newTreatment.setCaloriesBurnEveryday(prescription.getKcalRequire());
+                String kcal = prescription.getKcalRequire().replace(".","");
+                LOGGER.info("kcal[{}]", kcal);
+                newTreatment.setCaloriesBurnEveryday(Integer.parseInt(kcal));
                 newTreatment.setToDate(toDate);
                 newTreatment.setNote(prescription.getNote());
                 treatmentRepo.save(newTreatment);
@@ -565,6 +567,24 @@ public class DoctorService extends AbstractService {
         } catch (Exception e) {
             LOGGER.info("Exception: " + e.getMessage());
             return null;
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public boolean finishMakePrescription(final int appointmentId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointment[{}]", appointmentId);
+            Appointment appointment = appointmentRepo.findOne(appointmentId);
+            appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
+
+            MedicalRecord medicalRecord = appointment.getMedicalRecord();
+            medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.NO_ILLNESS);
+
+            appointmentRepo.saveAndFlush(appointment);
+            medicalRecordRepo.saveAndFlush(medicalRecord);
+            return true;
         }finally {
             LOGGER.info(IConsts.END_METHOD);
         }

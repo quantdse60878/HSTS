@@ -610,7 +610,7 @@ function loadPopupAppointment(appointmentId) {
 };
 
 // Select2 for diagnostic
-$("#select2Box").select2({
+var $illne = $("#select2Box").select2({
     width: "200px",
     ajax: {
         url: "/illnessName/list",
@@ -647,7 +647,33 @@ $("#select2Box").select2({
         };
     }
 });
+$illne.on("change", function (e) {
+    var val = $illne.val();
+    var textData = $illne.text().trim();
+    console.log("Value: " + val);
+    console.log("Text: " + textData);
+    if (val != null) {
+        if(val == "No illness"){
+            $('#patientName').html($("#txtpatientName").text());
+            // Show pop-up
+            $('#noIllness').modal('show');
+        }
+    }
 
+});
+
+function finishAndChangePage() {
+    $.ajax({
+        method: "POST",
+        url: "/finishTreatment",
+        data: {
+            appointmentId: $("#appointmentId").val()
+        }
+    }).done(function (data) {
+        console.log(data);
+        window.location.href = "doctorPatients";
+    });
+}
 function deleteRowFood(t) {
     var row = t.parentNode.parentNode;
     var nextRow = row.nextElementSibling;
