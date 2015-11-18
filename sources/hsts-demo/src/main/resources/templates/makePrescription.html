@@ -64,7 +64,8 @@
     <section class="content-header">
         <h1>
             Diagnostic
-            <small th:text="${PATIENT.account.fullName}">Patient Name</small>
+            <small id="txtpatientName" th:text="${PATIENT.account.fullName}">Patient Name</small>
+
         </h1>
         <ol class="breadcrumb">
             <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -81,7 +82,6 @@
                     <div class="box-body">
                         <div class="box-header">
                             <h4 class="col-md-3" style="margin-top: 4px;"><i class="fa fa-th"></i> Prescriptions</h4>
-
                             <!-- input-group -->
                             <div class="input-group col-md-2 pull-right" style="margin-right: 20px;">
                                 <input type="hidden" th:value="${PATIENT.id}" id="patientID"/>
@@ -384,6 +384,7 @@
 
     <!--POPUP-->
     <div id="blanket" style="display:none;"></div>
+    <!--History Image-->
     <!-- Modal -->
     <div class="modal fade" id="medi_img" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -396,6 +397,29 @@
                     <img th:each="imgMe : ${MEDI_IMGS}"
                          th:src="@{/uploadedHistoryImg(filename=${imgMe})}"
                          style="width: 559px;"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.Modal -->
+    <!--No illness-->
+    <!-- Modal -->
+    <div class="modal fade" id="noIllness" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm box</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Patient: </label>
+                        <span id="patientName"></span>
+                    </div>
+                    <h3>No illness!!</h3>
+                </div>
+                <div class="modal-footer">
+                    <a onclick="finishAndChangePage()" class="btn btn-primary">Next Patient</a>
                 </div>
             </div>
         </div>
@@ -439,7 +463,7 @@
     <!--<link th:href="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.css}" rel="stylesheet"/>-->
     <!--<script th:src="@{/static/bower/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js}"/>-->
     <!-- ChartJS 1.0.1 -->
-    <!--<script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>-->
+    <script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet"/>
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
@@ -503,6 +527,7 @@
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
             newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].f" onchange="findUnits(this)" id="fPresModels' + countFoods + '.f" data-msg-min="Please select." data-rule-min="1">'
+                    + '<option value="0">Select</option>'
                     + '<option th:each="food : ${FOODS}" th:value="${food.id}" th:text="${food.name}"></option>'
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
@@ -513,10 +538,10 @@
                     + '</select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<input type="text" value="0" class="form-control" style="text-align: right;" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" data-rule-required="true" data-msg-required="Please input." data-rule-min="0" data-msg-min="Value must great than 0"/>';
+            newCell.innerHTML = '<input type="text" value="0" class="form-control" style="text-align: right;" name="fPresModels[' + countFoods + '].fQuantity" id="fPresModels' + countFoods + '.fQuantity" placeholder="Quantity" data-rule-required="true" data-msg-required="Please input." data-rule-min="1" data-msg-min="Value must great than 0"/>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.setAttribute("class", "form-group");
-            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].fUnit" id="fPresModels' + countFoods + 'fUnit" data-msg-min="Please select." data-rule-min="2" onload="addValidate(this)">'
+            newCell.innerHTML = '<select class="form-control" name="fPresModels[' + countFoods + '].fUnit" id="fPresModels' + countFoods + 'fUnit" data-rule-min="1" data-msg-min="Please select." onload="addValidate(this)">'
                     + '<option value="0">Select</option></select>';
             newCell = newRow.insertCell(newRow.cells.length);
             newCell.innerHTML = '<input type="text" class="form-control" name="fPresModels[' + countFoods + '].fNote" id="fPresModels' + countFoods + '.fNote" placeholder="Advice"/>';

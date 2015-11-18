@@ -29,9 +29,10 @@
                     <div class="box-header" style="padding: 0px;">
                         <div class="form-group">
                             <!-- search form (Optional) -->
-                            <form action="createNewDevice" method="GET" onsubmit="return WP()"
+                            <form action="rapeDevice" method="POST" onsubmit="return WP()"
                                   style="border: none;margin-top: 10px;margin-left: 10px;">
-                                <input type="hidden" id="uuid" name="uuid" value=""/>
+                                <input type="hidden" id="brandName" name="brandName" value=""/>
+                                <input type="hidden" id="brandUUID" name="brandUUID" value=""/>
 
                                 <div id="autoComplete" style="float: left;width: 30%;">
                                     <input type="text" id="device" autocomplete="off" name="device"
@@ -46,7 +47,7 @@
                                                                               visibility: hidden">
                                     </div>
                                 </div>
-                                <input type="submit" id="create" name="search" value="Create New Device"
+                                <input type="submit" id="create" name="action" value="Create New Device"
                                        class="btn btn-default"
                                        style="display: none;margin-left: 10px"/>
 
@@ -64,6 +65,7 @@
                                 <th>Position Have Value</th>
                                 <th>UUID</th>
                                 <th>Type</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody id="table-body"></tbody>
@@ -74,15 +76,15 @@
                                 <th>Position Have Value</th>
                                 <th>UUID</th>
                                 <th>Type</th>
+                                <th></th>
                             </tr>
                             </tfoot>
                         </table>
                     </div>
-                    <div  >
-                        <form id="createNewMeasurement" action="createNewMeasurement" method="GET">
-                            <input type="submit"  class="btn btn-default" value="Create New Measurement"
-                                   style="display: none; margin-left: 10px;margin-bottom: 10px"/>
-                        </form>
+                    <div id="createNewMeasurement" style="display: none;">
+                        <button class="btn btn-default" onclick="viewMeasurement()"
+                                style="margin-left: 10px;margin-bottom: 10px">Create New Measurement
+                        </button>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -93,6 +95,76 @@
         <!-- /.row -->
 
     </section>
+
+    <div id="superParent" style="
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    background-color: black;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;" onclick="hideMesurement()">
+    </div>
+    <div id="child" style="
+    display: none;
+    width: 50%;
+    height: 45%;
+    z-index: 10000;
+    background-color: #ffffff;
+    opacity: 1;
+    position: fixed;
+    top: 6%;
+    left: 25%;
+    bottom: 0;
+    right: 0;">
+        <form class="form-horizontal" onsubmit="return false;">
+            <div class="box-body">
+                <h2 style="margin-bottom: 20px;margin-left: 20px;">Create New Measurement</h2>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Name*</label>
+
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="mName" oninput="checkValidateMeasurement(this,'errorName')" value=""/>
+                    </div>
+                    <label class="col-sm-4 control-label" id="errorName" style="color: red; margin-left: -75px; display: none"></label>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">UUID*</label>
+
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="mUUID" oninput="checkValidateMeasurement(this,'errorUUID')" value=""/>
+                    </div>
+                    <label class="col-sm-4 control-label" style="margin-left: -20px;"> -0000-1000-8000-00805f9b34fb</label>
+                    <label class="col-sm-4 control-label" id="errorUUID" style="color: red; margin-left: -70px; display: none"></label>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Position*</label>
+
+                    <div class="col-sm-2">
+                        <input type="text" id="mPosition" class="form-control" oninput="checkValidateMeasurement(this,'errorPosition')" value=""/>
+                    </div>
+                    <label class="col-sm-4 control-label" id="errorPosition" style="color: red; margin-left: -75px; display: none"></label>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Type</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" id="mType" class="form-control" oninput="checkValidateMeasurement(this,'errorType')" value=""/>
+                    </div>
+                    <label class="col-sm-4 control-label" id="errorType" style="color: red; margin-left: -75px; display: none"> </label>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-default" onclick="createMeasurement()" style="float: right;margin-right: 30px;">
+                        Create New Measurement
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/js/bootstrap.file-input.js}">

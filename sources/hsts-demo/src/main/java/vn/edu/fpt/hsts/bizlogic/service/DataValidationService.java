@@ -151,7 +151,7 @@ public class DataValidationService extends AbstractService {
         try {
             // Nurse register
             minVals.put("weight", (float) 20);
-            minVals.put("height", (float) 110);
+            minVals.put("height", (float) 100);
             minVals.put("hearthBeat", (float) 20);
             minVals.put("bloodPressure", (float) 10);
             minVals.put("waists", (float) 50);
@@ -166,7 +166,7 @@ public class DataValidationService extends AbstractService {
 
             // Prescription model attribute
             minVals.put("mQuantity", (float) 1);
-            minVals.put("kcalRequire", (float) 100);
+            minVals.put("kcalRequire", (float) 0);
 
             // Nutrition model attribute
         } finally {
@@ -178,7 +178,7 @@ public class DataValidationService extends AbstractService {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
             // Nurse register
-            maxVals.put("weight", (float) 200);
+            maxVals.put("weight", (float) 300);
             maxVals.put("height", (float) 250);
             maxVals.put("hearthBeat", (float) 200);
             maxVals.put("bloodPressure", (float) 200);
@@ -194,7 +194,7 @@ public class DataValidationService extends AbstractService {
 
             // Prescription Model attribute
             maxVals.put("mQuantity", (float) 10);
-            maxVals.put("kcalRequire", (float) 10000);
+            maxVals.put("kcalRequire", (float) 1000);
 
             // Nutrition model attribute
         } finally {
@@ -215,7 +215,6 @@ public class DataValidationService extends AbstractService {
             intParams.add("waists");
 
             // Prescription Model attribute
-            intParams.add("kcalRequire");
             // Nutrition model attribute
 
         } finally {

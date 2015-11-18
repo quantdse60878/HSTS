@@ -272,4 +272,18 @@ public class PrescriptionController extends AbstractController{
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    @RequestMapping(value = "/finishTreatment", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean finishTreatment(@RequestParam("appointmentId") final int appointmentId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointmentId[{}]", appointmentId);
+            boolean result = doctorService.finishMakePrescription(appointmentId);
+
+            return result;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

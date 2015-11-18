@@ -11,26 +11,16 @@ public class PrescriptionModel implements Serializable {
     private int appointmentId;
     private String appointmentDate;
     private String diagnostic;
-    private int kcalRequire;
+    private String kcalRequire;
     private String note;
     private List<MedicinePrescriptionModel> mPresModels;
     private List<FoodPrescriptionModel> fPresModels;
     private List<PracticePrescriptionModel> pPresModels;
 
     public PrescriptionModel() {
+        this.kcalRequire = "0";
     }
 
-    public PrescriptionModel(String diagnostic,
-                             int kcalRequire,
-                             List<MedicinePrescriptionModel> mPresModels,
-                             List<FoodPrescriptionModel> fPresModels,
-                             List<PracticePrescriptionModel> pPresModels) {
-        this.diagnostic = diagnostic;
-        this.kcalRequire = kcalRequire;
-        this.mPresModels = mPresModels;
-        this.fPresModels = fPresModels;
-        this.pPresModels = pPresModels;
-    }
 
     public String getDiagnostic() {
         return diagnostic;
@@ -40,11 +30,11 @@ public class PrescriptionModel implements Serializable {
         this.diagnostic = diagnostic;
     }
 
-    public int getKcalRequire() {
+    public String getKcalRequire() {
         return kcalRequire;
     }
 
-    public void setKcalRequire(int kcalRequire) {
+    public void setKcalRequire(String kcalRequire) {
         this.kcalRequire = kcalRequire;
     }
 
