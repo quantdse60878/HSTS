@@ -4,8 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vn.edu.fpt.hsts.common.util.AnalyticDataTask;
-import vn.edu.fpt.hsts.persistence.entity.MedicalRecordData;
+import vn.edu.fpt.hsts.scheduler.AnalyticDataTask;
 import vn.edu.fpt.hsts.persistence.entity.ParamMeasurement;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 import vn.edu.fpt.hsts.persistence.repo.ParamMeasurementRepo;
@@ -15,7 +14,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -15,7 +15,7 @@ import vn.edu.fpt.hsts.bizlogic.service.DeviceService;
 import vn.edu.fpt.hsts.bizlogic.service.FormulaService;
 import vn.edu.fpt.hsts.bizlogic.service.ParamMeasurementService;
 import vn.edu.fpt.hsts.common.IConsts;
-import vn.edu.fpt.hsts.common.util.AnalyticDataTask;
+import vn.edu.fpt.hsts.scheduler.AnalyticDataTask;
 import vn.edu.fpt.hsts.persistence.entity.Device;
 import vn.edu.fpt.hsts.persistence.entity.ParamMeasurement;
 
