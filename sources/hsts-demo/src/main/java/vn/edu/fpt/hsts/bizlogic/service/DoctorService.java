@@ -576,7 +576,7 @@ public class DoctorService extends AbstractService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("appointment[{}]", appointmentId);
-            Appointment appointment = appointmentRepo.findOne(appointmentId);
+            Appointment appointment = appointmentRepo.getOne(appointmentId);
             appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
 
             MedicalRecord medicalRecord = appointment.getMedicalRecord();

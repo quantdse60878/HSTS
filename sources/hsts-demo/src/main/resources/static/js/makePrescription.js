@@ -69,161 +69,171 @@ var validator = $("#mainForm").validate({
     },
     submitHandler: function (form) {
         //form.submit();
-        // get val of table medicine
-        var rows = document.getElementsByClassName('rowMedi');
-        var mPresModels = [];
-        for (var i = 0; i <rows.length; i++){
-            var row = rows[i];
-            var el = {
-                m: row.cells[1].firstElementChild.value,
-                mTime: row.cells[2].firstElementChild.value,
-                mQuantity: row.cells[3].firstElementChild.value,
-                mUnit: row.cells[4].firstElementChild.value,
-                mNote: row.cells[5].firstElementChild.value
-            }
-            mPresModels.push(el);
-        }
-        console.log(mPresModels);
-        // get val of table food
-        var rows = document.getElementsByClassName('rowFood');
-        var fPresModels = [];
-        for (var i = 0; i <rows.length; i++){
-            var row = rows[i];
-            var el = {
-                f: row.cells[1].firstElementChild.value,
-                fTime: row.cells[2].firstElementChild.value,
-                fQuantity: row.cells[3].firstElementChild.value,
-                fUnit: row.cells[4].firstElementChild.value,
-                fNote: row.cells[5].firstElementChild.value
-            }
-            fPresModels.push(el);
-        }
-        console.log(fPresModels);
-        // get val of table practice
-        var rows = document.getElementsByClassName('rowPrac');
-        var pPresModels = [];
-        for (var i = 0; i <rows.length; i++){
-            var row = rows[i];
-            var el = {
-                p: row.cells[1].firstElementChild.value,
-                pTime: row.cells[2].firstElementChild.value,
-                pIntensity: row.cells[3].firstElementChild.value,
-                pNote: row.cells[4].firstElementChild.value
-            }
-            pPresModels.push(el);
-        }
-        console.log(pPresModels);
-        // JSON data
-        var postData = {
-            appointmentId: $("#appointmentId").val(),
-            appointmentDate: $("#Appointment").val(),
-            diagnostic: $("#select2Box").val(),
-            kcalRequire: $("#kcalRequire").val(),
-            note: $("#note").val(),
-            mPresModels: mPresModels,
-            fPresModels: fPresModels,
-            pPresModels: pPresModels
-        }
-        // JSON data
-
-        $.ajax({
-            method: "POST",
-            url: "/makePrescription2",
-            contentType: "application/json",
-            data: JSON.stringify(postData)
-        })
-            .done(function (data) {
-                console.log(data);
-                if (data != null) {
-                    // Set data to html
-                    // Set information Date History
-                    $('#resultDate').html(data.dateInfor);
-                    var table = [];
-                    var row = [];
-                    // infor table medicines
-                    $('#resultMedicine').html('<tr><th style="width: 10px">#</th>'
-                        + '<th>Medicine</th>'
-                        + '<th>Times</th>'
-                        + '<th>Quantity</th>'
-                        + '<th>Unit</th>'
-                        + '<th>Advice</th>'
-                        + '</tr>');
-                    for (var i = 0; i < data.hms.length; i++) {
-                        var tmp = data.hms[i];
-                        row = "<tr>"
-                            + "<td>" + (i + 1) + "</td>"
-                            + "<td>" + tmp.name + "</td>"
-                            + "<td>" + tmp.times + "</td>"
-                            + "<td>" + tmp.quantity + "</td>"
-                            + "<td>" + tmp.unit + "</td>"
-                            + "<td>" + tmp.note + "</td>"
-                            + "</tr>";
-                        table = table + row;
-                    }
-                    ;
-                    //console.log(table);
-                    $(table).appendTo("#resultMedicine");
-
-                    table = [];
-                    row = [];
-                    // infor table food
-                    $('#resultFoods').html('<tr><th style="width: 10px">#</th>'
-                        + '<th>Menu</th>'
-                        + '<th>Times</th>'
-                        + '<th>Quantity</th>'
-                        + '<th>Unit</th>'
-                        + '<th>Advice</th>'
-                        + '</tr>');
-                    for (var i = 0; i < data.hfs.length; i++) {
-                        var tmp = data.hfs[i];
-                        row = "<tr>"
-                            + "<td>" + (i + 1) + "</td>"
-                            + "<td>" + tmp.name + "</td>"
-                            + "<td>" + tmp.times + "</td>"
-                            + "<td>" + tmp.quantity + "</td>"
-                            + "<td>" + tmp.unit + "</td>"
-                            + "<td>" + tmp.note + "</td>"
-                            + "</tr>";
-                        table = table + row;
-                    }
-                    ;
-                    //console.log(table);
-                    $(table).appendTo("#resultFoods");
-
-                    table = [];
-                    row = [];
-                    // infor table medicines
-                    $('#resultPractice').html('<tr><th style="width: 10px">#</th>'
-                        + '<th>Name</th>'
-                        + '<th>Times</th>'
-                        + '<th>Quantity</th>'
-                        + '<th>Advice</th>'
-                        + '</tr>');
-                    for (var i = 0; i < data.hps.length; i++) {
-                        var tmp = data.hps[i];
-                        row = "<tr>"
-                            + "<td>" + (i + 1) + "</td>"
-                            + "<td>" + tmp.name + "</td>"
-                            + "<td>" + tmp.times + "</td>"
-                            + "<td>" + tmp.quantity + "</td>"
-                            + "<td>" + tmp.note + "</td>"
-                            + "</tr>";
-                        table = table + row;
-                    }
-                    ;
-                    //console.log(table);
-                    $(table).appendTo("#resultPractice");
-
-                    // Hide pop-up
-                    $('#myModal').modal('hide');
-                    // Show pop-up
-                    $('#resultPre').modal('show');
-                    changeTabb("#tabRe_1", "#li_tabRe_1");
+        var diagno = $("#select2Box").val();
+        if(diagno == "No illness"){
+            $('#patientName').html($("#txtpatientName").text());
+            // Hide pop-up
+            $('#myModal').modal('hide');
+            // Show pop-up
+            $('#noIllness').modal('show');
+        } else {
+            // get val of table medicine
+            var rows = document.getElementsByClassName('rowMedi');
+            var mPresModels = [];
+            for (var i = 0; i <rows.length; i++){
+                var row = rows[i];
+                var el = {
+                    m: row.cells[1].firstElementChild.value,
+                    mTime: row.cells[2].firstElementChild.value,
+                    mQuantity: row.cells[3].firstElementChild.value,
+                    mUnit: row.cells[4].firstElementChild.value,
+                    mNote: row.cells[5].firstElementChild.value
                 }
+                mPresModels.push(el);
+            }
+            console.log(mPresModels);
+            // get val of table food
+            var rows = document.getElementsByClassName('rowFood');
+            var fPresModels = [];
+            for (var i = 0; i <rows.length; i++){
+                var row = rows[i];
+                var el = {
+                    f: row.cells[1].firstElementChild.value,
+                    fTime: row.cells[2].firstElementChild.value,
+                    fQuantity: row.cells[3].firstElementChild.value,
+                    fUnit: row.cells[4].firstElementChild.value,
+                    fNote: row.cells[5].firstElementChild.value
+                }
+                fPresModels.push(el);
+            }
+            console.log(fPresModels);
+            // get val of table practice
+            var rows = document.getElementsByClassName('rowPrac');
+            var pPresModels = [];
+            for (var i = 0; i <rows.length; i++){
+                var row = rows[i];
+                var el = {
+                    p: row.cells[1].firstElementChild.value,
+                    pTime: row.cells[2].firstElementChild.value,
+                    pIntensity: row.cells[3].firstElementChild.value,
+                    pNote: row.cells[4].firstElementChild.value
+                }
+                pPresModels.push(el);
+            }
+            console.log(pPresModels);
+            // JSON data
+            var postData = {
+                appointmentId: $("#appointmentId").val(),
+                appointmentDate: $("#Appointment").val(),
+                diagnostic: $("#select2Box").val(),
+                kcalRequire: $("#kcalRequire").val(),
+                note: $("#note").val(),
+                mPresModels: mPresModels,
+                fPresModels: fPresModels,
+                pPresModels: pPresModels
+            }
+            // JSON data
 
-            });
+            $.ajax({
+                method: "POST",
+                url: "/makePrescription2",
+                contentType: "application/json",
+                data: JSON.stringify(postData)
+            })
+                .done(function (data) {
+                    console.log(data);
+                    if (data != null) {
+                        // Set data to html
+                        // Set information Date History
+                        $('#resultDate').html(data.dateInfor);
+                        var table = [];
+                        var row = [];
+                        // infor table medicines
+                        $('#resultMedicine').html('<tr><th style="width: 10px">#</th>'
+                            + '<th>Medicine</th>'
+                            + '<th>Times</th>'
+                            + '<th>Quantity</th>'
+                            + '<th>Unit</th>'
+                            + '<th>Advice</th>'
+                            + '</tr>');
+                        for (var i = 0; i < data.hms.length; i++) {
+                            var tmp = data.hms[i];
+                            row = "<tr>"
+                                + "<td>" + (i + 1) + "</td>"
+                                + "<td>" + tmp.name + "</td>"
+                                + "<td>" + tmp.times + "</td>"
+                                + "<td>" + tmp.quantity + "</td>"
+                                + "<td>" + tmp.unit + "</td>"
+                                + "<td>" + tmp.note + "</td>"
+                                + "</tr>";
+                            table = table + row;
+                        }
+                        ;
+                        //console.log(table);
+                        $(table).appendTo("#resultMedicine");
 
-        return false;
+                        table = [];
+                        row = [];
+                        // infor table food
+                        $('#resultFoods').html('<tr><th style="width: 10px">#</th>'
+                            + '<th>Menu</th>'
+                            + '<th>Times</th>'
+                            + '<th>Quantity</th>'
+                            + '<th>Unit</th>'
+                            + '<th>Advice</th>'
+                            + '</tr>');
+                        for (var i = 0; i < data.hfs.length; i++) {
+                            var tmp = data.hfs[i];
+                            row = "<tr>"
+                                + "<td>" + (i + 1) + "</td>"
+                                + "<td>" + tmp.name + "</td>"
+                                + "<td>" + tmp.times + "</td>"
+                                + "<td>" + tmp.quantity + "</td>"
+                                + "<td>" + tmp.unit + "</td>"
+                                + "<td>" + tmp.note + "</td>"
+                                + "</tr>";
+                            table = table + row;
+                        }
+                        ;
+                        //console.log(table);
+                        $(table).appendTo("#resultFoods");
+
+                        table = [];
+                        row = [];
+                        // infor table medicines
+                        $('#resultPractice').html('<tr><th style="width: 10px">#</th>'
+                            + '<th>Name</th>'
+                            + '<th>Times</th>'
+                            + '<th>Quantity</th>'
+                            + '<th>Advice</th>'
+                            + '</tr>');
+                        for (var i = 0; i < data.hps.length; i++) {
+                            var tmp = data.hps[i];
+                            row = "<tr>"
+                                + "<td>" + (i + 1) + "</td>"
+                                + "<td>" + tmp.name + "</td>"
+                                + "<td>" + tmp.times + "</td>"
+                                + "<td>" + tmp.quantity + "</td>"
+                                + "<td>" + tmp.note + "</td>"
+                                + "</tr>";
+                            table = table + row;
+                        }
+                        ;
+                        //console.log(table);
+                        $(table).appendTo("#resultPractice");
+
+                        // Hide pop-up
+                        $('#myModal').modal('hide');
+                        // Show pop-up
+                        $('#resultPre').modal('show');
+                        changeTabb("#tabRe_1", "#li_tabRe_1");
+                    }
+
+                });
+
+            return false;
+        }
+
     },
     invalidHandler: function (e, validator) {
         if (validator.errorList.length > 0) {
