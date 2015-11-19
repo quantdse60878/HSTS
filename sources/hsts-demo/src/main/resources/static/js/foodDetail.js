@@ -21,7 +21,7 @@ $(document).ready(function(){
         "ajax": {
             "url": "/foodUnit",
             "data": {
-                foodId: 1
+                foodId: $("#foodId").val()
             },
             "dataSrc": ""
         },
