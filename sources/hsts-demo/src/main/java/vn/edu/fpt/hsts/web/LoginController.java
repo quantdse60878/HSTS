@@ -7,18 +7,26 @@ package vn.edu.fpt.hsts.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.LoginCredentialModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientModel;
-import vn.edu.fpt.hsts.bizlogic.service.*;
+import vn.edu.fpt.hsts.bizlogic.service.AccountService;
+import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
+import vn.edu.fpt.hsts.bizlogic.service.FormulaService;
+import vn.edu.fpt.hsts.bizlogic.service.MailService;
+import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
+import vn.edu.fpt.hsts.web.session.UserSession;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
@@ -30,7 +38,12 @@ import java.util.List;
  * Login controller, for processing login, logout.
  */
 @Controller
-public class LoginController {
+public class LoginController extends AbstractController {
+
+
+    /**
+     * The logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
     /**
@@ -58,6 +71,13 @@ public class LoginController {
     @Autowired
     DoctorService doctorService;
 
+
+    /**
+     * The {@link UserSession}.
+     */
+    @Autowired
+    private UserSession userSession;
+
     /**
      * The login page mapping
      *
@@ -75,24 +95,48 @@ public class LoginController {
         }
     }
 
+    @RequestMapping(value = "/loginRest", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public LoginCredentialModel loginRest(@RequestBody LoginCredentialModel loginCredential, HttpSession session) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("loginCredential[{}]", loginCredential);
+            Account user = accountService.checkLogin(loginCredential.getUsername(), loginCredential.getPassword());
+            if (null != user && user.getStatus() != IDbConsts.IAccountStatus.BLOCKED) {
+                session.setAttribute("USER", user);
+                LoginCredentialModel model = new LoginCredentialModel();
+                model.setAccountId(user.getId());
+                if (user.getStatus() == IDbConsts.IAccountStatus.ACTIVE) {
+                    model.setStatus(LoginCredentialModel.ILoginSatus.OK);
+                } else {
+                    model.setStatus(LoginCredentialModel.ILoginSatus.INACTIVE);
+                }
+                return model;
+            } else {
+                return new LoginCredentialModel(LoginCredentialModel.ILoginSatus.FAIL);
+            }
+        } catch (Exception e){
+            return new LoginCredentialModel(LoginCredentialModel.ILoginSatus.FAIL);
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
     /**
      * The login mapping
      *
-     * @param username
-     * @param password
      * @param session
      * @return
      */
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam("username") final String username,
-                              @RequestParam("password") final String password, HttpSession session) {
+    @RequestMapping(value = "navigate", method = RequestMethod.GET)
+    public ModelAndView login(HttpSession session) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             ModelAndView mav = new ModelAndView();
-            LOGGER.info("username[{}], password[{}]", username, password);
-            Account user = accountService.checkLogin(username, password);
+            final Account user = (Account) session.getAttribute("USER");
             if (user != null && user.getStatus() != IDbConsts.IAccountStatus.BLOCKED) {
-                session.setAttribute("USER", user);
+
                 mav.setViewName("home");
 
                 if (user.getStatus() == IDbConsts.IAccountStatus.ACTIVE){
@@ -219,24 +263,23 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = "createNewPassword", method = RequestMethod.POST)
-    public ModelAndView createNewPassword(@RequestParam("username") final String username,
-                                          @RequestParam("oldPassword") final String oldPassword,
-                                          @RequestParam("newPassword") final String newPassword,
+    @RequestMapping(value = "/createNewPassword", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String createNewPassword(@RequestBody LoginCredentialModel model,
                                           HttpSession session) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("username[{}],oldPassword[{}],newPassword[{}]", username, oldPassword, newPassword);
-            Account account = accountService.changePassword(username, oldPassword, newPassword);
+            LOGGER.info("model[{}]", model);
+            Account account = accountService.changePassword(model);
             if (null != account){
-                account.setStatus(IDbConsts.IAccountStatus.ACTIVE);
-                accountService.updateAccount(account);
+                session.invalidate();
+                return OK_STATUS;
             }
-            session.invalidate();
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("login");
-            return mav;
-        } finally {
+            return FAIL_STATUS;
+        } catch (Exception e) {
+            return FAIL_STATUS;
+        }finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }

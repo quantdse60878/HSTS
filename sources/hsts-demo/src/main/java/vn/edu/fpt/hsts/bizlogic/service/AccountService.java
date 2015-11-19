@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.bizlogic.model.AccountModel;
 import vn.edu.fpt.hsts.bizlogic.model.AccountPageModel;
+import vn.edu.fpt.hsts.bizlogic.model.LoginCredentialModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
@@ -29,6 +30,7 @@ import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
 import vn.edu.fpt.hsts.persistence.repo.RoleRepo;
 import vn.edu.fpt.hsts.web.session.UserSession;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -81,6 +83,7 @@ public class AccountService {
                 userSession.setId(account.getId());
                 userSession.setUsername(account.getUsername());
                 userSession.setRole(account.getRole().getName());
+                userSession.setStatus(account.getStatus());
                 userSession.setEmail(account.getEmail());
                 return account;
             }
@@ -260,5 +263,23 @@ public class AccountService {
     public void deleteAccount(Account account) {
         if(account.getRole().getName().equals("Doctor")) doctorRepo.delete(account.getId());
         accountRepo.delete(account);
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public Account changePassword(final LoginCredentialModel model){
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("model[{}]", model);
+            final Account account = accountRepo.findById(model.getAccountId(), model.getOldPassword());
+            if(null != account) {
+                account.setPassword(model.getPassword());
+                account.setStatus(IDbConsts.IAccountStatus.ACTIVE);
+                accountRepo.save(account);
+                return account;
+            }
+            return null;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
     }
 }

@@ -44,4 +44,7 @@ public interface AccountRepo extends JpaRepository<Account, Integer> {
 
     @Query("select a from Account a where email = :email")
     public Account findByEmail(@Param("email") final String email);
+
+    @Query("select a from Account a where id = :id and password = :password")
+    public Account findById(@Param(value = "id") final int id, @Param("password") final String password);
 }
