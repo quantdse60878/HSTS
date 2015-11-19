@@ -47,7 +47,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractElementGroup" />
-        <value>104</value>
+        <value>9</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -128,6 +128,24 @@
       <associated-diagrams />
       <owned-items />
       <style class="default" />
+    </item>
+    <item id="di581668896616536742" cid="EX006" type="extend" name="Suggest Nutrition" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/17/2015 14:06:10">
+      <stereotypes>
+        <stereotype name="extend" />
+      </stereotypes>
+      <associated-diagrams />
+      <owned-items />
+      <style class="default" />
+      <extend extension-point="" />
+    </item>
+    <item id="di987823916997995229" cid="EX004" type="extend" name="Suggest Nutrition" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/17/2015 14:05:49">
+      <stereotypes>
+        <stereotype name="extend" />
+      </stereotypes>
+      <associated-diagrams />
+      <owned-items />
+      <style class="default" />
+      <extend extension-point="" />
     </item>
   </items>
   <models>
@@ -2304,7 +2322,7 @@
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-usecase" id="p612635294580845203" name="UseCaseDiagram4" order-index="7" overview-order-index="0" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-39,31" zoom="0.6">
+      <diagram type="uml-usecase" id="p612635294580845203" name="UseCaseDiagram4" order-index="7" overview-order-index="0" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-39,203" zoom="0.6">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -2316,7 +2334,7 @@
           </authors>
           <description />
           <creation-date>11/16/2015 20:06:02</creation-date>
-          <change-date>11/17/2015 14:12:43</change-date>
+          <change-date>11/18/2015 22:41:44</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -2894,24 +2912,6 @@ Extension point: Select suggest treatment</comment>
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di987823916997995229" cid="EX004" type="extend" name="Suggest Nutrition" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/17/2015 14:05:49">
-            <stereotypes>
-              <stereotype name="extend" />
-            </stereotypes>
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <extend extension-point="" />
-          </item>
-          <item id="di581668896616536742" cid="EX006" type="extend" name="Suggest Nutrition" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/17/2015 14:06:10">
-            <stereotypes>
-              <stereotype name="extend" />
-            </stereotypes>
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <extend extension-point="" />
-          </item>
           <item id="di576996214928424894" cid="CMT004" type="comment" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/17/2015 14:12:17">
             <stereotypes />
             <associated-diagrams />
@@ -3432,24 +3432,6 @@ Extension point: Select suggest nutrition</comment>
             </layout>
             <relation from="di545104635424648391" from-iid="3281703599c248109fa7421e620aa016" to="di870939531646629240" to-iid="d1f6ba9232e84e2aacd138515bff2ddd" />
           </item>
-          <item id="di987823916997995229" iid="ec12d7f2f8af4863b7834d09e29b117a" creation-date="11/17/2015 14:05:49" order-index="143" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="820" y1="760" x2="502" y2="830" start-border-pos="0.866666666666667" end-border-pos="0.339285714285714">
-              <points>
-                <point x="820" y="760" />
-                <point x="502" y="830" />
-              </points>
-            </layout>
-            <relation from="di919187235859058180" from-iid="c63c5feed4bb4e82a54ce670a966eba4" to="di643740250515319244" to-iid="87c9d211dc3d40c6bf4284253a9fe1ff" />
-          </item>
-          <item id="di581668896616536742" iid="d7b024ec777a4698ba0a4ce1b0cbc17b" creation-date="11/17/2015 14:06:10" order-index="144" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="840" y1="850" x2="504" y2="840" start-border-pos="0.866666666666667" end-border-pos="0.369047619047619">
-              <points>
-                <point x="840" y="850" />
-                <point x="504" y="840" />
-              </points>
-            </layout>
-            <relation from="di493789024305086185" from-iid="4f910933420a4c118a817fa0bcf43caf" to="di643740250515319244" to-iid="87c9d211dc3d40c6bf4284253a9fe1ff" />
-          </item>
           <item id="di576996214928424894" iid="a5a6559becdd4cd6b1fd4fbdd0ffdfcd" container="di716729623404740288" container-iid="c6d7104506e24b60a5d2f433353e6dd6" creation-date="11/17/2015 14:12:17" order-index="145" type="entity">
             <layout ax="400" ay="640" awidth="210" aheight="100" x="400" y="640" width="210" height="100" angle="0" />
           </item>
@@ -3470,6 +3452,24 @@ Extension point: Select suggest nutrition</comment>
               </points>
             </layout>
             <relation from="di576996214928424894" from-iid="a5a6559becdd4cd6b1fd4fbdd0ffdfcd" to="di581668896616536742" to-iid="d7b024ec777a4698ba0a4ce1b0cbc17b" />
+          </item>
+          <item id="di581668896616536742" iid="d7b024ec777a4698ba0a4ce1b0cbc17b" creation-date="11/17/2015 14:06:10" order-index="144" type="relation">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="840" y1="850" x2="504" y2="840" start-border-pos="0.866666666666667" end-border-pos="0.369047619047619">
+              <points>
+                <point x="840" y="850" />
+                <point x="504" y="840" />
+              </points>
+            </layout>
+            <relation from="di493789024305086185" from-iid="4f910933420a4c118a817fa0bcf43caf" to="di643740250515319244" to-iid="87c9d211dc3d40c6bf4284253a9fe1ff" />
+          </item>
+          <item id="di987823916997995229" iid="ec12d7f2f8af4863b7834d09e29b117a" creation-date="11/17/2015 14:05:49" order-index="143" type="relation">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="820" y1="760" x2="502" y2="830" start-border-pos="0.866666666666667" end-border-pos="0.339285714285714">
+              <points>
+                <point x="820" y="760" />
+                <point x="502" y="830" />
+              </points>
+            </layout>
+            <relation from="di919187235859058180" from-iid="c63c5feed4bb4e82a54ce670a966eba4" to="di643740250515319244" to-iid="87c9d211dc3d40c6bf4284253a9fe1ff" />
           </item>
         </layer>
       </diagram>

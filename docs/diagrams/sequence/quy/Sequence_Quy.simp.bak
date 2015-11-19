@@ -9,11 +9,11 @@
     <entity-names>
       <counter>
         <item-type stereotype="" type="UmlActor" />
-        <value>2</value>
+        <value>3</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlLifeline" />
-        <value>15</value>
+        <value>16</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSequenceAction" />
@@ -23,19 +23,15 @@
         <item-type stereotype="" type="UmlActivationBar" />
         <value>44</value>
       </counter>
-      <counter>
-        <item-type stereotype="" type="DrawingItem" />
-        <value>1</value>
-      </counter>
     </entity-names>
     <entity-ids>
       <counter>
         <item-type stereotype="" type="UmlActor" />
-        <value>3</value>
+        <value>4</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlLifeline" />
-        <value>16</value>
+        <value>17</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSequenceAction" />
@@ -46,10 +42,6 @@
         <value>45</value>
       </counter>
       <counter>
-        <item-type stereotype="" type="AbstractElementGroup" />
-        <value>318</value>
-      </counter>
-      <counter>
         <item-type stereotype="" type="AbstractTextItem" />
         <value>2</value>
       </counter>
@@ -57,7 +49,7 @@
     <diagrams>
       <counter>
         <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlSequenceDiagram</type>
-        <value>2</value>
+        <value>3</value>
       </counter>
     </diagrams>
     <fields />
@@ -478,7 +470,7 @@
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di437806767267908631" iid="b1b28142349f4a93a28818e9839b909c" creation-date="11/17/2015 16:58:06" order-index="5" type="sequence-action">
-            <layout x1="-230" y1="185" x2="31" y2="185" ax="-230" ay="170" awidth="261" aheight="20" x="-230" y="170" width="261" height="20" message-x="0" message-y="-10" />
+            <layout x1="20" y1="185" x2="31" y2="185" ax="20" ay="170" awidth="11" aheight="20" x="20" y="170" width="11" height="20" message-x="0" message-y="-10" />
             <sequence-action from="di841744243243099830" to="di214592090852694309" show-sequence-number="false" />
           </item>
           <item id="di560004310823687107" iid="511113423bac45208af896892da673ef" creation-date="11/17/2015 17:36:57" order-index="19" type="sequence-action">
@@ -540,7 +532,7 @@
             <layout ax="1230" ay="371" awidth="20" aheight="40" x="1220" y="371" width="20" height="40" angle="0" />
           </item>
           <item id="di564245924992237634" iid="6f6321fc54d04837a046469d6fe69ec1" creation-date="11/17/2015 18:03:17" order-index="33" type="sequence-action">
-            <layout x1="680" y1="555" x2="1220" y2="555" ax="680" ay="540" awidth="540" aheight="20" x="680" y="540" width="540" height="20" message-x="120" message-y="-10" message-width="170" />
+            <layout x1="20" y1="555" x2="1220" y2="555" ax="20" ay="540" awidth="1200" aheight="20" x="20" y="540" width="1200" height="20" message-x="120" message-y="-10" message-width="170" />
             <sequence-action from="di377609401884040325" to="di835991071468497017" show-sequence-number="false" />
           </item>
           <item id="di319087954990361824" iid="e2878d7ed21f4cc3bd9b5f769a95bba4" creation-date="11/17/2015 18:07:32" order-index="34" type="sequence-action">
@@ -624,7 +616,7 @@
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-sequence" id="p560759868655061206" name="GetDataFromWristband" order-index="2" overview-order-index="0" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="194,9" zoom="0.7">
+      <diagram type="uml-sequence" id="p560759868655061206" name="GetDataFromWristband" order-index="2" overview-order-index="0" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="817,299" zoom="1.4">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -728,7 +720,7 @@
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di102901109190901000" iid="0566953aba8f40218bca2f3da260928f" creation-date="11/17/2015 19:35:00" order-index="6" type="sequence-action">
-            <layout x1="469" y1="230" x2="1110" y2="230" ax="469" ay="215" awidth="641" aheight="20" x="469" y="215" width="641" height="20" message-x="-120" message-y="-10" />
+            <layout x1="20" y1="230" x2="1110" y2="230" ax="20" ay="215" awidth="1090" aheight="20" x="20" y="215" width="1090" height="20" message-x="-120" message-y="-10" />
             <sequence-action from="di762299286748627050" to="di930832054283136209" show-sequence-number="false" />
           </item>
           <item id="di726944175913975018" iid="6e2117048663455d8c2368a0060322b9" creation-date="11/17/2015 19:37:05" order-index="9" type="sequence-action">
@@ -773,6 +765,46 @@
           <item id="di899662936774134734" iid="cc4084c0aec94d649324b9d12df33e50" creation-date="11/17/2015 19:55:38" order-index="19" type="sequence-action">
             <layout x1="1120" y1="386" x2="820" y2="386" ax="820" ay="371" awidth="300" aheight="20" x="820" y="371" width="300" height="20" message-x="0" message-y="-10" />
             <sequence-action from="di985708152415862821" to="di915635628719833663" show-sequence-number="false" />
+          </item>
+        </layer>
+      </diagram>
+      <diagram type="uml-sequence" id="p486897722922021223" name="AnalyticMeal" order-index="3" overview-order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>11/18/2015 22:32:40</creation-date>
+          <change-date>11/19/2015 13:30:50</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items>
+          <item id="di842529776123566907" cid="AC003" type="actor" name="Nutrition Doctor" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/18/2015 22:43:02">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di669873450642200783" cid="LL016" type="lifeline" name="Lifeline16" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/19/2015 13:30:50">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <lifeline classifier-name="" is-active="false" is-multi-object="false" />
+          </item>
+        </abstract-items>
+        <layer name="Default" visible="true" enabled="true" locked="false">
+          <item id="di842529776123566907" iid="18d1ebf4653e4d51b14c9ae192473b53" creation-date="11/18/2015 22:43:02" order-index="0" type="lifeline">
+            <layout ax="70" ay="50" awidth="140" aheight="500" x="70" y="50" width="140" height="500" angle="0" />
+          </item>
+          <item id="di669873450642200783" iid="8c5fe16c079a4772919a4d30f6e6a7b7" creation-date="11/19/2015 13:30:50" order-index="1" type="lifeline">
+            <layout ax="410" ay="50" awidth="140" aheight="500" x="410" y="50" width="140" height="500" angle="0" />
           </item>
         </layer>
       </diagram>
