@@ -49,7 +49,7 @@ $(document).ready(function(){
                     if (data != null && data.length > 0) {
                         var render = '';
                         $.each(data, function (key, element) {
-                           render += element.foodName + ", ";
+                           render += element.foodUnit + ", ";
                         });
                         var index = render.lastIndexOf(", ");
                         render = render.substring(0, index);
