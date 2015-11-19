@@ -133,7 +133,7 @@ public class AbstractController implements ControllerParam {
                 mav.addObject("FOODINGREDIENT", nutritionModel);
                 LOGGER.info("nutritionModel[{}]", nutritionModel);
                 int kcalEstimate = (int) (nutritionModel.getTotalEnergy() - preventionCheck.getBasalMetabolicRate());
-                prescriptionModel.setKcalRequire(kcalEstimate);
+                prescriptionModel.setKcalRequire(String.valueOf(kcalEstimate));
             }
 
             // Set entry patient
@@ -155,6 +155,8 @@ public class AbstractController implements ControllerParam {
             // Get Medicalhistory
             String medicalHistory = patientService.getPatientHistory(appointment.getMedicalRecord().getMedicalHistory());
             mav.addObject("MEDI_HIS", medicalHistory);
+
+
 
             // Add model
             mav.addObject("model", prescriptionModel);

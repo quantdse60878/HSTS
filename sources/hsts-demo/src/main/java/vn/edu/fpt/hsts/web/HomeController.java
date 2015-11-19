@@ -16,11 +16,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.service.AccountService;
 import vn.edu.fpt.hsts.bizlogic.service.DataValidationService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.util.StringUtils;
+import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.web.session.UserSession;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +49,9 @@ public class HomeController {
      */
     @Autowired
     private DataValidationService dataValidationService;
+
+    @Autowired
+    private AccountService accountService;
 
     @RequestMapping(value = "/")
     public String home() {
@@ -116,6 +122,23 @@ public class HomeController {
         try {
             final boolean result = dataValidationService.validateRequestString(request);
             return result;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/validatePassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public boolean validatePassword(@RequestParam("username") final String username,
+                                    @RequestParam("oldPassword") final String oldPassword) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            Account account = accountService.checkLogin(username, oldPassword);
+            if (null != account){
+                return true;
+            } else {
+                return false;
+            }
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

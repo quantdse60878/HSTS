@@ -24,4 +24,20 @@ public class ParamMeasurementService extends AbstractService {
     public List<ParamMeasurement> findParamMeasurementByDevice(Device device) {
         return paramMeasurementRepo.findParamMeasurementByDeviceId(device.getId());
     }
+
+    public void createNewMeasure(ParamMeasurement paramMeasurement) {
+        paramMeasurementRepo.save(paramMeasurement);
+    }
+
+    public void deleteMeasurement(Device device, String measurementUUID) {
+        ParamMeasurement paramMeasurement = paramMeasurementRepo.findParamMeasurementByDeviceIdAndUUID(device.getId(),measurementUUID);
+        paramMeasurementRepo.delete(paramMeasurement);
+    }
+
+    public void deleteAllParamMeasurementByDevice(Device device) {
+        List<ParamMeasurement> list = paramMeasurementRepo.findParamMeasurementByDeviceId(device.getId());
+        for(ParamMeasurement paramMeasurement : list){
+            paramMeasurementRepo.delete(paramMeasurement);
+        }
+    }
 }

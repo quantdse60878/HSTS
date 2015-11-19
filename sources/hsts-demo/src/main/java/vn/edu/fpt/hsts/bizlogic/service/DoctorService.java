@@ -271,7 +271,9 @@ public class DoctorService extends AbstractService {
                 newTreatment.setStatus(IDbConsts.ITreatmentStatus.ON_TREATING);
                 newTreatment.setAppointment(appointment);
                 newTreatment.setFromDate(new Date());
-                newTreatment.setCaloriesBurnEveryday(prescription.getKcalRequire());
+                String kcal = prescription.getKcalRequire().replace(".","");
+                LOGGER.info("kcal[{}]", kcal);
+                newTreatment.setCaloriesBurnEveryday(Integer.parseInt(kcal));
                 newTreatment.setToDate(toDate);
                 newTreatment.setNote(prescription.getNote());
                 treatmentRepo.save(newTreatment);
@@ -506,6 +508,99 @@ public class DoctorService extends AbstractService {
             final DoctorPageModel pageModel = new DoctorPageModel(doctors);
             return pageModel;
         } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public PracticeResultModel getInfoPracticeDataOfPatientByAppointment(final int appointmentId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointment[{}]", appointmentId);
+            PracticeResultModel resultModel = new PracticeResultModel();
+            Appointment appointment = appointmentRepo.findOne(appointmentId);
+            Appointment oldAppointment = appointmentRepo.findParentAppointment(appointmentId);
+
+            if (null != oldAppointment) {
+                Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(oldAppointment.getId()).get(0);
+                List<MedicalRecordData> medicalRecordDatas = medicalRecordDataRepo.findRecordDataByAppointment(oldAppointment,
+                        oldAppointment.getMeetingDate(), appointment.getMeetingDate());
+                LOGGER.info("medicalRecordDatas: " + medicalRecordDatas.size());
+                if (medicalRecordDatas.size() > 0) {
+                    int kcalEstimate = treatment.getCaloriesBurnEveryday();
+                    resultModel.setKcalEstimate(kcalEstimate);
+                    List<Integer> listKcalEstimate = new ArrayList<Integer>();
+                    List<Integer> listKcalConsumed = new ArrayList<Integer>();
+                    List<String> listLable = new ArrayList<String>();
+                    int kcalConsumed = 0;
+                    int count = medicalRecordDatas.size();
+                    for (int i = 0; i < count; i++) {
+                        kcalConsumed = 0;
+                        listKcalEstimate.add(kcalEstimate);
+                        listLable.add(DateUtils.formatDate(medicalRecordDatas.get(i).getCollectedDate(), DateUtils.DATE_PATTERN_5));
+                        List<PropertyRecord> propertyRecords = propertyRecordRepo.findAllPropertyRecordByMrdAndpm(medicalRecordDatas.get(i).getId(), 2);
+                        LOGGER.info("propertyRecords: " + propertyRecords.size());
+                        for (int j = 0; j < propertyRecords.size(); j++) {
+                            PropertyRecord propertyRecord = propertyRecords.get(j);
+                            kcalConsumed += Float.parseFloat(propertyRecord.getParamMeasurementValue());
+                        }
+                        listKcalConsumed.add(kcalConsumed);
+                    }
+                    kcalConsumed = kcalConsumed / count;
+                    resultModel.setAvgKcalConsumed(kcalConsumed);
+                    resultModel.setLables(listLable);
+                    resultModel.setKcalConsumeds(listKcalConsumed);
+                    resultModel.setKcalEstimets(listKcalEstimate);
+                    float ratioCompletePractice = ((float) kcalConsumed / (float) kcalEstimate) * 100;
+                    resultModel.setRatioCompletePractice(ratioCompletePractice);
+                    if (ratioCompletePractice >= 130) {
+                        resultModel.setStatus(3);
+                    } else if (ratioCompletePractice < 130 && ratioCompletePractice >= 85) {
+                        resultModel.setStatus(2);
+                    } else if (ratioCompletePractice < 85) {
+                        resultModel.setStatus(1);
+                    }
+                    LOGGER.info(resultModel.toString());
+                    return resultModel;
+                }
+            }
+            return null;
+        } catch (Exception e) {
+            LOGGER.info("Exception: " + e.getMessage());
+            return null;
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public boolean finishMakePrescription(final int appointmentId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointment[{}]", appointmentId);
+            Appointment appointment = appointmentRepo.getOne(appointmentId);
+            appointment.setStatus(IDbConsts.IAppointmentStatus.FINISHED);
+
+            MedicalRecord medicalRecord = appointment.getMedicalRecord();
+            medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.NO_ILLNESS);
+
+            appointmentRepo.saveAndFlush(appointment);
+            medicalRecordRepo.saveAndFlush(medicalRecord);
+            return true;
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public void createNoIllness() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            Illness illness = illnessRepo.findByName("No illness");
+            if (null == illness){
+                illness = new Illness();
+                illness.setDescription("No illness");
+                illness.setName("No illness");
+                illnessRepo.saveAndFlush(illness);
+            }
+        }finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }

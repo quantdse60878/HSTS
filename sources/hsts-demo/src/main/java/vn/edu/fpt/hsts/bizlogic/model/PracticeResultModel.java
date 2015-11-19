@@ -44,8 +44,35 @@ public class PracticeResultModel {
     private int kcalEstimate;
     private int status;
     private float ratioCompletePractice;
+    private List<String> lables;
+    private List<Integer> kcalEstimets;
+    private List<Integer> kcalConsumeds;
 
     public PracticeResultModel() {
+    }
+
+    public List<String> getLables() {
+        return lables;
+    }
+
+    public void setLables(List<String> lables) {
+        this.lables = lables;
+    }
+
+    public List<Integer> getKcalEstimets() {
+        return kcalEstimets;
+    }
+
+    public void setKcalEstimets(List<Integer> kcalEstimets) {
+        this.kcalEstimets = kcalEstimets;
+    }
+
+    public List<Integer> getKcalConsumeds() {
+        return kcalConsumeds;
+    }
+
+    public void setKcalConsumeds(List<Integer> kcalConsumeds) {
+        this.kcalConsumeds = kcalConsumeds;
     }
 
     public float getRatioCompletePractice() {
@@ -87,6 +114,9 @@ public class PracticeResultModel {
                 ", kcalEstimate=" + kcalEstimate +
                 ", status=" + status +
                 ", ratioCompletePractice=" + ratioCompletePractice +
+                ", lables=" + lables +
+                ", kcalEstimets=" + kcalEstimets +
+                ", kcalConsumeds=" + kcalConsumeds +
                 '}';
     }
 }

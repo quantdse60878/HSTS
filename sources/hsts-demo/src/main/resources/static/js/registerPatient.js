@@ -19,8 +19,8 @@ var $pGender = $("#pGender").iCheck({
 
 $("#birthday").datepicker({
     format: 'dd-mm-yyyy',
-    startDate: '1950-01-01',
-    endDate: 'today'
+    startDate: '01-01-1950',
+    endDate: '01-01-2000'
 });
 
 $("#doctorSelect").select2({
@@ -547,7 +547,7 @@ var fileUploader = $("#fileUploader").fileinput({
     maxFileCount: 5,
     allowedFileTypes: ['image'],
     allowedFileExtensions: ['jpg', 'gif', 'png'],
-    maxFileSize: 5170 // 5 MB
+    maxFileSize: 1024 // 1 MB
 });
 
 fileUploader.on('fileuploaded', function(event, data, previewId, index) {
