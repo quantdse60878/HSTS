@@ -204,4 +204,47 @@ public class FoodController extends AbstractController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    @RequestMapping(value = "/food/create", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String createFood(@RequestBody FoodModel model) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            foodService.createFood(model);
+            return OK_STATUS;
+        } catch (Exception e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/food/update", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String createFood(@RequestParam("foodId") final int foodId,
+                             @RequestParam("foodName") final String foodName) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            foodService.updateFood(foodId, foodName);
+            return OK_STATUS;
+        } catch (Exception e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/food/detail", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public FoodModel detailFood(@RequestParam("id") final int foodId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return foodService.detailFood(foodId);
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }
