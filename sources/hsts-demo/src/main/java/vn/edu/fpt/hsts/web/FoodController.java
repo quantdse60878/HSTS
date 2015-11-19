@@ -53,7 +53,7 @@ public class FoodController extends AbstractController {
     @ResponseBody
     public FoodPageModel findFoods(@RequestParam(value = "name", required = false, defaultValue = EMPTY) final String name,
                                     @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
-                                    @RequestParam(value = "pageSize", required = false, defaultValue = PAGE_SIZE_5) final int pageSize) {
+                                    @RequestParam(value = "pageSize", required = false, defaultValue = UNLIMIT_PAGE_SIZE) final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             return foodService.findFoods(name, page, pageSize);
