@@ -112,6 +112,9 @@ public class PrescriptionController extends AbstractController{
                 mav.addObject("DIAGNO", illness);
             }
 
+            // Create No illness if not
+            doctorService.createNoIllness();
+
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

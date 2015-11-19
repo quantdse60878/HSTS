@@ -589,4 +589,19 @@ public class DoctorService extends AbstractService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public void createNoIllness() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            Illness illness = illnessRepo.findByName("No illness");
+            if (null != illness){
+                illness = new Illness();
+                illness.setDescription("No illness");
+                illness.setName("No illness");
+                illnessRepo.saveAndFlush(illness);
+            }
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }
