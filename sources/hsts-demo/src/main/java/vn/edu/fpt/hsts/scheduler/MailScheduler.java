@@ -28,24 +28,16 @@ public class MailScheduler {
     private static final Logger LOGGER = LoggerFactory.getLogger(MailScheduler.class);
 
     /**
-     *
-     */
-    @Value("${hsts.mail.scheduler.cron}")
-    private final String config = "0 0/5 * 1/1 * ?";
-
-
-    /**
      * The {@link MailService}.
      */
     @Autowired
     private MailService mailService;
 
-    @Scheduled(cron = config)
+    @Scheduled(fixedDelay = 300000)
     private void schedulerTask() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("Starting mail scheduler at : {}", DateUtils.formatDate(new Date(), DateUtils.DATE_PATTERN_4));
-            LOGGER.info("Config cron: {}", config);
             // Call service
             mailService.mailingScheduler();
             LOGGER.info("End mail scheduler at : {}", DateUtils.formatDate(new Date(), DateUtils.DATE_PATTERN_4));

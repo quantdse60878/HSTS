@@ -132,7 +132,7 @@
             }
         },
         errorPlacement: function(error, element){
-            error.appendTo( element.parent().next() );
+            error.appendTo( element.parent() );
         },
         submitHandler: function () {
             console.log("begin login");

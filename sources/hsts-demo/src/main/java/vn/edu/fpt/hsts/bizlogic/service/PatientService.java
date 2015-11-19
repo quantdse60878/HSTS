@@ -165,6 +165,12 @@ public class PatientService extends AbstractService {
     @Autowired
     private MedicalOrderNumberProcessor medicalOrderNumberProcessor;
 
+    /**
+     * The {@link AuthenService}.
+     */
+    @Autowired
+    private AuthenService authenService;
+
     public Patient getPatient(final int accountId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         Patient patient = new Patient();
@@ -243,23 +249,33 @@ public class PatientService extends AbstractService {
                     // casting
                     final PatientCriteria patientCriteria = (PatientCriteria) criteria;
                     final Account newAccount = accountService.initPatientAccount(patientCriteria, currentDate);
+
+                    // Send mail with un-encrypted password
+                    final Account tmpAccount = new Account();
+                    tmpAccount.setPassword(newAccount.getPassword());
+                    tmpAccount.setUsername(newAccount.getUsername());
+                    tmpAccount.setEmail(newAccount.getEmail());
+                    mailService.pushMail(tmpAccount);
+
+                    // Encrypt password with MD5 hash
+                    final String password = newAccount.getPassword();
+                    final String md5 = authenService.hashMD5(password);
+                    newAccount.setPassword(md5);
+
+                    // Save change to db
                     accountRepo.saveAndFlush(newAccount);
 
-                    // Save patient
-                    patient.setAccount(newAccount);
-                    patientRepo.saveAndFlush(patient);
 
                     // Generate new barcode for patient
+                    patient.setAccount(newAccount);
+                    patientRepo.saveAndFlush(patient);
                     final String barcode = barcodeService.getPatientBarcode(patient.getId());
                     patient.setBarcode(barcode);
-                    patientRepo.save(patient);
+                    patientRepo.saveAndFlush(patient);
+
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("Create new patient[{}] successfully", newAccount.getUsername());
                     }
-
-                    //  send email with creditial information to patient
-                    mailService.pushMail(newAccount);
-
 
                 } else if (criteria instanceof RegistrationCriteria) {
                     final RegistrationCriteria rCriteria = (RegistrationCriteria) criteria;

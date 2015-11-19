@@ -40,17 +40,17 @@ public class LoginCredentialModel implements Serializable {
         /**
          *
          */
-        String OK = "OK";
+        String OK = "ok";
 
         /**
          *
          */
-        String FAIL = "FAIL";
+        String FAIL = "fail";
 
         /**
          *
          */
-        String INACTIVE = "INACTIVE";
+        String INACTIVE = "inactive";
     }
 
     @Override
