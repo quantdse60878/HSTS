@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Regimen search
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Regimen detail</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+
+                    <div class="box-header">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <a href="#insertModal" data-toggle="modal" data-target="#insertModal" class="btn btn-info">Create new unit</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <!-- info -->
+                        <div class="row">
+                            <input th:type="hidden" id = "foodId" th:value="${FOOD.id}"/>
+                            <label for="foodName" class="col-sm-2 control-label">Food name: </label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control hsts" id = "foodName"
+                                       th:value="${FOOD.name}" readonly="readonly" />
+                            </div>
+                        </div>
+                        <table id="dataContent" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Unit name</th>
+                                <th>Calories Estimate</th>
+                                <th>List Element Nutrition Name</th>
+                                <th>List Element Nutrition Value</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <!--<tbody id="table-body"></tbody>-->
+                            <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Unit name</th>
+                                <th>Calories Estimate</th>
+                                <th>List Element Nutrition Name</th>
+                                <th>List Element Nutrition Value</th>
+                                <th>Action</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+
+        <!-- confirm delete modal -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="deteteRegimen">Delete phase</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title">Are you wish to delete this phase?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <a class ="btn btn-danger" id = "btnDelete" data-dismiss="modal">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .confirm delete modal -->
+
+        <!-- message modal-->
+        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Result</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-title" id = "messageLabel">Test</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <a class ="btn btn-info"  data-dismiss="modal">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .message modal-->
+
+        <!-- insert new modal -->
+        <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="insertModalLabel" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "createForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="insertModalLabel">Create new phase</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Number of day*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="numberDay" class="form-control" id="numberDay"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidNumberDay">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!-- .insert new modal -->
+
+        <!-- update phase modal -->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "updateForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="updateModalLabel">Update phase</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Number of day*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="updateNumberDay" class="form-control" id="updateNumberDay"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateNumberDay">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!-- .update phase modal -->
+
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+    <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+
+    <!-- jquery validation -->
+    <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
+
+    <script th:src = "@{/static/js/foodDetail.js}"></script>
+
+    <!-- css add -->
+    <link th:href="@{/static/css/foodDetail.css}" rel="stylesheet"/>
+</div>
+<!-- /.content-wrapper -->
+</body>
+</html>

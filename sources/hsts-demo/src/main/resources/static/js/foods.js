@@ -39,7 +39,7 @@ $(document).ready(function(){
                     "name": "name"
                 },
                 "render": function (data, type, full, meta) {
-                    return '<a href="/food?id=' + data.id + '">'+  + data.name + '</a>';
+                    return '<a href="/food?id=' + data.id + '">'+ data.name + '</a>';
                 },
                 "width": "20%"
             },

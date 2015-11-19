@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.FoodModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPhaseModel;
+import vn.edu.fpt.hsts.bizlogic.model.UnitOfFoodModel;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.common.IConsts;
@@ -124,7 +126,7 @@ public class FoodController extends AbstractController {
 
     @RequestMapping(value = "/foodUnit", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<String> findUnitByFoodName(@RequestParam("foodId") final int foodId) {
+    public List<UnitOfFoodModel> findUnitByFoodName(@RequestParam("foodId") final int foodId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             return foodService.findUnitName(foodId);
@@ -138,6 +140,21 @@ public class FoodController extends AbstractController {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             final ModelAndView modelAndView = new ModelAndView("foods");
+            return modelAndView;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "food")
+    public ModelAndView foodDetail(@RequestParam("id") final int foodId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final ModelAndView modelAndView = new ModelAndView("foodDetail");
+
+            final FoodModel foodModel = foodService.findFood(foodId);
+            modelAndView.addObject("FOOD", foodModel);
+
             return modelAndView;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

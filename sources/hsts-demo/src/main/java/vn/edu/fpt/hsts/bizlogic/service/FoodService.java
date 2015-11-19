@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import vn.edu.fpt.hsts.bizlogic.model.FoodModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodUnitModel;
+import vn.edu.fpt.hsts.bizlogic.model.UnitOfFoodModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.persistence.entity.Food;
 import vn.edu.fpt.hsts.persistence.entity.UnitOfFood;
@@ -15,6 +18,7 @@ import vn.edu.fpt.hsts.persistence.repo.FoodRepo;
 import vn.edu.fpt.hsts.persistence.repo.UnitOfFoodRepo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -70,11 +74,34 @@ public class FoodService {
         }
     }
 
-    public List<String> findUnitName(final int foodId) {
+    public List<UnitOfFoodModel> findUnitName(final int foodId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("foodId[{}]", foodId);
-            return unitOfFoodRepo.findByFood(foodId);
+            final List<UnitOfFood> unitOfFoods = unitOfFoodRepo.findByFoodId(foodId);
+            if (!CollectionUtils.isEmpty(unitOfFoods)) {
+                final List<UnitOfFoodModel> modelList = new ArrayList<UnitOfFoodModel>();
+                for (UnitOfFood u: unitOfFoods) {
+                    final UnitOfFoodModel model = new UnitOfFoodModel();
+                    model.fromEntity(u);
+                    modelList.add(model);
+                }
+                return  modelList;
+            }
+            return Collections.emptyList();
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public FoodModel findFood(final int foodId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("foodId[{}]", foodId);
+            final Food food = foodRepo.findOne(foodId);
+            final FoodModel foodModel = new FoodModel();
+            foodModel.fromEntity(food);
+            return foodModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
