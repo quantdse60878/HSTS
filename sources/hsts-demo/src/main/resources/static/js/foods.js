@@ -5,6 +5,7 @@
  * Author: dangquantran.
  * Date: 11/19/2015.
  */
+var enableDeletion = false;
 $(document).ready(function(){
 
     var count = 1;
@@ -33,7 +34,14 @@ $(document).ready(function(){
                 },
                 "width": "10%"
             },
-            { "data": "name"
+            {   "data": {
+                    "id" : "id",
+                    "name": "name"
+                },
+                "render": function (data, type, full, meta) {
+                    return '<a href="/food?id=' + data.id + '">'+  + data.name + '</a>';
+                },
+                "width": "20%"
             },
             { "data": "units",
                 "render": function (data, type, full, meta) {
@@ -53,8 +61,8 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    var btnUpdate = '<a onclick="updateDialog('+ data +')" class="btn btn-success" style="margin-right: 20px">Update</a>';
-                    var btnDelete = '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>';
+                    var btnUpdate = '<a href="/food?id=' + data + '" class="btn btn-success">Update</a>';
+                    var btnDelete =  '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>';
                     return btnUpdate + btnDelete;
                 },
                 "width": "40%"
@@ -63,3 +71,15 @@ $(document).ready(function(){
 
     } );
 });
+
+function deleteDialog(element) {
+    console.log("-- begin delete --");
+    if (!enableDeletion) {
+        $("#messageLabel").html("Deletion function is disable. Delete food may cause old prescription became wrong!!!");
+        $("#messageModal").modal('show');
+        console.log("-- disable delete --");
+    } else {
+        // TODO
+    }
+    console.log("-- end delete --");
+}
