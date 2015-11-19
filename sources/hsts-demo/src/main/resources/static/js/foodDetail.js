@@ -18,7 +18,10 @@ $(document).ready(function(){
 
         "ajax": {
             "url": "/foodUnit",
-            "type": "GET"
+            "data": {
+                foodId: 1
+            },
+            "dataSrc": ""
         },
 
         "columns": [
@@ -26,13 +29,16 @@ $(document).ready(function(){
                 "render": function (data, type, full, meta) {
                     return count++;
                 },
-                "width": "10%"
+                "width": "5%"
             },
             {   "data": "foodUnit",
-                "width": "20%"
+                "width": "15%"
+            },
+            {   "data": "caloriesEstimate",
+                "width": "15%"
             },
             {   "data": "foodNutritionName",
-                "width": "20%"
+                "width": "15%"
             },
             {   "data": "foodNutritionValue",
                 "width": "20%"
