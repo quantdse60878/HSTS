@@ -14,6 +14,7 @@ import java.util.List;
 public class UnitOfFoodModel implements Serializable  {
 
     private int id;
+    private int foodId;
     private String foodName;
     private String foodUnit;
     private float caloriesEstimate;
@@ -65,6 +66,7 @@ public class UnitOfFoodModel implements Serializable  {
 
     public void fromEntity(final UnitOfFood entity) {
         this.id = entity.getId();
+        this.foodId = entity.getFood().getId();
         this.foodName = entity.getFood().getName();
         this.foodUnit = entity.getUnitName();
         this.caloriesEstimate = entity.getCaloriesEstimate();
@@ -78,6 +80,14 @@ public class UnitOfFoodModel implements Serializable  {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
     }
 }
 

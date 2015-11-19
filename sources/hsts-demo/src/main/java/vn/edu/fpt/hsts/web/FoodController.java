@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -167,6 +168,38 @@ public class FoodController extends AbstractController {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             return foodService.unitDetail(unitOfFoodId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/unitOfFood/update", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String updateUnit(@RequestBody UnitOfFoodModel model) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            foodService.updateUnit(model);
+            return OK_STATUS;
+        } catch (Exception e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/unitOfFood/create", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String createUnit(@RequestBody UnitOfFoodModel model) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            foodService.createUnit(model);
+            return OK_STATUS;
+        } catch (Exception e) {
+            return FAIL_STATUS;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

@@ -121,17 +121,44 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="insertModalLabel">Create new phase</h4>
+                            <h4 class="modal-title" id="insertModalLabel">Create new unit</h4>
                         </div>
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Number of day*: </label>
+                                <label class="col-sm-3 control-label">Unit name*: </label>
 
-                                <div class="col-sm-2">
-                                    <input type="number" th:name="numberDay" class="form-control" id="numberDay"/>
+                                <div class="col-sm-4">
+                                    <input type="text" th:name="insertUnitName" class="form-control" id="insertUnitName"/>
                                 </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidNumberDay">
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertUnitName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Calories Estimate*: </label>
+
+                                <div class="col-sm-3">
+                                    <input type="number" th:name="insertCaloriesEstimate" class="form-control" id="insertCaloriesEstimate"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertCaloriesEstimate">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Food Nutrition Name*: </label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" th:name="insertFoodNutritionName" class="form-control" id="insertFoodNutritionName"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertFoodNutritionName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Food Nutrition Value*: </label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" th:name="insertFoodNutritionValue" class="form-control" id="insertFoodNutritionValue"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertFoodNutritionValue">
                                 </div>
                             </div>
                         </div>
@@ -141,7 +168,6 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
         <!-- .insert new modal -->
@@ -168,7 +194,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Calories Estimate*: </label>
 
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <input type="number" th:name="updateCaloriesEstimate" class="form-control" id="updateCaloriesEstimate"/>
                                 </div>
                                 <div class="col-sm-3 help-block with-errors" id = "invalidUpdateCaloriesEstimate">
@@ -177,8 +203,8 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Food Nutrition Name*: </label>
 
-                                <div class="col-sm-2">
-                                    <input type="number" th:name="updateFoodNutritionName" class="form-control" id="updateFoodNutritionName"/>
+                                <div class="col-sm-4">
+                                    <input type="text" th:name="updateFoodNutritionName" class="form-control" id="updateFoodNutritionName"/>
                                 </div>
                                 <div class="col-sm-3 help-block with-errors" id = "invalidUpdateFoodNutritionName">
                                 </div>
@@ -186,8 +212,8 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Food Nutrition Value*: </label>
 
-                                <div class="col-sm-2">
-                                    <input type="number" th:name="updateFoodNutritionValue" class="form-control" id="updateFoodNutritionValue"/>
+                                <div class="col-sm-4">
+                                    <input type="text" th:name="updateFoodNutritionValue" class="form-control" id="updateFoodNutritionValue"/>
                                 </div>
                                 <div class="col-sm-3 help-block with-errors" id = "invalidUpdatefoodNutritionValue">
                                 </div>
