@@ -373,13 +373,11 @@ function updateFoodDialog(element) {
             }).done(function(data) {
                 var html = '<option value="" disabled="disabled">Select a food</option>';
                 if (data != null && data.length > 0) {
-
                     $.each(data, function (key, element) {
                         html += '<option value="' + element.foodUnit + '">' + element.foodUnit + '</option>';
                     })
-
                 }
-                var $unitSelect = $("#insertFoodUnitName");
+                var $unitSelect = $("#updateFoodUnit");
                 $unitSelect.html('');
                 $unitSelect.append(html);
                 $unitSelect.combobox();
