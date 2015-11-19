@@ -146,25 +146,50 @@
         </div>
         <!-- .insert new modal -->
 
-        <!-- update phase modal -->
-        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" data-backdrop="static"
+        <!-- update  modal -->
+        <div class="modal fade" id="updateDialog" tabindex="-1" role="dialog" aria-labelledby="updateMedicine" data-backdrop="static"
              data-keyboard="false">
             <div class="modal-dialog" role="document">
                 <form id = "updateForm" class="form-horizontal">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="updateModalLabel">Update phase</h4>
+                            <h4 class="modal-title" id="updateMedicine">Update</h4>
                         </div>
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Number of day*: </label>
+                                <label class="col-sm-3 control-label">Unit name*: </label>
+
+                                <div class="col-sm-3">
+                                    <label class="col-sm-2 control-label" id="unitName"></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Calories Estimate*: </label>
 
                                 <div class="col-sm-2">
-                                    <input type="number" th:name="updateNumberDay" class="form-control" id="updateNumberDay"/>
+                                    <input type="number" th:name="updateCaloriesEstimate" class="form-control" id="updateCaloriesEstimate"/>
                                 </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateNumberDay">
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateCaloriesEstimate">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Food Nutrition Name*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="updateFoodNutritionName" class="form-control" id="updateFoodNutritionName"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateFoodNutritionName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Food Nutrition Value*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="updateFoodNutritionValue" class="form-control" id="updateFoodNutritionValue"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdatefoodNutritionValue">
                                 </div>
                             </div>
                         </div>
@@ -177,7 +202,7 @@
 
             </div>
         </div>
-        <!-- .update phase modal -->
+        <!-- .update modal -->
 
         <!-- /.row -->
     </section>

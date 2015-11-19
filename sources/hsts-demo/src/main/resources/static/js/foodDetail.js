@@ -56,3 +56,44 @@ $(document).ready(function(){
 
     } );
 });
+
+function updateDialog(element) {
+    $.ajax({
+        method: "GET",
+        url: "/unitOfFood/detail",
+        data: {
+            id: element
+        }
+    }).done(function(data) {
+        console.log(data);
+        if (data != null) {
+            curMedicinePhase = data.id;
+            var txtName = document.getElementById("unitName");
+            txtName.innerHTML = data.foodUnit;
+
+            var updateCaloriesEstimate = document.getElementById("updateCaloriesEstimate");
+            updateCaloriesEstimate.value =  data.caloriesEstimate;
+
+            var updateFoodNutritionName = document.getElementById("updateFoodNutritionName");
+            updateFoodNutritionName.value = data.foodNutritionName;
+
+            var updateFoodNutritionValue = document.getElementById("updateFoodNutritionValue");
+            updateFoodNutritionValue.value = data.foodNutritionValue;
+
+            // Show diaglog
+            $("#updateDialog").modal('show');
+        }
+    });
+}
+
+function deleteDialog(element) {
+    console.log("-- begin delete --");
+    if (!enableDeletion) {
+        $("#messageLabel").html("Deletion function is disable. Delete food may cause old prescription became wrong!!!");
+        $("#messageModal").modal('show');
+        console.log("-- disable delete --");
+    } else {
+        // TODO
+    }
+    console.log("-- end delete --");
+}

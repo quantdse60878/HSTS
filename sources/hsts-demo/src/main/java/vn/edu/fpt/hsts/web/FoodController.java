@@ -160,4 +160,15 @@ public class FoodController extends AbstractController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    @RequestMapping(value = "/unitOfFood/detail", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public UnitOfFoodModel unitDetail(@RequestParam("id") final int unitOfFoodId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return foodService.unitDetail(unitOfFoodId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

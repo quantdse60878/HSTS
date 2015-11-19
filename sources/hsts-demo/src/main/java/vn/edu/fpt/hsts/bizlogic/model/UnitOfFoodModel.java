@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class UnitOfFoodModel implements Serializable  {
 
+    private int id;
     private String foodName;
     private String foodUnit;
     private float caloriesEstimate;
@@ -63,10 +64,20 @@ public class UnitOfFoodModel implements Serializable  {
     }
 
     public void fromEntity(final UnitOfFood entity) {
+        this.id = entity.getId();
         this.foodName = entity.getFood().getName();
         this.foodUnit = entity.getUnitName();
         this.caloriesEstimate = entity.getCaloriesEstimate();
         this.foodNutritionName = entity.getListElementNutritionName();
         this.foodNutritionValue = entity.getListElementNutritionValue();
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
+

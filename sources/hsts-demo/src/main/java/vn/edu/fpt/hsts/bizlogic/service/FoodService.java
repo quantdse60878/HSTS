@@ -106,4 +106,17 @@ public class FoodService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    public UnitOfFoodModel unitDetail(final int id) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("id[{}]", id);
+            final UnitOfFood unitOfFood = unitOfFoodRepo.findOne(id);
+            final UnitOfFoodModel model = new UnitOfFoodModel();
+            model.fromEntity(unitOfFood);
+            return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }
