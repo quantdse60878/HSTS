@@ -2,6 +2,7 @@ package vn.edu.fpt.hsts.bizlogic.model;
 
 
 import vn.edu.fpt.hsts.persistence.entity.Food;
+import vn.edu.fpt.hsts.persistence.entity.UnitOfFood;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.List;
  */
 public class UnitOfFoodModel implements Serializable  {
 
+    private int id;
+    private int foodId;
     private String foodName;
     private String foodUnit;
     private float caloriesEstimate;
@@ -60,4 +63,31 @@ public class UnitOfFoodModel implements Serializable  {
     public String getFoodNutritionValue() {
         return foodNutritionValue;
     }
+
+    public void fromEntity(final UnitOfFood entity) {
+        this.id = entity.getId();
+        this.foodId = entity.getFood().getId();
+        this.foodName = entity.getFood().getName();
+        this.foodUnit = entity.getUnitName();
+        this.caloriesEstimate = entity.getCaloriesEstimate();
+        this.foodNutritionName = entity.getListElementNutritionName();
+        this.foodNutritionValue = entity.getListElementNutritionValue();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
+    }
 }
+

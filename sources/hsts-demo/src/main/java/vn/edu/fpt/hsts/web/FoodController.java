@@ -12,12 +12,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.FoodModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPhaseModel;
+import vn.edu.fpt.hsts.bizlogic.model.UnitOfFoodModel;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
 import vn.edu.fpt.hsts.common.IConsts;
@@ -123,10 +127,79 @@ public class FoodController extends AbstractController {
 
     @RequestMapping(value = "/foodUnit", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<String> findUnitByFoodName(@RequestParam("foodId") final int foodId) {
+    public List<UnitOfFoodModel> findUnitByFoodName(@RequestParam("foodId") final int foodId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             return foodService.findUnitName(foodId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "foods")
+    public ModelAndView foodPage() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final ModelAndView modelAndView = new ModelAndView("foods");
+            return modelAndView;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "food")
+    public ModelAndView foodDetail(@RequestParam("id") final int foodId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final ModelAndView modelAndView = new ModelAndView("foodDetail");
+
+            final FoodModel foodModel = foodService.findFood(foodId);
+            modelAndView.addObject("FOOD", foodModel);
+
+            return modelAndView;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/unitOfFood/detail", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public UnitOfFoodModel unitDetail(@RequestParam("id") final int unitOfFoodId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return foodService.unitDetail(unitOfFoodId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/unitOfFood/update", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String updateUnit(@RequestBody UnitOfFoodModel model) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            foodService.updateUnit(model);
+            return OK_STATUS;
+        } catch (Exception e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/unitOfFood/create", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String createUnit(@RequestBody UnitOfFoodModel model) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            foodService.createUnit(model);
+            return OK_STATUS;
+        } catch (Exception e) {
+            return FAIL_STATUS;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }

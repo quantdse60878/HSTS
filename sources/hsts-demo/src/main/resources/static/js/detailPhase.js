@@ -272,12 +272,17 @@ $(document).ready(function(){
             }
         }).done(function(data) {
             var html = '<option value="" disabled="disabled">Select a food</option>';
-            $.each(data, function (key, element) {
-                html += '<option value="' + element + '">' + element + '</option>';
-            })
+            if (data != null && data.length > 0) {
+
+                $.each(data, function (key, element) {
+                    html += '<option value="' + element.foodUnit + '">' + element.foodUnit + '</option>';
+                })
+
+            }
             var $unitSelect = $("#insertFoodUnitName");
             $unitSelect.html('');
             $unitSelect.append(html);
+            $unitSelect.combobox();
         })
     });
 
@@ -366,15 +371,14 @@ function updateFoodDialog(element) {
                     foodId: foodId
                 }
             }).done(function(data) {
-                var html = '';
-                $.each(data, function (key, element) {
-                    if (element == unitName) {
-                        html += '<option selected="selected" value="' + element + '">' + element + '</option>';
-                    } else {
-                        html += '<option value="' + element + '">' + element + '</option>';
-                    }
-                })
+                var html = '<option value="" disabled="disabled">Select a food</option>';
+                if (data != null && data.length > 0) {
+                    $.each(data, function (key, element) {
+                        html += '<option value="' + element.foodUnit + '">' + element.foodUnit + '</option>';
+                    })
+                }
                 var $unitSelect = $("#updateFoodUnit");
+                $unitSelect.html('');
                 $unitSelect.append(html);
                 $unitSelect.combobox();
             })
