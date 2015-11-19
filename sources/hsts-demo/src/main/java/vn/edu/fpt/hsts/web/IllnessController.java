@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.fpt.hsts.bizlogic.model.IllnessModel;
+import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.IllnessService;
 import vn.edu.fpt.hsts.common.IConsts;
 
@@ -36,6 +37,9 @@ public class IllnessController extends AbstractController {
     @Autowired
     private IllnessService illnessService;
 
+    @Autowired
+    private DoctorService doctorService;
+
 
     @RequestMapping(value = "/illnessName/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -44,6 +48,9 @@ public class IllnessController extends AbstractController {
                                     @RequestParam(value = "pageSize", required = false, defaultValue = UNLIMIT_PAGE_SIZE) final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
+            // Create No illness if not
+            doctorService.createNoIllness();
+
             return illnessService.findAllIllnessName(searchString, page, pageSize);
         } finally {
             LOGGER.info(IConsts.END_METHOD);

@@ -156,6 +156,8 @@ public class AbstractController implements ControllerParam {
             String medicalHistory = patientService.getPatientHistory(appointment.getMedicalRecord().getMedicalHistory());
             mav.addObject("MEDI_HIS", medicalHistory);
 
+
+
             // Add model
             mav.addObject("model", prescriptionModel);
         }finally {

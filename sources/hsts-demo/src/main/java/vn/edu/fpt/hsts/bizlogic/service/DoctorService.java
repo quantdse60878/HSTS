@@ -594,7 +594,7 @@ public class DoctorService extends AbstractService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             Illness illness = illnessRepo.findByName("No illness");
-            if (null != illness){
+            if (null == illness){
                 illness = new Illness();
                 illness.setDescription("No illness");
                 illness.setName("No illness");
