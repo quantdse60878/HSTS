@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.MedicineModel;
+import vn.edu.fpt.hsts.bizlogic.model.PracticeModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.PracticePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
@@ -48,7 +51,7 @@ public class PracticeController extends AbstractController {
     @ResponseBody
     public PracticePageModel findFoods(@RequestParam(value = "name", required = false, defaultValue = EMPTY) final String name,
                                    @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
-                                   @RequestParam(value = "pageSize", required = false, defaultValue = PAGE_SIZE_5) final int pageSize) {
+                                   @RequestParam(value = "pageSize", required = false, defaultValue = UNLIMIT_PAGE_SIZE) final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             return practiceService.findPractices(name, page, pageSize);
@@ -112,6 +115,60 @@ public class PracticeController extends AbstractController {
             phaseService.updatePracticeToPhase(id, timeDuration, numberOfTime, advice);
             return OK_STATUS;
         } catch (BizlogicException e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "practices")
+    public ModelAndView practicePage() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("practices");
+            return modelAndView;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/practice/detail", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public PracticeModel medicineDetail(@RequestParam("id") final int id) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return practiceService.praticeDetail(id);
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/practice/create", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String createMedicine(@RequestParam("name") final String name,
+                                 @RequestParam("intensity") final int intensity) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            practiceService.create(name, intensity);
+            return OK_STATUS;
+        }catch (Exception e) {
+            return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/practice/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String createMedicine(@RequestParam("id") final int id,
+                                 @RequestParam("name") final String name,
+                                 @RequestParam("intensity") final int intensity) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            practiceService.update(id, name, intensity);
+            return OK_STATUS;
+        }catch (Exception e) {
             return FAIL_STATUS;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

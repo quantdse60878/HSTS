@@ -26,7 +26,7 @@
                 <div class="box">
                     <div class="box-header">
                         <div class="col-sm-2">
-                            <a href="#insertModal" data-toggle="modal" data-target="#insertModal" class="btn btn-info">Create new medicine</a>
+                            <a href="#insertModal" data-toggle="modal" data-target="#insertModal" class="btn btn-info">Create new practice</a>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -35,8 +35,8 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Medicine name</th>
-                                <th>Unit</th>
+                                <th>Practice name</th>
+                                <th>Intensity</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -44,8 +44,8 @@
                             <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Medicine name</th>
-                                <th>Unit</th>
+                                <th>Practice name</th>
+                                <th>Intensity</th>
                                 <th>Action</th>
                             </tr>
                             </tfoot>
@@ -91,21 +91,21 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Food name*: </label>
+                                <label class="col-sm-3 control-label">Practice name*: </label>
 
                                 <div class="col-sm-4">
-                                    <input type="text" th:name="insertMedicineName" class="form-control" id="insertMedicineName"/>
+                                    <input type="text" th:name="insertPracticeName" class="form-control" id="insertPracticeName"/>
                                 </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertMedicineName">
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertPracticeName">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Unit name*: </label>
+                                <label class="col-sm-3 control-label">Intensity *: </label>
 
-                                <div class="col-sm-4">
-                                    <input type="text" th:name="insertUnitName" class="form-control" id="insertUnitName"/>
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="insertIntensity" class="form-control" id="insertIntensity"/>
                                 </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertUnitName">
+                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertIntensity">
                                 </div>
                             </div>
                         </div>
@@ -132,21 +132,21 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Medicine name*: </label>
+                                <label class="col-sm-3 control-label">Practice name*: </label>
 
                                 <div class="col-sm-4">
-                                    <input type="text" th:name="updateMedicineName" class="form-control" id="updateMedicineName"/>
+                                    <input type="text" th:name="updatePracticeName" class="form-control" id="updatePracticeName"/>
                                 </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateMedicineName">
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdatePracticeName">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Medicine unit*: </label>
+                                <label class="col-sm-3 control-label">Practice intensity*: </label>
 
                                 <div class="col-sm-4">
-                                    <input type="text" th:name="updateMedicineUnit" class="form-control" id="updateMedicineUnit"/>
+                                    <input type="number" th:name="updatePracticeIntensity" class="form-control" id="updatePracticeIntensity"/>
                                 </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateMedicineUnit">
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdatePracticeIntensity">
                                 </div>
                             </div>
                         </div>
@@ -172,10 +172,10 @@
 
     <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
 
-    <script th:src = "@{/static/js/medicines.js}"></script>
+    <script th:src = "@{/static/js/practices.js}"></script>
 
     <!-- css add -->
-    <link th:href="@{/static/css/medicines.css}" rel="stylesheet"/>
+    <link th:href="@{/static/css/practices.css}" rel="stylesheet"/>
 </div>
 <!-- /.content-wrapper -->
 </body>
