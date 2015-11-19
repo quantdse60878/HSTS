@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.MedicineModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;
 import vn.edu.fpt.hsts.bizlogic.service.MedicineService;
@@ -49,7 +51,7 @@ public class MedicineController extends AbstractController {
     public MedicinePageModel findMedicines(
             @RequestParam(value = "name", required = false, defaultValue = EMPTY) final String name,
             @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
-            @RequestParam(value = "pageSize", required = false, defaultValue = PAGE_SIZE_5) final int pageSize) {
+            @RequestParam(value = "pageSize", required = false, defaultValue = UNLIMIT_PAGE_SIZE) final int pageSize) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("name[{}], page[{}], pageSize[{}]", name, page, pageSize);
@@ -116,6 +118,60 @@ public class MedicineController extends AbstractController {
             LOGGER.info("medicinePhaseId[{}]", medicinePhaseId);
             return phaseService.findMedicinePhase(medicinePhaseId);
         }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "medicines")
+    public ModelAndView medicinePage() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("medicines");
+            return modelAndView;
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/medicine/detail", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public MedicineModel medicineDetail(@RequestParam("id") final int medicineId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            return medicineService.medicineDetail(medicineId);
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/medicine/create", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String createMedicine(@RequestParam("name") final String medicineName,
+                                 @RequestParam("unit") final String medicineUnit) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            medicineService.createMedicine(medicineName, medicineUnit);
+            return OK_STATUS;
+        }catch (Exception e) {
+           return FAIL_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/medicine/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String createMedicine(@RequestParam("id") final int id,
+                            @RequestParam("name") final String medicineName,
+                            @RequestParam("unit") final String medicineUnit) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            medicineService.updateMedicine(id, medicineName, medicineUnit);
+            return OK_STATUS;
+        }catch (Exception e) {
+            return FAIL_STATUS;
+        } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
