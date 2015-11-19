@@ -33,6 +33,11 @@ public class UserSession {
      */
     private String role;
 
+    /**
+     *
+     */
+    private byte status;
+
     public int getId() {
         return id;
     }
@@ -63,5 +68,13 @@ public class UserSession {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
     }
 }

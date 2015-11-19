@@ -46,14 +46,14 @@
                 <div class="box-header">
                     <h3 class="box-title">Login</h3>
                 </div>
-                <form th:action="login" class="form-horizontal" method="POST">
+                <form  class="form-horizontal" id = "loginForm">
                     <div class="box-body">
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <label class="control-label">Username</label>
                             </div>
                             <div class="col-sm-12">
-                                <input th:type="text" th:name="username" class="form-control" placeholder="Username"/>
+                                <input th:type="text" th:name="username" class="form-control" placeholder="Username" id = "username"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -61,7 +61,7 @@
                                 <label class="control-label">Password</label>
                             </div>
                             <div class="col-sm-12">
-                                <input th:type="password" th:name="password" class="form-control" placeholder="Password"/>
+                                <input th:type="password" th:name="password" class="form-control" placeholder="Password" id = "password"/>
                             </div>
                         </div>
                         <div class="box-footer">
@@ -73,6 +73,24 @@
             </div>
         </div>
     </div>
+
+    <!-- message modal-->
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Result</h4>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title" id = "messageLabel">Test</h4>
+                </div>
+                <div class="modal-footer">
+                    <a class ="btn btn-info"  data-dismiss="modal">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .message modal-->
 </div>
 <!-- Main Footer -->
 <div class="container box-footer">
@@ -85,10 +103,63 @@
 </div>
 <!-- jQuery 2.1.4 -->
 <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+
+<!-- jquery MD5-->
+<script th:src="@{/static/plugins/jQuery-MD5/jquery.md5.js}"></script>
+<!-- jquery validation -->
+<script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
+
+
+
 <!-- Bootstrap 3.3.5 -->
 <script th:src="@{/static/bower/admin-lte/bootstrap/js/bootstrap.min.js}"></script>
 <!-- AdminLTE App -->
 <script th:src="@{/static/bower/admin-lte/dist/js/app.min.js}"></script>
 
+
+<script type="text/javascript">
+    $("#loginForm").validate({
+        ignore: [],
+        debug: true,
+        rules: {
+            // simple rule, converted to {required:true}
+            username: {
+                required: true
+            },
+            password: {
+                required: true,
+                minlength: 6
+            }
+        },
+        errorPlacement: function(error, element){
+            error.appendTo( element.parent().next() );
+        },
+        submitHandler: function () {
+            console.log("begin login");
+            var postData = {
+                username: $("#username").val(),
+                password: $.md5($("#password").val())
+            };
+            $.ajax({
+                method: "POST",
+                url: "/loginRest",
+                contentType: "application/json",
+                data: JSON.stringify(postData)
+            }).done(function(data) {
+                console.log(data);
+                var txtMessage = document.getElementById("messageLabel");
+                if (data.status == "fail") {
+                    txtMessage.innerHTML = "Invalid username or password";
+                    $("#messageModal").modal('show');
+                } else {
+                    console.log("-- reload page --");
+                    window.location.href = "navigate";
+                }
+            });
+            console.log("end login");
+            return false; // required to block normal submit since you used ajax
+        }
+    });
+</script>
 </body>
 </html>
