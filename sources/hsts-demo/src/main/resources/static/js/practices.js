@@ -6,7 +6,7 @@
  * Date: 11/19/2015.
  */
 var enableDeletion = false;
-var curMedicne = 0;
+var curPractice = 0;
 $(document).ready(function(){
 
     var count = 1;
@@ -19,7 +19,7 @@ $(document).ready(function(){
         "info": true,
 
         "ajax": {
-            "url": "/medicine/list",
+            "url": "/practice/list",
             "dataSrc": "dataList",
             "dataSrc": "dataList",
             "page": "pageNumber",
@@ -38,7 +38,7 @@ $(document).ready(function(){
             {   "data": "name",
                 "width": "30%"
             },
-            {   "data": "unit",
+            {   "data": "intensity",
                 "width": "20%"
             },
             {
@@ -56,10 +56,10 @@ $(document).ready(function(){
 });
 
 function updateDialog(element) {
-    curMedicne = element;
+    curPractice = element;
     $.ajax({
         method: "GET",
-        url: "/medicine/detail",
+        url: "/practice/detail",
         data: {
             id: element
         }
@@ -67,11 +67,11 @@ function updateDialog(element) {
         console.log(data);
         if (data != null) {
             curMedicinePhase = data.id;
-            var txtName = document.getElementById("updateMedicineName");
+            var txtName = document.getElementById("updatePracticeName");
             txtName.value = data.name;
 
-            var txtUnit = document.getElementById("updateMedicineUnit");
-            txtUnit.value =  data.unit;
+            var txtUnit = document.getElementById("updatePracticeIntensity");
+            txtUnit.value =  data.intensity;
             // Show diaglog
             $("#updateDialog").modal('show');
         }
@@ -81,7 +81,7 @@ function updateDialog(element) {
 function deleteDialog(element) {
     console.log("-- begin delete --");
     if (!enableDeletion) {
-        $("#messageLabel").html("Deletion function is disable. Delete medicine may cause old prescription became wrong!!!");
+        $("#messageLabel").html("Deletion function is disable. Delete practice may cause old prescription became wrong!!!");
         $("#messageModal").modal('show');
         console.log("-- disable delete --");
     } else {
@@ -96,18 +96,19 @@ $("#updateForm").validate({
     debug: true,
     rules: {
         // simple rule, converted to {required:true}
-        updateMedicineName: {
+        updatePracticeName: {
             required: true
         },
-        updateMedicineUnit: {
-            required: true
+        updatePracticeIntensity: {
+            required: true,
+            min: 1
         }
     },
     errorPlacement: function(error, element){
-        if(element.attr("name") == "updateMedicineName"){
-            error.appendTo($('#invalidUpdateMedicineName'));
-        } else if (element.attr("name") == "updateMedicineUnit") {
-            error.appendTo($('#invalidUpdateMedicineUnit'));
+        if(element.attr("name") == "updatePracticeName"){
+            error.appendTo($('#invalidUpdatePracticeName'));
+        } else if (element.attr("name") == "updatePracticeIntensity") {
+            error.appendTo($('#invalidUpdatePracticeIntensity'));
         }
 
         // Default
@@ -119,21 +120,21 @@ $("#updateForm").validate({
         console.log("begin update");
         $.ajax({
             method: "POST",
-            url: "/medicine/update",
+            url: "/practice/update",
             data: {
-                id: curMedicne,
-                name: $("#updateMedicineName").val(),
-                unit: $("#updateMedicineUnit").val()
+                id: curPractice,
+                name: $("#updatePracticeName").val(),
+                intensity: $("#updatePracticeIntensity").val()
             }
         }).done(function(data) {
             console.log(data);
             var txtMessage = document.getElementById("messageLabel");
             if (data.status == "fail") {
-                txtMessage.innerHTML = "Error while update medicine data";
+                txtMessage.innerHTML = "Error while update practice data";
                 $("#messageModal").modal('show');
             } else {
                 console.log("-- reload page --");
-                window.location.href = "medicines";
+                window.location.href = "practices";
             }
         });
         console.log("end update");
@@ -147,18 +148,19 @@ $("#createForm").validate({
     debug: true,
     rules: {
         // simple rule, converted to {required:true}
-        insertMedicineName: {
+        insertPracticeName: {
             required: true
         },
-        insertMedicineUnit: {
-            required: true
+        insertIntensity: {
+            required: true,
+            min: 1
         }
     },
     errorPlacement: function(error, element){
-        if(element.attr("name") == "insertMedicineName"){
-            error.appendTo($('#invalidInsertMedicineName'));
-        } else if (element.attr("name") == "insertMedicineName") {
-            error.appendTo($('#invalidInsertUnitName'));
+        if(element.attr("name") == "insertPracticeName"){
+            error.appendTo($('#invalidInsertPracticeName'));
+        } else if (element.attr("name") == "insertIntensity") {
+            error.appendTo($('#invalidInsertIntensity'));
         }
 
         // Default
@@ -170,20 +172,20 @@ $("#createForm").validate({
         console.log("begin create");
         $.ajax({
             method: "POST",
-            url: "/medicine/create",
+            url: "/practice/create",
             data: {
-                name: $("#insertMedicineName").val(),
-                unit: $("#insertMedicineUnit").val()
+                name: $("#insertPracticeName").val(),
+                intensity: $("#insertIntensity").val()
             }
         }).done(function(data) {
             console.log(data);
             var txtMessage = document.getElementById("messageLabel");
             if (data.status == "fail") {
-                txtMessage.innerHTML = "Error while create medicine data";
+                txtMessage.innerHTML = "Error while create practice data";
                 $("#messageModal").modal('show');
             } else {
                 console.log("-- reload page --");
-                window.location.href = "medicines";
+                window.location.href = "practices";
             }
         });
         console.log("end create");
