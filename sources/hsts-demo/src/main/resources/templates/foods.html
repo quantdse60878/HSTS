@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Search Patients
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Food</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Your Page Content Here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="col-sm-2">
+                            <a href="#insertModal" data-toggle="modal" data-target="#insertModal" class="btn btn-info">Create new food</a>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="dataContent" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Food name</th>
+                                <th>Unit list</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <!--<tbody id="table-body"></tbody>-->
+                            <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Food name</th>
+                                <th>Unit list</th>
+                                <th>Action</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+
+        <!-- message modal-->
+        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageLabel1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="messageLabel1">Message</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <h4 class="modal-title" id="messageLabel2">No available prescription for this patient</h4>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .message modal-->
+
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+
+    <!-- iCheck -->
+    <script th:src="@{/static/bower/icheck/icheck.min.js}"/>
+    <link th:href="@{/static/bower/icheck/skins/all.css}" rel="stylesheet"/>
+
+    <script th:src = "@{/static/bower/datatables/media/js/jquery.dataTables.min.js}"></script>
+
+    <script th:src = "@{/static/js/foods.js}"></script>
+
+    <!-- css add -->
+    <link th:href="@{/static/css/foods.css}" rel="stylesheet"/>
+</div>
+<!-- /.content-wrapper -->
+</body>
+</html>

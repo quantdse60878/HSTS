@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPhaseModel;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
@@ -127,6 +128,17 @@ public class FoodController extends AbstractController {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             return foodService.findUnitName(foodId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "foods")
+    public ModelAndView foodPage() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final ModelAndView modelAndView = new ModelAndView("foods");
+            return modelAndView;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
