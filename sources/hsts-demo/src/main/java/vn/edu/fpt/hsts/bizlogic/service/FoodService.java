@@ -153,4 +153,53 @@ public class FoodService {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void createFood(final FoodModel model) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("model[{}]", model);
+            final Food food = new Food();
+            food.setName(model.getName());
+            foodRepo.saveAndFlush(food);
+
+            if (!CollectionUtils.isEmpty(model.getUnits())) {
+                for (UnitOfFoodModel unitOfFoodModel: model.getUnits()) {
+                    UnitOfFood unitOfFood = new UnitOfFood();
+                    unitOfFood.setFood(food);
+                    unitOfFood.setUnitName(unitOfFoodModel.getFoodUnit());
+                    unitOfFood.setCaloriesEstimate(unitOfFoodModel.getCaloriesEstimate());
+                    unitOfFood.setListElementNutritionName(unitOfFoodModel.getFoodNutritionName());
+                    unitOfFood.setListElementNutritionValue(unitOfFoodModel.getFoodNutritionValue());
+                    unitOfFoodRepo.saveAndFlush(unitOfFood);
+                }
+            }
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional(rollbackOn = BizlogicException.class)
+    public void updateFood(final int foodId, final String foodName) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final Food food = foodRepo.findOne(foodId);
+            food.setName(foodName);
+            foodRepo.saveAndFlush(food);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public FoodModel detailFood(final int foodId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            final Food food = foodRepo.findOne(foodId);
+            final FoodModel model = new FoodModel();
+            model.fromEntity(food);
+            return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

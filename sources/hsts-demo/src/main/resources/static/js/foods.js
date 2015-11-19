@@ -6,6 +6,7 @@
  * Date: 11/19/2015.
  */
 var enableDeletion = false;
+var curFood = 0;
 $(document).ready(function(){
 
     var count = 1;
@@ -61,7 +62,7 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    var btnUpdate = '<a href="/food?id=' + data + '" class="btn btn-success">Update</a>';
+                    var btnUpdate = '<a onclick="updateDialog('+ data +')"class="btn btn-success" style="margin-right: 20px;">Update</a>';
                     var btnDelete =  '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>';
                     return btnUpdate + btnDelete;
                 },
@@ -71,6 +72,26 @@ $(document).ready(function(){
 
     } );
 });
+
+function updateDialog(element) {
+    curFood = element;
+    $.ajax({
+        method: "GET",
+        url: "/food/detail",
+        data: {
+            id: element
+        }
+    }).done(function(data) {
+        console.log(data);
+        if (data != null) {
+            var txtName = document.getElementById("updateFoodName");
+            txtName.value = data.name;
+
+            // Show diaglog
+            $("#updateDialog").modal('show');
+        }
+    });
+}
 
 function deleteDialog(element) {
     console.log("-- begin delete --");
@@ -83,3 +104,125 @@ function deleteDialog(element) {
     }
     console.log("-- end delete --");
 }
+
+
+// insert  validator
+$("#createForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        insertFoodName: {
+            required: true
+        },
+        insertUnitName: {
+            required: true
+        },
+        insertCaloriesEstimate: {
+            required: true,
+            min: 1
+        },
+        insertFoodNutritionName: {
+            required: true
+        },
+        insertFoodNutritionValue: {
+            required: true
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "insertFoodName"){
+            error.appendTo($('#invalidInsertFoodName'));
+        } else if(element.attr("name") == "insertUnitName"){
+            error.appendTo($('#invalidInsertUnitName'));
+        } else if(element.attr("name") == "insertCaloriesEstimate"){
+            error.appendTo($('#invalidInsertCaloriesEstimate'));
+        }  else if (element.attr("name") == "insertFoodNutritionName") {
+            error.appendTo($('#invalidInsertFoodNutritionName'));
+        } else if (element.attr("name") == "insertFoodNutritionValue") {
+            error.appendTo($('#invalidInsertFoodNutritionValue'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("begin insert");
+        var postData = {
+            name: $("#insertFoodName").val(),
+            units: [
+                {
+                    foodUnit: $("#insertUnitName").val(),
+                    caloriesEstimate: $("#insertCaloriesEstimate").val(),
+                    foodNutritionName: $("#insertFoodNutritionName").val(),
+                    foodNutritionValue: $("#insertFoodNutritionValue").val()
+                }
+            ]
+        };
+        $.ajax({
+            method: "POST",
+            url: "/food/create",
+            contentType: "application/json",
+            data: JSON.stringify(postData)
+        }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data.status == "fail") {
+                txtMessage.innerHTML = "Error while update food data";
+                $("#messageModal").modal('show');
+            } else {
+                console.log("-- reload page --");
+                window.location.href = "foods";
+            }
+        });
+        console.log("end create");
+        return false; // required to block normal submit since you used ajax
+    }
+});
+
+
+// update  validator
+$("#updateForm").validate({
+    ignore: [],
+    debug: true,
+    rules: {
+        // simple rule, converted to {required:true}
+        updateFoodName: {
+            required: true
+        }
+    },
+    errorPlacement: function(error, element){
+        if(element.attr("name") == "updateFoodName"){
+            error.appendTo($('#invalidUpdateFoodName'));
+        }
+
+        // Default
+        else {
+            error.appendTo( element.parent().next() );
+        }
+    },
+    submitHandler: function () {
+        console.log("begin insert");
+        $.ajax({
+            method: "POST",
+            url: "/food/update",
+            data: {
+                foodId: curFood,
+                foodName: $("#updateFoodName").val()
+            }
+        }).done(function(data) {
+            console.log(data);
+            var txtMessage = document.getElementById("messageLabel");
+            if (data.status == "fail") {
+                txtMessage.innerHTML = "Error while update food data";
+                $("#messageModal").modal('show');
+            } else {
+                console.log("-- reload page --");
+                window.location.href = "foods";
+            }
+        });
+        console.log("end create");
+        return false; // required to block normal submit since you used ajax
+    }
+});
