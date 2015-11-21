@@ -24,6 +24,7 @@ public class FoodModel extends AbstractKeyModel<Food> {
      *
      */
     private String name;
+    private FoodNutriValModel foodNutriValModel;
 
     private List<UnitOfFoodModel> units;
 
@@ -56,5 +57,13 @@ public class FoodModel extends AbstractKeyModel<Food> {
 
     public void setUnits(List<UnitOfFoodModel> units) {
         this.units = units;
+    }
+
+    public FoodNutriValModel getFoodNutriValModel() {
+        return foodNutriValModel;
+    }
+
+    public void setFoodNutriValModel(FoodNutriValModel foodNutriValModel) {
+        this.foodNutriValModel = foodNutriValModel;
     }
 }

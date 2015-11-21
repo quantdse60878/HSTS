@@ -13,6 +13,7 @@ import vn.edu.fpt.hsts.bizlogic.model.FoodUnitModel;
 import vn.edu.fpt.hsts.bizlogic.model.UnitOfFoodModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
+import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Food;
 import vn.edu.fpt.hsts.persistence.entity.UnitOfFood;
 import vn.edu.fpt.hsts.persistence.repo.FoodRepo;
@@ -158,7 +159,7 @@ public class FoodService {
     public void createFood(final FoodModel model) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("model[{}]", model);
+            LOGGER.info("model[{}],FoodNutriValModel[{}]", model, model.getFoodNutriValModel());
             final Food food = new Food();
             food.setName(model.getName());
             foodRepo.saveAndFlush(food);
@@ -169,8 +170,8 @@ public class FoodService {
                     unitOfFood.setFood(food);
                     unitOfFood.setUnitName(unitOfFoodModel.getFoodUnit());
                     unitOfFood.setCaloriesEstimate(unitOfFoodModel.getCaloriesEstimate());
-                    unitOfFood.setListElementNutritionName(unitOfFoodModel.getFoodNutritionName());
-                    unitOfFood.setListElementNutritionValue(unitOfFoodModel.getFoodNutritionValue());
+                    unitOfFood.setListElementNutritionName(IDbConsts.IUnitOfFood.listElNutriName);
+                    unitOfFood.setListElementNutritionValue(unitOfFoodModel.getFoodNutriValModel().toString());
                     unitOfFoodRepo.saveAndFlush(unitOfFood);
                 }
             }

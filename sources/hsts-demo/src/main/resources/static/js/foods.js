@@ -149,17 +149,35 @@ $("#createForm").validate({
     },
     submitHandler: function () {
         console.log("begin insert");
+        var foodNutriValModel = [
+        {
+            animalFat: $('#animalFat').val(),
+            animalProtein: $('#animalProtein').val(),
+            calcium: $('#calcium').val(),
+            fat: $('#fat').val(),
+            starch: $('#starch').val(),
+            protein: $('#protein').val(),
+            fiber: $('#fiber').val(),
+            iron: $('#iron').val(),
+            sodium: $('#sodium').val(),
+            vitaminB1: $('#vitaminB1').val(),
+            vitaminB2: $('#vitaminB2').val(),
+            vitaminC: $('#vitaminC').val(),
+            vitaminPP: $('#vitaminPP').val(),
+            zinc: $('#zinc').val()
+        }];
+        console.log(foodNutriValModel);
         var postData = {
             name: $("#insertFoodName").val(),
+            foodNutriValModel: foodNutriValModel,
             units: [
                 {
                     foodUnit: $("#insertUnitName").val(),
-                    caloriesEstimate: $("#insertCaloriesEstimate").val(),
-                    foodNutritionName: $("#insertFoodNutritionName").val(),
-                    foodNutritionValue: $("#insertFoodNutritionValue").val()
+                    caloriesEstimate: $("#insertCaloriesEstimate").val()
                 }
             ]
         };
+
         $.ajax({
             method: "POST",
             url: "/food/create",
