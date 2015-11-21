@@ -21,6 +21,24 @@ public class FoodNutriValModel implements Serializable {
     private float vitaminPP;
     private float zinc;
 
+    public FoodNutriValModel(String foodNutritionValue) {
+        String[] list = foodNutritionValue.split(",");
+        this.animalFat = Float.parseFloat(list[0]);
+        this.animalProtein = Float.parseFloat(list[1]);
+        this.calcium = Float.parseFloat(list[2]);
+        this.fat = Float.parseFloat(list[3]);
+        this.starch = Float.parseFloat(list[4]);
+        this.protein = Float.parseFloat(list[5]);
+        this.fiber = Float.parseFloat(list[6]);
+        this.iron = Float.parseFloat(list[7]);
+        this.sodium = Float.parseFloat(list[8]);
+        this.vitaminB1 = Float.parseFloat(list[9]);
+        this.vitaminB2 = Float.parseFloat(list[10]);
+        this.vitaminC = Float.parseFloat(list[11]);
+        this.vitaminPP = Float.parseFloat(list[12]);
+        this.zinc = Float.parseFloat(list[13]);
+    }
+
     public FoodNutriValModel() {
     }
 

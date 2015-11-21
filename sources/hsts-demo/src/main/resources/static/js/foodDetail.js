@@ -39,12 +39,6 @@ $(document).ready(function(){
             {   "data": "caloriesEstimate",
                 "width": "15%"
             },
-            {   "data": "foodNutritionName",
-                "width": "15%"
-            },
-            {   "data": "foodNutritionValue",
-                "width": "20%"
-            },
             {
                 "data": "id",
                 "render": function (data, type, full, meta) {
@@ -76,12 +70,20 @@ function updateDialog(element) {
 
             var updateCaloriesEstimate = document.getElementById("updateCaloriesEstimate");
             updateCaloriesEstimate.value =  data.caloriesEstimate;
-
-            var updateFoodNutritionName = document.getElementById("updateFoodNutritionName");
-            updateFoodNutritionName.value = data.foodNutritionName;
-
-            var updateFoodNutritionValue = document.getElementById("updateFoodNutritionValue");
-            updateFoodNutritionValue.value = data.foodNutritionValue;
+            document.getElementById("animalFatUP").value = data.foodNutriValModel.animalFat;
+            document.getElementById("animalProteinUP").value = data.foodNutriValModel.animalProtein;
+            document.getElementById("calciumUP").value = data.foodNutriValModel.calcium;
+            document.getElementById("fatUP").value = data.foodNutriValModel.fat;
+            document.getElementById("starchUP").value = data.foodNutriValModel.starch;
+            document.getElementById("proteinUP").value = data.foodNutriValModel.protein;
+            document.getElementById("fiberUP").value = data.foodNutriValModel.fiber;
+            document.getElementById("ironUP").value = data.foodNutriValModel.iron;
+            document.getElementById("sodiumUP").value = data.foodNutriValModel.sodium;
+            document.getElementById("vitaminB1UP").value = data.foodNutriValModel.vitaminB1;
+            document.getElementById("vitaminB2UP").value = data.foodNutriValModel.vitaminB2;
+            document.getElementById("vitaminCUP").value = data.foodNutriValModel.vitaminC;
+            document.getElementById("vitaminPPUP").value = data.foodNutriValModel.vitaminPP;
+            document.getElementById("zincUP").value = data.foodNutriValModel.zinc;
 
             // Show diaglog
             $("#updateDialog").modal('show');
@@ -129,16 +131,32 @@ $("#updateForm").validate({
 
         // Default
         else {
-            error.appendTo( element.parent().next() );
+            error.appendTo( element.parent() );
         }
     },
     submitHandler: function () {
         console.log("begin update");
+        var foodNutriValModel =
+        {
+            animalFat: $('#animalFatUP').val(),
+            animalProtein: $('#animalProteinUP').val(),
+            calcium: $('#calciumUP').val(),
+            fat: $('#fatUP').val(),
+            starch: $('#starchUP').val(),
+            protein: $('#proteinUP').val(),
+            fiber: $('#fiberUP').val(),
+            iron: $('#ironUP').val(),
+            sodium: $('#sodiumUP').val(),
+            vitaminB1: $('#vitaminB1UP').val(),
+            vitaminB2: $('#vitaminB2UP').val(),
+            vitaminC: $('#vitaminCUP').val(),
+            vitaminPP: $('#vitaminPPUP').val(),
+            zinc: $('#zincUP').val()
+        };
         var postData = {
             id: curUnit,
             caloriesEstimate: $("#updateCaloriesEstimate").val(),
-            foodNutritionName: $("#updateFoodNutritionName").val(),
-            foodNutritionValue: $("#updateFoodNutritionValue").val()
+            foodNutriValModel: foodNutriValModel
             };
         $.ajax({
             method: "POST",
@@ -195,17 +213,33 @@ $("#createForm").validate({
 
         // Default
         else {
-            error.appendTo( element.parent().next() );
+            error.appendTo( element.parent() );
         }
     },
     submitHandler: function () {
         console.log("begin insert");
+        var foodNutriValModel =
+        {
+            animalFat: $('#animalFat').val(),
+            animalProtein: $('#animalProtein').val(),
+            calcium: $('#calcium').val(),
+            fat: $('#fat').val(),
+            starch: $('#starch').val(),
+            protein: $('#protein').val(),
+            fiber: $('#fiber').val(),
+            iron: $('#iron').val(),
+            sodium: $('#sodium').val(),
+            vitaminB1: $('#vitaminB1').val(),
+            vitaminB2: $('#vitaminB2').val(),
+            vitaminC: $('#vitaminC').val(),
+            vitaminPP: $('#vitaminPP').val(),
+            zinc: $('#zinc').val()
+        };
         var postData = {
             foodId: $("#foodId").val(),
             foodUnit: $("#insertUnitName").val(),
             caloriesEstimate: $("#insertCaloriesEstimate").val(),
-            foodNutritionName: $("#insertFoodNutritionName").val(),
-            foodNutritionValue: $("#insertFoodNutritionValue").val()
+            foodNutriValModel: foodNutriValModel
         };
         $.ajax({
             method: "POST",

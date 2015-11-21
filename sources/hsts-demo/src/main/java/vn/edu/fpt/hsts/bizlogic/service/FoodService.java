@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import vn.edu.fpt.hsts.bizlogic.model.FoodModel;
+import vn.edu.fpt.hsts.bizlogic.model.FoodNutriValModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodUnitModel;
 import vn.edu.fpt.hsts.bizlogic.model.UnitOfFoodModel;
@@ -117,6 +118,8 @@ public class FoodService {
             final UnitOfFood unitOfFood = unitOfFoodRepo.findOne(id);
             final UnitOfFoodModel model = new UnitOfFoodModel();
             model.fromEntity(unitOfFood);
+            FoodNutriValModel foodNutriValModel = new FoodNutriValModel(unitOfFood.getListElementNutritionValue());
+            model.setFoodNutriValModel(foodNutriValModel);
             return model;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
@@ -130,8 +133,8 @@ public class FoodService {
             LOGGER.info("model[{}]", model);
             final UnitOfFood unitOfFood = unitOfFoodRepo.findOne(model.getId());
             unitOfFood.setCaloriesEstimate(model.getCaloriesEstimate());
-            unitOfFood.setListElementNutritionName(model.getFoodNutritionName());
-            unitOfFood.setListElementNutritionValue(model.getFoodNutritionValue());
+            unitOfFood.setListElementNutritionName(IDbConsts.IUnitOfFood.listElNutriName);
+            unitOfFood.setListElementNutritionValue(model.getFoodNutriValModel().toString());
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
@@ -147,8 +150,8 @@ public class FoodService {
             unitOfFood.setFood(food);
             unitOfFood.setUnitName(model.getFoodUnit());
             unitOfFood.setCaloriesEstimate(model.getCaloriesEstimate());
-            unitOfFood.setListElementNutritionName(model.getFoodNutritionName());
-            unitOfFood.setListElementNutritionValue(model.getFoodNutritionValue());
+            unitOfFood.setListElementNutritionName(IDbConsts.IUnitOfFood.listElNutriName);
+            unitOfFood.setListElementNutritionValue(model.getFoodNutriValModel().toString());
             unitOfFoodRepo.saveAndFlush(unitOfFood);
         } finally {
             LOGGER.info(IConsts.END_METHOD);
