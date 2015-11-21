@@ -171,7 +171,7 @@ public class FoodService {
                     unitOfFood.setUnitName(unitOfFoodModel.getFoodUnit());
                     unitOfFood.setCaloriesEstimate(unitOfFoodModel.getCaloriesEstimate());
                     unitOfFood.setListElementNutritionName(IDbConsts.IUnitOfFood.listElNutriName);
-                    unitOfFood.setListElementNutritionValue(unitOfFoodModel.getFoodNutriValModel().toString());
+                    unitOfFood.setListElementNutritionValue(model.getFoodNutriValModel().toString());
                     unitOfFoodRepo.saveAndFlush(unitOfFood);
                 }
             }

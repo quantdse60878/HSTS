@@ -127,7 +127,8 @@ $("#createForm").validate({
         },
         insertFoodNutritionValue: {
             required: true
-        }
+        },
+
     },
     errorPlacement: function(error, element){
         if(element.attr("name") == "insertFoodName"){
@@ -144,12 +145,12 @@ $("#createForm").validate({
 
         // Default
         else {
-            error.appendTo( element.parent().next() );
+            error.appendTo( element.parent() );
         }
     },
     submitHandler: function () {
         console.log("begin insert");
-        var foodNutriValModel = [
+        var foodNutriValModel =
         {
             animalFat: $('#animalFat').val(),
             animalProtein: $('#animalProtein').val(),
@@ -165,7 +166,7 @@ $("#createForm").validate({
             vitaminC: $('#vitaminC').val(),
             vitaminPP: $('#vitaminPP').val(),
             zinc: $('#zinc').val()
-        }];
+        };
         console.log(foodNutriValModel);
         var postData = {
             name: $("#insertFoodName").val(),

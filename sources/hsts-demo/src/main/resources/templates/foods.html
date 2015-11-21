@@ -112,7 +112,7 @@
                                 <label class="col-sm-4 control-label">Default Kcal Estimate/ 100g*: </label>
 
                                 <div class="col-sm-3">
-                                    <input type="number" th:name="insertCaloriesEstimate" class="form-control" id="insertCaloriesEstimate"/>
+                                    <input type="number" style="text-align: right;" th:name="insertCaloriesEstimate" class="form-control" value="0" id="insertCaloriesEstimate"/>
                                 </div>
                                 <div class="col-sm-3 help-block with-errors" id = "invalidInsertCaloriesEstimate">
                                 </div>
@@ -133,13 +133,15 @@
                                     </td>
                                     <td class="form-group">
                                         <input id="starch" th:name="starch" type="number" value="0.0" class="form-control hsts hsts-num"
-                                               placeholder="Starch"/>
+                                               placeholder="Starch" data-rule-min="0" data-msg-min="Value must greater than or equal to 0"/>
                                         <div class="help-block with-errors" id="invalidstarch"></div>
                                     </td>
 
                                     <td><label class="control-label">Iron* /1000 Kcal (mg)</label></td>
                                     <td class="form-group">
-                                        <input id="iron" th:name="iron" type="number" value="0.0" class="form-control hsts hsts-num"
+                                        <input id="iron" th:name="iron" type="number" value="0.0"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"
+                                               class="form-control hsts hsts-num"
                                                placeholder="Iron"/>
                                         <div class="help-block with-errors" id="invalidiron"></div>
                                     </td>
@@ -149,8 +151,9 @@
                                         <label class="control-label">Protein* (g)</label>
                                     </td>
                                     <td class="form-group">
-                                        <input id="protein" th:name="protein" type="number" value="0.0" class="form-control hsts hsts-num"
-                                               placeholder="Protein" data-remote="/validateData" data-error="Wrong input"/>
+                                        <input id="protein" th:name="protein" type="number"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0" value="0.0" class="form-control hsts hsts-num"
+                                               placeholder="Protein" />
                                         <div class="help-block with-errors" id="invalidprotein"></div>
                                     </td>
 
@@ -158,7 +161,8 @@
                                         <label class="control-label">Zinc* /1000 Kcal (mg)</label>
                                     </td>
                                     <td>
-                                        <input id="zinc" th:name="zinc" type="number" value="0.0" class="form-control hsts hsts-num"
+                                        <input id="zinc" th:name="zinc" type="number" value="0.0"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0" class="form-control hsts hsts-num"
                                                placeholder="Zinc"/>
                                         <div class="help-block with-errors" id="invalidzinc"></div>
                                     </td>
@@ -168,7 +172,9 @@
                                         <label class="control-label">Fat* (g)</label>
                                     </td>
                                     <td>
-                                        <input id="fat" th:name="fat" type="number" value="0.0" class="form-control hsts hsts-num"
+                                        <input id="fat" th:name="fat" type="number"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"
+                                               value="0.0" class="form-control hsts hsts-num"
                                                placeholder="Fat"/>
                                         <div class="help-block with-errors" id="invalidfat"></div>
                                     </td>
@@ -177,7 +183,9 @@
                                         <label class="control-label">Vitamin B1*/1000 Kcal (mg)</label>
                                     </td>
                                     <td>
-                                        <input id="vitaminB1" th:name="vitaminB1" type="number" value="0.0" class="form-control hsts hsts-num"
+                                        <input id="vitaminB1" th:name="vitaminB1"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"
+                                               type="number" value="0.0" class="form-control hsts hsts-num"
                                                placeholder="Vitamin B1"/>
                                         <div class="help-block with-errors" id="invalidvitaminB1"></div>
                                     </td>
@@ -188,6 +196,7 @@
                                     </td>
                                     <td>
                                         <input id="animalProtein" th:name="animalProtein" type="number" value="0.0"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"
                                                class="form-control hsts hsts-num" placeholder="Animal Protein"/>
                                         <div class="help-block with-errors" id="invalidanimalProtein"></div>
                                     </td>
@@ -196,7 +205,9 @@
                                         <label class="control-label">Vitamin C*/1000 Kcal (mg)</label>
                                     </td>
                                     <td>
-                                        <input id="vitaminC" th:name="vitaminC" type="number" value="0.0" class="form-control hsts hsts-num"
+                                        <input id="vitaminC" th:name="vitaminC" type="number"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"
+                                               value="0.0" class="form-control hsts hsts-num"
                                                placeholder="Vitamin C"/>
                                         <div class="help-block with-errors" id="invalidvitaminC"></div>
                                     </td>
@@ -206,7 +217,9 @@
                                         <label class="control-label">Animal Fat* (g)</label>
                                     </td>
                                     <td>
-                                        <input id="animalFat" th:name="animalFat" type="number" value="0.0" class="form-control hsts hsts-num"
+                                        <input id="animalFat" th:name="animalFat" type="number"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"
+                                               value="0.0" class="form-control hsts hsts-num"
                                                placeholder="Animal Fat"/>
                                         <div class="help-block with-errors" id="invalidanimalFat"></div>
                                     </td>
@@ -214,7 +227,9 @@
                                     <td><label class="control-label">Vitamin B2*/1000 Kcal (mg)</label>
                                     </td>
                                     <td>
-                                        <input id="vitaminB2" th:name="vitaminB2" type="number" value="0.0" class="form-control hsts hsts-num"
+                                        <input id="vitaminB2" th:name="vitaminB2" type="number"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"
+                                               value="0.0" class="form-control hsts hsts-num"
                                                placeholder="Vitamin B2"/>
                                         <div class="help-block with-errors" id="invalidvitaminB2"></div>
                                     </td>
@@ -222,7 +237,9 @@
                                 <tr>
                                     <td><label class="control-label">Calcium* (mg)</label></td>
                                     <td>
-                                        <input id="calcium" th:name="calcium" type="number" value="0.0" class="form-control hsts hsts-num"
+                                        <input id="calcium" th:name="calcium" type="number"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"
+                                               value="0.0" class="form-control hsts hsts-num"
                                                placeholder="Calcium"/>
                                         <div class="help-block with-errors" id="invalidcalcium"></div>
                                     </td>
@@ -230,7 +247,9 @@
                                     <td><label class="control-label">Vitamin PP*/1000 Kcal (mg)</label>
                                     </td>
                                     <td>
-                                        <input id="vitaminPP" th:name="vitaminPP" type="number" value="0.0" class="form-control hsts hsts-num"
+                                        <input id="vitaminPP" th:name="vitaminPP"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"
+                                               type="number" value="0.0" class="form-control hsts hsts-num"
                                                placeholder="Vitamin PP"/>
                                         <div class="help-block with-errors" id="invalidvitaminPP"></div>
                                     </td>
@@ -238,7 +257,9 @@
                                 <tr>
                                     <td><label class="control-label">Sodium* (mg)</label></td>
                                     <td>
-                                        <input id="sodium" th:name="sodium" type="number" value="0.0" class="form-control hsts hsts-num"
+                                        <input id="sodium" th:name="sodium" type="number"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"
+                                               value="0.0" class="form-control hsts hsts-num"
                                                placeholder="Sodium"/>
                                         <div class="help-block with-errors" id="invalidsodium"></div>
                                     </td>
@@ -246,7 +267,8 @@
                                     <td><label class="control-label">Fiber* (g)</label></td>
                                     <td>
                                         <input id="fiber" th:name="fiber" type="number" value="0.0" class="form-control hsts hsts-num"
-                                               placeholder="Fiber" data-remote="/validateData" data-error="Wrong input"/>
+                                               placeholder="Fiber"
+                                               data-rule-min="0" data-msg-min="Value must greater than or equal to 0"/>
                                         <div class="help-block with-errors" id="invalidfiber"></div>
                                     </td>
                                 </tr>
