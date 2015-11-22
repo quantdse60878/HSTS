@@ -59,7 +59,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractElementGroup" />
-        <value>4</value>
+        <value>5</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -158,7 +158,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="entity-relationship" id="p631070817288736774" name="EntityRelationshipDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-106,-9" zoom="0.4">
+      <diagram type="entity-relationship" id="p631070817288736774" name="EntityRelationshipDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="798,4174" zoom="2">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -1044,10 +1044,10 @@
               <attribute uid="a04c7c6312b274de8acca92c162ad99d1948" cid="EA153" name="CaloriesEstimate" type="" type-id="" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false">
                 <style class="default" />
               </attribute>
-              <attribute uid="a35a16a28f2c94b62a4a0a6b539152e30633" cid="EA154" name="AllNutritionName" type="" type-id="" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false">
+              <attribute uid="a35a16a28f2c94b62a4a0a6b539152e30633" cid="EA154" name="ElementNutritionName" type="" type-id="" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false">
                 <style class="default" />
               </attribute>
-              <attribute uid="a151c6f37f1da4ac4a036a3a369c2d223456" cid="EA155" name="AllNutritionValue" type="" type-id="" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false">
+              <attribute uid="a151c6f37f1da4ac4a036a3a369c2d223456" cid="EA155" name="ElementNutritionValue" type="" type-id="" type-size="" foreign-key="false" primary-key="false" nullable="false" description="" default-value="" auto-increment="false">
                 <style class="default" />
               </attribute>
             </attributes>
@@ -1690,7 +1690,7 @@
             <role-positions start-role="25,15" end-role="27.45949,-42.05459" />
           </item>
           <item id="di952290846626172058" iid="1f1baca8d71742b2987468c3e67fb582" creation-date="11/11/2015 23:36:07" order-index="55" type="entity">
-            <layout ax="590" ay="2200" awidth="206" aheight="160" x="590" y="2200" width="206" height="160" angle="0" />
+            <layout ax="590" ay="2200" awidth="242" aheight="160" x="590" y="2200" width="242" height="160" angle="0" />
             <erd-entity show-nullability="true" />
           </item>
           <item id="di476119760495484181" iid="358152d113634a38b713077fb1a15ce4" creation-date="11/12/2015 00:53:50" order-index="56" type="relation">
@@ -1761,10 +1761,10 @@
             <role-positions start-role="24,38" end-role="26,-46" />
           </item>
           <item id="di338232314563394894" iid="01c6abe6a1b34e6499ef89f0abb0a9ba" creation-date="11/12/2015 08:39:38" order-index="76" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="690" y1="2050" x2="690" y2="2200" start-border-pos="0.632352941176471" end-border-pos="0.121359223300971">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="690" y1="2050" x2="707" y2="2200" start-border-pos="0.632352941176471" end-border-pos="0.121359223300971">
               <points>
                 <point x="690" y="2050" />
-                <point x="690" y="2200" />
+                <point x="707" y="2200" />
               </points>
             </layout>
             <relation from="di866476339101425443" from-iid="0c690118ebbe45e794759242a943c929" to="di952290846626172058" to-iid="1f1baca8d71742b2987468c3e67fb582" />
@@ -4823,9 +4823,9 @@
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
           <item id="di526896717544395340" iid="04e09cf78bab485690f3097fc95ccec6" creation-date="11/21/2015 07:25:09" order-index="72" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="871" y1="2119" x2="878" y2="2220" start-border-pos="0.625789315359933" end-border-pos="0.125">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="874" y1="2119" x2="878" y2="2220" start-border-pos="0.61947511945452" end-border-pos="0.125">
               <points>
-                <point x="871" y="2119" />
+                <point x="874" y="2119" />
                 <point x="878" y="2220" />
               </points>
             </layout>
