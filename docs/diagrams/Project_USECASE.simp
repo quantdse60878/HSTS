@@ -47,7 +47,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractElementGroup" />
-        <value>15</value>
+        <value>3</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -2115,8 +2115,31 @@
               <end-role id="" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di611767431177423375" cid="UC022" type="use-case" name="Check Notify Of Patient" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/22/2015 15:54:53">
+          <item id="di611767431177423375" cid="UC022" type="use-case" name="Check Notifications Of Patient" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/22/2015 15:54:53">
             <stereotypes />
+            <documentation>
+              <text>
+                <styles>
+                  <style name="S1" font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                    <text>
+                      <solid-brush color="#FF000000" />
+                    </text>
+                  </style>
+                </styles>
+                <content>
+                  <paragraph>
+                    <p s="S1">
+                      <t>
+</t>
+                    </p>
+                  </paragraph>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
@@ -2259,7 +2282,7 @@
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
           <item id="di611767431177423375" iid="fb43f6e45a924c59b9621b85572cdc7a" container="ddip270305532598268068_136795117237268016" container-iid="f0c82317653641cb9592376526fcbdf6" creation-date="11/22/2015 15:54:53" order-index="135" type="entity">
-            <layout ax="720" ay="90" awidth="120" aheight="75" x="720" y="90" width="120" height="70" angle="0" />
+            <layout ax="720" ay="90" awidth="120" aheight="75" x="720" y="90" width="120" height="75" angle="0" />
             <use-case />
           </item>
           <item id="di861590778505828003" iid="76022e8f980b4621966c8f793a54b1ef" creation-date="11/22/2015 15:56:51" order-index="136" type="relation">
