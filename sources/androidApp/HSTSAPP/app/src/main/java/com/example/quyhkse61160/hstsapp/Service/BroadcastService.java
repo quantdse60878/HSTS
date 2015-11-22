@@ -88,8 +88,8 @@ public class BroadcastService extends Service {
                 @Override
                 public void run() {
                     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
-                    if(sharedPreferences.getString(Constant.PREF_HADSELECTDEVICE, "").equals("") ||
-                            sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")){
+                    if (sharedPreferences.getString(Constant.PREF_HADSELECTDEVICE, "").equals("") ||
+                            sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")) {
                         return;
                     }
 
@@ -184,19 +184,17 @@ public class BroadcastService extends Service {
                         Calendar c3 = Calendar.getInstance();
                         c3.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.split(":")[0]));
                         c3.set(Calendar.MINUTE, Integer.parseInt(time.split(":")[1]));
-
                         if (c3.getTime().getHours() == c.getTime().getHours()
                                 && c3.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
-                            if(BroadcastService.flag3 && c.getTime().getDate() >= Constant.PATIENT_APPOINTMENT.getDate() &&
+                            if (BroadcastService.flag3 && c.getTime().getDate() >= Constant.PATIENT_APPOINTMENT.getDate() &&
                                     c.getTime().getMonth() >= Constant.PATIENT_APPOINTMENT.getMonth() &&
-                                    c.getTime().getYear() >= Constant.PATIENT_APPOINTMENT.getYear()){
+                                    c.getTime().getYear() >= Constant.PATIENT_APPOINTMENT.getYear()) {
                                 BroadcastService.flag3 = false;
                                 Intent in = new Intent(context, HomeActivity.class);
                                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 in.putExtra("nextAppointment", Boolean.TRUE);
                                 context.startActivity(in);
                             }
-
                             if (BroadcastService.flag && BroadcastService.flag3) {
                                 Log.d("KhuongMH", "FLAG1 FALSEEEEEEEEEEE");
                                 BroadcastService.flag = false;

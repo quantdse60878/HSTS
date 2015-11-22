@@ -43,14 +43,21 @@ public class Tab4 extends Fragment {
         ill = (TextView) v.findViewById(R.id.notice_illness_name);
         fromDate = (TextView) v.findViewById(R.id.notice_from_date);
         nextApp = (TextView) v.findViewById(R.id.notice_next_appointment);
-
         name.setText(Constant.PATIENT_NAME);
         ill.setText(Constant.TREATMENTS.get(0).getIllnessName());
-        String[] temp = Constant.TREATMENTS.get(0).getFromDate().split(" ")[0].split("-");
-        fromDate.setText(temp[2] + "-" + temp[1] + "-" + temp[0]);
-        temp = Constant.TREATMENTS.get(0).getNextAppointment().split(" ")[0].split("-");
-        nextApp.setText(temp[2] + "-" + temp[1] + "-" + temp[0]);
 
+        if(!Constant.TREATMENTS.get(0).getFromDate().isEmpty()){
+            String[] temp = Constant.TREATMENTS.get(0).getFromDate().split(" ")[0].split("-");
+            fromDate.setText(temp[2] + "-" + temp[1] + "-" + temp[0]);
+        } else {
+            fromDate.setText("");
+        }
+        if(!Constant.TREATMENTS.get(0).getNextAppointment().isEmpty()){
+            String[] temp = Constant.TREATMENTS.get(0).getNextAppointment().split(" ")[0].split("-");
+            nextApp.setText(temp[2] + "-" + temp[1] + "-" + temp[0]);
+        } else {
+            nextApp.setText("");
+        }
 
         food = (LinearLayout) v.findViewById(R.id.btn_foods);
         medicine = (LinearLayout) v.findViewById(R.id.btn_medicines);

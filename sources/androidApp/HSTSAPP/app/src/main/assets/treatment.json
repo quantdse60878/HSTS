@@ -1,11 +1,11 @@
 [
   {
-    "illnessName": "Không có bệnh",
+    "illnessName": "",
     "nextAppointment": "",
     "appointmentId": 0,
     "fromDate": "",
     "toDate": "",
-    "caloriesBurnEveryday": "800",
+    "caloriesBurnEveryday": "",
     "listFoodTreatment": [],
     "listMedicineTreatment": [],
     "listPracticeTreatment": []

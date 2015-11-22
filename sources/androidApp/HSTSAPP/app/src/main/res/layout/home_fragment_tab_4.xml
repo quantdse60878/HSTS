@@ -73,7 +73,7 @@
                         android:id="@+id/notice_illness_name"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Không có bệnh"
+                        android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
                 </LinearLayout>
