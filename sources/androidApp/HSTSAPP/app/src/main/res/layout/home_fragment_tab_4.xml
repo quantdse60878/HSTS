@@ -48,7 +48,7 @@
                         android:id="@+id/notice_patient_name"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="KhuongMH "
+                        android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
                 </LinearLayout>
@@ -73,7 +73,7 @@
                         android:id="@+id/notice_illness_name"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Stupid "
+                        android:text="Không có bệnh"
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
                 </LinearLayout>
@@ -98,7 +98,7 @@
                         android:id="@+id/notice_from_date"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Ngày Mai "
+                        android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
                 </LinearLayout>
@@ -123,7 +123,7 @@
                         android:id="@+id/notice_next_appointment"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Hoho"
+                        android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="17dp" />
                 </LinearLayout>
