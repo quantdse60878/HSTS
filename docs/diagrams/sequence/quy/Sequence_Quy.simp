@@ -13,15 +13,15 @@
       </counter>
       <counter>
         <item-type stereotype="" type="UmlLifeline" />
-        <value>15</value>
+        <value>18</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSequenceAction" />
-        <value>63</value>
+        <value>67</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlActivationBar" />
-        <value>45</value>
+        <value>50</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlActivity" />
@@ -29,7 +29,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSwimlane" />
-        <value>6</value>
+        <value>7</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlInitialNode" />
@@ -39,6 +39,10 @@
         <item-type stereotype="" type="UmlAction" />
         <value>7</value>
       </counter>
+      <counter>
+        <item-type stereotype="" type="DrawingItem" />
+        <value>1</value>
+      </counter>
     </entity-names>
     <entity-ids>
       <counter>
@@ -47,15 +51,15 @@
       </counter>
       <counter>
         <item-type stereotype="" type="UmlLifeline" />
-        <value>16</value>
+        <value>19</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSequenceAction" />
-        <value>64</value>
+        <value>68</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlActivationBar" />
-        <value>46</value>
+        <value>51</value>
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractTextItem" />
@@ -67,11 +71,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSwimlane" />
-        <value>7</value>
-      </counter>
-      <counter>
-        <item-type stereotype="" type="AbstractElementGroup" />
-        <value>345</value>
+        <value>8</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlInitialNode" />
@@ -93,14 +93,34 @@
         <item-type stereotype="" type="UmlJoin" />
         <value>4</value>
       </counter>
+      <counter>
+        <item-type stereotype="" type="AbstractElementGroup" />
+        <value>60</value>
+      </counter>
+      <counter>
+        <item-type stereotype="" type="UmlComment" />
+        <value>2</value>
+      </counter>
+      <counter>
+        <item-type stereotype="" type="UmlCommentConnector" />
+        <value>2</value>
+      </counter>
+      <counter>
+        <item-type stereotype="" type="AbstractShapeItem" />
+        <value>4</value>
+      </counter>
     </entity-ids>
     <diagrams>
       <counter>
         <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlSequenceDiagram</type>
-        <value>3</value>
+        <value>4</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlActivityDiagram</type>
+        <value>2</value>
+      </counter>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlCommunicationDiagram</type>
         <value>1</value>
       </counter>
     </diagrams>
@@ -314,7 +334,7 @@
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="send" message="" is-asynchronous="false" from="di658820867997105099" to="di214592090852694309" return-value="" assign-to-variable="">
+            <sequence-action type="send" message="" is-asynchronous="false" to="di214592090852694309" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -603,7 +623,7 @@
             <sequence-action from="di723025431965553023" to="di810676510397637523" show-sequence-number="false" />
           </item>
           <item id="di131540143357825136" iid="c914474029a6451cade597f6f5e165ae" container="di959463293462787906" container-iid="5fdf6f44cebb4e798bb9934a96429e13" creation-date="11/17/2015 17:45:51" order-index="24" type="entity">
-            <layout ax="650" ay="210" awidth="20" aheight="830" x="650" y="220" width="20" height="820" angle="0" />
+            <layout ax="650" ay="210" awidth="20" aheight="820" x="650" y="210" width="20" height="820" angle="0" />
           </item>
           <item id="di810676510397637523" iid="b61f6f28dc1e4201aad74e715d6b4b9c" container="di647445265550994891" container-iid="3c91e6493ae541dd87423be2f71cfe58" creation-date="11/17/2015 18:14:29" order-index="37" type="entity">
             <layout ax="961" ay="647" awidth="20" aheight="103" x="951" y="647" width="20" height="103" angle="0" />
@@ -663,7 +683,7 @@
             <sequence-action from="di739835861684694811" to="di835991071468497017" show-sequence-number="false" />
           </item>
           <item id="di462795680475613862" iid="32b1b03a91a24f2eb931587882c8d001" creation-date="11/19/2015 18:32:56" order-index="52" type="sequence-action">
-            <layout x1="-220" y1="201" x2="21" y2="201" ax="-220" ay="186" awidth="241" aheight="20" x="-220" y="186" width="241" height="20" message-x="0" message-y="-10" />
+            <layout x1="20" y1="201" x2="21" y2="201" ax="20" ay="186" awidth="1" aheight="20" x="20" y="186" width="1" height="20" message-x="0" message-y="-10" />
             <sequence-action from="di658820867997105099" to="di214592090852694309" show-sequence-number="false" />
           </item>
         </layer>
@@ -696,7 +716,7 @@
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="call" message="readCharacteristic()" is-asynchronous="false" from="di762299286748627050" to="di930832054283136209" return-value="" assign-to-variable="">
+            <sequence-action type="call" message="readCharacteristic()" is-asynchronous="false" to="di930832054283136209" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -1435,6 +1455,62 @@
           </item>
           <item id="di774612636119744757" iid="de5b547638cd4930b9b8986435a52c2c" container="di104537243292445429" container-iid="a080c440fdc644f09e926cf14395ea7c" creation-date="11/19/2015 18:31:41" order-index="41" type="entity">
             <layout ax="1320" ay="660" awidth="100" aheight="50" x="1320" y="660" width="100" height="50" angle="0" />
+          </item>
+        </layer>
+      </diagram>
+      <diagram type="uml-communication" id="p850153564635720936" name="CommunicationDiagram1" order-index="5" overview-order-index="3" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>11/21/2015 17:19:24</creation-date>
+          <change-date>11/21/2015 17:20:47</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items>
+          <item id="di848879537652886990" cid="SL007" type="swimlane" name="Application" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/21/2015 17:19:30">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di948498152683717406" cid="SL007" type="swimlane" name="Android OS" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/21/2015 17:19:30">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di273354079443223536" cid="SL007" type="swimlane" name="Wristband" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/21/2015 17:19:30">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+        </abstract-items>
+        <layer name="Default" visible="true" enabled="true" locked="false">
+          <item id="di848879537652886990" iid="2dc45c0f5ed842e98391bf894cb4b222" creation-date="11/21/2015 17:19:30" order-index="0" type="entity">
+            <layout ax="70" ay="130" awidth="210" aheight="200" x="70" y="130" width="210" height="200" angle="0" />
+            <swimlane vertical="true" is-closed="false" />
+          </item>
+          <item id="di948498152683717406" iid="d3f3087bdd214500a676bfa679740cf1" creation-date="11/21/2015 17:19:30" order-index="0" type="entity">
+            <layout ax="390" ay="130" awidth="210" aheight="200" x="390" y="130" width="210" height="200" angle="0" />
+            <swimlane vertical="true" is-closed="false" />
+          </item>
+          <item id="di273354079443223536" iid="6aa2ec60edbb46438f1dceb8d70056be" creation-date="11/21/2015 17:19:30" order-index="0" type="entity">
+            <layout ax="710" ay="130" awidth="210" aheight="200" x="710" y="130" width="210" height="200" angle="0" />
+            <swimlane vertical="true" is-closed="false" />
+          </item>
+          <item id="di390670564781645013" iid="75828b7a17644203ad6ed730ec7f79cd" name="Element1" creation-date="11/21/2015 17:20:47" order-index="1" type="drawing-shape">
+            <layout ax="280" ay="190" awidth="110" aheight="20" x="280" y="190" width="110" height="20" angle="179.6141" />
+            <drawing-shape type="ArrowLeft" />
+            <style class="default" />
           </item>
         </layer>
       </diagram>

@@ -59,7 +59,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractElementGroup" />
-        <value>51</value>
+        <value>4</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -81,6 +81,10 @@
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlClassDiagram</type>
+        <value>1</value>
+      </counter>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlStateMachineDiagram</type>
         <value>1</value>
       </counter>
     </diagrams>
@@ -154,7 +158,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="entity-relationship" id="p631070817288736774" name="EntityRelationshipDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="387,701" zoom="1.4">
+      <diagram type="entity-relationship" id="p631070817288736774" name="EntityRelationshipDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-106,-9" zoom="0.4">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -1891,44 +1895,6 @@
           </item>
         </layer>
       </diagram>
-      <diagram type="chen-entity-relationship" id="p936274580878669583" name="ChenERDiagram1" order-index="2" overview-order-index="0" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
-        <style>
-          <background-color index="1" color="#FFFFFFFF" />
-          <background-color index="2" color="#FFFFFFFF" />
-          <background-type type="solid" />
-        </style>
-        <meta>
-          <authors>
-            <author> </author>
-          </authors>
-          <description />
-          <creation-date>09/17/2015 07:27:22</creation-date>
-          <change-date>09/17/2015 07:27:22</change-date>
-          <revision-count>0</revision-count>
-          <version />
-        </meta>
-        <abstract-items />
-        <layer name="Default" visible="true" enabled="true" locked="false" />
-      </diagram>
-      <diagram type="entity-relationship-idef1x" id="p749641180494761571" name="Diagram1" order-index="3" overview-order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
-        <style>
-          <background-color index="1" color="#FFFFFFFF" />
-          <background-color index="2" color="#FFFFFFFF" />
-          <background-type type="solid" />
-        </style>
-        <meta>
-          <authors>
-            <author> </author>
-          </authors>
-          <description />
-          <creation-date>09/17/2015 07:27:35</creation-date>
-          <change-date>09/17/2015 07:27:35</change-date>
-          <revision-count>0</revision-count>
-          <version />
-        </meta>
-        <abstract-items />
-        <layer name="Default" visible="true" enabled="true" locked="false" />
-      </diagram>
       <diagram type="entity-relationship" id="p343769720438288642" name="EntityRelationshipDiagram2" order-index="4" overview-order-index="2" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-147,404" zoom="0.6">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
@@ -3167,7 +3133,7 @@
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-class" id="p766067563828040190" name="ClassDiagram1" order-index="6" overview-order-index="4" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="34,1067" zoom="0.8">
+      <diagram type="uml-class" id="p766067563828040190" name="ClassDiagram1" order-index="6" overview-order-index="4" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="34,1213" zoom="0.8">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -4433,10 +4399,10 @@
               <attribute id="abc7851b364074e948411c35bf6416d44443" cid="AT108" name="CaloriesEstimate" type="" type-id="" visibility="private">
                 <style class="default" />
               </attribute>
-              <attribute id="ac2f3e69150a041309e393c84bc838b79206" cid="AT109" name="AllNutritionName" type="" type-id="" visibility="private">
+              <attribute id="ac2f3e69150a041309e393c84bc838b79206" cid="AT109" name="ElementNutritionName" type="" type-id="" visibility="private">
                 <style class="default" />
               </attribute>
-              <attribute id="aa418ddd1c7e24dd1a8f444914c235023826" cid="AT110" name="AllNutritionValue" type="" type-id="" visibility="private">
+              <attribute id="aa418ddd1c7e24dd1a8f444914c235023826" cid="AT110" name="ElementNutritionValue" type="" type-id="" visibility="private">
                 <style class="default" />
               </attribute>
             </attributes>
@@ -4741,7 +4707,7 @@
             <role-positions start-role="25,15" end-role="42.96269,-22.09504" start-multiplicity="30,-20" end-multiplicity="25,15" />
           </item>
           <item id="di216462788219095641" iid="0f4984bde888417e82dada8692bb490d" creation-date="11/18/2015 15:55:15" order-index="59" type="entity">
-            <layout ax="800" ay="2219" awidth="140" aheight="168" x="800" y="2219" width="140" height="168" angle="0" />
+            <layout ax="800" ay="2220" awidth="157" aheight="168" x="800" y="2220" width="157" height="168" angle="0" />
             <class />
           </item>
           <item id="di832223384913273957" iid="acdbf4d22831490b8fdf90cdb472ffa4" creation-date="11/20/2015 21:11:13" order-index="61" type="relation">
@@ -4857,10 +4823,10 @@
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
           <item id="di526896717544395340" iid="04e09cf78bab485690f3097fc95ccec6" creation-date="11/21/2015 07:25:09" order-index="72" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="871" y1="2119" x2="870" y2="2219" start-border-pos="0.625793675013951" end-border-pos="0.125">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="871" y1="2119" x2="878" y2="2220" start-border-pos="0.625789315359933" end-border-pos="0.125">
               <points>
                 <point x="871" y="2119" />
-                <point x="870" y="2219" />
+                <point x="878" y="2220" />
               </points>
             </layout>
             <relation from="di663250376126226483" from-iid="a4aae26208a84d388ffd13b6c7683aba" to="di216462788219095641" to-iid="0f4984bde888417e82dada8692bb490d" />
