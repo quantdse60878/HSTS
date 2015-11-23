@@ -293,6 +293,16 @@ function validateAuto() {
 };
 //var isValidAuto = setInterval(validateAuto, 5000);
 function validateAndOpenModal(m) {
+
+    var a = document.getElementById("medicine");
+    var b = document.getElementById("Foods");
+    var c = document.getElementById("Practice");
+
+    if(a.rows.length <=1 && b.rows.length <= 1 && c.rows.length <= 1) {
+        alert("Please select No illness in Diagnostic, if patient does not have illness");
+        return;
+    }
+
     var valid = true;
     var $fields = $('.tab-pane.active').find('input');
     console.log($fields);
