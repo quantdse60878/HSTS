@@ -103,7 +103,8 @@ public class LoginController extends AbstractController {
         try {
             LOGGER.info("loginCredential[{}]", loginCredential);
             Account user = accountService.checkLogin(loginCredential.getUsername(), loginCredential.getPassword());
-            if (null != user && user.getStatus() != IDbConsts.IAccountStatus.BLOCKED) {
+            if (null != user && user.getRole().getId() != IDbConsts.IRoleType.PATIENT
+                    && user.getStatus() != IDbConsts.IAccountStatus.BLOCKED) {
                 session.setAttribute("USER", user);
                 LoginCredentialModel model = new LoginCredentialModel();
                 model.setAccountId(user.getId());
