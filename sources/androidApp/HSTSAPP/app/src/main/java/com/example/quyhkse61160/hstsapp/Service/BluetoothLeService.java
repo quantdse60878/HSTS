@@ -88,7 +88,7 @@ public class BluetoothLeService extends Service {
                         }
 
 
-                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
                         Date date = new Date();
                         String dateString = df.format(date).replaceAll("/", "");
                         String FILENAME = dateString + ".txt";

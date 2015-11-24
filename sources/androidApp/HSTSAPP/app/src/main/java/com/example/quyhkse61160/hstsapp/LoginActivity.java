@@ -128,27 +128,27 @@ public class LoginActivity extends ActionBarActivity {
             });
 
 
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = new Date();
-            String dateString = df.format(date).replaceAll("/", "");
-            String FILENAME = "hakimquy" + ".txt";
-
-            File root = Environment.getExternalStorageDirectory();
-            File dir = new File(root.getAbsolutePath() + "/kimquy");
-            dir.mkdirs();
-            File file = new File(dir, FILENAME);
-            try {
-                FileOutputStream fos = new FileOutputStream(file);
-                PrintWriter pw = new PrintWriter(fos);
-                pw.println("----------------------");
-                pw.flush();
-                pw.close();
-                fos.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+//            Date date = new Date();
+//            String dateString = df.format(date).replaceAll("/", "");
+//            String FILENAME = "hakimquy" + ".txt";
+//
+//            File root = Environment.getExternalStorageDirectory();
+//            File dir = new File(root.getAbsolutePath() + "/kimquy");
+//            dir.mkdirs();
+//            File file = new File(dir, FILENAME);
+//            try {
+//                FileOutputStream fos = new FileOutputStream(file);
+//                PrintWriter pw = new PrintWriter(fos);
+//                pw.println("----------------------");
+//                pw.flush();
+//                pw.close();
+//                fos.close();
+//            } catch (FileNotFoundException e) {0
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 
 
         }

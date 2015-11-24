@@ -138,39 +138,44 @@ public class BroadcastService extends Service {
                         File root = Environment.getExternalStorageDirectory();
                         File dir = new File(root.getAbsolutePath() + "/kimquy");
                         dir.mkdirs();
-                        File file = new File(dir, FILENAME);
-                        if (file.exists()) {
-                            try {
-                                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                                StringBuffer stringBuffer = new StringBuffer();
-                                String line = null;
+                        for(int j = 0; j < dir.listFiles().length; j++) {
+                            File file = dir.listFiles()[j];
+                            Log.d("QUYYY123123", "FILE");
+                            if (file.exists()) {
+                                try {
+                                    BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+                                    StringBuffer stringBuffer = new StringBuffer();
+                                    String line = null;
 
-                                while ((line = bufferedReader.readLine()) != null) {
+                                    while ((line = bufferedReader.readLine()) != null) {
 
-                                    stringBuffer.append(line);
+                                        stringBuffer.append(line);
+                                    }
+
+                                    System.out.println(stringBuffer);
+                                    String fileData = new String(stringBuffer);
+
+                                    String[] listArray = fileData.split(",");
+                                    byte[] listByteData = new byte[listArray.length];
+                                    for (int i = 0; i < listArray.length; i++) {
+                                        listByteData[i] = Byte.parseByte(listArray[i]);
+                                    }
+                                    String listData = new String(listByteData);
+                                    String numberOfStep = listData.split(",")[Constant.numberOfStep_potition];
+//                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                                    String fileName = file.getName();
+                                    fileName = fileName.substring(0,4) + "/" + fileName.substring(4,6) + "/" + fileName.substring(6,8);
+                                    sendMedicalData(numberOfStep, fileName);
+                                    Log.d("QUY", "QUY");
+
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
                                 }
-
-                                System.out.println(stringBuffer);
-                                String fileData = new String(stringBuffer);
-
-                                String[] listArray = fileData.split(",");
-                                byte[] listByteData = new byte[listArray.length];
-                                for (int i = 0; i < listArray.length; i++) {
-                                    listByteData[i] = Byte.parseByte(listArray[i]);
-                                }
-                                String listData = new String(listByteData);
-                                String numberOfStep = listData.split(",")[Constant.numberOfStep_potition];
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-
-                                sendMedicalData(numberOfStep, sdf.format(date));
-                                Log.d("QUY", "QUY");
-
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
                             }
-                        }
 
+                        }
+//                        File file = new File(dir, FILENAME);
                         Log.d("QUY", "------------------111111111111111-------------");
 
                     }
