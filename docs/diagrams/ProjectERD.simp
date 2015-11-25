@@ -63,7 +63,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractElementGroup" />
-        <value>8</value>
+        <value>17</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -210,7 +210,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="entity-relationship" id="p631070817288736774" name="EntityRelationshipDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="1686,2669" zoom="1.8">
+      <diagram type="entity-relationship" id="p631070817288736774" name="EntityRelationshipDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="393,423" zoom="0.9">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -395,13 +395,34 @@
           </item>
           <item id="di348329837319604554" cid="REL004" type="erd-relationship" name="is a" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="09/16/2015 21:43:39">
             <stereotypes />
+            <documentation>
+              <text>
+                <styles>
+                  <style name="S1" font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                    <text>
+                      <solid-brush color="#FF000000" />
+                    </text>
+                  </style>
+                </styles>
+                <content>
+                  <paragraph>
+                    <p s="S1">
+                      <t>
+</t>
+                    </p>
+                  </paragraph>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <erd-relation type="Identifying" multiplicity-from="1" multiplicity-to="1">
-              <attribute-pairs>
-                <attribute-pair from-attribute="a08325f2a083e4dc780f1f2764489113c633" to-attribute="a4954c5a8e2e14c44a39222b49469ae8f526" />
-              </attribute-pairs>
+            <erd-relation type="Identifying" multiplicity-from="1" multiplicity-to="0..1">
+              <attribute-pairs />
             </erd-relation>
           </item>
           <item id="di320626413139406894" cid="ENT005" type="erd-entity" name="Patient" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="09/16/2015 21:44:51">
@@ -445,13 +466,34 @@
           </item>
           <item id="di281873311209170675" cid="REL005" type="erd-relationship" name="is a" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="09/16/2015 21:48:33">
             <stereotypes />
+            <documentation>
+              <text>
+                <styles>
+                  <style name="S1" font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                    <text>
+                      <solid-brush color="#FF000000" />
+                    </text>
+                  </style>
+                </styles>
+                <content>
+                  <paragraph>
+                    <p s="S1">
+                      <t>
+</t>
+                    </p>
+                  </paragraph>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <erd-relation type="Identifying" multiplicity-from="1" multiplicity-to="1">
-              <attribute-pairs>
-                <attribute-pair from-attribute="a08325f2a083e4dc780f1f2764489113c633" to-attribute="a0d949847661d4847bb918c02f73138e8492" />
-              </attribute-pairs>
+            <erd-relation type="Identifying" multiplicity-from="1" multiplicity-to="0..1">
+              <attribute-pairs />
             </erd-relation>
           </item>
           <item id="di701700790627422811" cid="ENT006" type="erd-entity" name="Regimen" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="09/16/2015 21:50:00">
@@ -1184,13 +1226,34 @@
           </item>
           <item id="di444981697385455172" cid="REL089" type="erd-relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/11/2015 23:27:41">
             <stereotypes />
+            <documentation>
+              <text>
+                <styles>
+                  <style name="S1" font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                    <text>
+                      <solid-brush color="#FF000000" />
+                    </text>
+                  </style>
+                </styles>
+                <content>
+                  <paragraph>
+                    <p s="S1">
+                      <t>
+</t>
+                    </p>
+                  </paragraph>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <erd-relation type="Identifying" multiplicity-from="1" multiplicity-to="0..*" start-role="has" end-role="belong to">
-              <attribute-pairs>
-                <attribute-pair from-attribute="" to-attribute="" />
-              </attribute-pairs>
+            <erd-relation type="Identifying" multiplicity-from="0..1" multiplicity-to="0..*" start-role="has" end-role="belong to">
+              <attribute-pairs />
             </erd-relation>
           </item>
           <item id="di869414703410640397" cid="REL048" type="erd-relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="09/17/2015 08:19:10">
@@ -1564,35 +1627,98 @@
           </item>
           <item id="di826148961110549915" cid="REL116" type="erd-relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/12/2015 09:01:30">
             <stereotypes />
+            <documentation>
+              <text>
+                <styles>
+                  <style name="S1" font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                    <text>
+                      <solid-brush color="#FF000000" />
+                    </text>
+                  </style>
+                </styles>
+                <content>
+                  <paragraph>
+                    <p s="S1">
+                      <t>
+</t>
+                    </p>
+                  </paragraph>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <erd-relation type="Identifying" multiplicity-from="1" multiplicity-to="1" start-role="has" end-role="belong to">
-              <attribute-pairs>
-                <attribute-pair from-attribute="" to-attribute="" />
-              </attribute-pairs>
+            <erd-relation type="Identifying" multiplicity-from="1" multiplicity-to="0..1" start-role="has" end-role="belong to">
+              <attribute-pairs />
             </erd-relation>
           </item>
           <item id="di419735570822744821" cid="REL117" type="erd-relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/12/2015 09:07:19">
             <stereotypes />
+            <documentation>
+              <text>
+                <styles>
+                  <style name="S1" font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                    <text>
+                      <solid-brush color="#FF000000" />
+                    </text>
+                  </style>
+                </styles>
+                <content>
+                  <paragraph>
+                    <p s="S1">
+                      <t>
+</t>
+                    </p>
+                  </paragraph>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <erd-relation type="Identifying" multiplicity-from="1" multiplicity-to="1" start-role="has" end-role="belong to">
-              <attribute-pairs>
-                <attribute-pair from-attribute="" to-attribute="" />
-              </attribute-pairs>
+            <erd-relation type="Identifying" multiplicity-from="1" multiplicity-to="0..1" start-role="has" end-role="belong to">
+              <attribute-pairs />
             </erd-relation>
           </item>
           <item id="di393510647408554525" cid="REL118" type="erd-relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/21/2015 08:47:18">
             <stereotypes />
+            <documentation>
+              <text>
+                <styles>
+                  <style name="S1" font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                    <text>
+                      <solid-brush color="#FF000000" />
+                    </text>
+                  </style>
+                </styles>
+                <content>
+                  <paragraph>
+                    <p s="S1">
+                      <t>
+</t>
+                    </p>
+                  </paragraph>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <erd-relation type="Identifying" multiplicity-from="1" multiplicity-to="0..*" start-role="be use" end-role="use">
-              <attribute-pairs>
-                <attribute-pair from-attribute="" to-attribute="" />
-              </attribute-pairs>
+            <erd-relation type="Identifying" multiplicity-from="0..1" multiplicity-to="0..*" start-role="be use" end-role="use">
+              <attribute-pairs />
             </erd-relation>
           </item>
         </abstract-items>
@@ -1763,7 +1889,7 @@
             <role-positions start-role="25,15" end-role="27.45949,-42.05459" />
           </item>
           <item id="di952290846626172058" iid="1f1baca8d71742b2987468c3e67fb582" creation-date="11/11/2015 23:36:07" order-index="55" type="entity">
-            <layout ax="590" ay="2200" awidth="242" aheight="160" x="590" y="2200" width="242" height="160" angle="0" />
+            <layout ax="580" ay="2200" awidth="242" aheight="160" x="580" y="2200" width="242" height="160" angle="0" />
             <erd-entity show-nullability="true" />
           </item>
           <item id="di476119760495484181" iid="358152d113634a38b713077fb1a15ce4" creation-date="11/12/2015 00:53:50" order-index="56" type="relation">
@@ -1834,10 +1960,10 @@
             <role-positions start-role="24,38" end-role="26,-46" />
           </item>
           <item id="di338232314563394894" iid="01c6abe6a1b34e6499ef89f0abb0a9ba" creation-date="11/12/2015 08:39:38" order-index="76" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="690" y1="2050" x2="707" y2="2200" start-border-pos="0.632352941176471" end-border-pos="0.121359223300971">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="700" y1="2050" x2="700" y2="2200" start-border-pos="0.617647058823529" end-border-pos="0.12396694214876">
               <points>
-                <point x="690" y="2050" />
-                <point x="707" y="2200" />
+                <point x="700" y="2050" />
+                <point x="700" y="2200" />
               </points>
             </layout>
             <relation from="di866476339101425443" from-iid="0c690118ebbe45e794759242a943c929" to="di952290846626172058" to-iid="1f1baca8d71742b2987468c3e67fb582" />
@@ -1887,12 +2013,12 @@
             <role-positions start-role="25,15" end-role="23,-45" />
           </item>
           <item id="di393510647408554525" iid="f38ed1c8ef81427384a590d15ff06bad" creation-date="11/21/2015 08:47:18" order-index="85" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="670" y1="246" x2="450" y2="346" start-border-pos="0.79375" end-border-pos="0.342857142857143">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="670" y1="240" x2="450" y2="350" start-border-pos="0.8125" end-border-pos="0.357142857142857">
               <points>
-                <point x="670" y="246" />
-                <point x="524" y="247" />
-                <point x="523" y="350" />
-                <point x="450" y="346" />
+                <point x="670" y="240" />
+                <point x="520" y="240" />
+                <point x="520" y="350" />
+                <point x="450" y="350" />
               </points>
             </layout>
             <relation from="di527094275963632600" from-iid="f94cd7ee702c473c85acd607eb4d3403" to="di320626413139406894" to-iid="cf0af6b475354353bf6b73ee7c667636" />
@@ -3206,7 +3332,7 @@
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-class" id="p766067563828040190" name="ClassDiagram1" order-index="6" overview-order-index="4" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="446,1194" zoom="0.9">
+      <diagram type="uml-class" id="p766067563828040190" name="ClassDiagram1" order-index="6" overview-order-index="4" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="251,1747" zoom="1.8">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -4223,7 +4349,7 @@
             <owned-items />
             <style class="default" />
             <relation from="di275751624824288570" to="di344550499649299482">
-              <start-role id="" name="has" multiplicity="1" navigability="" association-type="association" visibility="private" />
+              <start-role id="" name="has" multiplicity="0..1" navigability="" association-type="association" visibility="private" />
               <end-role id="" name="belong to" multiplicity="0..*" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
