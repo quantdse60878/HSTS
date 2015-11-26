@@ -32,11 +32,11 @@
         <item>Nhắc Nhở</item>
     </string-array>
     <array name="nav_drawer_icons">
-        <item>@android:drawable/ic_dialog_info</item>
+        <item>@drawable/commonInfo</item>
         <!--<item>@drawable/food_icon_v1</item>-->
         <!--<item>@drawable/medicine_icon_v1</item>-->
         <!--<item>@drawable/walk_icon_v1</item>-->
-        <item>@android:drawable/ic_dialog_info</item>
+        <item>@drawable/notify</item>
     </array>
 
     <string name="desc_list_item_icon">Item Icon</string>
