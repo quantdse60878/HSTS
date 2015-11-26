@@ -124,10 +124,8 @@ $selectPatient.on("change", function (e) {
     if (val == "") {
         return;
     }
-    if (val.indexOf("404") == 0) {
-        // Bind patient profile
-        loadPatientProfile(val);
-    };
+    // Bind patient profile
+    loadPatientProfile(val);
 });
 
 // Validator
