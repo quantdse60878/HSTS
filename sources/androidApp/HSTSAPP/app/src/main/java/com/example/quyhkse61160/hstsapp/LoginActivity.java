@@ -47,6 +47,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.MessageDigest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -186,7 +187,7 @@ public class LoginActivity extends ActionBarActivity {
 
             String stringURL = Constant.hostURL + Constant.loginMethod;
             Log.d("QUYYYY1111", "Login url: " + stringURL);
-            Log.d("QUYYYY1111", "Login param: " + strings[0] + "-" + strings[1]);
+            Log.d("QUYYYY1111", "Login param: " + strings[0] + "-" + encryptMD5(strings[1]));
 
             try {
                 URL url = new URL(stringURL);
@@ -200,7 +201,7 @@ public class LoginActivity extends ActionBarActivity {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 Constant.username = strings[0];
                 params.add(new BasicNameValuePair("username", strings[0]));
-                params.add(new BasicNameValuePair("password", strings[1]));
+                params.add(new BasicNameValuePair("password", encryptMD5(strings[1])));
 
                 OutputStream os = urlConnection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -272,5 +273,21 @@ public class LoginActivity extends ActionBarActivity {
         }
     }
 
-
+    public String encryptMD5(String password){
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            byte byteData[] = md.digest();
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0;i<byteData.length;i++) {
+                String hex=Integer.toHexString(0xff & byteData[i]);
+                if(hex.length()==1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
+    }
 }
