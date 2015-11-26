@@ -28,6 +28,7 @@ import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationRequest;
 import vn.edu.fpt.hsts.bizlogic.service.AnalyticFood;
 import vn.edu.fpt.hsts.bizlogic.service.AppointmentService;
+import vn.edu.fpt.hsts.bizlogic.service.DataValidationService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
@@ -87,6 +88,9 @@ public class PatientController extends AbstractController {
      */
     @Autowired
     private AppointmentService appointmentService;
+
+    @Autowired
+    private DataValidationService dataValidationService;
 
     @RequestMapping(value = "/patient/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -362,6 +366,18 @@ public class PatientController extends AbstractController {
         try {
             LOGGER.info("patientId[{}]", patientId);
             return appointmentService.findLastDoctorWithPatientId(patientId);
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/validateBirthday", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public boolean validateBirthday(@RequestParam("birthday") final String birthday) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("birthday[{}]", birthday);
+            return dataValidationService.validateBirthday(birthday);
         }finally {
             LOGGER.info(IConsts.END_METHOD);
         }

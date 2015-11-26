@@ -10,11 +10,15 @@ package vn.edu.fpt.hsts.bizlogic.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import vn.edu.fpt.hsts.common.IConsts;
+import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.common.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 
 /**
@@ -23,7 +27,23 @@ import java.util.Enumeration;
 @Service
 public class DataValidationService extends AbstractService {
 
+    /**
+     * The logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(DataValidationService.class);
+
+    /**
+     * The min patient age.
+     */
+    @Value("${hsts.patient.age.min}")
+    private int minPatientAge;
+
+
+    /**
+     * The max patient age.
+     */
+    @Value("${hsts.patient.age.max}")
+    private int maxPatientAge;
 
     @Autowired
     private void initParam() {
@@ -150,6 +170,8 @@ public class DataValidationService extends AbstractService {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
             // Nurse register
+            minVals.put("minPatientAge", (float) minPatientAge);
+
             minVals.put("weight", (float) 20);
             minVals.put("height", (float) 100);
             minVals.put("hearthBeat", (float) 60);
@@ -169,6 +191,8 @@ public class DataValidationService extends AbstractService {
             minVals.put("kcalRequire", (float) 0);
 
             // Nutrition model attribute
+
+
         } finally {
             LOGGER.debug(IConsts.END_METHOD);
         }
@@ -178,6 +202,8 @@ public class DataValidationService extends AbstractService {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
             // Nurse register
+            minVals.put("maxPatientAge", (float) maxPatientAge);
+
             maxVals.put("weight", (float) 300);
             maxVals.put("height", (float) 250);
             maxVals.put("hearthBeat", (float) 120);
@@ -206,6 +232,9 @@ public class DataValidationService extends AbstractService {
         LOGGER.debug(IConsts.BEGIN_METHOD);
         try {
             // Nurse register
+            intParams.add("minPatientAge");
+            intParams.add("maxPatientAge");
+
             intParams.add("weight");
             intParams.add("height");
             intParams.add("impedance");
@@ -252,5 +281,45 @@ public class DataValidationService extends AbstractService {
             LOGGER.debug(IConsts.END_METHOD);
         }
 
+    }
+
+    public boolean validateBirthday(final String birthday) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("birthday[{}]", birthday);
+            final Date patientBirthday = DateUtils.parseDate(birthday, DateUtils.DATE_PATTERN_3);
+            // Diff age
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(patientBirthday);
+            final int year1 = calendar.get(Calendar.YEAR);
+
+            calendar.setTime(new Date());
+            final int year2 = calendar.get(Calendar.YEAR);
+
+            final int diffYear = year2 - year1;
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Diffyear[{}]", diffYear);
+            }
+
+            // Check min value
+            final Float minVal = minVals.get("minPatientAge");
+            if(null != minVal) {
+                if (diffYear < minVal) {
+                    return false;
+                }
+            }
+            // Check max value
+            final Float maxVal = maxVals.get("maxPatientAge");
+            if(null != maxVal) {
+                if(diffYear > maxVal) {
+                    return false;
+                }
+            }
+
+            return true;
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
     }
 }
