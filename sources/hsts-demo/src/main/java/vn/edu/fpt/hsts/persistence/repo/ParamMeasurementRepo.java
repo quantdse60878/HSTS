@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ParamMeasurementRepo extends JpaRepository<ParamMeasurement, Integer> {
 
-    @Query(value = "SELECT * FROM parammeasurement WHERE measurementName = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM parammeasurement WHERE measurementName = ?1 LIMIT 1", nativeQuery = true)
     public ParamMeasurement findParamMeasurementByMeasurementName(String measurementName);
 
     @Query(value = "SELECT * FROM parammeasurement WHERE deviceId = ?1 AND type = 1", nativeQuery = true)
