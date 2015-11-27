@@ -25,6 +25,7 @@ import vn.edu.fpt.hsts.web.session.UserSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -105,6 +106,11 @@ public class UserAuthInterceptor extends HandlerInterceptorAdapter {
                 shouldIgnored = true;
                 break;
             }
+        }
+        final HttpSession session = request.getSession();
+        if (null == session) {
+            response.sendRedirect("login");
+            return false;
         }
         if(!shouldIgnored && StringUtils.isEmpty(userSession.getUsername())) {
             response.sendRedirect("login");
