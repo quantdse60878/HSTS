@@ -69,6 +69,18 @@ public class RegimenController extends AbstractController {
         }
     }
 
+    @RequestMapping(value = "/regimen", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public RegimenModel findRegimen(@RequestParam("regimenId") final int regimenId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("regimenId[{}]", regimenId);
+            return regimenService.findRegimen(regimenId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
     @RequestMapping(value = "/regimen/delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String deleteRegimen(@RequestParam("regimenId") final int regimenId) {
@@ -93,6 +105,23 @@ public class RegimenController extends AbstractController {
         try {
             LOGGER.info("name[{}], description[{}], numberPhase[{}]", name, description, numberPhase);
             regimenService.createNew(name, description, numberPhase);
+            return OK_STATUS;
+        } catch (Exception e) {
+            return FAIL_STATUS;
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/regimen/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String updateRegimen(@RequestParam("id") final int id,
+                                @RequestParam("name") final String name,
+                                @RequestParam("description") final String description) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("id[{}], name[{}], description[{}]", id, name, description);
+            regimenService.update(id, name, description);
             return OK_STATUS;
         } catch (Exception e) {
             return FAIL_STATUS;

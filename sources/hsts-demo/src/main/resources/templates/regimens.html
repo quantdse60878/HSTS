@@ -149,6 +149,47 @@
             </div>
         </div>
         <!-- .insert new modal -->
+
+        <!-- update modal -->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="insertModalLabel" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "updateForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="updateModalLabel">Update regimen</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Illness name*:</label>
+
+                                <div class="col-sm-5">
+                                    <input type="text" th:name="updateName" class="form-control" id="updateName"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Illness Description*: </label>
+
+                                <div class="col-sm-5">
+                                    <textarea th:name="updateDescription" class="form-control" id="updateDescription"></textarea>
+                                    <!--<input type="text" />-->
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateDescription">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- update modal-->
         <!-- /.row -->
     </section>
     <!-- /.content -->
