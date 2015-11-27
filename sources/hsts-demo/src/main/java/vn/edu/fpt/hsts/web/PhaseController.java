@@ -82,6 +82,37 @@ public class PhaseController extends AbstractController {
         }
     }
 
+    @RequestMapping(value = "/phase/update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String update(@RequestParam("phaseId") final int phaseId,
+                              @RequestParam("numberDay") final int numberDay) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}], numberDay[{}]", phaseId, numberDay);
+            try {
+                phaseService.updatePhase(phaseId, numberDay);
+            } catch (Exception e) {
+                return FAIL_STATUS;
+            }
+            return OK_STATUS;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/phase/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public PhaseModel findPhase(@RequestParam("phaseId") final int phaseId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("phaseId[{}]", phaseId);
+            return phaseService.findPhase(phaseId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+
     @RequestMapping(value = "/phase/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String createPhase(@RequestParam("regimenId") final int regimenId,

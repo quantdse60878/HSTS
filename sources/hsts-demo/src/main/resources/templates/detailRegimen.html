@@ -167,6 +167,40 @@
             </div>
         </div>
         <!-- .insert new modal -->
+
+        <!-- update phase modal -->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" data-backdrop="static"
+             data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <form id = "updateForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="updateModalLabel">Update phase</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Number of day*: </label>
+
+                                <div class="col-sm-2">
+                                    <input type="number" th:name="updateNumberDay" class="form-control" id="updateNumberDay"/>
+                                </div>
+                                <div class="col-sm-3 help-block with-errors" id = "invalidUpdateNumberDay">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!-- .update phase modal -->
+
         <!-- /.row -->
     </section>
     <!-- /.content -->
