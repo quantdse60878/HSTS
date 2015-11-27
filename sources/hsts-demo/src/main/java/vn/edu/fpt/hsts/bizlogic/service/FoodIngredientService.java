@@ -255,33 +255,60 @@ public class FoodIngredientService {
                 for (int i = 0; i < foodTreatments.size(); i++) {
                     foodTreatment = foodTreatments.get(i);
                     unitOfFood = unitOfFoodRepo.findByFoodIdAndUnit(foodTreatment.getFood(), foodTreatment.getUnitName());
+                    String thisIsFuckingFood = "";
+                    if(unitOfFood.getUnitName().equalsIgnoreCase("gam")){
+                        thisIsFuckingFood = foodTreatment.getQuantitative() + "g" +  " " + foodTreatment.getFood().getName();
+                    } else {
+                        thisIsFuckingFood = foodTreatment.getQuantitative() + " " + unitOfFood.getUnitName() + " " + foodTreatment.getFood().getName();
+                    }
                     switch (foodTreatment.getNumberOfTime()){
-                        case 1: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                        case 1: totalBre = totalBre + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            foodIngredientModel.getFoodBreakfast().add(thisIsFuckingFood);
                             break;
-                        case 2: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                        case 2: totalBre = totalBre + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            totalDin = totalLun + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            foodIngredientModel.getFoodBreakfast().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodLunch().add(thisIsFuckingFood);
                             break;
-                        case 3: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                        case 3: totalBre = totalBre + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            totalLun = totalLun + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            totalDin = totalDin + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            foodIngredientModel.getFoodBreakfast().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodLunch().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodDinner().add(thisIsFuckingFood);
                             break;
-                        case 4: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                        case 4: totalBre = totalBre + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            totalBreTiM = totalBreTiM + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            totalLun = totalLun + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            totalDin = totalDin + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            foodIngredientModel.getFoodBreakfast().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodBreaktimeMorning().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodLunch().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodDinner().add(thisIsFuckingFood);
+                            break;
+                        case 5: totalBre = totalBre + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            totalBreTiM = totalBreTiM + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            totalLun = totalLun + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            totalBreTiA = totalBreTiA + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            totalDin = totalDin + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
+                            foodIngredientModel.getFoodBreakfast().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodBreaktimeMorning().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodLunch().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodBreaktimeAfternoon().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodDinner().add(thisIsFuckingFood);
+                            break;
+                        case 6: totalBre = totalBre + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
                             totalBreTiM = totalBreTiM + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            break;
-                        case 5: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalBreTiM = totalBreTiM + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalLun = totalLun + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
                             totalBreTiA = totalBreTiA + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            break;
-                        case 6: totalBre = totalBre + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalLun = totalLun + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalDin = totalDin + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalBreTiM = totalBreTiM + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
-                            totalBreTiA = totalBreTiA + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            totalDin = totalDin + foodTreatment.getQuantitative() * unitOfFood.getCaloriesEstimate();
                             totalBreTiN = totalBreTiN + foodTreatment.getQuantitative()*unitOfFood.getCaloriesEstimate();
+                            foodIngredientModel.getFoodBreakfast().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodBreaktimeMorning().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodLunch().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodBreaktimeAfternoon().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodDinner().add(thisIsFuckingFood);
+                            foodIngredientModel.getFoodEatLate().add(thisIsFuckingFood);
                             break;
                     }
                 }
@@ -292,7 +319,6 @@ public class FoodIngredientService {
                 foodIngredientModel.setDinner(String.valueOf(totalDin));
                 foodIngredientModel.setEatLateAtNight(String.valueOf(totalBreTiN));
             }
-
             return foodIngredientModel;
         }finally {
             LOGGER.info(IConsts.END_METHOD);
