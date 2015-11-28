@@ -32,7 +32,7 @@
         <item>Nhắc Nhở</item>
     </string-array>
     <array name="nav_drawer_icons">
-        <item>@drawable/commonInfo</item>
+        <item>@drawable/commonnfo</item>
         <!--<item>@drawable/food_icon_v1</item>-->
         <!--<item>@drawable/medicine_icon_v1</item>-->
         <!--<item>@drawable/walk_icon_v1</item>-->
