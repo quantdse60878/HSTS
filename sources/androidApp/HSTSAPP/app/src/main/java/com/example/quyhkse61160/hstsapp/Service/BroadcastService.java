@@ -25,6 +25,7 @@ import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
 import com.example.quyhkse61160.hstsapp.HomeActivity;
 import com.example.quyhkse61160.hstsapp.LoginActivity;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -175,6 +176,11 @@ public class BroadcastService extends Service {
                             }
 
                         }
+                        try {
+                            FileUtils.cleanDirectory(dir);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 //                        File file = new File(dir, FILENAME);
                         Log.d("QUY", "------------------111111111111111-------------");
 
@@ -258,6 +264,8 @@ public class BroadcastService extends Service {
             while ((temp = bReader.readLine()) != null) {
                 response += temp;
             }
+
+
             HomeActivity.listNumberOfStep = new ArrayList<>();
             HomeActivity.dateSaveStep = new ArrayList<>();
 
