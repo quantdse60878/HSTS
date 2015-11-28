@@ -428,8 +428,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         }
 
         Context context = getApplicationContext();
-        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
-        context.startService(notifyIntent);
+//        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
+//        context.startService(notifyIntent);
     }
 
     @Override
