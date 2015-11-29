@@ -86,8 +86,8 @@ function checkExisted() {
                 if (listdevice[i].toLowerCase().indexOf(val.toLowerCase()) > -1) {
                     index = i;
                     item.style.visibility = "visible";
-                    btn = document.createElement("p");
-                    t = document.createTextNode(listdevice[i]);
+                    var btn = document.createElement("p");
+                    var t = document.createTextNode(listdevice[i]);
                     var att = document.createAttribute("onclick");
                     att.value = "fillInput('" + i + "')";
                     btn.appendChild(t);

@@ -7,17 +7,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import vn.edu.fpt.hsts.bizlogic.model.FoodModel;
-import vn.edu.fpt.hsts.bizlogic.model.FoodNutriValModel;
-import vn.edu.fpt.hsts.bizlogic.model.FoodPageModel;
-import vn.edu.fpt.hsts.bizlogic.model.FoodUnitModel;
-import vn.edu.fpt.hsts.bizlogic.model.UnitOfFoodModel;
+import vn.edu.fpt.hsts.bizlogic.model.*;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Food;
+import vn.edu.fpt.hsts.persistence.entity.FoodPhase;
 import vn.edu.fpt.hsts.persistence.entity.UnitOfFood;
+import vn.edu.fpt.hsts.persistence.repo.FoodPhaseRepo;
 import vn.edu.fpt.hsts.persistence.repo.FoodRepo;
+import vn.edu.fpt.hsts.persistence.repo.FoodTreatmentRepo;
 import vn.edu.fpt.hsts.persistence.repo.UnitOfFoodRepo;
 
 import javax.transaction.Transactional;
@@ -36,9 +35,18 @@ public class FoodService {
     private FoodRepo foodRepo;
 
     @Autowired
+    private UnitOfFoodService unitOfFoodService;
+
+    @Autowired
     private UnitOfFoodRepo unitOfFoodRepo;
 
-    public List<Food> getAllFood(){
+    @Autowired
+    private FoodPhaseRepo foodPhaseRepo;
+
+    @Autowired
+    private FoodTreatmentRepo foodTreatmentRepo;
+
+    public List<Food> getAllFood() {
         return foodRepo.findAll();
     }
 
@@ -64,18 +72,8 @@ public class FoodService {
         }
     }
 
-    public FoodPageModel findFoods(final String name, final int page, final int pageSize) {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            LOGGER.info("name[{}], page[{}], pageSize[{}]", name, page, pageSize);
-            final String formatName = "%" + name + "%";
-            final PageRequest pageRequest = new PageRequest(page, pageSize);
-            final Page<Food> foodPage = foodRepo.findByNameLike(formatName, pageRequest);
-            final FoodPageModel pageModel = new FoodPageModel(foodPage);
-            return pageModel;
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
-        }
+    public List<Food> findFoods() {
+        return foodRepo.findAll();
     }
 
     public List<UnitOfFoodModel> findUnitName(final int foodId) {
@@ -85,12 +83,12 @@ public class FoodService {
             final List<UnitOfFood> unitOfFoods = unitOfFoodRepo.findByFoodId(foodId);
             if (!CollectionUtils.isEmpty(unitOfFoods)) {
                 final List<UnitOfFoodModel> modelList = new ArrayList<UnitOfFoodModel>();
-                for (UnitOfFood u: unitOfFoods) {
+                for (UnitOfFood u : unitOfFoods) {
                     final UnitOfFoodModel model = new UnitOfFoodModel();
                     model.fromEntity(u);
                     modelList.add(model);
                 }
-                return  modelList;
+                return modelList;
             }
             return Collections.emptyList();
         } finally {
@@ -168,7 +166,7 @@ public class FoodService {
             foodRepo.saveAndFlush(food);
 
             if (!CollectionUtils.isEmpty(model.getUnits())) {
-                for (UnitOfFoodModel unitOfFoodModel: model.getUnits()) {
+                for (UnitOfFoodModel unitOfFoodModel : model.getUnits()) {
                     UnitOfFood unitOfFood = new UnitOfFood();
                     unitOfFood.setFood(food);
                     unitOfFood.setUnitName(unitOfFoodModel.getFoodUnit());
@@ -205,5 +203,61 @@ public class FoodService {
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
+    }
+
+    public void createFood(String nameFood,String kcal,String unit,String animalFat,String animalProtein,String calcium,
+                           String lipid, String starch,String protein,String fiber,String iron,String sodium,String vitaminB1,
+                           String vitaminB2,String vitaminC,String vitaminPP,String zinc) {
+        Food food = new Food();
+        food.setName(nameFood);
+        foodRepo.save(food);
+        unitOfFoodService.createUnitOfFood(food, kcal, unit, animalFat, animalProtein, calcium, lipid, starch, protein, fiber, iron,
+                sodium, vitaminB1, vitaminB2, vitaminC, vitaminPP, zinc);
+
+    }
+
+    public FoodNutritionModel getFood(int foodId) {
+        FoodNutritionModel model = new FoodNutritionModel();
+        Food food = foodRepo.findOne(foodId);
+        model.setFoodName(food.getName());
+        List<UnitOfFood> unitOfFoods = unitOfFoodService.findUnitOfFoodsByFoodID(foodId);
+        for (UnitOfFood item : unitOfFoods){
+            model.getUnitName().add(item.getUnitName());
+            model.getkCal().add(item.getCaloriesEstimate());
+            model.getValue().add(item.getListElementNutritionValue());
+        }
+        return model;
+    }
+
+    public void updateFood(String foodId, String nameFood, String kcal, String unit, String animalFat, String animalProtein,
+                           String calcium, String lipid, String starch, String protein, String fiber, String iron, String sodium,
+                           String vitaminB1, String vitaminB2, String vitaminC, String vitaminPP, String zinc) {
+        Food food = foodRepo.findOne(Integer.parseInt(foodId));
+        food.setName(nameFood);
+        foodRepo.save(food);
+        unitOfFoodService.updateUnitOfFood(food, kcal, unit, animalFat, animalProtein, calcium, lipid, starch, protein, fiber, iron,
+                sodium, vitaminB1, vitaminB2, vitaminC, vitaminPP, zinc);
+    }
+
+    public String deleteFood(int foodId) {
+        if(checkFoodPhase(foodId) || checkFoodTreatment(foodId)){
+            return "500";
+        }
+        List<UnitOfFood> unitOfFoods = unitOfFoodService.findUnitOfFoodsByFoodID(foodId);
+        for(UnitOfFood item : unitOfFoods){
+            unitOfFoodRepo.delete(item);
+        }
+        foodRepo.delete(foodRepo.findOne(foodId));
+        return "200";
+    }
+
+    public boolean checkFoodPhase(int foodId){
+        if(foodPhaseRepo.findByFoodId(foodId).size() != 0) return true;
+        return false;
+    }
+
+    public boolean checkFoodTreatment(int foodId){
+        if(foodTreatmentRepo.findFoodTreatmentByFoodId(foodId) != null) return true;
+        return false;
     }
 }
