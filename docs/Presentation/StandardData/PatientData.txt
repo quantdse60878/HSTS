@@ -1,0 +1,6 @@
+﻿breakfast: 		1 bát cơm, 100g thịt gà, 1 ly cà phê đen
+breaktimeMorning: 	100ml sữa tươi, 1 ổ bánh mì
+lunch: 			3 bát cơm, 50g cá thu, 50g thịt bò, 50g bắp cải, 1 quả trứng gà
+breaktimeAfternoon: 
+dinner: 		3 bát cơm, 50g rau ngót, 50g thịt gà, 1 lon nước ngọt
+eatLateAtNight: 	1 tô phở bò
