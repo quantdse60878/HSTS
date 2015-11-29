@@ -222,6 +222,9 @@ function analyticMeal(listMeal) {
                     if(listFoodDatabase[j].foodUnit == "g") {
                         numberOfQuantity = numberOfQuantity / 100;
                     }
+                    if(listFoodDatabase[j].foodUnit == "ml") {
+                        numberOfQuantity = numberOfQuantity / 100;
+                    }
                     foodItemValue.caloriesEstimate = numberOfQuantity * listFoodDatabase[j].caloriesEstimate;
                     var listNutritionValueDatabase = listFoodDatabase[j].foodNutritionValue.split(",");
                     var listNutritionValue = new Array();
