@@ -95,7 +95,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractElementGroup" />
-        <value>30</value>
+        <value>7</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -4984,7 +4984,7 @@
           </authors>
           <description />
           <creation-date>11/18/2015 15:03:58</creation-date>
-          <change-date>11/29/2015 14:40:59</change-date>
+          <change-date>11/29/2015 17:00:08</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -5168,23 +5168,13 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di936474621678837536" cid="REL063" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/27/2015 15:11:51">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <relation from="di469604166571228326" to="di819247024977994974">
-              <start-role id="" name="" navigability="" association-type="association" visibility="private" />
-              <end-role id="" name="" navigability="yes" association-type="association" visibility="private" />
-            </relation>
-          </item>
           <item id="di637635026898558323" cid="ELEM034" type="uml-provided-interface-connector" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/27/2015 15:12:20">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di491881001906817187" cid="DEP005" type="dependency" name="HTTP" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 14:40:59">
+          <item id="di491881001906817187" cid="DEP005" type="dependency" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 14:40:59">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -5291,16 +5281,6 @@
           </item>
           <item id="di469604166571228326" iid="20cc9d649cf14579bb192c082232cf07" container="di621479555435035916" container-iid="06ede609f5d04e5a8ba4dc155342e2ef" show-name="true" creation-date="11/27/2015 15:09:11" order-index="70" type="entity">
             <layout ax="380" ay="390" awidth="20" aheight="30" x="380" y="390" width="20" height="30" angle="0" name-position="30,-10" />
-          </item>
-          <item id="di936474621678837536" iid="3e5d1874d3e94ecab39f0fb1b4a6d5fb" creation-date="11/27/2015 15:11:51" order-index="71" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="400" y1="405" x2="440" y2="403" start-border-pos="0.372354380289714" end-border-pos="0.868503046970741" name-width="50">
-              <points>
-                <point x="400" y="405" />
-                <point x="440" y="403" />
-              </points>
-            </layout>
-            <relation from="di469604166571228326" from-iid="20cc9d649cf14579bb192c082232cf07" to="di819247024977994974" to-iid="cb8e9a4a97194df79c6b8752dc82135c" />
-            <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
           <item id="di637635026898558323" iid="4c6def9bdcd240b396cd7606c90ae2ed" creation-date="11/27/2015 15:12:20" order-index="72" type="relation">
             <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="380" y1="405" x2="325" y2="402" start-border-pos="0.878205108642578" end-border-pos="0.375">
