@@ -1206,6 +1206,15 @@ function hideWatting() {
         findUnits(foodElement);
     }
 })();
+(function(){
+    var a = document.getElementsByClassName("btn btn-link");
+    var b = a[0];
+    if(b.textContent == "View Detail") {
+    } else {
+        document.getElementById("patientHasToMakeFI").style.display = "";
+        document.getElementsByClassName("btn btn-primary pull-right")[4].style.display = "none";
+    }
+})();
 
 function showModalAndDraw () {
     // Get practice Data
