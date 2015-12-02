@@ -257,7 +257,7 @@ public class FoodService {
     }
 
     public boolean checkFoodTreatment(int foodId){
-        if(foodTreatmentRepo.findFoodTreatmentByFoodId(foodId) != null) return true;
+        if(foodTreatmentRepo.findFoodTreatmentByFoodId(foodId).size() != 0) return true;
         return false;
     }
 }

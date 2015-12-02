@@ -25,7 +25,8 @@ function loadPage() {
     }).done(function (data) {
         listFood = data;
         for (var i = 0; i < data.length; i++) {
-            inner += '<tr><td>' + i + 1 + '</td><td>' + data[i].name + '</td><td>' + data[i].unit + '</td><td>' +
+            var count = i + 1;
+            inner += '<tr><td>' + count + '</td><td>' + data[i].name + '</td><td>' + data[i].unit + '</td><td>' +
                 '<a href="#" onclick="viewUpdate(' + "'" + data[i].id + "'" + ')" class="btn btn-primary">Update</a>' +
                 '<a href="#" onclick="deleteFood(' + "'" + data[i].id + "'" + ')" class="btn btn-danger">Delete</a>' +
                 '</td></tr>';
@@ -36,7 +37,7 @@ function loadPage() {
 }
 
 function viewCreate() {
-    foodNutrition = undefined
+    foodNutrition = undefined;
     document.getElementById("superParent").style.display = "";
     document.getElementById("child").style.display = "";
     document.getElementById("update").style.display = "none";
@@ -314,7 +315,7 @@ function updateMeasurement() {
                 "unitOfFood": mUnit.value,
                 "Kcal": mKcal.value,
                 "animalFat": document.getElementById("animalFat").value,
-                "animalProtein": animalProtein,
+                "animalProtein": document.getElementById("animalProtein").value,
                 "calcium": document.getElementById("calcium").value,
                 "starch": document.getElementById("starch").value,
                 "protein": document.getElementById("protein").value,
