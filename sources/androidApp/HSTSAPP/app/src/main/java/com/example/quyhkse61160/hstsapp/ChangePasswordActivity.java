@@ -1,8 +1,13 @@
 package com.example.quyhkse61160.hstsapp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,6 +47,7 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
 public class ChangePasswordActivity extends ActionBarActivity {
     EditText current, newPassword, confirm;
     Button cancel,update;
+    public SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,12 @@ public class ChangePasswordActivity extends ActionBarActivity {
         newPassword = (EditText) findViewById(R.id.txt_change_password_new);
         confirm = (EditText) findViewById(R.id.txt_change_password_new_confirm);
         cancel = (Button) findViewById(R.id.btn_change_password_cancel);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            if(bundle.getBoolean("loginFirstTime")){
+                cancel.setVisibility(View.VISIBLE);
+            }
+        }
         update = (Button) findViewById(R.id.btn_change_password_update);
         update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +83,8 @@ public class ChangePasswordActivity extends ActionBarActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent continueIntent = new Intent(ChangePasswordActivity.this, DeviceScanActivity.class);
+                startActivity(continueIntent);
             }
         });
     }
@@ -117,8 +131,8 @@ public class ChangePasswordActivity extends ActionBarActivity {
 
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("username", Constant.username));
-                params.add(new BasicNameValuePair("oldPassword", strings[0]));
-                params.add(new BasicNameValuePair("newPassword", strings[1]));
+                params.add(new BasicNameValuePair("oldPassword", HSTSUtils.encryptMD5(strings[0])));
+                params.add(new BasicNameValuePair("newPassword", HSTSUtils.encryptMD5(strings[1])));
 
                 OutputStream os = urlConnection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -149,8 +163,12 @@ public class ChangePasswordActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            if(result.equals("200")){
+            if(result == null){
+                Toast.makeText(ChangePasswordActivity.this,"Không thể kết nối đến server!",Toast.LENGTH_LONG).show();
+            } else if(result.equals("200")){
                 Toast.makeText(ChangePasswordActivity.this,R.string.change_password_success_password,Toast.LENGTH_LONG).show();
+            } else if (result.equals("202")){
+                Toast.makeText(ChangePasswordActivity.this,"Password cũ chưa đúng, vui lòng kiểm tra lại!",Toast.LENGTH_LONG).show();
             }
         }
     }

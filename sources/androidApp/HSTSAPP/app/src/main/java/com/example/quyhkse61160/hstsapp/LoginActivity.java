@@ -184,10 +184,10 @@ public class LoginActivity extends ActionBarActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-
+            String status = "";
             String stringURL = Constant.hostURL + Constant.loginMethod;
             Log.d("QUYYYY1111", "Login url: " + stringURL);
-            Log.d("QUYYYY1111", "Login param: " + strings[0] + "-" + encryptMD5(strings[1]));
+            Log.d("QUYYYY1111", "Login param: " + strings[0] + "-" + HSTSUtils.encryptMD5(strings[1]));
 
             try {
                 URL url = new URL(stringURL);
@@ -201,7 +201,7 @@ public class LoginActivity extends ActionBarActivity {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 Constant.username = strings[0];
                 params.add(new BasicNameValuePair("username", strings[0]));
-                params.add(new BasicNameValuePair("password", encryptMD5(strings[1])));
+                params.add(new BasicNameValuePair("password", HSTSUtils.encryptMD5(strings[1])));
 
                 OutputStream os = urlConnection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -224,6 +224,7 @@ public class LoginActivity extends ActionBarActivity {
                     Constant.accountId = patientObject.getString("accountId");
                     Constant.PATIENT_NAME = patientObject.getString("fullname");
                     Constant.patientId = patientObject.getString("patientId");
+                    status = patientObject.getString("status");
                     Log.d("QUYYY111", "Benh nhan: " + "Account: " + Constant.accountId + " Patient: " + Constant.patientId);
 
                 } catch (JSONException e) {
@@ -253,7 +254,7 @@ public class LoginActivity extends ActionBarActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return "";
+            return status;
         }
 
         @Override
@@ -266,28 +267,19 @@ public class LoginActivity extends ActionBarActivity {
                 editor.putString(Constant.PREF_PATIENTID_HADLOGIN,Constant.patientId);
                 editor.putString(Constant.PREF_PATIENT_NAME,Constant.PATIENT_NAME);
                 editor.commit();
+                if(result.equalsIgnoreCase("1")){
+                    Intent in = new Intent(LoginActivity.this, ChangePasswordActivity.class);
+                    in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    in.putExtra("loginFirstTime", Boolean.TRUE);
+                    startActivity(in);
+                } else {
+                    Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
+                    startActivity(continueIntent);
+                }
 
-                Intent continueIntent = new Intent(LoginActivity.this, DeviceScanActivity.class);
-                startActivity(continueIntent);
             }
         }
     }
 
-    public String encryptMD5(String password){
-        try{
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(password.getBytes());
-            byte byteData[] = md.digest();
-            StringBuffer hexString = new StringBuffer();
-            for (int i=0;i<byteData.length;i++) {
-                String hex=Integer.toHexString(0xff & byteData[i]);
-                if(hex.length()==1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return "";
-    }
+
 }

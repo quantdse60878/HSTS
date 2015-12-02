@@ -239,7 +239,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         }
         SendBrandAsyncTask sendBrandAsyncTask = new SendBrandAsyncTask();
 //        sendBrandAsyncTask.execute();
-        Constant.TREATMENTS = Constant.getItems();
+        Constant.TREATMENTS = HSTSUtils.getItems();
 
 
         Bundle bundle = getIntent().getExtras();
@@ -278,7 +278,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
                 Constant.DATA_FROM_SERVER = HSTSUtils.loadData(getAssets());
-                Constant.TREATMENTS = Constant.getItems();
+                Constant.TREATMENTS = HSTSUtils.getItems();
             }if (bundle.getBoolean("notFinished")) {
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);

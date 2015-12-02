@@ -418,7 +418,7 @@ public class BroadcastService extends Service {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(Constant.PREF_DATA, Constant.DATA_FROM_SERVER);
             editor.commit();
-            Constant.TREATMENTS = Constant.getItems();
+            Constant.TREATMENTS = HSTSUtils.getItems();
             Log.d("QUYYY111", "Treatment--" + response);
             HomeActivity.amountTime = HomeActivity.amountTime();
             Intent homeIntent = new Intent(this, HomeActivity.class);

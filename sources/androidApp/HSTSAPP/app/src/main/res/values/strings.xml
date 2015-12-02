@@ -54,7 +54,7 @@
     <string name="prompt_change_password_new">Mật Khẩu Mới</string>
     <string name="prompt_change_password_new_confirm">Xác Nhận Mật Khẩu Mới</string>
     <string name="change_password_update">Cập Nhật Mật Khẩu</string>
-    <string name="change_password_cancel">Quay Lại</string>
+    <string name="change_password_cancel">Bỏ Qua</string>
     <string name="change_password_error_password">Confirmed Password Bị Sai</string>
     <string name="change_password_success_password">Cập Nhật Mật Khẩu Thành Công</string>
     <string name="login_error">Tên Đăng Nhập hoặc Mật Khẩu bị sai.</string>
