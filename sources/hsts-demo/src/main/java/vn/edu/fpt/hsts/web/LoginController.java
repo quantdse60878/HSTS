@@ -225,6 +225,7 @@ public class LoginController extends AbstractController {
             patient.setPatientId(patientLogin.getId());
             patient.setEmail(userLogin.getEmail());
             patient.setFullname(userLogin.getFullName());
+            patient.setStatus(userLogin.getStatus() + "");
         }
         return patient;
     }
@@ -234,12 +235,11 @@ public class LoginController extends AbstractController {
     public String changePassword(@RequestParam("username") final String username,
                                  @RequestParam("oldPassword") final String oldPassword,
                                  @RequestParam("newPassword") final String newPassword) {
-        Account userLogin = new Account();
-        userLogin = accountService.changePassword(username, oldPassword, newPassword);
+        Account userLogin = accountService.changePassword(username, oldPassword, newPassword);
         if (userLogin != null) {
             return "200";
         }
-        return "error";
+        return "202";
     }
 
 

@@ -110,6 +110,7 @@ public class AccountService {
             final Account account = accountRepo.findByUsernameAndPassword(username, oldPassword);
             if(null != account) {
                 account.setPassword(newPassword);
+                account.setStatus((byte)2);
                 accountRepo.save(account);
                 return account;
             }

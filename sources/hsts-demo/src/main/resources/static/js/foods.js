@@ -25,7 +25,7 @@ function loadPage() {
     }).done(function (data) {
         listFood = data;
         for (var i = 0; i < data.length; i++) {
-            inner += '<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].unit + '</td><td>' +
+            inner += '<tr><td>' + i + 1 + '</td><td>' + data[i].name + '</td><td>' + data[i].unit + '</td><td>' +
                 '<a href="#" onclick="viewUpdate(' + "'" + data[i].id + "'" + ')" class="btn btn-primary">Update</a>' +
                 '<a href="#" onclick="deleteFood(' + "'" + data[i].id + "'" + ')" class="btn btn-danger">Delete</a>' +
                 '</td></tr>';
