@@ -40,7 +40,7 @@ public class MedicalRecord extends AbstractKeyEntity {
      * The illness.
      */
     @ManyToOne
-    @JoinColumn(name = "illnessId", referencedColumnName = "id")
+    @JoinColumn(name = "illnessId")
     private Illness illness;
 
     /**
