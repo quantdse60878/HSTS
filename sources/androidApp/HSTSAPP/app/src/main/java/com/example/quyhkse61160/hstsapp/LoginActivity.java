@@ -233,6 +233,18 @@ public class LoginActivity extends ActionBarActivity {
 
 
             } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+            return status;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if(result == null){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
                 builder.setTitle("Lỗi").setMessage("Không thể kết nối tới server. Bạn có muốn đổi IP không ?")
                         .setPositiveButton(R.string.action_settings_IP, new DialogInterface.OnClickListener() {
@@ -251,16 +263,11 @@ public class LoginActivity extends ActionBarActivity {
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+                return;
             }
-            return status;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
             if ((Constant.accountId.equals("0") && Constant.PATIENT_NAME == null) || Constant.patientId.equals("0")) {
                 Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_LONG).show();
+                return;
             } else {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(Constant.PREF_ACCOUNTID_HADLOGIN,Constant.accountId);
