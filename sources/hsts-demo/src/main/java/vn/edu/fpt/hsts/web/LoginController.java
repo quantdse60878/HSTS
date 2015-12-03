@@ -233,9 +233,8 @@ public class LoginController extends AbstractController {
     @RequestMapping(value = "changePassword", method = RequestMethod.POST)
     @ResponseBody
     public String changePassword(@RequestParam("username") final String username,
-                                 @RequestParam("oldPassword") final String oldPassword,
                                  @RequestParam("newPassword") final String newPassword) {
-        Account userLogin = accountService.changePassword(username, oldPassword, newPassword);
+        Account userLogin = accountService.changePassword(username, newPassword);
         if (userLogin != null) {
             return "200";
         }

@@ -103,11 +103,11 @@ public class AccountService {
 
     public void updateAccount(Account account){ accountRepo.save(account); }
 
-    public Account changePassword(final String username, final String oldPassword, final String newPassword){
+    public Account changePassword(final String username, final String newPassword){
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("username[{}], oldPassword[{}], newPassword[{}]", username, oldPassword, newPassword);
-            final Account account = accountRepo.findByUsernameAndPassword(username, oldPassword);
+            LOGGER.info("username[{}], newPassword[{}]", username, newPassword);
+            final Account account = accountRepo.findByUsername(username);
             if(null != account) {
                 account.setPassword(newPassword);
                 account.setStatus((byte)2);
