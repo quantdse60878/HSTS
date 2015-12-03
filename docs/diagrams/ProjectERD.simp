@@ -67,7 +67,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractElementGroup" />
-        <value>58</value>
+        <value>14</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -306,7 +306,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="entity-relationship" id="p631070817288736774" name="EntityRelationshipDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="441,-120" zoom="1.6">
+      <diagram type="entity-relationship" id="p631070817288736774" name="EntityRelationshipDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="226,-156" zoom="1.2">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -3449,7 +3449,7 @@
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-class" id="p766067563828040190" name="ClassDiagram1" order-index="6" overview-order-index="4" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="92,-85">
+      <diagram type="uml-class" id="p766067563828040190" name="ClassDiagram1" order-index="6" overview-order-index="4" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="92,-55">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -3519,12 +3519,6 @@
                 <style class="default" />
               </attribute>
               <attribute id="a5ad686a464e741779b3ed770cd931aaf618" cid="AT019" name="status" type="" type-id="" visibility="private">
-                <style class="default" />
-              </attribute>
-              <attribute id="ad77dd158333d4cb59361768db20089f5249" cid="AT135" name="sender" type="" type-id="" visibility="private">
-                <style class="default" />
-              </attribute>
-              <attribute id="ac5933a90402b48c18e57f4a37428a784706" cid="AT136" name="receiver" type="" type-id="" visibility="private">
                 <style class="default" />
               </attribute>
             </attributes>
