@@ -47,7 +47,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractElementGroup" />
-        <value>15</value>
+        <value>37</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -144,7 +144,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-usecase" id="p303911810959166380" name="UseCaseDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="false" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="true" view-location="-33,48" zoom="0.5">
+      <diagram type="uml-usecase" id="p303911810959166380" name="UseCaseDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="false" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="true" view-location="-33,-34" zoom="0.5">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -2115,8 +2115,31 @@
               <end-role id="" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di611767431177423375" cid="UC022" type="use-case" name="Check Notify Of Patient" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/22/2015 15:54:53">
+          <item id="di611767431177423375" cid="UC022" type="use-case" name="Check Notifications Of Patient" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/22/2015 15:54:53">
             <stereotypes />
+            <documentation>
+              <text>
+                <styles>
+                  <style name="S1" font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                    <text>
+                      <solid-brush color="#FF000000" />
+                    </text>
+                  </style>
+                </styles>
+                <content>
+                  <paragraph>
+                    <p s="S1">
+                      <t>
+</t>
+                    </p>
+                  </paragraph>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
@@ -2259,7 +2282,7 @@
             <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
           <item id="di611767431177423375" iid="fb43f6e45a924c59b9621b85572cdc7a" container="ddip270305532598268068_136795117237268016" container-iid="f0c82317653641cb9592376526fcbdf6" creation-date="11/22/2015 15:54:53" order-index="135" type="entity">
-            <layout ax="720" ay="90" awidth="120" aheight="75" x="720" y="90" width="120" height="70" angle="0" />
+            <layout ax="720" ay="90" awidth="120" aheight="75" x="720" y="90" width="120" height="75" angle="0" />
             <use-case />
           </item>
           <item id="di861590778505828003" iid="76022e8f980b4621966c8f793a54b1ef" creation-date="11/22/2015 15:56:51" order-index="136" type="relation">
@@ -2375,8 +2398,31 @@
               <end-role id="" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
-          <item id="di511028699409933976" cid="AC002" type="actor" name="AuthorizeUser" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="private" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:01:18">
+          <item id="di511028699409933976" cid="AC002" type="actor" name="Authorized User" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="private" creation-date="09/12/2015 08:01:18">
             <stereotypes />
+            <documentation>
+              <text>
+                <styles>
+                  <style name="S1" font-name="Verdana" font-size="12" font-bold="false" font-italic="false" font-underline="false" font-strikeout="false">
+                    <text>
+                      <solid-brush color="#FF000000" />
+                    </text>
+                  </style>
+                </styles>
+                <content>
+                  <paragraph>
+                    <p s="S1">
+                      <t>
+</t>
+                    </p>
+                  </paragraph>
+                </content>
+              </text>
+            </documentation>
+            <cooperation>
+              <participants />
+              <comments />
+            </cooperation>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
@@ -2433,7 +2479,7 @@
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di910068101884738581" cid="UC004" type="use-case" name="Register Examming" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="private" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:12:43">
+          <item id="di910068101884738581" cid="UC004" type="use-case" name="Register Medical Examination" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="private" creator="P5ab8b5f4d8774850b3dd1a2bebdb6110" creation-date="09/12/2015 08:12:43">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -2966,20 +3012,20 @@ Extension point: Select suggest nutrition</comment>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di845141827354286563" iid="57694f3b550e4908a31dc193fa08e90d" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 07:57:50" order-index="1" type="entity">
-            <layout ax="1105" ay="290" awidth="20" aheight="40" x="1105" y="290" width="20" height="40" angle="0" name-position="0,0" name-anchor="bottom" />
+            <layout ax="1090" ay="268" awidth="37.5" aheight="75" x="1090" y="268" width="37.5" height="75" angle="0" name-position="0,0" name-anchor="bottom" />
           </item>
           <item id="di896803118319799036" iid="7be0e289adcc4f19bdb47524548a8eab" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:00:36" order-index="3" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="749" y1="303" x2="1105" y2="310" start-border-pos="0.378977342085405" end-border-pos="0.876250076293945">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="914" y1="319" x2="1090" y2="307" start-border-pos="0.361974022605202" end-border-pos="0.869184875488281">
               <points>
-                <point x="749" y="303" />
-                <point x="1105" y="310" />
+                <point x="914" y="319" />
+                <point x="1090" y="307" />
               </points>
             </layout>
             <relation from="di504132509223611666" from-iid="4dda42fd4f64458eb367af50e39f1c83" to="di845141827354286563" to-iid="57694f3b550e4908a31dc193fa08e90d" />
             <role-positions start-role="25,15" end-role="25,15" start-multiplicity="29.69209,-13.68867" end-multiplicity="25,-15" />
           </item>
           <item id="di511028699409933976" iid="98ce7ef947364efcb2985ea69312b0cd" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:01:18" order-index="4" type="entity">
-            <layout ax="160" ay="260" awidth="35" aheight="70" x="160" y="260" width="35" height="70" angle="0" name-position="0,-7.629395E-06" name-anchor="bottom" />
+            <layout ax="160" ay="260" awidth="35" aheight="70" x="160" y="260" width="35" height="75" angle="0" name-position="0,0" name-anchor="bottom" name-width="260" />
           </item>
           <item id="di817979539946140146" iid="a1a538d2906b4364b93121d626e88669" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:01:48" order-index="6" type="relation">
             <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="195" y1="295" x2="350" y2="297" start-border-pos="0.375839342389788" end-border-pos="0.877777372087751">
@@ -2992,58 +3038,63 @@ Extension point: Select suggest nutrition</comment>
             <role-positions start-role="25,15" end-role="25,15" start-multiplicity="25,-15" end-multiplicity="25,-15" />
           </item>
           <item id="di969339659779969505" iid="56116e92f9a84f8fa7ffa1f948ed1e58" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:01:53" order-index="7" type="entity">
-            <layout ax="160" ay="110" awidth="20" aheight="40" x="160" y="110" width="20" height="40" angle="0" name-position="0,0" name-anchor="bottom" />
+            <layout ax="160" ay="110" awidth="35" aheight="70" x="160" y="110" width="35" height="70" angle="0" name-position="0,0" name-anchor="bottom" />
           </item>
           <item id="di967320191566280317" iid="05674bdf90204b0581c9b9efa26699c4" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:12:03" order-index="9" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="171" y1="150" x2="176" y2="260" start-border-pos="0.612878799438477" end-border-pos="0.11645017351423">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="160" y1="147" x2="178" y2="260" start-border-pos="0.869155829293387" end-border-pos="0.128571428571429">
               <points>
-                <point x="171" y="150" />
-                <point x="176" y="260" />
+                <point x="160" y="147" />
+                <point x="123" y="150" />
+                <point x="123" y="226" />
+                <point x="178" y="225" />
+                <point x="178" y="260" />
               </points>
             </layout>
             <relation from="di969339659779969505" from-iid="56116e92f9a84f8fa7ffa1f948ed1e58" to="di511028699409933976" to-iid="98ce7ef947364efcb2985ea69312b0cd" />
           </item>
           <item id="di298833939249183654" iid="23db3d58d1e144f5846d5465d3388f69" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:12:09" order-index="10" type="entity">
-            <layout ax="170" ay="460" awidth="20" aheight="40" x="170" y="460" width="20" height="80" angle="0" name-position="0,0" name-anchor="bottom" />
+            <layout ax="160" ay="425" awidth="37.5" aheight="75" x="160" y="425" width="37.5" height="75" angle="0" name-position="0,0" name-anchor="bottom" />
           </item>
           <item id="di882506750943250833" iid="60165a03ea5f4004b54cd01184d11d59" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:13:02" order-index="12" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="190" y1="474" x2="328" y2="413" start-border-pos="0.336956596374512" end-border-pos="0.75373637676239">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="198" y1="453" x2="304" y2="411" start-border-pos="0.342583312988281" end-border-pos="0.774166666666667">
               <points>
-                <point x="190" y="474" />
-                <point x="328" y="413" />
+                <point x="198" y="453" />
+                <point x="304" y="411" />
               </points>
             </layout>
             <relation from="di298833939249183654" from-iid="23db3d58d1e144f5846d5465d3388f69" to="di910068101884738581" to-iid="8b35e622dd80457c817ebdf6e81ed34b" />
             <role-positions start-role="25,15" end-role="25,15" start-multiplicity="25,-15" end-multiplicity="25,-15" />
           </item>
           <item id="di238571757936703560" iid="57e36519be6144d5a8331204ede503c6" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:13:06" order-index="13" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="180" y1="460" x2="178" y2="330" start-border-pos="0.122297286987305" end-border-pos="0.618725912911551">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="160" y1="461" x2="160" y2="328" start-border-pos="0.88" end-border-pos="0.757142857142857">
               <points>
-                <point x="180" y="460" />
-                <point x="178" y="330" />
+                <point x="160" y="461" />
+                <point x="90" y="462" />
+                <point x="89" y="328" />
+                <point x="160" y="328" />
               </points>
             </layout>
             <relation from="di298833939249183654" from-iid="23db3d58d1e144f5846d5465d3388f69" to="di511028699409933976" to-iid="98ce7ef947364efcb2985ea69312b0cd" />
           </item>
           <item id="di857466823740503609" iid="9bcdfa35b03a459097c410b447afc1a1" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:13:17" order-index="14" type="entity">
-            <layout ax="170" ay="600" awidth="30" aheight="60" x="170" y="600" width="30" height="60" angle="0" name-position="0,0" name-anchor="bottom" />
+            <layout ax="160" ay="590" awidth="37.5" aheight="75" x="160" y="590" width="37.5" height="75" angle="0" name-position="0,0" name-anchor="bottom" />
           </item>
           <item id="di345439295832496997" iid="abbd39ce1f6e4726a76734706f2e0308" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:13:29" order-index="15" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="30,-10" auto-path="" x1="170" y1="640" x2="160" y2="330" start-border-pos="0.833333333333333" end-border-pos="0.75">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="30,-10" auto-path="" x1="160" y1="640" x2="160" y2="312" start-border-pos="0.833333333333333" end-border-pos="0.814285714285714">
               <points>
-                <point x="170" y="640" />
-                <point x="90" y="640" />
-                <point x="90" y="330" />
-                <point x="160" y="330" />
+                <point x="160" y="640" />
+                <point x="74" y="640" />
+                <point x="74" y="312" />
+                <point x="160" y="312" />
               </points>
             </layout>
             <relation from="di857466823740503609" from-iid="9bcdfa35b03a459097c410b447afc1a1" to="di511028699409933976" to-iid="98ce7ef947364efcb2985ea69312b0cd" />
           </item>
           <item id="di377049719230311658" iid="0eb16208e3d94ccfaaf2cd28fe6b011d" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:30:04" order-index="16" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="180" y1="134" x2="346" y2="191" start-border-pos="0.39732141494751" end-border-pos="0.946428604125977">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="195" y1="150" x2="344" y2="193" start-border-pos="0.393033926827567" end-border-pos="0.934405975341797">
               <points>
-                <point x="180" y="134" />
-                <point x="346" y="191" />
+                <point x="195" y="150" />
+                <point x="344" y="193" />
               </points>
             </layout>
             <relation from="di969339659779969505" from-iid="56116e92f9a84f8fa7ffa1f948ed1e58" to="di831147133844797525" to-iid="1fa823a53a4e42a39d66a1398254402b" />
@@ -3098,10 +3149,10 @@ Extension point: Select suggest nutrition</comment>
             <layout ax="1080" ay="440" awidth="35" aheight="70" x="1080" y="440" width="35" height="70" angle="0" name-position="0,0" name-anchor="bottom" />
           </item>
           <item id="di572432364481202904" iid="d51726536cc14bb38cffafc9dedb9e3d" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/16/2015 16:39:52" order-index="74" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="200" y1="627" x2="423" y2="587" start-border-pos="0.363524627685547" end-border-pos="0.83848727833141">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="198" y1="625" x2="422" y2="586" start-border-pos="0.366248575846354" end-border-pos="0.840470574118874">
               <points>
-                <point x="200" y="627" />
-                <point x="423" y="587" />
+                <point x="198" y="625" />
+                <point x="422" y="586" />
               </points>
             </layout>
             <relation from="di857466823740503609" from-iid="9bcdfa35b03a459097c410b447afc1a1" to="di656206500416425982" to-iid="355232acd15d4113af641a1f89a9f336" />
@@ -3169,10 +3220,10 @@ Extension point: Select suggest nutrition</comment>
             <relation from="di925839291157418938" from-iid="666faba1e5d64985b959d30fedd4145a" to="di511028699409933976" to-iid="98ce7ef947364efcb2985ea69312b0cd" />
           </item>
           <item id="di110568890727864763" iid="d8bf35a2b7184eb79b54685f2f1def75" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/24/2015 14:31:30" order-index="104" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="200" y1="621" x2="326" y2="574" start-border-pos="0.337903340657552" end-border-pos="0.754623616536458">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="198" y1="618" x2="316" y2="572" start-border-pos="0.343126220703125" end-border-pos="0.761532185872396">
               <points>
-                <point x="200" y="621" />
-                <point x="326" y="574" />
+                <point x="198" y="618" />
+                <point x="316" y="572" />
               </points>
             </layout>
             <relation from="di857466823740503609" from-iid="9bcdfa35b03a459097c410b447afc1a1" to="di993278239921911573" to-iid="8104a531a8734bb0966338343000adb8" />
@@ -3231,7 +3282,7 @@ Extension point: Select suggest nutrition</comment>
             <layout ax="240" ay="70" awidth="770" aheight="1080" x="240" y="70" width="770" height="1080" angle="0" />
           </item>
           <item id="di504132509223611666" iid="4dda42fd4f64458eb367af50e39f1c83" container="di716729623404740288" container-iid="c6d7104506e24b60a5d2f433353e6dd6" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:00:24" order-index="2" type="entity">
-            <layout ax="680" ay="280" awidth="70" aheight="44" x="680" y="280" width="70" height="44" angle="0" />
+            <layout ax="845" ay="299" awidth="70" aheight="44" x="845" y="299" width="70" height="44" angle="0" />
             <use-case />
           </item>
           <item id="di220385300912853774" iid="8d4df719a6aa495783a8ee00213d2c2c" container="di716729623404740288" container-iid="c6d7104506e24b60a5d2f433353e6dd6" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:01:35" order-index="5" type="entity">
@@ -3243,7 +3294,7 @@ Extension point: Select suggest nutrition</comment>
             <use-case />
           </item>
           <item id="di910068101884738581" iid="8b35e622dd80457c817ebdf6e81ed34b" container="di716729623404740288" container-iid="c6d7104506e24b60a5d2f433353e6dd6" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:12:43" order-index="11" type="entity">
-            <layout ax="290" ay="350" awidth="102" aheight="64" x="290" y="350" width="102" height="64" angle="0" />
+            <layout ax="279" ay="343" awidth="120" aheight="75" x="279" y="343" width="120" height="75" angle="0" />
             <use-case />
           </item>
           <item id="di185103201590176746" iid="035452d35a7d4f33861d3b2bd825d4e3" container="di716729623404740288" container-iid="c6d7104506e24b60a5d2f433353e6dd6" show-cid="false" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" creation-date="09/12/2015 08:41:35" order-index="26" type="entity">
@@ -3479,9 +3530,9 @@ Extension point: Select suggest nutrition</comment>
             <use-case />
           </item>
           <item id="di958559751143335643" iid="a87d89c533134cb0827c691632080ab3" creation-date="11/20/2015 10:55:19" order-index="149" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="190" y1="480" x2="380" y2="440" start-border-pos="0.375" end-border-pos="0.866666666666667">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="198" y1="462" x2="380" y2="440" start-border-pos="0.375" end-border-pos="0.866666666666667">
               <points>
-                <point x="190" y="480" />
+                <point x="198" y="462" />
                 <point x="380" y="440" />
               </points>
             </layout>
