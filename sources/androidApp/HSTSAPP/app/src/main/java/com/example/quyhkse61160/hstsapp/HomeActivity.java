@@ -256,12 +256,17 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 BroadcastService.alertMinute = 0;
+                                Constant.ALARM_TIME_COUNT = 0;
                             }
                         })
                         .setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                BroadcastService.alertMinute += 5;
+                                Constant.ALARM_TIME_COUNT++;
+                                BroadcastService.alertMinute = 0;
+                                for(int i=0; i< Constant.ALARM_TIME_COUNT;i++){
+                                    BroadcastService.alertMinute += Constant.ALARM_TIME;
+                                }
                             }
                         });
                 AlertDialog dialog = builder.create();
@@ -565,6 +570,11 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 }
                 Intent logout = new Intent(getApplication(),LoginActivity.class);
                 startActivity(logout);
+                break;
+            }
+            case R.id.action_config_alarm:{
+                Intent intentConfigAlarm = new Intent(this, AlarmSettingActivity.class);
+                startActivity(intentConfigAlarm);
                 break;
             }
 

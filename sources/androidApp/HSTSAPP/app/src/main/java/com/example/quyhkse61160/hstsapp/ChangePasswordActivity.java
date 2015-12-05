@@ -47,6 +47,7 @@ import cz.msebera.android.httpclient.message.BasicNameValuePair;
 public class ChangePasswordActivity extends ActionBarActivity {
     EditText newPassword, confirm;
     Button cancel,update;
+    boolean firstTime = false;
     public SharedPreferences sharedPreferences;
 
     @Override
@@ -63,6 +64,7 @@ public class ChangePasswordActivity extends ActionBarActivity {
         if (bundle != null){
             if(bundle.getBoolean("loginFirstTime")){
                 cancel.setVisibility(View.VISIBLE);
+                firstTime = true;
             }
         }
         update = (Button) findViewById(R.id.btn_change_password_update);
@@ -164,8 +166,10 @@ public class ChangePasswordActivity extends ActionBarActivity {
                 Toast.makeText(ChangePasswordActivity.this,"Không thể kết nối đến server!",Toast.LENGTH_LONG).show();
             } else if(result.equals("200")){
                 Toast.makeText(getApplicationContext(),R.string.change_password_success_password,Toast.LENGTH_LONG).show();
-                Intent continueIntent = new Intent(ChangePasswordActivity.this, DeviceScanActivity.class);
-                startActivity(continueIntent);
+                if(firstTime){
+                    Intent continueIntent = new Intent(ChangePasswordActivity.this, DeviceScanActivity.class);
+                    startActivity(continueIntent);
+                }
             }
         }
     }

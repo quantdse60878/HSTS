@@ -61,6 +61,8 @@ public class Constant {
     public static Date PATIENT_APPOINTMENT = new Date();
     public static List<String> TIMES = new ArrayList<>();
     public static List<Treatment> TREATMENTS = new ArrayList<>();
+    public static int ALARM_TIME = 5;
+    public static int ALARM_TIME_COUNT = 0;
 
 //    public static List<ToDoTime> Foods = new ArrayList<>();
 //    public static List<ToDoTime> Medicines = new ArrayList<>();

@@ -6,4 +6,6 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_change_password" android:title="@string/action_change_password"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_config_alarm" android:title="Cài Đặt Nhắc Nhở"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

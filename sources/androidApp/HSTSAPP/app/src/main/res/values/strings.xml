@@ -62,5 +62,6 @@
     <string name="action_settings_IP">Thiết Lập IP</string>
     <string name="action_settings">Thiết Lập</string>
     <string name="action_settings_setup">Cài Đặt</string>
+    <string name="title_activity_alarm_setting">Cài đặt nhắc nhở</string>
     <!-- KhuongMH -->
 </resources>
