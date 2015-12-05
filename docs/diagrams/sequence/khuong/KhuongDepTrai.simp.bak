@@ -9,39 +9,39 @@
     <entity-names>
       <counter>
         <item-type stereotype="" type="UmlActor" />
-        <value>21</value>
+        <value>22</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlLifeline" />
-        <value>81</value>
+        <value>83</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSequenceAction" />
-        <value>316</value>
+        <value>333</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlActivationBar" />
-        <value>146</value>
+        <value>150</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlFragment" />
-        <value>25</value>
+        <value>26</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSystemBoundary" />
-        <value>7</value>
+        <value>8</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlUseCase" />
-        <value>26</value>
+        <value>29</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSwimlane" />
-        <value>26</value>
+        <value>27</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlActivity" />
-        <value>7</value>
+        <value>9</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlInitialNode" />
@@ -53,11 +53,11 @@
       </counter>
       <counter>
         <item-type stereotype="" type="UmlActivityFinalNode" />
-        <value>14</value>
+        <value>15</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlDestroy" />
-        <value>58</value>
+        <value>64</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSequenceConcurrent" />
@@ -65,15 +65,15 @@
       </counter>
       <counter>
         <item-type stereotype="" type="StartEndSymbol" />
-        <value>6</value>
+        <value>7</value>
       </counter>
       <counter>
         <item-type stereotype="" type="Process" />
-        <value>8</value>
+        <value>9</value>
       </counter>
       <counter>
         <item-type stereotype="" type="Data" />
-        <value>9</value>
+        <value>10</value>
       </counter>
       <counter>
         <item-type stereotype="" type="Decision" />
@@ -89,49 +89,45 @@
       </counter>
       <counter>
         <item-type stereotype="" type="PredefinedProcess" />
-        <value>1</value>
-      </counter>
-      <counter>
-        <item-type stereotype="" type="Process" />
-        <value>8</value>
+        <value>3</value>
       </counter>
     </entity-names>
     <entity-ids>
       <counter>
         <item-type stereotype="" type="UmlActor" />
-        <value>22</value>
+        <value>23</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlLifeline" />
-        <value>82</value>
+        <value>84</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSequenceAction" />
-        <value>317</value>
+        <value>334</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlActivationBar" />
-        <value>154</value>
+        <value>158</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlFragment" />
-        <value>26</value>
-      </counter>
-      <counter>
-        <item-type stereotype="" type="UmlInteractionOperand" />
-        <value>47</value>
-      </counter>
-      <counter>
-        <item-type stereotype="" type="UmlSystemBoundary" />
-        <value>8</value>
-      </counter>
-      <counter>
-        <item-type stereotype="" type="UmlUseCase" />
         <value>27</value>
       </counter>
       <counter>
+        <item-type stereotype="" type="UmlInteractionOperand" />
+        <value>49</value>
+      </counter>
+      <counter>
+        <item-type stereotype="" type="UmlSystemBoundary" />
+        <value>9</value>
+      </counter>
+      <counter>
+        <item-type stereotype="" type="UmlUseCase" />
+        <value>30</value>
+      </counter>
+      <counter>
         <item-type stereotype="" type="UmlAssociation" />
-        <value>19</value>
+        <value>22</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlExtend" />
@@ -151,11 +147,11 @@
       </counter>
       <counter>
         <item-type stereotype="" type="UmlSwimlane" />
-        <value>27</value>
+        <value>28</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlActivity" />
-        <value>8</value>
+        <value>10</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlInitialNode" />
@@ -179,7 +175,7 @@
       </counter>
       <counter>
         <item-type stereotype="" type="UmlControlFlow" />
-        <value>95</value>
+        <value>102</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlObjectFlow" />
@@ -187,15 +183,15 @@
       </counter>
       <counter>
         <item-type stereotype="" type="UmlDecision" />
-        <value>7</value>
+        <value>8</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlActivityFinalNode" />
-        <value>15</value>
+        <value>16</value>
       </counter>
       <counter>
         <item-type stereotype="" type="UmlDestroy" />
-        <value>59</value>
+        <value>65</value>
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractTextItem" />
@@ -207,19 +203,19 @@
       </counter>
       <counter>
         <item-type stereotype="" type="StartEndSymbol" />
-        <value>54</value>
+        <value>55</value>
       </counter>
       <counter>
         <item-type stereotype="" type="Process" />
-        <value>15</value>
+        <value>24</value>
       </counter>
       <counter>
         <item-type stereotype="" type="Data" />
-        <value>10</value>
+        <value>11</value>
       </counter>
       <counter>
         <item-type stereotype="" type="Flow" />
-        <value>55</value>
+        <value>67</value>
       </counter>
       <counter>
         <item-type stereotype="" type="Decision" />
@@ -239,15 +235,11 @@
       </counter>
       <counter>
         <item-type stereotype="" type="PredefinedProcess" />
-        <value>2</value>
+        <value>4</value>
       </counter>
       <counter>
         <item-type stereotype="" type="AbstractElementGroup" />
-        <value>292</value>
-      </counter>
-      <counter>
-        <item-type stereotype="" type="Process" />
-        <value>23</value>
+        <value>117</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -257,7 +249,7 @@
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlUseCaseDiagram</type>
-        <value>1</value>
+        <value>2</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlActivityDiagram</type>
@@ -682,6 +674,20 @@
       <style class="default" />
       <interaction-operand guard="Fail" />
     </item>
+    <item id="di975838951838334063" cid="IOP047" type="interaction-operand" name="Success" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:30:50">
+      <stereotypes />
+      <associated-diagrams />
+      <owned-items />
+      <style class="default" />
+      <interaction-operand guard="Success" />
+    </item>
+    <item id="di102663064417609105" cid="IOP048" type="interaction-operand" name="Fail" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:30:54">
+      <stereotypes />
+      <associated-diagrams />
+      <owned-items />
+      <style class="default" />
+      <interaction-operand guard="Fail" />
+    </item>
   </items>
   <models>
     <model id="p559869713415671386" name="Model 1" type="model" namespace="" order-index="1">
@@ -697,7 +703,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-sequence" id="p419369584430770085" name="SequenceDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="188,280" zoom="1.4">
+      <diagram type="uml-sequence" id="p419369584430770085" name="SequenceDiagram1" order-index="1" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="188,-20" zoom="1.4">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -1627,7 +1633,7 @@ Extension point: Select suggest nutrition</comment>
           </authors>
           <description />
           <creation-date>11/19/2015 10:46:41</creation-date>
-          <change-date>11/19/2015 11:41:43</change-date>
+          <change-date>11/30/2015 16:06:34</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -1699,21 +1705,14 @@ Extension point: Select suggest nutrition</comment>
             <style class="default" />
             <control-flow guard="" />
           </item>
-          <item id="di903732842502564309" cid="ELEM026" type="control-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/19/2015 11:41:38">
+          <item id="di759158960394698551" cid="ELEM101" type="control-flow" name="No" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 16:06:34">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
             <control-flow guard="" />
           </item>
-          <item id="di869414921617333008" cid="ELEM022" type="control-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/19/2015 11:07:23">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <control-flow guard="" />
-          </item>
-          <item id="di812664836252128195" cid="DC002" type="decision" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/19/2015 11:08:53">
+          <item id="di573777161488767309" cid="SL027" type="swimlane" name="Server" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 15:51:27">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -1725,33 +1724,52 @@ Extension point: Select suggest nutrition</comment>
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di304025982742173924" cid="ACT010" type="action" name="Alert patient" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/19/2015 11:13:41">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-          </item>
           <item id="di712967429143806561" cid="AFN003" type="activity-final-node" name="Show Notice" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/19/2015 11:41:10">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di684288610588237050" cid="ELEM024" type="control-flow" name="practice hard" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/19/2015 11:14:16">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <control-flow guard="" />
-          </item>
-          <item id="di415419691295260375" cid="ELEM025" type="control-flow" name="practice not enough" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/19/2015 11:14:20">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <control-flow guard="" />
-          </item>
           <item id="di500359008714685274" cid="ELEM027" type="control-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/19/2015 11:41:43">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <control-flow guard="" />
+          </item>
+          <item id="di135496251306046999" cid="A009" type="activity" name="Get latest patient's calculated practice data" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 15:52:01">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di552195197581290520" cid="ELEM097" type="control-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 15:52:45">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <control-flow guard="" />
+          </item>
+          <item id="di718749168448466228" cid="DC007" type="decision" name="[Is it followed the treatment ?]" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 16:01:14">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di328460178215834267" cid="ELEM099" type="control-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 16:01:38">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <control-flow guard="" />
+          </item>
+          <item id="di239878675917687028" cid="AFN015" type="activity-final-node" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 16:02:35">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di816137588198366041" cid="ELEM100" type="control-flow" name="Yes" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 16:02:47">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -1761,11 +1779,11 @@ Extension point: Select suggest nutrition</comment>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di665809564740488488" iid="4a4e11e9582b4edfb467382900345798" creation-date="11/19/2015 10:48:59" order-index="0" type="entity">
-            <layout ax="42" ay="90" awidth="267" aheight="454" x="42" y="90" width="267" height="454" angle="0" />
+            <layout ax="42" ay="90" awidth="267" aheight="541" x="42" y="90" width="267" height="541" angle="0" />
             <swimlane vertical="true" is-closed="false" />
           </item>
           <item id="di580564765267126850" iid="39e475c7690e4616a92f88dae24c7f31" creation-date="11/19/2015 10:49:12" order-index="1" type="entity">
-            <layout ax="320" ay="90" awidth="406" aheight="454" x="320" y="90" width="406" height="454" angle="0" />
+            <layout ax="321" ay="90" awidth="325" aheight="541" x="321" y="90" width="325" height="541" angle="0" />
             <swimlane vertical="true" is-closed="false" />
           </item>
           <item id="di961834545921755598" iid="80a95b5390024568a32582ab531e7bfb" container="di665809564740488488" container-iid="4a4e11e9582b4edfb467382900345798" creation-date="11/19/2015 10:49:51" order-index="2" type="entity">
@@ -1784,73 +1802,81 @@ Extension point: Select suggest nutrition</comment>
             <relation from="di961834545921755598" from-iid="80a95b5390024568a32582ab531e7bfb" to="di468768174873317032" to-iid="1a8e3526e81d4482b6954f2dc1785cc8" />
           </item>
           <item id="di713709326230384906" iid="d4bcdb42d20244c995d1e8b6f08bbe33" container="di580564765267126850" container-iid="39e475c7690e4616a92f88dae24c7f31" creation-date="11/19/2015 10:52:37" order-index="5" type="entity">
-            <layout ax="400" ay="229.5" awidth="139" aheight="50" x="400" y="229.5" width="139" height="50" angle="0" />
+            <layout ax="381" ay="228.5" awidth="207" aheight="50" x="381" y="228.5" width="207" height="50" angle="0" />
           </item>
           <item id="di125790927374951269" iid="b0785cbbe7374b68b9190b805ddec772" creation-date="11/19/2015 10:53:48" order-index="6" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="238" y1="254" x2="400" y2="254" start-border-pos="0.3725" end-border-pos="0.8775">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="238" y1="254" x2="381" y2="254" start-border-pos="0.3725" end-border-pos="0.8725">
               <points>
                 <point x="238" y="254" />
-                <point x="400" y="254" />
+                <point x="381" y="254" />
               </points>
             </layout>
             <relation from="di468768174873317032" from-iid="1a8e3526e81d4482b6954f2dc1785cc8" to="di713709326230384906" to-iid="d4bcdb42d20244c995d1e8b6f08bbe33" />
           </item>
-          <item id="di869414921617333008" iid="d609b18704864abeb516b5856844c49d" creation-date="11/19/2015 11:07:23" order-index="8" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="470" y1="280" x2="470" y2="334" start-border-pos="0.62410071942446" end-border-pos="0.128125">
+          <item id="di573777161488767309" iid="d0614f08ccca445a9acc4a2b95f708e6" creation-date="11/30/2015 15:51:27" order-index="18" type="entity">
+            <layout ax="658" ay="90" awidth="228" aheight="541" x="658" y="90" width="228" height="541" angle="0" />
+            <swimlane vertical="true" is-closed="false" />
+          </item>
+          <item id="di135496251306046999" iid="1a59bc4582b14bd0a68ce2d4dfa56bef" container="di573777161488767309" container-iid="d0614f08ccca445a9acc4a2b95f708e6" creation-date="11/30/2015 15:52:01" order-index="19" type="entity">
+            <layout ax="679" ay="228.5" awidth="165" aheight="50" x="679" y="228.5" width="165" height="50" angle="0" />
+          </item>
+          <item id="di552195197581290520" iid="ffd80a1b5ef34b16860afd43b1e1ca13" creation-date="11/30/2015 15:52:45" order-index="20" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="588" y1="254" x2="679" y2="254" start-border-pos="0.3775" end-border-pos="0.8725">
               <points>
-                <point x="470" y="280" />
-                <point x="470" y="334" />
+                <point x="588" y="254" />
+                <point x="679" y="254" />
               </points>
             </layout>
-            <relation from="di713709326230384906" from-iid="d4bcdb42d20244c995d1e8b6f08bbe33" to="di812664836252128195" to-iid="9beee47179354a16976cdb5d6170c5c5" />
+            <relation from="di713709326230384906" from-iid="d4bcdb42d20244c995d1e8b6f08bbe33" to="di135496251306046999" to-iid="1a59bc4582b14bd0a68ce2d4dfa56bef" />
           </item>
-          <item id="di812664836252128195" iid="9beee47179354a16976cdb5d6170c5c5" container="di580564765267126850" container-iid="39e475c7690e4616a92f88dae24c7f31" creation-date="11/19/2015 11:08:53" order-index="9" type="entity">
-            <layout ax="449.5" ay="333.5" awidth="40" aheight="69" x="449.5" y="333.5" width="40" height="69" angle="0" name-position="0,10" name-anchor="bottom" />
-          </item>
-          <item id="di882565694702436804" iid="903625ea445d4783b047e07ac29a66ba" container="di580564765267126850" container-iid="39e475c7690e4616a92f88dae24c7f31" creation-date="11/19/2015 11:09:12" order-index="10" type="entity">
-            <layout ax="565" ay="342.5" awidth="109" aheight="50" x="565" y="342.5" width="109" height="50" angle="0" />
-          </item>
-          <item id="di304025982742173924" iid="41f05f30616a4e0e961e174e12eb136b" container="di580564765267126850" container-iid="39e475c7690e4616a92f88dae24c7f31" creation-date="11/19/2015 11:13:41" order-index="11" type="entity">
-            <layout ax="415" ay="452.5" awidth="109" aheight="50" x="415" y="452.5" width="109" height="50" angle="0" />
-          </item>
-          <item id="di684288610588237050" iid="dc9345db666249ddb8867a1966b87e16" creation-date="11/19/2015 11:14:16" order-index="13" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-6,-23" auto-path="" x1="489" y1="368" x2="565" y2="368" start-border-pos="0.375" end-border-pos="0.8725">
-              <points>
-                <point x="489" y="368" />
-                <point x="565" y="368" />
-              </points>
-            </layout>
-            <relation from="di812664836252128195" from-iid="9beee47179354a16976cdb5d6170c5c5" to="di882565694702436804" to-iid="903625ea445d4783b047e07ac29a66ba" />
-          </item>
-          <item id="di415419691295260375" iid="c77821cbbbb7489990b7f2d36c0a8013" creation-date="11/19/2015 11:14:20" order-index="14" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-56,-6" auto-path="" x1="470" y1="401" x2="470" y2="452" start-border-pos="0.621875" end-border-pos="0.126146788990826">
-              <points>
-                <point x="470" y="401" />
-                <point x="470" y="452" />
-              </points>
-            </layout>
-            <relation from="di812664836252128195" from-iid="9beee47179354a16976cdb5d6170c5c5" to="di304025982742173924" to-iid="41f05f30616a4e0e961e174e12eb136b" />
-          </item>
-          <item id="di712967429143806561" iid="00b652629278409e9e6204bd7c07615f" container="di580564765267126850" container-iid="39e475c7690e4616a92f88dae24c7f31" creation-date="11/19/2015 11:41:10" order-index="15" type="entity">
-            <layout ax="607" ay="462.5" awidth="25" aheight="25" x="607" y="462.5" width="25" height="25" angle="0" name-position="0,10" name-anchor="bottom" />
-          </item>
-          <item id="di903732842502564309" iid="952c47492a89466a8419dcd61bf2a195" creation-date="11/19/2015 11:41:38" order-index="16" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="524" y1="477" x2="607" y2="475" start-border-pos="0.372100067138672" end-border-pos="0.87239990234375">
-              <points>
-                <point x="524" y="477" />
-                <point x="607" y="475" />
-              </points>
-            </layout>
-            <relation from="di304025982742173924" from-iid="41f05f30616a4e0e961e174e12eb136b" to="di712967429143806561" to-iid="00b652629278409e9e6204bd7c07615f" />
+          <item id="di718749168448466228" iid="709efb2c3da54d81885a9984c0bc47ae" container="di573777161488767309" container-iid="d0614f08ccca445a9acc4a2b95f708e6" creation-date="11/30/2015 16:01:14" order-index="21" type="entity">
+            <layout ax="742" ay="318.5" awidth="40" aheight="69" x="742" y="318.5" width="40" height="69" angle="0" name-position="-11.79295,-35.46225" name-anchor="right" />
           </item>
           <item id="di500359008714685274" iid="0e10562b66724ef08787347f3ac0d326" creation-date="11/19/2015 11:41:43" order-index="17" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="620" y1="392" x2="620" y2="463" start-border-pos="0.623853211009174" end-border-pos="0.13">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="483" y1="452" x2="481" y2="488" start-border-pos="0.628471374511719" end-border-pos="0.129864807128906">
               <points>
-                <point x="620" y="392" />
-                <point x="620" y="463" />
+                <point x="483" y="452" />
+                <point x="481" y="488" />
               </points>
             </layout>
             <relation from="di882565694702436804" from-iid="903625ea445d4783b047e07ac29a66ba" to="di712967429143806561" to-iid="00b652629278409e9e6204bd7c07615f" />
+          </item>
+          <item id="di328460178215834267" iid="7aa5276f9f0a4ff4b369d2d1d40dfe7d" creation-date="11/30/2015 16:01:38" order-index="22" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="762" y1="278" x2="762" y2="318" start-border-pos="0.624242424242424" end-border-pos="0.125">
+              <points>
+                <point x="762" y="278" />
+                <point x="762" y="318" />
+              </points>
+            </layout>
+            <relation from="di135496251306046999" from-iid="1a59bc4582b14bd0a68ce2d4dfa56bef" to="di718749168448466228" to-iid="709efb2c3da54d81885a9984c0bc47ae" />
+          </item>
+          <item id="di712967429143806561" iid="00b652629278409e9e6204bd7c07615f" container="di580564765267126850" container-iid="39e475c7690e4616a92f88dae24c7f31" creation-date="11/19/2015 11:41:10" order-index="15" type="entity">
+            <layout ax="468.5" ay="488" awidth="25" aheight="25" x="468.5" y="488" width="25" height="25" angle="0" name-position="0,10" name-anchor="bottom" />
+          </item>
+          <item id="di882565694702436804" iid="903625ea445d4783b047e07ac29a66ba" container="di580564765267126850" container-iid="39e475c7690e4616a92f88dae24c7f31" creation-date="11/19/2015 11:09:12" order-index="10" type="entity">
+            <layout ax="430" ay="401.5" awidth="109" aheight="50" x="430" y="401.5" width="109" height="50" angle="0" />
+          </item>
+          <item id="di239878675917687028" iid="813f684c22c8444c93e381b4f31ab4d2" container="di580564765267126850" container-iid="39e475c7690e4616a92f88dae24c7f31" creation-date="11/30/2015 16:02:35" order-index="23" type="entity">
+            <layout ax="468.5" ay="340" awidth="25" aheight="25" x="468.5" y="340" width="25" height="25" angle="0" name-position="0,10" name-anchor="bottom" />
+          </item>
+          <item id="di816137588198366041" iid="791e37037ccb41a484646c0c812d89a4" creation-date="11/30/2015 16:02:47" order-index="24" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="97,-12" auto-path="" x1="742" y1="353" x2="493" y2="352" start-border-pos="0.875257851420969" end-border-pos="0.370426940917969">
+              <points>
+                <point x="742" y="353" />
+                <point x="493" y="352" />
+              </points>
+            </layout>
+            <relation from="di718749168448466228" from-iid="709efb2c3da54d81885a9984c0bc47ae" to="di239878675917687028" to-iid="813f684c22c8444c93e381b4f31ab4d2" />
+          </item>
+          <item id="di759158960394698551" iid="ffd343ac521c47f68df65bc9141c9d2d" creation-date="11/30/2015 16:06:34" order-index="25" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="67,-18" auto-path="" x1="762" y1="387" x2="539" y2="426" start-border-pos="0.625" end-border-pos="0.3725">
+              <points>
+                <point x="762" y="387" />
+                <point x="762" y="426" />
+                <point x="539" y="426" />
+              </points>
+            </layout>
+            <relation from="di718749168448466228" from-iid="709efb2c3da54d81885a9984c0bc47ae" to="di882565694702436804" to-iid="903625ea445d4783b047e07ac29a66ba" />
           </item>
         </layer>
       </diagram>
@@ -4369,7 +4395,7 @@ Extension point: Select suggest nutrition</comment>
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-activity" id="p556343513833072215" name="Analystic New Treatment" order-index="15" overview-order-index="13" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="22,62">
+      <diagram type="uml-activity" id="p556343513833072215" name="Analystic New Treatment" order-index="15" overview-order-index="13" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,62">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -6072,7 +6098,7 @@ Extension point: Select suggest nutrition</comment>
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-sequence" id="p444938578688580809" name="Analytic meal" order-index="19" overview-order-index="17" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="8,-3" zoom="0.8">
+      <diagram type="uml-sequence" id="p444938578688580809" name="Analytic meal" order-index="19" overview-order-index="17" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,-3" zoom="0.8">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -6631,7 +6657,7 @@ Extension point: Select suggest nutrition</comment>
           </item>
         </layer>
       </diagram>
-      <diagram type="flowchart" id="p872425682216869304" name="Analytic Meal By Voice" order-index="20" overview-order-index="18" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,306" zoom="0.9">
+      <diagram type="flowchart" id="p872425682216869304" name="Analytic Meal By Voice" order-index="20" overview-order-index="18" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,-54" zoom="0.9">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -6643,7 +6669,7 @@ Extension point: Select suggest nutrition</comment>
           </authors>
           <description />
           <creation-date>11/25/2015 11:03:12</creation-date>
-          <change-date>11/25/2015 16:08:04</change-date>
+          <change-date>12/04/2015 09:15:32</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -6666,7 +6692,7 @@ Extension point: Select suggest nutrition</comment>
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di442309467794069364" cid="FCP002" type="flowchart-process" name="Convert speech to text" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 11:05:11">
+          <item id="di398699461387807774" cid="FCPP002" type="flowchart-predefined-process" name="Convert speech to text" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 09:14:10">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -6852,7 +6878,7 @@ Extension point: Select suggest nutrition</comment>
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di732130862866477802" cid="FCF021" type="flowchart-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 15:58:22">
+          <item id="di282265468673335914" cid="FCP002" type="flowchart-process" name="Add food to list foods based on meal name" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 09:14:39">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -6865,6 +6891,18 @@ Extension point: Select suggest nutrition</comment>
             <style class="default" />
           </item>
           <item id="di681732557771181002" cid="FCF024" type="flowchart-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 16:08:04">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di701936189456631616" cid="FCF058" type="flowchart-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 09:15:22">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di879687213608556312" cid="FCF059" type="flowchart-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 09:15:32">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -6887,26 +6925,23 @@ Extension point: Select suggest nutrition</comment>
             </layout>
             <relation from="di243569949389863973" from-iid="43346f021aa6427e9afcf8dc257f3a5a" to="di879322180105337304" to-iid="de0f037346d54fc6a2355fbff851b40d" />
           </item>
-          <item id="di442309467794069364" iid="e76a3405a53e49828ec80fe977752290" creation-date="11/25/2015 11:05:11" order-index="3" type="entity">
-            <layout ax="528.5" ay="169" awidth="187" aheight="60" x="528.5" y="169" width="187" height="60" angle="0" />
-          </item>
           <item id="di645637633582300689" iid="d81c77fc29574ccb89e8d66a33d39650" creation-date="11/25/2015 11:05:23" order-index="4" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="621" y1="104" x2="622" y2="169" start-border-pos="0.624704445524169" end-border-pos="0.124679157440675">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="621" y1="104" x2="621" y2="167" start-border-pos="0.625" end-border-pos="0.125">
               <points>
                 <point x="621" y="104" />
-                <point x="622" y="169" />
+                <point x="621" y="167" />
               </points>
             </layout>
-            <relation from="di879322180105337304" from-iid="de0f037346d54fc6a2355fbff851b40d" to="di442309467794069364" to-iid="e76a3405a53e49828ec80fe977752290" />
+            <relation from="di879322180105337304" from-iid="de0f037346d54fc6a2355fbff851b40d" to="di398699461387807774" to-iid="4f82f4aba81c46ed8d1b5501b36c6301" />
           </item>
           <item id="di169929506374046397" iid="494565e062874bab863ca3996ff6af21" creation-date="11/25/2015 11:07:01" order-index="6" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="622" y1="229" x2="622" y2="281" start-border-pos="0.625" end-border-pos="0.125">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="621" y1="227" x2="622" y2="281" start-border-pos="0.624648150275735" end-border-pos="0.124675882273707">
               <points>
-                <point x="622" y="229" />
+                <point x="621" y="227" />
                 <point x="622" y="281" />
               </points>
             </layout>
-            <relation from="di442309467794069364" from-iid="e76a3405a53e49828ec80fe977752290" to="di194252324356667589" to-iid="926f12eb9b354c4cba63d06549206470" />
+            <relation from="di398699461387807774" from-iid="4f82f4aba81c46ed8d1b5501b36c6301" to="di194252324356667589" to-iid="926f12eb9b354c4cba63d06549206470" />
           </item>
           <item id="di133683778659338730" iid="64c31b2339464cffb4ab420bf041014a" creation-date="11/25/2015 11:07:07" order-index="7" type="entity">
             <layout ax="796" ay="261" awidth="138" aheight="100" x="796" y="261" width="138" height="100" angle="0" />
@@ -6924,13 +6959,13 @@ Extension point: Select suggest nutrition</comment>
             <relation from="di194252324356667589" from-iid="926f12eb9b354c4cba63d06549206470" to="di133683778659338730" to-iid="64c31b2339464cffb4ab420bf041014a" />
           </item>
           <item id="di890722663954831785" iid="81fd2102bbe14310ba15857e43091c36" creation-date="11/25/2015 15:34:59" order-index="11" type="entity">
-            <layout ax="1006.5" ay="281" awidth="138" aheight="60" x="1006.5" y="281" width="138" height="60" angle="0" />
+            <layout ax="1086.5" ay="281" awidth="138" aheight="60" x="1086.5" y="281" width="138" height="60" angle="0" />
           </item>
           <item id="di344400999356022661" iid="9f7788a6b778455289439567759cf008" creation-date="11/25/2015 15:35:26" order-index="12" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-8,-21" auto-path="" x1="934" y1="311" x2="1006" y2="311" start-border-pos="0.375" end-border-pos="0.875">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-8,-21" auto-path="" x1="934" y1="311" x2="1086" y2="311" start-border-pos="0.375" end-border-pos="0.875">
               <points>
                 <point x="934" y="311" />
-                <point x="1006" y="311" />
+                <point x="1086" y="311" />
               </points>
             </layout>
             <relation from="di133683778659338730" from-iid="64c31b2339464cffb4ab420bf041014a" to="di890722663954831785" to-iid="81fd2102bbe14310ba15857e43091c36" />
@@ -6948,13 +6983,13 @@ Extension point: Select suggest nutrition</comment>
             <layout ax="803.25" ay="492" awidth="123.5" aheight="100" x="803.25" y="492" width="123.5" height="100" angle="0" />
           </item>
           <item id="di479945567383914714" iid="95b01ea2492a40289f50fc118acb123d" creation-date="11/25/2015 15:38:04" order-index="15" type="entity">
-            <layout ax="1000.5" ay="512" awidth="138" aheight="60" x="1000.5" y="512" width="138" height="60" angle="0" />
+            <layout ax="1080.5" ay="512" awidth="138" aheight="60" x="1080.5" y="512" width="138" height="60" angle="0" />
           </item>
           <item id="di466305206797461495" iid="12be7d47bc8541fd8106eaaf4c567404" creation-date="11/25/2015 15:38:13" order-index="16" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-7,-17" auto-path="" x1="927" y1="542" x2="1000" y2="542" start-border-pos="0.375" end-border-pos="0.875">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-7,-17" auto-path="" x1="927" y1="542" x2="1080" y2="542" start-border-pos="0.375" end-border-pos="0.875">
               <points>
                 <point x="927" y="542" />
-                <point x="1000" y="542" />
+                <point x="1080" y="542" />
               </points>
             </layout>
             <relation from="di444500150451087905" from-iid="486699e919b74dee972a38b0aac55c12" to="di479945567383914714" to-iid="95b01ea2492a40289f50fc118acb123d" />
@@ -6987,11 +7022,11 @@ Extension point: Select suggest nutrition</comment>
             <layout ax="790" ay="613" awidth="150" aheight="100" x="790" y="613" width="150" height="100" angle="0" />
           </item>
           <item id="di692859260194001560" iid="1fc8fbafaadd4ad0bba1c053b74e0a9a" creation-date="11/25/2015 15:43:08" order-index="22" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-64,-19" auto-path="" x1="940" y1="665" x2="1070" y2="572" start-border-pos="0.379550933837891" end-border-pos="0.623662976251132">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-64,-19" auto-path="" x1="940" y1="664" x2="1150" y2="572" start-border-pos="0.378278045654297" end-border-pos="0.623662976251132">
               <points>
-                <point x="940" y="665" />
-                <point x="1071" y="668" />
-                <point x="1070" y="572" />
+                <point x="940" y="664" />
+                <point x="1151" y="668" />
+                <point x="1150" y="572" />
               </points>
             </layout>
             <relation from="di289349041527851782" from-iid="d93635a105d949d191ed9f7f3cbcc6d3" to="di479945567383914714" to-iid="95b01ea2492a40289f50fc118acb123d" />
@@ -7043,11 +7078,11 @@ Extension point: Select suggest nutrition</comment>
             <relation from="di117917295921411027" from-iid="4971e56e75ac43109e0f10a4ae4b53eb" to="di197860766270500508" to-iid="49e7ae38629b4f4987adbc0de71a6ef7" />
           </item>
           <item id="di828000946381170246" iid="afb35c6c83dc4d5aa6a1173512f21636" creation-date="11/25/2015 15:49:03" order-index="31" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-73,113" auto-path="" x1="950" y1="957" x2="1070" y2="572" start-border-pos="0.378094635009766" end-border-pos="0.624094202898551">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-73,113" auto-path="" x1="950" y1="957" x2="1150" y2="572" start-border-pos="0.37722900390625" end-border-pos="0.624094202898551">
               <points>
                 <point x="950" y="957" />
-                <point x="1070" y="959" />
-                <point x="1070" y="572" />
+                <point x="1150" y="959" />
+                <point x="1150" y="572" />
               </points>
             </layout>
             <relation from="di197860766270500508" from-iid="49e7ae38629b4f4987adbc0de71a6ef7" to="di479945567383914714" to-iid="95b01ea2492a40289f50fc118acb123d" />
@@ -7089,40 +7124,54 @@ Extension point: Select suggest nutrition</comment>
             </layout>
             <relation from="di108043569725324971" from-iid="b0e055bb2d7043f2bde2c3f55ec15bc7" to="di921165645963777543" to-iid="0b744368681b4df1a4a89f057c723be5" />
           </item>
-          <item id="di732130862866477802" iid="a3252c2a84ea4602a92e70aad4e0e603" creation-date="11/25/2015 15:58:22" order-index="38" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="950" y1="1192" x2="1070" y2="572" start-border-pos="0.371561686197917" end-border-pos="0.624094202898551">
-              <points>
-                <point x="950" y="1192" />
-                <point x="1069.5" y="1191" />
-                <point x="1070" y="572" />
-              </points>
-            </layout>
-            <relation from="di921165645963777543" from-iid="0b744368681b4df1a4a89f057c723be5" to="di479945567383914714" to-iid="95b01ea2492a40289f50fc118acb123d" />
-          </item>
           <item id="di951614079872289176" iid="48320e6d8f6642f3aa18f07b49bb9d81" creation-date="11/25/2015 16:02:58" order-index="39" type="entity">
-            <layout ax="984" ay="399" awidth="171" aheight="60" x="984" y="399" width="171" height="60" angle="0" />
+            <layout ax="1064" ay="399" awidth="171" aheight="60" x="1064" y="399" width="171" height="60" angle="0" />
           </item>
           <item id="di577600274423295971" iid="8a401318cf374fb09a82f588cfbeb197" creation-date="11/25/2015 16:08:00" order-index="40" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="1074" y1="341" x2="1072" y2="399" start-border-pos="0.626857591711957" end-border-pos="0.127961097404971">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="1154" y1="341" x2="1152" y2="399" start-border-pos="0.626857591711957" end-border-pos="0.127961097404971">
               <points>
-                <point x="1074" y="341" />
-                <point x="1072" y="399" />
+                <point x="1154" y="341" />
+                <point x="1152" y="399" />
               </points>
             </layout>
             <relation from="di890722663954831785" from-iid="81fd2102bbe14310ba15857e43091c36" to="di951614079872289176" to-iid="48320e6d8f6642f3aa18f07b49bb9d81" />
           </item>
           <item id="di681732557771181002" iid="a7b14344dfe04fffac9745e191c21750" creation-date="11/25/2015 16:08:04" order-index="41" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="1070" y1="459" x2="1070" y2="512" start-border-pos="0.624269005847953" end-border-pos="0.125905797101449">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="1150" y1="459" x2="1150" y2="512" start-border-pos="0.624269005847953" end-border-pos="0.125905797101449">
               <points>
-                <point x="1070" y="459" />
-                <point x="1070" y="512" />
+                <point x="1150" y="459" />
+                <point x="1150" y="512" />
               </points>
             </layout>
             <relation from="di951614079872289176" from-iid="48320e6d8f6642f3aa18f07b49bb9d81" to="di479945567383914714" to-iid="95b01ea2492a40289f50fc118acb123d" />
           </item>
+          <item id="di398699461387807774" iid="4f82f4aba81c46ed8d1b5501b36c6301" creation-date="12/04/2015 09:14:10" order-index="42" type="entity">
+            <layout ax="527.5" ay="167" awidth="187" aheight="60" x="527.5" y="167" width="187" height="60" angle="0" />
+          </item>
+          <item id="di282265468673335914" iid="5a6d4e9285ea45d2b63c36dad6d01891" creation-date="12/04/2015 09:14:39" order-index="43" type="entity">
+            <layout ax="1062" ay="1163" awidth="171" aheight="60" x="1062" y="1163" width="171" height="60" angle="0" />
+          </item>
+          <item id="di701936189456631616" iid="288cbb544e494afe8b5b4278a7c58865" creation-date="12/04/2015 09:15:22" order-index="44" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="1148" y1="1163" x2="1150" y2="572" start-border-pos="0.125865735505757" end-border-pos="0.624261165010756">
+              <points>
+                <point x="1148" y="1163" />
+                <point x="1150" y="572" />
+              </points>
+            </layout>
+            <relation from="di282265468673335914" from-iid="5a6d4e9285ea45d2b63c36dad6d01891" to="di479945567383914714" to-iid="95b01ea2492a40289f50fc118acb123d" />
+          </item>
+          <item id="di879687213608556312" iid="5a48ef5405614cdbb761afdf2ef84fd7" creation-date="12/04/2015 09:15:32" order-index="45" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="950" y1="1193" x2="1062" y2="1193" start-border-pos="0.375" end-border-pos="0.875">
+              <points>
+                <point x="950" y="1193" />
+                <point x="1062" y="1193" />
+              </points>
+            </layout>
+            <relation from="di921165645963777543" from-iid="0b744368681b4df1a4a89f057c723be5" to="di282265468673335914" to-iid="5a6d4e9285ea45d2b63c36dad6d01891" />
+          </item>
         </layer>
       </diagram>
-      <diagram type="uml-sequence" id="p854036206261896393" name="Make Prescription" order-index="21" overview-order-index="19" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-118,-27">
+      <diagram type="uml-sequence" id="p854036206261896393" name="Make Prescription" order-index="21" overview-order-index="19" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-118,93">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -7444,7 +7493,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[16.1] : response success message" is-asynchronous="false" from="di993062388597531437" to="di435928252646698809" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[16,1] : response success message" is-asynchronous="false" from="di993062388597531437" to="di435928252646698809" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -7500,7 +7549,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[16.2] : response fail message" is-asynchronous="false" from="di993062388597531437" to="di435928252646698809" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[16,2] : response fail message" is-asynchronous="false" from="di993062388597531437" to="di435928252646698809" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -7632,7 +7681,7 @@ Extension point: Select suggest nutrition</comment>
             <layout ax="135" ay="735.8711" awidth="298" aheight="82.12891" x="135" y="735.8711" width="298" height="86" angle="0" />
           </item>
           <item id="di462601091575011784" iid="7bebc6f3b7a840e198ee7022ffa8b28c" creation-date="11/25/2015 17:26:36" order-index="38" type="sequence-action">
-            <layout x1="397" y1="747" x2="257" y2="747" ax="257" ay="732" awidth="140" aheight="20" x="257" y="732" width="140" height="20" message-x="-4" message-y="33" message-width="134" />
+            <layout x1="397" y1="747" x2="257" y2="747" ax="257" ay="732" awidth="140" aheight="20" x="257" y="732" width="140" height="20" message-x="-3" message-y="33" message-width="134" />
             <sequence-action from="di993062388597531437" to="di435928252646698809" show-sequence-number="false" />
           </item>
           <item id="di469192212696028634" iid="70aac561d0a34bbea7f7087baa228ef9" creation-date="11/25/2015 17:38:54" order-index="39" type="entity">
@@ -7840,7 +7889,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[9.1] : response success result" is-asynchronous="false" from="di573480205239517219" to="di313974277673995422" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[9,1] : response success result" is-asynchronous="false" from="di573480205239517219" to="di313974277673995422" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -7849,7 +7898,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[9.2] : response fail message" is-asynchronous="false" from="di573480205239517219" to="di313974277673995422" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[9,2] : response fail message" is-asynchronous="false" from="di573480205239517219" to="di313974277673995422" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -8190,7 +8239,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[9.1] : response success message" is-asynchronous="false" from="di401068252262883450" to="di820388141261046403" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[9,1] : response success message" is-asynchronous="false" from="di401068252262883450" to="di820388141261046403" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -8199,7 +8248,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[9.2] : response fail message" is-asynchronous="false" from="di401068252262883450" to="di820388141261046403" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[9,2] : response fail message" is-asynchronous="false" from="di401068252262883450" to="di820388141261046403" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -8302,7 +8351,7 @@ Extension point: Select suggest nutrition</comment>
             <sequence-action from="di401068252262883450" to="di820388141261046403" show-sequence-number="false" />
           </item>
           <item id="di655529000911950119" iid="c39b7e600de44410a3a8978f72a2cffe" creation-date="11/25/2015 19:40:45" order-index="21" type="sequence-action">
-            <layout x1="471" y1="363" x2="320" y2="363" ax="320" ay="348" awidth="151" aheight="20" x="320" y="348" width="151" height="20" message-x="1" message-y="25" />
+            <layout x1="471" y1="363" x2="320" y2="363" ax="320" ay="348" awidth="151" aheight="20" x="320" y="348" width="151" height="20" message-x="8" message-y="26" />
             <sequence-action from="di401068252262883450" to="di820388141261046403" show-sequence-number="false" />
           </item>
           <item id="di420385668702988406" iid="48ed100503ce42a283790bd8583bd004" creation-date="11/25/2015 19:41:16" order-index="22" type="entity">
@@ -8364,7 +8413,7 @@ Extension point: Select suggest nutrition</comment>
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-sequence" id="p884406136797285124" name="Delete Food Nutrition" order-index="24" overview-order-index="22" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
+      <diagram type="uml-sequence" id="p884406136797285124" name="Delete Food Nutrition" order-index="24" overview-order-index="22" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-13,-60" zoom="0.7">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -8376,7 +8425,7 @@ Extension point: Select suggest nutrition</comment>
           </authors>
           <description />
           <creation-date>11/25/2015 19:47:39</creation-date>
-          <change-date>11/27/2015 16:20:46</change-date>
+          <change-date>11/30/2015 19:36:59</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -8388,13 +8437,13 @@ Extension point: Select suggest nutrition</comment>
             <style class="default" />
             <frame type="sd" />
           </item>
-          <item id="di148767518650579585" cid="DES032" type="destroy" name="DestructionOccurrence32" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:42:02">
+          <item id="di922866405562628164" cid="DES059" type="destroy" name="DestructionOccurrence59" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:25:51">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di432479956355258376" cid="DES031" type="destroy" name="DestructionOccurrence31" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:41:59">
+          <item id="di466585029847891375" cid="DES060" type="destroy" name="DestructionOccurrence60" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:25:58">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -8407,11 +8456,12 @@ Extension point: Select suggest nutrition</comment>
             <style class="default" />
             <activation-bar lifeline-ref="di103481073803554792" />
           </item>
-          <item id="di924462521182063290" cid="AB078" type="activation-bar" name="ExecutionOccurrence76" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:35:21">
+          <item id="di138402582421946948" cid="LL082" type="lifeline" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:19:09">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
+            <lifeline classifier-name="UnitOfFood Service" is-active="false" is-multi-object="false" />
           </item>
           <item id="di103481073803554792" cid="LL048" type="lifeline" name="Browser" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:31:12">
             <stereotypes />
@@ -8433,12 +8483,12 @@ Extension point: Select suggest nutrition</comment>
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di812673354976335907" cid="AB081" type="activation-bar" name="ExecutionOccurrence79" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:37:10">
+          <item id="di199752115583823856" cid="AB154" type="activation-bar" name="ExecutionOccurrence147" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:22:22">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <activation-bar lifeline-ref="di906568611416835585" />
+            <activation-bar lifeline-ref="di138402582421946948" />
           </item>
           <item id="di628489440863051744" cid="LL049" type="lifeline" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:33:15">
             <stereotypes />
@@ -8447,12 +8497,14 @@ Extension point: Select suggest nutrition</comment>
             <style class="default" />
             <lifeline classifier-name="FoodController" is-active="false" is-multi-object="false" />
           </item>
-          <item id="di412834001435847064" cid="AB083" type="activation-bar" name="ExecutionOccurrence81" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:38:12">
+          <item id="di156000168113240059" cid="SM318" type="sequence-action" name="Message318" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:22:53">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <activation-bar lifeline-ref="di792790866546453683" />
+            <sequence-action type="call" message="[4] : findOne()" is-asynchronous="false" from="di199752115583823856" to="di661541660649517566" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
           </item>
           <item id="di906568611416835585" cid="LL050" type="lifeline" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:34:41">
             <stereotypes />
@@ -8482,7 +8534,164 @@ Extension point: Select suggest nutrition</comment>
             <style class="default" />
             <lifeline classifier-name="" is-active="false" is-multi-object="false" />
           </item>
-          <item id="di285899262272665587" cid="FR015" type="fragment" name="Fragment15" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:41:16">
+          <item id="di349525063853799348" cid="AB157" type="activation-bar" name="ExecutionOccurrence150" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:26:54">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <activation-bar lifeline-ref="di792790866546453683" />
+          </item>
+          <item id="di999908556652079484" cid="AB156" type="activation-bar" name="ExecutionOccurrence149" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:26:30">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <activation-bar lifeline-ref="di906568611416835585" />
+          </item>
+          <item id="di791158927173517295" cid="SM325" type="sequence-action" name="Message325" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:26:52">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="call" message="[10] : delete()" is-asynchronous="false" from="di999908556652079484" to="di349525063853799348" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di740058847837106021" cid="SM323" type="sequence-action" name="Message323" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:25:31">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="reply" message="[8] : return result" is-asynchronous="false" from="di199752115583823856" to="di932519750532478145" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di191010201480919428" cid="SM321" type="sequence-action" name="Message321" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:24:59">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="reply" message="[7] : return result" is-asynchronous="false" from="di661541660649517566" to="di199752115583823856" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di640150285556513504" cid="SM320" type="sequence-action" name="Message320" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:24:31">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="reply" message="[6] : return result" is-asynchronous="false" from="di740696232810134311" to="di661541660649517566" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di953206535885221417" cid="SM319" type="sequence-action" name="Message319" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:23:12">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="call" message="[5] : executeQuery()" is-asynchronous="false" from="di661541660649517566" to="di740696232810134311" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di661541660649517566" cid="AB155" type="activation-bar" name="ExecutionOccurrence148" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:22:57">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <activation-bar lifeline-ref="di433420412694648435" />
+          </item>
+          <item id="di343031447806054715" cid="SM317" type="sequence-action" name="Message317" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:22:17">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="call" message="[3] : findUnitOfFoodByFood()" is-asynchronous="false" from="di932519750532478145" to="di199752115583823856" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di595045030480292099" cid="SM160" type="sequence-action" name="Message160" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:36:35">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="call" message="[2] : Send delete food request" is-asynchronous="false" from="di782892457129692941" to="di932519750532478145" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di573909000951119026" cid="SM159" type="sequence-action" name="Message159" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:35:20">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="call" message="[1] : Send delete food command" is-asynchronous="false" to="di782892457129692941" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di541542421871797430" cid="SM324" type="sequence-action" name="Message324" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:26:27">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="call" message="[9] : deleteFood()" is-asynchronous="false" from="di932519750532478145" to="di999908556652079484" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di433420412694648435" cid="LL083" type="lifeline" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:19:56">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <lifeline classifier-name="UnitOfFood Repository" is-active="false" is-multi-object="false" />
+          </item>
+          <item id="di658634888590313531" cid="SM327" type="sequence-action" name="Message327" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:28:05">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="call" message="[11] : executeQuery()" is-asynchronous="false" from="di349525063853799348" to="di740696232810134311" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di841371990967421652" cid="SM328" type="sequence-action" name="Message328" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:28:24">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="reply" message="[12] : return result" is-asynchronous="false" from="di740696232810134311" to="di349525063853799348" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di239987569127795488" cid="SM329" type="sequence-action" name="Message329" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:28:43">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="reply" message="[13] : return result" is-asynchronous="false" from="di349525063853799348" to="di999908556652079484" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di729368559546927071" cid="SM331" type="sequence-action" name="Message331" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:29:30">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <sequence-action type="reply" message="[14] : return result" is-asynchronous="false" from="di999908556652079484" to="di932519750532478145" return-value="" assign-to-variable="">
+              <parameters />
+            </sequence-action>
+          </item>
+          <item id="di849607140175756043" cid="DES061" type="destroy" name="DestructionOccurrence61" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:30:06">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di759305807128796959" cid="DES062" type="destroy" name="DestructionOccurrence62" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:30:09">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di446494351450763757" cid="FR026" type="fragment" name="Fragment26" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:30:28">
             <stereotypes />
             <documentation>
               <text>
@@ -8512,102 +8721,30 @@ Extension point: Select suggest nutrition</comment>
             <style class="default" />
             <fragment operator="alt">
               <operands>
-                <operand uid="di806570332286693239" />
-                <operand uid="di744845447631974125" />
+                <operand uid="di975838951838334063" />
+                <operand uid="di102663064417609105" />
               </operands>
             </fragment>
           </item>
-          <item id="di103563798429311124" cid="SM171" type="sequence-action" name="Message171" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:40:45">
+          <item id="di125099068759874782" cid="SM332" type="sequence-action" name="Message332" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:31:07">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[9.2] : response fail message" is-asynchronous="false" from="di932519750532478145" to="di782892457129692941" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[15,1] : response success message" is-asynchronous="false" from="di932519750532478145" to="di782892457129692941" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
-          <item id="di707955252470297721" cid="SM170" type="sequence-action" name="Message170" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:40:21">
+          <item id="di953228133810513739" cid="SM333" type="sequence-action" name="Message333" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:35:59">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[9.1] : response success message" is-asynchronous="false" from="di932519750532478145" to="di782892457129692941" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[15,2] : response fail message" is-asynchronous="false" from="di932519750532478145" to="di782892457129692941" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
-          <item id="di467962846205836241" cid="SM168" type="sequence-action" name="Message168" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:39:57">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <sequence-action type="reply" message="[8] : return result" is-asynchronous="false" from="di812673354976335907" to="di932519750532478145" return-value="" assign-to-variable="">
-              <parameters />
-            </sequence-action>
-          </item>
-          <item id="di334337195444878745" cid="SM167" type="sequence-action" name="Message167" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:39:40">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <sequence-action type="reply" message="[7] : return result" is-asynchronous="false" from="di412834001435847064" to="di812673354976335907" return-value="" assign-to-variable="">
-              <parameters />
-            </sequence-action>
-          </item>
-          <item id="di189276759200797931" cid="SM166" type="sequence-action" name="Message166" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:39:23">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <sequence-action type="reply" message="[6] : return result" is-asynchronous="false" from="di740696232810134311" to="di412834001435847064" return-value="" assign-to-variable="">
-              <parameters />
-            </sequence-action>
-          </item>
-          <item id="di557373243500965976" cid="SM164" type="sequence-action" name="Message164" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:38:26">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <sequence-action type="call" message="[5] : executeQuery()" is-asynchronous="false" from="di412834001435847064" to="di740696232810134311" return-value="" assign-to-variable="">
-              <parameters />
-            </sequence-action>
-          </item>
-          <item id="di138558329537861371" cid="SM163" type="sequence-action" name="Message163" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:38:06">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <sequence-action type="call" message="[4] : remove()" is-asynchronous="false" from="di812673354976335907" to="di412834001435847064" return-value="" assign-to-variable="">
-              <parameters />
-            </sequence-action>
-          </item>
-          <item id="di858146953707141202" cid="SM161" type="sequence-action" name="Message161" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:37:07">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <sequence-action type="call" message="[3] : deleteFood()" is-asynchronous="false" from="di932519750532478145" to="di812673354976335907" return-value="" assign-to-variable="">
-              <parameters />
-            </sequence-action>
-          </item>
-          <item id="di595045030480292099" cid="SM160" type="sequence-action" name="Message160" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:36:35">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <sequence-action type="call" message="[2] : Send delete food request" is-asynchronous="false" from="di782892457129692941" to="di932519750532478145" return-value="" assign-to-variable="">
-              <parameters />
-            </sequence-action>
-          </item>
-          <item id="di573909000951119026" cid="SM159" type="sequence-action" name="Message159" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/25/2015 19:35:20">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-            <sequence-action type="call" message="[1] : Send delete food command" is-asynchronous="false" from="di924462521182063290" to="di782892457129692941" return-value="" assign-to-variable="">
-              <parameters />
-            </sequence-action>
-          </item>
-          <item id="di522383640751530805" cid="DES048" type="destroy" name="DestructionOccurrence48" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/27/2015 16:20:46">
+          <item id="di209086470774430212" cid="DES064" type="destroy" name="DestructionOccurrence64" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/30/2015 19:36:56">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -8616,105 +8753,144 @@ Extension point: Select suggest nutrition</comment>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di573909000951119026" iid="66903424834442e0b584fa0052a3cae9" creation-date="11/25/2015 19:35:20" order-index="6" type="sequence-action">
-            <layout x1="170" y1="193" x2="300" y2="193" ax="170" ay="178" awidth="130" aheight="20" x="170" y="178" width="130" height="20" message-x="1" message-y="-29" />
+            <layout x1="20" y1="191" x2="300" y2="191" ax="20" ay="176" awidth="280" aheight="20" x="20" y="176" width="280" height="20" message-x="1" message-y="-29" />
             <sequence-action from="di924462521182063290" to="di782892457129692941" show-sequence-number="false" />
           </item>
           <item id="di595045030480292099" iid="55c04383afb0403d88bf3bac0de8a1a6" creation-date="11/25/2015 19:36:35" order-index="9" type="sequence-action">
-            <layout x1="320" y1="206" x2="471" y2="206" ax="320" ay="191" awidth="151" aheight="20" x="320" y="191" width="151" height="20" message-x="3" message-y="-9" message-width="166" />
+            <layout x1="320" y1="204" x2="471" y2="204" ax="320" ay="189" awidth="151" aheight="20" x="320" y="189" width="151" height="20" message-x="3" message-y="-9" message-width="166" />
             <sequence-action from="di782892457129692941" to="di932519750532478145" show-sequence-number="false" />
           </item>
-          <item id="di858146953707141202" iid="b3b938ebcc43447893e9ddea62a1ae66" creation-date="11/25/2015 19:37:07" order-index="11" type="sequence-action">
-            <layout x1="491" y1="217" x2="642" y2="217" ax="491" ay="202" awidth="151" aheight="20" x="491" y="202" width="151" height="20" message-x="-1" message-y="-10" message-width="166" />
-            <sequence-action from="di932519750532478145" to="di812673354976335907" show-sequence-number="false" />
-          </item>
-          <item id="di138558329537861371" iid="ee3a84d8c280431cb17c9d47a46c73e6" creation-date="11/25/2015 19:38:06" order-index="13" type="sequence-action">
-            <layout x1="662" y1="227" x2="813" y2="227" ax="662" ay="212" awidth="151" aheight="20" x="662" y="212" width="151" height="20" message-x="-6" message-y="-9" />
-            <sequence-action from="di812673354976335907" to="di412834001435847064" show-sequence-number="false" />
-          </item>
-          <item id="di557373243500965976" iid="f596c7b233504436b7a16c2037e23969" creation-date="11/25/2015 19:38:26" order-index="15" type="sequence-action">
-            <layout x1="833" y1="237" x2="984" y2="237" ax="833" ay="222" awidth="151" aheight="20" x="833" y="222" width="151" height="20" message-x="0" message-y="-10" />
-            <sequence-action from="di412834001435847064" to="di740696232810134311" show-sequence-number="false" />
-          </item>
-          <item id="di189276759200797931" iid="5ada7214b80c48869645d4540c536515" creation-date="11/25/2015 19:39:23" order-index="17" type="sequence-action">
-            <layout x1="984" y1="256" x2="833" y2="256" ax="833" ay="241" awidth="151" aheight="20" x="833" y="241" width="151" height="20" message-x="5" message-y="17" />
-            <sequence-action from="di740696232810134311" to="di412834001435847064" show-sequence-number="false" />
-          </item>
-          <item id="di334337195444878745" iid="e6b2765e936140d28c876fe14c577e32" creation-date="11/25/2015 19:39:40" order-index="18" type="sequence-action">
-            <layout x1="813" y1="269" x2="662" y2="269" ax="662" ay="254" awidth="151" aheight="20" x="662" y="254" width="151" height="20" message-x="4" message-y="17" />
-            <sequence-action from="di412834001435847064" to="di812673354976335907" show-sequence-number="false" />
-          </item>
-          <item id="di467962846205836241" iid="5ffe89cc5b9f4392bf08beaf2abdd4ad" creation-date="11/25/2015 19:39:57" order-index="19" type="sequence-action">
-            <layout x1="642" y1="279" x2="491" y2="279" ax="491" ay="264" awidth="151" aheight="20" x="491" y="264" width="151" height="20" message-x="7" message-y="16" />
-            <sequence-action from="di812673354976335907" to="di932519750532478145" show-sequence-number="false" />
-          </item>
-          <item id="di103563798429311124" iid="2ba05f06d62c4d39827bfbc841f1d959" creation-date="11/25/2015 19:40:45" order-index="21" type="sequence-action">
-            <layout x1="471" y1="363" x2="320" y2="363" ax="320" ay="348" awidth="151" aheight="20" x="320" y="348" width="151" height="20" message-x="2" message-y="29" />
-            <sequence-action from="di932519750532478145" to="di782892457129692941" show-sequence-number="false" />
-          </item>
-          <item id="di285899262272665587" iid="4d140a9ff63c449195be46ade44717c3" creation-date="11/25/2015 19:41:16" order-index="22" type="entity">
-            <layout ax="198" ay="299" awidth="315" aheight="148" x="198" y="299" width="315" height="148" angle="0" />
-          </item>
-          <item id="di806570332286693239" iid="d5a121d12d8c450a82db139469ca5706" container="di285899262272665587" container-iid="4d140a9ff63c449195be46ade44717c3" creation-date="11/25/2015 19:41:36" order-index="23" type="entity">
-            <layout ax="198" ay="322.8711" awidth="315" aheight="30" x="198" y="322.8711" width="315" height="40" angle="0" />
-          </item>
-          <item id="di744845447631974125" iid="dd214159c7804c1aa8e0f8f7bab7afeb" container="di285899262272665587" container-iid="4d140a9ff63c449195be46ade44717c3" creation-date="11/25/2015 19:41:36" order-index="24" type="entity">
-            <layout ax="198" ay="352.8711" awidth="315" aheight="94.12891" x="198" y="352.8711" width="315" height="94.12891" angle="0" />
-          </item>
           <item id="di552499682405188866" iid="21e42e1247f54a329ca22f2aeea0783a" creation-date="11/25/2015 19:35:10" order-index="5" type="lifeline">
-            <layout ax="924" ay="50" awidth="140" aheight="366" x="924" y="50" width="140" height="366" angle="0" />
+            <layout ax="1246" ay="50" awidth="140" aheight="586" x="1246" y="50" width="140" height="586" angle="0" />
           </item>
           <item id="di792790866546453683" iid="1a24d39141af4e05be5792514b1324f5" creation-date="11/25/2015 19:34:57" order-index="4" type="lifeline">
-            <layout ax="753" ay="50" awidth="140" aheight="366" x="753" y="49" width="140" height="366" angle="0" />
+            <layout ax="753" ay="50" awidth="140" aheight="500" x="753" y="50" width="140" height="500" angle="0" />
           </item>
           <item id="di740696232810134311" iid="351704238a7547f3a1273bf53202bf65" container="di552499682405188866" container-iid="21e42e1247f54a329ca22f2aeea0783a" creation-date="11/25/2015 19:38:29" order-index="16" type="entity">
-            <layout ax="984" ay="178" awidth="20" aheight="110" x="984" y="178" width="20" height="110" angle="0" />
+            <layout ax="1306" ay="222.5" awidth="20" aheight="247" x="1306" y="222.5" width="20" height="247" angle="0" />
           </item>
           <item id="di906568611416835585" iid="33abc910720944259bd82012d406c2eb" creation-date="11/25/2015 19:34:41" order-index="3" type="lifeline">
-            <layout ax="582" ay="50" awidth="140" aheight="366" x="582" y="49" width="140" height="366" angle="0" />
-          </item>
-          <item id="di412834001435847064" iid="ab68d44a22024125a14a1ba80738a245" container="di792790866546453683" container-iid="1a24d39141af4e05be5792514b1324f5" creation-date="11/25/2015 19:38:12" order-index="14" type="entity">
-            <layout ax="813" ay="226" awidth="20" aheight="43" x="813" y="226" width="20" height="42" angle="0" />
+            <layout ax="582" ay="50" awidth="140" aheight="644" x="582" y="50" width="140" height="644" angle="0" />
           </item>
           <item id="di628489440863051744" iid="b362a59db9844b9ebc459f70ef0da9d0" creation-date="11/25/2015 19:33:15" order-index="2" type="lifeline">
-            <layout ax="411" ay="50" awidth="140" aheight="366" x="411" y="49" width="140" height="366" angle="0" />
-          </item>
-          <item id="di812673354976335907" iid="ceb9ac65f2a04facbeede231a1d44feb" container="di906568611416835585" container-iid="33abc910720944259bd82012d406c2eb" creation-date="11/25/2015 19:37:10" order-index="12" type="entity">
-            <layout ax="642" ay="216" awidth="20" aheight="63" x="642" y="216" width="20" height="62" angle="0" />
+            <layout ax="411" ay="50" awidth="140" aheight="644" x="411" y="50" width="140" height="644" angle="0" />
           </item>
           <item id="di932519750532478145" iid="b543471a3a204108b661a03ca9ecf558" container="di628489440863051744" container-iid="b362a59db9844b9ebc459f70ef0da9d0" creation-date="11/25/2015 19:36:37" order-index="10" type="entity">
-            <layout ax="471" ay="205" awidth="20" aheight="158" x="471" y="205" width="20" height="157" angle="0" />
+            <layout ax="471" ay="204" awidth="20" aheight="360" x="471" y="204" width="20" height="350" angle="0" />
           </item>
           <item id="di103481073803554792" iid="eb48c6ab78e04d2e98486e5b41395cd5" creation-date="11/25/2015 19:31:12" order-index="1" type="lifeline">
-            <layout ax="240" ay="50" awidth="140" aheight="366" x="240" y="50" width="140" height="366" angle="0" />
+            <layout ax="240" ay="50" awidth="140" aheight="586" x="240" y="50" width="140" height="586" angle="0" />
           </item>
           <item id="di782892457129692941" iid="8d214a994d3c48f09df0ed863bf4593b" container="di103481073803554792" container-iid="eb48c6ab78e04d2e98486e5b41395cd5" creation-date="11/25/2015 19:35:21" order-index="8" type="entity">
-            <layout ax="300" ay="192" awidth="20" aheight="171" x="300" y="192" width="20" height="171" angle="0" />
-          </item>
-          <item id="di432479956355258376" iid="45ef4a86ba0c4de6a631a8c488472d12" container="di906568611416835585" container-iid="33abc910720944259bd82012d406c2eb" creation-date="11/25/2015 19:41:59" order-index="25" type="entity">
-            <layout ax="632" ay="306" awidth="40" aheight="40" x="632" y="306" width="40" height="40" angle="0" />
-          </item>
-          <item id="di148767518650579585" iid="3f489e8cdc2d493ebc4a5de58d9381e4" container="di792790866546453683" container-iid="1a24d39141af4e05be5792514b1324f5" creation-date="11/25/2015 19:42:02" order-index="26" type="entity">
-            <layout ax="803" ay="307.8711" awidth="40" aheight="40" x="803" y="307.8711" width="40" height="40" angle="0" />
+            <layout ax="300" ay="190" awidth="20" aheight="374" x="300" y="190" width="20" height="367" angle="0" />
           </item>
           <item id="di543905835401243412" iid="2f3dc14e6e254c8fa3c1711e6ccd27e8" creation-date="11/25/2015 19:42:15" order-index="27" type="entity">
-            <layout ax="86" ay="19" awidth="991" aheight="442" x="86" y="19" width="991" height="442" angle="0" />
+            <layout ax="86" ay="19" awidth="1323" aheight="633" x="86" y="19" width="1323" height="633" angle="0" />
           </item>
           <item id="di505432896347760877" iid="39cbed0169104096b2afb3efc9be49b9" container="di543905835401243412" container-iid="2f3dc14e6e254c8fa3c1711e6ccd27e8" creation-date="11/25/2015 19:30:56" order-index="0" type="lifeline">
-            <layout ax="90" ay="50" awidth="140" aheight="366" x="90" y="50" width="140" height="366" angle="0" />
+            <layout ax="90" ay="50" awidth="140" aheight="586" x="90" y="50" width="140" height="586" angle="0" />
           </item>
-          <item id="di707955252470297721" iid="a276c007206f4a9d8a52d77126ec788d" container="di543905835401243412" container-iid="2f3dc14e6e254c8fa3c1711e6ccd27e8" creation-date="11/25/2015 19:40:21" order-index="20" type="sequence-action">
-            <layout x1="471" y1="306" x2="320" y2="306" ax="320" ay="291" awidth="151" aheight="20" x="320" y="291" width="151" height="20" message-x="4" message-y="29" />
+          <item id="di138402582421946948" iid="5e235ac42315405a91246822f62dd3fb" creation-date="11/30/2015 19:19:09" order-index="29" type="lifeline">
+            <layout ax="924" ay="50" awidth="130" aheight="500" x="924" y="50" width="130" height="500" angle="0" />
+          </item>
+          <item id="di433420412694648435" iid="433dfea7a1cf457493934e9f9376601d" creation-date="11/30/2015 19:19:56" order-index="30" type="lifeline">
+            <layout ax="1085" ay="50" awidth="130" aheight="500" x="1085" y="50" width="130" height="500" angle="0" />
+          </item>
+          <item id="di343031447806054715" iid="b2d7316d132348278ef14c5cc40087a1" creation-date="11/30/2015 19:22:17" order-index="31" type="sequence-action">
+            <layout x1="491" y1="225" x2="979" y2="225" ax="491" ay="210" awidth="488" aheight="20" x="491" y="210" width="488" height="20" message-x="-163" message-y="-13" message-width="154" />
+            <sequence-action from="di932519750532478145" to="di199752115583823856" show-sequence-number="false" />
+          </item>
+          <item id="di199752115583823856" iid="3c9e964dbcc2473685c04e0e34b73b7e" container="di138402582421946948" container-iid="5e235ac42315405a91246822f62dd3fb" creation-date="11/30/2015 19:22:22" order-index="32" type="entity">
+            <layout ax="979" ay="225" awidth="20" aheight="71" x="979" y="225" width="20" height="40" angle="0" />
+          </item>
+          <item id="di156000168113240059" iid="207bf1f8b2a04001ac3d677a123cadd8" creation-date="11/30/2015 19:22:53" order-index="33" type="sequence-action">
+            <layout x1="999" y1="240" x2="1140" y2="240" ax="999" ay="225" awidth="141" aheight="20" x="999" y="225" width="141" height="20" message-x="-3" message-y="-6" />
+            <sequence-action from="di199752115583823856" to="di661541660649517566" show-sequence-number="false" />
+          </item>
+          <item id="di661541660649517566" iid="bfdb72915c9f4734a821b08747580d9b" container="di433420412694648435" container-iid="433dfea7a1cf457493934e9f9376601d" creation-date="11/30/2015 19:22:57" order-index="34" type="entity">
+            <layout ax="1140" ay="240" awidth="20" aheight="43" x="1140" y="240" width="20" height="40" angle="0" />
+          </item>
+          <item id="di953206535885221417" iid="4dca7f3e23cc47abaa4c9d5fdc398e8c" creation-date="11/30/2015 19:23:12" order-index="35" type="sequence-action">
+            <layout x1="1160" y1="252" x2="1306" y2="252" ax="1160" ay="237" awidth="146" aheight="20" x="1160" y="237" width="146" height="20" message-x="-3" message-y="-12" />
+            <sequence-action from="di661541660649517566" to="di740696232810134311" show-sequence-number="false" />
+          </item>
+          <item id="di640150285556513504" iid="808316aca1b24d9ea632625a1a1dcf06" creation-date="11/30/2015 19:24:31" order-index="36" type="sequence-action">
+            <layout x1="1306" y1="269" x2="1160" y2="269" ax="1160" ay="254" awidth="146" aheight="20" x="1160" y="254" width="146" height="20" message-x="4" message-y="21" />
+            <sequence-action from="di740696232810134311" to="di661541660649517566" show-sequence-number="false" />
+          </item>
+          <item id="di191010201480919428" iid="21a03b94fc2d4ac0abe84020cc7e7357" creation-date="11/30/2015 19:24:59" order-index="37" type="sequence-action">
+            <layout x1="1140" y1="283" x2="999" y2="283" ax="999" ay="268" awidth="141" aheight="20" x="999" y="268" width="141" height="20" message-x="4" message-y="20" message-width="124" />
+            <sequence-action from="di661541660649517566" to="di199752115583823856" show-sequence-number="false" />
+          </item>
+          <item id="di740058847837106021" iid="c8298f6c8dec4d8db502c29937804d36" creation-date="11/30/2015 19:25:31" order-index="38" type="sequence-action">
+            <layout x1="979" y1="296" x2="491" y2="296" ax="491" ay="281" awidth="488" aheight="20" x="491" y="281" width="488" height="20" message-x="185" message-y="20" />
+            <sequence-action from="di199752115583823856" to="di932519750532478145" show-sequence-number="false" />
+          </item>
+          <item id="di922866405562628164" iid="1f748b61d91d48aaa7d159a27d5267c9" container="di138402582421946948" container-iid="5e235ac42315405a91246822f62dd3fb" creation-date="11/30/2015 19:25:51" order-index="39" type="entity">
+            <layout ax="969" ay="322" awidth="40" aheight="40" x="969" y="322" width="40" height="40" angle="0" />
+          </item>
+          <item id="di466585029847891375" iid="9cf80b5080314c65b3ddb79b9c95deed" container="di433420412694648435" container-iid="433dfea7a1cf457493934e9f9376601d" creation-date="11/30/2015 19:25:58" order-index="40" type="entity">
+            <layout ax="1130" ay="323" awidth="40" aheight="40" x="1130" y="323" width="40" height="40" angle="0" />
+          </item>
+          <item id="di541542421871797430" iid="53697a9608c44cb8b216de0606e1a1b7" creation-date="11/30/2015 19:26:27" order-index="41" type="sequence-action">
+            <layout x1="491" y1="379" x2="642" y2="379" ax="491" ay="364" awidth="151" aheight="20" x="491" y="364" width="151" height="20" message-x="-8" message-y="-7" />
+            <sequence-action from="di932519750532478145" to="di999908556652079484" show-sequence-number="false" />
+          </item>
+          <item id="di999908556652079484" iid="4f473a8d19424c3eab75e7bba7c72fc8" container="di906568611416835585" container-iid="33abc910720944259bd82012d406c2eb" creation-date="11/30/2015 19:26:30" order-index="42" type="entity">
+            <layout ax="642" ay="378" awidth="20" aheight="79" x="642" y="378" width="20" height="79" angle="0" />
+          </item>
+          <item id="di791158927173517295" iid="761c89a73a13460c9da38ef206c46dbe" container="di543905835401243412" container-iid="2f3dc14e6e254c8fa3c1711e6ccd27e8" creation-date="11/30/2015 19:26:52" order-index="43" type="sequence-action">
+            <layout x1="662" y1="396" x2="813" y2="396" ax="662" ay="381" awidth="151" aheight="20" x="662" y="381" width="151" height="20" message-x="0" message-y="-6" />
+            <sequence-action from="di999908556652079484" to="di349525063853799348" show-sequence-number="false" />
+          </item>
+          <item id="di349525063853799348" iid="28723c5431f949309e3310fd4d09b766" container="di792790866546453683" container-iid="1a24d39141af4e05be5792514b1324f5" creation-date="11/30/2015 19:26:54" order-index="44" type="entity">
+            <layout ax="813" ay="396" awidth="20" aheight="47" x="813" y="396" width="20" height="40" angle="0" />
+          </item>
+          <item id="di658634888590313531" iid="1b25b06c05b84f1e898a1a82a0a8c716" creation-date="11/30/2015 19:28:05" order-index="45" type="sequence-action">
+            <layout x1="833" y1="412" x2="1306" y2="412" ax="833" ay="397" awidth="473" aheight="20" x="833" y="397" width="473" height="20" message-x="-153" message-y="-5" />
+            <sequence-action from="di349525063853799348" to="di740696232810134311" show-sequence-number="false" />
+          </item>
+          <item id="di841371990967421652" iid="6fe22599798942a391f5068c79868893" creation-date="11/30/2015 19:28:24" order-index="46" type="sequence-action">
+            <layout x1="1306" y1="430" x2="833" y2="430" ax="833" ay="415" awidth="473" aheight="20" x="833" y="415" width="473" height="20" message-x="172" message-y="20" />
+            <sequence-action from="di740696232810134311" to="di349525063853799348" show-sequence-number="false" />
+          </item>
+          <item id="di239987569127795488" iid="bb69d737d5e64c0ca14b6be89e914831" creation-date="11/30/2015 19:28:43" order-index="47" type="sequence-action">
+            <layout x1="813" y1="443" x2="662" y2="443" ax="662" ay="428" awidth="151" aheight="20" x="662" y="428" width="151" height="20" message-x="7" message-y="21" message-width="128" />
+            <sequence-action from="di349525063853799348" to="di999908556652079484" show-sequence-number="false" />
+          </item>
+          <item id="di729368559546927071" iid="5f1f14e4966748a880177de30d060e54" creation-date="11/30/2015 19:29:30" order-index="48" type="sequence-action">
+            <layout x1="642" y1="452" x2="491" y2="452" ax="491" ay="437" awidth="151" aheight="20" x="491" y="437" width="151" height="20" message-x="6" message-y="19" message-width="142" />
+            <sequence-action from="di999908556652079484" to="di932519750532478145" show-sequence-number="false" />
+          </item>
+          <item id="di849607140175756043" iid="eca055fbdf444496ac747cb2414b2965" container="di792790866546453683" container-iid="1a24d39141af4e05be5792514b1324f5" creation-date="11/30/2015 19:30:06" order-index="49" type="entity">
+            <layout ax="803" ay="483" awidth="40" aheight="40" x="803" y="483" width="40" height="40" angle="0" />
+          </item>
+          <item id="di759305807128796959" iid="8632cff5b19748438b4355891ca39972" container="di906568611416835585" container-iid="33abc910720944259bd82012d406c2eb" creation-date="11/30/2015 19:30:09" order-index="50" type="entity">
+            <layout ax="632" ay="483" awidth="40" aheight="40" x="632" y="483" width="40" height="40" angle="0" />
+          </item>
+          <item id="di446494351450763757" iid="f9083700defa4a8f800fac9d018a6ece" container="di543905835401243412" container-iid="2f3dc14e6e254c8fa3c1711e6ccd27e8" creation-date="11/30/2015 19:30:28" order-index="51" type="entity">
+            <layout ax="240" ay="483" awidth="296" aheight="113" x="240" y="483" width="296" height="113" angle="0" />
+          </item>
+          <item id="di975838951838334063" iid="0cb09122021440bfbb960b366817d0e2" container="di446494351450763757" container-iid="f9083700defa4a8f800fac9d018a6ece" creation-date="11/30/2015 19:30:55" order-index="52" type="entity">
+            <layout ax="240" ay="506.8711" awidth="296" aheight="40" x="240" y="506.8711" width="296" height="40" angle="0" />
+          </item>
+          <item id="di102663064417609105" iid="f8d8ed8321524ea1acaa28970d61db31" container="di446494351450763757" container-iid="f9083700defa4a8f800fac9d018a6ece" creation-date="11/30/2015 19:30:55" order-index="53" type="entity">
+            <layout ax="240" ay="546.8711" awidth="296" aheight="49.12891" x="240" y="546.8711" width="296" height="49.12891" angle="0" />
+          </item>
+          <item id="di125099068759874782" iid="d1fce34d6cdf494399b2b3657d613808" creation-date="11/30/2015 19:31:07" order-index="54" type="sequence-action">
+            <layout x1="471" y1="499" x2="320" y2="499" ax="320" ay="484" awidth="151" aheight="20" x="320" y="484" width="151" height="20" message-x="3" message-y="24" />
             <sequence-action from="di932519750532478145" to="di782892457129692941" show-sequence-number="false" />
           </item>
-          <item id="di924462521182063290" iid="d49d20ad865f47c4b3be05efd99a1357" container="di505432896347760877" container-iid="39cbed0169104096b2afb3efc9be49b9" creation-date="11/25/2015 19:35:21" order-index="7" type="entity">
-            <layout ax="150" ay="192" awidth="20" aheight="40" x="150" y="192" width="20" height="40" angle="0" />
+          <item id="di953228133810513739" iid="0373dd5e4de34f7795f1621671936a26" creation-date="11/30/2015 19:35:59" order-index="55" type="sequence-action">
+            <layout x1="471" y1="564" x2="320" y2="564" ax="320" ay="549" awidth="151" aheight="20" x="320" y="549" width="151" height="20" message-x="3" message-y="23" message-width="126" />
+            <sequence-action from="di932519750532478145" to="di782892457129692941" show-sequence-number="false" />
           </item>
-          <item id="di522383640751530805" iid="6f3d416f6bbb4526b32f5e5b9016b841" container="di628489440863051744" container-iid="b362a59db9844b9ebc459f70ef0da9d0" creation-date="11/27/2015 16:20:46" order-index="28" type="entity">
-            <layout ax="461" ay="396" awidth="40" aheight="40" x="461" y="396" width="40" height="40" angle="0" />
+          <item id="di209086470774430212" iid="9d8f6594c4844fef8b2b3e498342f153" container="di628489440863051744" container-iid="b362a59db9844b9ebc459f70ef0da9d0" creation-date="11/30/2015 19:36:56" order-index="57" type="entity">
+            <layout ax="461" ay="606" awidth="40" aheight="40" x="461" y="606" width="40" height="40" angle="0" />
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-sequence" id="p223072706174629564" name="Update Food Nutrition" order-index="25" overview-order-index="23" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-2,114">
+      <diagram type="uml-sequence" id="p223072706174629564" name="Update Food Nutrition" order-index="25" overview-order-index="23" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-2,-36">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -8861,7 +9037,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="call" message="[10.1] : Input information" is-asynchronous="false" from="di647075075410305048" to="di348925932425917100" return-value="" assign-to-variable="">
+            <sequence-action type="call" message="[10,1] : Input information" is-asynchronous="false" from="di647075075410305048" to="di348925932425917100" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -8933,7 +9109,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[9.1] : response result" is-asynchronous="false" from="di844535597430411907" to="di348925932425917100" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[9,1] : response result" is-asynchronous="false" from="di844535597430411907" to="di348925932425917100" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -8955,7 +9131,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="send" message="[11.1] : validate input" is-asynchronous="false" from="di348925932425917100" to="di348925932425917100" return-value="" assign-to-variable="">
+            <sequence-action type="send" message="[11,1] : validate input" is-asynchronous="false" from="di348925932425917100" to="di348925932425917100" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -8964,7 +9140,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="call" message="[12.1] : Send update food command" is-asynchronous="false" from="di647075075410305048" to="di348925932425917100" return-value="" assign-to-variable="">
+            <sequence-action type="call" message="[12,1] : Send update food command" is-asynchronous="false" from="di647075075410305048" to="di348925932425917100" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -8973,7 +9149,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="call" message="[13.1] : Send update food request" is-asynchronous="false" from="di348925932425917100" to="di844535597430411907" return-value="" assign-to-variable="">
+            <sequence-action type="call" message="[13,1] : Send update food request" is-asynchronous="false" from="di348925932425917100" to="di844535597430411907" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -8982,7 +9158,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="call" message="[14.1] : updateFood()" is-asynchronous="false" from="di844535597430411907" to="di289178471841387532" return-value="" assign-to-variable="">
+            <sequence-action type="call" message="[14,1] : updateFood()" is-asynchronous="false" from="di844535597430411907" to="di289178471841387532" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -8991,7 +9167,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="call" message="[15.1] : save(food)" is-asynchronous="false" from="di289178471841387532" to="di330600867595751353" return-value="" assign-to-variable="">
+            <sequence-action type="call" message="[15,1] : save(food)" is-asynchronous="false" from="di289178471841387532" to="di330600867595751353" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -9000,7 +9176,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="call" message="[16.1] : executeQuery()" is-asynchronous="false" from="di330600867595751353" to="di483922811616763084" return-value="" assign-to-variable="">
+            <sequence-action type="call" message="[16,1] : executeQuery()" is-asynchronous="false" from="di330600867595751353" to="di483922811616763084" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -9009,7 +9185,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[17.1] : return result" is-asynchronous="false" from="di483922811616763084" to="di330600867595751353" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[17,1] : return result" is-asynchronous="false" from="di483922811616763084" to="di330600867595751353" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -9018,7 +9194,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[18.1] : return result" is-asynchronous="false" from="di330600867595751353" to="di289178471841387532" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[18,1] : return result" is-asynchronous="false" from="di330600867595751353" to="di289178471841387532" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -9039,7 +9215,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[19.1] : return result" is-asynchronous="false" from="di289178471841387532" to="di844535597430411907" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[19,1] : return result" is-asynchronous="false" from="di289178471841387532" to="di844535597430411907" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -9048,7 +9224,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[20.1.1] : response success message" is-asynchronous="false" from="di844535597430411907" to="di348925932425917100" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[20,1,1] : response success message" is-asynchronous="false" from="di844535597430411907" to="di348925932425917100" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -9092,7 +9268,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[20.1.2] : response fail message" is-asynchronous="false" from="di844535597430411907" to="di348925932425917100" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[20,1,2] : response fail message" is-asynchronous="false" from="di844535597430411907" to="di348925932425917100" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -9101,7 +9277,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="reply" message="[9.2] : response not found message" is-asynchronous="false" from="di844535597430411907" to="di348925932425917100" return-value="" assign-to-variable="">
+            <sequence-action type="reply" message="[9,2] : response not found message" is-asynchronous="false" from="di844535597430411907" to="di348925932425917100" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -9121,11 +9297,11 @@ Extension point: Select suggest nutrition</comment>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di950230549718068708" iid="aad5a8948fec4654865eb46a690add64" creation-date="11/25/2015 20:02:44" order-index="6" type="sequence-action">
-            <layout x1="139" y1="173" x2="285" y2="173" ax="139" ay="158" awidth="146" aheight="20" x="139" y="158" width="146" height="20" message-x="0" message-y="-17" />
+            <layout x1="143" y1="173" x2="288" y2="173" ax="143" ay="158" awidth="145" aheight="20" x="143" y="158" width="145" height="20" message-x="0" message-y="-17" />
             <sequence-action from="di555701587105932195" to="di348925932425917100" show-sequence-number="false" />
           </item>
           <item id="di464654148213294236" iid="4dbb17a78c9148e59b773af9283a80e3" creation-date="11/25/2015 20:03:02" order-index="9" type="sequence-action">
-            <layout x1="305" y1="185" x2="451" y2="185" ax="305" ay="170" awidth="146" aheight="20" x="305" y="170" width="146" height="20" message-x="0" message-y="-10" />
+            <layout x1="308" y1="185" x2="451" y2="185" ax="308" ay="170" awidth="143" aheight="20" x="308" y="170" width="143" height="20" message-x="0" message-y="-10" />
             <sequence-action from="di348925932425917100" to="di844535597430411907" show-sequence-number="false" />
           </item>
           <item id="di473689609103509486" iid="3b2d0ea4df04428397c49f03cf8a4bfb" creation-date="11/25/2015 20:03:15" order-index="11" type="sequence-action">
@@ -9153,7 +9329,7 @@ Extension point: Select suggest nutrition</comment>
             <sequence-action from="di289178471841387532" to="di844535597430411907" show-sequence-number="false" />
           </item>
           <item id="di938151931890378679" iid="21c5afafbfaa460bb20138f06dd15469" creation-date="11/25/2015 20:06:06" order-index="20" type="sequence-action">
-            <layout x1="451" y1="295" x2="305" y2="295" ax="305" ay="280" awidth="146" aheight="20" x="305" y="280" width="146" height="20" message-x="0" message-y="21" />
+            <layout x1="451" y1="295" x2="308" y2="295" ax="308" ay="280" awidth="143" aheight="20" x="308" y="280" width="143" height="20" message-x="0" message-y="21" />
             <sequence-action from="di844535597430411907" to="di348925932425917100" show-sequence-number="false" />
           </item>
           <item id="di724726947467164499" iid="121d5614825b48f1827d08d99b081de1" creation-date="11/25/2015 20:06:50" order-index="21" type="entity">
@@ -9166,19 +9342,19 @@ Extension point: Select suggest nutrition</comment>
             <layout ax="59.01544" ay="635.3197" awidth="1019" aheight="98.12891" x="59.01544" y="635.3197" width="1019" height="98.12891" angle="0" />
           </item>
           <item id="di163131798993716365" iid="d0a146d81a9e4c698814664087104b07" creation-date="11/25/2015 20:07:51" order-index="24" type="sequence-action">
-            <layout x1="139" y1="320" x2="285" y2="320" ax="139" ay="305" awidth="146" aheight="20" x="139" y="305" width="146" height="20" message-x="-2" message-y="-13" />
+            <layout x1="143" y1="320" x2="288" y2="320" ax="143" ay="305" awidth="145" aheight="20" x="143" y="305" width="145" height="20" message-x="-2" message-y="-13" />
             <sequence-action from="di647075075410305048" to="di348925932425917100" show-sequence-number="false" />
           </item>
           <item id="di500268451648815861" iid="e691deee97ad4b2d9e1d0dca9a6583f4" creation-date="11/25/2015 20:08:29" order-index="26" type="sequence-action">
-            <layout x1="305" y1="320" x2="305" y2="370.7277" ax="305" ay="320" awidth="108" aheight="50.72769" x="305" y="320" width="108" height="50.72769" message-x="3" message-y="5" />
+            <layout x1="308" y1="320" x2="308" y2="370.7277" ax="308" ay="320" awidth="108" aheight="50.72769" x="308" y="320" width="108" height="50.72769" message-x="3" message-y="5" />
             <sequence-action from="di348925932425917100" to="di348925932425917100" show-sequence-number="false" />
           </item>
           <item id="di289624654819181133" iid="3ac5d7a732a64382a98dbd7152689973" creation-date="11/25/2015 20:08:57" order-index="27" type="sequence-action">
-            <layout x1="139" y1="390" x2="285" y2="390" ax="139" ay="375" awidth="146" aheight="20" x="139" y="375" width="146" height="20" message-x="-1" message-y="-18" />
+            <layout x1="143" y1="390" x2="288" y2="390" ax="143" ay="375" awidth="145" aheight="20" x="143" y="375" width="145" height="20" message-x="-1" message-y="-18" />
             <sequence-action from="di647075075410305048" to="di348925932425917100" show-sequence-number="false" />
           </item>
           <item id="di490432678976719753" iid="9e16f02ddb414d82b92dfdc98cd55c20" creation-date="11/25/2015 20:09:44" order-index="28" type="sequence-action">
-            <layout x1="305" y1="423" x2="451" y2="423" ax="305" ay="408" awidth="146" aheight="20" x="305" y="408" width="146" height="20" message-x="-1" message-y="-21" />
+            <layout x1="308" y1="423" x2="451" y2="423" ax="308" ay="408" awidth="143" aheight="20" x="308" y="408" width="143" height="20" message-x="-1" message-y="-21" />
             <sequence-action from="di348925932425917100" to="di844535597430411907" show-sequence-number="false" />
           </item>
           <item id="di398759266804461627" iid="498d2fab39ad4e3ba30d687e2f88c6ff" creation-date="11/25/2015 20:10:27" order-index="29" type="sequence-action">
@@ -9202,11 +9378,11 @@ Extension point: Select suggest nutrition</comment>
             <sequence-action from="di289178471841387532" to="di844535597430411907" show-sequence-number="false" />
           </item>
           <item id="di336342925898251236" iid="ff49c9eaf9414dde8243ac6bb1dddab3" creation-date="11/25/2015 20:13:32" order-index="37" type="sequence-action">
-            <layout x1="451" y1="519" x2="305" y2="519" ax="305" ay="504" awidth="146" aheight="20" x="305" y="504" width="146" height="20" message-x="-1" message-y="26" />
+            <layout x1="451" y1="519" x2="308" y2="519" ax="308" ay="504" awidth="143" aheight="20" x="308" y="504" width="143" height="20" message-x="2" message-y="29" />
             <sequence-action from="di844535597430411907" to="di348925932425917100" show-sequence-number="false" />
           </item>
           <item id="di663551753707548282" iid="256efb6f796a4f56acea96b0505deadb" creation-date="11/25/2015 20:02:37" order-index="5" type="lifeline">
-            <layout ax="887.983" ay="50" awidth="140" aheight="633" x="887.983" y="51.68335" width="140" height="633" angle="0" />
+            <layout ax="887.983" ay="50" awidth="140" aheight="633" x="887.983" y="50" width="140" height="633" angle="0" />
           </item>
           <item id="di483922811616763084" iid="b72d5561e15f487fb678d092cba46661" container="di663551753707548282" container-iid="256efb6f796a4f56acea96b0505deadb" creation-date="11/25/2015 20:03:50" order-index="16" type="entity">
             <layout ax="947.983" ay="218" awidth="20" aheight="298" x="947.983" y="218" width="20" height="298" angle="0" />
@@ -9227,7 +9403,7 @@ Extension point: Select suggest nutrition</comment>
             <layout ax="212.4323" ay="533.1593" awidth="301" aheight="40" x="212.4323" y="533.1593" width="301" height="40" angle="0" />
           </item>
           <item id="di145066327212851743" iid="5c963c9e81b244949bf04eff53601c0a" creation-date="11/25/2015 20:02:16" order-index="3" type="lifeline">
-            <layout ax="557.7089" ay="50" awidth="140" aheight="633" x="557.7089" y="51.29565" width="140" height="633" angle="0" />
+            <layout ax="557.7089" ay="50" awidth="140" aheight="633" x="557.7089" y="50" width="140" height="633" angle="0" />
           </item>
           <item id="di289178471841387532" iid="f315fadd940a460e93061423e80d80ff" container="di145066327212851743" container-iid="5c963c9e81b244949bf04eff53601c0a" creation-date="11/25/2015 20:03:18" order-index="12" type="entity">
             <layout ax="617.7089" ay="198" awidth="20" aheight="292" x="617.7089" y="198" width="20" height="292" angle="0" />
@@ -9238,15 +9414,6 @@ Extension point: Select suggest nutrition</comment>
           <item id="di692225489722293605" iid="9e5e08550ea941a69905669795e26d44" container="di128165065763107229" container-iid="02be99ae980f459f9c4a71b5e8a8d52e" creation-date="11/25/2015 20:15:13" order-index="40" type="entity">
             <layout ax="212.4323" ay="573.1593" awidth="301" aheight="52.12891" x="212.4323" y="573.1592" width="301" height="52.12897" angle="0" />
           </item>
-          <item id="di335885944507811475" iid="0aafd47bd2134b94acf4eabe8dd81779" creation-date="11/25/2015 20:01:29" order-index="0" type="lifeline">
-            <layout ax="59.79889" ay="50" awidth="140" aheight="633" x="59.79889" y="50.5766" width="140" height="633" angle="0" />
-          </item>
-          <item id="di555701587105932195" iid="2de311e8acac45ceb03897801437bd34" container="di335885944507811475" container-iid="0aafd47bd2134b94acf4eabe8dd81779" creation-date="11/25/2015 20:02:46" order-index="7" type="entity">
-            <layout ax="119.7989" ay="173" awidth="20" aheight="40" x="119.7989" y="173" width="20" height="40" angle="0" />
-          </item>
-          <item id="di647075075410305048" iid="60b50c66839149d69287ba9856344608" container="di335885944507811475" container-iid="0aafd47bd2134b94acf4eabe8dd81779" creation-date="11/25/2015 20:07:56" order-index="25" type="entity">
-            <layout ax="119.7989" ay="320" awidth="20" aheight="80" x="119.7989" y="320" width="20" height="80" angle="0" />
-          </item>
           <item id="di907349368277779789" iid="49228c4b31584e5a8dab1ccb573f4772" creation-date="11/25/2015 20:01:48" order-index="2" type="lifeline">
             <layout ax="391.8267" ay="50" awidth="140" aheight="633" x="391.8267" y="51.00012" width="140" height="633" angle="0" />
           </item>
@@ -9254,25 +9421,34 @@ Extension point: Select suggest nutrition</comment>
             <layout ax="451.8267" ay="185" awidth="20" aheight="478" x="451.8267" y="185" width="20" height="478" angle="0" />
           </item>
           <item id="di225553485513007042" iid="9f681d8a819e4742a9f615872b123032" creation-date="11/25/2015 20:16:15" order-index="41" type="sequence-action">
-            <layout x1="451" y1="584" x2="305" y2="584" ax="305" ay="569" awidth="146" aheight="20" x="305" y="569" width="146" height="20" message-x="5" message-y="31" message-width="137" />
+            <layout x1="451" y1="584" x2="308" y2="584" ax="308" ay="569" awidth="143" aheight="20" x="308" y="569" width="143" height="20" message-x="5" message-y="31" message-width="137" />
             <sequence-action from="di844535597430411907" to="di348925932425917100" show-sequence-number="false" />
           </item>
           <item id="di788694127333006331" iid="ea77d8f394d045c79de476352da1d59e" creation-date="11/25/2015 20:17:11" order-index="42" type="sequence-action">
-            <layout x1="451" y1="655" x2="305" y2="655" ax="305" ay="640" awidth="146" aheight="20" x="305" y="640" width="146" height="20" message-x="5" message-y="26" />
+            <layout x1="451" y1="655" x2="308" y2="655" ax="308" ay="640" awidth="143" aheight="20" x="308" y="640" width="143" height="20" message-x="5" message-y="26" />
             <sequence-action from="di844535597430411907" to="di348925932425917100" show-sequence-number="false" />
           </item>
           <item id="di225204808608485659" iid="33e0efccb13641728077ab730ec0e403" creation-date="11/25/2015 20:18:17" order-index="43" type="entity">
             <layout ax="10" ay="17" awidth="1097" aheight="728" x="10" y="17" width="1097" height="728" angle="0" />
           </item>
           <item id="di218183755821887244" iid="80ef37ed9b634aabbfb917cf553bd4f2" creation-date="11/25/2015 20:01:36" order-index="1" type="lifeline">
-            <layout ax="225.8375" ay="50" awidth="140" aheight="633" x="225.8375" y="50.7572" width="140" height="633" angle="0" />
+            <layout ax="225.8375" ay="50" awidth="146" aheight="649" x="225.8375" y="50" width="146" height="649" angle="0" />
+          </item>
+          <item id="di335885944507811475" iid="0aafd47bd2134b94acf4eabe8dd81779" container="di225204808608485659" container-iid="33e0efccb13641728077ab730ec0e403" creation-date="11/25/2015 20:01:29" order-index="0" type="lifeline">
+            <layout ax="60.79889" ay="50" awidth="145" aheight="645" x="60.79889" y="50" width="145" height="645" angle="0" />
+          </item>
+          <item id="di555701587105932195" iid="2de311e8acac45ceb03897801437bd34" container="di335885944507811475" container-iid="0aafd47bd2134b94acf4eabe8dd81779" creation-date="11/25/2015 20:02:46" order-index="7" type="entity">
+            <layout ax="123.2989" ay="173" awidth="20" aheight="40" x="123.2989" y="173" width="20" height="40" angle="0" />
+          </item>
+          <item id="di647075075410305048" iid="60b50c66839149d69287ba9856344608" container="di335885944507811475" container-iid="0aafd47bd2134b94acf4eabe8dd81779" creation-date="11/25/2015 20:07:56" order-index="25" type="entity">
+            <layout ax="123.2989" ay="320" awidth="20" aheight="80" x="123.2989" y="320" width="20" height="80" angle="0" />
           </item>
           <item id="di157672382679395552" iid="ccee76831f76425b843abcc3fce1b8d2" container="di225204808608485659" container-iid="33e0efccb13641728077ab730ec0e403" creation-date="11/25/2015 20:10:58" order-index="30" type="sequence-action">
             <layout x1="637" y1="445" x2="782" y2="445" ax="637" ay="430" awidth="145" aheight="20" x="637" y="430" width="145" height="20" message-x="-1" message-y="-15" />
             <sequence-action from="di289178471841387532" to="di330600867595751353" show-sequence-number="false" />
           </item>
           <item id="di348925932425917100" iid="ae4971c5478f4248a9661624ea26b312" container="di218183755821887244" container-iid="80ef37ed9b634aabbfb917cf553bd4f2" creation-date="11/25/2015 20:02:46" order-index="8" type="entity">
-            <layout ax="285.8375" ay="173" awidth="20" aheight="492" x="285.8375" y="173" width="20" height="492" angle="0" />
+            <layout ax="288.8375" ay="173" awidth="20" aheight="492" x="288.8375" y="173" width="20" height="492" angle="0" />
           </item>
           <item id="di792477454878889617" iid="c2455dd8a73b4624a14d67704bcaf814" container="di907349368277779789" container-iid="49228c4b31584e5a8dab1ccb573f4772" creation-date="11/27/2015 16:12:07" order-index="44" type="entity">
             <layout ax="441.8267" ay="683.4486" awidth="40" aheight="40" x="441.8267" y="683.4486" width="40" height="40" angle="0" />
@@ -9805,7 +9981,7 @@ Extension point: Select suggest nutrition</comment>
             <associated-diagrams />
             <owned-items />
             <style class="default" />
-            <sequence-action type="call" message="[3.1] : Send register accounts request" is-asynchronous="false" from="di530919069378541384" to="di666163252601271660" return-value="" assign-to-variable="">
+            <sequence-action type="call" message="[3.1] : Send register accounts excel file request" is-asynchronous="false" from="di530919069378541384" to="di666163252601271660" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -10007,7 +10183,7 @@ Extension point: Select suggest nutrition</comment>
             <layout ax="25" ay="567.8711" awidth="967" aheight="124.1289" x="25" y="550" width="967" height="142" angle="0" />
           </item>
           <item id="di408970070295261645" iid="e4ccea4df1594484876aa6e7a7c585b9" creation-date="11/27/2015 16:41:42" order-index="13" type="sequence-action">
-            <layout x1="276" y1="274" x2="418" y2="274" ax="276" ay="259" awidth="142" aheight="20" x="276" y="259" width="142" height="20" message-x="-4" message-y="-10" message-width="162" />
+            <layout x1="276" y1="274" x2="418" y2="274" ax="276" ay="259" awidth="142" aheight="20" x="276" y="259" width="142" height="20" message-x="-3" message-y="31" message-width="124" />
             <sequence-action from="di530919069378541384" to="di666163252601271660" show-sequence-number="false" />
           </item>
           <item id="di306367028881715731" iid="0d49a4af065c4173b0914ad4894d9c98" creation-date="11/27/2015 16:42:17" order-index="15" type="sequence-action">
@@ -10982,7 +11158,7 @@ Extension point: Select suggest nutrition</comment>
           </item>
         </layer>
       </diagram>
-      <diagram type="flowchart" id="p993572773727011924" name="FlowchartDiagram2" order-index="30" overview-order-index="28" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,234" zoom="0.8">
+      <diagram type="flowchart" id="p993572773727011924" name="FlowchartDiagram2" order-index="30" overview-order-index="28" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,144" zoom="0.8">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -11381,7 +11557,7 @@ Extension point: Select suggest nutrition</comment>
           </item>
         </layer>
       </diagram>
-      <diagram type="flowchart" id="p647779669489168711" name="FlowchartDiagram3" order-index="31" overview-order-index="29" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
+      <diagram type="flowchart" id="p647779669489168711" name="ConnectWristband" order-index="31" overview-order-index="29" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,62">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -11393,18 +11569,12 @@ Extension point: Select suggest nutrition</comment>
           </authors>
           <description />
           <creation-date>11/29/2015 19:48:05</creation-date>
-          <change-date>11/29/2015 20:18:07</change-date>
+          <change-date>12/04/2015 11:02:57</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
         <abstract-items>
           <item id="di249097591639039697" cid="ELEM053" type="flowchart-start-end" name="Start" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 19:54:04">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-          </item>
-          <item id="di743900042848502145" cid="FCP015" type="flowchart-process" name="Setting BLE" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 19:54:16">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -11416,19 +11586,13 @@ Extension point: Select suggest nutrition</comment>
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di418525832840995368" cid="FCP016" type="flowchart-process" name="Finding BLE device" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 19:54:51">
+          <item id="di132372281550816125" cid="FCDT010" type="flowchart-data" name="Patient selects  wristband" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 09:26:27">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di723014506569059544" cid="FCP017" type="flowchart-process" name="Select patient wristband" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 19:55:08">
-            <stereotypes />
-            <associated-diagrams />
-            <owned-items />
-            <style class="default" />
-          </item>
-          <item id="di502899865384062128" cid="FCP018" type="flowchart-process" name="Request Android OS send register command" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 19:56:06">
+          <item id="di952184015551051933" cid="FCF065" type="flowchart-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 09:26:49">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -11470,13 +11634,13 @@ Extension point: Select suggest nutrition</comment>
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di421927539914629112" cid="FCF046" type="flowchart-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 19:59:13">
+          <item id="di387649592393975691" cid="FCF066" type="flowchart-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 11:02:57">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
             <style class="default" />
           </item>
-          <item id="di250169745896453464" cid="FCF047" type="flowchart-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 19:59:16">
+          <item id="di400838318103069435" cid="FCP015" type="flowchart-process" name="Request Android OS send register command" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 11:02:14">
             <stereotypes />
             <associated-diagrams />
             <owned-items />
@@ -11536,31 +11700,34 @@ Extension point: Select suggest nutrition</comment>
             <owned-items />
             <style class="default" />
           </item>
+          <item id="di136565586625711577" cid="FCP023" type="flowchart-process" name="Get list data's characteristic follow device name" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 20:19:55">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di505969040578900937" cid="ELEM054" type="flowchart-start-end" name="End" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 20:20:23">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di681896350728167116" cid="FCF055" type="flowchart-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 20:20:40">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di701529941448369383" cid="FCF056" type="flowchart-flow" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="11/29/2015 20:20:44">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
         </abstract-items>
         <layer name="Default" visible="true" enabled="true" locked="false">
           <item id="di249097591639039697" iid="e24610be4d0f4545b47496da45b746f4" creation-date="11/29/2015 19:54:04" order-index="0" type="entity">
-            <layout ax="202" ay="33" awidth="150" aheight="60" x="202" y="33" width="150" height="60" angle="0" />
-          </item>
-          <item id="di743900042848502145" iid="c7ebf7384b9041fd8b36813a792db1c5" creation-date="11/29/2015 19:54:16" order-index="1" type="entity">
-            <layout ax="202" ay="133" awidth="150" aheight="60" x="202" y="133" width="150" height="60" angle="0" />
-          </item>
-          <item id="di224859100322599460" iid="c0a9408f69694dafaf170155f4fe2abd" creation-date="11/29/2015 19:54:24" order-index="2" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="277" y1="93" x2="277" y2="133" start-border-pos="0.625" end-border-pos="0.125">
-              <points>
-                <point x="277" y="93" />
-                <point x="277" y="133" />
-              </points>
-            </layout>
-            <relation from="di249097591639039697" from-iid="e24610be4d0f4545b47496da45b746f4" to="di743900042848502145" to-iid="c7ebf7384b9041fd8b36813a792db1c5" />
-          </item>
-          <item id="di418525832840995368" iid="5d69c3d647d8408ba60c02f84e41acc9" creation-date="11/29/2015 19:54:51" order-index="3" type="entity">
-            <layout ax="402" ay="133" awidth="157" aheight="60" x="402" y="133" width="157" height="60" angle="0" />
-          </item>
-          <item id="di723014506569059544" iid="147f90eeab3042dba72b917b50cf983e" creation-date="11/29/2015 19:55:08" order-index="4" type="entity">
-            <layout ax="405.5" ay="243" awidth="150" aheight="60" x="405.5" y="243" width="150" height="60" angle="0" />
-          </item>
-          <item id="di502899865384062128" iid="2a3e66be7d704bb2a35e4264bfd96cd0" creation-date="11/29/2015 19:56:06" order-index="5" type="entity">
-            <layout ax="202" ay="243" awidth="150" aheight="60" x="202" y="243" width="150" height="60" angle="0" />
+            <layout ax="456" ay="133" awidth="150" aheight="60" x="456" y="133" width="150" height="60" angle="0" />
           </item>
           <item id="di658306567470619124" iid="2a3d6c129fbc4d84aa4edc6d7e3cdbd0" creation-date="11/29/2015 19:56:30" order-index="6" type="entity">
             <layout ax="202" ay="353" awidth="150" aheight="60" x="202" y="353" width="150" height="60" angle="0" />
@@ -11580,41 +11747,14 @@ Extension point: Select suggest nutrition</comment>
             </layout>
             <relation from="di737885110502975186" from-iid="32949c5aabd94cd98d4aef2e0b66980a" to="di410355686181509123" to-iid="034ef13bee474794a2d1aedbc9fe0978" />
           </item>
-          <item id="di956693601192530284" iid="bff064c5ef704717814200a025ab823a" creation-date="11/29/2015 19:59:05" order-index="10" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="352" y1="163" x2="402" y2="163" start-border-pos="0.375" end-border-pos="0.875">
-              <points>
-                <point x="352" y="163" />
-                <point x="402" y="163" />
-              </points>
-            </layout>
-            <relation from="di743900042848502145" from-iid="c7ebf7384b9041fd8b36813a792db1c5" to="di418525832840995368" to-iid="5d69c3d647d8408ba60c02f84e41acc9" />
-          </item>
           <item id="di562235095728807791" iid="c9e870db7b4742f38393440caa9c0bdf" creation-date="11/29/2015 19:59:09" order-index="11" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="480" y1="193" x2="480" y2="243" start-border-pos="0.625796178343949" end-border-pos="0.124166666666667">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="531" y1="193" x2="531" y2="243" start-border-pos="0.625" end-border-pos="0.125">
               <points>
-                <point x="480" y="193" />
-                <point x="480" y="243" />
+                <point x="531" y="193" />
+                <point x="531" y="243" />
               </points>
             </layout>
-            <relation from="di418525832840995368" from-iid="5d69c3d647d8408ba60c02f84e41acc9" to="di723014506569059544" to-iid="147f90eeab3042dba72b917b50cf983e" />
-          </item>
-          <item id="di421927539914629112" iid="7282d0176fe24f90855a8683481dcb3b" creation-date="11/29/2015 19:59:13" order-index="12" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="406" y1="273" x2="352" y2="273" start-border-pos="0.875" end-border-pos="0.375">
-              <points>
-                <point x="406" y="273" />
-                <point x="352" y="273" />
-              </points>
-            </layout>
-            <relation from="di723014506569059544" from-iid="147f90eeab3042dba72b917b50cf983e" to="di502899865384062128" to-iid="2a3e66be7d704bb2a35e4264bfd96cd0" />
-          </item>
-          <item id="di250169745896453464" iid="4c30e7e3023e48b5bfe9f4092d6e8c5a" creation-date="11/29/2015 19:59:16" order-index="13" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="277" y1="303" x2="277" y2="353" start-border-pos="0.625" end-border-pos="0.125">
-              <points>
-                <point x="277" y="303" />
-                <point x="277" y="353" />
-              </points>
-            </layout>
-            <relation from="di502899865384062128" from-iid="2a3e66be7d704bb2a35e4264bfd96cd0" to="di658306567470619124" to-iid="2a3d6c129fbc4d84aa4edc6d7e3cdbd0" />
+            <relation from="di249097591639039697" from-iid="e24610be4d0f4545b47496da45b746f4" to="di132372281550816125" to-iid="fcb28b38759648cfa2cc4ae238682ba6" />
           </item>
           <item id="di372928468155975142" iid="ef57d78e6c7c442284651c0f4f55828f" creation-date="11/29/2015 19:59:19" order-index="14" type="relation">
             <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="352" y1="383" x2="406" y2="383" start-border-pos="0.375" end-border-pos="0.875">
@@ -11626,12 +11766,12 @@ Extension point: Select suggest nutrition</comment>
             <relation from="di658306567470619124" from-iid="2a3d6c129fbc4d84aa4edc6d7e3cdbd0" to="di737885110502975186" to-iid="32949c5aabd94cd98d4aef2e0b66980a" />
           </item>
           <item id="di794041724312983905" iid="4aa152867e1a49f8ac35f64e76bc172b" creation-date="11/29/2015 19:59:23" order-index="15" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-53,58" auto-path="" x1="565" y1="513" x2="556" y2="383" start-border-pos="0.375" end-border-pos="0.375">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="-26,61" auto-path="" x1="565" y1="513" x2="556" y2="384" start-border-pos="0.375" end-border-pos="0.377314758300781">
               <points>
                 <point x="565" y="513" />
-                <point x="645" y="513" />
-                <point x="645" y="383" />
-                <point x="556" y="383" />
+                <point x="615" y="513" />
+                <point x="615" y="384" />
+                <point x="556" y="384" />
               </points>
             </layout>
             <relation from="di410355686181509123" from-iid="034ef13bee474794a2d1aedbc9fe0978" to="di737885110502975186" to-iid="32949c5aabd94cd98d4aef2e0b66980a" />
@@ -11673,15 +11813,195 @@ Extension point: Select suggest nutrition</comment>
             <relation from="di581084625979341236" from-iid="19e07d00ae4e4ee9b673c16bb6812678" to="di257016460280791188" to-iid="426e539edacb42a99047554243e96968" />
           </item>
           <item id="di779045429626958091" iid="b37c441e4015434696a2f5594725945c" creation-date="11/29/2015 20:18:07" order-index="22" type="relation">
-            <layout line-style="oblique" lock-start-point="false" lock-end-point="true" lock-to-fields="false" name-position="10,-10" auto-path="" x1="248" y1="593" x2="202" y2="514" start-border-pos="0.0817414238339379" end-border-pos="0.870833333333333">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" name-position="21,56" auto-path="" x1="193" y1="644" x2="202" y2="514" start-border-pos="0.8725" end-border-pos="0.870833333333333">
               <points>
-                <point x="248" y="593" />
-                <point x="157" y="642" />
+                <point x="193" y="644" />
+                <point x="157" y="644" />
                 <point x="157" y="514" />
                 <point x="202" y="514" />
               </points>
             </layout>
             <relation from="di581084625979341236" from-iid="19e07d00ae4e4ee9b673c16bb6812678" to="di796142733690741207" to-iid="e613c9d0699c40c698bd3e02c6f73cf8" />
+          </item>
+          <item id="di136565586625711577" iid="5befe12724ef4d10979940808b4b3ac7" creation-date="11/29/2015 20:19:55" order-index="23" type="entity">
+            <layout ax="615" ay="613" awidth="168" aheight="60" x="615" y="613" width="168" height="60" angle="0" />
+          </item>
+          <item id="di505969040578900937" iid="6965c17760cf4928b99f03183fba0e1f" creation-date="11/29/2015 20:20:23" order-index="24" type="entity">
+            <layout ax="624" ay="513" awidth="150" aheight="60" x="624" y="513" width="150" height="60" angle="0" />
+          </item>
+          <item id="di681896350728167116" iid="8c2146a3396649dea20dd5fb436ffa45" creation-date="11/29/2015 20:20:40" order-index="25" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="564" y1="643" x2="615" y2="643" start-border-pos="0.375" end-border-pos="0.875">
+              <points>
+                <point x="564" y="643" />
+                <point x="615" y="643" />
+              </points>
+            </layout>
+            <relation from="di257016460280791188" from-iid="426e539edacb42a99047554243e96968" to="di136565586625711577" to-iid="5befe12724ef4d10979940808b4b3ac7" />
+          </item>
+          <item id="di701529941448369383" iid="70cdfafa27164f4fb7afe8d2f53509ba" creation-date="11/29/2015 20:20:44" order-index="26" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="699" y1="613" x2="699" y2="573" start-border-pos="0.125" end-border-pos="0.625">
+              <points>
+                <point x="699" y="613" />
+                <point x="699" y="573" />
+              </points>
+            </layout>
+            <relation from="di136565586625711577" from-iid="5befe12724ef4d10979940808b4b3ac7" to="di505969040578900937" to-iid="6965c17760cf4928b99f03183fba0e1f" />
+          </item>
+          <item id="di132372281550816125" iid="fcb28b38759648cfa2cc4ae238682ba6" creation-date="12/04/2015 09:26:27" order-index="29" type="entity">
+            <layout ax="447" ay="243" awidth="168" aheight="60" x="447" y="243" width="168" height="60" angle="0" />
+          </item>
+          <item id="di952184015551051933" iid="c5273105ec494230b0fd920608971caa" creation-date="12/04/2015 09:26:49" order-index="30" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="447" y1="273" x2="404" y2="273" start-border-pos="0.875" end-border-pos="0.375">
+              <points>
+                <point x="447" y="273" />
+                <point x="404" y="273" />
+              </points>
+            </layout>
+            <relation from="di132372281550816125" from-iid="fcb28b38759648cfa2cc4ae238682ba6" to="di400838318103069435" to-iid="361c4bf8e93f42db88edca7cc82934b5" />
+          </item>
+          <item id="di400838318103069435" iid="361c4bf8e93f42db88edca7cc82934b5" creation-date="12/04/2015 11:02:14" order-index="31" type="entity">
+            <layout ax="156.5" ay="243" awidth="247" aheight="60" x="156.5" y="243" width="247" height="60" angle="0" />
+          </item>
+          <item id="di387649592393975691" iid="0bca25f55ee54608ba0b0a788228205c" creation-date="12/04/2015 11:02:57" order-index="32" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="279" y1="303" x2="278" y2="353" start-border-pos="0.625828113633129" end-border-pos="0.126363627115885">
+              <points>
+                <point x="279" y="303" />
+                <point x="278" y="353" />
+              </points>
+            </layout>
+            <relation from="di400838318103069435" from-iid="361c4bf8e93f42db88edca7cc82934b5" to="di658306567470619124" to-iid="2a3d6c129fbc4d84aa4edc6d7e3cdbd0" />
+          </item>
+        </layer>
+      </diagram>
+      <diagram type="uml-usecase" id="p251521215369553947" name="UseCaseDiagram2" order-index="32" overview-order-index="30" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>12/02/2015 11:36:18</creation-date>
+          <change-date>12/04/2015 16:03:39</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items>
+          <item id="di901111680950174526" cid="AC022" type="actor" name="Patient" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/02/2015 11:36:20">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di472301615222816905" cid="SYS008" type="system-boundary" name="System" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/02/2015 11:36:25">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+          </item>
+          <item id="di654918583133866320" cid="UC027" type="use-case" name="Configure Alarm" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/02/2015 11:36:28">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <use-case />
+          </item>
+          <item id="di919112147482191004" cid="REL019" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/02/2015 11:36:47">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <relation from="di901111680950174526" to="di654918583133866320">
+              <start-role id="" name="" navigability="" association-type="association" visibility="private" />
+              <end-role id="" name="" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+          <item id="di832451968646460090" cid="UC028" type="use-case" name="Logout" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 16:03:03">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <use-case />
+          </item>
+          <item id="di967893579701514051" cid="UC029" type="use-case" name="Pair Device" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 16:03:06">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <use-case />
+          </item>
+          <item id="di738623342160242679" cid="REL020" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 16:03:35">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <relation from="di901111680950174526" to="di832451968646460090">
+              <start-role id="" name="" navigability="" association-type="association" visibility="private" />
+              <end-role id="" name="" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+          <item id="di598315787346064000" cid="REL021" type="relationship" name="" style-class="" is-abstract="false" is-root="false" is-leaf="false" is-active="false" visibility="package" creation-date="12/04/2015 16:03:39">
+            <stereotypes />
+            <associated-diagrams />
+            <owned-items />
+            <style class="default" />
+            <relation from="di901111680950174526" to="di967893579701514051">
+              <start-role id="" name="" navigability="" association-type="association" visibility="private" />
+              <end-role id="" name="" navigability="" association-type="association" visibility="private" />
+            </relation>
+          </item>
+        </abstract-items>
+        <layer name="Default" visible="true" enabled="true" locked="false">
+          <item id="di901111680950174526" iid="1c29ff8826ea41d49fb3065e20a06d07" creation-date="12/02/2015 11:36:20" order-index="0" type="entity">
+            <layout ax="322" ay="208.5" awidth="50" aheight="100" x="322" y="208.5" width="50" height="100" angle="0" name-position="0,10" name-anchor="bottom" />
+          </item>
+          <item id="di472301615222816905" iid="cbb6f10da5e44309aa1b780a9a21d1db" creation-date="12/02/2015 11:36:25" order-index="1" type="entity">
+            <layout ax="453" ay="97" awidth="249" aheight="322" x="453" y="97" width="249" height="322" angle="0" />
+          </item>
+          <item id="di654918583133866320" iid="035613195387492d809034ae59e36e2e" container="di472301615222816905" container-iid="cbb6f10da5e44309aa1b780a9a21d1db" creation-date="12/02/2015 11:36:28" order-index="2" type="entity">
+            <layout ax="523" ay="220.5" awidth="120" aheight="75" x="523" y="220.5" width="120" height="75" angle="0" />
+            <use-case />
+          </item>
+          <item id="di919112147482191004" iid="bae63ab90aa840bdb49673ab4156482f" creation-date="12/02/2015 11:36:47" order-index="3" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="372" y1="258" x2="523" y2="258" start-border-pos="0.37375" end-border-pos="0.875">
+              <points>
+                <point x="372" y="258" />
+                <point x="523" y="258" />
+              </points>
+            </layout>
+            <relation from="di901111680950174526" from-iid="1c29ff8826ea41d49fb3065e20a06d07" to="di654918583133866320" to-iid="035613195387492d809034ae59e36e2e" />
+            <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
+          </item>
+          <item id="di832451968646460090" iid="ddd7a52d5d364050bde895eb97838e6a" container="di472301615222816905" container-iid="cbb6f10da5e44309aa1b780a9a21d1db" creation-date="12/04/2015 16:03:03" order-index="4" type="entity">
+            <layout ax="523" ay="118" awidth="120" aheight="75" x="523" y="118" width="120" height="75" angle="0" />
+            <use-case />
+          </item>
+          <item id="di967893579701514051" iid="ac9123db33a84b2bb9500e6d35667af0" container="di472301615222816905" container-iid="cbb6f10da5e44309aa1b780a9a21d1db" creation-date="12/04/2015 16:03:06" order-index="5" type="entity">
+            <layout ax="512" ay="323" awidth="120" aheight="75" x="512" y="323" width="120" height="75" angle="0" />
+            <use-case />
+          </item>
+          <item id="di738623342160242679" iid="9b48961482d74f668dde2fc31878f7a3" creation-date="12/04/2015 16:03:35" order-index="6" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="372" y1="247" x2="540" y2="182" start-border-pos="0.346737289428711" end-border-pos="0.786892649332682">
+              <points>
+                <point x="372" y="247" />
+                <point x="540" y="182" />
+              </points>
+            </layout>
+            <relation from="di901111680950174526" from-iid="1c29ff8826ea41d49fb3065e20a06d07" to="di832451968646460090" to-iid="ddd7a52d5d364050bde895eb97838e6a" />
+            <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
+          </item>
+          <item id="di598315787346064000" iid="5bf863309e8546ff8bf5c55327856ead" creation-date="12/04/2015 16:03:39" order-index="7" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" name-position="10,-10" auto-path="" x1="372" y1="269" x2="531" y2="333" start-border-pos="0.402083358764648" end-border-pos="0.967333374023438">
+              <points>
+                <point x="372" y="269" />
+                <point x="531" y="333" />
+              </points>
+            </layout>
+            <relation from="di901111680950174526" from-iid="1c29ff8826ea41d49fb3065e20a06d07" to="di967893579701514051" to-iid="ac9123db33a84b2bb9500e6d35667af0" />
+            <role-positions start-role="25,15" end-role="25,-15" start-multiplicity="25,-15" end-multiplicity="25,15" />
           </item>
         </layer>
       </diagram>
