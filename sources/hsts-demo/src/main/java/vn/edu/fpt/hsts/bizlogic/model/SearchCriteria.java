@@ -5,7 +5,7 @@
  * Author: dangquantran.
  * Date: 10/8/2015.
  */
-package vn.edu.fpt.hsts.criteria;
+package vn.edu.fpt.hsts.bizlogic.model;
 
 import java.io.Serializable;
 

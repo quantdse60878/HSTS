@@ -13,20 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.service.AccountService;
 import vn.edu.fpt.hsts.bizlogic.service.DoctorService;
 import vn.edu.fpt.hsts.bizlogic.service.PatientService;
 import vn.edu.fpt.hsts.common.IConsts;
-import vn.edu.fpt.hsts.common.expception.BizlogicException;
-import vn.edu.fpt.hsts.criteria.PatientCriteria;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
-import java.util.List;
 
 /**
  * Register controller, for processing Register patient, account.

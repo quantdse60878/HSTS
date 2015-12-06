@@ -5,9 +5,9 @@
  * Author: dangquantran.
  * Date: 10/8/2015.
  */
-package vn.edu.fpt.hsts.criteria;
+package vn.edu.fpt.hsts.bizlogic.model;
 
-import java.util.Date;
+import vn.edu.fpt.hsts.bizlogic.model.SearchCriteria;
 
 public class PatientCriteria extends SearchCriteria {
 

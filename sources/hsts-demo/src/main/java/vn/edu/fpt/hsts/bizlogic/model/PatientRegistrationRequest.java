@@ -7,10 +7,6 @@
  */
 package vn.edu.fpt.hsts.bizlogic.model;
 
-import vn.edu.fpt.hsts.criteria.CheckCriteria;
-import vn.edu.fpt.hsts.criteria.PatientCriteria;
-import vn.edu.fpt.hsts.criteria.RegistrationCriteria;
-
 import java.io.Serializable;
 
 public class PatientRegistrationRequest implements Serializable {

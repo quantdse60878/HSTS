@@ -35,9 +35,9 @@ import vn.edu.fpt.hsts.bizlogic.service.PreventionCheckService;
 import vn.edu.fpt.hsts.bizlogic.service.TreatmentService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
-import vn.edu.fpt.hsts.criteria.CheckCriteria;
-import vn.edu.fpt.hsts.criteria.PatientCriteria;
-import vn.edu.fpt.hsts.criteria.RegistrationCriteria;
+import vn.edu.fpt.hsts.bizlogic.model.CheckCriteria;
+import vn.edu.fpt.hsts.bizlogic.model.PatientCriteria;
+import vn.edu.fpt.hsts.bizlogic.model.RegistrationCriteria;
 import vn.edu.fpt.hsts.persistence.entity.Patient;
 import vn.edu.fpt.hsts.persistence.entity.PreventionCheck;
 

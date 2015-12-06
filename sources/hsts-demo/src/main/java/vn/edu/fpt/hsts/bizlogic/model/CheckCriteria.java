@@ -5,7 +5,9 @@
  * Author: dangquantran.
  * Date: 10/21/2015.
  */
-package vn.edu.fpt.hsts.criteria;
+package vn.edu.fpt.hsts.bizlogic.model;
+
+import vn.edu.fpt.hsts.bizlogic.model.SearchCriteria;
 
 public class CheckCriteria extends SearchCriteria {
 

@@ -20,14 +20,13 @@ import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.common.util.StringUtils;
-import vn.edu.fpt.hsts.criteria.PatientCriteria;
+import vn.edu.fpt.hsts.bizlogic.model.PatientCriteria;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.entity.Role;
 import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
 import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
-import vn.edu.fpt.hsts.persistence.repo.RoleRepo;
 import vn.edu.fpt.hsts.web.session.UserSession;
 
 import javax.transaction.Transactional;
