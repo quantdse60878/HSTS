@@ -1,6 +1,24 @@
-﻿breakfast: 		1 bát cơm, 100g thịt gà, 1 ly cà phê đen
+﻿Name: Huynh Kinh Kha
+Birthday: 1/1/1995
+Email: ruybiking@gmail.com
+Weight: 77
+Height: 160
+Heart Beat: 87
+Waists: 98
+Body Fat: 38.6
+Visceral fat: 6
+Muscle Mass: 57.5
+Body Water: 49.1
+Phase Angle: 6
+Impedance: 447
+Basal Metabolic Rate: 1800
+
+
+
+
+breakfast: 		1 bát cơm, 100g thịt gà, 1 ly cà phê đen
 breaktimeMorning: 	100ml sữa tươi, 1 ổ bánh mì
-lunch: 			3 bát cơm, 50g cá thu, 50g thịt bò, 50g bắp cải, 1 quả trứng gà
+lunch: 			2 bát cơm, 50g cá thu, 50g thịt bò, 50g bắp cải, 1 quả trứng gà
 breaktimeAfternoon: 
-dinner: 		3 bát cơm, 50g rau ngót, 50g thịt gà, 1 lon nước ngọt
+dinner: 		2 bát cơm, 50g rau ngót, 50g thịt gà, 1 lon nước ngọt
 eatLateAtNight: 	1 tô phở bò
