@@ -1,8 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS `hsts` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `hsts`;
 -- MySQL dump 10.13  Distrib 5.7.9, for Win64 (x86_64)
 --
 -- Host: localhost    Database: hsts
 -- ------------------------------------------------------
--- Server version	5.6.25-log
+-- Server version	5.7.9-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,7 +47,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,'1993-12-02 00:00:00','doctor@gmail.com','Ngô Tấn Sĩ',2,'4297f44b13955235245b2497399d7a93',2,NULL,'doctor',1),(2,'1993-12-02 00:00:00','nutrition@gmail.com','Huỳnh Văn Dưỡng',2,'4297f44b13955235245b2497399d7a93',2,NULL,'nutrition',7),(3,'1993-12-02 00:00:00','nurse@gmail.com','Nguyễn Thị Ý',2,'4297f44b13955235245b2497399d7a93',2,NULL,'nurse',3),(4,'1993-12-02 00:00:00','staff@gmail.com','Nguyễn Tố Viên',2,'4297f44b13955235245b2497399d7a93',2,NULL,'staff',5),(6,'2015-11-01 00:00:00','abc@gmail.com','Hồ Văn Bác',1,'4297f44b13955235245b2497399d7a93',2,'2015-11-01 21:28:49','doctor1',1),(16,'2015-11-01 00:00:00','ffffff@gmail.com','Nguyễn Thanh Dinh',1,'4297f44b13955235245b2497399d7a93',2,'2015-11-11 00:00:00','nutrition1',7),(17,'2015-11-01 00:00:00','doctormanager@gmail.com','Huỳnh Văn Sao',1,'4297f44b13955235245b2497399d7a93',1,'2015-11-11 00:00:00','manager',4),(18,'2015-11-01 00:00:00','admin@gmail.com','Hồ Văn Trị',1,'4297f44b13955235245b2497399d7a93',2,'2015-11-11 00:00:00','admin',6),(64,'1995-01-01 00:00:00','quyha212@gmail.com','aaaa',1,'f4cfeb74369fccf3796f772a3548d45c',1,'2015-11-28 00:39:21','aaaa',2);
+INSERT INTO `account` VALUES (1,'1993-12-02 00:00:00','doctor@gmail.com','Ngô Tấn Sĩ',2,'4297f44b13955235245b2497399d7a93',2,NULL,'doctor',1),(2,'1993-12-02 00:00:00','nutrition@gmail.com','Huỳnh Văn Dưỡng',2,'4297f44b13955235245b2497399d7a93',2,NULL,'nutrition',7),(3,'1993-12-02 00:00:00','nurse@gmail.com','Nguyễn Thị Ý',2,'4297f44b13955235245b2497399d7a93',2,NULL,'nurse',3),(4,'1993-12-02 00:00:00','staff@gmail.com','Nguyễn Tố Viên',2,'4297f44b13955235245b2497399d7a93',2,NULL,'staff',5),(6,'2015-11-01 00:00:00','abc@gmail.com','Hồ Văn Bác',1,'4297f44b13955235245b2497399d7a93',2,'2015-11-01 21:28:49','doctor1',1),(16,'2015-11-01 00:00:00','ffffff@gmail.com','Nguyễn Thanh Dinh',1,'4297f44b13955235245b2497399d7a93',2,'2015-11-11 00:00:00','nutrition1',7),(17,'2015-11-01 00:00:00','doctormanager@gmail.com','Huỳnh Văn Sao',1,'4297f44b13955235245b2497399d7a93',1,'2015-11-11 00:00:00','manager',4),(18,'2015-11-01 00:00:00','admin@gmail.com','Hồ Văn Trị',1,'4297f44b13955235245b2497399d7a93',2,'2015-11-11 00:00:00','admin',6);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +70,7 @@ CREATE TABLE `appointment` (
   KEY `FK_a0ei95cok5pnaru5cueeyc4np` (`nextAppointment`),
   CONSTRAINT `FK_6ciexxiu11immx0bdvn0uujkp` FOREIGN KEY (`medicalRecordId`) REFERENCES `medicalrecord` (`id`),
   CONSTRAINT `FK_a0ei95cok5pnaru5cueeyc4np` FOREIGN KEY (`nextAppointment`) REFERENCES `appointment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +175,7 @@ CREATE TABLE `food` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `foodName` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +184,7 @@ CREATE TABLE `food` (
 
 LOCK TABLES `food` WRITE;
 /*!40000 ALTER TABLE `food` DISABLE KEYS */;
-INSERT INTO `food` VALUES (1,'Cơm'),(2,'Cá thu'),(3,'Thịt bò'),(4,'Thịt gà'),(5,'Trái cây'),(6,'Bún bò huế'),(7,'Cá ngừ'),(8,'Bắp cải'),(9,'Rau ngót'),(10,'Cơm tấm sườn'),(11,'Bún thịt nướng'),(14,'Nước Ngọt'),(15,'Phở bò'),(16,'Hủ tíu thịt heo'),(17,'Bánh mì'),(18,'Hột vịt lộn'),(19,'Trứng gà'),(20,'Cà phê đen'),(21,'Sữa đậu nành'),(22,'Chanh'),(23,'Bia'),(24,'Bột mì'),(25,'Sữa tươi'),(26,'Bột gạo'),(27,'Gạo nếp'),(28,'Gạo thường'),(29,'Thịt heo'),(30,'Tôm'),(31,'Dưa leo');
+INSERT INTO `food` VALUES (1,'Cơm'),(2,'Cá thu'),(3,'Thịt bò'),(4,'Thịt gà'),(5,'Trái cây'),(6,'Bún bò huế'),(7,'Cá ngừ'),(8,'Bắp cải'),(9,'Rau ngót'),(10,'Cơm tấm sườn'),(11,'Bún thịt nướng'),(14,'Nước Ngọt'),(15,'Phở bò'),(16,'Hủ tíu thịt heo'),(17,'Bánh mì'),(18,'Hột vịt lộn'),(19,'Trứng gà'),(20,'Cà phê đen'),(21,'Sữa đậu nành'),(22,'Chanh'),(23,'Bia'),(24,'Bột mì'),(25,'Sữa tươi'),(26,'Bột gạo'),(27,'Gạo nếp'),(28,'Gạo thường'),(29,'Thịt heo'),(30,'Tôm'),(31,'Dưa leo'),(32,'Bí xanh'),(33,'Rau củ các loại');
 /*!40000 ALTER TABLE `food` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,7 +221,7 @@ CREATE TABLE `foodingredient` (
   PRIMARY KEY (`id`),
   KEY `FK_m0py0h5oy55wy81kh2xe2ir9p` (`appointmentId`),
   CONSTRAINT `FK_m0py0h5oy55wy81kh2xe2ir9p` FOREIGN KEY (`appointmentId`) REFERENCES `appointment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,7 +262,7 @@ CREATE TABLE `foodphase` (
 
 LOCK TABLES `foodphase` WRITE;
 /*!40000 ALTER TABLE `foodphase` DISABLE KEYS */;
-INSERT INTO `foodphase` VALUES (1,1,1,'ăn ít',5,'bát',2),(2,2,1,'ăn nhiều',3,'gam',3),(3,3,1,'hạn chế',3,'gam',1),(4,4,1,'càng nhiều càng tốt',5,'gam',4),(5,5,1,'ăn trái cây có nhiều nước',3,'gam',3),(6,1,2,'ăn ít',5,'bát',2),(7,2,2,'ăn nhiều',3,'gam',3),(8,3,2,'hạn chế',3,'gam',1),(9,4,2,'càng nhiều càng tốt',5,'gam',4),(10,5,2,'ăn trái cây có nhiều nước',3,'gam',3),(11,1,3,'ăn ít',5,'bát',2),(12,2,3,'ăn nhiều',3,'gam',3),(13,3,3,'hạn chế',3,'gam',1),(14,4,3,'càng nhiều càng tốt',5,'gam',4),(15,5,3,'ăn trái cây có nhiều nước',3,'gam',3);
+INSERT INTO `foodphase` VALUES (1,1,1,'ăn ít',5,'bát',2),(2,2,1,'ăn nhiều',3,'gam',200),(3,4,1,'hạn chế',3,'gam',100),(4,33,1,'càng nhiều càng tốt',5,'gam',400),(5,5,1,'ăn trái cây có nhiều nước',3,'gam',300),(6,1,2,'ăn ít',5,'bát',2),(7,2,2,'ăn nhiều',3,'gam',200),(8,4,2,'hạn chế',3,'gam',100),(9,33,2,'càng nhiều càng tốt',5,'gam',400),(10,5,2,'ăn trái cây có nhiều nước',3,'gam',300),(11,1,3,'ăn ít',5,'bát',2),(12,2,3,'ăn nhiều',3,'gam',200),(13,4,3,'hạn chế',3,'gam',100),(14,33,3,'càng nhiều càng tốt',5,'gam',4400),(15,5,3,'ăn trái cây có nhiều nước',3,'gam',300);
 /*!40000 ALTER TABLE `foodphase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +286,7 @@ CREATE TABLE `foodtreatment` (
   KEY `FK_al5pg659nf9t7vgwarbjfjx2h` (`treatmentId`),
   CONSTRAINT `FK_4sil2ru0amkukqyhh1fvh5eio` FOREIGN KEY (`foodId`) REFERENCES `food` (`id`),
   CONSTRAINT `FK_al5pg659nf9t7vgwarbjfjx2h` FOREIGN KEY (`treatmentId`) REFERENCES `treatment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,7 +310,7 @@ CREATE TABLE `illness` (
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -345,7 +347,7 @@ CREATE TABLE `medicalrecord` (
   CONSTRAINT `FK_9w4j4nqi98up5qqj5my6q005` FOREIGN KEY (`doctorId`) REFERENCES `doctor` (`id`),
   CONSTRAINT `FK_jxea6j6fm9viv3ojnlfed8hm5` FOREIGN KEY (`illnessId`) REFERENCES `illness` (`id`),
   CONSTRAINT `FK_krk6v5uihsmaop15xcq454mv4` FOREIGN KEY (`patientId`) REFERENCES `patient` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -462,7 +464,7 @@ CREATE TABLE `medicinetreatment` (
   KEY `FK_ht7qtv3ge0q0secdrjro0vhkx` (`treatmentId`),
   CONSTRAINT `FK_4pdwmgu4nf488rf85bl10yswl` FOREIGN KEY (`medicineId`) REFERENCES `medicine` (`id`),
   CONSTRAINT `FK_ht7qtv3ge0q0secdrjro0vhkx` FOREIGN KEY (`treatmentId`) REFERENCES `treatment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -502,7 +504,6 @@ CREATE TABLE `notify` (
 
 LOCK TABLES `notify` WRITE;
 /*!40000 ALTER TABLE `notify` DISABLE KEYS */;
-INSERT INTO `notify` VALUES (267,'57',2,4,1,3),(268,'57',1,2,64,1),(269,'57',1,4,1,3);
 /*!40000 ALTER TABLE `notify` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -562,7 +563,6 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (57,'40400570',64);
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -673,7 +673,7 @@ CREATE TABLE `practicetreatment` (
   KEY `FK_qa9wkeh3na0g3uj0tfvqiy49w` (`treatmentId`),
   CONSTRAINT `FK_8dxt7at4ktdejhu60gg4df49p` FOREIGN KEY (`practiceId`) REFERENCES `practice` (`id`),
   CONSTRAINT `FK_qa9wkeh3na0g3uj0tfvqiy49w` FOREIGN KEY (`treatmentId`) REFERENCES `treatment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -711,7 +711,7 @@ CREATE TABLE `preventioncheck` (
   PRIMARY KEY (`id`),
   KEY `FK_2lurw6wup63mjc7ix8882kf97` (`appointmentId`),
   CONSTRAINT `FK_2lurw6wup63mjc7ix8882kf97` FOREIGN KEY (`appointmentId`) REFERENCES `appointment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -825,7 +825,7 @@ CREATE TABLE `treatment` (
   PRIMARY KEY (`id`),
   KEY `FK_1k406kjs718c9035j7oggwiu4` (`appointmentId`),
   CONSTRAINT `FK_1k406kjs718c9035j7oggwiu4` FOREIGN KEY (`appointmentId`) REFERENCES `appointment` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -854,7 +854,7 @@ CREATE TABLE `unitoffood` (
   PRIMARY KEY (`id`),
   KEY `FK_75orce4pd9veck60shyaio5tw` (`foodId`),
   CONSTRAINT `FK_75orce4pd9veck60shyaio5tw` FOREIGN KEY (`foodId`) REFERENCES `food` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -863,7 +863,7 @@ CREATE TABLE `unitoffood` (
 
 LOCK TABLES `unitoffood` WRITE;
 /*!40000 ALTER TABLE `unitoffood` DISABLE KEYS */;
-INSERT INTO `unitoffood` VALUES (1,200,'bát',1,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,0.6,44.2,4.6,0.230,0,0,0,0,0,0,0'),(2,158,'gam',2,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','1.801,0,13,6.32,0,23.6,0,0.74,66,0,0,1.6,5,0.62'),(3,250,'gam',3,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','5.9,0,1.8,15,0,26,0,2.6,7.2,0.46,0.176,82.4,5.378,6.31'),(4,219,'gam',4,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','3.5,0,0,12.56,0,24.68,0,1.16,67,0,0,0,0,0'),(5,61,'gam',5,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,121,0,4.7,3.5,0,0,0,0,0,0,0,0'),(6,479,'tô',6,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,16,65.3,18.4,3.3,0,0,0,0,0,0,0'),(7,200,'gam',7,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,13,8,0,29,0,1.4,0,0,0,29,0,0.9'),(8,25,'gam',8,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,40,0.1,3.2,1.28,2.5,0.47,18,0.061,0.04,36.6,0.234,0.18'),(9,59,'gam',9,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,204,0,11,4.8,0,3,0,0.1,0,239,0,0'),(10,527,'đĩa',10,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,13.3,81.6,20.7,0.44,0,0,0,0,0,0,0'),(11,451,'tô',11,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,13.7,67.3,14.7,3.96,0,0,0,0,0,0,0'),(14,146,'lon',14,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,0,36.2,0,0,0,0,0,0,0,0,0'),(15,431,'tô',15,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,11.7,59.3,17.9,2.28,0,0,0,0,0,0,0'),(16,361,'tô',16,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,12.5,47.8,14.4,1.23,0,0,0,0,0,0,0'),(17,30,'ổ',17,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,7,1,15,2.7,0.8,6,147,0,0,0,0,0'),(18,80,'quả',18,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,6.7,2.2,7.3,0,0,0,0,0,0,0,0'),(19,50,'quả',19,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,2,5,0.6,6,0,3,62,0,0,0,0,0'),(20,237,'ly',20,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,0,0,0.3,0,0,5,0,0,0,0,0'),(21,131,'ly',21,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,6,4.3,0,8,1.5,8,124,0,0,0,0,0'),(22,58,'quả',22,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,1,0.2,5,0.6,1.6,1,1,0,0,51,0,0'),(23,154,'ly',23,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,1,0,13,1.6,0,0,14,0,0,0,0,0'),(24,455,'gam',24,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,1,1.2,95,13,3.4,8,3,0,0,0,0,0'),(25,103,'ml',25,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,30,2.4,12,8,0,0,107,0,0,0,0,0'),(26,366,'gam',26,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,1,1.4,80,6,2.4,2,0,0,0,0,0,0'),(27,97,'gam',27,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,0.2,21,2,1,0,5,0,0,0,0,0'),(28,130,'gam',28,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,1,0.3,28,2.7,0.4,1,1,0,0,0,0'),(29,242,'gam',29,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','5.23,0,19,13.92,0,27.32,0,0.87,62,0,0,0.6,0.46,2.39'),(30,71,'gam',30,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,54,1.01,0.91,13.61,0,0.21,566,0,0,0,0,0.97'),(31,15,'gam',31,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,16,0.1,3.6,0.7,0.5,0.3,0,0,0,2.8,0,0');
+INSERT INTO `unitoffood` VALUES (1,200,'bát',1,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,0.6,44.2,4.6,0.230,0,0,0,0,0,0,0'),(2,158,'gam',2,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','1.801,0,13,6.32,0,23.6,0,0.74,66,0,0,1.6,5,0.62'),(3,250,'gam',3,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','5.9,0,1.8,15,0,26,0,2.6,7.2,0.46,0.176,82.4,5.378,6.31'),(4,219,'gam',4,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','3.5,0,0,12.56,0,24.68,0,1.16,67,0,0,0,0,0'),(5,61,'gam',5,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,121,0,4.7,3.5,0,0,0,0,0,0,0,0'),(6,479,'tô',6,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,16,65.3,18.4,3.3,0,0,0,0,0,0,0'),(7,200,'gam',7,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,13,8,0,29,0,1.4,0,0,0,29,0,0.9'),(8,25,'gam',8,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,40,0.1,3.2,1.28,2.5,0.47,18,0.061,0.04,36.6,0.234,0.18'),(9,59,'gam',9,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,204,0,11,4.8,0,3,0,0.1,0,239,0,0'),(10,527,'đĩa',10,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,13.3,81.6,20.7,0.44,0,0,0,0,0,0,0'),(11,451,'tô',11,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,13.7,67.3,14.7,3.96,0,0,0,0,0,0,0'),(14,146,'lon',14,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,0,36.2,0,0,0,0,0,0,0,0,0'),(15,431,'tô',15,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,11.7,59.3,17.9,2.28,0,0,0,0,0,0,0'),(16,361,'tô',16,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,12.5,47.8,14.4,1.23,0,0,0,0,0,0,0'),(17,30,'ổ',17,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,7,1,15,2.7,0.8,6,147,0,0,0,0,0'),(18,80,'quả',18,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,6.7,2.2,7.3,0,0,0,0,0,0,0,0'),(19,50,'quả',19,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,2,5,0.6,6,0,3,62,0,0,0,0,0'),(20,237,'ly',20,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,0,0,0.3,0,0,5,0,0,0,0,0'),(21,131,'ly',21,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,6,4.3,0,8,1.5,8,124,0,0,0,0,0'),(22,58,'quả',22,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,1,0.2,5,0.6,1.6,1,1,0,0,51,0,0'),(23,154,'ly',23,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,1,0,13,1.6,0,0,14,0,0,0,0,0'),(24,455,'gam',24,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,1,1.2,95,13,3.4,8,3,0,0,0,0,0'),(25,103,'ml',25,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,30,2.4,12,8,0,0,107,0,0,0,0,0'),(26,366,'gam',26,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,1,1.4,80,6,2.4,2,0,0,0,0,0,0'),(27,97,'gam',27,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,0,0.2,21,2,1,0,5,0,0,0,0,0'),(28,130,'gam',28,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,1,0.3,28,2.7,0.4,1,1,0,0,0,0'),(29,242,'gam',29,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','5.23,0,19,13.92,0,27.32,0,0.87,62,0,0,0.6,0.46,2.39'),(30,71,'gam',30,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,54,1.01,0.91,13.61,0,0.21,566,0,0,0,0,0.97'),(31,15,'gam',31,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,16,0.1,3.6,0.7,0.5,0.3,0,0,0,2.8,0,0'),(32,10,'gam',32,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,16,0.1,3.6,0.7,0.5,0.3,0,1,0,2.8,0,1'),(33,16,'gam',33,'animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc','0,0,16,0.1,3.6,0.7,0.5,0.3,0,1,0,2.8,1,1');
 /*!40000 ALTER TABLE `unitoffood` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -876,4 +876,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-30  1:28:30
+-- Dump completed on 2015-12-10 10:21:22
