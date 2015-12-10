@@ -204,6 +204,7 @@ public class DoctorService extends AbstractService {
                         medicalRecord.setEndTime(curDate);
                         medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
                         medicalRecordRepo.saveAndFlush(medicalRecord);
+
                         // Create new medicalrecord
                         medicalRecord = new MedicalRecord();
                         medicalRecord.setStartTime(curDate);
@@ -211,6 +212,8 @@ public class DoctorService extends AbstractService {
                         medicalRecord.setPatient(patient);
                         medicalRecord.setSymptoms(symptoms);
                         medicalRecord.setMedicalHistory(medicalHistory);
+                        medicalRecordRepo.saveAndFlush(medicalRecord);
+                        appointment.setMedicalRecord(medicalRecord);
                     }
                 }
 
