@@ -199,6 +199,12 @@ function createMeasurement() {
     var errorUnit = document.getElementById("errorUnit");
     var errorKcal = document.getElementById("errorKcal");
     if (validateAllField()) {
+        for(var i=0; i< listFood.length;i++){
+            if(mName.value.toLowerCase() == listFood[i].name){
+                alert("This food has been existed");
+                return;
+            }
+        }
         $.ajax({
             method: "GET",
             url: "/food/createFood",
