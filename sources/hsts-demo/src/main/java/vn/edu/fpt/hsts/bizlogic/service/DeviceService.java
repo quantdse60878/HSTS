@@ -62,7 +62,10 @@ public class DeviceService {
         }
     }
 
-    public void createNewDevice(Device device) {
+    public void createNewDevice(String brandName, String uuid) {
+        Device device = new Device();
+        device.setBrandName(brandName);
+        device.setBrandUuid(uuid);
         deviceRepo.save(device);
     }
 
@@ -77,5 +80,13 @@ public class DeviceService {
 
     public void deleteDevice(Device device) {
         deviceRepo.delete(device);
+    }
+
+    public String updateWristband(String brandName, String newName, String uuid) {
+        Device device = deviceRepo.findDeviceByBrandName(brandName);
+        device.setBrandName(newName);
+        device.setBrandUuid(uuid);
+        deviceRepo.save(device);
+        return "200";
     }
 }

@@ -75,8 +75,10 @@ $(document).ready(function () {
 function checkExisted() {
     var val = document.getElementById("device").value;
     document.getElementById("create").style.display = 'none';
+    document.getElementById("update").style.display = 'none';
     document.getElementById("createNewMeasurement").style.display = 'none';
     var item = document.getElementById("autoCompleteItem");
+    $("#table-body").html("");
     item.style.visibility = "hidden";
     item.innerHTML = "";
     if (val != "") {
@@ -98,10 +100,12 @@ function checkExisted() {
             var found = $.inArray(val, listdevice) > -1;
             if (found) {
                 document.getElementById("create").style.display = 'none';
+                document.getElementById("update").style.display = '';
                 document.getElementById("createNewMeasurement").style.display = 'none';
             }
             else {
-                document.getElementById("create").style.display = 'inline-table';
+                document.getElementById("create").style.display = '';
+                document.getElementById("update").style.display = 'none';
             }
         }
     }
@@ -111,6 +115,7 @@ function fillInput(c) {
     index = c;
     document.getElementById("autoCompleteItem").style.visibility = "hidden";
     document.getElementById("create").style.display = 'none';
+    document.getElementById("update").style.display = '';
     document.getElementById("createNewMeasurement").style.display = 'inline-table';
     document.getElementById("device").value = listdevice[c];
     document.getElementById("brandName").value = listint[c];
@@ -165,28 +170,58 @@ function confirmDelete(uuid){
     }
 }
 
-function WP() {
-    var val = document.getElementById("device").value;
-    var uuid = prompt("Please enter UUID Of Wristband : (Exp: 0000180a) ", "UUID");
-    if (uuid != null) {
-        document.getElementById("brandUUID").setAttribute("value", uuid);
-        var bytes = [];
-        for (var i = 0; i < val.length; ++i) {
-            bytes.push(val.charCodeAt(i));
-        }
-        document.getElementById("brandName").setAttribute("value", bytes);
-        return true;
-    }
-    return false;
-}
-
-function viewMeasurement() {
+function viewMeasurement(id) {
     document.getElementById("superParent").style.display = "";
     document.getElementById("child").style.display = "";
-    document.getElementById("mName").value = "";
-    document.getElementById("mType").value = "";
-    document.getElementById("mPosition").value = "";
-    document.getElementById("mUUID").value = "";
+    if(id == 'createMeasurement'){
+        document.getElementById("createMeasurement").style.display = "";
+        document.getElementById("updateWristband").style.display = "none";
+        document.getElementById("createWristband").style.display = "none";
+        document.getElementById("confirmWristband").style.display = "none";
+        document.getElementById("mName").value = "";
+        document.getElementById("mType").value = "";
+        document.getElementById("mPosition").value = "";
+        document.getElementById("mUUID").value = "";
+    }
+    if(id == 'updateWristband'){
+        document.getElementById("createMeasurement").style.display = "none";
+        document.getElementById("updateWristband").style.display = "";
+        document.getElementById("createWristband").style.display = "none";
+        document.getElementById("confirmWristband").style.display = "none";
+        document.getElementById("wName").value = document.getElementById("device").value;
+        $.ajax({
+            method: "POST",
+            url: "/getDevice",
+            data: {"brandName": listint[index]}
+        }).done(function (data) {
+            document.getElementById("wUUID").value = data.brandUuid;
+        });
+
+    }
+    if(id == 'createWristband'){
+        document.getElementById("createMeasurement").style.display = "none";
+        document.getElementById("updateWristband").style.display = "none";
+        document.getElementById("createWristband").style.display = "";
+        document.getElementById("confirmWristband").style.display = "none";
+        document.getElementById("wName2").value = document.getElementById("device").value;
+    }
+    if(id == 'confirmWristband'){
+        var wName2 = document.getElementById("wName2");
+        var wUUID2 = document.getElementById("wUUID2");
+        checkValidateMeasurement(wName2,'errorwName2');
+        checkValidateMeasurement(wUUID2,'errorwUUID2');
+        if(wName2.value == ""){
+           return;
+        }
+        if(wUUID2.value == ""){
+           return;
+        }
+        document.getElementById("createMeasurement").style.display = "none";
+        document.getElementById("updateWristband").style.display = "none";
+        document.getElementById("createWristband").style.display = "none";
+        document.getElementById("confirmWristband").style.display = "";
+    }
+
 }
 
 function hideMesurement() {
@@ -240,4 +275,82 @@ function checkValidateMeasurement (element, errorID){
         document.getElementById(errorID).innerHTML = "";
         document.getElementById(errorID).style.display = "none";
     }
+}
+
+function createWristband(){
+    var wName2 = document.getElementById("wName2");
+    var wUUID2 = document.getElementById("wUUID2");
+    var mName2 = document.getElementById("mName2");
+    var mUUID2 = document.getElementById("mUUID2");
+    var mPosition2 = document.getElementById("mPosition2");
+    var mType2 = document.getElementById("mType2");
+    checkValidateMeasurement(mName2,'errorName2');
+    checkValidateMeasurement(mUUID2,'errorUUID2');
+    checkValidateMeasurement(mPosition2,'errorPosition2');
+    checkValidateMeasurement(mType2,'errorType2');
+    if(mName2.value == ""){
+        return;
+    }
+    if(mUUID2.value == ""){
+        return;
+    }
+    if(mPosition2.value == ""){
+        return;
+    }
+    if(mType2.value == ""){
+        return;
+    }
+    var bytes = [];
+    for (var i = 0; i < wName2.value.length; ++i) {
+        bytes.push(wName2.value.charCodeAt(i));
+    }
+    $.ajax({
+        method: "POST",
+        url: "/createWristband",
+        data: {"brandName": bytes,
+            "UUID": wUUID2.value,
+            "measureName" : mName2.value,
+            "measureType" : mType2.value,
+            "measurePosition" : mPosition2.value,
+            "measureUUID" : mUUID2.value
+        }
+    }).done(function (data) {
+        if(data == "200"){
+            alert("New Wristband has been created !")
+            location.reload();
+        }
+        alert("Create Wristband failed!");
+    });
+}
+
+function updateWristband(){
+    var wName = document.getElementById("wName");
+    var wUUID = document.getElementById("wUUID");
+    checkValidateMeasurement(wName,'errorwName');
+    checkValidateMeasurement(wUUID,'errorwUUID');
+    if(wName.value == ""){
+        return;
+    }
+    if(wUUID.value == ""){
+        return;
+    }
+    var bytes = [];
+    for (var i = 0; i < wName.value.length; ++i) {
+        bytes.push(wName.value.charCodeAt(i));
+    }
+    //
+    $.ajax({
+        method: "POST",
+        url: "/updateWristband",
+        data: {"brandName": listint[index],
+            "newName": bytes,
+            "UUID": wUUID.value
+        }
+    }).done(function (data) {
+        if(data == "200"){
+            alert("New Wristband has been created !")
+            location.reload();
+        }
+        alert("Create Wristband failed!");
+    });
 }
