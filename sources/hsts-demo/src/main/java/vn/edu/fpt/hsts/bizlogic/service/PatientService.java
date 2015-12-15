@@ -72,7 +72,15 @@ import java.util.Set;
 @Service
 public class PatientService extends AbstractService {
 
+    /**
+     * The logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(PatientService.class);
+
+    /**
+     * Alternative logger - use for log username and password.
+     */
+    private static final Logger ACC_LOGGER = LoggerFactory.getLogger("AccountLogger");
 
     /**
      * The {@link AccountRepo}.
@@ -255,6 +263,10 @@ public class PatientService extends AbstractService {
                     tmpAccount.setPassword(newAccount.getPassword());
                     tmpAccount.setUsername(newAccount.getUsername());
                     tmpAccount.setEmail(newAccount.getEmail());
+
+                    // Log username - password to file
+                    ACC_LOGGER.info("{} - {}", tmpAccount.getUsername(), tmpAccount.getPassword());
+
                     mailService.pushMail(tmpAccount);
 
                     // Encrypt password with MD5 hash

@@ -22,9 +22,30 @@
         </encoder>
     </appender>
 
+    <appender name="ACCOUNTLOGGER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>\log\hsts-account.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>\log\hsts-account-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 10MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
     <!-- Set up logback configuration -->
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
+
+    <logger name="AccountLogger" level="INFO"
+            additivity="false">
+        <appender-ref ref="ACCOUNTLOGGER" />
+    </logger>
 </configuration>
