@@ -1314,3 +1314,9 @@ function showModalAndDraw () {
             barChart.Line(barChartData, barChartOptions);
         })
 };
+
+(function(){
+    var a = document.getElementById("appointmentId").value;
+    var b = document.getElementById("finishMedicalRecord");
+    b.href = "/finishMedicalRecord?appointmentId=" + a;
+})();
