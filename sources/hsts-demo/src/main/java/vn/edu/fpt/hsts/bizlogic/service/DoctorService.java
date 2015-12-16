@@ -575,6 +575,7 @@ public class DoctorService extends AbstractService {
         }
     }
 
+    @Transactional
     public boolean finishMakePrescription(final int appointmentId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
@@ -603,6 +604,33 @@ public class DoctorService extends AbstractService {
                 illness.setName("No illness");
                 illnessRepo.saveAndFlush(illness);
             }
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional
+    public boolean finishMedicalRecord(final int appointmentId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointment[{}]", appointmentId);
+            Appointment appointment = appointmentRepo.findOne(appointmentId);
+
+            MedicalRecord medicalRecord = appointment.getMedicalRecord();
+            medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
+
+            // Set all related appointment to FINISHED
+            appointmentRepo.setStatusByMedicalRecordId(IDbConsts.IAppointmentStatus.FINISHED, medicalRecord.getId());
+
+            // Set all related treatment to FINISHED
+            treatmentRepo.setStatusByMedicalRecordId(IDbConsts.ITreatmentStatus.FINISHED, medicalRecord.getId());
+
+            medicalRecordRepo.saveAndFlush(medicalRecord);
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("MedicalRecord[{}] is finished", medicalRecord.getId());
+            }
+            return true;
         }finally {
             LOGGER.info(IConsts.END_METHOD);
         }
