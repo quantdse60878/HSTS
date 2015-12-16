@@ -2,6 +2,7 @@ package com.example.quyhkse61160.hstsapp;
 
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Ringtone;
@@ -83,6 +84,8 @@ public class AlarmSettingActivity extends ActionBarActivity {
                 }
                 Constant.ALARM_TIME = Integer.parseInt(time.getText().toString());
                 Toast.makeText(AlarmSettingActivity.this,"Cập Nhật Thành Công.",Toast.LENGTH_LONG).show();
+                Intent home = new Intent(AlarmSettingActivity.this,HomeActivity.class);
+                startActivity(home);
             }
         });
 

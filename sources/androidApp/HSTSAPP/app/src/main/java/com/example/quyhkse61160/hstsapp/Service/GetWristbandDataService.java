@@ -33,12 +33,15 @@ public class GetWristbandDataService extends Service {
                 @Override
                 public void run() {
                     Log.d("KhuongMHHHHHH", "Tao Dang Chạy GetWristbandData");
-                    if(HomeActivity.hadHadCharacteristic) {
-                        HomeActivity.readData();
+                    if(!HomeActivity.stopGetDataFromWristband) {
+                        if(HomeActivity.hadHadCharacteristic) {
+                            HomeActivity.readData();
+                        }
                     }
+
                 }
             }).start();
-            handlerThreadSetup.postDelayed(this,30000);
+            handlerThreadSetup.postDelayed(this,10000);
         }
     };
 

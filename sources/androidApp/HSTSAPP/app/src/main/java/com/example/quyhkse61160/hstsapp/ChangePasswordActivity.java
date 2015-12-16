@@ -92,7 +92,7 @@ public class ChangePasswordActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_notify_to_doctor, menu);
+        //getMenuInflater().inflate(R.menu.menu_notify_to_doctor, menu);
         return true;
     }
 

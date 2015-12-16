@@ -107,6 +107,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public static boolean hadHadCharacteristic = false;
     private final Handler handlerThread = new Handler();
 
+    public static boolean stopGetDataFromWristband = false;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -190,22 +191,22 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
 //        txtNumberOfStep.setText(numberOfStep);
 
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // Your logic here...
-
-                // When you need to modify a UI element, do so on the UI thread.
-                // 'getActivity()' is required as this is being ran from a Fragment.
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // This code will always run on the UI thread, therefore is safe to modify UI elements.
-                        readData();
-                    }
-                });
-            }
-        }, 10000, 10000);
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                // Your logic here...
+//
+//                // When you need to modify a UI element, do so on the UI thread.
+//                // 'getActivity()' is required as this is being ran from a Fragment.
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // This code will always run on the UI thread, therefore is safe to modify UI elements.
+//                        readData();
+//                    }
+//                });
+//            }
+//        }, 10000, 10000);
 
 
     }
@@ -433,8 +434,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         }
 
         Context context = getApplicationContext();
-//        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
-//        context.startService(notifyIntent);
+        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
+        context.startService(notifyIntent);
     }
 
     @Override
@@ -527,6 +528,11 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
+        if(!stopGetDataFromWristband) {
+            menu.findItem(R.id.action_stop).setTitle("STOP");
+        } else {
+            menu.findItem(R.id.action_stop).setTitle("START");
+        }
         return true;
     }
 
@@ -577,6 +583,18 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 startActivity(intentConfigAlarm);
                 break;
             }
+            case R.id.action_stop:{
+                if(!stopGetDataFromWristband) {
+                    stopGetDataFromWristband = true;
+                    item.setTitle("START");
+                } else {
+                    stopGetDataFromWristband = false;
+                    item.setChecked(true);
+                    item.setTitle("STOP");
+                }
+            }
+
+
 
         }
 
