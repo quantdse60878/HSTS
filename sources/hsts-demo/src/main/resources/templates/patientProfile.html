@@ -38,11 +38,14 @@
                                 <div class="nav-tabs-custom" style="box-shadow: none;">
                                     <!-- Tab header -->
                                     <ul class="nav nav-tabs">
-                                        <li id="li_tab_1">
+                                        <li id="li_tab_1" class="active">
                                             <a href="#tab_1" data-toggle="tab" onclick="changeTab('#tab_1', '#li_tab_1')">Patient's Profile</a>
                                         </li>
-                                        <li id="li_tab_2" class="active">
-                                            <a href="#tab_2" data-toggle="tab" onclick="changeTab('#tab_2', '#li_tab_2')">Medical Profiles</a>
+                                        <li id="li_tab_2">
+                                            <a href="#tab_2" data-toggle="tab" onclick="changeTab('#tab_2', '#li_tab_2')">Last Measurements</a>
+                                        </li>
+                                        <li id="li_tab_3">
+                                            <a href="#tab_3" data-toggle="tab" onclick="changeTab('#tab_3', '#li_tab_3')">Medical History</a>
                                         </li>
                                     </ul>
                                     <!-- End tab header -->
@@ -87,23 +90,164 @@
                                                     <input type="checkbox"  id="pGender" th:checked="${READONLY_PATIENT.account.gender == 1}" disabled="disabled"/>
                                                 </div>
                                             </div>
-
-                                            <!-- footer -->
-                                            <div style="margin: 15px;">
-                                                <a data-toggle="tab" onclick="changeTab('#tab_2', '#li_tab_2')"
-                                                   class="btn btn-primary pull-right">Next</a>
-                                            </div>
-                                            <!-- /.footer -->
                                         </div>
                                         <!-- End tab 1 -->
 
                                         <!-- Tab 2: Basic patient data -->
                                         <div class="tab-pane active" id="tab_2">
+                                            <table class="table table-bordered table-striped" id="tableMedicalCheck">
+                                                <thead>
+                                                <tr>
+                                                    <th style="width: 250px; text-align: center">Measurement index</th>
+                                                    <th style="width: 75px; text-align: center">Value</th>
+                                                    <th style="width: 250px; text-align: center">Measurement index</th>
+                                                    <th style="width: 75px; text-align: center" >Value</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label for="weight" class="control-label">Weight* (Kg)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="number" th:name="weight" class="form-control" id="weight" th:value="(*{PC}!= null and *{PC.weight != null})?${#numbers.formatInteger(PC.weight, 2)}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id="invalidWeight">
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="visceralFat" class="control-label">Visceral Fat* (level)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="visceralFat" class="form-control"
+                                                               id="visceralFat" th:value="(*{PC}!= null and *{PC.visceralFat != null})?*{PC.visceralFat}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id="invalidVisceralFat"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="height" class="control-label">Height* (cm)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="number" th:name="height" class="form-control" id="height"
+                                                               th:value="(*{PC} != null and *{PC.height != null})?${#numbers.formatInteger(PC.height, 2)}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id="invalidHeight"></div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="muscleMass" class="control-label">Muscle Mass* (%)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="muscleMass" class="form-control"
+                                                               id="muscleMass" th:value="(*{PC}!= null and *{PC.muscleMass != null})?*{PC.muscleMass}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id="invalidMuscleMass"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="heartBeat" class="control-label">Heart Beat* (times/min)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="number" th:name="heartBeat" class="form-control"
+                                                               id="heartBeat" th:value="(*{PC}!= null and *{PC.heartBeat != null})?${#numbers.formatInteger(PC.heartBeat, 2)}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id="invalidHeartBeat"></div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="bodyWater" class="control-label">Body Water* (%)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="bodyWater" class="form-control"
+                                                               id="bodyWater" th:value="(*{PC}!= null and *{PC.bodyWater != null})?*{PC.bodyWater}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id="invalidBodyWater"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="bloodPressure" class="control-label">Blood Pressure* (mmHg)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="number" th:name="bloodPressure" class="form-control"
+                                                               id="bloodPressure" th:value="(*{PC}!= null and *{PC.bloodPressure != null})?${#numbers.formatInteger(PC.bloodPressure, 2)}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id = "invalidBloodPressure"></div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="phaseAngle" class="control-label">Phase Angle* (o)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="phaseAngle" class="form-control"
+                                                               id="phaseAngle" th:value="(*{PC}!= null and *{PC.phaseAngle != null})?*{PC.phaseAngle}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id = "invalidPhaseAngle"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="waists" class="control-label">Waists* (cm)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="number" th:name="waists" class="form-control" id="waists"
+                                                               th:value="(*{PC}!= null and *{PC.waists != null})?${#numbers.formatInteger(PC.waists, 2)}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id = "invalidWaists"></div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="impedance" class="control-label">Impedance* (Ohm)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="number" th:name="impedance" class="form-control"
+                                                               id="impedance"
+                                                               th:value="(*{PC}!= null and *{PC.impedance != null})?${#numbers.formatInteger(PC.impedance, 2)}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id = "invalidImpedance"></div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label for="bodyFat" class="control-label">Body Fat* (%)</label>
+                                                    </td>
+                                                    <td class="form-group">
+                                                        <input type="text" th:name="bodyFat" class="form-control"
+                                                               id="bodyFat"
+                                                               th:value="(*{PC}!= null and *{PC.bodyFat != null})?*{PC.bodyFat}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id = "invalidBodyFat"></div>
+                                                    </td>
+
+                                                    <td>
+                                                        <label for="basalMetabolicRate" class="control-label">Basal
+                                                            Metabolic Rate* (Kcal)</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" th:name="basalMetabolicRate" class="form-control"
+                                                               id="basalMetabolicRate"
+                                                               th:value="(*{PC}!= null and *{PC.basalMetabolicRate != null})?${#numbers.formatInteger(PC.basalMetabolicRate, 2)}:0" readonly="readonly"/>
+
+                                                        <div class="help-block with-errors" id="invalidBasalMetabolicRate"></div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- End tab 2 -->
+
+                                        <!-- Tab 3: Basic patient data -->
+                                        <div class="tab-pane" id="tab_3">
                                             <div id="medicalContent">
 
                                             </div>
                                         </div>
-                                        <!-- End tab 2 -->
+                                        <!-- End tab 3 -->
 
                                     </div>
                                     <!-- end tab content -->

@@ -78,9 +78,18 @@ public class DoctorController extends AbstractController{
     @Autowired
     private TreatmentService treatmentService;
 
+    /**
+     * The {@link UserSession}.
+     */
     @Autowired
     private UserSession userSession;
 
+
+    /**
+     * The {@link PreventionCheckService}.
+     */
+    @Autowired
+    private PreventionCheckService preventionCheckService;
 
     /**
      * The doctor patients page mapping
@@ -286,6 +295,11 @@ public class DoctorController extends AbstractController{
             mav.setViewName("patientProfile");
             Patient patient = patientService.getPatientByID(patientId);
             mav.addObject("READONLY_PATIENT", patient);
+
+            // Find last old preventcheck
+            final PreventionCheck pc = preventionCheckService.findLastPreventionCheckByPatientId(patientId);
+            mav.addObject("PC", pc);
+
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
