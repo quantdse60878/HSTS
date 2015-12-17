@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import vn.edu.fpt.hsts.bizlogic.PracticePhasePageModel;
+import vn.edu.fpt.hsts.bizlogic.model.PracticePhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.regimen.PhaseModel;

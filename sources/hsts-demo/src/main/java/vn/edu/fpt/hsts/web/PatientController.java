@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
+import vn.edu.fpt.hsts.bizlogic.model.MedicalRecordPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationModel;
@@ -378,6 +379,18 @@ public class PatientController extends AbstractController {
         try {
             LOGGER.info("birthday[{}]", birthday);
             return dataValidationService.validateBirthday(birthday);
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping( value = "/medicalRecords", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public MedicalRecordPageModel medicalRecords(@RequestParam("patientId") final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            return patientService.findMedicalRecordsByPatientId(patientId);
         }finally {
             LOGGER.info(IConsts.END_METHOD);
         }

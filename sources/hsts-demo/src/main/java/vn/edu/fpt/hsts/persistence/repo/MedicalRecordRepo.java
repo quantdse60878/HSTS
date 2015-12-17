@@ -7,6 +7,7 @@
  */
 package vn.edu.fpt.hsts.persistence.repo;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,4 +27,7 @@ public interface MedicalRecordRepo extends JpaRepository<MedicalRecord, Integer>
 
     @Query("select m from MedicalRecord m where m.patient.id = :patientId order by id desc")
     public List<MedicalRecord> findByPatientId(@Param("patientId") final int patientId, final Pageable pageable);
+
+    @Query("select m from MedicalRecord m where m.patient.id = :patientId order by startTime asc")
+    public Page<MedicalRecord> findPageByPatientId(@Param("patientId") final int patientId, final Pageable pageable);
 }

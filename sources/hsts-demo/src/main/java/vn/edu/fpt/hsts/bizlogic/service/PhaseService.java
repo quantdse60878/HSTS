@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import vn.edu.fpt.hsts.bizlogic.PracticePhasePageModel;
+import vn.edu.fpt.hsts.bizlogic.model.PracticePhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPhaseModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPhasePageModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicinePhaseModel;

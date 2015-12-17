@@ -5,7 +5,7 @@
  * Author: dangquantran.
  * Date: 11/14/2015.
  */
-package vn.edu.fpt.hsts.bizlogic;
+package vn.edu.fpt.hsts.bizlogic.model;
 
 import org.springframework.data.domain.Page;
 import vn.edu.fpt.hsts.bizlogic.model.AbstractPageModel;

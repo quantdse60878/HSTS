@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
+import vn.edu.fpt.hsts.bizlogic.model.MedicalRecordPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientExtendedPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.PatientRegistrationModel;
@@ -960,6 +961,22 @@ public class PatientService extends AbstractService {
             PatientExtendedModel model = new PatientExtendedModel();
             model.fromEntity(patient);
             return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public MedicalRecordPageModel findMedicalRecordsByPatientId(final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
+            final Page<MedicalRecord> medicalRecordPage = medicalRecordRepo.findPageByPatientId(patientId, pageRequest);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Got {} records", medicalRecordPage.getNumberOfElements());
+            }
+            final MedicalRecordPageModel pageModel = new MedicalRecordPageModel(medicalRecordPage);
+            return pageModel;
         } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
