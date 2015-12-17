@@ -53,7 +53,7 @@ $(document).ready(function(){
             {
                 "data": "id",
                 "render": function ( data, type, full, meta ) {
-                    return '<a onclick="printPrescription('+ data +')" class="btn btn-info" id = "printPres">View</a>';
+                    return '<a href="patientProfile?patientId='+ data + '" class="btn btn-info">View</a>';
                 },
                 "width": "20%"
             }
@@ -61,25 +61,3 @@ $(document).ready(function(){
 
     } );
 });
-
-
-function printPrescription(patientId) {
-    console.log(patientId);
-    $.ajax({
-        method: "GET",
-        url: "/checkPrescription",
-        data: {
-            patientId: patientId
-        }
-    })
-        .done(function(data) {
-            console.log(data);
-            // Check if the
-            if (data == FAIL_STATUS) {
-                $('#messageModal').modal('show');
-                return;
-            }
-            var url = "/printPrescriptionPage?patientId=" + patientId;
-            var w = window.open(url, "_blank");
-        });
-}

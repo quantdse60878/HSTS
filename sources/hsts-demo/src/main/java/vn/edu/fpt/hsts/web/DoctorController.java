@@ -265,12 +265,27 @@ public class DoctorController extends AbstractController{
     }
 
     @RequestMapping(value = "dictionary", method = RequestMethod.GET)
-    public ModelAndView finishMedicalRecord() {
+    public ModelAndView dictionary() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
 
             ModelAndView mav = new ModelAndView();
             mav.setViewName("dictionary");
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/patientProfile", method = RequestMethod.GET)
+    public ModelAndView patientProfile(@RequestParam("patientId") final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("patientProfile");
+            Patient patient = patientService.getPatientByID(patientId);
+            mav.addObject("READONLY_PATIENT", patient);
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

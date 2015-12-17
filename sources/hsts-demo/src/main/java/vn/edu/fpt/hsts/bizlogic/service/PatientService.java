@@ -211,6 +211,24 @@ public class PatientService extends AbstractService {
         } else return null;
     }
 
+    public Patient findById(final int patientId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("patientId[{}]", patientId);
+            final Patient patient = patientRepo.findOne(patientId);
+            if (null != patient) {
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Found patient[{}]", patient.getAccount().getFullName());
+                }
+            } else {
+                LOGGER.warn("Not found patient with id[{}]", patientId);
+            }
+            return patient;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
 
     @Transactional(rollbackOn = BizlogicException.class)
     public PatientRegistrationModel register(final int patientId, final SearchCriteria ... criterias) throws BizlogicException {

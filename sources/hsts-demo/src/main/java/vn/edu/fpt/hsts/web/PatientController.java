@@ -170,7 +170,7 @@ public class PatientController extends AbstractController {
         try {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("updatePatient");
-            Patient patient = patientService.getPatientByID(patientID);
+            Patient patient = patientService.findById(patientID);
             mav.addObject("PATIENT", patient);
             return mav;
         } finally {
@@ -264,7 +264,7 @@ public class PatientController extends AbstractController {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("oldMeasurement");
 
-            Patient patient = patientService.getPatientByID(patientId);
+            Patient patient = patientService.findById(patientId);
             mav.addObject("PATIENT", patient);
 
             // Find last old preventcheck
