@@ -264,4 +264,16 @@ public class DoctorController extends AbstractController{
         }
     }
 
+    @RequestMapping(value = "dictionary", method = RequestMethod.GET)
+    public ModelAndView finishMedicalRecord() {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("dictionary");
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

@@ -36,6 +36,7 @@
             <li class="active treeview" th:if="${session.USER.role.name == 'Doctor'}">
                 <ul class="treeview-menu">
                     <li><a href="doctorPatients"><i class="fa fa-users"></i> Patients</a></li>
+                    <li><a href="dictionary"><i class="fa fa-users"></i> Medical Dictionary</a></li>
                 </ul>
                 <div th:if="${PATIENT != null}">
                     <!-- patient's Profile -->
