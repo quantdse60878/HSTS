@@ -90,7 +90,7 @@ public class NoticeTab extends Fragment {
                         y2 = touchevent.getY();
 
                         //if left to right sweep event on screen
-                        if (x1 < x2 && (x2 - x1) > 5)
+                        if (x1 < x2 && (x2 - x1) > 50)
                         {
 
                             if( !HomeActivity.timeAlert.isEmpty() && count - 1 >= 0){
@@ -102,7 +102,7 @@ public class NoticeTab extends Fragment {
                         }
 
                         // if right to left sweep event on screen
-                        if (x1 > x2 && (x1 - x2) > 5)
+                        if (x1 > x2 && (x1 - x2) > 50)
                         {
                             if(!HomeActivity.timeAlert.isEmpty() && count + 1 <= Constant.TIMES.size() - 1){
                                 count += 1;

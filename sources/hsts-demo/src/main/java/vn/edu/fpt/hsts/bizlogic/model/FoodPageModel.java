@@ -10,20 +10,35 @@ package vn.edu.fpt.hsts.bizlogic.model;
 import org.springframework.data.domain.Page;
 import vn.edu.fpt.hsts.persistence.entity.Food;
 
-public class FoodPageModel extends AbstractPageModel<Food, FoodModel>{
-    /**
-     * <p>
-     * Constructor.
-     * </p>
-     *
-     * @param pageEntities {@link Page}
-     */
-    public FoodPageModel(Page<Food> pageEntities) {
-        super(pageEntities);
+public class FoodPageModel{
+    private int id;
+    private String name = "";
+    private String unit = "";
+
+    public FoodPageModel() {
     }
 
-    @Override
-    protected Class<FoodModel> getModelClass() {
-        return FoodModel.class;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

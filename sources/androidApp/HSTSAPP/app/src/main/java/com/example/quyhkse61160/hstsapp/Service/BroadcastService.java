@@ -25,6 +25,7 @@ import com.example.quyhkse61160.hstsapp.Common.HSTSUtils;
 import com.example.quyhkse61160.hstsapp.HomeActivity;
 import com.example.quyhkse61160.hstsapp.LoginActivity;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -88,8 +89,8 @@ public class BroadcastService extends Service {
                 @Override
                 public void run() {
                     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constant.PREF_NAME, Context.MODE_PRIVATE);
-                    if(sharedPreferences.getString(Constant.PREF_HADSELECTDEVICE, "").equals("") ||
-                            sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")){
+                    if (sharedPreferences.getString(Constant.PREF_HADSELECTDEVICE, "").equals("") ||
+                            sharedPreferences.getString(Constant.PREF_ACCOUNTID_HADLOGIN, "").equals("")) {
                         return;
                     }
 
@@ -138,39 +139,49 @@ public class BroadcastService extends Service {
                         File root = Environment.getExternalStorageDirectory();
                         File dir = new File(root.getAbsolutePath() + "/kimquy");
                         dir.mkdirs();
-                        File file = new File(dir, FILENAME);
-                        if (file.exists()) {
-                            try {
-                                BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-                                StringBuffer stringBuffer = new StringBuffer();
-                                String line = null;
+                        for(int j = 0; j < dir.listFiles().length; j++) {
+                            File file = dir.listFiles()[j];
+                            Log.d("QUYYY123123", "FILE");
+                            if (file.exists()) {
+                                try {
+                                    BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+                                    StringBuffer stringBuffer = new StringBuffer();
+                                    String line = null;
 
-                                while ((line = bufferedReader.readLine()) != null) {
+                                    while ((line = bufferedReader.readLine()) != null) {
 
-                                    stringBuffer.append(line);
+                                        stringBuffer.append(line);
+                                    }
+
+                                    System.out.println(stringBuffer);
+                                    String fileData = new String(stringBuffer);
+
+                                    String[] listArray = fileData.split(",");
+                                    byte[] listByteData = new byte[listArray.length];
+                                    for (int i = 0; i < listArray.length; i++) {
+                                        listByteData[i] = Byte.parseByte(listArray[i]);
+                                    }
+                                    String listData = new String(listByteData);
+                                    String numberOfStep = listData.split(",")[Constant.numberOfStep_potition];
+//                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                                    String fileName = file.getName();
+                                    fileName = fileName.substring(0,4) + "/" + fileName.substring(4,6) + "/" + fileName.substring(6,8);
+                                    sendMedicalData(numberOfStep, fileName);
+                                    Log.d("QUY", "QUY");
+
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
                                 }
-
-                                System.out.println(stringBuffer);
-                                String fileData = new String(stringBuffer);
-
-                                String[] listArray = fileData.split(",");
-                                byte[] listByteData = new byte[listArray.length];
-                                for (int i = 0; i < listArray.length; i++) {
-                                    listByteData[i] = Byte.parseByte(listArray[i]);
-                                }
-                                String listData = new String(listByteData);
-                                String numberOfStep = listData.split(",")[Constant.numberOfStep_potition];
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-
-                                sendMedicalData(numberOfStep, sdf.format(date));
-                                Log.d("QUY", "QUY");
-
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
                             }
-                        }
 
+                        }
+                        try {
+                            FileUtils.cleanDirectory(dir);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+//                        File file = new File(dir, FILENAME);
                         Log.d("QUY", "------------------111111111111111-------------");
 
                     }
@@ -184,19 +195,17 @@ public class BroadcastService extends Service {
                         Calendar c3 = Calendar.getInstance();
                         c3.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time.split(":")[0]));
                         c3.set(Calendar.MINUTE, Integer.parseInt(time.split(":")[1]));
-
                         if (c3.getTime().getHours() == c.getTime().getHours()
                                 && c3.getTime().getMinutes() + alertMinute == c.getTime().getMinutes()) {
-                            if(BroadcastService.flag3 && c.getTime().getDate() >= Constant.PATIENT_APPOINTMENT.getDate() &&
+                            if (BroadcastService.flag3 && c.getTime().getDate() >= Constant.PATIENT_APPOINTMENT.getDate() &&
                                     c.getTime().getMonth() >= Constant.PATIENT_APPOINTMENT.getMonth() &&
-                                    c.getTime().getYear() >= Constant.PATIENT_APPOINTMENT.getYear()){
+                                    c.getTime().getYear() >= Constant.PATIENT_APPOINTMENT.getYear()) {
                                 BroadcastService.flag3 = false;
                                 Intent in = new Intent(context, HomeActivity.class);
                                 in.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 in.putExtra("nextAppointment", Boolean.TRUE);
                                 context.startActivity(in);
                             }
-
                             if (BroadcastService.flag && BroadcastService.flag3) {
                                 Log.d("KhuongMH", "FLAG1 FALSEEEEEEEEEEE");
                                 BroadcastService.flag = false;
@@ -255,6 +264,8 @@ public class BroadcastService extends Service {
             while ((temp = bReader.readLine()) != null) {
                 response += temp;
             }
+
+
             HomeActivity.listNumberOfStep = new ArrayList<>();
             HomeActivity.dateSaveStep = new ArrayList<>();
 
@@ -407,7 +418,7 @@ public class BroadcastService extends Service {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(Constant.PREF_DATA, Constant.DATA_FROM_SERVER);
             editor.commit();
-            Constant.TREATMENTS = Constant.getItems();
+            Constant.TREATMENTS = HSTSUtils.getItems();
             Log.d("QUYYY111", "Treatment--" + response);
             HomeActivity.amountTime = HomeActivity.amountTime();
             Intent homeIntent = new Intent(this, HomeActivity.class);

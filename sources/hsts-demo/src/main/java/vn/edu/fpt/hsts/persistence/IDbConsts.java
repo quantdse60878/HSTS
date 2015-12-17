@@ -199,4 +199,8 @@ public interface IDbConsts {
         int CALCULATE = 0;
 
     }
+
+    public interface IUnitOfFood {
+        String listElNutriName = "animalFat,animalProtein,calcium,fat,starch,protein,fiber,iron,sodium,vitaminB1,vitaminB2,vitaminC,vitaminPP,zinc";
+    }
 }

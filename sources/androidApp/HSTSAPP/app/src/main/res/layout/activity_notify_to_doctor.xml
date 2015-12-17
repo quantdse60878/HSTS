@@ -10,13 +10,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txt_change_password_current"
-        android:hint="@string/prompt_change_password_current"
-        android:layout_gravity="center"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/txt_change_password_new"
         android:inputType="textPassword"
         android:hint="@string/prompt_change_password_new"
@@ -42,6 +35,7 @@
             android:layout_marginRight="5dp"
             android:background="#ce2aa7d6"
             android:text="@string/change_password_cancel"
+            android:visibility="gone"
             android:textColor="#ffffff"
             android:textStyle="bold" />
         <Button

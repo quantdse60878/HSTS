@@ -18,15 +18,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import vn.edu.fpt.hsts.bizlogic.model.FoodModel;
-import vn.edu.fpt.hsts.bizlogic.model.FoodPageModel;
-import vn.edu.fpt.hsts.bizlogic.model.FoodPhaseModel;
-import vn.edu.fpt.hsts.bizlogic.model.UnitOfFoodModel;
+import vn.edu.fpt.hsts.bizlogic.model.*;
 import vn.edu.fpt.hsts.bizlogic.service.FoodService;
 import vn.edu.fpt.hsts.bizlogic.service.PhaseService;
+import vn.edu.fpt.hsts.bizlogic.service.UnitOfFoodService;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
+import vn.edu.fpt.hsts.persistence.entity.Food;
+import vn.edu.fpt.hsts.persistence.entity.FoodPhase;
+import vn.edu.fpt.hsts.persistence.entity.UnitOfFood;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -51,15 +53,26 @@ public class FoodController extends AbstractController {
 
     @RequestMapping(value = "/food/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public FoodPageModel findFoods(@RequestParam(value = "name", required = false, defaultValue = EMPTY) final String name,
-                                    @RequestParam(value = "page", required = false, defaultValue = DEFAULT_PAGE) final int page,
-                                    @RequestParam(value = "pageSize", required = false, defaultValue = PAGE_SIZE_5) final int pageSize) {
-        LOGGER.info(IConsts.BEGIN_METHOD);
-        try {
-            return foodService.findFoods(name, page, pageSize);
-        } finally {
-            LOGGER.info(IConsts.END_METHOD);
+    public List<FoodPageModel> findFoods() {
+        List<Food> foods = foodService.findFoods();
+        List<FoodPageModel> foodPageModels = new ArrayList<FoodPageModel>();
+        for (Food item : foods){
+            FoodPageModel model = new FoodPageModel();
+            model.setId(item.getId());
+            model.setName(item.getName());
+            String temp = "";
+            List<UnitOfFood> unitOfFoods = item.getUnitOfFoodList();
+            for (int i=0;i<unitOfFoods.size();i++){
+                if(i==0){
+                    temp = unitOfFoods.get(i).getUnitName();
+                } else {
+                    temp += ", " +unitOfFoods.get(i).getUnitName();
+                }
+            }
+            model.setUnit(temp);
+            foodPageModels.add(model);
         }
+        return foodPageModels;
     }
 
     @RequestMapping(value = "/phase/food/detail", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -246,5 +259,66 @@ public class FoodController extends AbstractController {
         }finally {
             LOGGER.info(IConsts.END_METHOD);
         }
+    }
+
+    @RequestMapping(value = "/food/createFood", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String createFood(@RequestParam("foodName") final String nameFood,
+                             @RequestParam("unitOfFood") final String unit,
+                             @RequestParam("Kcal") final String kcal,
+                             @RequestParam("animalFat") final String animalFat,
+                             @RequestParam("animalProtein") final String animalProtein,
+                             @RequestParam("calcium") final String calcium,
+                             @RequestParam("lipid") final String lipid,
+                             @RequestParam("starch") final String starch,
+                             @RequestParam("protein") final String protein,
+                             @RequestParam("fiber") final String fiber,
+                             @RequestParam("iron") final String iron,
+                             @RequestParam("sodium") final String sodium,
+                             @RequestParam("vitaminB1") final String vitaminB1,
+                             @RequestParam("vitaminB2") final String vitaminB2,
+                             @RequestParam("vitaminC") final String vitaminC,
+                             @RequestParam("vitaminPP") final String vitaminPP,
+                             @RequestParam("zinc") final String zinc){
+        foodService.createFood(nameFood, kcal, unit, animalFat, animalProtein, calcium, lipid, starch, protein, fiber,
+                iron, sodium, vitaminB1, vitaminB2, vitaminC, vitaminPP, zinc);
+        return "200";
+    }
+
+    @RequestMapping(value = "/food/get", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public FoodNutritionModel specificFood(@RequestParam("foodId") final String foodId){
+        return foodService.getFood(Integer.parseInt(foodId));
+    }
+
+    @RequestMapping(value = "/food/updateFood", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String updateFood(@RequestParam("foodId") final String foodId,
+                             @RequestParam("foodName") final String nameFood,
+                             @RequestParam("unitOfFood") final String unit,
+                             @RequestParam("Kcal") final String Kcal,
+                             @RequestParam("animalFat") final String animalFat,
+                             @RequestParam("animalProtein") final String animalProtein,
+                             @RequestParam("calcium") final String calcium,
+                             @RequestParam("lipid") final String lipid,
+                             @RequestParam("starch") final String starch,
+                             @RequestParam("protein") final String protein,
+                             @RequestParam("fiber") final String fiber,
+                             @RequestParam("iron") final String iron,
+                             @RequestParam("sodium") final String sodium,
+                             @RequestParam("vitaminB1") final String vitaminB1,
+                             @RequestParam("vitaminB2") final String vitaminB2,
+                             @RequestParam("vitaminC") final String vitaminC,
+                             @RequestParam("vitaminPP") final String vitaminPP,
+                             @RequestParam("zinc") final String zinc){
+        foodService.updateFood(foodId, nameFood, Kcal, unit, animalFat, animalProtein, calcium, lipid, starch, protein, fiber,
+                iron, sodium, vitaminB1, vitaminB2, vitaminC, vitaminPP, zinc);
+        return "200";
+    }
+
+    @RequestMapping(value = "/food/deleteFood", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteFood(@RequestParam("foodId") final String foodId){
+        return foodService.deleteFood(Integer.parseInt(foodId));
     }
 }

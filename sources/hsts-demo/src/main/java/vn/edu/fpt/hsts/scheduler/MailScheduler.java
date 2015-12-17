@@ -33,7 +33,7 @@ public class MailScheduler {
     @Autowired
     private MailService mailService;
 
-    @Scheduled(fixedDelay = 300000)
+    @Scheduled(fixedDelay = 120000)
     private void schedulerTask() {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {

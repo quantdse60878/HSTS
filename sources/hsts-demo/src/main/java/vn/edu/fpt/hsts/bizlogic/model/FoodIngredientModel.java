@@ -1,5 +1,10 @@
 package vn.edu.fpt.hsts.bizlogic.model;
 
+import vn.edu.fpt.hsts.persistence.entity.FoodTreatment;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Aking on 10/21/2015.
  */
@@ -104,6 +109,36 @@ public class FoodIngredientModel {
      *
      */
     private String fiber;
+
+    /**
+     *
+     */
+    private List<String> foodBreakfast = new ArrayList<String>();
+
+    /**
+     *
+     */
+    private List<String> foodBreaktimeMorning = new ArrayList<String>();
+
+    /**
+     *
+     */
+    private List<String> foodLunch = new ArrayList<String>();
+
+    /**
+     *
+     */
+    private List<String> foodBreaktimeAfternoon = new ArrayList<String>();
+
+    /**
+     *
+     */
+    private List<String> foodDinner = new ArrayList<String>();
+
+    /**
+     *
+     */
+    private List<String> foodEatLate = new ArrayList<String>();
 
     public FoodIngredientModel() {
     }
@@ -268,6 +303,53 @@ public class FoodIngredientModel {
         this.fiber = fiber;
     }
 
+    public List<String> getFoodBreakfast() {
+        return foodBreakfast;
+    }
+
+    public void setFoodBreakfast(List<String> foodBreakfast) {
+        this.foodBreakfast = foodBreakfast;
+    }
+
+    public List<String> getFoodBreaktimeMorning() {
+        return foodBreaktimeMorning;
+    }
+
+    public void setFoodBreaktimeMorning(List<String> foodBreaktimeMorning) {
+        this.foodBreaktimeMorning = foodBreaktimeMorning;
+    }
+
+    public List<String> getFoodLunch() {
+        return foodLunch;
+    }
+
+    public void setFoodLunch(List<String> foodLunch) {
+        this.foodLunch = foodLunch;
+    }
+
+    public List<String> getFoodBreaktimeAfternoon() {
+        return foodBreaktimeAfternoon;
+    }
+
+    public void setFoodBreaktimeAfternoon(List<String> foodBreaktimeAfternoon) {
+        this.foodBreaktimeAfternoon = foodBreaktimeAfternoon;
+    }
+
+    public List<String> getFoodDinner() {
+        return foodDinner;
+    }
+
+    public void setFoodDinner(List<String> foodDinner) {
+        this.foodDinner = foodDinner;
+    }
+
+    public List<String> getFoodEatLate() {
+        return foodEatLate;
+    }
+
+    public void setFoodEatLate(List<String> foodEatLate) {
+        this.foodEatLate = foodEatLate;
+    }
 
     @Override
     public String toString() {

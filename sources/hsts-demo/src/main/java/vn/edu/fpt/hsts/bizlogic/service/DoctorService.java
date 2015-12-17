@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPrescriptionModel;
@@ -204,6 +205,7 @@ public class DoctorService extends AbstractService {
                         medicalRecord.setEndTime(curDate);
                         medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
                         medicalRecordRepo.saveAndFlush(medicalRecord);
+
                         // Create new medicalrecord
                         medicalRecord = new MedicalRecord();
                         medicalRecord.setStartTime(curDate);
@@ -211,6 +213,8 @@ public class DoctorService extends AbstractService {
                         medicalRecord.setPatient(patient);
                         medicalRecord.setSymptoms(symptoms);
                         medicalRecord.setMedicalHistory(medicalHistory);
+                        medicalRecordRepo.saveAndFlush(medicalRecord);
+                        appointment.setMedicalRecord(medicalRecord);
                     }
                 }
 
@@ -572,6 +576,7 @@ public class DoctorService extends AbstractService {
         }
     }
 
+    @Transactional
     public boolean finishMakePrescription(final int appointmentId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
@@ -600,6 +605,40 @@ public class DoctorService extends AbstractService {
                 illness.setName("No illness");
                 illnessRepo.saveAndFlush(illness);
             }
+        }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @Transactional
+    public boolean finishMedicalRecord(final int appointmentId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointment[{}]", appointmentId);
+            Appointment appointment = appointmentRepo.findOne(appointmentId);
+
+            MedicalRecord medicalRecord = appointment.getMedicalRecord();
+            medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
+            medicalRecord.setEndTime(new Date());
+
+            // Set all related appointment to FINISHED
+            appointmentRepo.setStatusByMedicalRecordId(IDbConsts.IAppointmentStatus.FINISHED, medicalRecord.getId());
+
+            // Set all related treatment to FINISHED
+            final List<Treatment> treatments = treatmentRepo.findByMedicalRecordId(medicalRecord.getId());
+            if (!CollectionUtils.isEmpty(treatments)) {
+                for (Treatment treatment: treatments) {
+                    treatment.setStatus(IDbConsts.ITreatmentStatus.FINISHED);
+                }
+                treatmentRepo.save(treatments);
+            }
+
+            medicalRecordRepo.saveAndFlush(medicalRecord);
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("MedicalRecord[{}] is finished", medicalRecord.getId());
+            }
+            return true;
         }finally {
             LOGGER.info(IConsts.END_METHOD);
         }

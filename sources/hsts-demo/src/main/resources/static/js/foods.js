@@ -7,222 +7,361 @@
  */
 var enableDeletion = false;
 var curFood = 0;
-$(document).ready(function(){
+var listFood;
+var foodNutrition;
+var mName = document.getElementById("mName");
+var mUnit = document.getElementById("mUnit");
+var mKcal = document.getElementById("mKcal");
+var autoComplete = document.getElementById("autoCompleteItem");
 
-    var count = 1;
-    var table = $('#dataContent').dataTable( {
-        "processing": true,
-        "pagingType": "full",
-        "paging": true,
-        "lengthChange": false,
-        "ordering": true,
-        "info": true,
+$(document).ready(loadPage());
 
-        "ajax": {
-            "url": "/food/list",
-            "dataSrc": "dataList",
-            "page": "pageNumber",
-            "pages": "pageSize",
-            "recordsTotal": "totalElements",
-            "recordsFiltered": "numberOfElements",
-            "type": "GET"
-        },
-
-        "columns": [
-            { "data": "null",
-                "render": function (data, type, full, meta) {
-                    return count++;
-                },
-                "width": "10%"
-            },
-            {   "data": {
-                    "id" : "id",
-                    "name": "name"
-                },
-                "render": function (data, type, full, meta) {
-                    return '<a href="/food?id=' + data.id + '">'+ data.name + '</a>';
-                },
-                "width": "20%"
-            },
-            { "data": "units",
-                "render": function (data, type, full, meta) {
-                    if (data != null && data.length > 0) {
-                        var render = '';
-                        $.each(data, function (key, element) {
-                           render += element.foodName + ", ";
-                        });
-                        var index = render.lastIndexOf(", ");
-                        render = render.substring(0, index);
-                        return render;
-                    }
-                    return 'N/A';
-                },
-                "width": "20%"
-            },
-            {
-                "data": "id",
-                "render": function ( data, type, full, meta ) {
-                    var btnUpdate = '<a onclick="updateDialog('+ data +')"class="btn btn-success" style="margin-right: 20px;">Update</a>';
-                    var btnDelete =  '<a onclick="deleteDialog('+ data +')" class="btn btn-danger">Delete</a>';
-                    return btnUpdate + btnDelete;
-                },
-                "width": "40%"
-            }
-        ]
-
-    } );
-});
-
-function updateDialog(element) {
-    curFood = element;
+function loadPage() {
+    var inner = '';
     $.ajax({
         method: "GET",
-        url: "/food/detail",
-        data: {
-            id: element
+        url: "/food/list",
+        data: {}
+    }).done(function (data) {
+        listFood = data;
+        for (var i = 0; i < data.length; i++) {
+            var count = i + 1;
+            inner += '<tr><td>' + count + '</td><td>' + data[i].name + '</td><td>' + data[i].unit + '</td><td>' +
+                '<a href="#" onclick="viewUpdate(' + "'" + data[i].id + "'" + ')" class="btn btn-primary">Update</a>' +
+                '<a href="#" onclick="deleteFood(' + "'" + data[i].id + "'" + ')" class="btn btn-danger">Delete</a>' +
+                '</td></tr>';
         }
-    }).done(function(data) {
-        console.log(data);
-        if (data != null) {
-            var txtName = document.getElementById("updateFoodName");
-            txtName.value = data.name;
-
-            // Show diaglog
-            $("#updateDialog").modal('show');
-        }
+        document.getElementById('table-body').innerHTML = inner;
+        $('#dataContent').DataTable();
     });
 }
 
-function deleteDialog(element) {
-    console.log("-- begin delete --");
-    if (!enableDeletion) {
-        $("#messageLabel").html("Deletion function is disable. Delete food may cause old prescription became wrong!!!");
-        $("#messageModal").modal('show');
-        console.log("-- disable delete --");
-    } else {
-        // TODO
-    }
-    console.log("-- end delete --");
+function viewCreate() {
+    foodNutrition = undefined;
+    document.getElementById("superParent").style.display = "";
+    document.getElementById("child").style.display = "";
+    document.getElementById("update").style.display = "none";
+    document.getElementById("create").style.display = "";
+    document.getElementById("headerh2").innerHTML = "Create New Food";
+    mName.value = "";
+    mKcal.value = "";
+    mUnit.value = "";
+    document.getElementById("errorName").style.display = "none";
+    document.getElementById("errorUnit").style.display = "none";
+    document.getElementById("errorKcal").style.display = "none";
+    document.getElementById("animalFat").value = 0.0;
+    document.getElementById("animalProtein").value = 0.0;
+    document.getElementById("calcium").value = 0.0;
+    document.getElementById("starch").value = 0.0;
+    document.getElementById("protein").value = 0.0;
+    document.getElementById("fat").value = 0.0;
+    document.getElementById("fiber").value = 0.0;
+    document.getElementById("iron").value = 0.0;
+    document.getElementById("sodium").value = 0.0;
+    document.getElementById("vitaminB1").value = 0.0;
+    document.getElementById("vitaminC").value = 0.0;
+    document.getElementById("vitaminB2").value = 0.0;
+    document.getElementById("vitaminPP").value = 0.0;
+    document.getElementById("zinc").value = 0.0;
 }
 
+function viewUpdate(id) {
+    document.getElementById("superParent").style.display = "";
+    document.getElementById("child").style.display = "";
+    document.getElementById("update").style.display = "";
+    document.getElementById("create").style.display = "none";
+    document.getElementById("headerh2").innerHTML = "Update Food";
+    document.getElementById("foodId").value = id;
+    $.ajax({
+        method: "GET",
+        url: "/food/get",
+        data: {"foodId": id}
+    }).done(function (data) {
+        foodNutrition = data;
+        mName.value = data.foodName;
+        loadNutrition(0);
+    });
+}
+var flag = 0;
 
-// insert  validator
-$("#createForm").validate({
-    ignore: [],
-    debug: true,
-    rules: {
-        // simple rule, converted to {required:true}
-        insertFoodName: {
-            required: true
-        },
-        insertUnitName: {
-            required: true
-        },
-        insertCaloriesEstimate: {
-            required: true,
-            min: 1
-        },
-        insertFoodNutritionName: {
-            required: true
-        },
-        insertFoodNutritionValue: {
-            required: true
-        }
-    },
-    errorPlacement: function(error, element){
-        if(element.attr("name") == "insertFoodName"){
-            error.appendTo($('#invalidInsertFoodName'));
-        } else if(element.attr("name") == "insertUnitName"){
-            error.appendTo($('#invalidInsertUnitName'));
-        } else if(element.attr("name") == "insertCaloriesEstimate"){
-            error.appendTo($('#invalidInsertCaloriesEstimate'));
-        }  else if (element.attr("name") == "insertFoodNutritionName") {
-            error.appendTo($('#invalidInsertFoodNutritionName'));
-        } else if (element.attr("name") == "insertFoodNutritionValue") {
-            error.appendTo($('#invalidInsertFoodNutritionValue'));
-        }
+function fillInput(number) {
+    autoComplete.innerHTML = "";
+    flag = -1;
+    loadNutrition(number);
+}
 
-        // Default
-        else {
-            error.appendTo( element.parent().next() );
+function loadNutrition(number) {
+    mUnit.value = foodNutrition.unitName[number];
+    mKcal.value = foodNutrition.kCal[number];
+    var val = foodNutrition.value[number].split(",");
+    for (var i = 0; i < val.length; i++) {
+        if (i == 0) {
+            document.getElementById("animalFat").value = val[i];
         }
-    },
-    submitHandler: function () {
-        console.log("begin insert");
-        var postData = {
-            name: $("#insertFoodName").val(),
-            units: [
-                {
-                    foodUnit: $("#insertUnitName").val(),
-                    caloriesEstimate: $("#insertCaloriesEstimate").val(),
-                    foodNutritionName: $("#insertFoodNutritionName").val(),
-                    foodNutritionValue: $("#insertFoodNutritionValue").val()
-                }
-            ]
-        };
-        $.ajax({
-            method: "POST",
-            url: "/food/create",
-            contentType: "application/json",
-            data: JSON.stringify(postData)
-        }).done(function(data) {
-            console.log(data);
-            var txtMessage = document.getElementById("messageLabel");
-            if (data.status == "fail") {
-                txtMessage.innerHTML = "Error while update food data";
-                $("#messageModal").modal('show');
-            } else {
-                console.log("-- reload page --");
-                window.location.href = "foods";
-            }
-        });
-        console.log("end create");
-        return false; // required to block normal submit since you used ajax
+        if (i == 1) {
+            document.getElementById("animalProtein").value = val[i];
+        }
+        if (i == 2) {
+            document.getElementById("calcium").value = val[i];
+        }
+        if (i == 3) {
+            document.getElementById("fat").value = val[i];
+        }
+        if (i == 4) {
+            document.getElementById("starch").value = val[i];
+        }
+        if (i == 5) {
+            document.getElementById("protein").value = val[i];
+        }
+        if (i == 6) {
+            document.getElementById("fiber").value = val[i];
+        }
+        if (i == 7) {
+            document.getElementById("iron").value = val[i];
+        }
+        if (i == 8) {
+            document.getElementById("sodium").value = val[i];
+        }
+        if (i == 9) {
+            document.getElementById("vitaminB1").value = val[i];
+        }
+        if (i == 10) {
+            document.getElementById("vitaminC").value = val[i];
+        }
+        if (i == 11) {
+            document.getElementById("vitaminB2").value = val[i];
+        }
+        if (i == 12) {
+            document.getElementById("vitaminPP").value = val[i];
+        }
+        if (i == 13) {
+            document.getElementById("zinc").value = val[i];
+        }
     }
-});
+}
 
+function hideMesurement() {
+    document.getElementById("superParent").style.display = "none";
+    document.getElementById("child").style.display = "none";
+}
 
-// update  validator
-$("#updateForm").validate({
-    ignore: [],
-    debug: true,
-    rules: {
-        // simple rule, converted to {required:true}
-        updateFoodName: {
-            required: true
+function checkValidateMeasurement(element, error) {
+    autoComplete.innerHTML = "";
+    for (var i = 0; i < foodNutrition.unitName.length; i++) {
+        if (foodNutrition.unitName[i].toLowerCase().indexOf(mUnit.value.toLowerCase()) > -1) {
+            var btn = document.createElement("p");
+            var t = document.createTextNode(foodNutrition.unitName[i]);
+            var att = document.createAttribute("onclick");
+            att.value = "fillInput('" + i + "')";
+            btn.appendChild(t);
+            btn.setAttributeNode(att);
+            autoComplete.appendChild(btn);
         }
-    },
-    errorPlacement: function(error, element){
-        if(element.attr("name") == "updateFoodName"){
-            error.appendTo($('#invalidUpdateFoodName'));
+    }
+    if (element.id == "mName") {
+        for (var i = 0; i < listFood.length; i++) {
+            if (element.value.toLowerCase() == listFood[i].name.toLowerCase()) {
+                document.getElementById(error).innerHTML = "Food Name is existed!";
+                document.getElementById(error).style.display = "";
+                return;
+            }
         }
+    }
+    if (element.value == "") {
+        document.getElementById(error).innerHTML = "Field cannot be empty";
+        document.getElementById(error).style.display = "";
+    } else {
+        document.getElementById(error).style.display = "none";
+    }
+}
 
-        // Default
-        else {
-            error.appendTo( element.parent().next() );
+function checkValidateValue(element, error) {
+    if (element.value == "") {
+        document.getElementById(error).innerHTML = "Field cannot be empty";
+        document.getElementById(error).style.display = "";
+        return;
+    }
+    if (parseFloat(element.value) < 0) {
+        document.getElementById(error).innerHTML = "Value must be over 0";
+        document.getElementById(error).style.display = "";
+        return;
+    }
+
+    document.getElementById(error).innerHTML = "";
+    document.getElementById(error).style.display = "none";
+}
+
+function createMeasurement() {
+    var mName = document.getElementById("mName");
+    var mUnit = document.getElementById("mUnit");
+    var mKcal = document.getElementById("mKcal");
+    var errorName = document.getElementById("errorName");
+    var errorUnit = document.getElementById("errorUnit");
+    var errorKcal = document.getElementById("errorKcal");
+    if (validateAllField()) {
+        for(var i=0; i< listFood.length;i++){
+            if(mName.value.toLowerCase() == listFood[i].name){
+                alert("This food has been existed");
+                return;
+            }
         }
-    },
-    submitHandler: function () {
-        console.log("begin insert");
         $.ajax({
-            method: "POST",
-            url: "/food/update",
+            method: "GET",
+            url: "/food/createFood",
             data: {
-                foodId: curFood,
-                foodName: $("#updateFoodName").val()
+                "foodName": mName.value,
+                "unitOfFood": mUnit.value,
+                "Kcal": mKcal.value,
+                "animalFat": document.getElementById("animalFat").value,
+                "animalProtein": document.getElementById("animalProtein").value,
+                "calcium": document.getElementById("calcium").value,
+                "starch": document.getElementById("starch").value,
+                "protein": document.getElementById("protein").value,
+                "lipid": document.getElementById("fat").value,
+                "fiber": document.getElementById("fiber").value,
+                "iron": document.getElementById("iron").value,
+                "sodium": document.getElementById("sodium").value,
+                "vitaminB1": document.getElementById("vitaminB1").value,
+                "vitaminC": document.getElementById("vitaminC").value,
+                "vitaminB2": document.getElementById("vitaminB2").value,
+                "vitaminPP": document.getElementById("vitaminPP").value,
+                "zinc": document.getElementById("zinc").value
             }
-        }).done(function(data) {
-            console.log(data);
-            var txtMessage = document.getElementById("messageLabel");
-            if (data.status == "fail") {
-                txtMessage.innerHTML = "Error while update food data";
-                $("#messageModal").modal('show');
+        }).done(function (data) {
+            if (data == "200") {
+                alert("Insert food successfully!");
+                hideMesurement();
+                location.reload();
             } else {
-                console.log("-- reload page --");
-                window.location.href = "foods";
+                alert("Insert Food Fail !!!");
             }
         });
-        console.log("end create");
-        return false; // required to block normal submit since you used ajax
     }
-});
+}
+
+function validateAllField() {
+    if (mName.value == "") {
+        errorName.innerHTML = "Field cannot be empty";
+        errorName.style.display = "";
+        return false;
+    }
+    if (mUnit.value == "") {
+        errorUnit.innerHTML = "Field cannot be empty";
+        errorUnit.style.display = "";
+        return false;
+    }
+    if (mKcal.value == "") {
+        errorKcal.innerHTML = "Field cannot be empty";
+        errorKcal.style.display = "";
+        return false;
+    }
+    if (errorName.style.display != "none") {
+        return false;
+    }
+    if (errorUnit.style.display != "none") {
+        return false;
+    }
+    if (errorKcal.style.display != "none") {
+        return false;
+    }
+    if (document.getElementById("invalidstarch").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidiron").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidprotein").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidzinc").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidfat").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidvitaminB1").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidanimalProtein").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidvitaminC").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidanimalFat").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidvitaminB2").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidcalcium").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidvitaminPP").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidsodium").innerHTML != "") {
+        return false;
+    }
+    if (document.getElementById("invalidfiber").innerHTML != "") {
+        return false;
+    }
+    return true;
+}
+
+function updateMeasurement() {
+    var id = document.getElementById("foodId").value;
+    if (validateAllField()) {
+        $.ajax({
+            method: "GET",
+            url: "/food/updateFood",
+            data: {
+                "foodId": id,
+                "foodName": mName.value,
+                "unitOfFood": mUnit.value,
+                "Kcal": mKcal.value,
+                "animalFat": document.getElementById("animalFat").value,
+                "animalProtein": document.getElementById("animalProtein").value,
+                "calcium": document.getElementById("calcium").value,
+                "starch": document.getElementById("starch").value,
+                "protein": document.getElementById("protein").value,
+                "lipid": document.getElementById("fat").value,
+                "fiber": document.getElementById("fiber").value,
+                "iron": document.getElementById("iron").value,
+                "sodium": document.getElementById("sodium").value,
+                "vitaminB1": document.getElementById("vitaminB1").value,
+                "vitaminC": document.getElementById("vitaminC").value,
+                "vitaminB2": document.getElementById("vitaminB2").value,
+                "vitaminPP": document.getElementById("vitaminPP").value,
+                "zinc": document.getElementById("zinc").value
+            }
+        }).done(function (data) {
+            if (data == "200") {
+                alert("Update food successfully!");
+                hideMesurement();
+                location.reload();
+            } else {
+                alert("Update Food Fail !!!");
+            }
+        });
+    }
+}
+
+function deleteFood(id){
+    var x = confirm("Are sure to delete this food ?");
+    if(x) {
+        $.ajax({
+            method: "GET",
+            url: "/food/deleteFood",
+            data: {"foodId": id}
+        }).done(function (data) {
+            if (data == "200") {
+                alert("Delete food successfully!");
+                location.reload();;
+            } else {
+                alert("Food is using. You cannot delete this food!");
+            }
+        });
+
+    }
+}

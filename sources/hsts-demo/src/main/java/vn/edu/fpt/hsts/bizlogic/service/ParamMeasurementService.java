@@ -21,11 +21,23 @@ public class ParamMeasurementService extends AbstractService {
     @Autowired
     private ParamMeasurementRepo paramMeasurementRepo;
 
+    @Autowired
+    private DeviceService deviceService;
+
     public List<ParamMeasurement> findParamMeasurementByDevice(Device device) {
         return paramMeasurementRepo.findParamMeasurementByDeviceId(device.getId());
     }
 
-    public void createNewMeasure(ParamMeasurement paramMeasurement) {
+    public void createNewMeasure(String brandName,String name, String type, String position, String measurementUUID) {
+        ParamMeasurement paramMeasurement = new ParamMeasurement();
+        paramMeasurement.setDevice(deviceService.findDeviceByBrandName(brandName));
+        paramMeasurement.setUuid(measurementUUID);
+        paramMeasurement.setPositionHaveValue(Integer.parseInt(position));
+        paramMeasurement.setMeasurementType(type);
+        paramMeasurement.setMeasurementName(name);
+        paramMeasurement.setMeasurementMaxRange(-1);
+        paramMeasurement.setMeasurementMinRange(-1);
+        paramMeasurement.setType((byte) 1);
         paramMeasurementRepo.save(paramMeasurement);
     }
 

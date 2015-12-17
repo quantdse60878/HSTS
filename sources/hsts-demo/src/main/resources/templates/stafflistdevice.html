@@ -29,7 +29,7 @@
                     <div class="box-header" style="padding: 0px;">
                         <div class="form-group">
                             <!-- search form (Optional) -->
-                            <form action="rapeDevice" method="POST" onsubmit="return WP()"
+                            <form action="rapeDevice" method="POST" onsubmit="return false;"
                                   style="border: none;margin-top: 10px;margin-left: 10px;">
                                 <input type="hidden" id="brandName" name="brandName" value=""/>
                                 <input type="hidden" id="brandUUID" name="brandUUID" value=""/>
@@ -48,7 +48,10 @@
                                     </div>
                                 </div>
                                 <input type="submit" id="create" name="action" value="Create New Device"
-                                       class="btn btn-default"
+                                       class="btn btn-default" onclick="viewMeasurement('createWristband')"
+                                       style="display: none;margin-left: 10px"/>
+                                <input type="submit" id="update" name="action" value="Update Device"
+                                       class="btn btn-default" onclick="viewMeasurement('updateWristband')"
                                        style="display: none;margin-left: 10px"/>
 
                             </form>
@@ -82,7 +85,7 @@
                         </table>
                     </div>
                     <div id="createNewMeasurement" style="display: none;">
-                        <button class="btn btn-default" onclick="viewMeasurement()"
+                        <button class="btn btn-default" onclick="viewMeasurement('createMeasurement')"
                                 style="margin-left: 10px;margin-bottom: 10px">Create New Measurement
                         </button>
                     </div>
@@ -95,6 +98,34 @@
         <!-- /.row -->
 
     </section>
+
+    <div id="superParent2" style="
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    background-color: black;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;" onclick="hideMesurement2()">
+    </div>
+    <div id="child2" style="
+    display: none;
+    width: 50%;
+    height: 45%;
+    z-index: 10000;
+    background-color: #ffffff;
+    opacity: 1;
+    position: fixed;
+    top: 6%;
+    left: 25%;
+    bottom: 0;
+    right: 0;">
+    </div>
+
 
     <div id="superParent" style="
     display: none;
@@ -121,49 +152,157 @@
     left: 25%;
     bottom: 0;
     right: 0;">
-        <form class="form-horizontal" onsubmit="return false;">
-            <div class="box-body">
-                <h2 style="margin-bottom: 20px;margin-left: 20px;">Create New Measurement</h2>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Name*</label>
+        <div id="createMeasurement" style="display:none;">
+            <form class="form-horizontal" onsubmit="return false;">
+                <div class="box-body">
+                    <h2 style="margin-bottom: 20px;margin-left: 20px;">Create New Measurement</h2>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Name*</label>
 
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="mName" oninput="checkValidateMeasurement(this,'errorName')" value=""/>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="mName" oninput="checkValidateMeasurement(this,'errorName')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorName" style="color: red; margin-left: -75px; display: none"></label>
                     </div>
-                    <label class="col-sm-4 control-label" id="errorName" style="color: red; margin-left: -75px; display: none"></label>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">UUID*</label>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">UUID*</label>
 
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" id="mUUID" oninput="checkValidateMeasurement(this,'errorUUID')" value=""/>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="mUUID" oninput="checkValidateMeasurement(this,'errorUUID')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" style="margin-left: -20px;"> -0000-1000-8000-00805f9b34fb</label>
+                        <label class="col-sm-4 control-label" id="errorUUID" style="color: red; margin-left: -70px; display: none"></label>
                     </div>
-                    <label class="col-sm-4 control-label" style="margin-left: -20px;"> -0000-1000-8000-00805f9b34fb</label>
-                    <label class="col-sm-4 control-label" id="errorUUID" style="color: red; margin-left: -70px; display: none"></label>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Position*</label>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Position*</label>
 
-                    <div class="col-sm-2">
-                        <input type="text" id="mPosition" class="form-control" oninput="checkValidateMeasurement(this,'errorPosition')" value=""/>
+                        <div class="col-sm-2">
+                            <input type="text" id="mPosition" class="form-control" oninput="checkValidateMeasurement(this,'errorPosition')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorPosition" style="color: red; margin-left: -75px; display: none"></label>
                     </div>
-                    <label class="col-sm-4 control-label" id="errorPosition" style="color: red; margin-left: -75px; display: none"></label>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Type</label>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Type</label>
 
-                    <div class="col-sm-5">
-                        <input type="text" id="mType" class="form-control" oninput="checkValidateMeasurement(this,'errorType')" value=""/>
+                        <div class="col-sm-5">
+                            <input type="text" id="mType" class="form-control" oninput="checkValidateMeasurement(this,'errorType')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorType" style="color: red; margin-left: -75px; display: none"> </label>
                     </div>
-                    <label class="col-sm-4 control-label" id="errorType" style="color: red; margin-left: -75px; display: none"> </label>
+                    <div class="form-group" id="createMeasure">
+                        <button class="btn btn-default" onclick="createMeasurement()" style="float: right;margin-right: 30px;">
+                            Create New Measurement
+                        </button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-default" onclick="createMeasurement()" style="float: right;margin-right: 30px;">
-                        Create New Measurement
-                    </button>
+            </form>
+        </div>
+        <div id="updateWristband" style="display:none;">
+            <form class="form-horizontal" onsubmit="return false;">
+                <div class="box-body">
+                    <h2 style="margin-bottom: 20px;margin-left: 20px;">Update Wristband</h2>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Name</label>
+
+                        <div class="col-sm-4">
+                            <input type="hidden" id="hiddenwName" value=""/>
+                            <input type="text" class="form-control" id="wName" oninput="checkValidateMeasurement(this,'errorwName')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorwName" style="color: red; margin-left: -75px; display: none"></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Brand UUID</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="wUUID" oninput="checkValidateMeasurement(this,'errorwUUID')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorwUUID" style="color: red; margin-left: -75px; display: none"></label>
+                    </div>
+                    <div class="form-group" id="btnUpdate">
+                        <button class="btn btn-default" onclick="updateWristband()" style="float: right;margin-right: 30px; margin-top: 98px;">
+                            Update Wristband
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div id="createWristband" style="display:none;">
+            <form class="form-horizontal" onsubmit="return false;">
+                <div class="box-body">
+                    <h2 style="margin-bottom: 20px;margin-left: 20px;">View Wristband</h2>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Name</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="wName2" oninput="checkValidateMeasurement(this,'errorName'2)" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorwName2" style="color: red; margin-left: -75px; display: none"></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Brand UUID</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="wUUID2" oninput="checkValidateMeasurement(this,'errorwUUID2')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorwUUID2" style="color: red; margin-left: -75px; display: none"></label>
+                    </div>
+                    <div class="form-group" id="btnCreate">
+                        <button class="btn btn-default" onclick="viewMeasurement('confirmWristband')" style="float: right;margin-right: 30px;margin-top: 98px;">
+                            Create A Measurement
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="confirmWristband" style="display:none;">
+            <form class="form-horizontal" onsubmit="return false;">
+                <div class="box-body">
+                    <h2 style="margin-bottom: 20px;margin-left: 20px;">Create New Measurement</h2>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Name*</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="mName2" oninput="checkValidateMeasurement(this,'errorName2')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorName2" style="color: red; margin-left: -75px; display: none"></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">UUID*</label>
+
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="mUUID2" oninput="checkValidateMeasurement(this,'errorUUID2')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" style="margin-left: -20px;"> -0000-1000-8000-00805f9b34fb</label>
+                        <label class="col-sm-4 control-label" id="errorUUID2" style="color: red; margin-left: -70px; display: none"></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Position*</label>
+
+                        <div class="col-sm-2">
+                            <input type="text" id="mPosition2" class="form-control" oninput="checkValidateMeasurement(this,'errorPosition2')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorPosition2" style="color: red; margin-left: -75px; display: none"></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Type</label>
+
+                        <div class="col-sm-5">
+                            <input type="text" id="mType2" class="form-control" oninput="checkValidateMeasurement(this,'errorType2')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorType2" style="color: red; margin-left: -75px; display: none"> </label>
+                    </div>
+                    <div class="form-group" id="confirmCreateWristband">
+                        <button class="btn btn-default" onclick="createWristband()" style="float: right;margin-right: 30px;">
+                            Create Wristband
+                        </button>
+                        <button class="btn btn-default" onclick="viewMeasurement('createWristband')" style="float: right;margin-right: 30px;">
+                            Back
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>

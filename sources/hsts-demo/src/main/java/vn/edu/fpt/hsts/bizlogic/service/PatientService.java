@@ -23,10 +23,10 @@ import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.common.util.StringUtils;
-import vn.edu.fpt.hsts.criteria.CheckCriteria;
-import vn.edu.fpt.hsts.criteria.PatientCriteria;
-import vn.edu.fpt.hsts.criteria.RegistrationCriteria;
-import vn.edu.fpt.hsts.criteria.SearchCriteria;
+import vn.edu.fpt.hsts.bizlogic.model.CheckCriteria;
+import vn.edu.fpt.hsts.bizlogic.model.PatientCriteria;
+import vn.edu.fpt.hsts.bizlogic.model.RegistrationCriteria;
+import vn.edu.fpt.hsts.bizlogic.model.SearchCriteria;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Appointment;
@@ -72,7 +72,15 @@ import java.util.Set;
 @Service
 public class PatientService extends AbstractService {
 
+    /**
+     * The logger.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(PatientService.class);
+
+    /**
+     * Alternative logger - use for log username and password.
+     */
+    private static final Logger ACC_LOGGER = LoggerFactory.getLogger("AccountLogger");
 
     /**
      * The {@link AccountRepo}.
@@ -255,6 +263,10 @@ public class PatientService extends AbstractService {
                     tmpAccount.setPassword(newAccount.getPassword());
                     tmpAccount.setUsername(newAccount.getUsername());
                     tmpAccount.setEmail(newAccount.getEmail());
+
+                    // Log username - password to file
+                    ACC_LOGGER.info("{} - {}", tmpAccount.getUsername(), tmpAccount.getPassword());
+
                     mailService.pushMail(tmpAccount);
 
                     // Encrypt password with MD5 hash

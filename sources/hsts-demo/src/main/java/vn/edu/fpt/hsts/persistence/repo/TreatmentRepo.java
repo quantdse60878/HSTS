@@ -9,11 +9,10 @@ package vn.edu.fpt.hsts.persistence.repo;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import vn.edu.fpt.hsts.persistence.entity.MedicalRecord;
-import vn.edu.fpt.hsts.persistence.entity.MedicineTreatment;
 import vn.edu.fpt.hsts.persistence.entity.Treatment;
 
 import java.util.List;
@@ -32,4 +31,7 @@ public interface TreatmentRepo extends JpaRepository<Treatment, Integer>{
 
     @Query("select distinct t from Treatment t where appointment.medicalRecord.patient.id = :patientId ORDER BY id DESC")
     public List<Treatment> findLastTreatmenByPatientId(@Param("patientId") final int patientId, final Pageable pageable);
+
+    @Query(value = "select t from Treatment t where t.appointment.medicalRecord.id = :medicalRecordId")
+    public List<Treatment> findByMedicalRecordId(@Param("medicalRecordId") final int medicalRecordId);
 }

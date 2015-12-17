@@ -82,6 +82,7 @@
                     <div class="box-body">
                         <div class="box-header">
                             <h4 class="col-md-3" style="margin-top: 4px;"><i class="fa fa-th"></i> Prescriptions</h4>
+                            <h3 id="patientHasToMakeFI" style="color: red; display: none">Patient has to make Food Ingredient</h3>
                             <!-- input-group -->
                             <div class="input-group col-md-2 pull-right" style="margin-right: 20px;">
                                 <input type="hidden" th:value="${PATIENT.id}" id="patientID"/>
@@ -117,8 +118,9 @@
                                         </select>
                                         <div class="help-block with-errors" id="invalidDiagnostic"></div>
                                     </div>
-                                    <div class="col-sm-2 pull-right" th:if="${TREATMENT == null}">
+                                    <div class="col-sm-3" th:if="${TREATMENT == null}">
                                         <button type="submit" class="btn btn-primary">Suggest</button>
+                                        <a id="finishMedicalRecord" href="/finishMedicalRecord?appointmentId=" class="btn btn-success pull-right">Finish</a>
                                     </div>
                                 </div>
                                 <!-- ./form-group -->

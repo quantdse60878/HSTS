@@ -202,21 +202,6 @@ public class StaffController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "rapeDevice", method = RequestMethod.POST)
-    public ModelAndView rapeDevice(@RequestParam(value = "brandName") final String brandName,
-                                   @RequestParam(value = "brandUUID") final String brandUUID,
-                                   @RequestParam(value = "action") final String action) {
-        ModelAndView mav = new ModelAndView();
-        if(action.equalsIgnoreCase("Create New Device")){
-            Device device = new Device();
-            device.setBrandName(brandName);
-            device.setBrandUuid(brandUUID);
-            deviceService.createNewDevice(device);
-        }
-        mav.setViewName("stafflistdevice");
-        return mav;
-    }
-
     @RequestMapping(value = "viewDevices", method = RequestMethod.GET)
     public ModelAndView staffDevicesPage() {
         ModelAndView mav = new ModelAndView();
@@ -231,16 +216,7 @@ public class StaffController extends AbstractController {
                                    @RequestParam(value = "measureType") final String measureType,
                                    @RequestParam(value = "measurePosition") final String measurePosition,
                                    @RequestParam(value = "measureUUID") final String measureUUID) {
-        ParamMeasurement paramMeasurement = new ParamMeasurement();
-        paramMeasurement.setDevice(deviceService.findDeviceByBrandName(brandName));
-        paramMeasurement.setMeasurementMaxRange(-1);
-        paramMeasurement.setMeasurementMinRange(-1);
-        paramMeasurement.setMeasurementName(measureName);
-        paramMeasurement.setMeasurementType(measureType);
-        paramMeasurement.setPositionHaveValue(Integer.parseInt(measurePosition));
-        paramMeasurement.setUuid(measureUUID);
-        paramMeasurement.setType((byte) 1);
-        paramMeasurementService.createNewMeasure(paramMeasurement);
+        paramMeasurementService.createNewMeasure(brandName, measureName, measureType, measurePosition, measureUUID);
         return "200";
     }
 
@@ -249,7 +225,35 @@ public class StaffController extends AbstractController {
     public String deleteMeasurement(@RequestParam(value = "brandName") final String brandName,
                                     @RequestParam(value = "measurementUUID") final String measurementUUID){
         Device device = deviceService.findDeviceByBrandName(brandName);
-        paramMeasurementService.deleteMeasurement(device,measurementUUID);
+        paramMeasurementService.deleteMeasurement(device, measurementUUID);
         return "200";
     }
+
+    @RequestMapping(value = "createWristband", method = RequestMethod.POST)
+    @ResponseBody
+    public String createWristband(@RequestParam(value = "brandName") final String brandName,
+                                  @RequestParam(value = "UUID") final String uuid,
+                                  @RequestParam(value = "measureName") final String measureName,
+                                  @RequestParam(value = "measureType") final String measureType,
+                                  @RequestParam(value = "measurePosition") final String measurePosition,
+                                  @RequestParam(value = "measureUUID") final String measureUUID){
+        deviceService.createNewDevice(brandName,uuid);
+        paramMeasurementService.createNewMeasure(brandName, measureName, measureType, measurePosition, measureUUID);
+        return "200";
+    }
+
+    @RequestMapping(value = "getDevice", method = RequestMethod.POST)
+    @ResponseBody
+    public Device getDevice(@RequestParam(value = "brandName") final String brandName){
+        return deviceService.findDeviceByBrandName(brandName);
+    }
+
+    @RequestMapping(value = "updateWristband", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateWristband(@RequestParam(value = "brandName") final String brandName,
+                                  @RequestParam(value = "newName") final String newName,
+                                  @RequestParam(value = "UUID") final String uuid){
+        return deviceService.updateWristband(brandName,newName,uuid);
+    }
+
 }

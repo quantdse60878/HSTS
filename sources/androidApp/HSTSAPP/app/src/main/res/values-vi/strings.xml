@@ -22,5 +22,5 @@
     <string name="change_password_error_password">Confirmed Password Bị Sai</string>
     <string name="login_error">Tên Đăng Nhập hoặc Mật Khẩu bị sai.</string>
     <string name="title_activity_setup">Thiết Lập IP</string>
-    <string name="action_settings_setup">Thiết Lập</string>
+    <string name="action_settings_setup">Cài Đặt</string>
 </resources>

@@ -103,7 +103,8 @@ public class LoginController extends AbstractController {
         try {
             LOGGER.info("loginCredential[{}]", loginCredential);
             Account user = accountService.checkLogin(loginCredential.getUsername(), loginCredential.getPassword());
-            if (null != user && user.getStatus() != IDbConsts.IAccountStatus.BLOCKED) {
+            if (null != user && user.getRole().getId() != IDbConsts.IRoleType.PATIENT
+                    && user.getStatus() != IDbConsts.IAccountStatus.BLOCKED) {
                 session.setAttribute("USER", user);
                 LoginCredentialModel model = new LoginCredentialModel();
                 model.setAccountId(user.getId());
@@ -224,6 +225,7 @@ public class LoginController extends AbstractController {
             patient.setPatientId(patientLogin.getId());
             patient.setEmail(userLogin.getEmail());
             patient.setFullname(userLogin.getFullName());
+            patient.setStatus(userLogin.getStatus() + "");
         }
         return patient;
     }
@@ -231,14 +233,12 @@ public class LoginController extends AbstractController {
     @RequestMapping(value = "changePassword", method = RequestMethod.POST)
     @ResponseBody
     public String changePassword(@RequestParam("username") final String username,
-                                 @RequestParam("oldPassword") final String oldPassword,
                                  @RequestParam("newPassword") final String newPassword) {
-        Account userLogin = new Account();
-        userLogin = accountService.changePassword(username, oldPassword, newPassword);
+        Account userLogin = accountService.changePassword(username, newPassword);
         if (userLogin != null) {
             return "200";
         }
-        return "error";
+        return "202";
     }
 
 

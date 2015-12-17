@@ -25,7 +25,7 @@ public class Treatment extends AbstractKeyEntity {
     /**
      *
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "appointmentId", nullable = false)
     private Appointment appointment;
 

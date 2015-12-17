@@ -20,6 +20,7 @@ public class UnitOfFoodModel implements Serializable  {
     private float caloriesEstimate;
     private String foodNutritionName;
     private String foodNutritionValue;
+    private FoodNutriValModel foodNutriValModel;
 
     public UnitOfFoodModel() {
     }
@@ -30,6 +31,14 @@ public class UnitOfFoodModel implements Serializable  {
 
     public void setFoodNutritionValue(String foodNutritionValue) {
         this.foodNutritionValue = foodNutritionValue;
+    }
+
+    public FoodNutriValModel getFoodNutriValModel() {
+        return foodNutriValModel;
+    }
+
+    public void setFoodNutriValModel(FoodNutriValModel foodNutriValModel) {
+        this.foodNutriValModel = foodNutriValModel;
     }
 
     public float getCaloriesEstimate() {

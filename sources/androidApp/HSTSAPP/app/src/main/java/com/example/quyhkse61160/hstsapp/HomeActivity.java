@@ -107,6 +107,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public static boolean hadHadCharacteristic = false;
     private final Handler handlerThread = new Handler();
 
+    public static boolean stopGetDataFromWristband = false;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -190,22 +191,22 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
 
 //        txtNumberOfStep.setText(numberOfStep);
 
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // Your logic here...
-
-                // When you need to modify a UI element, do so on the UI thread.
-                // 'getActivity()' is required as this is being ran from a Fragment.
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // This code will always run on the UI thread, therefore is safe to modify UI elements.
-                        readData();
-                    }
-                });
-            }
-        }, 10000, 10000);
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                // Your logic here...
+//
+//                // When you need to modify a UI element, do so on the UI thread.
+//                // 'getActivity()' is required as this is being ran from a Fragment.
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        // This code will always run on the UI thread, therefore is safe to modify UI elements.
+//                        readData();
+//                    }
+//                });
+//            }
+//        }, 10000, 10000);
 
 
     }
@@ -239,7 +240,7 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         }
         SendBrandAsyncTask sendBrandAsyncTask = new SendBrandAsyncTask();
 //        sendBrandAsyncTask.execute();
-        Constant.TREATMENTS = Constant.getItems();
+        Constant.TREATMENTS = HSTSUtils.getItems();
 
 
         Bundle bundle = getIntent().getExtras();
@@ -256,12 +257,17 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 BroadcastService.alertMinute = 0;
+                                Constant.ALARM_TIME_COUNT = 0;
                             }
                         })
                         .setNegativeButton("Làm Sau", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                BroadcastService.alertMinute += 5;
+                                Constant.ALARM_TIME_COUNT++;
+                                BroadcastService.alertMinute = 0;
+                                for(int i=0; i< Constant.ALARM_TIME_COUNT;i++){
+                                    BroadcastService.alertMinute += Constant.ALARM_TIME;
+                                }
                             }
                         });
                 AlertDialog dialog = builder.create();
@@ -277,6 +283,8 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 AlertDialog dialog = builder.create();
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
                 dialog.show();
+                Constant.DATA_FROM_SERVER = HSTSUtils.loadData(getAssets());
+                Constant.TREATMENTS = HSTSUtils.getItems();
             }if (bundle.getBoolean("notFinished")) {
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
@@ -413,21 +421,21 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
         amountTime = amountTime();
 
 
-//        final Intent intent = getIntent();
-//        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-//        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-//
-//        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-//        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-//        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-//        if (mBluetoothLeService != null) {
-//            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
-//            Log.d(TAG, "Connect request result=" + result);
-//        }
+        final Intent intent = getIntent();
+        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
 
-//        Context context = getApplicationContext();
-//        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
-//        context.startService(notifyIntent);
+        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        if (mBluetoothLeService != null) {
+            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+            Log.d(TAG, "Connect request result=" + result);
+        }
+
+        Context context = getApplicationContext();
+        Intent notifyIntent = new Intent(context, GetWristbandDataService.class);
+        context.startService(notifyIntent);
     }
 
     @Override
@@ -520,6 +528,11 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
+        if(!stopGetDataFromWristband) {
+            menu.findItem(R.id.action_stop).setTitle("STOP");
+        } else {
+            menu.findItem(R.id.action_stop).setTitle("START");
+        }
         return true;
     }
 
@@ -565,6 +578,23 @@ public class HomeActivity extends ActionBarActivity implements ActionBar.TabList
                 startActivity(logout);
                 break;
             }
+            case R.id.action_config_alarm:{
+                Intent intentConfigAlarm = new Intent(this, AlarmSettingActivity.class);
+                startActivity(intentConfigAlarm);
+                break;
+            }
+            case R.id.action_stop:{
+                if(!stopGetDataFromWristband) {
+                    stopGetDataFromWristband = true;
+                    item.setTitle("START");
+                } else {
+                    stopGetDataFromWristband = false;
+                    item.setChecked(true);
+                    item.setTitle("STOP");
+                }
+            }
+
+
 
         }
 

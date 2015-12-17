@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class Constant {
     //All constant of call api
-    public static String hostURL = "http://192.168.20.130:8080";
+    public static String hostURL = "http://192.168.0.103:8080";
     public static final String loginMethod = "/loginMobile";
     public static final String checkNotifyMethod = "/notify";
     public static final String getTreatment = "/getTreatment";
@@ -34,8 +34,8 @@ public class Constant {
     public static final String PREF_DATA = "HSTSAPPDATA";
     public static final String PREF_PATIENT_NAME = "HSTSAPPPREFPATIENTNAME";
 
-    public static String accountId = "13";
-    public static String patientId = "9";
+    public static String accountId = "0";
+    public static String patientId = "0";
     public static String username = "";
     public static String numberOfStep = "2000";
     public static int position = -1;
@@ -60,87 +60,9 @@ public class Constant {
     public static String PATIENT_NAME = "Trần Đăng Quân";
     public static Date PATIENT_APPOINTMENT = new Date();
     public static List<String> TIMES = new ArrayList<>();
-
-
-
-    public static List<Treatment> getItems() {
-        List<Treatment> foods = new ArrayList<>();
-        try {
-            JSONArray jsonArray = new JSONArray(Constant.DATA_FROM_SERVER);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                Treatment treatment = new Treatment();
-                treatment.setIllnessName(jsonArray.getJSONObject(i).getString("illnessName"));
-                treatment.setNextAppointment(jsonArray.getJSONObject(i).getString("nextAppointment"));
-                PATIENT_APPOINTMENT = new SimpleDateFormat("yyyy-MM-dd").parse(jsonArray.getJSONObject(i).getString("nextAppointment").split(" ")[0]);
-                treatment.setFromDate(jsonArray.getJSONObject(i).getString("fromDate"));
-                treatment.setToDate(jsonArray.getJSONObject(i).getString("toDate"));
-                treatment.setCaloriesBurnEveryday(jsonArray.getJSONObject(i).getString("caloriesBurnEveryday"));
-                treatment.setListFoodTreatment(Constant.getInfoTreatment(jsonArray.getJSONObject(i).getJSONArray(Constant.FOOD_FROM_JSON)
-                        , Constant.FOOD_FROM_JSON));
-                treatment.setListMedicineTreatment(Constant.getInfoTreatment(jsonArray.getJSONObject(i).getJSONArray(Constant.MEDICINE_FROM_JSON)
-                        , Constant.MEDICINE_FROM_JSON));
-                treatment.setListPracticeTreatment(Constant.getInfoTreatment(jsonArray.getJSONObject(i).getJSONArray(Constant.PRACTICE_FROM_JSON)
-                        , Constant.PRACTICE_FROM_JSON));
-                foods.add(treatment);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return foods;
-    }
-
-    public static List<ToDoTime> getInfoTreatment(JSONArray source, String field) {
-        List<ToDoTime> times = new ArrayList<>();
-        try {
-            for(int i = 0; i < source.length();i++){
-                ToDoTime time = new ToDoTime();
-                time.setName(source.getJSONObject(i).getString("name"));
-                time.setQuantitative(source.getJSONObject(i).getString("quantitative"));
-                int tempTime = source.getJSONObject(i).getInt("numberOfTime");
-                List<String> numberOfTime = new ArrayList<>();
-                numberOfTime.add("07:00");
-                if(tempTime == 2){
-                    numberOfTime.add("18:00");
-                }
-                if(tempTime == 3){
-                    numberOfTime.add("12:00");
-                    numberOfTime.add("18:00");
-                }
-                if(tempTime == 4){
-                    numberOfTime.add("12:00");
-                    numberOfTime.add("18:00");
-                    numberOfTime.add("21:00");
-                }
-                if(tempTime == 5){
-                    numberOfTime.add("09:00");
-                    numberOfTime.add("12:00");
-                    numberOfTime.add("15:00");
-                    numberOfTime.add("18:00");
-                }
-                if(tempTime == 6){
-                    numberOfTime.add("09:00");
-                    numberOfTime.add("12:00");
-                    numberOfTime.add("15:00");
-                    numberOfTime.add("18:00");
-                    numberOfTime.add("21:00");
-                }
-                if(field.equals(MEDICINE_FROM_JSON)){
-                    time.setUnit(source.getJSONObject(i).getString("unit"));
-                }
-                time.setNumberOfTime(numberOfTime);
-                time.setAdvice(source.getJSONObject(i).getString("advice"));
-                times.add(time);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        return times;
-    }
-
     public static List<Treatment> TREATMENTS = new ArrayList<>();
+    public static int ALARM_TIME = 5;
+    public static int ALARM_TIME_COUNT = 0;
 
 //    public static List<ToDoTime> Foods = new ArrayList<>();
 //    public static List<ToDoTime> Medicines = new ArrayList<>();

@@ -26,7 +26,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="18:00"
+                android:text=""
                 android:textStyle="bold"
                 android:textColor="#FF1744"
                 android:id="@+id/time_practice"/>

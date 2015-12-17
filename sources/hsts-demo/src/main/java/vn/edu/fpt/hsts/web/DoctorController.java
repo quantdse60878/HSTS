@@ -250,4 +250,18 @@ public class DoctorController extends AbstractController{
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    @RequestMapping(value = "finishMedicalRecord", method = RequestMethod.GET)
+    public ModelAndView finishMedicalRecord(@RequestParam("appointmentId") final int appointmentId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            doctorService.finishMedicalRecord(appointmentId);
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("doctorPatients");
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
 }

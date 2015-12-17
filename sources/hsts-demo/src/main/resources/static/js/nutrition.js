@@ -347,6 +347,16 @@ function validateAndOpenModal(m) {
         document.getElementById("breakTimeAfternoon").value = voiceModel.breakTimeAfternoon;
         document.getElementById("dinner").value = voiceModel.dinner;
         document.getElementById("eatLateAtNight").value = voiceModel.eatLateAtNight;
+        document.getElementById("iron").value = voiceModel.iron;
+        document.getElementById("zinc").value = voiceModel.zinc;
+        document.getElementById("vitaminB1").value = voiceModel.vitaminB1;
+        document.getElementById("animalProtein").value = voiceModel.animalProtein;
+        document.getElementById("vitaminC").value = voiceModel.vitaminC;
+        document.getElementById("animalFat").value = voiceModel.animalFat;
+        document.getElementById("vitaminB2").value = voiceModel.vitaminB2;
+        document.getElementById("calcium").value = voiceModel.calcium;
+        document.getElementById("vitaminPP").value = voiceModel.vitaminPP;
+        document.getElementById("sodium").value = voiceModel.sodium;
         document.getElementById("starch").value = voiceModel.starch;
         document.getElementById("protein").value = voiceModel.protein;
         document.getElementById("fat").value = voiceModel.fat;

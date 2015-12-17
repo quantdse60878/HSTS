@@ -222,6 +222,9 @@ function analyticMeal(listMeal) {
                     if(listFoodDatabase[j].foodUnit == "g") {
                         numberOfQuantity = numberOfQuantity / 100;
                     }
+                    if(listFoodDatabase[j].foodUnit == "ml") {
+                        numberOfQuantity = numberOfQuantity / 100;
+                    }
                     foodItemValue.caloriesEstimate = numberOfQuantity * listFoodDatabase[j].caloriesEstimate;
                     var listNutritionValueDatabase = listFoodDatabase[j].foodNutritionValue.split(",");
                     var listNutritionValue = new Array();
@@ -308,6 +311,20 @@ function validation1(){
 }
 
 function createNutrition(){
+
+        breakfast = document.getElementById("bf").value;
+        listFood = breakfast;
+        breaktimeMorning = document.getElementById("break_time_morning").value;
+        listFood = breaktimeMorning;
+        lunch = document.getElementById("lunch").value;
+        listFood = lunch;
+        breaktimeAfternoon = document.getElementById("bta").value;
+        listFood = breaktimeAfternoon;
+        dinner = document.getElementById("dinner").value;
+        listFood = dinner;
+        lateAtNight = document.getElementById("en").value;
+        listFood = lateAtNight;
+
 
     var listBreakfast = breakfast.split(",");
     var listBreaktimeMorning = breaktimeMorning.split(",");
@@ -417,6 +434,64 @@ function changeColorTab(target){
     target.style.fontWeight = "850";
 }
 
-function accepted(){
+$(document).ready(function () {
+    var breakfast = "";
+    for(var i = 0; i < foodIngredientModel.foodBreakfast.length; i++ ){
+        if(i==0){
+            breakfast = foodIngredientModel.foodBreakfast[i];
+        } else {
+            breakfast += "," + foodIngredientModel.foodBreakfast[i];
+        }
+    }
 
-}
+    var breakTimeMorning = "";
+    for(var i = 0; i < foodIngredientModel.foodBreaktimeMorning.length; i++ ){
+        if(i==0){
+            breakTimeMorning = foodIngredientModel.foodBreaktimeMorning[i];
+        } else {
+            breakTimeMorning += "," + foodIngredientModel.foodBreaktimeMorning[i];
+        }
+    }
+
+    var lunch = "";
+    for(var i = 0; i < foodIngredientModel.foodLunch.length; i++ ){
+        if(i==0){
+            lunch = foodIngredientModel.foodLunch[i];
+        } else {
+            lunch += "," + foodIngredientModel.foodLunch[i];
+        }
+    }
+
+    var breakTimeAfternoon = "";
+    for(var i = 0; i < foodIngredientModel.foodBreaktimeAfternoon.length; i++ ){
+        if(i==0){
+            breakTimeAfternoon = foodIngredientModel.foodBreaktimeAfternoon[i];
+        } else {
+            breakTimeAfternoon += "," + foodIngredientModel.foodBreaktimeAfternoon[i];
+        }
+    }
+
+    var dinner = "";
+    for(var i = 0; i < foodIngredientModel.foodDinner.length; i++ ){
+        if(i==0){
+            dinner = foodIngredientModel.foodDinner[i];
+        } else {
+            dinner += "," + foodIngredientModel.foodDinner[i];
+        }
+    }
+
+    var eatLate = "";
+    for(var i = 0; i < foodIngredientModel.foodEatLate.length; i++ ){
+        if(i==0){
+            eatLate = foodIngredientModel.foodEatLate[i];
+        } else {
+            eatLate += "," + foodIngredientModel.foodEatLate[i];
+        }
+    }
+    document.getElementById("bf").value = breakfast;
+    document.getElementById("break_time_morning").value = breakTimeMorning;
+    document.getElementById("lunch").value = lunch;
+    document.getElementById("bta").value = breakTimeAfternoon;
+    document.getElementById("dinner").value = dinner;
+    document.getElementById("en").value = eatLate;
+});

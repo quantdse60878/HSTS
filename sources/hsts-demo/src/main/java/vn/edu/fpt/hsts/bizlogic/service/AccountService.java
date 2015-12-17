@@ -20,14 +20,13 @@ import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.expception.BizlogicException;
 import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.common.util.StringUtils;
-import vn.edu.fpt.hsts.criteria.PatientCriteria;
+import vn.edu.fpt.hsts.bizlogic.model.PatientCriteria;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
 import vn.edu.fpt.hsts.persistence.entity.Account;
 import vn.edu.fpt.hsts.persistence.entity.Doctor;
 import vn.edu.fpt.hsts.persistence.entity.Role;
 import vn.edu.fpt.hsts.persistence.repo.AccountRepo;
 import vn.edu.fpt.hsts.persistence.repo.DoctorRepo;
-import vn.edu.fpt.hsts.persistence.repo.RoleRepo;
 import vn.edu.fpt.hsts.web.session.UserSession;
 
 import javax.transaction.Transactional;
@@ -103,13 +102,14 @@ public class AccountService {
 
     public void updateAccount(Account account){ accountRepo.save(account); }
 
-    public Account changePassword(final String username, final String oldPassword, final String newPassword){
+    public Account changePassword(final String username, final String newPassword){
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-            LOGGER.info("username[{}], oldPassword[{}], newPassword[{}]", username, oldPassword, newPassword);
-            final Account account = accountRepo.findByUsernameAndPassword(username, oldPassword);
+            LOGGER.info("username[{}], newPassword[{}]", username, newPassword);
+            final Account account = accountRepo.findByUsername(username);
             if(null != account) {
                 account.setPassword(newPassword);
+                account.setStatus((byte)2);
                 accountRepo.save(account);
                 return account;
             }

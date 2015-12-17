@@ -26,7 +26,7 @@
                 <div class="box">
                     <div class="box-header">
                         <div class="col-sm-2">
-                            <a href="#insertModal" data-toggle="modal" data-target="#insertModal" class="btn btn-info">Create new food</a>
+                            <a href="#" data-toggle="modal" onclick="viewCreate()" class="btn btn-info">Create new food</a>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -36,16 +36,18 @@
                             <tr>
                                 <th>#</th>
                                 <th>Food name</th>
-                                <th>Unit list</th>
+                                <th>Unit of food</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
-                            <!--<tbody id="table-body"></tbody>-->
+                            <tbody id="table-body">
+
+                            </tbody>
                             <tfoot>
                             <tr>
                                 <th>#</th>
                                 <th>Food name</th>
-                                <th>Unit list</th>
+                                <th>Unit of food</th>
                                 <th>Action</th>
                             </tr>
                             </tfoot>
@@ -79,72 +81,236 @@
         </div>
         <!-- .message modal-->
 
-        <!-- insert new modal -->
-        <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="insertModalLabel" data-backdrop="static"
-             data-keyboard="false">
-            <div class="modal-dialog" role="document">
-                <form id = "createForm" class="form-horizontal">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="insertModalLabel">Create new food</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Food name*: </label>
-
-                                <div class="col-sm-4">
-                                    <input type="text" th:name="insertFoodName" class="form-control" id="insertFoodName"/>
-                                </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertFoodName">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Default unit name*: </label>
-
-                                <div class="col-sm-4">
-                                    <input type="text" th:name="insertUnitName" class="form-control" id="insertUnitName"/>
-                                </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertUnitName">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Default calories Estimate*: </label>
-
-                                <div class="col-sm-3">
-                                    <input type="number" th:name="insertCaloriesEstimate" class="form-control" id="insertCaloriesEstimate"/>
-                                </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertCaloriesEstimate">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Default nutrition Name*: </label>
-
-                                <div class="col-sm-4">
-                                    <input type="text" th:name="insertFoodNutritionName" class="form-control" id="insertFoodNutritionName"/>
-                                </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertFoodNutritionName">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Default  nutrition Value*: </label>
-
-                                <div class="col-sm-4">
-                                    <input type="text" th:name="insertFoodNutritionValue" class="form-control" id="insertFoodNutritionValue"/>
-                                </div>
-                                <div class="col-sm-3 help-block with-errors" id = "invalidInsertFoodNutritionValue">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+        <div id="superParent" style="
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    background-color: black;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    " onclick="hideMesurement()">
         </div>
-        <!-- .insert new modal -->
+        <div id="child" style="
+    display: none;
+    width: 50%;
+    height: 98%;
+    z-index: 10000;
+    background-color: #ffffff;
+    opacity: 1;
+    position: fixed;
+    top: 1%;
+    left: 25%;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+        " >
+            <form class="form-horizontal" onsubmit="return false;">
+                <div class="box-body">
+                    <h2 id="headerh2" style="margin-bottom: 20px;margin-left: 20px;">Create New Food</h2>
+                    <input id="foodId" type="hidden" value=""/>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Food name*: </label>
+
+                        <div class="col-sm-4">
+                            <input type="text" autocomplete="off" class="form-control" id="mName" oninput="checkValidateMeasurement(this,'errorName')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorName" style="color: red;margin-left: -80px; display: none;"></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Unit name*:</label>
+                        <div id="autoCompleteItem" style="  background-color: #E0E0E0;
+                                                            word-wrap: break-word;
+                                                            width: 12.5%;
+                                                            margin-left: 196px;
+                                                            margin-top: 34px;
+                                                            z-index: 1;
+                                                            position: absolute">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" autocomplete="off" id="mUnit" class="form-control" oninput="checkValidateMeasurement(this,'errorUnit')" value=""/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorUnit" style="color: red;margin-left: -80px; display: none"></label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Default Kcal Estimate/ 100g*:</label>
+                        <div class="col-sm-2">
+                            <input type="text" autocomplete="off" id="mKcal" class="form-control hsts hsts-num" oninput="checkValidateValue(this,'errorKcal')" value="0.0"/>
+                        </div>
+                        <label class="col-sm-4 control-label" id="errorKcal" style="color: red;margin-left: -80px; display: none"> </label>
+                    </div>
+                    <table id="evaluationIndex" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Evaluation Index</th>
+                            <th style="width: 100px;">Result</th>
+                            <th>Evaluation Index</th>
+                            <th style="width: 100px;">Result</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <label class="control-label">Starch* (g)</label>
+                            </td>
+                            <td class="form-group">
+                                <input id="starch" autocomplete="off" type="number" value="0.0" class="form-control hsts hsts-num"
+                                       oninput="checkValidateValue(this,'invalidstarch')" placeholder="Starch"/>
+                                <div class="help-block with-errors" id="invalidstarch"></div>
+                            </td>
+
+                            <td><label class="control-label">Iron* /1000 Kcal (mg)</label></td>
+                            <td class="form-group">
+                                <input id="iron" autocomplete="off" type="number" value="0.0"
+                                       oninput="checkValidateValue(this,'invalidiron')"
+                                       class="form-control hsts hsts-num"
+                                       placeholder="Iron"/>
+                                <div class="help-block with-errors" id="invalidiron"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Protein* (g)</label>
+                            </td>
+                            <td class="form-group">
+                                <input id="protein" autocomplete="off" type="number"
+                                       oninput="checkValidateValue(this,'invalidprotein')" value="0.0" class="form-control hsts hsts-num"
+                                       placeholder="Protein" />
+                                <div class="help-block with-errors" id="invalidprotein"></div>
+                            </td>
+
+                            <td>
+                                <label class="control-label">Zinc* /1000 Kcal (mg)</label>
+                            </td>
+                            <td>
+                                <input id="zinc" autocomplete="off" type="number" value="0.0"
+                                       oninput="checkValidateValue(this,'invalidzinc')" class="form-control hsts hsts-num"
+                                       placeholder="Zinc"/>
+                                <div class="help-block with-errors" id="invalidzinc"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Fat* (g)</label>
+                            </td>
+                            <td>
+                                <input id="fat" autocomplete="off" type="number"
+                                       oninput="checkValidateValue(this,'invalidfat')"
+                                       value="0.0" class="form-control hsts hsts-num"
+                                       placeholder="Fat"/>
+                                <div class="help-block with-errors" id="invalidfat"></div>
+                            </td>
+
+                            <td>
+                                <label class="control-label">Vitamin B1*/1000 Kcal (mg)</label>
+                            </td>
+                            <td>
+                                <input id="vitaminB1" autocomplete="off"
+                                       oninput="checkValidateValue(this,'invalidvitaminB1')"
+                                       type="number" value="0.0" class="form-control hsts hsts-num"
+                                       placeholder="Vitamin B1"/>
+                                <div class="help-block with-errors" id="invalidvitaminB1"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Animal Protein* (g)</label>
+                            </td>
+                            <td>
+                                <input id="animalProtein" autocomplete="off" type="number" value="0.0"
+                                       oninput="checkValidateValue(this,'invalidanimalProtein')"
+                                       class="form-control hsts hsts-num" placeholder="Animal Protein"/>
+                                <div class="help-block with-errors" id="invalidanimalProtein"></div>
+                            </td>
+
+                            <td>
+                                <label class="control-label">Vitamin C*/1000 Kcal (mg)</label>
+                            </td>
+                            <td>
+                                <input id="vitaminC" autocomplete="off" type="number"
+                                       oninput="checkValidateValue(this,'invalidvitaminC')"
+                                       value="0.0" class="form-control hsts hsts-num"
+                                       placeholder="Vitamin C"/>
+                                <div class="help-block with-errors" id="invalidvitaminC"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Animal Fat* (g)</label>
+                            </td>
+                            <td>
+                                <input id="animalFat" autocomplete="off" type="number"
+                                       oninput="checkValidateValue(this,'invalidanimalFat')"
+                                       value="0.0" class="form-control hsts hsts-num"
+                                       placeholder="Animal Fat"/>
+                                <div class="help-block with-errors" id="invalidanimalFat"></div>
+                            </td>
+
+                            <td><label class="control-label">Vitamin B2*/1000 Kcal (mg)</label>
+                            </td>
+                            <td>
+                                <input id="vitaminB2" autocomplete="off" type="number"
+                                       oninput="checkValidateValue(this,'invalidvitaminB2')"
+                                       value="0.0" class="form-control hsts hsts-num"
+                                       placeholder="Vitamin B2"/>
+                                <div class="help-block with-errors" id="invalidvitaminB2"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label">Calcium* (mg)</label></td>
+                            <td>
+                                <input id="calcium" autocomplete="off" type="number"
+                                       oninput="checkValidateValue(this,'invalidcalcium')"
+                                       value="0.0" class="form-control hsts hsts-num"
+                                       placeholder="Calcium"/>
+                                <div class="help-block with-errors" id="invalidcalcium"></div>
+                            </td>
+
+                            <td><label class="control-label">Vitamin PP*/1000 Kcal (mg)</label>
+                            </td>
+                            <td>
+                                <input id="vitaminPP" autocomplete="off"
+                                       oninput="checkValidateValue(this,'invalidvitaminPP')"
+                                       type="number" value="0.0" class="form-control hsts hsts-num"
+                                       placeholder="Vitamin PP"/>
+                                <div class="help-block with-errors" id="invalidvitaminPP"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label">Sodium* (mg)</label></td>
+                            <td>
+                                <input id="sodium" autocomplete="off" type="number"
+                                       oninput="checkValidateValue(this,'invalidsodium')"
+                                       value="0.0" class="form-control hsts hsts-num"
+                                       placeholder="Sodium"/>
+                                <div class="help-block with-errors" id="invalidsodium"></div>
+                            </td>
+
+                            <td><label class="control-label">Fiber* (g)</label></td>
+                            <td>
+                                <input id="fiber" autocomplete="off" type="number" value="0.0" class="form-control hsts hsts-num"
+                                       placeholder="Fiber"
+                                       oninput="checkValidateValue(this,'invalidfiber')"/>
+                                <div class="help-block with-errors" id="invalidfiber"></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <button id="create" class="btn btn-default" onclick="createMeasurement()" style="float: right;margin-right: 10px;margin-top: 10px">
+                            Create New Food
+                        </button>
+                        <button id="update" class="btn btn-default" onclick="updateMeasurement()" style="float: right;margin-right: 10px;margin-top: 10px">
+                            Update Food
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
         <div class="modal fade" id="updateDialog" tabindex="-1" role="dialog" aria-labelledby="updateMedicine" data-backdrop="static"
              data-keyboard="false">

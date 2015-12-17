@@ -19,8 +19,8 @@ var $pGender = $("#pGender").iCheck({
 
 $("#birthday").datepicker({
     format: 'dd-mm-yyyy',
-    startDate: '01-01-1950',
-    endDate: '01-01-2000'
+    startDate: '01-01-1945',
+    endDate: '01-01-1995'
 });
 
 $("#doctorSelect").select2({
@@ -124,10 +124,8 @@ $selectPatient.on("change", function (e) {
     if (val == "") {
         return;
     }
-    if (val.indexOf("404") == 0) {
-        // Bind patient profile
-        loadPatientProfile(val);
-    };
+    // Bind patient profile
+    loadPatientProfile(val);
 });
 
 // Validator
@@ -140,7 +138,11 @@ var validator = $("#mainForm").validate({
             required: true
         },
         birthday: {
-            required: true
+            required: true,
+            remote: {
+                url: "/validateBirthday",
+                type: "POST"
+            }
         },
         // compound rule
         email: {
@@ -252,7 +254,10 @@ var validator = $("#mainForm").validate({
         //patientName: {
         //    maxlenght: "Name is too long, please modify it"
         //},
-        birthday: "Please input valid birthday",
+        birthday: {
+            required: "Please input valid birthday",
+            remote: "Birthday is out of range, please fix"
+        },
         email: {
             email: "This email is invalid format",
             remote: "This email is already use"
@@ -480,10 +485,7 @@ $selectPatient.on("change", function (e) {
     var textData = $selectPatient.text().trim();
     console.log("Value: " + val);
     console.log("Text: " + textData);
-    if (val.indexOf("404") == 0) {
-        // Bind patient profile
-        loadPatientProfile(val);
-    };
+    // Bind patient profile
 });
 
 function loadPatientProfile(patientBarcode) {

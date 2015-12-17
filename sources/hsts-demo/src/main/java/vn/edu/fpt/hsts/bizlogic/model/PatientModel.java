@@ -11,15 +11,16 @@ public class PatientModel implements Serializable {
     private int patientId;
     private String fullname;
     private String email;
-
+    private String status;
     public PatientModel() {
     }
 
-    public PatientModel(int accountId, int patientId, String fullname, String email) {
+    public PatientModel(int accountId, int patientId, String fullname, String email, String status) {
         this.accountId = accountId;
         this.patientId = patientId;
         this.fullname = fullname;
         this.email = email;
+        this.status = status;
     }
 
     public int getAccountId() {
@@ -52,5 +53,13 @@ public class PatientModel implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
