@@ -421,4 +421,17 @@ public class PatientController extends AbstractController {
             LOGGER.info(IConsts.END_METHOD);
         }
     }
+
+    @RequestMapping(value = "mrDetail", method = RequestMethod.GET)
+    public ModelAndView mrDetail(@RequestParam("id") final int medicalRecordId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("mrDetail");
+            return mav;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
 }

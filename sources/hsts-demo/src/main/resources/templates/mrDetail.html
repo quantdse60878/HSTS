@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" layout:fragment="body">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Medical Record Detail</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- Your Page Content Here -->
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- New design -->
+                <div class="col-md-12">
+
+                    <div class="box box-info">
+
+                        <!-- /.box -->
+                    </div>
+                    <!-- End new design -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+    <!-- /.content -->
+
+    <!-- jQuery -->
+    <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
+
+    <!-- jquery validation -->
+    <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
+
+    <!-- iCheck -->
+    <script th:src="@{/static/bower/icheck/icheck.min.js}"/>
+    <link th:href="@{/static/bower/icheck/skins/all.css}" rel="stylesheet"/>
+
+    <!-- select 2-->
+    <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet" />
+    <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
+
+
+
+    <!-- external script -->
+    <script th:src="@{/static/js/mrDetail.js}"/>
+
+    <!-- external css -->
+    <link th:href="@{/static/css/mrDetail.css}" rel="stylesheet"/>
+</div>
+<!-- /.content-wrapper -->
+
+</body>
+</html>

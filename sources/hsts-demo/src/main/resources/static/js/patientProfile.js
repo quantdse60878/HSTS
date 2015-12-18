@@ -92,7 +92,7 @@ $(document).ready(function(){
                 bodyContent += '<div class="form-group">';
                 bodyContent += '<label class="col-sm-3 control-label">Symptoms:</label>';
                 bodyContent += '<div class="col-sm-5">';
-                bodyContent += '<a href = "/appointmentsByMR?id='+ element.id + '" class="'+ btnClass + '">'+ btnInfo + '</a>';
+                bodyContent += '<a href = "/mrDetail?id='+ element.id + '" class="'+ btnClass + '">'+ btnInfo + '</a>';
                 bodyContent += '</div>';
                 bodyContent += '</div>';
 
