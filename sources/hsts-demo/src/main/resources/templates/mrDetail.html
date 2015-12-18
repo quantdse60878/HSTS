@@ -103,8 +103,58 @@
                                         <div id="collapseData" class="panel-collapse collapse">
                                             <div class="panel-body">
                                                 <!-- table medicines -->
-                                                <table class="table table-striped" id="resultData">
-                                                </table>
+                                                <div class="chart">
+                                                    <canvas id="barChart" style="height:230px"></canvas>
+                                                </div>
+
+                                                <i class="fa fa-square text-green"></i>
+                                                <h4 style="display: inline;"> Calories Consumed</h4>
+                                                <i class="fa fa-square text-orange"></i>
+                                                <h4 style="display: inline;"> Calories Required </h4>
+                                                <div style="margin: auto;">
+                                                    <table id="practiceData" class="table table-bordered table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th style="width: 200px;">Result</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <label class="control-label">AVG Kcal Consumed/ Kcal Estimate</label>
+                                                            </td>
+                                                            <td style="text-align: center;">
+                                                                <i id = "avgKcalConsumed" class="text-green"></i>kcal / <i id = "kcalEstimate"
+                                                                                                                                 class="text-orange"></i>kcal
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label class="control-label">Status</label>
+                                                            </td>
+                                                            <td id = "status">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label class="control-label">Complete Practice Percent</label>
+                                                            </td>
+                                                            <!--<td>-->
+                                                                <!--<input type="text" class="form-control" readonly="readonly"-->
+                                                                       <!--style="text-align: center;background-color: #f0ad4e;color: white;" th:if="*{status == 3}"-->
+                                                                       <!--th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>-->
+                                                                <!--<input type="text" class="form-control" readonly="readonly"-->
+                                                                       <!--style="text-align: center;background-color: #5bc0de;color: white;" th:if="*{status == 2}"-->
+                                                                       <!--th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>-->
+                                                                <!--<input type="text" class="form-control" readonly="readonly"-->
+                                                                       <!--style="text-align: center;background-color: #d9534f;color: white;" th:if="*{status == 1}"-->
+                                                                       <!--th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>-->
+                                                            <!--</td>-->
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                                 <!-- /.table medicines -->
                                             </div>
                                         </div>
@@ -128,17 +178,12 @@
     <!-- jQuery -->
     <script th:src="@{/static/bower/jquery/dist/jquery.min.js}"></script>
 
-    <!-- jquery validation -->
-    <script th:src="@{/static/bower/jquery-validation/dist/jquery.validate.min.js}"></script>
-
-    <!-- iCheck -->
-    <script th:src="@{/static/bower/icheck/icheck.min.js}"/>
-    <link th:href="@{/static/bower/icheck/skins/all.css}" rel="stylesheet"/>
-
     <!-- select 2-->
     <link th:href="@{/static/bower/admin-lte/plugins/select2/select2.css}" rel="stylesheet" />
     <script th:src="@{/static/bower/admin-lte/plugins/select2/select2.min.js}"></script>
 
+    <!-- ChartJS 1.0.1 -->
+    <script th:src="@{/static/bower/admin-lte/plugins/chartjs/Chart.min.js}"></script>
 
 
     <!-- external script -->
