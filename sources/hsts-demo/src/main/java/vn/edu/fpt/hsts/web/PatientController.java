@@ -426,9 +426,9 @@ public class PatientController extends AbstractController {
     public ModelAndView mrDetail(@RequestParam("id") final int medicalRecordId) {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
-
             ModelAndView mav = new ModelAndView();
             mav.setViewName("mrDetail");
+            mav.addObject("MR", medicalRecordId);
             return mav;
         } finally {
             LOGGER.info(IConsts.END_METHOD);

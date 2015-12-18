@@ -23,7 +23,22 @@
                 <div class="col-md-12">
 
                     <div class="box box-info">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <input type="hidden" name="medicalRecordId" th:value="${MR}" id = "medicalRecordId"/>
+                                <label class="col-sm-3 control-label">Select appointment: </label>
 
+                                <div class="col-sm-5">
+                                    <select id="appointmentSelect" name="appSelect">
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div id = "bodyContent">
+
+                            </div>
+                        </div>
                         <!-- /.box -->
                     </div>
                     <!-- End new design -->
