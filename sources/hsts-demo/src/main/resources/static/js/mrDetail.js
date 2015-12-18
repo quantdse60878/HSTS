@@ -5,7 +5,7 @@
  * Author: dangquantran.
  * Date: 12/18/2015.
  */
-$("#appointmentSelect").select2({
+var $appSelect = $("#appointmentSelect").select2({
     placeholder: "Choose an appointment",
     theme: "classic",
     width: "400px",
@@ -34,4 +34,9 @@ $("#appointmentSelect").select2({
     escapeMarkup: function (markup) {
         return markup; // let our custom formatter work
     }
+});
+
+$appSelect.on("change", function (e) {
+
+    // TODO Draw template: medicine, food, name
 });
