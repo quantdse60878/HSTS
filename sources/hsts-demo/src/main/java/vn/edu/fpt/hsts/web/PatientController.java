@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import vn.edu.fpt.hsts.bizlogic.model.AppointmentExtendedModel;
+import vn.edu.fpt.hsts.bizlogic.model.AppointmentModel;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.model.FileUploadModel;
 import vn.edu.fpt.hsts.bizlogic.model.MedicalRecordPageModel;
@@ -392,6 +394,30 @@ public class PatientController extends AbstractController {
             LOGGER.info("patientId[{}]", patientId);
             return patientService.findMedicalRecordsByPatientId(patientId);
         }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/history", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public AppointmentExtendedModel appointmentHistory(@RequestParam("appointmentId") final int appointmentId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointmentId[{}]", appointmentId);
+            return appointmentService.findHistory(appointmentId);
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    @RequestMapping(value = "/appointmentsByMR", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<AppointmentModel> appointmentList(@RequestParam("medicalRecordId") final int medicalRecordId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("medicalRecordId[{}]", medicalRecordId);
+            return appointmentService.findByMedicalRecordId(medicalRecordId);
+        } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }

@@ -52,6 +52,12 @@ public class Appointment extends AbstractKeyEntity {
     private Appointment nextAppointment;
 
     /**
+     *
+     */
+    @OneToOne(mappedBy = "appointment")
+    private PreventionCheck preventionCheck;
+
+    /**
      * The status.
      */
     private byte status;
@@ -109,5 +115,13 @@ public class Appointment extends AbstractKeyEntity {
 
     public void setTreatmentList(final List<Treatment> treatmentList) {
         this.treatmentList = treatmentList;
+    }
+
+    public PreventionCheck getPreventionCheck() {
+        return preventionCheck;
+    }
+
+    public void setPreventionCheck(PreventionCheck preventionCheck) {
+        this.preventionCheck = preventionCheck;
     }
 }

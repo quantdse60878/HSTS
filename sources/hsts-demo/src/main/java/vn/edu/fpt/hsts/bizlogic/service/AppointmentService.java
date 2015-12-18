@@ -8,9 +8,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import vn.edu.fpt.hsts.bizlogic.model.AppointmentExtendedModel;
+import vn.edu.fpt.hsts.bizlogic.model.AppointmentModel;
 import vn.edu.fpt.hsts.bizlogic.model.AppointmentPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.model.HisInforDateModel;
+import vn.edu.fpt.hsts.bizlogic.model.PracticeResultModel;
 import vn.edu.fpt.hsts.common.IConsts;
 import vn.edu.fpt.hsts.common.util.DateUtils;
 import vn.edu.fpt.hsts.persistence.IDbConsts;
@@ -42,6 +45,12 @@ public class AppointmentService {
      */
     @Autowired
     private MedicalRecordRepo medicalRecordRepo;
+
+    /**
+     * The {@link DoctorService}.
+     */
+    @Autowired
+    private DoctorService doctorService;
 
     public Appointment findAppointmentByID(int appointmentID) {
         return appointmentRepo.findOne(appointmentID);
@@ -132,6 +141,42 @@ public class AppointmentService {
             }
             return null;
         }finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public AppointmentExtendedModel findHistory(final int appointmentId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("appointmentId[{}]", appointmentId);
+            final Appointment appointment = appointmentRepo.findOne(appointmentId);
+            final AppointmentExtendedModel model = new AppointmentExtendedModel();
+            model.fromEntity(appointment);
+            if (null != appointment) {
+                final PracticeResultModel practiceResultModel = doctorService.getInfoPracticeDataOfPatient(appointment);
+                model.setPracticeResult(practiceResultModel);
+            }
+            return model;
+        } finally {
+            LOGGER.info(IConsts.END_METHOD);
+        }
+    }
+
+    public List<AppointmentModel> findByMedicalRecordId(final int medicalRecordId) {
+        LOGGER.info(IConsts.BEGIN_METHOD);
+        try {
+            LOGGER.info("medicalRecordId[{}]", medicalRecordId);
+            final List<Appointment> appointmentList = appointmentRepo.findHistoryByMedicalRecordId(medicalRecordId);
+            final List<AppointmentModel> modelList = new ArrayList<AppointmentModel>();
+            if (!CollectionUtils.isEmpty(appointmentList)) {
+                for (Appointment app: appointmentList) {
+                    final AppointmentModel model = new AppointmentModel();
+                    model.fromEntity(app);
+                    modelList.add(model);
+                }
+            }
+            return modelList;
+        } finally {
             LOGGER.info(IConsts.END_METHOD);
         }
     }

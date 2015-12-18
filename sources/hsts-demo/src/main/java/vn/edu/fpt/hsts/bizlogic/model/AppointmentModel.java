@@ -13,7 +13,23 @@ public class AppointmentModel extends AbstractKeyModel<Appointment> {
     }
 
 
+    /**
+     *
+     */
     private String meetingDate;
+
+    /**
+     *
+     */
+    private byte status;
+
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
+    }
 
     public AppointmentModel() {
     }
@@ -30,5 +46,6 @@ public class AppointmentModel extends AbstractKeyModel<Appointment> {
     public void fromEntity(Appointment entity) {
         super.fromEntity(entity);
         meetingDate = DateUtils.formatDate(entity.getMeetingDate(), DateUtils.DATE_PATTERN_3);
+        status = entity.getStatus();
     }
 }

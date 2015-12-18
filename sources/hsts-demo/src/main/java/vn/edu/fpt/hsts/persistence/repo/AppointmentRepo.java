@@ -54,4 +54,7 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
     @Modifying
     @Query("update Appointment a set a.status = :status where a.medicalRecord.id = :medicalRecordId")
     public void setStatusByMedicalRecordId(@Param("status") final byte status, @Param("medicalRecordId") final int medicalRecordId);
+
+    @Query("select a from Appointment a where medicalRecord.id = :medicalRecordId ORDER BY meetingDate ASC")
+    public List<Appointment> findHistoryByMedicalRecordId(@Param("medicalRecordId") final int medicalRecordId);
 }
