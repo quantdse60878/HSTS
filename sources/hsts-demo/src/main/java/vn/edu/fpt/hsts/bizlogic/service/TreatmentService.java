@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import vn.edu.fpt.hsts.bizlogic.model.FoodTreatmentModel;
 import vn.edu.fpt.hsts.bizlogic.model.HisFood;
 import vn.edu.fpt.hsts.bizlogic.model.HisInforDateModel;
@@ -213,7 +214,11 @@ public class TreatmentService {
         LOGGER.info(IConsts.BEGIN_METHOD);
         try {
             LOGGER.info("appoitmentID[{}]", appoitmentID);
-            Treatment treatment = treatmentRepo.findLastTreatmenByAppointmentId(appoitmentID).get(0);
+            final List<Treatment> list = treatmentRepo.findLastTreatmenByAppointmentId(appoitmentID);
+            if (CollectionUtils.isEmpty(list)) {
+                return null;
+            }
+            Treatment treatment = list.get(0);
             // Find treatment form appointment
             List<MedicineTreatment> medicineTreatments = medicineTreatmentRepo.getAllMedicineTreatmentFromTreatment(treatment);
             List<FoodTreatment> foodTreatments = foodTreatmentRepo.getAllFoodTreatmentFromTreatment(treatment);
