@@ -253,11 +253,11 @@ $(document).ready(function(){
         }
     }).done(function(data) {
         var html = '<option disable="disable" value="">Select a food</option>';
-        $.each(data.dataList, function (key, element) {
+        $.each(data, function (key, element) {
             html += '<option value="' + element.id + '">' + element.name + '</option>';
-        })
-        var $medicineSelect = $("#insertFood");
-        $medicineSelect.append(html);
+        });
+        var $foodSelect = $("#insertFood");
+        $foodSelect.append(html);
     })
     // end load
 
@@ -300,8 +300,8 @@ $(document).ready(function(){
         $.each(data.dataList, function (key, element) {
             html += '<option value="' + element.id + '">' + element.name + '</option>';
         })
-        var $medicineSelect = $("#insertPractice");
-        $medicineSelect.append(html);
+        var $practiceSelect = $("#insertPractice");
+        $practiceSelect.append(html);
     })
     // end load
 
