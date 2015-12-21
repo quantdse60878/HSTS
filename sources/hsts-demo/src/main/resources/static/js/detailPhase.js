@@ -18,6 +18,9 @@ var curMedicinePhase = 0;
 var curFoodPhase = 0;
 var curPracticePhase = 0;
 
+var medicineList = [];
+var foodList = [];
+var practiceList = [];
 
 $(document).ready(function(){
     console.log("-- begin --");
@@ -89,7 +92,13 @@ $(document).ready(function(){
                 },
                 "width": "140px"
             }
-        ]
+        ],
+        "initComplete": function(settings, json) {
+            $.each(json.dataList, function (key, element) {
+                medicineList.push(element.medicine.id);
+                console.log(medicineList);
+            })
+        }
     } );
     // end medicine
 
@@ -114,7 +123,11 @@ $(document).ready(function(){
                 phaseId: $("#phaseId").val()
             }
         },
-
+        "initComplete": function(settings, json) {
+            $.each(json.dataList, function (key, element) {
+                foodList.push(element.food.id);
+            })
+        },
         "columns": [
             // col 1
             {
@@ -183,7 +196,11 @@ $(document).ready(function(){
                 phaseId: $("#phaseId").val()
             }
         },
-
+        "initComplete": function(settings, json) {
+            $.each(json.dataList, function (key, element) {
+                practiceList.push(element.practice.id);
+            })
+        },
         "columns": [
             // col 1
             {
@@ -237,7 +254,11 @@ $(document).ready(function(){
     }).done(function(data) {
         var html = '<option disable="disable" value="">Select a medicine</option>';
         $.each(data.dataList, function (key, element) {
-            html += '<option value="' + element.id + '">' + element.name + '</option>';
+            console.log("Data: " + element.id);
+            console.log("arr: " + medicineList);
+            if($.inArray(element.id, medicineList)) {
+                html += '<option value="' + element.id + '">' + element.name + '</option>';
+            }
         })
         var $medicineSelect = $("#insertMedicine");
         $medicineSelect.append(html);
@@ -254,7 +275,10 @@ $(document).ready(function(){
     }).done(function(data) {
         var html = '<option disable="disable" value="">Select a food</option>';
         $.each(data, function (key, element) {
-            html += '<option value="' + element.id + '">' + element.name + '</option>';
+            if($.inArray(element.id, foodList)) {
+                html += '<option value="' + element.id + '">' + element.name + '</option>';
+            }
+
         });
         var $foodSelect = $("#insertFood");
         $foodSelect.append(html);
@@ -298,7 +322,9 @@ $(document).ready(function(){
     }).done(function(data) {
         var html = '<option disable="disable" value="">Select a practice</option>';
         $.each(data.dataList, function (key, element) {
-            html += '<option value="' + element.id + '">' + element.name + '</option>';
+            if($.inArray(element.id, foodList)) {
+                html += '<option value="' + element.id + '">' + element.name + '</option>';
+            }
         })
         var $practiceSelect = $("#insertPractice");
         $practiceSelect.append(html);

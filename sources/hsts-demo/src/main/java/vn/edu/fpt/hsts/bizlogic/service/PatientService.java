@@ -357,7 +357,7 @@ public class PatientService extends AbstractService {
                     preventionCheckRepo.saveAndFlush(preventionCheck);
 
                     // Process medicine history
-                    if (null != medicineHistories) {
+                    if (null != medicineHistories && !StringUtils.isEmpty(medicineHistories)) {
                         final String[] tmp = medicineHistories.split(",");
                         if (null != tmp && tmp.length > 0) {
                             final Treatment oldTreatment = new Treatment();
