@@ -92,73 +92,73 @@
                                         </div>
                                     </div>
 
-                                    <div class="panel panel-default" id="dataPanel">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseData">
-                                                    Practice Data
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseData" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <!-- table medicines -->
-                                                <div class="chart">
-                                                    <canvas id="barChart" style="height:230px"></canvas>
-                                                </div>
+                                    <!--<div class="panel panel-default" id="dataPanel">-->
+                                        <!--<div class="panel-heading">-->
+                                            <!--<h4 class="panel-title">-->
+                                                <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseData">-->
+                                                    <!--Practice Data-->
+                                                <!--</a>-->
+                                            <!--</h4>-->
+                                        <!--</div>-->
+                                        <!--<div id="collapseData" class="panel-collapse collapse">-->
+                                            <!--<div class="panel-body">-->
+                                                <!--&lt;!&ndash; table medicines &ndash;&gt;-->
+                                                <!--<div class="chart">-->
+                                                    <!--<canvas id="barChart" style="height:230px"></canvas>-->
+                                                <!--</div>-->
 
-                                                <i class="fa fa-square text-green"></i>
-                                                <h4 style="display: inline;"> Calories Consumed</h4>
-                                                <i class="fa fa-square text-orange"></i>
-                                                <h4 style="display: inline;"> Calories Required </h4>
-                                                <div style="margin: auto;">
-                                                    <table id="practiceData" class="table table-bordered table-striped">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Name</th>
-                                                            <th style="width: 200px;">Result</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <label class="control-label">AVG Kcal Consumed/ Kcal Estimate</label>
-                                                            </td>
-                                                            <td style="text-align: center;">
-                                                                <i id = "avgKcalConsumed" class="text-green"></i>kcal / <i id = "kcalEstimate"
-                                                                                                                                 class="text-orange"></i>kcal
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <label class="control-label">Status</label>
-                                                            </td>
-                                                            <td id = "status">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <label class="control-label">Complete Practice Percent</label>
-                                                            </td>
+                                                <!--<i class="fa fa-square text-green"></i>-->
+                                                <!--<h4 style="display: inline;"> Calories Consumed</h4>-->
+                                                <!--<i class="fa fa-square text-orange"></i>-->
+                                                <!--<h4 style="display: inline;"> Calories Required </h4>-->
+                                                <!--<div style="margin: auto;">-->
+                                                    <!--<table id="practiceData" class="table table-bordered table-striped">-->
+                                                        <!--<thead>-->
+                                                        <!--<tr>-->
+                                                            <!--<th>Name</th>-->
+                                                            <!--<th style="width: 200px;">Result</th>-->
+                                                        <!--</tr>-->
+                                                        <!--</thead>-->
+                                                        <!--<tbody>-->
+                                                        <!--<tr>-->
                                                             <!--<td>-->
-                                                                <!--<input type="text" class="form-control" readonly="readonly"-->
-                                                                       <!--style="text-align: center;background-color: #f0ad4e;color: white;" th:if="*{status == 3}"-->
-                                                                       <!--th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>-->
-                                                                <!--<input type="text" class="form-control" readonly="readonly"-->
-                                                                       <!--style="text-align: center;background-color: #5bc0de;color: white;" th:if="*{status == 2}"-->
-                                                                       <!--th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>-->
-                                                                <!--<input type="text" class="form-control" readonly="readonly"-->
-                                                                       <!--style="text-align: center;background-color: #d9534f;color: white;" th:if="*{status == 1}"-->
-                                                                       <!--th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>-->
+                                                                <!--<label class="control-label">AVG Kcal Consumed/ Kcal Estimate</label>-->
                                                             <!--</td>-->
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <!-- /.table medicines -->
-                                            </div>
-                                        </div>
-                                    </div>
+                                                            <!--<td style="text-align: center;">-->
+                                                                <!--<i id = "avgKcalConsumed" class="text-green"></i>kcal / <i id = "kcalEstimate"-->
+                                                                                                                                 <!--class="text-orange"></i>kcal-->
+                                                            <!--</td>-->
+                                                        <!--</tr>-->
+                                                        <!--<tr>-->
+                                                            <!--<td>-->
+                                                                <!--<label class="control-label">Status</label>-->
+                                                            <!--</td>-->
+                                                            <!--<td id = "status">-->
+                                                            <!--</td>-->
+                                                        <!--</tr>-->
+                                                        <!--<tr>-->
+                                                            <!--<td>-->
+                                                                <!--<label class="control-label">Complete Practice Percent</label>-->
+                                                            <!--</td>-->
+                                                            <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                                                                <!--&lt;!&ndash;<input type="text" class="form-control" readonly="readonly"&ndash;&gt;-->
+                                                                       <!--&lt;!&ndash;style="text-align: center;background-color: #f0ad4e;color: white;" th:if="*{status == 3}"&ndash;&gt;-->
+                                                                       <!--&lt;!&ndash;th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>&ndash;&gt;-->
+                                                                <!--&lt;!&ndash;<input type="text" class="form-control" readonly="readonly"&ndash;&gt;-->
+                                                                       <!--&lt;!&ndash;style="text-align: center;background-color: #5bc0de;color: white;" th:if="*{status == 2}"&ndash;&gt;-->
+                                                                       <!--&lt;!&ndash;th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>&ndash;&gt;-->
+                                                                <!--&lt;!&ndash;<input type="text" class="form-control" readonly="readonly"&ndash;&gt;-->
+                                                                       <!--&lt;!&ndash;style="text-align: center;background-color: #d9534f;color: white;" th:if="*{status == 1}"&ndash;&gt;-->
+                                                                       <!--&lt;!&ndash;th:value="${#numbers.formatDecimal(DATAPRACS.ratioCompletePractice, 1, 'COMMA', 1, 'POINT')}"/>&ndash;&gt;-->
+                                                            <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                                                        <!--</tr>-->
+                                                        <!--</tbody>-->
+                                                    <!--</table>-->
+                                                <!--</div>-->
+                                                <!--&lt;!&ndash; /.table medicines &ndash;&gt;-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
 
                                 </div>
                             </div>

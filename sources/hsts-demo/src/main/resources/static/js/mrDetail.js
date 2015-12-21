@@ -42,7 +42,7 @@ $appSelect.on("change", function (e) {
     var appData = $appSelect.val();
     console.log("VAL: " + appData);
     loadPopupResult(appData);
-    showModalAndDraw();
+    //showModalAndDraw();
 });
 
 
