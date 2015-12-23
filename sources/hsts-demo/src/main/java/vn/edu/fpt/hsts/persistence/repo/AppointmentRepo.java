@@ -10,6 +10,7 @@ package vn.edu.fpt.hsts.persistence.repo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -50,6 +51,7 @@ public interface AppointmentRepo extends JpaRepository<Appointment, Integer> {
     @Query("select a from Appointment a where status  = :status and medicalRecord.patient.id = :patientId ORDER BY id DESC")
     public Page<Appointment> findHistoryByPatientId(@Param("status") final byte status, @Param("patientId") final int patientId, final Pageable pageable);
 
+    @Modifying
     @Query("update Appointment a set a.status = :status where a.medicalRecord.id = :medicalRecordId")
-    public boolean setStatusByMedicalRecordId(@Param("status") final byte status, @Param("medicalRecordId") final int medicalRecordId);
+    public void setStatusByMedicalRecordId(@Param("status") final byte status, @Param("medicalRecordId") final int medicalRecordId);
 }

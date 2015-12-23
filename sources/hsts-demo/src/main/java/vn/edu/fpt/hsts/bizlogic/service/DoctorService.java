@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorModel;
 import vn.edu.fpt.hsts.bizlogic.model.DoctorPageModel;
 import vn.edu.fpt.hsts.bizlogic.model.FoodPrescriptionModel;
@@ -618,12 +619,19 @@ public class DoctorService extends AbstractService {
 
             MedicalRecord medicalRecord = appointment.getMedicalRecord();
             medicalRecord.setStatus(IDbConsts.IMedicalRecordStatus.FINISHED);
+            medicalRecord.setEndTime(new Date());
 
             // Set all related appointment to FINISHED
             appointmentRepo.setStatusByMedicalRecordId(IDbConsts.IAppointmentStatus.FINISHED, medicalRecord.getId());
 
             // Set all related treatment to FINISHED
-            treatmentRepo.setStatusByMedicalRecordId(IDbConsts.ITreatmentStatus.FINISHED, medicalRecord.getId());
+            final List<Treatment> treatments = treatmentRepo.findByMedicalRecordId(medicalRecord.getId());
+            if (!CollectionUtils.isEmpty(treatments)) {
+                for (Treatment treatment: treatments) {
+                    treatment.setStatus(IDbConsts.ITreatmentStatus.FINISHED);
+                }
+                treatmentRepo.save(treatments);
+            }
 
             medicalRecordRepo.saveAndFlush(medicalRecord);
 
